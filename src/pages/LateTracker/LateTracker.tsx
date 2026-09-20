@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { supabase, type TeamMember, type AttendanceRecord, type AttendanceState } from '../../lib/supabase';
+import { supabase, type TeamMember, type AttendanceRecord, type AttendanceState, type TeamMemberType } from '../../lib/supabase';
 import { Button, Badge } from '../../components/ui/Button';
 import { TimeEditor } from '../../components/ui/TimeEditor';
 import { toast } from 'react-toastify';
+import { SortableHeader, useSort } from '../../components/ui/SortableHeader';
 import { Clock, Check, Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, addDays, subDays, parse, getDay, isToday, isFuture } from 'date-fns';
 import { getDhakaTimeOfDay, formatDhakaTime12h, dhakaDateTimeToIso } from '../../lib/dhakaTime';
@@ -15,6 +16,7 @@ const isOffDay = (date: Date) => {
 export const LateTracker = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [members, setMembers] = useState<TeamMember[]>([]);
+  const [types, setTypes] = useState<TeamMemberType[]>([]);
   const [attendanceRecords, setAttendanceRecords] = useState<Record<string, AttendanceRecord>>({});
   const [defaultThreshold, setDefaultThreshold] = useState<string>('10:00:00');
   const [defaultPunishment, setDefaultPunishment] = useState<number>(200);
@@ -27,9 +29,23 @@ export const LateTracker = () => {
   // Formatting date for db 'YYYY-MM-DD' ignoring timezone shifts easily
   const getDbDateString = (date: Date) => format(date, 'yyyy-MM-dd');
 
+  const { sort, toggleSort, compare } = useSort<'name' | 'type'>('name');
+
   useEffect(() => {
     fetchSettings();
+    fetchTypes();
   }, []);
+
+  const fetchTypes = async () => {
+    const { data, error } = await supabase.from('team_member_types').select('*').order('name');
+    if (error) {
+      console.error(error);
+      return;
+    }
+    setTypes(data || []);
+  };
+
+  const typeNameOf = (member: TeamMember) => types.find(t => t.id === member.type_id)?.name ?? '';
 
   useEffect(() => {
     fetchDataForDate(selectedDate);
@@ -206,6 +222,10 @@ export const LateTracker = () => {
   const offDay = isOffDay(selectedDate);
   const isNextDisabled = isToday(selectedDate) || isFuture(selectedDate);
 
+  const sortedMembers = [...members].sort((a, b) =>
+    sort.key === 'name' ? compare(a.name, b.name) : compare(typeNameOf(a), typeNameOf(b))
+  );
+
   const summary = members.reduce((acc, m) => {
     const s = getStatus(attendanceRecords[m.id]);
     if (s === 'PUNCTUAL') acc.punctual++;
@@ -274,7 +294,8 @@ export const LateTracker = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-50/50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
-                  <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm">Team Member</th>
+                  <SortableHeader label="Team Member" sortKey="name" sort={sort} onSort={toggleSort} />
+                  <SortableHeader label="Type" sortKey="type" sort={sort} onSort={toggleSort} />
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-center">Entry</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-center">Omitted</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm">Time</th>
@@ -282,7 +303,7 @@ export const LateTracker = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                {members.map(member => {
+                {sortedMembers.map(member => {
                   const record = attendanceRecords[member.id];
                   const state = record?.state || 'NO_ENTRY';
                   const entryChecked = state === 'ENTRY';
@@ -299,6 +320,13 @@ export const LateTracker = () => {
                            </div>
                            <span className="font-medium text-gray-900 dark:text-gray-100">{member.name}</span>
                         </div>
+                      </td>
+                      <td className="p-4">
+                        {typeNameOf(member) ? (
+                          <Badge variant="default">{typeNameOf(member)}</Badge>
+                        ) : (
+                          <span className="text-gray-400 dark:text-gray-600 text-sm">&mdash;</span>
+                        )}
                       </td>
                       <td className="p-4 text-center">
                         <label className="relative inline-flex items-center justify-center cursor-pointer group">

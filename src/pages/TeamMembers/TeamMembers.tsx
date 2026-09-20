@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { supabase, type TeamMember } from '../../lib/supabase';
+import { supabase, type TeamMember, type TeamMemberType } from '../../lib/supabase';
 import { Button, Badge } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { Modal } from '../../components/ui/Modal';
 import { Pencil, Plus, ShieldCheck, ShieldAlert, Users, Trash2, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
+import { SortableHeader, useSort } from '../../components/ui/SortableHeader';
 
 export const TeamMembers = () => {
   const [members, setMembers] = useState<TeamMember[]>([]);
@@ -14,15 +15,35 @@ export const TeamMembers = () => {
   const [editingMember, setEditingMember] = useState<TeamMember | null>(null);
   const [name, setName] = useState('');
   const [isActive, setIsActive] = useState(true);
+  const [typeId, setTypeId] = useState<string>('');
+  const [types, setTypes] = useState<TeamMemberType[]>([]);
   const [saving, setSaving] = useState(false);
 
   const [memberToDelete, setMemberToDelete] = useState<TeamMember | null>(null);
   const [keepDataOnDelete, setKeepDataOnDelete] = useState(true);
   const [deleting, setDeleting] = useState(false);
 
+  const { sort, toggleSort, compare } = useSort<'name' | 'type'>('name');
+
   useEffect(() => {
     fetchMembers();
+    fetchTypes();
   }, []);
+
+  const fetchTypes = async () => {
+    const { data, error } = await supabase.from('team_member_types').select('*').order('name');
+    if (error) {
+      console.error(error);
+      return;
+    }
+    setTypes(data || []);
+  };
+
+  const typeNameOf = (member: TeamMember) => types.find(t => t.id === member.type_id)?.name ?? '';
+
+  const sortedMembers = [...members].sort((a, b) =>
+    sort.key === 'name' ? compare(a.name, b.name) : compare(typeNameOf(a), typeNameOf(b))
+  );
 
   const fetchMembers = async () => {
     try {
@@ -50,13 +71,13 @@ export const TeamMembers = () => {
       if (editingMember) {
         const { error } = await supabase
           .from('team_members')
-          .update({ name, is_active: isActive })
+          .update({ name, is_active: isActive, type_id: typeId || null })
           .eq('id', editingMember.id);
         if (error) throw error;
       } else {
         const { error } = await supabase
           .from('team_members')
-          .insert([{ name, is_active: isActive }]);
+          .insert([{ name, is_active: isActive, type_id: typeId || null }]);
         if (error) throw error;
       }
       
@@ -130,12 +151,14 @@ export const TeamMembers = () => {
     setEditingMember(null);
     setName('');
     setIsActive(true);
+    setTypeId('');
   };
 
   const openEdit = (member: TeamMember) => {
     setEditingMember(member);
     setName(member.name);
     setIsActive(member.is_active);
+    setTypeId(member.type_id ?? '');
     setIsModalOpen(true);
   };
 
@@ -173,14 +196,15 @@ export const TeamMembers = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-50/50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
-                  <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm">Name</th>
+                  <SortableHeader label="Name" sortKey="name" sort={sort} onSort={toggleSort} />
+                  <SortableHeader label="Type" sortKey="type" sort={sort} onSort={toggleSort} />
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm">Status</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm">Created</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                {members.map(member => (
+                {sortedMembers.map(member => (
                   <tr key={member.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
@@ -189,6 +213,13 @@ export const TeamMembers = () => {
                          </div>
                          <span className="font-medium text-gray-900 dark:text-gray-100">{member.name}</span>
                       </div>
+                    </td>
+                    <td className="p-4">
+                      {typeNameOf(member) ? (
+                        <Badge variant="default">{typeNameOf(member)}</Badge>
+                      ) : (
+                        <span className="text-gray-400 dark:text-gray-600 text-sm">&mdash;</span>
+                      )}
                     </td>
                     <td className="p-4">
                       {member.is_active ? (
@@ -239,6 +270,25 @@ export const TeamMembers = () => {
             autoFocus
           />
           
+          <div className="w-full">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Type</label>
+            <select
+              value={typeId}
+              onChange={e => setTypeId(e.target.value)}
+              className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50"
+            >
+              <option value="">No type</option>
+              {types.map(t => (
+                <option key={t.id} value={t.id}>{t.name}</option>
+              ))}
+            </select>
+            {types.length === 0 && (
+              <p className="mt-1.5 text-xs text-gray-500 dark:text-gray-400">
+                No types defined yet &mdash; add them in Settings.
+              </p>
+            )}
+          </div>
+
           <div className="flex items-center gap-2 pt-2">
             <input 
               type="checkbox" 

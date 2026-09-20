@@ -39,7 +39,8 @@ function App() {
       <AuthProvider>
         <AuthGate />
       </AuthProvider>
-      <ToastContainer position="bottom-right" theme="colored" newestOnTop />
+      {/* offset clears the 64px top bar so toasts don't sit on the theme toggle */}
+      <ToastContainer position="top-right" theme="colored" newestOnTop style={{ top: '72px' }} />
     </BrowserRouter>
   )
 }

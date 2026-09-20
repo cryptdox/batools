@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { supabase, type AttendanceSetting } from '../../lib/supabase';
+import { supabase, type AttendanceSetting, type TeamMemberType } from '../../lib/supabase';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
+import { Modal } from '../../components/ui/Modal';
 import { format } from 'date-fns';
-import { Save } from 'lucide-react';
+import { Save, Plus, Trash2, AlertTriangle, Tag, Pencil, Check, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 export const SettingsPage = () => {
@@ -14,9 +15,117 @@ export const SettingsPage = () => {
   const [thresholdStr, setThresholdStr] = useState('10:00');
   const [amountStr, setAmountStr] = useState('200');
 
+  const [types, setTypes] = useState<TeamMemberType[]>([]);
+  const [typeCounts, setTypeCounts] = useState<Record<string, number>>({});
+  const [newTypeName, setNewTypeName] = useState('');
+  const [addingType, setAddingType] = useState(false);
+  const [typeToDelete, setTypeToDelete] = useState<TeamMemberType | null>(null);
+  const [deletingType, setDeletingType] = useState(false);
+  const [editingTypeId, setEditingTypeId] = useState<string | null>(null);
+  const [editingTypeName, setEditingTypeName] = useState('');
+  const [savingType, setSavingType] = useState(false);
+
   useEffect(() => {
     fetchSettings();
+    fetchTypes();
   }, []);
+
+  const fetchTypes = async () => {
+    try {
+      const { data, error } = await supabase.from('team_member_types').select('*').order('name');
+      if (error) throw error;
+      setTypes(data || []);
+
+      const { data: members, error: membersError } = await supabase
+        .from('team_members')
+        .select('type_id')
+        .eq('is_deleted', false);
+      if (membersError) throw membersError;
+
+      const counts: Record<string, number> = {};
+      (members || []).forEach(m => {
+        if (m.type_id) counts[m.type_id] = (counts[m.type_id] ?? 0) + 1;
+      });
+      setTypeCounts(counts);
+    } catch (e) {
+      console.error(e);
+      toast.error(e instanceof Error ? e.message : 'Unable to load member types.');
+    }
+  };
+
+  const handleAddType = async () => {
+    const name = newTypeName.trim();
+    if (!name) return;
+    setAddingType(true);
+    try {
+      const { error } = await supabase.from('team_member_types').insert({ name });
+      if (error) throw error;
+      setNewTypeName('');
+      await fetchTypes();
+      toast.success(`Type "${name}" added.`);
+    } catch (e) {
+      console.error(e);
+      toast.error(e instanceof Error ? e.message : 'Unable to add type.');
+    } finally {
+      setAddingType(false);
+    }
+  };
+
+  const startEditType = (type: TeamMemberType) => {
+    setEditingTypeId(type.id);
+    setEditingTypeName(type.name);
+  };
+
+  const cancelEditType = () => {
+    setEditingTypeId(null);
+    setEditingTypeName('');
+  };
+
+  const handleSaveType = async () => {
+    const name = editingTypeName.trim();
+    if (!editingTypeId || !name) return;
+
+    const original = types.find(t => t.id === editingTypeId);
+    if (original && original.name === name) {
+      cancelEditType();
+      return;
+    }
+
+    setSavingType(true);
+    try {
+      const { error } = await supabase
+        .from('team_member_types')
+        .update({ name, updated_at: new Date().toISOString() })
+        .eq('id', editingTypeId);
+      if (error) throw error;
+
+      await fetchTypes();
+      cancelEditType();
+      toast.success('Type renamed.');
+    } catch (e) {
+      console.error(e);
+      toast.error(e instanceof Error ? e.message : 'Unable to rename type.');
+    } finally {
+      setSavingType(false);
+    }
+  };
+
+  const handleDeleteType = async () => {
+    if (!typeToDelete) return;
+    setDeletingType(true);
+    try {
+      const { error } = await supabase.from('team_member_types').delete().eq('id', typeToDelete.id);
+      if (error) throw error;
+      await fetchTypes();
+      toast.success(`Type "${typeToDelete.name}" deleted.`);
+      setTypeToDelete(null);
+    } catch (e) {
+      console.error(e);
+      toast.error(e instanceof Error ? e.message : 'Unable to delete type.');
+    } finally {
+      setDeletingType(false);
+    }
+  };
 
   const fetchSettings = async () => {
     setLoading(true);
@@ -92,6 +201,81 @@ export const SettingsPage = () => {
         </div>
       </div>
 
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Team Member Types</h3>
+        <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
+          Designations you can assign to team members, e.g. Developer, Designer, Intern.
+        </p>
+
+        <div className="flex flex-wrap gap-2 items-end mb-5 max-w-md">
+          <div className="flex-1 min-w-[12rem]">
+            <Input
+              label="New type"
+              value={newTypeName}
+              onChange={e => setNewTypeName(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') handleAddType(); }}
+              placeholder="e.g. Developer"
+            />
+          </div>
+          <Button onClick={handleAddType} disabled={addingType || !newTypeName.trim()}>
+            <Plus size={18} className="mr-2" /> {addingType ? 'Adding...' : 'Add'}
+          </Button>
+        </div>
+
+        {types.length === 0 ? (
+          <div className="text-sm text-gray-500 dark:text-gray-400 border border-dashed border-gray-200 dark:border-gray-700 rounded-lg p-6 text-center">
+            No types yet. Add one above to start assigning types to team members.
+          </div>
+        ) : (
+          <div className="divide-y divide-gray-100 dark:divide-gray-700 border border-gray-100 dark:border-gray-700 rounded-lg overflow-hidden">
+            {types.map(t => (
+              <div key={t.id} className="flex items-center justify-between gap-3 px-4 py-3">
+                {editingTypeId === t.id ? (
+                  <>
+                    <input
+                      value={editingTypeName}
+                      onChange={e => setEditingTypeName(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter') handleSaveType();
+                        if (e.key === 'Escape') cancelEditType();
+                      }}
+                      autoFocus
+                      className="flex-1 min-w-0 h-9 rounded-md border border-gray-300 bg-white px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50"
+                    />
+                    <div className="flex items-center gap-1 shrink-0">
+                      <Button variant="ghost" size="sm" onClick={handleSaveType} disabled={savingType || !editingTypeName.trim()} title="Save">
+                        <Check size={16} className="text-success" />
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={cancelEditType} disabled={savingType} title="Cancel">
+                        <X size={16} />
+                      </Button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-2 min-w-0">
+                      <Tag size={16} className="text-primary shrink-0" />
+                      <span className="font-medium text-gray-900 dark:text-gray-100 truncate">{t.name}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400 shrink-0">
+                        {typeCounts[t.id] ?? 0} member{(typeCounts[t.id] ?? 0) === 1 ? '' : 's'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1 shrink-0">
+                      <Button variant="ghost" size="sm" onClick={() => startEditType(t)} title="Rename type">
+                        <Pencil size={16} />
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={() => setTypeToDelete(t)} title="Delete type">
+                        <Trash2 size={16} className="text-danger" />
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden mt-6">
          <div className="p-4 bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500">Settings History (Audit Log)</h3>
@@ -122,6 +306,31 @@ export const SettingsPage = () => {
             </table>
          )}
       </div>
+
+      <Modal isOpen={!!typeToDelete} onClose={() => !deletingType && setTypeToDelete(null)} title="Delete Type">
+        {typeToDelete && (
+          <div className="space-y-4">
+            <div className="flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg p-4">
+              <AlertTriangle size={20} className="text-danger shrink-0 mt-0.5" />
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                Delete the type <span className="font-semibold">{typeToDelete.name}</span>?
+                {(typeCounts[typeToDelete.id] ?? 0) > 0 && (
+                  <> <span className="font-semibold">{typeCounts[typeToDelete.id]} member(s)</span> currently use it and will become untyped.</>
+                )}
+              </p>
+            </div>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              No team members or attendance history are deleted &mdash; only the label is removed.
+            </p>
+            <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
+              <Button variant="ghost" onClick={() => setTypeToDelete(null)} disabled={deletingType}>Cancel</Button>
+              <Button variant="danger" onClick={handleDeleteType} disabled={deletingType}>
+                {deletingType ? 'Deleting...' : 'Delete Type'}
+              </Button>
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };
