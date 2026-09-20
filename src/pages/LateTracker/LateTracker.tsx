@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { supabase, type TeamMember, type AttendanceRecord, type AttendanceState, type TeamMemberType } from '../../lib/supabase';
 import { Button, Badge } from '../../components/ui/Button';
 import { TimeEditor } from '../../components/ui/TimeEditor';
+import { Modal } from '../../components/ui/Modal';
 import { toast } from 'react-toastify';
 import { SortableHeader, useSort } from '../../components/ui/SortableHeader';
-import { Clock, Check, Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Clock, Check, Calendar as CalendarIcon, ChevronLeft, ChevronRight, AlertTriangle } from 'lucide-react';
 import { format, addDays, subDays, parse, getDay, isToday, isFuture } from 'date-fns';
 import { getDhakaTimeOfDay, formatDhakaTime12h, dhakaDateTimeToIso } from '../../lib/dhakaTime';
 
@@ -21,6 +22,10 @@ export const LateTracker = () => {
   const [defaultThreshold, setDefaultThreshold] = useState<string>('10:00:00');
   const [defaultPunishment, setDefaultPunishment] = useState<number>(200);
   const [loading, setLoading] = useState(true);
+
+  // Confirmation before clearing an existing entry/omitted mark
+  const [pendingUncheck, setPendingUncheck] = useState<{ member: TeamMember; kind: 'entry' | 'omitted' } | null>(null);
+  const [confirmingUncheck, setConfirmingUncheck] = useState(false);
 
   // Time Editor State
   const [editorMember, setEditorMember] = useState<TeamMember | null>(null);
@@ -110,7 +115,35 @@ export const LateTracker = () => {
     setSelectedDate(parse(value, 'yyyy-MM-dd', new Date()));
   };
 
-  const handleEntryChange = async (member: TeamMember, checked: boolean) => {
+  const handleEntryChange = (member: TeamMember, checked: boolean) => {
+    if (!checked) {
+      setPendingUncheck({ member, kind: 'entry' });
+      return;
+    }
+    applyEntryChange(member, true);
+  };
+
+  const handleLeaveChange = (member: TeamMember, checked: boolean) => {
+    if (!checked) {
+      setPendingUncheck({ member, kind: 'omitted' });
+      return;
+    }
+    applyLeaveChange(member, true);
+  };
+
+  const confirmUncheck = async () => {
+    if (!pendingUncheck) return;
+    setConfirmingUncheck(true);
+    try {
+      if (pendingUncheck.kind === 'entry') await applyEntryChange(pendingUncheck.member, false);
+      else await applyLeaveChange(pendingUncheck.member, false);
+      setPendingUncheck(null);
+    } finally {
+      setConfirmingUncheck(false);
+    }
+  };
+
+  const applyEntryChange = async (member: TeamMember, checked: boolean) => {
     try {
       const dbDate = getDbDateString(selectedDate);
       
@@ -150,7 +183,7 @@ export const LateTracker = () => {
     }
   };
 
-  const handleLeaveChange = async (member: TeamMember, checked: boolean) => {
+  const applyLeaveChange = async (member: TeamMember, checked: boolean) => {
     try {
       const dbDate = getDbDateString(selectedDate);
       const newState: AttendanceState = checked ? 'LEAVE' : 'NO_ENTRY';
@@ -373,6 +406,48 @@ export const LateTracker = () => {
         )}
       </div>
       
+      <Modal
+        isOpen={!!pendingUncheck}
+        onClose={() => !confirmingUncheck && setPendingUncheck(null)}
+        title={pendingUncheck?.kind === 'entry' ? 'Clear Entry' : 'Clear Omitted'}
+      >
+        {pendingUncheck && (
+          <div className="space-y-4">
+            <div className="flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg p-4">
+              <AlertTriangle size={20} className="text-danger shrink-0 mt-0.5" />
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                {pendingUncheck.kind === 'entry' ? (
+                  <>
+                    Clear the entry for <span className="font-semibold">{pendingUncheck.member.name}</span> on{' '}
+                    <span className="font-semibold">{format(selectedDate, 'MMMM d, yyyy')}</span>? The recorded
+                    time and status will be removed.
+                  </>
+                ) : (
+                  <>
+                    Clear the omitted mark for <span className="font-semibold">{pendingUncheck.member.name}</span> on{' '}
+                    <span className="font-semibold">{format(selectedDate, 'MMMM d, yyyy')}</span>?
+                  </>
+                )}
+              </p>
+            </div>
+
+            {pendingUncheck.kind === 'entry' && getStatus(attendanceRecords[pendingUncheck.member.id]) === 'LATE' && (
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                They are currently marked late, so the penalty for this day will also be removed &mdash; unless a
+                payment or waiver has already been recorded against it, which is always kept.
+              </p>
+            )}
+
+            <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
+              <Button variant="ghost" onClick={() => setPendingUncheck(null)} disabled={confirmingUncheck}>Cancel</Button>
+              <Button variant="danger" onClick={confirmUncheck} disabled={confirmingUncheck}>
+                {confirmingUncheck ? 'Clearing...' : 'Clear'}
+              </Button>
+            </div>
+          </div>
+        )}
+      </Modal>
+
       <TimeEditor 
         isOpen={!!editorMember}
         onClose={() => setEditorMember(null)}
