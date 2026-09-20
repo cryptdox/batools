@@ -6,6 +6,7 @@ import { Modal } from '../../components/ui/Modal';
 import { toast } from 'react-toastify';
 import { DateRangeFilter, type FilterPreset } from '../../components/ui/DateRangeFilter';
 import { PeriodNav } from '../../components/ui/PeriodNav';
+import { RotateCcw, AlertTriangle } from 'lucide-react';
 import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { format, startOfMonth } from 'date-fns';
 import { formatDhakaTime12h } from '../../lib/dhakaTime';
@@ -32,6 +33,9 @@ export const PunishmentPage = () => {
   const [amount, setAmount] = useState('');
   const [type, setType] = useState<'PAID' | 'DISCOUNT'>('PAID');
   const [saving, setSaving] = useState(false);
+
+  const [isResetOpen, setIsResetOpen] = useState(false);
+  const [resetting, setResetting] = useState(false);
 
   useEffect(() => {
     fetchPunishments();
@@ -115,6 +119,33 @@ export const PunishmentPage = () => {
     }
   };
 
+  const outstanding = useMemo(() => {
+    const rows = filteredPunishments.filter(p => p.remaining_amount > 0);
+    return { count: rows.length, total: rows.reduce((sum, p) => sum + p.remaining_amount, 0) };
+  }, [filteredPunishments]);
+
+  const handleResetDues = async () => {
+    setResetting(true);
+    try {
+      const { data, error } = await supabase.rpc('waive_all_remaining', {
+        p_from: dateRange ? format(dateRange.from, 'yyyy-MM-dd') : null,
+        p_to: dateRange ? format(dateRange.to, 'yyyy-MM-dd') : null,
+        p_note: 'Bulk waiver (reset dues)',
+      });
+
+      if (error) throw error;
+
+      await fetchPunishments();
+      setIsResetOpen(false);
+      toast.success(`${data ?? 0} punishment record(s) waived.`);
+    } catch (e) {
+      console.error(e);
+      toast.error(e instanceof Error ? e.message : 'Unable to reset dues.');
+    } finally {
+      setResetting(false);
+    }
+  };
+
   const openDeductModal = (p: PunishmentWithDetails) => {
     setSelectedPunishment(p);
     setAmount('');
@@ -139,6 +170,9 @@ export const PunishmentPage = () => {
             onCustomFromChange={setCustomFrom}
             onCustomToChange={setCustomTo}
           />
+          <Button variant="danger" size="sm" onClick={() => setIsResetOpen(true)} disabled={outstanding.count === 0}>
+            <RotateCcw size={16} className="mr-2" /> Reset Dues
+          </Button>
         </div>
       </div>
 
@@ -256,6 +290,32 @@ export const PunishmentPage = () => {
             </div>
           </div>
         )}
+      </Modal>
+
+      <Modal isOpen={isResetOpen} onClose={() => !resetting && setIsResetOpen(false)} title="Reset Dues">
+        <div className="space-y-4">
+          <div className="flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg p-4">
+            <AlertTriangle size={20} className="text-danger shrink-0 mt-0.5" />
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              This waives the entire remaining balance on{' '}
+              <span className="font-semibold">{outstanding.count} punishment record(s)</span>, clearing{' '}
+              <span className="font-semibold">৳{outstanding.total.toFixed(2)}</span> of dues
+              {periodLabel ? <> for <span className="font-semibold">{periodLabel}</span></> : ' across all time'}.
+            </p>
+          </div>
+
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Each cleared balance is recorded as a waived transaction, so the original penalty amounts and
+            existing payment history stay intact in the audit trail. This cannot be undone from the app.
+          </p>
+
+          <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
+            <Button variant="ghost" onClick={() => setIsResetOpen(false)} disabled={resetting}>Cancel</Button>
+            <Button variant="danger" onClick={handleResetDues} disabled={resetting}>
+              {resetting ? 'Waiving...' : `Waive ৳${outstanding.total.toFixed(2)}`}
+            </Button>
+          </div>
+        </div>
       </Modal>
     </div>
   );
