@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* Tailwind v4 defaults `dark:` to the OS prefers-color-scheme. This app
+   toggles a `.dark` class on <html> instead, so `dark:` must key off that
+   class or the in-app theme toggle does nothing for any dark: utility. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #9c88ff;
+  --color-secondary: #00a8ff;
+  --color-success: #44bd32;
+  --color-warning: #fbc531;
+  --color-danger: #e84118;
+  --color-muted: #718093;
+
+  /* Basic spacing/layout variables can go here, but color-primary makes `bg-primary` available */
+}
+
+@layer base {
+  :root {
+    --bg-color: #f5f6fa;
+    --card-color: #ffffff;
+    --text-color: #2f3640;
+  }
+
+  /* We'll use the 'dark' class applied to html or body by the theme toggle */
+  .dark {
+    --bg-color: #0a0c10;
+    --card-color: #1a1d24;
+    --text-color: #f5f6fa;
+  }
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Base custom classes utilizing the variables */
+.bg-theme-main { background-color: var(--bg-color); }
+.bg-theme-card { background-color: var(--card-color); }
+.text-theme-main { color: var(--text-color); }
+
+/* Dark mode is near-black, so cards need a visible shadow to read as raised
+   content rather than blending into the page. Most cards share the same
+   `shadow-sm`/`shadow-2xl` utility strings across pages, so this overrides
+   those utilities globally under `.dark` instead of editing every page. */
+.dark .shadow-sm {
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.55), 0 2px 8px -2px rgba(0, 0, 0, 0.5);
+}
+.dark .shadow-2xl {
+  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.7), 0 8px 20px -4px rgba(0, 0, 0, 0.6);
+}
+
+/* Scrollbar styling for a polished look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #576574;
+}
+
+/* Micro-animations */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
