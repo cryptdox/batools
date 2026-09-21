@@ -74,7 +74,7 @@ SECURITY DEFINER
 AS $$
 DECLARE
   v_original NUMERIC;
-  v_deducted NUMERIC;
+  v_adjusted NUMERIC;
   v_remaining NUMERIC;
 BEGIN
   IF p_amount <= 0 THEN
@@ -92,11 +92,11 @@ BEGIN
     RAISE EXCEPTION 'Punishment record not found';
   END IF;
 
-  SELECT COALESCE(SUM(amount), 0) INTO v_deducted
+  SELECT COALESCE(SUM(amount), 0) INTO v_adjusted
   FROM punishment_transactions
   WHERE punishment_id = p_punishment_id;
 
-  v_remaining := v_original - v_deducted;
+  v_remaining := v_original - v_adjusted;
 
   IF p_amount > v_remaining THEN
     RAISE EXCEPTION 'Adjustment amount cannot exceed the remaining punishment amount';
