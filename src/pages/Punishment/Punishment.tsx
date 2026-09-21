@@ -94,7 +94,7 @@ export const PunishmentPage = () => {
     }
   };
 
-  const handleDeduct = async () => {
+  const handleAdjust = async () => {
     if (!selectedPunishment || !amount) return;
     setSaving(true);
     try {
@@ -146,7 +146,7 @@ export const PunishmentPage = () => {
     }
   };
 
-  const openDeductModal = (p: PunishmentWithDetails) => {
+  const openAdjustModal = (p: PunishmentWithDetails) => {
     setSelectedPunishment(p);
     setAmount('');
     setType('PAID');
@@ -223,7 +223,7 @@ export const PunishmentPage = () => {
                       </Badge>
                     </td>
                     <td className="p-4 text-right">
-                      <Button size="sm" onClick={() => openDeductModal(p)} disabled={p.remaining_amount <= 0}>
+                      <Button size="sm" onClick={() => openAdjustModal(p)} disabled={p.remaining_amount <= 0}>
                         Adjust
                       </Button>
                     </td>
@@ -235,7 +235,7 @@ export const PunishmentPage = () => {
         )}
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => !saving && setIsModalOpen(false)} title="Deduct Punishment">
+      <Modal isOpen={isModalOpen} onClose={() => !saving && setIsModalOpen(false)} title="Adjust Punishment">
         {selectedPunishment && (
           <div className="space-y-4">
             <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
@@ -284,7 +284,7 @@ export const PunishmentPage = () => {
 
             <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
               <Button variant="ghost" onClick={() => setIsModalOpen(false)} disabled={saving}>Cancel</Button>
-              <Button onClick={handleDeduct} disabled={saving || !amount || Number(amount) <= 0 || Number(amount) > selectedPunishment.remaining_amount}>
+              <Button onClick={handleAdjust} disabled={saving || !amount || Number(amount) <= 0 || Number(amount) > selectedPunishment.remaining_amount}>
                 {saving ? 'Confirming...' : 'Confirm Adjustment'}
               </Button>
             </div>
