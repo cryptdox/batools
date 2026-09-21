@@ -15,6 +15,7 @@ type AttendanceSummary = {
   member_name: string;
   in_time: number;
   late: number;
+  considered: number;
   omitted: number;
   total_recorded: number;
 };
@@ -68,11 +69,16 @@ export const AttendanceReportPage = () => {
 
         let inTime = 0;
         let late = 0;
+        let considered = 0;
         let omitted = 0;
 
         memberRecords.forEach(r => {
           if (r.state === 'LEAVE') {
             omitted++;
+          } else if (r.state === 'CONSIDER_ENTRY') {
+            // Recorded and acknowledged, but exempt from the late rule, so it
+            // is never counted as in time or late.
+            considered++;
           } else if (r.state === 'ENTRY' && r.entry_time && r.threshold_time_used) {
             if (getDhakaTimeOfDay(r.entry_time) >= r.threshold_time_used) late++;
             else inTime++;
@@ -84,8 +90,9 @@ export const AttendanceReportPage = () => {
           member_name: member.name,
           in_time: inTime,
           late,
+          considered,
           omitted,
-          total_recorded: inTime + late + omitted,
+          total_recorded: inTime + late + considered + omitted,
         };
       })
       .filter(s => s.total_recorded > 0);
@@ -94,8 +101,8 @@ export const AttendanceReportPage = () => {
   const handleExport = () => {
     downloadCsv(
       `attendance-report-${format(new Date(), 'yyyy-MM-dd')}.csv`,
-      ['Team Member', 'In Time', 'Late', 'Omitted', 'Total Days'],
-      summaries.map(s => [s.member_name, s.in_time, s.late, s.omitted, s.total_recorded])
+      ['Team Member', 'In Time', 'Late', 'Considered', 'Omitted', 'Total Days'],
+      summaries.map(s => [s.member_name, s.in_time, s.late, s.considered, s.omitted, s.total_recorded])
     );
   };
 
@@ -104,7 +111,7 @@ export const AttendanceReportPage = () => {
       <div className="flex flex-wrap justify-between items-center gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
         <div>
           <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Attendance Report</h2>
-          <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">In time, late and omitted days per team member.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">In time, late, considered and omitted days per team member.</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <PeriodNav label={periodLabel} onPrev={() => shiftPeriod(-1)} onNext={() => shiftPeriod(1)} nextDisabled={isNextPeriodDisabled} />
@@ -135,6 +142,7 @@ export const AttendanceReportPage = () => {
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm">Team Member</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">In Time</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Late</th>
+                  <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Considered</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Omitted</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Total Days</th>
                 </tr>
@@ -145,7 +153,8 @@ export const AttendanceReportPage = () => {
                     <td className="p-4 font-medium text-gray-900 dark:text-gray-100">{s.member_name}</td>
                     <td className="p-4 text-right text-success font-medium">{s.in_time}</td>
                     <td className="p-4 text-right text-danger font-medium">{s.late}</td>
-                    <td className="p-4 text-right text-[#d49a15] dark:text-warning font-medium">{s.omitted}</td>
+                    <td className="p-4 text-right text-[#d49a15] dark:text-warning font-medium">{s.considered}</td>
+                    <td className="p-4 text-right text-gray-500 dark:text-gray-400 font-medium">{s.omitted}</td>
                     <td className="p-4 text-right text-gray-900 dark:text-gray-100">{s.total_recorded}</td>
                   </tr>
                 ))}

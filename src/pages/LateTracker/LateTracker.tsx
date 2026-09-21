@@ -23,8 +23,8 @@ export const LateTracker = () => {
   const [defaultPunishment, setDefaultPunishment] = useState<number>(200);
   const [loading, setLoading] = useState(true);
 
-  // Confirmation before clearing an existing entry/omitted mark
-  const [pendingUncheck, setPendingUncheck] = useState<{ member: TeamMember; kind: 'entry' | 'omitted' } | null>(null);
+  // Confirmation before clearing an existing entry/considered mark
+  const [pendingUncheck, setPendingUncheck] = useState<{ member: TeamMember; kind: 'entry' | 'consider' } | null>(null);
   const [confirmingUncheck, setConfirmingUncheck] = useState(false);
 
   // Time Editor State
@@ -123,12 +123,12 @@ export const LateTracker = () => {
     applyEntryChange(member, true);
   };
 
-  const handleLeaveChange = (member: TeamMember, checked: boolean) => {
+  const handleConsiderChange = (member: TeamMember, checked: boolean) => {
     if (!checked) {
-      setPendingUncheck({ member, kind: 'omitted' });
+      setPendingUncheck({ member, kind: 'consider' });
       return;
     }
-    applyLeaveChange(member, true);
+    applyConsiderChange(member, true);
   };
 
   const confirmUncheck = async () => {
@@ -136,7 +136,7 @@ export const LateTracker = () => {
     setConfirmingUncheck(true);
     try {
       if (pendingUncheck.kind === 'entry') await applyEntryChange(pendingUncheck.member, false);
-      else await applyLeaveChange(pendingUncheck.member, false);
+      else await applyConsiderChange(pendingUncheck.member, false);
       setPendingUncheck(null);
     } finally {
       setConfirmingUncheck(false);
@@ -148,21 +148,24 @@ export const LateTracker = () => {
       const dbDate = getDbDateString(selectedDate);
       
       if (checked) {
-        // Mark Entry
-        const now = new Date();
-        const entryTime = now.toISOString();
+        // Mark Entry. A time already on the record (e.g. the day was marked as
+        // considered first) is kept as-is — only a day with no time yet gets
+        // stamped with the current time.
+        const record = attendanceRecords[member.id];
+        const entryTime = record?.entry_time || new Date().toISOString();
+        const threshold = record?.threshold_time_used || defaultThreshold;
 
         const { error } = await supabase.rpc('record_attendance', {
           p_team_member_id: member.id,
           p_attendance_date: dbDate,
           p_state: 'ENTRY',
           p_entry_time: entryTime,
-          p_threshold_time_used: defaultThreshold,
+          p_threshold_time_used: threshold,
           p_punishment_amount: defaultPunishment
         });
         
         if (error) throw error;
-        mergeLocalRecord(member.id, { state: 'ENTRY', entry_time: entryTime, threshold_time_used: defaultThreshold });
+        mergeLocalRecord(member.id, { state: 'ENTRY', entry_time: entryTime, threshold_time_used: threshold });
       } else {
         // Uncheck Entry -> NO_ENTRY
         const { error } = await supabase.rpc('record_attendance', {
@@ -183,26 +186,33 @@ export const LateTracker = () => {
     }
   };
 
-  const applyLeaveChange = async (member: TeamMember, checked: boolean) => {
+  // "Considered" only decides whether the day is judged against the late
+  // threshold — it never touches the recorded time. Unticking it therefore
+  // hands the day back to the normal entry rules with the same time, and the
+  // penalty (if the time is late) comes back with it.
+  const applyConsiderChange = async (member: TeamMember, checked: boolean) => {
     try {
       const dbDate = getDbDateString(selectedDate);
-      const newState: AttendanceState = checked ? 'LEAVE' : 'NO_ENTRY';
+      const record = attendanceRecords[member.id];
+      const entryTime = record?.entry_time || (checked ? new Date().toISOString() : null);
+      const threshold = entryTime ? (record?.threshold_time_used || defaultThreshold) : null;
+      const newState: AttendanceState = checked ? 'CONSIDER_ENTRY' : entryTime ? 'ENTRY' : 'NO_ENTRY';
 
       const { error } = await supabase.rpc('record_attendance', {
         p_team_member_id: member.id,
         p_attendance_date: dbDate,
         p_state: newState,
-        p_entry_time: null,
-        p_threshold_time_used: null,
+        p_entry_time: entryTime,
+        p_threshold_time_used: threshold,
         p_punishment_amount: defaultPunishment
       });
         
       if (error) throw error;
 
-      mergeLocalRecord(member.id, { state: newState, entry_time: null, threshold_time_used: null });
+      mergeLocalRecord(member.id, { state: newState, entry_time: entryTime, threshold_time_used: threshold });
     } catch (e) {
       console.error(e);
-      toast.error(e instanceof Error ? e.message : 'Unable to update omitted status.');
+      toast.error(e instanceof Error ? e.message : 'Unable to update considered status.');
     }
   };
 
@@ -218,10 +228,15 @@ export const LateTracker = () => {
       
       const newEntryTime = timeString ? dhakaDateTimeToIso(dbDate, timeString) : null;
 
+      // Editing the time of a considered day leaves it considered: the time is
+      // there to be corrected, not to re-open the day to the late rule.
+      const wasConsidered = attendanceRecords[editorMember.id]?.state === 'CONSIDER_ENTRY';
+      const newState: AttendanceState = !newEntryTime ? 'NO_ENTRY' : wasConsidered ? 'CONSIDER_ENTRY' : 'ENTRY';
+
       const { error } = await supabase.rpc('record_attendance', {
         p_team_member_id: editorMember.id,
         p_attendance_date: dbDate,
-        p_state: newEntryTime ? 'ENTRY' : 'NO_ENTRY',
+        p_state: newState,
         p_entry_time: newEntryTime,
         p_threshold_time_used: newEntryTime ? defaultThreshold : null,
         p_punishment_amount: defaultPunishment
@@ -230,7 +245,7 @@ export const LateTracker = () => {
       if (error) throw error;
 
       mergeLocalRecord(editorMember.id, {
-        state: newEntryTime ? 'ENTRY' : 'NO_ENTRY',
+        state: newState,
         entry_time: newEntryTime,
         threshold_time_used: newEntryTime ? defaultThreshold : null,
       });
@@ -242,12 +257,21 @@ export const LateTracker = () => {
     }
   };
 
-  const getStatus = (record?: AttendanceRecord): 'PUNCTUAL' | 'LATE' | 'LEAVE' | null => {
+  // Whether the time on the record is itself past the threshold, regardless of
+  // the state the day currently carries — a considered day still holds a late
+  // time, and un-considering it brings the penalty back.
+  const isTimeLate = (record?: AttendanceRecord) =>
+    !!record?.entry_time && !!record.threshold_time_used &&
+    getDhakaTimeOfDay(record.entry_time) >= record.threshold_time_used;
+
+  const getStatus = (record?: AttendanceRecord): 'PUNCTUAL' | 'LATE' | 'CONSIDERED' | 'LEAVE' | null => {
     if (!record) return null;
     if (record.state === 'LEAVE') return 'LEAVE';
+    // A considered day is never measured against the threshold.
+    if (record.state === 'CONSIDER_ENTRY') return 'CONSIDERED';
     if (record.state === 'ENTRY' && record.entry_time && record.threshold_time_used) {
         // Compare using Asia/Dhaka wall-clock time, not the viewer's own timezone.
-        return getDhakaTimeOfDay(record.entry_time) >= record.threshold_time_used ? 'LATE' : 'PUNCTUAL';
+        return isTimeLate(record) ? 'LATE' : 'PUNCTUAL';
     }
     return null;
   };
@@ -263,9 +287,9 @@ export const LateTracker = () => {
     const s = getStatus(attendanceRecords[m.id]);
     if (s === 'PUNCTUAL') acc.punctual++;
     if (s === 'LATE') acc.late++;
-    if (s === 'LEAVE') acc.leave++;
+    if (s === 'CONSIDERED') acc.considered++;
     return acc;
-  }, { total: members.length, punctual: 0, late: 0, leave: 0 });
+  }, { total: members.length, punctual: 0, late: 0, considered: 0 });
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -313,8 +337,8 @@ export const LateTracker = () => {
            <div className="text-3xl font-bold mt-1 text-gray-900 dark:text-white">{summary.late}</div>
         </div>
         <div className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-           <div className="text-orange-500 text-sm font-medium">Omitted</div>
-           <div className="text-3xl font-bold mt-1 text-gray-900 dark:text-white">{summary.leave}</div>
+           <div className="text-orange-500 text-sm font-medium">Considered</div>
+           <div className="text-3xl font-bold mt-1 text-gray-900 dark:text-white">{summary.considered}</div>
         </div>
       </div>
 
@@ -330,7 +354,7 @@ export const LateTracker = () => {
                   <SortableHeader label="Team Member" sortKey="name" sort={sort} onSort={toggleSort} />
                   <SortableHeader label="Type" sortKey="type" sort={sort} onSort={toggleSort} />
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-center">Entry</th>
-                  <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-center">Omitted</th>
+                  <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-center">Considered</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm">Time</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm">Status</th>
                 </tr>
@@ -340,7 +364,7 @@ export const LateTracker = () => {
                   const record = attendanceRecords[member.id];
                   const state = record?.state || 'NO_ENTRY';
                   const entryChecked = state === 'ENTRY';
-                  const leaveChecked = state === 'LEAVE';
+                  const considerChecked = state === 'CONSIDER_ENTRY';
                   
                   const status = getStatus(record);
                   
@@ -371,7 +395,7 @@ export const LateTracker = () => {
                       </td>
                       <td className="p-4 text-center">
                         <label className="relative inline-flex items-center justify-center cursor-pointer group">
-                           <input type="checkbox" className="peer sr-only" checked={leaveChecked} onChange={(e) => handleLeaveChange(member, e.target.checked)} />
+                           <input type="checkbox" className="peer sr-only" checked={considerChecked} onChange={(e) => handleConsiderChange(member, e.target.checked)} />
                            <div className="w-6 h-6 border-2 border-gray-300 dark:border-gray-600 rounded-md peer-checked:bg-orange-500 peer-checked:border-orange-500 flex items-center justify-center transition-all group-hover:border-orange-500">
                              <Check size={16} className="text-white opacity-0 group-has-checked:opacity-100 transform scale-50 group-has-checked:scale-100 transition-all" />
                            </div>
@@ -394,7 +418,8 @@ export const LateTracker = () => {
                             {offDay ? 'Late (No Penalty)' : 'Late'}
                           </Badge>
                         )}
-                        {status === 'LEAVE' && <Badge variant="warning">Omitted</Badge>}
+                        {status === 'CONSIDERED' && <Badge variant="warning">Considered</Badge>}
+                        {status === 'LEAVE' && <Badge variant="muted">Omitted</Badge>}
                         {!status && <span className="text-gray-400 dark:text-gray-600">—</span>}
                       </td>
                     </tr>
@@ -409,7 +434,7 @@ export const LateTracker = () => {
       <Modal
         isOpen={!!pendingUncheck}
         onClose={() => !confirmingUncheck && setPendingUncheck(null)}
-        title={pendingUncheck?.kind === 'entry' ? 'Clear Entry' : 'Clear Omitted'}
+        title={pendingUncheck?.kind === 'entry' ? 'Clear Entry' : 'Clear Considered'}
       >
         {pendingUncheck && (
           <div className="space-y-4">
@@ -424,8 +449,9 @@ export const LateTracker = () => {
                   </>
                 ) : (
                   <>
-                    Clear the omitted mark for <span className="font-semibold">{pendingUncheck.member.name}</span> on{' '}
-                    <span className="font-semibold">{format(selectedDate, 'MMMM d, yyyy')}</span>?
+                    Clear the considered mark for <span className="font-semibold">{pendingUncheck.member.name}</span> on{' '}
+                    <span className="font-semibold">{format(selectedDate, 'MMMM d, yyyy')}</span>? The recorded time is
+                    kept and the day goes back to being judged against the late threshold.
                   </>
                 )}
               </p>
@@ -435,6 +461,13 @@ export const LateTracker = () => {
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 They are currently marked late, so the penalty for this day will also be removed &mdash; unless a
                 payment or waiver has already been recorded against it, which is always kept.
+              </p>
+            )}
+
+            {pendingUncheck.kind === 'consider' && isTimeLate(attendanceRecords[pendingUncheck.member.id]) && !offDay && (
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Their recorded time is past the late threshold, so this day will become late again and its penalty
+                will be re-applied.
               </p>
             )}
 

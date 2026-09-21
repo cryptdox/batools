@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-export type AttendanceState = 'NO_ENTRY' | 'ENTRY' | 'LEAVE'
+export type AttendanceState = 'NO_ENTRY' | 'ENTRY' | 'CONSIDER_ENTRY' | 'LEAVE'
 
 export type TeamMemberType = {
   id: string
