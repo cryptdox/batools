@@ -99,7 +99,7 @@ BEGIN
   v_remaining := v_original - v_deducted;
 
   IF p_amount > v_remaining THEN
-    RAISE EXCEPTION 'Deduction amount cannot exceed the remaining punishment amount';
+    RAISE EXCEPTION 'Adjustment amount cannot exceed the remaining punishment amount';
   END IF;
 
   INSERT INTO punishment_transactions (

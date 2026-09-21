@@ -113,7 +113,7 @@ export const PunishmentPage = () => {
       toast.success('Punishment updated.');
     } catch (e) {
       console.error(e);
-      toast.error(e instanceof Error ? e.message : 'Error updating deduction. Check remaining balance.');
+      toast.error(e instanceof Error ? e.message : 'Error updating Adjustment. Check remaining balance.');
     } finally {
       setSaving(false);
     }
@@ -224,7 +224,7 @@ export const PunishmentPage = () => {
                     </td>
                     <td className="p-4 text-right">
                       <Button size="sm" onClick={() => openDeductModal(p)} disabled={p.remaining_amount <= 0}>
-                        Deduct
+                        Adjust
                       </Button>
                     </td>
                   </tr>
@@ -258,7 +258,7 @@ export const PunishmentPage = () => {
             </div>
 
             <Input 
-              label="Amount to deduct" 
+              label="Amount to Adjust" 
               type="number" 
               step="1"
               min="1"
@@ -285,7 +285,7 @@ export const PunishmentPage = () => {
             <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
               <Button variant="ghost" onClick={() => setIsModalOpen(false)} disabled={saving}>Cancel</Button>
               <Button onClick={handleDeduct} disabled={saving || !amount || Number(amount) <= 0 || Number(amount) > selectedPunishment.remaining_amount}>
-                {saving ? 'Confirming...' : 'Confirm Deduction'}
+                {saving ? 'Confirming...' : 'Confirm Adjustment'}
               </Button>
             </div>
           </div>
