@@ -42,7 +42,7 @@ export const LateTracker = () => {
   }, []);
 
   const fetchTypes = async () => {
-    const { data, error } = await supabase.from('team_member_types').select('*').order('name');
+    const { data, error } = await supabase.from('lt_team_member_types').select('*').order('name');
     if (error) {
       console.error(error);
       return;
@@ -57,7 +57,7 @@ export const LateTracker = () => {
   }, [selectedDate]);
 
   const fetchSettings = async () => {
-    const { data } = await supabase.from('attendance_settings').select('*').order('created_at', { ascending: false }).limit(1);
+    const { data } = await supabase.from('lt_attendance_settings').select('*').order('created_at', { ascending: false }).limit(1);
     if (data && data.length > 0) {
       setDefaultThreshold(data[0].late_threshold);
       setDefaultPunishment(data[0].punishment_amount);
@@ -69,11 +69,11 @@ export const LateTracker = () => {
     try {
       const dbDate = getDbDateString(date);
       
-      const { data: membersData } = await supabase.from('team_members').select('*').eq('is_active', true).eq('is_deleted', false);
+      const { data: membersData } = await supabase.from('lt_team_members').select('*').eq('is_active', true).eq('is_deleted', false);
       setMembers(membersData || []);
 
       const { data: recordsData } = await supabase
-        .from('attendance_records')
+        .from('lt_attendance_records')
         .select('*')
         .eq('attendance_date', dbDate);
       

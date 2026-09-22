@@ -32,12 +32,12 @@ export const SettingsPage = () => {
 
   const fetchTypes = async () => {
     try {
-      const { data, error } = await supabase.from('team_member_types').select('*').order('name');
+      const { data, error } = await supabase.from('lt_team_member_types').select('*').order('name');
       if (error) throw error;
       setTypes(data || []);
 
       const { data: members, error: membersError } = await supabase
-        .from('team_members')
+        .from('lt_team_members')
         .select('type_id')
         .eq('is_deleted', false);
       if (membersError) throw membersError;
@@ -58,7 +58,7 @@ export const SettingsPage = () => {
     if (!name) return;
     setAddingType(true);
     try {
-      const { error } = await supabase.from('team_member_types').insert({ name });
+      const { error } = await supabase.from('lt_team_member_types').insert({ name });
       if (error) throw error;
       setNewTypeName('');
       await fetchTypes();
@@ -94,7 +94,7 @@ export const SettingsPage = () => {
     setSavingType(true);
     try {
       const { error } = await supabase
-        .from('team_member_types')
+        .from('lt_team_member_types')
         .update({ name, updated_at: new Date().toISOString() })
         .eq('id', editingTypeId);
       if (error) throw error;
@@ -114,7 +114,7 @@ export const SettingsPage = () => {
     if (!typeToDelete) return;
     setDeletingType(true);
     try {
-      const { error } = await supabase.from('team_member_types').delete().eq('id', typeToDelete.id);
+      const { error } = await supabase.from('lt_team_member_types').delete().eq('id', typeToDelete.id);
       if (error) throw error;
       await fetchTypes();
       toast.success(`Type "${typeToDelete.name}" deleted.`);
@@ -130,7 +130,7 @@ export const SettingsPage = () => {
   const fetchSettings = async () => {
     setLoading(true);
     try {
-      const { data } = await supabase.from('attendance_settings').select('*').order('effective_from', { ascending: false });
+      const { data } = await supabase.from('lt_attendance_settings').select('*').order('effective_from', { ascending: false });
       if (data) {
         setSettings(data);
         if (data.length > 0) {
@@ -150,7 +150,7 @@ export const SettingsPage = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const { error } = await supabase.from('attendance_settings').insert({
+      const { error } = await supabase.from('lt_attendance_settings').insert({
         late_threshold: `${thresholdStr}:00`,
         punishment_amount: Number(amountStr),
         effective_from: new Date().toISOString()
