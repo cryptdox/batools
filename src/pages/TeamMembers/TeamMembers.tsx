@@ -31,7 +31,7 @@ export const TeamMembers = () => {
   }, []);
 
   const fetchTypes = async () => {
-    const { data, error } = await supabase.from('team_member_types').select('*').order('name');
+    const { data, error } = await supabase.from('lt_team_member_types').select('*').order('name');
     if (error) {
       console.error(error);
       return;
@@ -48,7 +48,7 @@ export const TeamMembers = () => {
   const fetchMembers = async () => {
     try {
       const { data, error } = await supabase
-        .from('team_members')
+        .from('lt_team_members')
         .select('*')
         .eq('is_deleted', false)
         .order('created_at', { ascending: false });
@@ -70,13 +70,13 @@ export const TeamMembers = () => {
     try {
       if (editingMember) {
         const { error } = await supabase
-          .from('team_members')
+          .from('lt_team_members')
           .update({ name, is_active: isActive, type_id: typeId || null })
           .eq('id', editingMember.id);
         if (error) throw error;
       } else {
         const { error } = await supabase
-          .from('team_members')
+          .from('lt_team_members')
           .insert([{ name, is_active: isActive, type_id: typeId || null }]);
         if (error) throw error;
       }
@@ -96,7 +96,7 @@ export const TeamMembers = () => {
   const toggleStatus = async (member: TeamMember) => {
     try {
       const { error } = await supabase
-        .from('team_members')
+        .from('lt_team_members')
         .update({ is_active: !member.is_active })
         .eq('id', member.id);
 
@@ -120,13 +120,13 @@ export const TeamMembers = () => {
     try {
       if (keepDataOnDelete) {
         const { error } = await supabase
-          .from('team_members')
+          .from('lt_team_members')
           .update({ is_deleted: true })
           .eq('id', memberToDelete.id);
         if (error) throw error;
       } else {
         const { error } = await supabase
-          .from('team_members')
+          .from('lt_team_members')
           .delete()
           .eq('id', memberToDelete.id);
         if (error) throw error;

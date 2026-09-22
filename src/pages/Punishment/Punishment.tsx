@@ -58,18 +58,18 @@ export const PunishmentPage = () => {
       // we'll fetch them separately or use a custom join/view in production. For now, fetch matching manually if needed, or rely on Postgrest join syntax
       
       const { data, error } = await supabase
-        .from('punishments')
+        .from('lt_punishments')
         .select(`
           *,
-          team_members (*),
-          attendance_records (*)
+          lt_team_members (*),
+          lt_attendance_records (*)
         `)
         .order('attendance_date', { ascending: false });
 
       if (error) throw error;
 
       // also fetch transactions to calculate totals properly without view
-      const { data: transactions } = await supabase.from('punishment_transactions').select('*');
+      const { data: transactions } = await supabase.from('lt_punishment_transactions').select('*');
 
       const formattedData: PunishmentWithDetails[] = (data || []).map(p => {
         const trans = (transactions || []).filter(t => t.punishment_id === p.id);
@@ -77,8 +77,8 @@ export const PunishmentPage = () => {
         const waived = trans.filter(t => t.transaction_type === 'DISCOUNT').reduce((sum, t) => sum + Number(t.amount), 0);
         return {
           ...p,
-          team_member: p.team_members,
-          attendance_record: p.attendance_records,
+          team_member: p.lt_team_members,
+          attendance_record: p.lt_attendance_records,
           paid_amount: paid,
           waived_amount: waived,
           remaining_amount: Number(p.punishment_amount) - paid - waived

@@ -41,11 +41,11 @@ export const ReportsPage = () => {
   const fetchReports = async () => {
     setLoading(true);
     try {
-      const { data: membersData, error: membersError } = await supabase.from('team_members').select('*');
+      const { data: membersData, error: membersError } = await supabase.from('lt_team_members').select('*');
       if (membersError) throw membersError;
-      const { data: punishmentsData, error: punishmentsError } = await supabase.from('punishments').select('*');
+      const { data: punishmentsData, error: punishmentsError } = await supabase.from('lt_punishments').select('*');
       if (punishmentsError) throw punishmentsError;
-      const { data: transactionsData, error: transactionsError } = await supabase.from('punishment_transactions').select('*');
+      const { data: transactionsData, error: transactionsError } = await supabase.from('lt_punishment_transactions').select('*');
       if (transactionsError) throw transactionsError;
 
       setMembers(membersData || []);

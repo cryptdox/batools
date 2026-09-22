@@ -40,9 +40,9 @@ export const AttendanceReportPage = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const { data: membersData, error: membersError } = await supabase.from('team_members').select('*');
+      const { data: membersData, error: membersError } = await supabase.from('lt_team_members').select('*');
       if (membersError) throw membersError;
-      const { data: recordsData, error: recordsError } = await supabase.from('attendance_records').select('*');
+      const { data: recordsData, error: recordsError } = await supabase.from('lt_attendance_records').select('*');
       if (recordsError) throw recordsError;
 
       setMembers(membersData || []);
