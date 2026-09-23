@@ -13,7 +13,11 @@ import { Login } from './pages/Login/Login';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 
 function AuthGate() {
-  const { userEmail } = useAuth();
+  const { userEmail, loading } = useAuth();
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center bg-theme-main text-gray-500">Loading...</div>;
+  }
 
   if (!userEmail) {
     return <Login />;

@@ -1,45 +1,114 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import {
+  clearSession,
+  getTokenExpiry,
+  iamLogin,
+  iamLogout,
+  iamRefresh,
+  loadSession,
+  IamError,
+  type IamSession,
+  type IamUser,
+} from './iam';
 
-// Static, env-based login gate. This is a UI convenience only, not real
-// database security: the anon key still grants full access to the
-// database (RLS stays permissive), and any VITE_-prefixed value here is
-// bundled in plaintext into the client JS. Do not rely on this for
-// anything beyond keeping casual visitors out of the UI.
-const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
-const STORAGE_KEY = 'late-tracker-auth';
+// Login is delegated to the Identity and Access Management service. Note this
+// only gates the UI: data access still goes through Supabase with the anon key.
+
+// Refresh this long before the access token's `exp` so requests never race it.
+const REFRESH_LEAD_MS = 60_000;
 
 type AuthContextValue = {
+  user: IamUser | null;
   userEmail: string | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<{ error: string | null }>;
+  signIn: (email: string, password: string, captchaToken: string) => Promise<{ error: string | null }>;
   signOut: () => void;
+  /** A non-expired access token, refreshing first if needed; null when signed out. */
+  getAccessToken: () => Promise<string | null>;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [userEmail, setUserEmail] = useState<string | null>(() => localStorage.getItem(STORAGE_KEY));
+const isExpiringSoon = (token: string) => {
+  const exp = getTokenExpiry(token);
+  return exp === null || exp * 1000 - Date.now() < REFRESH_LEAD_MS;
+};
 
-  const signIn = async (email: string, password: string) => {
-    if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
-      return { error: 'VITE_ADMIN_EMAIL / VITE_ADMIN_PASSWORD are not configured in .env.' };
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [session, setSession] = useState<IamSession | null>(() => loadSession());
+  const [loading, setLoading] = useState(() => {
+    const stored = loadSession();
+    return !!stored && isExpiringSoon(stored.accessToken);
+  });
+  const refreshTimer = useRef<number | undefined>(undefined);
+
+  const endSession = useCallback(() => {
+    clearSession();
+    setSession(null);
+  }, []);
+
+  const refresh = useCallback(async () => {
+    try {
+      const next = await iamRefresh();
+      setSession(next);
+      return next;
+    } catch (err) {
+      // Only a rejected refresh token ends the session; network hiccups keep it.
+      if (err instanceof IamError && err.status !== 0) endSession();
+      return null;
     }
-    if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
-      return { error: 'Invalid email or password.' };
+  }, [endSession]);
+
+  // On load: if the stored access token is stale, refresh before rendering the app.
+  useEffect(() => {
+    if (!loading) return;
+    refresh().finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Keep the access token fresh while signed in.
+  useEffect(() => {
+    window.clearTimeout(refreshTimer.current);
+    if (!session || loading) return;
+    const exp = getTokenExpiry(session.accessToken);
+    const delay = exp === null ? 0 : Math.max(exp * 1000 - Date.now() - REFRESH_LEAD_MS, 0);
+    refreshTimer.current = window.setTimeout(() => { void refresh(); }, delay);
+    return () => window.clearTimeout(refreshTimer.current);
+  }, [session, loading, refresh]);
+
+  // Other tabs rotate the refresh token too; stay in sync with what they store.
+  useEffect(() => {
+    const onStorage = () => setSession(loadSession());
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
+  const signIn = async (email: string, password: string, captchaToken: string) => {
+    try {
+      setSession(await iamLogin(email, password, captchaToken));
+      return { error: null };
+    } catch (err) {
+      return { error: err instanceof Error ? err.message : 'Login failed.' };
     }
-    localStorage.setItem(STORAGE_KEY, email);
-    setUserEmail(email);
-    return { error: null };
   };
 
   const signOut = () => {
-    localStorage.removeItem(STORAGE_KEY);
-    setUserEmail(null);
+    const token = session?.accessToken;
+    endSession();
+    if (token) iamLogout(token).catch(() => { /* session already cleared locally */ });
   };
 
+  const getAccessToken = useCallback(async () => {
+    const current = loadSession();
+    if (!current) return null;
+    if (!isExpiringSoon(current.accessToken)) return current.accessToken;
+    return (await refresh())?.accessToken ?? null;
+  }, [refresh]);
+
+  const user = session?.user ?? null;
+
   return (
-    <AuthContext.Provider value={{ userEmail, loading: false, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, userEmail: user?.email ?? null, loading, signIn, signOut, getAccessToken }}>
       {children}
     </AuthContext.Provider>
   );
