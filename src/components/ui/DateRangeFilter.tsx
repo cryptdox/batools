@@ -10,11 +10,11 @@ interface DateRangeFilterProps {
 }
 
 const PRESETS: { value: FilterPreset; label: string }[] = [
-  { value: 'all', label: 'All Time' },
+  // { value: 'all', label: 'All Time' },
   { value: 'daily', label: 'Daily' },
   { value: 'weekly', label: 'Weekly' },
   { value: 'monthly', label: 'Monthly' },
-  { value: 'custom', label: 'Custom Range' },
+  // { value: 'custom', label: 'Custom Range' },
 ];
 
 export const DateRangeFilter = ({

@@ -23,7 +23,7 @@ export const PunishmentPage = () => {
   const [punishments, setPunishments] = useState<PunishmentWithDetails[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const [preset, setPreset] = useState<FilterPreset>('all');
+  const [preset, setPreset] = useState<FilterPreset>('daily');
   const [customFrom, setCustomFrom] = useState(format(startOfMonth(new Date()), 'yyyy-MM-dd'));
   const [customTo, setCustomTo] = useState(format(new Date(), 'yyyy-MM-dd'));
 
