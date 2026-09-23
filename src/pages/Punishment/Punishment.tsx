@@ -165,6 +165,7 @@ export const PunishmentPage = () => {
           <DateRangeFilter
             preset={preset}
             onPresetChange={setPreset}
+            exclude={['all', 'custom']}
             customFrom={customFrom}
             customTo={customTo}
             onCustomFromChange={setCustomFrom}

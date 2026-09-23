@@ -7,14 +7,15 @@ interface DateRangeFilterProps {
   customTo: string;
   onCustomFromChange: (value: string) => void;
   onCustomToChange: (value: string) => void;
+  exclude?: FilterPreset[];
 }
 
 const PRESETS: { value: FilterPreset; label: string }[] = [
-  // { value: 'all', label: 'All Time' },
+  { value: 'all', label: 'All Time' },
   { value: 'daily', label: 'Daily' },
   { value: 'weekly', label: 'Weekly' },
   { value: 'monthly', label: 'Monthly' },
-  // { value: 'custom', label: 'Custom Range' },
+  { value: 'custom', label: 'Custom Range' },
 ];
 
 export const DateRangeFilter = ({
@@ -24,6 +25,7 @@ export const DateRangeFilter = ({
   customTo,
   onCustomFromChange,
   onCustomToChange,
+  exclude = [],
 }: DateRangeFilterProps) => {
   return (
     <div className="flex flex-wrap items-center gap-3">
@@ -32,7 +34,7 @@ export const DateRangeFilter = ({
         onChange={(e) => onPresetChange(e.target.value as FilterPreset)}
         className="h-10 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-gray-50 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
       >
-        {PRESETS.map(p => (
+        {PRESETS.filter(p => !exclude.includes(p.value)).map(p => (
           <option key={p.value} value={p.value}>{p.label}</option>
         ))}
       </select>
