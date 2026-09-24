@@ -20,7 +20,7 @@ const NAV_TREE: NavGroup[] = [
       { to: '/', label: 'Daily Tracker', icon: Clock },
       { to: '/team', label: 'Team Members', icon: Users },
       { to: '/punishment', label: 'Punishment', icon: ShieldAlert },
-      { to: '/reports', label: 'Financial Report', icon: FileText },
+      { to: '/reports', label: 'Collection Report', icon: FileText },
       { to: '/attendance-report', label: 'Attendance Report', icon: ClipboardList },
       { to: '/spend', label: 'Spend', icon: Wallet },
       { to: '/settings', label: 'Settings', icon: Settings },

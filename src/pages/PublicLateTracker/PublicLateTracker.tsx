@@ -229,6 +229,14 @@ export const PublicLateTracker = () => {
     return data.spends.filter(s => s.spend_date >= from && s.spend_date <= to);
   }, [data, dateRange]);
 
+  // Money on hand right now, so it ignores the period filter: every payment
+  // ever collected (including from members no longer active) minus every spend.
+  const currentBalance = useMemo(() => {
+    if (!data) return 0;
+    const collected = data.punishments.reduce((sum, p) => sum + Number(p.paid), 0);
+    return collected - sumSpends(data.spends);
+  }, [data]);
+
   const totals = useMemo(() => {
     const sum = (k: Exclude<SortKey, 'name' | 'today'>) => rows.reduce((acc, r) => acc + r[k], 0);
     const lateToday = rows.filter(r => r.today === 'LATE').length;
@@ -312,6 +320,7 @@ export const PublicLateTracker = () => {
                 { label: 'Waived', value: formatTaka(totals.waived), tone: 'text-[#d49a15] dark:text-warning' },
                 { label: 'Due', value: formatTaka(totals.due), tone: 'text-danger' },
                 { label: 'Total Spend', value: formatTaka(sumSpends(filteredSpends)), tone: 'text-primary', onClick: () => setIsSpendListOpen(true) },
+                { label: 'Current Balance', value: formatTaka(currentBalance), tone: currentBalance < 0 ? 'text-danger' : 'text-success' },
               ]}
             />
 

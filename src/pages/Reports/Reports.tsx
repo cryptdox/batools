@@ -8,7 +8,6 @@ import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { downloadCsv } from '../../lib/csvExport';
 import { Download } from 'lucide-react';
 import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
-import { SpendListModal, sumSpends, type SpendRow } from '../../components/spend/SpendTable';
 import { startOfMonth, format } from 'date-fns';
 
 type ReportSummary = {
@@ -28,8 +27,6 @@ export const ReportsPage = () => {
   const [members, setMembers] = useState<RawMember[]>([]);
   const [punishments, setPunishments] = useState<RawPunishment[]>([]);
   const [transactions, setTransactions] = useState<RawTransaction[]>([]);
-  const [spends, setSpends] = useState<SpendRow[]>([]);
-  const [isSpendListOpen, setIsSpendListOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [preset, setPreset] = useState<FilterPreset>('monthly');
@@ -55,11 +52,6 @@ export const ReportsPage = () => {
       setMembers(membersData || []);
       setPunishments(punishmentsData || []);
       setTransactions(transactionsData || []);
-
-      const { data: spendsData, error: spendsError } = await supabase.from('lt_spends').select('id, spend_date, amount, description, created_at');
-      // Spend is secondary here: a failure shouldn't hide the punishment report.
-      if (spendsError) console.error(spendsError);
-      setSpends(spendsData || []);
     } catch (e) {
       console.error(e);
       toast.error(e instanceof Error ? e.message : 'Unable to load report data.');
@@ -106,13 +98,6 @@ export const ReportsPage = () => {
       .filter(s => s.total_punishment > 0);
   }, [members, punishments, transactions, dateRange]);
 
-  const filteredSpends = useMemo(() => {
-    if (!dateRange) return spends;
-    const from = format(dateRange.from, 'yyyy-MM-dd');
-    const to = format(dateRange.to, 'yyyy-MM-dd');
-    return spends.filter(s => s.spend_date >= from && s.spend_date <= to);
-  }, [spends, dateRange]);
-
   const totals = useMemo(() => reports.reduce(
     (acc, r) => ({
       total_punishment: acc.total_punishment + r.total_punishment,
@@ -125,7 +110,7 @@ export const ReportsPage = () => {
 
   const handleExport = () => {
     downloadCsv(
-      `financial-report-${format(new Date(), 'yyyy-MM-dd')}.csv`,
+      `collection-report-${format(new Date(), 'yyyy-MM-dd')}.csv`,
       ['Team Member', 'Total Punishment', 'Paid', 'Waived', 'Remaining'],
       reports.map(r => [r.member_name, r.total_punishment.toFixed(2), r.paid.toFixed(2), r.discount.toFixed(2), r.remaining.toFixed(2)])
     );
@@ -135,8 +120,8 @@ export const ReportsPage = () => {
     <div className="max-w-6xl mx-auto space-y-6">
       <div className="flex flex-wrap justify-between items-center gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
         <div>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Financial Report</h2>
-          <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Summary of all accrued financial penalties.</p>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Collection Report</h2>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Punishments collected, waived and still due per team member.</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <PeriodNav label={periodLabel} onPrev={() => shiftPeriod(-1)} onNext={() => shiftPeriod(1)} nextDisabled={isNextPeriodDisabled} />
@@ -161,7 +146,6 @@ export const ReportsPage = () => {
           { label: 'Paid', value: formatTaka(totals.paid), tone: 'text-success' },
           { label: 'Waived', value: formatTaka(totals.discount), tone: 'text-[#d49a15] dark:text-warning' },
           { label: 'Remaining', value: formatTaka(totals.remaining), tone: 'text-danger' },
-          { label: 'Total Spend', value: formatTaka(sumSpends(filteredSpends)), tone: 'text-primary', onClick: () => setIsSpendListOpen(true) },
         ]}
       />
 
@@ -197,8 +181,6 @@ export const ReportsPage = () => {
           </div>
         )}
       </div>
-
-      <SpendListModal isOpen={isSpendListOpen} onClose={() => setIsSpendListOpen(false)} spends={filteredSpends} periodLabel={periodLabel} />
     </div>
   );
 };
