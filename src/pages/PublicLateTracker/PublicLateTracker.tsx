@@ -7,6 +7,7 @@ import { DateRangeFilter, type FilterPreset } from '../../components/ui/DateRang
 import { PeriodNav } from '../../components/ui/PeriodNav';
 import { SortableHeader, useSort } from '../../components/ui/SortableHeader';
 import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
+import { SpendListModal, sumSpends, type SpendRow } from '../../components/spend/SpendTable';
 import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { getDhakaDateString, getDhakaTimeOfDay } from '../../lib/dhakaTime';
 
@@ -25,7 +26,7 @@ type PublicPunishment = {
   paid: number;
   waived: number;
 };
-type PublicData = { members: PublicMember[]; records: PublicRecord[]; punishments: PublicPunishment[] };
+type PublicData = { members: PublicMember[]; records: PublicRecord[]; punishments: PublicPunishment[]; spends: SpendRow[] };
 
 type TodayStatus = 'LATE' | 'IN_TIME' | 'CONSIDERED' | 'LEAVE' | 'UNCHECKED' | 'OFF_DAY';
 
@@ -77,6 +78,7 @@ const TODAY_ORDER: Record<TodayStatus, number> = { LATE: 0, UNCHECKED: 1, CONSID
 
 export const PublicLateTracker = () => {
   const [data, setData] = useState<PublicData | null>(null);
+  const [isSpendListOpen, setIsSpendListOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
@@ -103,12 +105,15 @@ export const PublicLateTracker = () => {
     const load = async () => {
       setLoading(true);
       try {
-        const [membersRes, recordsRes, punishmentsRes, transactionsRes] = await Promise.all([
+        const [membersRes, recordsRes, punishmentsRes, transactionsRes, spendsRes] = await Promise.all([
           supabase.from('lt_team_members').select('id, name, created_at').eq('is_active', true).eq('is_deleted', false).order('name'),
           supabase.from('lt_attendance_records').select('team_member_id, attendance_date, state, entry_time, threshold_time_used'),
           supabase.from('lt_punishments').select('id, team_member_id, attendance_date, punishment_amount'),
           supabase.from('lt_punishment_transactions').select('punishment_id, transaction_type, amount'),
+          supabase.from('lt_spends').select('id, spend_date, amount, description, created_at'),
         ]);
+        // Spend is secondary here: a failure shouldn't hide the attendance table.
+        if (spendsRes.error) console.error(spendsRes.error);
         const failed = [membersRes, recordsRes, punishmentsRes, transactionsRes].find(r => r.error);
         if (failed?.error) throw failed.error;
 
@@ -127,6 +132,7 @@ export const PublicLateTracker = () => {
             paid: sumOf(p.id, 'PAID'),
             waived: sumOf(p.id, 'DISCOUNT'),
           })),
+          spends: spendsRes.data || [],
         });
       } catch (e) {
         console.error(e);
@@ -215,6 +221,14 @@ export const PublicLateTracker = () => {
     });
   }, [rows, sort, compare]);
 
+  const filteredSpends = useMemo(() => {
+    if (!data) return [];
+    if (!dateRange) return data.spends;
+    const from = toDbDate(dateRange.from);
+    const to = toDbDate(dateRange.to);
+    return data.spends.filter(s => s.spend_date >= from && s.spend_date <= to);
+  }, [data, dateRange]);
+
   const totals = useMemo(() => {
     const sum = (k: Exclude<SortKey, 'name' | 'today'>) => rows.reduce((acc, r) => acc + r[k], 0);
     const lateToday = rows.filter(r => r.today === 'LATE').length;
@@ -297,6 +311,7 @@ export const PublicLateTracker = () => {
                 { label: 'Paid', value: formatTaka(totals.paid), tone: 'text-success' },
                 { label: 'Waived', value: formatTaka(totals.waived), tone: 'text-[#d49a15] dark:text-warning' },
                 { label: 'Due', value: formatTaka(totals.due), tone: 'text-danger' },
+                { label: 'Total Spend', value: formatTaka(sumSpends(filteredSpends)), tone: 'text-primary', onClick: () => setIsSpendListOpen(true) },
               ]}
             />
 
@@ -349,6 +364,8 @@ export const PublicLateTracker = () => {
                 </div>
               )}
             </div>
+
+            <SpendListModal isOpen={isSpendListOpen} onClose={() => setIsSpendListOpen(false)} spends={filteredSpends} periodLabel={periodLabel} />
           </>
         )}
       </main>

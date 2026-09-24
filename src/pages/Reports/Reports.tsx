@@ -8,6 +8,7 @@ import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { downloadCsv } from '../../lib/csvExport';
 import { Download } from 'lucide-react';
 import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
+import { SpendListModal, sumSpends, type SpendRow } from '../../components/spend/SpendTable';
 import { startOfMonth, format } from 'date-fns';
 
 type ReportSummary = {
@@ -27,6 +28,8 @@ export const ReportsPage = () => {
   const [members, setMembers] = useState<RawMember[]>([]);
   const [punishments, setPunishments] = useState<RawPunishment[]>([]);
   const [transactions, setTransactions] = useState<RawTransaction[]>([]);
+  const [spends, setSpends] = useState<SpendRow[]>([]);
+  const [isSpendListOpen, setIsSpendListOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [preset, setPreset] = useState<FilterPreset>('monthly');
@@ -52,6 +55,11 @@ export const ReportsPage = () => {
       setMembers(membersData || []);
       setPunishments(punishmentsData || []);
       setTransactions(transactionsData || []);
+
+      const { data: spendsData, error: spendsError } = await supabase.from('lt_spends').select('id, spend_date, amount, description, created_at');
+      // Spend is secondary here: a failure shouldn't hide the punishment report.
+      if (spendsError) console.error(spendsError);
+      setSpends(spendsData || []);
     } catch (e) {
       console.error(e);
       toast.error(e instanceof Error ? e.message : 'Unable to load report data.');
@@ -97,6 +105,13 @@ export const ReportsPage = () => {
       })
       .filter(s => s.total_punishment > 0);
   }, [members, punishments, transactions, dateRange]);
+
+  const filteredSpends = useMemo(() => {
+    if (!dateRange) return spends;
+    const from = format(dateRange.from, 'yyyy-MM-dd');
+    const to = format(dateRange.to, 'yyyy-MM-dd');
+    return spends.filter(s => s.spend_date >= from && s.spend_date <= to);
+  }, [spends, dateRange]);
 
   const totals = useMemo(() => reports.reduce(
     (acc, r) => ({
@@ -146,6 +161,7 @@ export const ReportsPage = () => {
           { label: 'Paid', value: formatTaka(totals.paid), tone: 'text-success' },
           { label: 'Waived', value: formatTaka(totals.discount), tone: 'text-[#d49a15] dark:text-warning' },
           { label: 'Remaining', value: formatTaka(totals.remaining), tone: 'text-danger' },
+          { label: 'Total Spend', value: formatTaka(sumSpends(filteredSpends)), tone: 'text-primary', onClick: () => setIsSpendListOpen(true) },
         ]}
       />
 
@@ -181,6 +197,8 @@ export const ReportsPage = () => {
           </div>
         )}
       </div>
+
+      <SpendListModal isOpen={isSpendListOpen} onClose={() => setIsSpendListOpen(false)} spends={filteredSpends} periodLabel={periodLabel} />
     </div>
   );
 };
