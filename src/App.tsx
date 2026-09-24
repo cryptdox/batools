@@ -38,8 +38,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Read-only share link: reachable without signing in, gated by its key instead. */}
-        <Route path="/late-tracker/:key" element={<PublicLateTracker />} />
+        {/* Read-only page, reachable without signing in. */}
+        <Route path="/late-tracker" element={<PublicLateTracker />} />
         <Route
           path="/*"
           element={

@@ -4,7 +4,7 @@ import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { Modal } from '../../components/ui/Modal';
 import { format } from 'date-fns';
-import { Save, Plus, Trash2, AlertTriangle, Tag, Pencil, Check, X, Link2, Copy, RefreshCw } from 'lucide-react';
+import { Save, Plus, Trash2, AlertTriangle, Tag, Pencil, Check, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 export const SettingsPage = () => {
@@ -25,52 +25,10 @@ export const SettingsPage = () => {
   const [editingTypeName, setEditingTypeName] = useState('');
   const [savingType, setSavingType] = useState(false);
 
-  const [shareKey, setShareKey] = useState<string | null>(null);
-  const [isRegenerateOpen, setIsRegenerateOpen] = useState(false);
-  const [regenerating, setRegenerating] = useState(false);
-  const shareUrl = shareKey ? `${window.location.origin}/late-tracker/${shareKey}` : null;
-
   useEffect(() => {
     fetchSettings();
     fetchTypes();
-    fetchShareKey();
   }, []);
-
-  const fetchShareKey = async () => {
-    const { data, error } = await supabase.rpc('get_public_share_key');
-    if (error) {
-      console.error(error);
-      return;
-    }
-    setShareKey(data ?? null);
-  };
-
-  // Replacing the key is what revokes old links, so an existing link asks first.
-  const handleRegenerateKey = async () => {
-    setRegenerating(true);
-    try {
-      const { data, error } = await supabase.rpc('regenerate_public_share_key');
-      if (error) throw error;
-      setShareKey(data);
-      setIsRegenerateOpen(false);
-      toast.success(shareKey ? 'New public link generated. The old link no longer works.' : 'Public link generated.');
-    } catch (e) {
-      console.error(e);
-      toast.error(e instanceof Error ? e.message : 'Unable to generate public link.');
-    } finally {
-      setRegenerating(false);
-    }
-  };
-
-  const handleCopyLink = async () => {
-    if (!shareUrl) return;
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      toast.success('Link copied.');
-    } catch {
-      toast.error('Unable to copy. Select the link and copy it manually.');
-    }
-  };
 
   const fetchTypes = async () => {
     try {
@@ -244,37 +202,6 @@ export const SettingsPage = () => {
       </div>
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Public Late Tracker Link</h3>
-        <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
-          A read-only page showing today's late status and per-member totals. Anyone with the link can view it without signing in.
-        </p>
-
-        {shareUrl ? (
-          <div className="flex flex-wrap gap-2 items-center">
-            <div className="flex-1 min-w-[16rem] flex items-center gap-2 h-10 rounded-md border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3">
-              <Link2 size={16} className="text-primary shrink-0" />
-              <input
-                readOnly
-                value={shareUrl}
-                onFocus={e => e.target.select()}
-                className="flex-1 min-w-0 bg-transparent text-sm text-gray-700 dark:text-gray-300 focus:outline-none"
-              />
-            </div>
-            <Button variant="outline" onClick={handleCopyLink}>
-              <Copy size={16} className="mr-2" /> Copy
-            </Button>
-            <Button variant="outline" onClick={() => setIsRegenerateOpen(true)}>
-              <RefreshCw size={16} className="mr-2" /> Regenerate
-            </Button>
-          </div>
-        ) : (
-          <Button onClick={handleRegenerateKey} disabled={regenerating}>
-            <Link2 size={18} className="mr-2" /> {regenerating ? 'Generating...' : 'Generate Public Link'}
-          </Button>
-        )}
-      </div>
-
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Team Member Types</h3>
         <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
           Designations you can assign to team members, e.g. Developer, Designer, Intern.
@@ -379,23 +306,6 @@ export const SettingsPage = () => {
             </table>
          )}
       </div>
-
-      <Modal isOpen={isRegenerateOpen} onClose={() => !regenerating && setIsRegenerateOpen(false)} title="Regenerate Public Link">
-        <div className="space-y-4">
-          <div className="flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg p-4">
-            <AlertTriangle size={20} className="text-danger shrink-0 mt-0.5" />
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              The current link will stop working immediately. Anyone using it will need the new one.
-            </p>
-          </div>
-          <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
-            <Button variant="ghost" onClick={() => setIsRegenerateOpen(false)} disabled={regenerating}>Cancel</Button>
-            <Button variant="danger" onClick={handleRegenerateKey} disabled={regenerating}>
-              {regenerating ? 'Regenerating...' : 'Regenerate Link'}
-            </Button>
-          </div>
-        </div>
-      </Modal>
 
       <Modal isOpen={!!typeToDelete} onClose={() => !deletingType && setTypeToDelete(null)} title="Delete Type">
         {typeToDelete && (

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { addDays, format, getDay, parse, startOfMonth } from 'date-fns';
 import { Moon, Sun } from 'lucide-react';
 import { supabase, type AttendanceState } from '../../lib/supabase';
@@ -77,7 +76,6 @@ const isLate = (r: PublicRecord) =>
 const TODAY_ORDER: Record<TodayStatus, number> = { LATE: 0, UNCHECKED: 1, CONSIDERED: 2, IN_TIME: 3, LEAVE: 4, OFF_DAY: 5 };
 
 export const PublicLateTracker = () => {
-  const { key } = useParams<{ key: string }>();
   const [data, setData] = useState<PublicData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -104,19 +102,41 @@ export const PublicLateTracker = () => {
   useEffect(() => {
     const load = async () => {
       setLoading(true);
-      const { data: result, error: rpcError } = await supabase.rpc('get_public_late_tracker', { p_key: key });
-      if (rpcError) {
-        console.error(rpcError);
+      try {
+        const [membersRes, recordsRes, punishmentsRes, transactionsRes] = await Promise.all([
+          supabase.from('lt_team_members').select('id, name, created_at').eq('is_active', true).eq('is_deleted', false).order('name'),
+          supabase.from('lt_attendance_records').select('team_member_id, attendance_date, state, entry_time, threshold_time_used'),
+          supabase.from('lt_punishments').select('id, team_member_id, attendance_date, punishment_amount'),
+          supabase.from('lt_punishment_transactions').select('punishment_id, transaction_type, amount'),
+        ]);
+        const failed = [membersRes, recordsRes, punishmentsRes, transactionsRes].find(r => r.error);
+        if (failed?.error) throw failed.error;
+
+        const transactions = transactionsRes.data || [];
+        const sumOf = (punishmentId: string, type: string) => transactions
+          .filter(t => t.punishment_id === punishmentId && t.transaction_type === type)
+          .reduce((sum, t) => sum + Number(t.amount), 0);
+
+        setData({
+          members: membersRes.data || [],
+          records: recordsRes.data || [],
+          punishments: (punishmentsRes.data || []).map(p => ({
+            team_member_id: p.team_member_id,
+            attendance_date: p.attendance_date,
+            punishment_amount: Number(p.punishment_amount),
+            paid: sumOf(p.id, 'PAID'),
+            waived: sumOf(p.id, 'DISCOUNT'),
+          })),
+        });
+      } catch (e) {
+        console.error(e);
         setError('Unable to load the late tracker right now.');
-      } else if (!result) {
-        setError('This link is invalid or has been revoked.');
-      } else {
-        setData(result as PublicData);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     void load();
-  }, [key]);
+  }, []);
 
   const rows = useMemo<Row[]>(() => {
     if (!data) return [];
