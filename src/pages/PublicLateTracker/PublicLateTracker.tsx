@@ -288,7 +288,7 @@ export const PublicLateTracker = () => {
               items={[
                 { label: 'Late Today', value: totals.lateToday, tone: 'text-danger' },
                 { label: 'Not Late Today', value: totals.notLateToday, tone: 'text-success' },
-                { label: 'Total Days', value: totals.total_days },
+                { label: 'Total Counts', value: totals.total_days },
                 { label: 'In Time', value: totals.in_time, tone: 'text-success' },
                 { label: 'Late', value: totals.late, tone: 'text-danger' },
                 { label: 'Considered', value: totals.considered, tone: 'text-[#d49a15] dark:text-warning' },
