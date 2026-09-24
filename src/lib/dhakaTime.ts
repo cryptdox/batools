@@ -29,3 +29,10 @@ export function formatDhakaTime12h(isoString: string): string {
 export function dhakaDateTimeToIso(dbDate: string, timeHHmm: string): string {
   return `${dbDate}T${timeHHmm}:00+06:00`;
 }
+
+// Today's calendar date in Asia/Dhaka as 'yyyy-MM-dd', so "today" means the
+// organization's day even for a viewer in another timezone.
+export function getDhakaDateString(date: Date = new Date()): string {
+  // en-CA formats as yyyy-MM-dd.
+  return new Intl.DateTimeFormat('en-CA', { timeZone: DHAKA_TZ }).format(date);
+}

@@ -10,6 +10,7 @@ import { RotateCcw, AlertTriangle } from 'lucide-react';
 import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { format, startOfMonth } from 'date-fns';
 import { formatDhakaTime12h } from '../../lib/dhakaTime';
+import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
 
 type PunishmentWithDetails = Punishment & {
   team_member: TeamMember;
@@ -124,6 +125,16 @@ export const PunishmentPage = () => {
     return { count: rows.length, total: rows.reduce((sum, p) => sum + p.remaining_amount, 0) };
   }, [filteredPunishments]);
 
+  const totals = useMemo(() => filteredPunishments.reduce(
+    (acc, p) => ({
+      punishment: acc.punishment + Number(p.punishment_amount),
+      paid: acc.paid + p.paid_amount,
+      waived: acc.waived + p.waived_amount,
+      remaining: acc.remaining + p.remaining_amount,
+    }),
+    { punishment: 0, paid: 0, waived: 0, remaining: 0 }
+  ), [filteredPunishments]);
+
   const handleResetDues = async () => {
     setResetting(true);
     try {
@@ -176,6 +187,16 @@ export const PunishmentPage = () => {
           </Button>
         </div>
       </div>
+
+      <SummaryBar
+        items={[
+          { label: 'Records', value: filteredPunishments.length },
+          { label: 'Punishment', value: formatTaka(totals.punishment) },
+          { label: 'Paid', value: formatTaka(totals.paid), tone: 'text-success' },
+          { label: 'Waived', value: formatTaka(totals.waived), tone: 'text-[#d49a15] dark:text-warning' },
+          { label: 'Remaining', value: formatTaka(totals.remaining), tone: 'text-danger' },
+        ]}
+      />
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
         {loading ? (

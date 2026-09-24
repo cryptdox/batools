@@ -10,6 +10,7 @@ import { ReportsPage } from './pages/Reports/Reports';
 import { AttendanceReportPage } from './pages/AttendanceReport/AttendanceReport';
 import { SettingsPage } from './pages/Settings/Settings';
 import { Login } from './pages/Login/Login';
+import { PublicLateTracker } from './pages/PublicLateTracker/PublicLateTracker';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 
 function AuthGate() {
@@ -36,9 +37,18 @@ function AuthGate() {
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <AuthGate />
-      </AuthProvider>
+      <Routes>
+        {/* Read-only share link: reachable without signing in, gated by its key instead. */}
+        <Route path="/late-tracker/:key" element={<PublicLateTracker />} />
+        <Route
+          path="/*"
+          element={
+            <AuthProvider>
+              <AuthGate />
+            </AuthProvider>
+          }
+        />
+      </Routes>
       {/* offset clears the 64px top bar so toasts don't sit on the theme toggle */}
       <ToastContainer position="top-right" theme="colored" newestOnTop style={{ top: '72px' }} />
     </BrowserRouter>

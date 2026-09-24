@@ -7,6 +7,7 @@ import { PeriodNav } from '../../components/ui/PeriodNav';
 import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { downloadCsv } from '../../lib/csvExport';
 import { Download } from 'lucide-react';
+import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
 import { startOfMonth, format } from 'date-fns';
 
 type ReportSummary = {
@@ -97,6 +98,16 @@ export const ReportsPage = () => {
       .filter(s => s.total_punishment > 0);
   }, [members, punishments, transactions, dateRange]);
 
+  const totals = useMemo(() => reports.reduce(
+    (acc, r) => ({
+      total_punishment: acc.total_punishment + r.total_punishment,
+      paid: acc.paid + r.paid,
+      discount: acc.discount + r.discount,
+      remaining: acc.remaining + r.remaining,
+    }),
+    { total_punishment: 0, paid: 0, discount: 0, remaining: 0 }
+  ), [reports]);
+
   const handleExport = () => {
     downloadCsv(
       `financial-report-${format(new Date(), 'yyyy-MM-dd')}.csv`,
@@ -127,6 +138,16 @@ export const ReportsPage = () => {
           </Button>
         </div>
       </div>
+
+      <SummaryBar
+        items={[
+          { label: 'Members', value: reports.length },
+          { label: 'Total Punishment', value: formatTaka(totals.total_punishment) },
+          { label: 'Paid', value: formatTaka(totals.paid), tone: 'text-success' },
+          { label: 'Waived', value: formatTaka(totals.discount), tone: 'text-[#d49a15] dark:text-warning' },
+          { label: 'Remaining', value: formatTaka(totals.remaining), tone: 'text-danger' },
+        ]}
+      />
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
         {loading ? (

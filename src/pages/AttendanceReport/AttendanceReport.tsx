@@ -8,6 +8,7 @@ import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { getDhakaTimeOfDay } from '../../lib/dhakaTime';
 import { downloadCsv } from '../../lib/csvExport';
 import { Download } from 'lucide-react';
+import { SummaryBar } from '../../components/ui/SummaryBar';
 import { startOfMonth, format } from 'date-fns';
 
 type AttendanceSummary = {
@@ -98,6 +99,17 @@ export const AttendanceReportPage = () => {
       .filter(s => s.total_recorded > 0);
   }, [members, records, dateRange]);
 
+  const totals = useMemo(() => summaries.reduce(
+    (acc, s) => ({
+      in_time: acc.in_time + s.in_time,
+      late: acc.late + s.late,
+      considered: acc.considered + s.considered,
+      omitted: acc.omitted + s.omitted,
+      total_recorded: acc.total_recorded + s.total_recorded,
+    }),
+    { in_time: 0, late: 0, considered: 0, omitted: 0, total_recorded: 0 }
+  ), [summaries]);
+
   const handleExport = () => {
     downloadCsv(
       `attendance-report-${format(new Date(), 'yyyy-MM-dd')}.csv`,
@@ -128,6 +140,17 @@ export const AttendanceReportPage = () => {
           </Button>
         </div>
       </div>
+
+      <SummaryBar
+        items={[
+          { label: 'Members', value: summaries.length },
+          { label: 'In Time', value: totals.in_time, tone: 'text-success' },
+          { label: 'Late', value: totals.late, tone: 'text-danger' },
+          { label: 'Considered', value: totals.considered, tone: 'text-[#d49a15] dark:text-warning' },
+          { label: 'Omitted', value: totals.omitted },
+          { label: 'Total Days', value: totals.total_recorded },
+        ]}
+      />
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
         {loading ? (
