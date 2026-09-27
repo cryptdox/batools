@@ -18,6 +18,15 @@ import { TaskManagerPage } from './pages/TaskManager/TaskManagerPage';
 import { TaskStorePage } from './pages/TaskManager/TaskStorePage';
 import { VocabularyPage } from './pages/TaskManager/VocabularyPage';
 import { AdministrationPage } from './pages/TaskManager/AdministrationPage';
+import { PbDashboard } from './pages/PartnerBusiness/PbDashboard';
+import { PbProducts } from './pages/PartnerBusiness/PbProducts';
+import { PbBuy } from './pages/PartnerBusiness/PbBuy';
+import { PbSell } from './pages/PartnerBusiness/PbSell';
+import { PbCosts } from './pages/PartnerBusiness/PbCosts';
+import { PbAssets } from './pages/PartnerBusiness/PbAssets';
+import { PbPartners } from './pages/PartnerBusiness/PbPartners';
+import { PbLedger } from './pages/PartnerBusiness/PbLedger';
+import { PbProfitAdjust } from './pages/PartnerBusiness/PbProfitAdjust';
 
 function AuthGate() {
   const { userEmail, loading } = useAuth();
@@ -44,6 +53,15 @@ function AuthGate() {
         <Route path="/task-store" element={<TaskStorePage />} />
         <Route path="/vocabulary" element={<VocabularyPage />} />
         <Route path="/task-administration" element={<AdministrationPage />} />
+        <Route path="/pb" element={<PbDashboard />} />
+        <Route path="/pb/products" element={<PbProducts />} />
+        <Route path="/pb/buy" element={<PbBuy />} />
+        <Route path="/pb/sell" element={<PbSell />} />
+        <Route path="/pb/costs" element={<PbCosts />} />
+        <Route path="/pb/assets" element={<PbAssets />} />
+        <Route path="/pb/partners" element={<PbPartners />} />
+        <Route path="/pb/ledger" element={<PbLedger />} />
+        <Route path="/pb/adjust" element={<PbProfitAdjust />} />
       </Routes>
     </AppLayout>
   );

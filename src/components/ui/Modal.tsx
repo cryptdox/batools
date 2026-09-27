@@ -47,7 +47,9 @@ export const Modal = ({ isOpen, onClose, title, children, className }: ModalProp
       <div 
         ref={modalRef}
         className={cn(
-          "relative w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 transform transition-all animate-fade-in-scale",
+          // max-h + overflow so a tall form (the buy batch, with many lines)
+          // scrolls inside the dialog instead of running off the viewport.
+          "relative w-full max-w-md max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 transform transition-all animate-fade-in-scale",
           className
         )}
       >

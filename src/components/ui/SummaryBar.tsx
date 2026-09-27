@@ -10,7 +10,7 @@ export type SummaryItem = {
 // A strip of stat cards showing the column totals of the table below it.
 export const SummaryBar = ({ items }: { items: SummaryItem[] }) => (
   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(8.5rem,1fr))] gap-3">
-    {items.map(item => {
+    {items.map((item, i) => {
       const content = (
         <>
           <div className={`text-xs font-medium truncate ${item.tone ?? 'text-gray-500 dark:text-gray-400'}`}>{item.label}</div>
@@ -20,7 +20,7 @@ export const SummaryBar = ({ items }: { items: SummaryItem[] }) => (
       const cardClass = 'bg-white dark:bg-gray-800 px-4 py-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 min-w-0 text-left';
       return item.onClick ? (
         <button
-          key={item.label}
+          key={`${i}-${item.label}`}
           type="button"
           onClick={item.onClick}
           title={`View ${item.label.toLowerCase()} details`}
@@ -29,7 +29,7 @@ export const SummaryBar = ({ items }: { items: SummaryItem[] }) => (
           {content}
         </button>
       ) : (
-        <div key={item.label} className={cardClass}>{content}</div>
+        <div key={`${i}-${item.label}`} className={cardClass}>{content}</div>
       );
     })}
   </div>

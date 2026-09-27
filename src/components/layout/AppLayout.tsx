@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Clock, Users, ShieldAlert, FileText, ClipboardList, Wallet, Settings, Moon, Sun, Menu, X, LogOut,
-  ChevronDown, ListTodo, Package, BookOpen, Sliders, type LucideIcon,
+  ChevronDown, ListTodo, Package, BookOpen, Sliders,
+  Briefcase, Boxes, ShoppingCart, Tags, Receipt, Landmark, HandCoins, Scale, LayoutDashboard,
+  type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
+import { useLanguage } from '../../lib/LanguageContext';
 
 const APP_NAME = 'Bangla Tools';
 
@@ -24,6 +27,22 @@ const NAV_TREE: NavGroup[] = [
       { to: '/attendance-report', label: 'Attendance Report', icon: ClipboardList },
       { to: '/spend', label: 'Spend', icon: Wallet },
       { to: '/settings', label: 'Settings', icon: Settings },
+    ],
+  },
+  {
+    key: 'partner-business',
+    label: 'Partner Business',
+    icon: Briefcase,
+    children: [
+      { to: '/pb', label: 'Dashboard', icon: LayoutDashboard },
+      { to: '/pb/products', label: 'Products', icon: Boxes },
+      { to: '/pb/buy', label: 'Buy', icon: ShoppingCart },
+      { to: '/pb/sell', label: 'Sell', icon: Tags },
+      { to: '/pb/costs', label: 'Daily Costs', icon: Receipt },
+      { to: '/pb/assets', label: 'Assets', icon: Landmark },
+      { to: '/pb/partners', label: 'Partners', icon: Users },
+      { to: '/pb/ledger', label: 'Partner Ledger', icon: HandCoins },
+      { to: '/pb/adjust', label: 'Profit Adjust', icon: Scale },
     ],
   },
   {
@@ -78,6 +97,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const lastScrollTop = useRef(0);
   const location = useLocation();
   const { userEmail, signOut } = useAuth();
+  const { language, setLanguage } = useLanguage();
   const userInitials = (userEmail ?? '').slice(0, 2).toUpperCase() || '?';
 
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(() => {
@@ -149,6 +169,14 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
           <span className="text-lg font-bold tracking-tight whitespace-nowrap">{APP_NAME}</span>
         </div>
+        <div className="flex items-center gap-1">
+        <button
+          onClick={() => setLanguage(language === 'en' ? 'bn' : 'en')}
+          title={language === 'en' ? 'বাংলায় দেখুন' : 'View in English'}
+          className="px-2.5 py-1.5 rounded-md text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+        >
+          {language === 'en' ? 'বাংলা' : 'EN'}
+        </button>
         <button
           onClick={toggleTheme}
           className="p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
@@ -156,6 +184,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
         >
           {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
         </button>
+        </div>
       </header>
 
       <div className="flex flex-1 min-h-0 overflow-hidden">
