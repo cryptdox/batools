@@ -9,7 +9,9 @@ import { PunishmentPage } from './pages/Punishment/Punishment';
 import { ReportsPage } from './pages/Reports/Reports';
 import { AttendanceReportPage } from './pages/AttendanceReport/AttendanceReport';
 import { SettingsPage } from './pages/Settings/Settings';
+import { SpendPage } from './pages/Spend/Spend';
 import { Login } from './pages/Login/Login';
+import { PublicLateTracker } from './pages/PublicLateTracker/PublicLateTracker';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 
 function AuthGate() {
@@ -31,6 +33,7 @@ function AuthGate() {
         <Route path="/punishment" element={<PunishmentPage />} />
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="/attendance-report" element={<AttendanceReportPage />} />
+        <Route path="/spend" element={<SpendPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Routes>
     </AppLayout>
@@ -40,9 +43,18 @@ function AuthGate() {
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <AuthGate />
-      </AuthProvider>
+      <Routes>
+        {/* Read-only page, reachable without signing in. */}
+        <Route path="/late-tracker" element={<PublicLateTracker />} />
+        <Route
+          path="/*"
+          element={
+            <AuthProvider>
+              <AuthGate />
+            </AuthProvider>
+          }
+        />
+      </Routes>
       {/* offset clears the 64px top bar so toasts don't sit on the theme toggle */}
       <ToastContainer position="top-right" theme="colored" newestOnTop style={{ top: '72px' }} />
     </BrowserRouter>

@@ -51,6 +51,15 @@ export type Punishment = {
   updated_at: string
 }
 
+export type Spend = {
+  id: string
+  spend_date: string
+  amount: number
+  description: string
+  created_at: string
+  updated_at: string
+}
+
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 

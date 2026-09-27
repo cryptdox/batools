@@ -7,6 +7,7 @@ import { PeriodNav } from '../../components/ui/PeriodNav';
 import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { downloadCsv } from '../../lib/csvExport';
 import { Download } from 'lucide-react';
+import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
 import { startOfMonth, format } from 'date-fns';
 
 type ReportSummary = {
@@ -97,9 +98,19 @@ export const ReportsPage = () => {
       .filter(s => s.total_punishment > 0);
   }, [members, punishments, transactions, dateRange]);
 
+  const totals = useMemo(() => reports.reduce(
+    (acc, r) => ({
+      total_punishment: acc.total_punishment + r.total_punishment,
+      paid: acc.paid + r.paid,
+      discount: acc.discount + r.discount,
+      remaining: acc.remaining + r.remaining,
+    }),
+    { total_punishment: 0, paid: 0, discount: 0, remaining: 0 }
+  ), [reports]);
+
   const handleExport = () => {
     downloadCsv(
-      `financial-report-${format(new Date(), 'yyyy-MM-dd')}.csv`,
+      `collection-report-${format(new Date(), 'yyyy-MM-dd')}.csv`,
       ['Team Member', 'Total Punishment', 'Paid', 'Waived', 'Remaining'],
       reports.map(r => [r.member_name, r.total_punishment.toFixed(2), r.paid.toFixed(2), r.discount.toFixed(2), r.remaining.toFixed(2)])
     );
@@ -109,8 +120,8 @@ export const ReportsPage = () => {
     <div className="max-w-6xl mx-auto space-y-6">
       <div className="flex flex-wrap justify-between items-center gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
         <div>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Financial Report</h2>
-          <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Summary of all accrued financial penalties.</p>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Collection Report</h2>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Punishments collected, waived and still due per team member.</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <PeriodNav label={periodLabel} onPrev={() => shiftPeriod(-1)} onNext={() => shiftPeriod(1)} nextDisabled={isNextPeriodDisabled} />
@@ -127,6 +138,16 @@ export const ReportsPage = () => {
           </Button>
         </div>
       </div>
+
+      <SummaryBar
+        items={[
+          { label: 'Members', value: reports.length },
+          { label: 'Total Punishment', value: formatTaka(totals.total_punishment) },
+          { label: 'Paid', value: formatTaka(totals.paid), tone: 'text-success' },
+          { label: 'Waived', value: formatTaka(totals.discount), tone: 'text-[#d49a15] dark:text-warning' },
+          { label: 'Remaining', value: formatTaka(totals.remaining), tone: 'text-danger' },
+        ]}
+      />
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
         {loading ? (
