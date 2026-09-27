@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Clock, Users, ShieldAlert, FileText, ClipboardList, Wallet, Settings, Moon, Sun, Menu, X, LogOut,
-  ChevronDown, type LucideIcon,
+  ChevronDown, ListTodo, Package, BookOpen, Sliders, type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
 
@@ -24,6 +24,17 @@ const NAV_TREE: NavGroup[] = [
       { to: '/attendance-report', label: 'Attendance Report', icon: ClipboardList },
       { to: '/spend', label: 'Spend', icon: Wallet },
       { to: '/settings', label: 'Settings', icon: Settings },
+    ],
+  },
+  {
+    key: 'task-manager',
+    label: 'Task Manager',
+    icon: ListTodo,
+    children: [
+      { to: '/task-manager', label: 'Daily Tasks', icon: ListTodo },
+      { to: '/task-store', label: 'Task Store', icon: Package },
+      { to: '/vocabulary', label: 'Vocabulary', icon: BookOpen },
+      { to: '/task-administration', label: 'Administration', icon: Sliders },
     ],
   },
 ];

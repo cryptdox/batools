@@ -13,6 +13,11 @@ import { SpendPage } from './pages/Spend/Spend';
 import { Login } from './pages/Login/Login';
 import { PublicLateTracker } from './pages/PublicLateTracker/PublicLateTracker';
 import { AuthProvider, useAuth } from './lib/AuthContext';
+import { LanguageProvider } from './lib/LanguageContext';
+import { TaskManagerPage } from './pages/TaskManager/TaskManagerPage';
+import { TaskStorePage } from './pages/TaskManager/TaskStorePage';
+import { VocabularyPage } from './pages/TaskManager/VocabularyPage';
+import { AdministrationPage } from './pages/TaskManager/AdministrationPage';
 
 function AuthGate() {
   const { userEmail, loading } = useAuth();
@@ -35,6 +40,10 @@ function AuthGate() {
         <Route path="/attendance-report" element={<AttendanceReportPage />} />
         <Route path="/spend" element={<SpendPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/task-manager" element={<TaskManagerPage />} />
+        <Route path="/task-store" element={<TaskStorePage />} />
+        <Route path="/vocabulary" element={<VocabularyPage />} />
+        <Route path="/task-administration" element={<AdministrationPage />} />
       </Routes>
     </AppLayout>
   );
@@ -50,7 +59,9 @@ function App() {
           path="/*"
           element={
             <AuthProvider>
-              <AuthGate />
+              <LanguageProvider>
+                <AuthGate />
+              </LanguageProvider>
             </AuthProvider>
           }
         />
