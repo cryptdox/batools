@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { useAuth } from '../../lib/AuthContext';
+import { Turnstile } from '../../components/ui/Turnstile';
 import { LogIn } from 'lucide-react';
 
 export const Login = () => {
@@ -10,13 +11,21 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  // Captcha tokens are single-use; bumping this remounts the widget for a new one.
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!captchaToken) return;
     setSubmitting(true);
     setError(null);
-    const { error } = await signIn(email, password);
-    if (error) setError(error);
+    const { error } = await signIn(email, password, captchaToken);
+    if (error) {
+      setError(error);
+      setCaptchaToken(null);
+      setCaptchaKey(k => k + 1);
+    }
     setSubmitting(false);
   };
 
@@ -52,9 +61,11 @@ export const Login = () => {
           required
         />
 
+        <Turnstile key={captchaKey} onVerify={setCaptchaToken} onExpire={() => setCaptchaToken(null)} />
+
         {error && <p className="text-sm text-danger">{error}</p>}
 
-        <Button type="submit" className="w-full" disabled={submitting}>
+        <Button type="submit" className="w-full" disabled={submitting || !captchaToken}>
           <LogIn size={18} className="mr-2" /> {submitting ? 'Signing in...' : 'Sign In'}
         </Button>
       </form>

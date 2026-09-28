@@ -28,7 +28,13 @@ const MOVED: Record<string, string> = {
 };
 
 function AuthGate() {
-  const { userEmail } = useAuth();
+  const { userEmail, loading } = useAuth();
+
+  // Restoring an IAM session is async; without this the login screen flashes
+  // on every reload before the stored session is read.
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center bg-theme-main text-gray-500">Loading...</div>;
+  }
 
   // The read-only board stays reachable without signing in.
   if (!userEmail) {
