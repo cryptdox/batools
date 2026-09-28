@@ -11,7 +11,9 @@ import { SpendListModal, sumSpends, type SpendRow } from '../../components/spend
 import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { getDhakaDateString, getDhakaTimeOfDay } from '../../lib/dhakaTime';
 
-type PublicMember = { id: string; name: string; created_at: string };
+type PublicMember = { id: string; name: string; created_at: string
+  is_active: boolean;
+};
 type PublicRecord = {
   team_member_id: string;
   attendance_date: string;
@@ -28,13 +30,13 @@ type PublicPunishment = {
 };
 type PublicData = { members: PublicMember[]; records: PublicRecord[]; punishments: PublicPunishment[]; spends: SpendRow[] };
 
-type TodayStatus = 'LATE' | 'IN_TIME' | 'CONSIDERED' | 'LEAVE' | 'UNCHECKED' | 'OFF_DAY';
+type TodayStatus = 'LATE' | 'IN_TIME' | 'CONSIDERED' | 'LEAVE' | 'UNCHECKED' | 'OFF_DAY' | 'INACTIVE';
 
 type Row = {
   member_id: string;
   name: string;
   today: TodayStatus;
-  total_days: number;
+  total_count: number;
   in_time: number;
   late: number;
   considered: number;
@@ -45,7 +47,7 @@ type Row = {
   due: number;
 };
 
-type SortKey = 'name' | 'today' | 'total_days' | 'in_time' | 'late' | 'considered' | 'unchecked' | 'punishment' | 'paid' | 'waived' | 'due';
+type SortKey = 'name' | 'today' | 'total_count' | 'in_time' | 'late' | 'considered' | 'unchecked' | 'punishment' | 'paid' | 'waived' | 'due';
 
 const APP_NAME = 'Bangla Tools';
 
@@ -74,9 +76,17 @@ const isLate = (r: PublicRecord) =>
   r.state === 'ENTRY' && !!r.entry_time && !!r.threshold_time_used &&
   getDhakaTimeOfDay(r.entry_time) >= r.threshold_time_used;
 
-const TODAY_ORDER: Record<TodayStatus, number> = { LATE: 0, UNCHECKED: 1, CONSIDERED: 2, IN_TIME: 3, LEAVE: 4, OFF_DAY: 5 };
+const TODAY_ORDER: Record<TodayStatus, number> = { LATE: 0, UNCHECKED: 1, CONSIDERED: 2, IN_TIME: 3, LEAVE: 4, OFF_DAY: 5, INACTIVE: 6 };
 
-export const PublicLateTracker = () => {
+interface PublicLateTrackerProps {
+  /**
+   * Rendered inside AppLayout rather than standalone: the app already supplies
+   * the page background, top bar and padding, so this drops its own.
+   */
+  embedded?: boolean;
+}
+
+export const PublicLateTracker = ({ embedded = false }: PublicLateTrackerProps) => {
   const [data, setData] = useState<PublicData | null>(null);
   const [isSpendListOpen, setIsSpendListOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -106,7 +116,7 @@ export const PublicLateTracker = () => {
       setLoading(true);
       try {
         const [membersRes, recordsRes, punishmentsRes, transactionsRes, spendsRes] = await Promise.all([
-          supabase.from('lt_team_members').select('id, name, created_at').eq('is_active', true).eq('is_deleted', false).order('name'),
+          supabase.from('lt_team_members').select('id, name, created_at, is_active').eq('is_deleted', false).order('name'),
           supabase.from('lt_attendance_records').select('team_member_id, attendance_date, state, entry_time, threshold_time_used'),
           supabase.from('lt_punishments').select('id, team_member_id, attendance_date, punishment_amount'),
           supabase.from('lt_punishment_transactions').select('punishment_id, transaction_type, amount'),
@@ -164,13 +174,20 @@ export const PublicLateTracker = () => {
       const createdOn = getDhakaDateString(new Date(member.created_at));
       const firstRecord = memberRecords.reduce((min, r) => (r.attendance_date < min ? r.attendance_date : min), createdOn);
       const from = firstRecord > rangeFrom ? firstRecord : rangeFrom;
-      const workingDays = from <= rangeTo ? countWorkingDays(from, rangeTo) : 0;
+      // A deactivated member stops accruing days when they stopped being
+      // recorded. Their past days still count -- they were on the team then --
+      // but every day since must not pile up as "unchecked".
+      const lastRecord = memberRecords.reduce<string | null>(
+        (max, r) => (max === null || r.attendance_date > max ? r.attendance_date : max), null);
+      const memberTo = member.is_active || lastRecord === null || lastRecord >= rangeTo
+        ? rangeTo
+        : lastRecord;
+      const workingDays = from <= memberTo ? countWorkingDays(from, memberTo) : 0;
 
-      let inTime = 0, late = 0, considered = 0, checkedWorkingDays = 0, checkedOffDays = 0;
+      let inTime = 0, late = 0, considered = 0, checkedWorkingDays = 0;
       memberRecords.forEach(r => {
         if (!inRange(r.attendance_date) || !isChecked(r)) return;
-        if (isOffDay(r.attendance_date)) checkedOffDays++;
-        else if (r.attendance_date >= from) checkedWorkingDays++;
+        if (!isOffDay(r.attendance_date) && r.attendance_date >= from) checkedWorkingDays++;
 
         if (r.state === 'CONSIDER_ENTRY') considered++;
         else if (r.state === 'ENTRY') {
@@ -189,21 +206,26 @@ export const PublicLateTracker = () => {
 
       const todayRecord = memberRecords.find(r => r.attendance_date === today);
       let todayStatus: TodayStatus;
-      if (!todayRecord || !isChecked(todayRecord)) todayStatus = isOffDay(today) ? 'OFF_DAY' : 'UNCHECKED';
+      if (!member.is_active && !todayRecord) todayStatus = 'INACTIVE';
+      else if (!todayRecord || !isChecked(todayRecord)) todayStatus = isOffDay(today) ? 'OFF_DAY' : 'UNCHECKED';
       else if (todayRecord.state === 'LEAVE') todayStatus = 'LEAVE';
       else if (todayRecord.state === 'CONSIDER_ENTRY') todayStatus = 'CONSIDERED';
       else todayStatus = isLate(todayRecord) ? 'LATE' : 'IN_TIME';
+
+      const unchecked = Math.max(workingDays - checkedWorkingDays, 0);
 
       return {
         member_id: member.id,
         name: member.name,
         today: todayStatus,
-        // Off days only count when someone actually came in.
-        total_days: workingDays + checkedOffDays,
+        // Days actually accounted for. Unchecked is excluded on purpose -- a day
+        // nobody marked is not an attendance count, it is a gap -- so this will
+        // be less than the number of days in the period, by that gap.
+        total_count: inTime + late + considered,
         in_time: inTime,
         late,
         considered,
-        unchecked: Math.max(workingDays - checkedWorkingDays, 0),
+        unchecked,
         punishment,
         paid,
         waived,
@@ -244,7 +266,7 @@ export const PublicLateTracker = () => {
     return {
       lateToday,
       notLateToday,
-      total_days: sum('total_days'),
+      total_count: sum('total_count'),
       in_time: sum('in_time'),
       late: sum('late'),
       considered: sum('considered'),
@@ -260,23 +282,8 @@ export const PublicLateTracker = () => {
     <SortableHeader label={label} sortKey={k} sort={sort} onSort={toggleSort} className="text-right whitespace-nowrap" />
   );
 
-  return (
-    <div className="min-h-screen bg-theme-main text-theme-main font-sans">
-      <header className="bg-gradient-to-b from-[#1e3162] to-[#131d3d] text-white h-16 flex items-center justify-between px-4 sm:px-6">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold shadow-lg shrink-0">B</div>
-          <span className="text-lg font-bold tracking-tight whitespace-nowrap">{APP_NAME}</span>
-        </div>
-        <button
-          onClick={() => setTheme(prev => (prev === 'light' ? 'dark' : 'light'))}
-          className="p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
-          aria-label="Toggle dark mode"
-        >
-          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
-      </header>
-
-      <main className="max-w-7xl mx-auto p-4 sm:p-6 space-y-6">
+  const body = (
+    <>
         {loading ? (
           <div className="p-12 text-center text-gray-500 font-medium">Loading late tracker...</div>
         ) : error ? (
@@ -310,7 +317,7 @@ export const PublicLateTracker = () => {
               items={[
                 { label: 'Late Today', value: totals.lateToday, tone: 'text-danger' },
                 { label: 'Not Late Today', value: totals.notLateToday, tone: 'text-success' },
-                { label: 'Total Counts', value: totals.total_days },
+                { label: 'Total Count', value: totals.total_count },
                 { label: 'In Time', value: totals.in_time, tone: 'text-success' },
                 { label: 'Late', value: totals.late, tone: 'text-danger' },
                 { label: 'Considered', value: totals.considered, tone: 'text-[#d49a15] dark:text-warning' },
@@ -334,7 +341,7 @@ export const PublicLateTracker = () => {
                       <tr className="bg-gray-50/50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
                         <SortableHeader label="Team Member" sortKey="name" sort={sort} onSort={toggleSort} />
                         <SortableHeader label="Today" sortKey="today" sort={sort} onSort={toggleSort} />
-                        {numHeader('Total Days', 'total_days')}
+                        {numHeader('Total Count', 'total_count')}
                         {numHeader('In Time', 'in_time')}
                         {numHeader('Late', 'late')}
                         {numHeader('Considered', 'considered')}
@@ -355,9 +362,10 @@ export const PublicLateTracker = () => {
                             {r.today === 'CONSIDERED' && <Badge variant="warning">Considered</Badge>}
                             {r.today === 'LEAVE' && <Badge variant="muted">Omitted</Badge>}
                             {r.today === 'UNCHECKED' && <Badge variant="muted">Unchecked</Badge>}
+                            {r.today === 'INACTIVE' && <Badge variant="muted">Inactive</Badge>}
                             {r.today === 'OFF_DAY' && <span className="text-gray-400 dark:text-gray-600">&mdash;</span>}
                           </td>
-                          <td className="p-4 text-right text-gray-900 dark:text-gray-100">{r.total_days}</td>
+                          <td className="p-4 text-right text-gray-900 dark:text-gray-100">{r.total_count}</td>
                           <td className="p-4 text-right text-success font-medium">{r.in_time}</td>
                           <td className="p-4 text-right text-danger font-medium">{r.late}</td>
                           <td className="p-4 text-right text-[#d49a15] dark:text-warning font-medium">{r.considered}</td>
@@ -377,7 +385,27 @@ export const PublicLateTracker = () => {
             <SpendListModal isOpen={isSpendListOpen} onClose={() => setIsSpendListOpen(false)} spends={filteredSpends} periodLabel={periodLabel} />
           </>
         )}
-      </main>
+    </>
+  );
+
+  if (embedded) return <div className="space-y-6">{body}</div>;
+
+  return (
+    <div className="min-h-screen bg-theme-main text-theme-main font-sans">
+      <header className="bg-gradient-to-b from-[#1e3162] to-[#131d3d] text-white h-16 flex items-center justify-between px-4 sm:px-6">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold shadow-lg shrink-0">B</div>
+          <span className="text-lg font-bold tracking-tight whitespace-nowrap">{APP_NAME}</span>
+        </div>
+        <button
+          onClick={() => setTheme(prev => (prev === 'light' ? 'dark' : 'light'))}
+          className="p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+          aria-label="Toggle dark mode"
+        >
+          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
+      </header>
+      <main className="max-w-7xl mx-auto p-4 sm:p-6 space-y-6">{body}</main>
     </div>
   );
 };
