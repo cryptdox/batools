@@ -12,6 +12,9 @@ import { format, startOfMonth } from 'date-fns';
 import { formatDhakaTime12h } from '../../lib/dhakaTime';
 import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
 
+/** Keeps repeated addition from drifting into 0.1 + 0.2 territory. */
+const round2 = (n: number) => Math.round((n + Number.EPSILON) * 100) / 100;
+
 type PunishmentWithDetails = Punishment & {
   team_member: TeamMember;
   attendance_record: AttendanceRecord;
@@ -33,6 +36,8 @@ export const PunishmentPage = () => {
   const [selectedPunishment, setSelectedPunishment] = useState<PunishmentWithDetails | null>(null);
   const [amount, setAmount] = useState('');
   const [type, setType] = useState<'PAID' | 'DISCOUNT'>('PAID');
+  /** ONE: just this record. ALL: spread over the member's dues, oldest first. */
+  const [scope, setScope] = useState<'ONE' | 'ALL'>('ONE');
   const [saving, setSaving] = useState(false);
 
   const [isResetOpen, setIsResetOpen] = useState(false);
@@ -98,27 +103,76 @@ export const PunishmentPage = () => {
   const handleAdjust = async () => {
     if (!selectedPunishment || !amount) return;
     setSaving(true);
+    // Applied one record at a time, so a failure part-way leaves the earlier
+    // ones standing; the message says how far it got rather than implying
+    // nothing happened.
+    let done = 0;
     try {
-      const { error } = await supabase.rpc('add_punishment_transaction', {
-        p_punishment_id: selectedPunishment.id,
-        p_type: type,
-        p_amount: Number(amount),
-        p_note: ''
-      });
+      const steps = scope === 'ONE'
+        ? [{ id: selectedPunishment.id, take: round2(Number(amount)) }]
+        : allocation.map(a => ({ id: a.p.id, take: a.take }));
 
-      if (error) throw error;
-      
+      for (const step of steps) {
+        if (step.take <= 0) continue;
+        const { error } = await supabase.rpc('add_punishment_transaction', {
+          p_punishment_id: step.id,
+          p_type: type,
+          p_amount: step.take,
+          p_note: scope === 'ALL' ? 'Oldest-first adjustment' : ''
+        });
+        if (error) throw error;
+        done++;
+      }
+
       await fetchPunishments();
       setIsModalOpen(false);
       setAmount('');
-      toast.success('Punishment updated.');
+      toast.success(done > 1 ? `${done} punishment records updated.` : 'Punishment updated.');
     } catch (e) {
       console.error(e);
-      toast.error(e instanceof Error ? e.message : 'Error updating Adjustment. Check remaining balance.');
+      const partial = done > 0 ? ` ${done} record(s) were already applied.` : '';
+      toast.error((e instanceof Error ? e.message : 'Error updating Adjustment. Check remaining balance.') + partial);
+      await fetchPunishments();
     } finally {
       setSaving(false);
     }
   };
+
+  /**
+   * Everything this member still owes, oldest first.
+   *
+   * Deliberately taken from every punishment rather than the filtered period:
+   * the point of paying oldest-first is to clear debts that predate whatever
+   * window happens to be on screen.
+   */
+  const memberDues = useMemo(() => {
+    if (!selectedPunishment) return [] as PunishmentWithDetails[];
+    return punishments
+      .filter(p => p.team_member_id === selectedPunishment.team_member_id && p.remaining_amount > 0)
+      .sort((a, b) => a.attendance_date.localeCompare(b.attendance_date));
+  }, [punishments, selectedPunishment]);
+
+  const memberRemaining = useMemo(
+    () => round2(memberDues.reduce((sum, p) => sum + p.remaining_amount, 0)),
+    [memberDues]
+  );
+
+  /**
+   * How `amount` would land across those dues, oldest first: each record is
+   * filled to its remaining before anything moves to the next. Plain, not
+   * memoized -- it walks at most a handful of rows and re-runs on every
+   * keystroke anyway.
+   */
+  const allocation = memberDues.reduce<{ parts: { p: PunishmentWithDetails; take: number }[]; left: number }>(
+    (acc, p) => {
+      if (acc.left <= 0) return acc;
+      const take = round2(Math.min(acc.left, p.remaining_amount));
+      return { parts: [...acc.parts, { p, take }], left: round2(acc.left - take) };
+    },
+    { parts: [], left: round2(Number(amount) || 0) }
+  ).parts;
+
+  const maxAmount = scope === 'ONE' ? (selectedPunishment?.remaining_amount ?? 0) : memberRemaining;
 
   const outstanding = useMemo(() => {
     const rows = filteredPunishments.filter(p => p.remaining_amount > 0);
@@ -161,6 +215,7 @@ export const PunishmentPage = () => {
     setSelectedPunishment(p);
     setAmount('');
     setType('PAID');
+    setScope('ONE');
     setIsModalOpen(true);
   };
 
@@ -279,16 +334,71 @@ export const PunishmentPage = () => {
                </div>
             </div>
 
+            <div className="flex items-center justify-between gap-3 rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-3 text-sm">
+              <div>
+                <span className="block text-gray-500">
+                  Total remaining for {selectedPunishment.team_member?.name}
+                </span>
+                <span className="text-xs text-gray-400">
+                  {memberDues.length} unpaid record{memberDues.length === 1 ? '' : 's'}, all dates
+                </span>
+              </div>
+              <span className="font-bold text-danger text-base">{formatTaka(memberRemaining)}</span>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Apply to</label>
+              <div className="space-y-2">
+                <label className="flex items-start gap-2 cursor-pointer">
+                  <input type="radio" checked={scope === 'ONE'} onChange={() => setScope('ONE')} className="text-primary focus:ring-primary h-4 w-4 mt-0.5" />
+                  <span className="text-sm">
+                    This record only
+                    <span className="block text-xs text-gray-500">
+                      Up to {formatTaka(selectedPunishment.remaining_amount)}
+                    </span>
+                  </span>
+                </label>
+                <label className="flex items-start gap-2 cursor-pointer">
+                  <input type="radio" checked={scope === 'ALL'} onChange={() => setScope('ALL')} className="text-primary focus:ring-primary h-4 w-4 mt-0.5" />
+                  <span className="text-sm">
+                    All dues, oldest first
+                    <span className="block text-xs text-gray-500">
+                      Up to {formatTaka(memberRemaining)}, filling each record before moving on
+                    </span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
             <Input 
               label="Amount to Adjust" 
               type="number" 
               step="1"
               min="1"
-              max={selectedPunishment.remaining_amount}
+              max={maxAmount}
               value={amount}
               onChange={e => setAmount(e.target.value)} 
               placeholder="e.g. 100"
             />
+            {scope === 'ALL' && allocation.length > 0 && (
+              <div className="rounded-lg bg-gray-50 dark:bg-gray-900/50 p-3 space-y-1">
+                <div className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Will be applied as</div>
+                {allocation.map(a => (
+                  <div key={a.p.id} className="flex justify-between text-sm">
+                    <span className="text-gray-600 dark:text-gray-300">
+                      {format(new Date(a.p.attendance_date), 'MMM d, yyyy')}
+                      <span className="text-xs text-gray-400 ml-2">of {formatTaka(a.p.remaining_amount)}</span>
+                    </span>
+                    <span className="font-medium text-gray-900 dark:text-gray-100">{formatTaka(a.take)}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {Number(amount) > maxAmount && (
+              <p className="text-xs text-danger">
+                More than the {scope === 'ONE' ? 'remaining on this record' : 'total remaining'} ({formatTaka(maxAmount)}).
+              </p>
+            )}
             
             <div>
                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Type</label>
@@ -306,7 +416,7 @@ export const PunishmentPage = () => {
 
             <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
               <Button variant="ghost" onClick={() => setIsModalOpen(false)} disabled={saving}>Cancel</Button>
-              <Button onClick={handleAdjust} disabled={saving || !amount || Number(amount) <= 0 || Number(amount) > selectedPunishment.remaining_amount}>
+              <Button onClick={handleAdjust} disabled={saving || !amount || Number(amount) <= 0 || Number(amount) > maxAmount}>
                 {saving ? 'Confirming...' : 'Confirm Adjustment'}
               </Button>
             </div>

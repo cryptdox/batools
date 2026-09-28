@@ -13,21 +13,23 @@ import { useLanguage } from '../../lib/LanguageContext';
 const APP_NAME = 'Bangla Tools';
 
 type NavChild = { to: string; label: string; icon: LucideIcon };
-type NavGroup = { key: string; label: string; icon: LucideIcon; children: NavChild[] };
+/** `to` is the group's own landing page, reached by clicking its header. */
+type NavGroup = { key: string; label: string; icon: LucideIcon; to?: string; children: NavChild[] };
 
 const NAV_TREE: NavGroup[] = [
   {
     key: 'late-tracker',
     label: 'Late Tracker',
     icon: Clock,
+    to: '/late-tracker',
     children: [
-      { to: '/', label: 'Daily Tracker', icon: Clock },
-      { to: '/team', label: 'Team Members', icon: Users },
-      { to: '/punishment', label: 'Punishment', icon: ShieldAlert },
-      { to: '/reports', label: 'Collection Report', icon: FileText },
-      { to: '/attendance-report', label: 'Attendance Report', icon: ClipboardList },
-      { to: '/spend', label: 'Spend', icon: Wallet },
-      { to: '/settings', label: 'Settings', icon: Settings },
+      { to: '/late-tracker/daily-tracker', label: 'Daily Tracker', icon: Clock },
+      { to: '/late-tracker/team', label: 'Team Members', icon: Users },
+      { to: '/late-tracker/punishment', label: 'Punishment', icon: ShieldAlert },
+      { to: '/late-tracker/reports', label: 'Collection Report', icon: FileText },
+      { to: '/late-tracker/attendance-report', label: 'Attendance Report', icon: ClipboardList },
+      { to: '/late-tracker/spend', label: 'Spend', icon: Wallet },
+      { to: '/late-tracker/settings', label: 'Settings', icon: Settings },
     ],
   },
   {
@@ -89,13 +91,18 @@ const SidebarChildLink = ({ to, icon: Icon, label, onClick, collapsed }: NavChil
 };
 
 const findActiveGroup = (pathname: string) =>
-  NAV_TREE.find(group => group.children.some(child => child.to === pathname));
+  NAV_TREE.find(group => group.to === pathname || group.children.some(child => child.to === pathname));
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [topBarHidden, setTopBarHidden] = useState(false);
-  const [collapsed, setCollapsed] = useState(() => localStorage.getItem(COLLAPSED_STORAGE_KEY) === 'true');
+  const [collapsed, setCollapsed] = useState(() => {
+    // Arriving at the base URL lands on the public board, which reads better
+    // with the panel out of the way. Any later toggle is remembered as usual.
+    if (window.location.pathname === '/') return true;
+    return localStorage.getItem(COLLAPSED_STORAGE_KEY) === 'true';
+  });
   const lastScrollTop = useRef(0);
   const location = useLocation();
   const { userEmail, signOut } = useAuth();
@@ -134,7 +141,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
 
   const activeGroup = findActiveGroup(location.pathname);
   const activeChild = activeGroup?.children.find(child => child.to === location.pathname);
-  const pageTitle = activeChild?.label ?? 'Late Tracker';
+  const pageTitle = activeChild?.label ?? activeGroup?.label ?? 'Late Tracker';
 
   useEffect(() => {
     document.title = `${pageTitle} · ${APP_NAME}`;
@@ -210,20 +217,33 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
             {NAV_TREE.map(group => {
               const GroupIcon = group.icon;
               const isExpanded = collapsed || (expandedGroups[group.key] ?? true);
-              const isGroupActive = group.children.some(child => child.to === location.pathname);
+              const isGroupActive = group.to === location.pathname || group.children.some(child => child.to === location.pathname);
               return (
                 <div key={group.key}>
-                  <button
-                    onClick={() => { if (!collapsed) toggleGroup(group.key); }}
-                    title={collapsed ? group.label : undefined}
+                  <div
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${collapsed ? 'md:justify-center md:px-0' : ''} ${
                       isGroupActive ? 'text-white' : 'text-white/80 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <GroupIcon size={20} />
-                    <span className={`font-semibold flex-1 text-left ${collapsed ? 'md:hidden' : ''}`}>{group.label}</span>
-                    <ChevronDown size={16} className={`transition-transform ${isExpanded ? 'rotate-180' : ''} ${collapsed ? 'md:hidden' : ''}`} />
-                  </button>
+                    {/* The header is a link to the group's own page; the chevron
+                        beside it is what opens and closes the list. */}
+                    <Link
+                      to={group.to ?? group.children[0].to}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      title={collapsed ? group.label : undefined}
+                      className="flex items-center gap-3 flex-1 min-w-0"
+                    >
+                      <GroupIcon size={20} />
+                      <span className={`font-semibold text-left ${collapsed ? 'md:hidden' : ''}`}>{group.label}</span>
+                    </Link>
+                    <button
+                      onClick={() => { if (!collapsed) toggleGroup(group.key); }}
+                      aria-label={`Toggle ${group.label}`}
+                      className={collapsed ? 'md:hidden' : ''}
+                    >
+                      <ChevronDown size={16} className={`transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                    </button>
+                  </div>
                   {isExpanded && (
                     <div className="mt-1 space-y-1">
                       {group.children.map(child => (

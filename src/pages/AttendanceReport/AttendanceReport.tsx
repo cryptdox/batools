@@ -41,7 +41,12 @@ export const AttendanceReportPage = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const { data: membersData, error: membersError } = await supabase.from('lt_team_members').select('*');
+      // Deactivated members stay in: the days they attended were real and were
+      // counted at the time. Only deleted members drop out.
+      const { data: membersData, error: membersError } = await supabase
+        .from('lt_team_members')
+        .select('*')
+        .eq('is_deleted', false);
       if (membersError) throw membersError;
       const { data: recordsData, error: recordsError } = await supabase.from('lt_attendance_records').select('*');
       if (recordsError) throw recordsError;
@@ -93,10 +98,15 @@ export const AttendanceReportPage = () => {
           late,
           considered,
           omitted,
-          total_recorded: inTime + late + considered + omitted,
+          // Omitted is excluded: an omitted day is not an attendance count.
+          // It keeps its own column, but it is not part of the total.
+          total_recorded: inTime + late + considered,
         };
       })
-      .filter(s => s.total_recorded > 0);
+      // Membership of the report is "has any record", which is a different
+      // question from the total above -- otherwise a member whose only days
+      // were omitted would disappear from the report.
+      .filter(s => s.total_recorded > 0 || s.omitted > 0);
   }, [members, records, dateRange]);
 
   const totals = useMemo(() => summaries.reduce(
@@ -113,7 +123,7 @@ export const AttendanceReportPage = () => {
   const handleExport = () => {
     downloadCsv(
       `attendance-report-${format(new Date(), 'yyyy-MM-dd')}.csv`,
-      ['Team Member', 'In Time', 'Late', 'Considered', 'Omitted', 'Total Days'],
+      ['Team Member', 'In Time', 'Late', 'Considered', 'Omitted', 'Total Count'],
       summaries.map(s => [s.member_name, s.in_time, s.late, s.considered, s.omitted, s.total_recorded])
     );
   };
@@ -148,7 +158,7 @@ export const AttendanceReportPage = () => {
           { label: 'Late', value: totals.late, tone: 'text-danger' },
           { label: 'Considered', value: totals.considered, tone: 'text-[#d49a15] dark:text-warning' },
           { label: 'Omitted', value: totals.omitted },
-          { label: 'Total Days', value: totals.total_recorded },
+          { label: 'Total Count', value: totals.total_recorded },
         ]}
       />
 
@@ -167,7 +177,7 @@ export const AttendanceReportPage = () => {
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Late</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Considered</th>
                   <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Omitted</th>
-                  <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Total Days</th>
+                  <th className="p-4 font-medium text-gray-500 dark:text-gray-400 text-sm text-right">Total Count</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
