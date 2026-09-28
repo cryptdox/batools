@@ -7,11 +7,15 @@ import { Modal } from '../../components/ui/Modal';
 import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
 import { Pagination, usePagination } from '../../components/ui/Pagination';
 import { toast } from 'react-toastify';
-import { Plus, Trash2, AlertTriangle, Tags } from 'lucide-react';
+import { Plus, Trash2, AlertTriangle, Tags, X } from 'lucide-react';
 import { format } from 'date-fns';
 import { getDhakaDateString } from '../../lib/dhakaTime';
 import { money } from '../../lib/partnerBusiness';
 import type { PbSale, PbBuyBatch, PbBuyBatchItemStock } from '../../types/partnerBusiness';
+
+/** A titled cost of selling, mirroring a buy batch's extra costs. */
+type ExtraDraft = { title: string; amount: string };
+const blankExtra = (): ExtraDraft => ({ title: '', amount: '' });
 
 const NO_BATCH = '__none__';
 
@@ -46,10 +50,14 @@ export const PbSell = () => {
   const [sales, setSales] = useState<PbSale[]>([]);
   const [batches, setBatches] = useState<PbBuyBatch[]>([]);
   const [stock, setStock] = useState<PbBuyBatchItemStock[]>([]);
+  const [extraDrafts, setExtraDrafts] = useState<ExtraDraft[]>([]);
+  /** Batches this sale draws on, in the order they were added. */
+  const [pickedBatches, setPickedBatches] = useState<string[]>([]);
+  /** Set when the sale also includes an item that is not from any batch. */
+  const [withCustom, setWithCustom] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [batchId, setBatchId] = useState<string>(NO_BATCH);
   const [lines, setLines] = useState<LineDraft[]>([]);
   const [customName, setCustomName] = useState('');
   const [customQty, setCustomQty] = useState('');
@@ -104,26 +112,41 @@ export const PbSell = () => {
   );
 
   const openAdd = () => {
-    setBatchId(NO_BATCH);
+    setPickedBatches([]);
+    setWithCustom(false);
     setLines([]);
     setCustomName(''); setCustomQty(''); setCustomPrice(''); setCustomTotal('');
     setSoldAt(getDhakaDateString());
     setNote('');
+    setExtraDrafts([]);
     setIsModalOpen(true);
   };
 
-  const chooseBatch = (id: string) => {
-    setBatchId(id);
-    if (id === NO_BATCH) { setLines([]); return; }
-    setLines(
-      stock
-        .filter(s => s.buy_batch_id === id)
-        .map(s => ({ stock: s, selected: false, quantity: '', unit_price: '', total: '' }))
-    );
+  /**
+   * Lines stay one flat list across every picked batch; each carries its own
+   * stock row, so buy_batch_id travels with it all the way to the insert and
+   * the display just groups by batch.
+   */
+  const addBatch = (id: string) => {
+    if (!id || id === NO_BATCH || pickedBatches.includes(id)) return;
+    setPickedBatches(prev => [...prev, id]);
+    setLines(prev => [
+      ...prev,
+      ...stock
+        .filter(x => x.buy_batch_id === id)
+        .map(x => ({ stock: x, selected: false, quantity: '', unit_price: '', total: '' })),
+    ]);
   };
 
-  const setLine = (i: number, patch: Partial<LineDraft>) =>
-    setLines(prev => prev.map((l, idx) => idx === i ? { ...l, ...patch } : l));
+  const removeBatch = (id: string) => {
+    setPickedBatches(prev => prev.filter(x => x !== id));
+    setLines(prev => prev.filter(l => l.stock.buy_batch_id !== id));
+  };
+
+  const linesOfBatch = (id: string) => lines.filter(l => l.stock.buy_batch_id === id);
+
+  const setLine = (itemId: string, patch: Partial<LineDraft>) =>
+    setLines(prev => prev.map(l => l.stock.buy_batch_item_id === itemId ? { ...l, ...patch } : l));
 
   const lineTotal = (l: LineDraft) => {
     const explicit = parseFloat(l.total);
@@ -137,19 +160,40 @@ export const PbSell = () => {
 
   const chosen = lines.filter(l => l.selected);
   const customTotalNum = parseFloat(customTotal) || (parseFloat(customQty) || 0) * (parseFloat(customPrice) || 0);
-  const grandTotal = batchId === NO_BATCH
-    ? money(customTotalNum)
-    : money(chosen.reduce((s, l) => s + lineTotal(l), 0));
+  const customAmount = withCustom ? money(customTotalNum) : 0;
+  const salesSubtotal = money(chosen.reduce((s, l) => s + lineTotal(l), 0) + customAmount);
+  const setExtra = (i: number, patch: Partial<ExtraDraft>) =>
+    setExtraDrafts(prev => prev.map((d, idx) => idx === i ? { ...d, ...patch } : d));
+  const extrasSubtotal = money(extraDrafts.reduce((s, d) => s + (parseFloat(d.amount) || 0), 0));
+  // What the sale is actually worth once the cost of selling comes off. This is
+  // the figure that reaches profit.
+  const grandTotal = money(salesSubtotal - extrasSubtotal);
 
-  const canSave = batchId === NO_BATCH
-    ? customName.trim() !== '' && customTotalNum > 0
-    : chosen.length > 0 && chosen.every(l => lineTotal(l) > 0) && !chosen.some(overSold);
+  const customValid = !withCustom || (customName.trim() !== '' && customTotalNum > 0);
+  const canSave =
+    (chosen.length > 0 || (withCustom && customTotalNum > 0)) &&
+    chosen.every(l => lineTotal(l) > 0) &&
+    !chosen.some(overSold) &&
+    customValid;
 
   const handleSave = async () => {
     if (!canSave) return;
     setSaving(true);
     try {
-      const rows: SaleRow[] = batchId === NO_BATCH
+      const batchRows: SaleRow[] = chosen.map(l => ({
+        buy_batch_id: l.stock.buy_batch_id,
+        buy_batch_item_id: l.stock.buy_batch_item_id,
+        product_id: l.stock.product_id,
+        product_name: l.stock.product_name,
+        unit: l.stock.unit,
+        quantity: l.quantity ? Number(l.quantity) : null,
+        unit_price: l.unit_price ? Number(l.unit_price) : null,
+        total_amount: money(lineTotal(l)),
+        note: note.trim() || null,
+        sold_at: soldAt,
+      }));
+
+      const customRows: SaleRow[] = withCustom && customTotalNum > 0
         ? [{
             buy_batch_id: null,
             buy_batch_item_id: null,
@@ -162,21 +206,37 @@ export const PbSell = () => {
             note: note.trim() || null,
             sold_at: soldAt,
           }]
-        : chosen.map(l => ({
-            buy_batch_id: batchId,
-            buy_batch_item_id: l.stock.buy_batch_item_id,
-            product_id: l.stock.product_id,
-            product_name: l.stock.product_name,
-            unit: l.stock.unit,
-            quantity: l.quantity ? Number(l.quantity) : null,
-            unit_price: l.unit_price ? Number(l.unit_price) : null,
-            total_amount: money(lineTotal(l)),
-            note: note.trim() || null,
-            sold_at: soldAt,
-          }));
+        : [];
 
-      const { error } = await supabase.from('pb_sales').insert(rows);
+      const rows = [...batchRows, ...customRows];
+
+      // The event is the header the extras hang off, and it is what ties a
+      // delivery charge to the whole sale rather than to one line of it.
+      const { data: ev, error: evError } = await supabase
+        .from('pb_sale_events')
+        .insert([{
+          // Only meaningful for a single-batch sale; the money split is derived
+          // from the sale rows, never from this column.
+          buy_batch_id: pickedBatches.length === 1 ? pickedBatches[0] : null,
+          sold_at: soldAt,
+          note: note.trim() || null,
+        }])
+        .select('id')
+        .single();
+      if (evError) throw evError;
+
+      const { error } = await supabase
+        .from('pb_sales')
+        .insert(rows.map(r => ({ ...r, sale_event_id: ev.id })));
       if (error) throw error;
+
+      const extraRows = extraDrafts
+        .filter(d => d.title.trim() && (parseFloat(d.amount) || 0) > 0)
+        .map((d, idx) => ({ sale_event_id: ev.id, title: d.title.trim(), amount: Number(d.amount), sort_order: idx }));
+      if (extraRows.length) {
+        const { error: exError } = await supabase.from('pb_sale_extra_costs').insert(extraRows);
+        if (exError) throw exError;
+      }
 
       await fetchAll();
       setIsModalOpen(false);
@@ -297,64 +357,108 @@ export const PbSell = () => {
 
       <Modal isOpen={isModalOpen} onClose={() => !saving && setIsModalOpen(false)} title={t('pb.sell.addTitle')} className="max-w-3xl">
         <div className="space-y-5">
+          {/* batch sections -- a sale may draw on several batches at once */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t('pb.buy.batchLabel')}</label>
-            <select value={batchId} onChange={e => chooseBatch(e.target.value)} className={selectClass}>
-              <option value={NO_BATCH}>{t('pb.sell.noBatch')}</option>
-              {sellableBatches.map(b => <option key={b.id} value={b.id}>{batchLabel(b)}</option>)}
+            <div className="flex flex-wrap items-end justify-between gap-2 mb-1.5">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('pb.sell.batches')}</label>
+              <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={withCustom}
+                  onChange={e => setWithCustom(e.target.checked)}
+                  className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary"
+                />
+                {t('pb.sell.includeCustom')}
+              </label>
+            </div>
+            <select value="" onChange={e => addBatch(e.target.value)} className={selectClass}>
+              <option value="">{t('pb.sell.addBatch')}</option>
+              {sellableBatches
+                .filter(b => !pickedBatches.includes(b.id))
+                .map(b => <option key={b.id} value={b.id}>{batchLabel(b)}</option>)}
             </select>
             <p className="mt-1.5 text-xs text-gray-500 dark:text-gray-400">{t('pb.sell.batchHint')}</p>
           </div>
 
-          {batchId === NO_BATCH ? (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="col-span-2"><Input label={t('pb.sell.customProductName')} value={customName} onChange={e => setCustomName(e.target.value)} /></div>
-              <Input label={t('pb.common.quantity')} type="number" value={customQty} onChange={e => setCustomQty(e.target.value)} />
-              <Input label={t('pb.sell.unitPrice')} type="number" value={customPrice} onChange={e => setCustomPrice(e.target.value)} />
-              <div className="col-span-2">
-                <Input label={t('pb.sell.totalAmount')} type="number" value={customTotal} onChange={e => setCustomTotal(e.target.value)} placeholder={formatTaka(customTotalNum)} />
-              </div>
-            </div>
-          ) : lines.length === 0 ? (
-            <p className="text-sm text-gray-500">{t('pb.sell.batchEmpty')}</p>
-          ) : (
-            <div>
-              <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{t('pb.sell.pickProducts')}</div>
-              <div className="space-y-2">
-                {lines.map((l, i) => {
-                  const remaining = l.stock.remaining_quantity;
-                  return (
-                    <div key={l.stock.buy_batch_item_id} className={`rounded-lg border p-3 ${l.selected ? 'border-primary/40 bg-primary/5' : 'border-gray-200 dark:border-gray-700'}`}>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={l.selected}
-                          onChange={e => setLine(i, { selected: e.target.checked })}
-                          className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary"
-                        />
-                        <span className="font-medium text-gray-900 dark:text-gray-100">{l.stock.product_name}</span>
-                        <span className="text-xs text-gray-500">
-                          {remaining === null
-                            ? t('pb.sell.noUnits')
-                            : `${t('pb.common.remaining')}: ${Number(remaining)} ${l.stock.unit ?? ''}`}
-                        </span>
-                      </label>
+          {pickedBatches.length === 0 && !withCustom && (
+            <p className="text-sm text-gray-500">{t('pb.sell.pickAtLeastOne')}</p>
+          )}
 
-                      {l.selected && (
-                        <div className="grid grid-cols-3 gap-2 mt-3">
-                          <input type="number" value={l.quantity} onChange={e => setLine(i, { quantity: e.target.value })} placeholder={t('pb.common.quantity')} className={`${inputClass} text-right`} />
-                          <input type="number" value={l.unit_price} onChange={e => setLine(i, { unit_price: e.target.value })} placeholder={t('pb.sell.unitPrice')} className={`${inputClass} text-right`} />
-                          <input type="number" value={l.total} onChange={e => setLine(i, { total: e.target.value })} placeholder={formatTaka(lineTotal(l))} className={`${inputClass} text-right`} />
-                          {overSold(l) && (
-                            <p className="col-span-3 text-xs text-danger">
-                              {t('pb.sell.overSold')} {Number(remaining)} {l.stock.unit ?? ''}
-                            </p>
+          {pickedBatches.map(bid => {
+            const batch = batchOf(bid);
+            const rows = linesOfBatch(bid);
+            const subtotal = money(rows.filter(l => l.selected).reduce((a, l) => a + lineTotal(l), 0));
+            return (
+              <div key={bid} className="rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div className="flex items-center justify-between gap-3 px-3 py-2 bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <Badge variant="default">{batch ? batchLabel(batch) : bid.slice(0, 8)}</Badge>
+                    <span className="text-xs text-gray-500">{t('pb.sell.subtotal')} {formatTaka(subtotal)}</span>
+                  </div>
+                  <button
+                    onClick={() => removeBatch(bid)}
+                    title={t('pb.common.delete')}
+                    className="px-1 text-gray-400 hover:text-danger transition-colors"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+
+                {rows.length === 0 ? (
+                  <p className="p-3 text-sm text-gray-500">{t('pb.sell.batchEmpty')}</p>
+                ) : (
+                  <div className="p-3 space-y-2">
+                    {rows.map(l => {
+                      const remaining = l.stock.remaining_quantity;
+                      const id = l.stock.buy_batch_item_id;
+                      return (
+                        <div key={id} className={`rounded-lg border p-3 ${l.selected ? 'border-primary/40 bg-primary/5' : 'border-gray-200 dark:border-gray-700'}`}>
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={l.selected}
+                              onChange={e => setLine(id, { selected: e.target.checked })}
+                              className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary"
+                            />
+                            <span className="font-medium text-gray-900 dark:text-gray-100">{l.stock.product_name}</span>
+                            <span className="text-xs text-gray-500">
+                              {remaining === null
+                                ? t('pb.sell.noUnits')
+                                : `${t('pb.common.remaining')}: ${Number(remaining)} ${l.stock.unit ?? ''}`}
+                            </span>
+                          </label>
+
+                          {l.selected && (
+                            <div className="grid grid-cols-3 gap-2 mt-3">
+                              <input type="number" value={l.quantity} onChange={e => setLine(id, { quantity: e.target.value })} placeholder={t('pb.common.quantity')} className={`${inputClass} text-right`} />
+                              <input type="number" value={l.unit_price} onChange={e => setLine(id, { unit_price: e.target.value })} placeholder={t('pb.sell.unitPrice')} className={`${inputClass} text-right`} />
+                              <input type="number" value={l.total} onChange={e => setLine(id, { total: e.target.value })} placeholder={formatTaka(lineTotal(l))} className={`${inputClass} text-right`} />
+                              {overSold(l) && (
+                                <p className="col-span-3 text-xs text-danger">
+                                  {t('pb.sell.overSold')} {Number(remaining)} {l.stock.unit ?? ''}
+                                </p>
+                              )}
+                            </div>
                           )}
                         </div>
-                      )}
-                    </div>
-                  );
-                })}
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+          {withCustom && (
+            <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-3">
+              <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{t('pb.sell.noBatch')}</div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="col-span-2"><Input label={t('pb.sell.customProductName')} value={customName} onChange={e => setCustomName(e.target.value)} /></div>
+                <Input label={t('pb.common.quantity')} type="number" value={customQty} onChange={e => setCustomQty(e.target.value)} />
+                <Input label={t('pb.sell.unitPrice')} type="number" value={customPrice} onChange={e => setCustomPrice(e.target.value)} />
+                <div className="col-span-2">
+                  <Input label={t('pb.sell.totalAmount')} type="number" value={customTotal} onChange={e => setCustomTotal(e.target.value)} placeholder={formatTaka(customTotalNum)} />
+                </div>
               </div>
             </div>
           )}
@@ -364,9 +468,42 @@ export const PbSell = () => {
             <Input label={t('pb.common.note')} value={note} onChange={e => setNote(e.target.value)} />
           </div>
 
-          <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 flex justify-between text-sm font-semibold text-gray-900 dark:text-white">
-            <span>{t('pb.common.total')}</span>
-            <span>{formatTaka(grandTotal)}</span>
+          {/* extra costs */}
+          <div className="border-t border-gray-100 dark:border-gray-700 pt-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{t('pb.sell.extraCosts')}</span>
+              <Button size="sm" variant="outline" onClick={() => setExtraDrafts(prev => [...prev, blankExtra()])}>
+                <Plus size={14} className="mr-1" /> {t('pb.sell.addExtraCost')}
+              </Button>
+            </div>
+            {extraDrafts.length === 0 ? (
+              <p className="text-xs text-gray-500 dark:text-gray-400">{t('pb.sell.noExtraCosts')}</p>
+            ) : (
+              <div className="space-y-2">
+                {extraDrafts.map((d, i) => (
+                  <div key={i} className="grid grid-cols-[minmax(0,1fr)_10rem_auto] gap-2 items-center">
+                    <input value={d.title} onChange={e => setExtra(i, { title: e.target.value })} placeholder={t('pb.sell.costTitlePlaceholder')} className={inputClass} />
+                    <input type="number" value={d.amount} onChange={e => setExtra(i, { amount: e.target.value })} placeholder={t('pb.common.amount')} className={`${inputClass} text-right`} />
+                    <button onClick={() => setExtraDrafts(prev => prev.filter((_, idx) => idx !== i))} title={t('pb.common.delete')} className="px-1 flex items-center justify-center text-gray-400 hover:text-danger transition-colors">
+                      <X size={16} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{t('pb.sell.extraHint')}</p>
+          </div>
+
+          <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 space-y-1 text-sm">
+            <div className="flex justify-between text-gray-500">
+              <span>{t('pb.sell.salesSubtotal')}</span><span>{formatTaka(salesSubtotal)}</span>
+            </div>
+            <div className="flex justify-between text-gray-500">
+              <span>{t('pb.sell.extraCosts')}</span><span>&minus;{formatTaka(extrasSubtotal)}</span>
+            </div>
+            <div className="flex justify-between pt-1 mt-1 border-t border-gray-200 dark:border-gray-700 font-semibold text-gray-900 dark:text-white">
+              <span>{t('pb.sell.netRevenue')}</span><span>{formatTaka(grandTotal)}</span>
+            </div>
           </div>
 
           <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">

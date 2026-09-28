@@ -24,6 +24,7 @@ import { PbBuy } from './pages/PartnerBusiness/PbBuy';
 import { PbSell } from './pages/PartnerBusiness/PbSell';
 import { PbCosts } from './pages/PartnerBusiness/PbCosts';
 import { PbAssets } from './pages/PartnerBusiness/PbAssets';
+import { PbShareGroups } from './pages/PartnerBusiness/PbShareGroups';
 import { PbPartners } from './pages/PartnerBusiness/PbPartners';
 import { PbLedger } from './pages/PartnerBusiness/PbLedger';
 import { PbProfitAdjust } from './pages/PartnerBusiness/PbProfitAdjust';
@@ -60,6 +61,7 @@ function AuthGate() {
         <Route path="/pb/costs" element={<PbCosts />} />
         <Route path="/pb/assets" element={<PbAssets />} />
         <Route path="/pb/partners" element={<PbPartners />} />
+        <Route path="/pb/share-groups" element={<PbShareGroups />} />
         <Route path="/pb/ledger" element={<PbLedger />} />
         <Route path="/pb/adjust" element={<PbProfitAdjust />} />
       </Routes>

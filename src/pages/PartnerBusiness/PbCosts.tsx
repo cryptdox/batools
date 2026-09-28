@@ -9,11 +9,12 @@ import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
 import { Pagination, usePagination } from '../../components/ui/Pagination';
 import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, AlertTriangle, Receipt } from 'lucide-react';
-import type { PbAdditionalCost } from '../../types/partnerBusiness';
+import type { PbAdditionalCost, PbGeneralFund } from '../../types/partnerBusiness';
 
 export const PbCosts = () => {
   const { t } = useLanguage();
   const [costs, setCosts] = useState<PbAdditionalCost[]>([]);
+  const [fund, setFund] = useState<PbGeneralFund | null>(null);
   const [loading, setLoading] = useState(true);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,12 +34,13 @@ export const PbCosts = () => {
   const fetchAll = async () => {
     setLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('pb_additional_costs')
-        .select('*')
-        .order('cost_date', { ascending: false });
-      if (error) throw error;
-      setCosts(data ?? []);
+      const [c, f] = await Promise.all([
+        supabase.from('pb_additional_costs').select('*').order('cost_date', { ascending: false }),
+        supabase.from('pb_general_fund').select('*').single(),
+      ]);
+      for (const r of [c, f]) if (r.error) throw r.error;
+      setCosts(c.data ?? []);
+      setFund(f.data ?? null);
     } catch (e) {
       console.error(e);
       toast.error(e instanceof Error ? e.message : t('pb.costs.loadError'));
@@ -60,6 +62,13 @@ export const PbCosts = () => {
   const pg = usePagination(sorted);
 
   // The schema requires amount > 0 and a description, so the button mirrors that.
+  // A daily cost is paid out of invested capital, so it has a ceiling like a
+  // buy does. While editing, this cost is already inside the figure.
+  const available = fund ? Number(fund.remaining) : 0;
+  const availableForForm = available + (editing ? Number(editing.amount) : 0);
+  const amountNum = Number(amount) || 0;
+  const overCapital = amountNum > availableForForm;
+
   const canSave = !!description.trim() && amount.trim() !== '' && Number(amount) > 0;
 
   const openAdd = () => {
@@ -137,6 +146,11 @@ export const PbCosts = () => {
         items={[
           { label: t('pb.costs.count'), value: totals.count },
           { label: t('pb.costs.totalAmount'), value: formatTaka(totals.amount), tone: 'text-danger' },
+          {
+            label: t('pb.costs.capitalLeft'),
+            value: formatTaka(available),
+            tone: available < 0 ? 'text-danger' : 'text-success',
+          },
         ]}
       />
 
@@ -201,6 +215,14 @@ export const PbCosts = () => {
         <div className="space-y-4">
           <Input label={t('pb.common.date')} type="date" value={costDate} onChange={e => setCostDate(e.target.value)} />
           <Input label={t('pb.common.amount')} type="number" min="0" step="any" value={amount} onChange={e => setAmount(e.target.value)} placeholder="500" />
+
+          <div className="flex items-center justify-between text-sm rounded-lg bg-gray-50 dark:bg-gray-900/50 px-3 py-2">
+            <span className="text-gray-500">{t('pb.costs.capitalLeft')}</span>
+            <span className={overCapital ? 'text-danger font-semibold' : 'text-gray-500'}>
+              {formatTaka(availableForForm)} → {formatTaka(availableForForm - amountNum)}
+            </span>
+          </div>
+          {overCapital && <p className="text-xs text-danger -mt-2">{t('pb.costs.overCapital')}</p>}
           <Input label={t('pb.costs.description')} value={description} onChange={e => setDescription(e.target.value)} placeholder={t('pb.costs.descriptionPlaceholder')} />
 
           <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">

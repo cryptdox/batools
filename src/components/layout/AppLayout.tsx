@@ -4,6 +4,7 @@ import {
   Clock, Users, ShieldAlert, FileText, ClipboardList, Wallet, Settings, Moon, Sun, Menu, X, LogOut,
   ChevronDown, ListTodo, Package, BookOpen, Sliders,
   Briefcase, Boxes, ShoppingCart, Tags, Receipt, Landmark, HandCoins, Scale, LayoutDashboard,
+  Users2,
   type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
@@ -41,6 +42,7 @@ const NAV_TREE: NavGroup[] = [
       { to: '/pb/costs', label: 'Daily Costs', icon: Receipt },
       { to: '/pb/assets', label: 'Assets', icon: Landmark },
       { to: '/pb/partners', label: 'Partners', icon: Users },
+      { to: '/pb/share-groups', label: 'Share Groups', icon: Users2 },
       { to: '/pb/ledger', label: 'Partner Ledger', icon: HandCoins },
       { to: '/pb/adjust', label: 'Profit Adjust', icon: Scale },
     ],

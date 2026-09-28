@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, AlertTriangle, ShoppingCart, Users, X } from 'lucide-react';
 import { format } from 'date-fns';
 import { getDhakaDateString } from '../../lib/dhakaTime';
-import { splitByShares, money } from '../../lib/partnerBusiness';
+import { splitByShares, money , nextSequentialCode , unspentCapital } from '../../lib/partnerBusiness';
 import type {
   PbBuyBatch, PbBuyBatchItem, PbBuyBatchExtraCost, PbBuyBatchTotals, PbBusinessCash,
   PbShareGroupFund, PbGeneralFund,
@@ -114,8 +114,10 @@ export const PbBuy = () => {
   const itemsOf = (id: string) => items.filter(i => i.buy_batch_id === id);
   const extrasOf = (id: string) => extras.filter(e => e.buy_batch_id === id);
 
-  // Business-wide: everything put in that has not yet gone out on stock.
-  const available = cash ? Number(cash.invested_total) - Number(cash.spent_on_buys) : 0;
+  // Business-wide: everything put in that has not gone out on stock or assets.
+  // Assets count here too -- capital turned into a machine is capital that
+  // cannot also be spent on stock.
+  const available = unspentCapital(cash);
 
   // A batch spends from ONE pot: the picked group's fund, or the ungrouped fund
   // for a batch with no group. Keeping them separate is what stops the same
@@ -124,7 +126,7 @@ export const PbBuy = () => {
   const fundAvailable = activeGroupId
     ? Number(groupFunds.find(f => f.share_group_id === activeGroupId)?.remaining ?? 0)
     : generalFund
-      ? Number(generalFund.net_contributed) - Number(generalFund.spent)
+      ? Number(generalFund.remaining)
       : 0;
   // While editing, this batch's own cost is already counted as spent in its pot,
   // so add it back before projecting — but only while it stays in that same pot.
@@ -196,7 +198,9 @@ export const PbBuy = () => {
 
   const openAdd = () => {
     setEditing(null);
-    setTitle(''); setNote(''); setIsRemaining(true);
+    // Suggested, not imposed -- the field stays editable.
+    setTitle(nextSequentialCode(batches.map(b => b.title), 'BATCH'));
+    setNote(''); setIsRemaining(true);
     setPurchasedAt(getDhakaDateString());
     setItemDrafts([blankItem()]);
     setExtraDrafts([]);

@@ -9,7 +9,6 @@ import { Pagination, usePagination } from '../../components/ui/Pagination';
 import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, AlertTriangle, Users, Percent, ArrowDownToLine, TrendingUp, ArrowUpFromLine, Undo2 } from 'lucide-react';
 import { PartnerTxnModal } from '../../components/partnerBusiness/PartnerTxnModal';
-import { ShareGroupsCard } from '../../components/partnerBusiness/ShareGroupsCard';
 import { replaceCurrentShares } from '../../lib/partnerBusiness';
 import type { PbPartner, PbPartnerAccount, PbPartnerTxnType } from '../../types/partnerBusiness';
 
@@ -269,7 +268,6 @@ export const PbPartners = () => {
         )}
       </div>
 
-      <ShareGroupsCard partners={partners} accounts={accounts} onFundChanged={fetchAll} />
 
       <PartnerTxnModal
         isOpen={!!txnFor}

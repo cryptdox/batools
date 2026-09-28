@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { nextSequentialCode } from '../../lib/partnerBusiness';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { Button, Badge } from '../../components/ui/Button';
@@ -75,7 +76,9 @@ export const PbProducts = () => {
 
   const openAdd = () => {
     setEditing(null);
-    setName(''); setCode(''); setDefaultUnit(''); setDescription('');
+    // Suggested SKU, editable like any other field.
+    setName(''); setCode(nextSequentialCode(products.map(p => p.code), 'SKU'));
+    setDefaultUnit(''); setDescription('');
     setIsActive(true); setIsRemaining(true);
     setIsModalOpen(true);
   };

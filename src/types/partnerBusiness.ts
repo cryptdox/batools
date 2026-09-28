@@ -62,6 +62,8 @@ export type PbBusinessCash = {
   spent_on_buys: number;
   sales_total: number;
   costs_total: number;
+  assets_total: number;
+  sale_costs_total: number;
 };
 
 export type PbSale = {
@@ -138,8 +140,6 @@ export type PbPartnerTransaction = {
   amount: number;
   reference_type: string | null;
   reference_id: string | null;
-  /** Which group's fund the money moved through; null = the ungrouped fund. */
-  share_group_id: string | null;
   description: string | null;
   txn_date: string;
   created_at: string;
@@ -213,6 +213,8 @@ export type PbBatchProfit = {
   purchased_at: string;
   total_cost: number;
   revenue: number;
+  /** What the selling itself cost; already deducted from profit. */
+  sale_cost: number;
   profit: number;
   last_sold_at: string | null;
   is_fully_sold: boolean;
@@ -225,6 +227,8 @@ export type PbBatchUnadjustedProfit = {
   purchased_at: string;
   total_cost: number;
   revenue: number;
+  /** What the selling itself cost; already deducted from lifetime_profit. */
+  sale_cost: number;
   lifetime_profit: number;
   adjusted_profit: number;
   remaining_profit: number;
@@ -260,33 +264,94 @@ export type PbShareGroupSummary = {
   group_invested: number;
 };
 
-/** A group's fund: what partners advanced, what its batches spent, what is left. */
+/**
+ * A group's pot of INVESTED capital: what partners moved behind it, what its
+ * batches spent, what is left. Nothing here touches anyone's balance.
+ */
 export type PbShareGroupFund = {
   share_group_id: string;
   name: string;
-  contributed: number;
-  returned: number;
-  net_contributed: number;
+  allocated_in: number;
+  allocated_back: number;
+  net_allocated: number;
   spent: number;
   remaining: number;
 };
 
 /**
- * One partner's standing in one group's fund. `net_contributed` drives the
+ * One partner's standing in one group's pot. `net_allocated` drives the
  * give-back default — capital goes back by what each partner actually put in,
- * not by their ownership share percent.
+ * not by their ownership share percent — and caps it.
  */
 export type PbShareGroupPartnerFund = {
   share_group_id: string;
   partner_id: string;
   partner_name: string;
-  contributed: number;
-  returned: number;
-  net_contributed: number;
+  allocated_in: number;
+  allocated_back: number;
+  net_allocated: number;
 };
 
-/** Money not tied to any group; what an ungrouped batch may spend. */
+/** Invested capital no group is holding; what an ungrouped batch may spend. */
 export type PbGeneralFund = {
-  net_contributed: number;
+  invested_total: number;
+  allocated_to_groups: number;
   spent: number;
+  /** Capital turned into assets. Reduces what is free to spend, never profit. */
+  assets: number;
+  /** Daily costs paid out. Reduces both what is free to spend and profit. */
+  daily_costs: number;
+  remaining: number;
+};
+
+/** How much of one partner's invested capital is not tied up anywhere. */
+export type PbPartnerFreeCapital = {
+  partner_id: string;
+  partner_name: string;
+  investment_amount: number;
+  in_groups: number;
+  in_ungrouped_batches: number;
+  free_capital: number;
+};
+
+/** A move of invested capital between the general pot and a group's pot. */
+export type PbGroupFundAllocation = {
+  id: string;
+  share_group_id: string;
+  partner_id: string;
+  /** Positive into the group, negative back to the general pot. */
+  amount: number;
+  allocated_at: string;
+  note: string | null;
+  created_at: string;
+};
+
+/** One Sell submit: the header its extra costs hang off. */
+export type PbSaleEvent = {
+  id: string;
+  buy_batch_id: string | null;
+  sold_at: string;
+  note: string | null;
+  created_at: string;
+};
+
+/** A titled cost of selling — delivery, packaging, commission. Reduces profit. */
+export type PbSaleExtraCost = {
+  id: string;
+  sale_event_id: string;
+  title: string;
+  amount: number;
+  sort_order: number;
+  created_at: string;
+};
+
+/** View: pb_sale_event_totals */
+export type PbSaleEventTotals = {
+  sale_event_id: string;
+  buy_batch_id: string | null;
+  sold_at: string;
+  revenue: number;
+  extra_cost: number;
+  net_revenue: number;
+  line_count: number;
 };

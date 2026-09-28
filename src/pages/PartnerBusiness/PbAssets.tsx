@@ -9,11 +9,12 @@ import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
 import { Pagination, usePagination } from '../../components/ui/Pagination';
 import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, AlertTriangle, Boxes } from 'lucide-react';
-import type { PbAsset } from '../../types/partnerBusiness';
+import type { PbAsset, PbGeneralFund } from '../../types/partnerBusiness';
 
 export const PbAssets = () => {
   const { t } = useLanguage();
   const [assets, setAssets] = useState<PbAsset[]>([]);
+  const [fund, setFund] = useState<PbGeneralFund | null>(null);
   const [loading, setLoading] = useState(true);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,12 +37,13 @@ export const PbAssets = () => {
   const fetchAll = async () => {
     setLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('pb_assets')
-        .select('*')
-        .order('acquired_at', { ascending: false });
-      if (error) throw error;
-      setAssets(data ?? []);
+      const [a, f] = await Promise.all([
+        supabase.from('pb_assets').select('*').order('acquired_at', { ascending: false }),
+        supabase.from('pb_general_fund').select('*').single(),
+      ]);
+      for (const r of [a, f]) if (r.error) throw r.error;
+      setAssets(a.data ?? []);
+      setFund(f.data ?? null);
     } catch (e) {
       console.error(e);
       toast.error(e instanceof Error ? e.message : t('pb.assets.loadError'));
@@ -62,6 +64,13 @@ export const PbAssets = () => {
   }), [assets]);
 
   const pg = usePagination(sorted);
+
+  // Capital an asset can draw on. While editing, this asset's own cost is
+  // already inside the figure, so add it back or it counts against itself.
+  const available = fund ? Number(fund.remaining) : 0;
+  const availableForForm = available + (editing ? Number(editing.amount) : 0);
+  const amountNum = Number(amount) || 0;
+  const overCapital = amountNum > availableForForm;
 
   const canSave =
     !!name.trim() &&
@@ -153,6 +162,11 @@ export const PbAssets = () => {
           { label: t('pb.assets.count'), value: totals.count },
           { label: t('pb.assets.totalQuantity'), value: totals.quantity },
           { label: t('pb.assets.totalValue'), value: formatTaka(totals.amount), tone: 'text-success' },
+          {
+            label: t('pb.assets.capitalLeft'),
+            value: formatTaka(available),
+            tone: available < 0 ? 'text-danger' : 'text-success',
+          },
         ]}
       />
 
@@ -229,6 +243,14 @@ export const PbAssets = () => {
           </div>
           <Input label={t('pb.common.amount')} type="number" min="0" step="any" value={amount} onChange={e => setAmount(e.target.value)} />
           <p className="text-xs text-gray-500 dark:text-gray-400 -mt-2">{t('pb.assets.amountHint')}</p>
+
+          <div className="flex items-center justify-between text-sm rounded-lg bg-gray-50 dark:bg-gray-900/50 px-3 py-2">
+            <span className="text-gray-500">{t('pb.assets.capitalLeft')}</span>
+            <span className={overCapital ? 'text-danger font-semibold' : 'text-gray-500'}>
+              {formatTaka(availableForForm)} → {formatTaka(availableForForm - amountNum)}
+            </span>
+          </div>
+          {overCapital && <p className="text-xs text-danger -mt-2">{t('pb.assets.overCapital')}</p>}
 
           <Input label={t('pb.assets.acquiredAt')} type="date" value={acquiredAt} onChange={e => setAcquiredAt(e.target.value)} />
           <Input label={t('pb.common.note')} value={note} onChange={e => setNote(e.target.value)} />

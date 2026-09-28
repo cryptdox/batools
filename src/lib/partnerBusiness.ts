@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { PbPartnerShare, PbPartnerTxnType } from '../types/partnerBusiness';
+import type { PbPartnerShare, PbPartnerTxnType , PbBusinessCash } from '../types/partnerBusiness';
 
 export const PB_TXN_TYPES: PbPartnerTxnType[] = ['DEPOSIT', 'INVESTMENT', 'WITHDRAW', 'PROFIT', 'RETURN'];
 
@@ -74,4 +74,45 @@ export function splitByShares<T extends { share_percent: number }>(
     raw[biggest].amount = money(raw[biggest].amount + diff);
   }
   return raw;
+}
+
+/**
+ * Next sequential code in a `PREFIX-001` series, from whatever already exists.
+ *
+ * Only values matching the prefix count, so a hand-typed name never blocks the
+ * series, and the width of the widest existing number is kept so BATCH-099 is
+ * followed by BATCH-100 rather than BATCH-0100. The result is a suggestion the
+ * form pre-fills and the user can always overwrite.
+ */
+export function nextSequentialCode(existing: (string | null | undefined)[], prefix: string): string {
+  const pattern = new RegExp(`^${prefix}-(\\d+)$`, 'i');
+  let max = 0;
+  let width = 3;
+  for (const value of existing) {
+    const match = value?.trim().match(pattern);
+    if (!match) continue;
+    const n = parseInt(match[1], 10);
+    if (Number.isNaN(n)) continue;
+    if (n > max) max = n;
+    if (match[1].length > width) width = match[1].length;
+  }
+  return `${prefix}-${String(max + 1).padStart(width, '0')}`;
+}
+
+/**
+ * Invested capital that has not gone out yet — the one figure every page must
+ * agree on, which is why it lives here rather than being re-derived per page.
+ *
+ * Buys and assets and daily costs all consume it; only an asset leaves profit
+ * untouched. Money parked in a share group's pot is still unspent and so is
+ * still counted, because a grouped batch has not been bought yet.
+ */
+export function unspentCapital(cash: PbBusinessCash | null | undefined): number {
+  if (!cash) return 0;
+  return money(
+    Number(cash.invested_total)
+    - Number(cash.spent_on_buys)
+    - Number(cash.assets_total)
+    - Number(cash.costs_total)
+  );
 }

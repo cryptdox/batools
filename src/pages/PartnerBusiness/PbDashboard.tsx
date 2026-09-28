@@ -9,8 +9,8 @@ import { PeriodNav } from '../../components/ui/PeriodNav';
 import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { toast } from 'react-toastify';
 import { format, startOfMonth } from 'date-fns';
-import { money } from '../../lib/partnerBusiness';
-import type { PbPartnerAccount, PbProductStock, PbBusinessCash } from '../../types/partnerBusiness';
+import { money , unspentCapital } from '../../lib/partnerBusiness';
+import type { PbPartnerAccount, PbProductStock, PbBusinessCash , PbShareGroupFund } from '../../types/partnerBusiness';
 
 export const PbDashboard = () => {
   const { t } = useLanguage();
@@ -26,6 +26,7 @@ export const PbDashboard = () => {
   const [accounts, setAccounts] = useState<PbPartnerAccount[]>([]);
   const [stock, setStock] = useState<PbProductStock[]>([]);
   const [cash, setCash] = useState<PbBusinessCash | null>(null);
+  const [groupFunds, setGroupFunds] = useState<PbShareGroupFund[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export const PbDashboard = () => {
   const fetchAll = async () => {
     setLoading(true);
     try {
-      const [s, b, c, a, acc, st, ch] = await Promise.all([
+      const [s, b, c, a, acc, st, ch, gf] = await Promise.all([
         supabase.from('pb_sales').select('total_amount, sold_at'),
         supabase.from('pb_buy_batch_totals').select('total_cost, purchased_at'),
         supabase.from('pb_additional_costs').select('amount, cost_date'),
@@ -43,8 +44,10 @@ export const PbDashboard = () => {
         supabase.from('pb_partner_account_summary').select('*'),
         supabase.from('pb_product_stock').select('*'),
         supabase.from('pb_business_cash').select('*').single(),
+        supabase.from('pb_share_group_fund').select('*'),
       ]);
-      for (const r of [s, b, c, a, acc, st, ch]) if (r.error) throw r.error;
+      for (const r of [s, b, c, a, acc, st, ch, gf]) if (r.error) throw r.error;
+      setGroupFunds(gf.data ?? []);
       setSales(s.data ?? []);
       setBuys(b.data ?? []);
       setCosts(c.data ?? []);
@@ -79,6 +82,13 @@ export const PbDashboard = () => {
   }), [accounts]);
 
   const inStock = useMemo(() => stock.filter(s => Number(s.remaining_quantity) > 0), [stock]);
+
+  // Part of the unspent figure above, shown separately because it is already
+  // earmarked for a group's batches rather than free for any purchase.
+  const inGroupFunds = useMemo(
+    () => groupFunds.reduce((s, f) => s + Number(f.remaining), 0),
+    [groupFunds]
+  );
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -118,7 +128,8 @@ export const PbDashboard = () => {
           <SummaryBar
             items={[
               { label: t('pb.common.invested'), value: formatTaka(partnerTotals.invested) },
-              { label: t('pb.buy.available'), value: formatTaka(Number(cash?.invested_total ?? 0) - Number(cash?.spent_on_buys ?? 0)), tone: 'text-secondary' },
+              { label: t('pb.buy.available'), value: formatTaka(unspentCapital(cash)), tone: 'text-secondary' },
+              { label: t('pb.groups.inGroupFunds'), value: formatTaka(inGroupFunds) },
               { label: t('pb.dash.partnerBalance'), value: formatTaka(partnerTotals.balance), tone: partnerTotals.balance >= 0 ? 'text-success' : 'text-danger' },
               { label: t('pb.dash.assetValue'), value: formatTaka(assetTotal) },
               { label: t('pb.dash.productsInStock'), value: inStock.length },

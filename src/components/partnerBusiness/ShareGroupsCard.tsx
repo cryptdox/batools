@@ -5,12 +5,13 @@ import { Button, Badge } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Modal } from '../ui/Modal';
 import { formatTaka } from '../ui/SummaryBar';
+import { Pagination, usePagination } from '../ui/Pagination';
 import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, AlertTriangle, Users2, Equal, Wallet, Undo2 } from 'lucide-react';
 import { GroupFundModal, type FundMode } from './GroupFundModal';
 import type {
-  PbPartner, PbPartnerAccount, PbShareGroup, PbShareGroupMember, PbShareGroupSummary,
-  PbShareGroupFund, PbShareGroupPartnerFund,
+  PbPartner, PbShareGroup, PbShareGroupMember, PbShareGroupSummary,
+  PbShareGroupFund, PbShareGroupPartnerFund, PbPartnerFreeCapital, PbGeneralFund,
 } from '../../types/partnerBusiness';
 
 type MemberDraft = { partner_id: string; name: string; included: boolean; percent: string };
@@ -19,18 +20,19 @@ const inputBase = 'h-9 rounded-md border border-gray-300 bg-white px-2 text-sm f
 
 interface Props {
   partners: PbPartner[];
-  accounts: PbPartnerAccount[];
-  /** Balances move when a fund is topped up or handed back, so the page reloads too. */
+  /** Invested capital moves between pots, so the page's figures reload too. */
   onFundChanged: () => void;
 }
 
-export const ShareGroupsCard = ({ partners, accounts, onFundChanged }: Props) => {
+export const ShareGroupsCard = ({ partners, onFundChanged }: Props) => {
   const { t } = useLanguage();
   const [groups, setGroups] = useState<PbShareGroup[]>([]);
   const [members, setMembers] = useState<PbShareGroupMember[]>([]);
   const [summary, setSummary] = useState<PbShareGroupSummary[]>([]);
   const [funds, setFunds] = useState<PbShareGroupFund[]>([]);
   const [partnerFunds, setPartnerFunds] = useState<PbShareGroupPartnerFund[]>([]);
+  const [freeCapital, setFreeCapital] = useState<PbPartnerFreeCapital[]>([]);
+  const [general, setGeneral] = useState<PbGeneralFund | null>(null);
   const [loading, setLoading] = useState(true);
 
   const [fundMode, setFundMode] = useState<FundMode>('ADD');
@@ -50,19 +52,23 @@ export const ShareGroupsCard = ({ partners, accounts, onFundChanged }: Props) =>
   const fetchAll = async () => {
     setLoading(true);
     try {
-      const [g, m, s, f, pf] = await Promise.all([
+      const [g, m, s, f, pf, fc, gen] = await Promise.all([
         supabase.from('pb_share_groups').select('*').order('name'),
         supabase.from('pb_share_group_members').select('*'),
         supabase.from('pb_share_group_summary').select('*'),
         supabase.from('pb_share_group_fund').select('*'),
         supabase.from('pb_share_group_partner_fund').select('*'),
+        supabase.from('pb_partner_free_capital').select('*'),
+        supabase.from('pb_general_fund').select('*').single(),
       ]);
-      for (const r of [g, m, s, f, pf]) if (r.error) throw r.error;
+      for (const r of [g, m, s, f, pf, fc, gen]) if (r.error) throw r.error;
       setGroups(g.data ?? []);
       setMembers(m.data ?? []);
       setSummary(s.data ?? []);
       setFunds(f.data ?? []);
       setPartnerFunds(pf.data ?? []);
+      setFreeCapital(fc.data ?? []);
+      setGeneral(gen.data ?? null);
     } catch (e) {
       console.error(e);
       toast.error(e instanceof Error ? e.message : t('pb.groups.loadError'));
@@ -173,14 +179,12 @@ export const ShareGroupsCard = ({ partners, accounts, onFundChanged }: Props) =>
   };
 
   const sorted = useMemo(() => [...groups].sort((a, b) => a.name.localeCompare(b.name)), [groups]);
+  const pg = usePagination(sorted);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
       <div className="p-4 bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700 flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500">{t('pb.groups.title')}</h3>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t('pb.groups.subtitle')}</p>
-        </div>
+        <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500">{t('pb.groups.all')}</h3>
         <Button size="sm" onClick={openAdd} disabled={partners.filter(p => p.is_active).length === 0}>
           <Plus size={16} className="mr-1.5" /> {t('pb.groups.add')}
         </Button>
@@ -195,7 +199,7 @@ export const ShareGroupsCard = ({ partners, accounts, onFundChanged }: Props) =>
         </div>
       ) : (
         <div className="divide-y divide-gray-100 dark:divide-gray-700">
-          {sorted.map(g => {
+          {pg.pageRows.map(g => {
             const s = summaryOf(g.id);
             const f = fundOf(g.id);
             const fundRemaining = Number(f?.remaining ?? 0);
@@ -221,7 +225,7 @@ export const ShareGroupsCard = ({ partners, accounts, onFundChanged }: Props) =>
                     </div>
                     <div className="text-[11px] text-gray-400">
                       {t('pb.groups.fundBreakdown')
-                        .replace('{in}', formatTaka(Number(f?.net_contributed ?? 0)))
+                        .replace('{in}', formatTaka(Number(f?.net_allocated ?? 0)))
                         .replace('{out}', formatTaka(Number(f?.spent ?? 0)))}
                     </div>
                   </div>
@@ -236,6 +240,13 @@ export const ShareGroupsCard = ({ partners, accounts, onFundChanged }: Props) =>
             );
           })}
         </div>
+      )}
+
+      {!loading && sorted.length > 0 && (
+        <Pagination
+          page={pg.page} pageCount={pg.pageCount} total={pg.total} pageSize={pg.pageSize}
+          onPageChange={pg.setPage} onPageSizeChange={pg.setPageSize}
+        />
       )}
 
       <Modal isOpen={isOpen} onClose={() => !saving && setIsOpen(false)} title={editing ? t('pb.groups.editTitle') : t('pb.groups.addTitle')} className="max-w-lg">
@@ -313,7 +324,8 @@ export const ShareGroupsCard = ({ partners, accounts, onFundChanged }: Props) =>
         group={fundGroup}
         members={members}
         partners={partners}
-        accounts={accounts}
+        freeCapital={freeCapital}
+        generalRemaining={Number(general?.remaining ?? 0)}
         fund={fundGroup ? fundOf(fundGroup.id) : undefined}
         partnerFund={partnerFunds}
         onClose={() => setFundGroup(null)}
