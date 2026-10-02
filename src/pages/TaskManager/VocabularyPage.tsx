@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { tmUser } from '../../lib/taskManagerUser';
+import { useTmUser } from '../../lib/taskManagerUser';
 import { useLanguage } from '../../lib/LanguageContext';
 import { supabase } from '../../lib/supabase';
 import type { Vocabulary, LanguageCode } from '../../types/taskManager';
@@ -9,7 +9,7 @@ import { VocabItem } from '../../components/taskManager/vocabulary/VocabItem';
 import { ConfirmDeleteModal } from '../../components/taskManager/vocabulary/ConfirmDeleteModal';
 
 export function VocabularyPage() {
-  const user = tmUser;
+  const user = useTmUser();
   const { t } = useLanguage();
 
   const [vocabs, setVocabs] = useState<Vocabulary[]>([]);

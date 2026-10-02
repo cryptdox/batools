@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { tmUser } from '../../lib/taskManagerUser';
+import { useTmUser } from '../../lib/taskManagerUser';
 import { Plus, Edit2, Trash2, Save, X } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { supabase } from '../../lib/supabase';
@@ -15,7 +15,7 @@ const predefinedColors = [
 ];
 
 export function AdministrationPage() {
-  const user = tmUser;
+  const user = useTmUser();
   const { t } = useLanguage();
 
   const [types, setTypes] = useState<TaskType[]>([]);

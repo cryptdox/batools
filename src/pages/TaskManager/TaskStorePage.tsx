@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { tmUser } from '../../lib/taskManagerUser';
+import { useTmUser } from '../../lib/taskManagerUser';
 import { useLanguage } from '../../lib/LanguageContext';
 import { supabase } from '../../lib/supabase';
 import type { ToDoTask, TaskTag } from '../../types/taskManager';
@@ -10,7 +10,7 @@ import { DoneModal } from '../../components/taskManager/taskStore/DoneModal';
 import { ConfirmModal } from '../../components/taskManager/taskStore/ConfirmModal';
 
 export function TaskStorePage() {
-  const user = tmUser;
+  const user = useTmUser();
   const { t } = useLanguage();
 
   const [tasks, setTasks] = useState<ToDoTask[]>([]);
