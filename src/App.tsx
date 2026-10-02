@@ -28,6 +28,11 @@ import { PbShareGroups } from './pages/PartnerBusiness/PbShareGroups';
 import { PbPartners } from './pages/PartnerBusiness/PbPartners';
 import { PbLedger } from './pages/PartnerBusiness/PbLedger';
 import { PbProfitAdjust } from './pages/PartnerBusiness/PbProfitAdjust';
+import { PfProfile } from './pages/Portfolio/PfProfile';
+import { PfAbout } from './pages/Portfolio/PfAbout';
+import { PfProjects, PfExperience, PfTechStack, PfResearch } from './pages/Portfolio/PfWork';
+import { PfLabels } from './pages/Portfolio/PfLabels';
+import { PfMessages } from './pages/Portfolio/PfMessages';
 
 /** Every Late Tracker page lives under this prefix. */
 const LT = '/late-tracker';
@@ -93,6 +98,15 @@ function AuthGate() {
         <Route path="/pb/share-groups" element={<PbShareGroups />} />
         <Route path="/pb/ledger" element={<PbLedger />} />
         <Route path="/pb/adjust" element={<PbProfitAdjust />} />
+
+        <Route path="/portfolio" element={<PfProfile />} />
+        <Route path="/portfolio/about" element={<PfAbout />} />
+        <Route path="/portfolio/projects" element={<PfProjects />} />
+        <Route path="/portfolio/experience" element={<PfExperience />} />
+        <Route path="/portfolio/tech-stack" element={<PfTechStack />} />
+        <Route path="/portfolio/research" element={<PfResearch />} />
+        <Route path="/portfolio/labels" element={<PfLabels />} />
+        <Route path="/portfolio/messages" element={<PfMessages />} />
       </Routes>
     </AppLayout>
   );

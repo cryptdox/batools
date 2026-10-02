@@ -4,7 +4,7 @@ import {
   Clock, Users, ShieldAlert, FileText, ClipboardList, Wallet, Settings, Moon, Sun, Menu, X, LogOut,
   ChevronDown, ListTodo, Package, BookOpen, Sliders,
   Briefcase, Boxes, ShoppingCart, Tags, Receipt, Landmark, HandCoins, Scale, LayoutDashboard,
-  Users2,
+  Users2, UserCircle, User, FolderKanban, Building2, Cpu, Languages, Mail, FlaskConical,
   type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
@@ -47,6 +47,21 @@ const NAV_TREE: NavGroup[] = [
       { to: '/pb/share-groups', label: 'Share Groups', icon: Users2 },
       { to: '/pb/ledger', label: 'Partner Ledger', icon: HandCoins },
       { to: '/pb/adjust', label: 'Profit Adjust', icon: Scale },
+    ],
+  },
+  {
+    key: 'portfolio',
+    label: 'Portfolio',
+    icon: UserCircle,
+    children: [
+      { to: '/portfolio', label: 'Profile', icon: User },
+      { to: '/portfolio/about', label: 'About', icon: BookOpen },
+      { to: '/portfolio/projects', label: 'Projects', icon: FolderKanban },
+      { to: '/portfolio/experience', label: 'Experience', icon: Building2 },
+      { to: '/portfolio/tech-stack', label: 'Tech Stack', icon: Cpu },
+      { to: '/portfolio/research', label: 'Research', icon: FlaskConical },
+      { to: '/portfolio/labels', label: 'Labels', icon: Languages },
+      { to: '/portfolio/messages', label: 'Messages', icon: Mail },
     ],
   },
   {
