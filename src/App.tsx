@@ -11,6 +11,8 @@ import { AttendanceReportPage } from './pages/AttendanceReport/AttendanceReport'
 import { SettingsPage } from './pages/Settings/Settings';
 import { SpendPage } from './pages/Spend/Spend';
 import { Login } from './pages/Login/Login';
+import { AuthCallback } from './pages/Login/AuthCallback';
+import { REDIRECT_PATH } from './lib/iam';
 import { PublicLateTracker } from './pages/PublicLateTracker/PublicLateTracker';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { LanguageProvider } from './lib/LanguageContext';
@@ -59,6 +61,7 @@ function AuthGate() {
     return (
       <Routes>
         <Route path={LT} element={<PublicLateTracker />} />
+        <Route path={REDIRECT_PATH} element={<AuthCallback />} />
         <Route path="*" element={<Login />} />
       </Routes>
     );
@@ -69,6 +72,7 @@ function AuthGate() {
       <Routes>
         {/* Landing goes to the group's own page, which is the public board. */}
         <Route path="/" element={<Navigate to={LT} replace />} />
+        <Route path={REDIRECT_PATH} element={<Navigate to="/" replace />} />
 
         <Route path={LT} element={<PublicLateTracker embedded />} />
         <Route path={`${LT}/daily-tracker`} element={<LateTracker />} />

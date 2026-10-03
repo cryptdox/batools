@@ -6,6 +6,18 @@ const IAM_API_BASE_URL = (import.meta.env.VITE_IAM_API_BASE_URL as string | unde
 const IAM_CR_ACCESS_CODE = import.meta.env.VITE_IAM_CR_ACCESS_CODE as string | undefined;
 export const IAM_CLIENT_ID = import.meta.env.VITE_IAM_CLIENT_ID as string | undefined;
 
+// How Sign In works (VITE_IAM_LOGIN_MODE):
+//  'embed' (default) shows the IAM frontend's /sso/login page in an iframe here, which
+//    posts the session back to this window;
+//  'redirect' goes to that page and comes back to REDIRECT_PATH;
+//  'direct' keeps the in-app form.
+const IAM_FRONTEND_URL = import.meta.env.VITE_IAM_FRONTEND_URL as string | undefined;
+const LOGIN_MODES = ['embed', 'redirect', 'direct'] as const;
+export const IAM_LOGIN_MODE: (typeof LOGIN_MODES)[number] =
+  LOGIN_MODES.find(m => m === import.meta.env.VITE_IAM_LOGIN_MODE) ?? 'embed';
+/** Must be registered as a LOGIN_CALLBACK redirect URI on the batools client in IAM. */
+export const REDIRECT_PATH = '/auth/callback';
+
 const CR_ACCESS_CODE_HEADER = 'x-cr-access-code';
 const STORAGE_KEY = 'batools-iam-session';
 
@@ -98,6 +110,68 @@ export async function iamLogin(email: string, password: string, captchaToken: st
   });
   saveSession(data);
   return data;
+}
+
+/** URL of the IAM frontend's /sso/login page for this client. The backend only
+ * accepts redirectUri if it is one of the client's LOGIN_CALLBACK URIs — embed mode
+ * relies on that too, since the session is posted only to that URI's origin. */
+export function iamSsoLoginUrl({ embed, theme }: { embed: boolean; theme?: 'light' | 'dark' }): string {
+  if (!IAM_CR_ACCESS_CODE) {
+    throw new IamError('VITE_IAM_CR_ACCESS_CODE is not configured in .env.', 0);
+  }
+  if (!IAM_FRONTEND_URL) {
+    throw new IamError('VITE_IAM_FRONTEND_URL is not configured in .env.', 0);
+  }
+  const url = new URL('/sso/login', IAM_FRONTEND_URL);
+  url.search = new URLSearchParams({
+    crAccessCode: IAM_CR_ACCESS_CODE,
+    redirectUri: `${window.location.origin}${REDIRECT_PATH}`,
+    ...(embed ? { embed: 'true' } : {}),
+    ...(theme ? { theme } : {}),
+  }).toString();
+  return url.toString();
+}
+
+/** Leaves the app for the IAM frontend's /sso/login page. */
+export function iamRedirectLogin() {
+  window.location.assign(iamSsoLoginUrl({ embed: false }));
+}
+
+/** Accepts the session the embedded /sso/login iframe posts on success — only from
+ * the IAM frontend's own origin — and stores it. Null for any other message. */
+export function acceptEmbeddedLogin(event: MessageEvent): IamSession | null {
+  if (!IAM_FRONTEND_URL || event.origin !== new URL(IAM_FRONTEND_URL).origin) return null;
+  const data = event.data as { type?: string; session?: Partial<IamSession> } | null;
+  if (data?.type !== 'iam:login') return null;
+  const { accessToken, refreshToken, user } = data.session ?? {};
+  if (typeof accessToken !== 'string' || typeof refreshToken !== 'string' || !user?.userId) return null;
+  const session: IamSession = { accessToken, refreshToken, user };
+  saveSession(session);
+  return session;
+}
+
+/** Height the embedded /sso/login iframe reports for its content, or null. */
+export function embeddedLoginHeight(event: MessageEvent): number | null {
+  if (!IAM_FRONTEND_URL || event.origin !== new URL(IAM_FRONTEND_URL).origin) return null;
+  const data = event.data as { type?: string; height?: unknown } | null;
+  return data?.type === 'iam:resize' && typeof data.height === 'number' ? data.height : null;
+}
+
+/** Reads the session the IAM frontend put in the URL fragment after a redirect
+ * login, and stores it. Returns null if the fragment doesn't carry one. */
+export function completeRedirectLogin(hash: string): IamSession | null {
+  const params = new URLSearchParams(hash.replace(/^#/, ''));
+  const accessToken = params.get('access_token');
+  const refreshToken = params.get('refresh_token');
+  const rawUser = params.get('user');
+  if (!accessToken || !refreshToken || !rawUser) return null;
+  try {
+    const session: IamSession = { accessToken, refreshToken, user: JSON.parse(rawUser) as IamUser };
+    saveSession(session);
+    return session;
+  } catch {
+    return null;
+  }
 }
 
 // Refresh tokens are single-use (the backend rotates them), so concurrent

@@ -1,8 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import {
+  acceptEmbeddedLogin,
   clearSession,
+  completeRedirectLogin,
   getTokenExpiry,
   iamLogin,
+  iamRedirectLogin,
   iamLogout,
   iamRefresh,
   loadSession,
@@ -22,6 +25,12 @@ type AuthContextValue = {
   userEmail: string | null;
   loading: boolean;
   signIn: (email: string, password: string, captchaToken: string) => Promise<{ error: string | null }>;
+  /** Leaves for the IAM frontend's /sso/login page; returns an error only if it can't. */
+  signInWithRedirect: () => { error: string | null };
+  /** Finishes a redirect login from the callback URL's fragment; false if it carried no session. */
+  completeRedirectSignIn: (hash: string) => boolean;
+  /** Finishes an embedded login from the IAM iframe's message; false for any other message. */
+  completeEmbeddedSignIn: (event: MessageEvent) => boolean;
   signOut: () => void;
   /** A non-expired access token, refreshing first if needed; null when signed out. */
   getAccessToken: () => Promise<string | null>;
@@ -92,6 +101,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const signInWithRedirect = () => {
+    try {
+      iamRedirectLogin();
+      return { error: null };
+    } catch (err) {
+      return { error: err instanceof Error ? err.message : 'Login failed.' };
+    }
+  };
+
+  const completeRedirectSignIn = (hash: string) => {
+    const next = completeRedirectLogin(hash);
+    if (next) setSession(next);
+    return !!next;
+  };
+
+  const completeEmbeddedSignIn = (event: MessageEvent) => {
+    const next = acceptEmbeddedLogin(event);
+    if (next) setSession(next);
+    return !!next;
+  };
+
   const signOut = () => {
     const token = session?.accessToken;
     endSession();
@@ -108,7 +138,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const user = session?.user ?? null;
 
   return (
-    <AuthContext.Provider value={{ user, userEmail: user?.email ?? null, loading, signIn, signOut, getAccessToken }}>
+    <AuthContext.Provider value={{ user, userEmail: user?.email ?? null, loading, signIn, signInWithRedirect, completeRedirectSignIn, completeEmbeddedSignIn, signOut, getAccessToken }}>
       {children}
     </AuthContext.Provider>
   );
