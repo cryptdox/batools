@@ -22,19 +22,26 @@ export type PfRow = Record<string, unknown> & { id: string };
  *   i18n             — `_en`/`_bn` strings, shown side by side
  *   i18nList         — `_en`/`_bn` TEXT[], edited one item per line
  *   tags             — one TEXT[], edited comma separated (tech names)
- *   number / boolean / select — as named
+ *   number / boolean / select / date — as named
  */
 export type PfField = {
   name: string;
   /** Translation key. */
   label: string;
-  type: 'text' | 'textarea' | 'i18n' | 'i18nList' | 'tags' | 'number' | 'boolean' | 'select';
+  type: 'text' | 'textarea' | 'i18n' | 'i18nList' | 'tags' | 'number' | 'boolean' | 'select' | 'date';
   /** i18n only: render as a textarea instead of an input. */
   multiline?: boolean;
   required?: boolean;
   /** Translation key shown under the field. */
   hint?: string;
   options?: { value: string; label: string }[];
+  /** select only: offers a blank choice, stored as NULL. */
+  allowEmpty?: boolean;
+  /** textarea only: visible rows (default 4). */
+  rows?: number;
+  /** text only: adds an upload button that fills in the file's public URL.
+   *  The value is the input's `accept`; the editor supplies the bucket. */
+  upload?: string;
   min?: number;
   max?: number;
   /** Value a new row starts with (in form shape). */

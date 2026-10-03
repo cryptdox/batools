@@ -86,15 +86,26 @@ export function clearSession() {
   localStorage.removeItem(STORAGE_KEY);
 }
 
-/** Seconds-since-epoch `exp` claim of a JWT, or null if it can't be read. */
-export function getTokenExpiry(token: string): number | null {
+/** The JWT's payload, or null if it can't be read. */
+function getTokenClaims(token: string): Record<string, unknown> | null {
   try {
     const payload = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
-    const { exp } = JSON.parse(atob(payload)) as { exp?: number };
-    return typeof exp === 'number' ? exp : null;
+    return JSON.parse(atob(payload)) as Record<string, unknown>;
   } catch {
     return null;
   }
+}
+
+/** Seconds-since-epoch `exp` claim of a JWT, or null if it can't be read. */
+export function getTokenExpiry(token: string): number | null {
+  const exp = getTokenClaims(token)?.exp;
+  return typeof exp === 'number' ? exp : null;
+}
+
+/** The IAM realm the token was issued in (`realmId` claim), or null. */
+export function getTokenRealmId(token: string): string | null {
+  const realmId = getTokenClaims(token)?.realmId;
+  return typeof realmId === 'string' && realmId ? realmId : null;
 }
 
 // ---------------- API calls ----------------

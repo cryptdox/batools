@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, AlertTriangle, ArrowUp, ArrowDown, Eye, EyeOff, Search, Inbox } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -6,7 +6,7 @@ import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage, formFromRow, isFormComplete, rowFromForm, usePfUserId, type PfField, type PfFormValues, type PfRow } from '../../lib/portfolio';
 import { Button, Badge } from '../ui/Button';
 import { Modal } from '../ui/Modal';
-import { PfFieldInput, pfInputClass } from './PfFieldInput';
+import { PfFieldInput, pfInputClass, type PfUploadTarget } from './PfFieldInput';
 
 type Props = {
   table: string;
@@ -20,8 +20,20 @@ type Props = {
   scope?: Record<string, string>;
   /** Off for tables without sort_order / is_visible (labels). */
   ordered?: boolean;
-  /** Columns to sort by, in order; defaults to sort_order (or created_at). */
+  /** Columns to sort by, in order; `-col` sorts descending. Defaults to sort_order (or created_at). */
   orderBy?: string[];
+  /** Column + id the rows belong to; defaults to the signed-in user's `user_id`. */
+  owner?: { column: string; id: string | null };
+  /** Written as `updated_by` on every save, and `created_by` on new rows. */
+  auditUserId?: string | null;
+  /** Show/hide toggle (needs is_visible); defaults to `ordered`. */
+  hideable?: boolean;
+  /** Translation key for the delete confirmation's warning. */
+  deleteHint?: string;
+  /** Where fields with `upload` store their files. */
+  upload?: PfUploadTarget;
+  /** Called with the full row list after every load. */
+  onRowsChange?: (rows: PfRow[]) => void;
   searchable?: boolean;
   /** Extra buttons per row, before edit/delete. */
   rowActions?: (row: PfRow) => ReactNode;
@@ -35,9 +47,15 @@ type Props = {
  */
 export const PfListEditor = ({
   table, title, subtitle, fields, renderRow, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
+  owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange,
 }: Props) => {
   const { t } = useLanguage();
-  const userId = usePfUserId();
+  const pfUserId = usePfUserId();
+  const ownerColumn = owner?.column ?? 'user_id';
+  const ownerId = owner ? owner.id : pfUserId;
+  // Kept in a ref so a new callback each render doesn't refetch.
+  const onRowsChangeRef = useRef(onRowsChange);
+  useEffect(() => { onRowsChangeRef.current = onRowsChange; });
   const [rows, setRows] = useState<PfRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -55,15 +73,18 @@ export const PfListEditor = ({
   const sortKey = (orderBy ?? [ordered ? 'sort_order' : 'created_at']).join(',');
 
   const fetchRows = useCallback(async () => {
-    if (!userId) return;
+    if (!ownerId) return;
     setLoading(true);
     try {
-      let query = supabase.from(table).select('*').eq('user_id', userId);
+      let query = supabase.from(table).select('*').eq(ownerColumn, ownerId);
       for (const [col, val] of Object.entries(JSON.parse(scopeKey) as Record<string, string>)) query = query.eq(col, val);
-      for (const col of sortKey.split(',')) query = query.order(col, { ascending: true });
+      for (const col of sortKey.split(',')) {
+        query = col.startsWith('-') ? query.order(col.slice(1), { ascending: false }) : query.order(col, { ascending: true });
+      }
       const { data, error } = await query;
       if (error) throw error;
       setRows((data ?? []) as PfRow[]);
+      onRowsChangeRef.current?.((data ?? []) as PfRow[]);
     } catch (e) {
       console.error(e);
       toast.error(errorMessage(e, t('pf.common.loadError')));
@@ -71,7 +92,7 @@ export const PfListEditor = ({
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [table, userId, scopeKey, sortKey]);
+  }, [table, ownerColumn, ownerId, scopeKey, sortKey]);
 
   useEffect(() => { void fetchRows(); }, [fetchRows]);
 
@@ -95,16 +116,21 @@ export const PfListEditor = ({
   };
 
   const handleSave = async () => {
-    if (!userId || !isFormComplete(fields, values)) return;
+    if (!ownerId || !isFormComplete(fields, values)) return;
     setSaving(true);
     try {
-      const payload = { ...rowFromForm(fields, values), updated_at: new Date().toISOString() };
+      const payload = {
+        ...rowFromForm(fields, values),
+        updated_at: new Date().toISOString(),
+        ...(auditUserId ? { updated_by: auditUserId } : {}),
+      };
       const { error } = editing
-        ? await supabase.from(table).update(payload).eq('id', editing.id).eq('user_id', userId)
+        ? await supabase.from(table).update(payload).eq('id', editing.id).eq(ownerColumn, ownerId)
         : await supabase.from(table).insert([{
             ...payload,
             ...scope,
-            user_id: userId,
+            [ownerColumn]: ownerId,
+            ...(auditUserId ? { created_by: auditUserId } : {}),
             // New rows go to the end of the list.
             ...(ordered ? { sort_order: Math.max(0, ...rows.map(r => Number(r.sort_order) || 0)) + 1 } : {}),
           }]);
@@ -121,10 +147,10 @@ export const PfListEditor = ({
   };
 
   const handleDelete = async () => {
-    if (!toDelete || !userId) return;
+    if (!toDelete || !ownerId) return;
     setDeleting(true);
     try {
-      const { error } = await supabase.from(table).delete().eq('id', toDelete.id).eq('user_id', userId);
+      const { error } = await supabase.from(table).delete().eq('id', toDelete.id).eq(ownerColumn, ownerId);
       if (error) throw error;
       await fetchRows();
       setToDelete(null);
@@ -138,11 +164,12 @@ export const PfListEditor = ({
   };
 
   const update = async (changes: { id: string; patch: Record<string, unknown> }[]) => {
-    if (!userId) return;
+    if (!ownerId) return;
     setBusy(true);
     try {
       for (const { id, patch } of changes) {
-        const { error } = await supabase.from(table).update(patch).eq('id', id).eq('user_id', userId);
+        const audited = auditUserId ? { ...patch, updated_by: auditUserId, updated_at: new Date().toISOString() } : patch;
+        const { error } = await supabase.from(table).update(audited).eq('id', id).eq(ownerColumn, ownerId);
         if (error) throw error;
       }
       await fetchRows();
@@ -203,7 +230,7 @@ export const PfListEditor = ({
         <ul className="divide-y divide-gray-100 dark:divide-gray-700">
           {visibleRows.map(row => {
             const index = rows.indexOf(row);
-            const hidden = ordered && row.is_visible === false;
+            const hidden = hideable && row.is_visible === false;
             return (
               <li
                 key={row.id}
@@ -227,7 +254,7 @@ export const PfListEditor = ({
                       </button>
                     </>
                   )}
-                  {ordered && (
+                  {hideable && (
                     <button
                       className={iconButton}
                       disabled={busy}
@@ -258,7 +285,7 @@ export const PfListEditor = ({
       >
         <div className="space-y-4">
           {fields.map(f => (
-            <PfFieldInput key={f.name} field={f} values={values} onChange={(key, value) => setValues(prev => ({ ...prev, [key]: value }))} />
+            <PfFieldInput key={f.name} field={f} values={values} upload={upload} onChange={(key, value) => setValues(prev => ({ ...prev, [key]: value }))} />
           ))}
           <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
             <Button variant="ghost" onClick={() => setIsModalOpen(false)} disabled={saving}>{t('pf.common.cancel')}</Button>
@@ -276,7 +303,7 @@ export const PfListEditor = ({
               <AlertTriangle size={20} className="text-danger shrink-0 mt-0.5" />
               <div className="text-sm text-gray-700 dark:text-gray-300 min-w-0">{renderRow(toDelete)}</div>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{t('pf.common.deleteHint')}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{t(deleteHint)}</p>
             <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
               <Button variant="ghost" onClick={() => setToDelete(null)} disabled={deleting}>{t('pf.common.cancel')}</Button>
               <Button variant="danger" onClick={handleDelete} disabled={deleting}>

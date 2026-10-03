@@ -5,6 +5,7 @@ import {
   ChevronDown, ListTodo, Package, BookOpen, Sliders,
   Briefcase, Boxes, ShoppingCart, Tags, Receipt, Landmark, HandCoins, Scale, LayoutDashboard,
   Users2, UserCircle, User, FolderKanban, Building2, Cpu, Languages, Mail, FlaskConical,
+  Globe, Layers, Package2, MessageSquareQuote, UsersRound, Newspaper, BriefcaseBusiness, HelpCircle, FileUser,
   type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
@@ -62,6 +63,25 @@ const NAV_TREE: NavGroup[] = [
       { to: '/portfolio/research', label: 'Research', icon: FlaskConical },
       { to: '/portfolio/labels', label: 'Labels', icon: Languages },
       { to: '/portfolio/messages', label: 'Messages', icon: Mail },
+    ],
+  },
+  {
+    key: 'org-site',
+    label: 'Organization Site',
+    icon: Globe,
+    children: [
+      { to: '/org', label: 'About', icon: Building2 },
+      { to: '/org/services', label: 'Services', icon: Layers },
+      { to: '/org/products', label: 'Products', icon: Package2 },
+      { to: '/org/projects', label: 'Portfolio', icon: FolderKanban },
+      { to: '/org/clients', label: 'Clients & Testimonials', icon: MessageSquareQuote },
+      { to: '/org/teams', label: 'Teams & Skills', icon: Users2 },
+      { to: '/org/members', label: 'Members', icon: UsersRound },
+      { to: '/org/blog', label: 'Blog', icon: Newspaper },
+      { to: '/org/jobs', label: 'Jobs', icon: BriefcaseBusiness },
+      { to: '/org/faqs', label: 'FAQ', icon: HelpCircle },
+      { to: '/org/applications', label: 'Applications', icon: FileUser },
+      { to: '/org/contacts', label: 'Contact Messages', icon: Mail },
     ],
   },
   {

@@ -73,6 +73,59 @@ export const translations = {
         empty: 'No messages yet.', unread: 'unread', markRead: 'Mark as read', markUnread: 'Mark as unread',
       },
     },
+    org: {
+      common: {
+        description: 'Description', image: 'Image', title: 'Title',
+        startDate: 'Start date', endDate: 'End date', present: 'Present',
+        deleteHint: 'This removes it from the website permanently. To keep it, hide it instead.',
+        deleteInboxHint: 'This deletes it permanently.',
+        noOrg: 'No organization on this session',
+        noOrgHint: 'Your login carries no realm id. Sign out and sign in again.',
+      },
+      about: {
+        pageTitle: 'Organization About', pageSubtitle: 'The About page of the organization website.',
+        title: 'Title', founderName: 'Founder name', founderImage: 'Founder image',
+        mission: 'Mission', story: 'Story', coreValues: 'Core values',
+      },
+      services: { pageTitle: 'Services', title: 'Services', iconHint: 'A lucide icon name, e.g. Code, Cloud, Smartphone, BrainCircuit.' },
+      products: { pageTitle: 'Products', title: 'Products & packages', service: 'Service', free: 'Free', price: 'Price', siteUrl: 'Site URL' },
+      faqs: { pageTitle: 'FAQ', title: 'Questions', question: 'Question', answer: 'Answer' },
+      clients: {
+        pageTitle: 'Clients & Testimonials', title: 'Clients', organization: 'Organization', joinedAt: 'Joined on',
+        client: 'Client', content: 'Testimonial', rating: 'Rating (1–5)',
+        testimonials: 'Testimonials', testimonialsHint: 'Only visible testimonials appear on the home page.',
+      },
+      blogs: {
+        pageTitle: 'Blog', pageSubtitle: 'Newest first on the website. Hide a post to unpublish it.',
+        title: 'Posts', content: 'Content', contentHint: 'HTML is allowed (e.g. <p>, <h2>, <b>, <a href>, <ul><li>).',
+      },
+      jobs: {
+        pageTitle: 'Jobs', pageSubtitle: 'Job circulars on the Careers page. Newest first.',
+        title: 'Job circulars', expires: 'Expires', expired: 'Expired',
+        expiresHint: 'The circular leaves the Careers page after this date.',
+        descriptionHint: 'Line breaks are kept; HTML is allowed.',
+      },
+      projects: { pageTitle: 'Portfolio', title: 'Projects', technology: 'Technology used', link: 'Link', member: 'Built by' },
+      teams: { pageTitle: 'Teams & Skills', title: 'Teams', skills: 'Skill catalogue', skillsHint: 'Members pick their skills from this list.' },
+      members: {
+        pageTitle: 'Members', pageSubtitle: 'People of the organization and their profiles.',
+        title: 'Members', designation: 'Designation', photo: 'Photo', objective: 'Objective',
+        teams: 'Teams', skills: 'Skills', team: 'Team', skill: 'Skill', level: 'Level',
+        levels: { Beginner: 'Beginner', Intermediate: 'Intermediate', Advanced: 'Advanced', Expert: 'Expert' },
+        currentHint: 'Leave empty for the current position.',
+        editDetails: 'Edit teams, skills, education & experience',
+        pick: 'Choose a member above with the list icon to edit their teams, skills, education and experience.',
+      },
+      contacts: {
+        pageTitle: 'Contact Messages', pageSubtitle: "What visitors sent through the website's contact form.",
+        statusLabel: 'Status', status: { unread: 'Unread', read: 'Read', replied: 'Replied' },
+      },
+      applications: {
+        pageTitle: 'Job Applications', pageSubtitle: 'Applications sent through the Careers page.',
+        title: 'Applications', allJobs: 'All jobs', empty: 'No applications yet.', pending: 'to review',
+        reviewed: 'Reviewed', approved: 'Approved',
+      },
+    },
     pb: {
       groups: {
         all: 'All Groups',
@@ -675,6 +728,59 @@ export const translations = {
       messages: {
         pageTitle: 'পোর্টফোলিও বার্তা', pageSubtitle: 'আপনার পোর্টফোলিওর যোগাযোগ ফর্ম থেকে পাঠানো।',
         empty: 'এখনো কোনো বার্তা নেই।', unread: 'অপঠিত', markRead: 'পঠিত চিহ্নিত করুন', markUnread: 'অপঠিত চিহ্নিত করুন',
+      },
+    },
+    org: {
+      common: {
+        description: 'বিবরণ', image: 'ছবি', title: 'শিরোনাম',
+        startDate: 'শুরুর তারিখ', endDate: 'শেষের তারিখ', present: 'বর্তমান',
+        deleteHint: 'এটি ওয়েবসাইট থেকে স্থায়ীভাবে মুছে যাবে। রাখতে চাইলে লুকিয়ে রাখুন।',
+        deleteInboxHint: 'এটি স্থায়ীভাবে মুছে যাবে।',
+        noOrg: 'এই সেশনে কোনো প্রতিষ্ঠান নেই',
+        noOrgHint: 'আপনার লগইনে কোনো realm id নেই। সাইন আউট করে আবার সাইন ইন করুন।',
+      },
+      about: {
+        pageTitle: 'প্রতিষ্ঠান পরিচিতি', pageSubtitle: 'প্রতিষ্ঠানের ওয়েবসাইটের About পাতা।',
+        title: 'শিরোনাম', founderName: 'প্রতিষ্ঠাতার নাম', founderImage: 'প্রতিষ্ঠাতার ছবি',
+        mission: 'লক্ষ্য', story: 'গল্প', coreValues: 'মূল মূল্যবোধ',
+      },
+      services: { pageTitle: 'সেবাসমূহ', title: 'সেবাসমূহ', iconHint: 'একটি lucide আইকনের নাম, যেমন Code, Cloud, Smartphone, BrainCircuit।' },
+      products: { pageTitle: 'পণ্যসমূহ', title: 'পণ্য ও প্যাকেজ', service: 'সেবা', free: 'ফ্রি', price: 'মূল্য', siteUrl: 'সাইট URL' },
+      faqs: { pageTitle: 'প্রশ্নোত্তর', title: 'প্রশ্নসমূহ', question: 'প্রশ্ন', answer: 'উত্তর' },
+      clients: {
+        pageTitle: 'ক্লায়েন্ট ও মতামত', title: 'ক্লায়েন্ট', organization: 'প্রতিষ্ঠান', joinedAt: 'যোগদানের তারিখ',
+        client: 'ক্লায়েন্ট', content: 'মতামত', rating: 'রেটিং (১–৫)',
+        testimonials: 'মতামতসমূহ', testimonialsHint: 'শুধু দৃশ্যমান মতামত হোম পেজে দেখা যায়।',
+      },
+      blogs: {
+        pageTitle: 'ব্লগ', pageSubtitle: 'ওয়েবসাইটে নতুনগুলো আগে। প্রকাশ বন্ধ করতে পোস্ট লুকান।',
+        title: 'পোস্টসমূহ', content: 'বিষয়বস্তু', contentHint: 'HTML ব্যবহার করা যাবে (যেমন <p>, <h2>, <b>, <a href>, <ul><li>)।',
+      },
+      jobs: {
+        pageTitle: 'চাকরি', pageSubtitle: 'Careers পাতার চাকরির বিজ্ঞপ্তি। নতুনগুলো আগে।',
+        title: 'চাকরির বিজ্ঞপ্তি', expires: 'মেয়াদ শেষ', expired: 'মেয়াদোত্তীর্ণ',
+        expiresHint: 'এই তারিখের পরে বিজ্ঞপ্তিটি Careers পাতা থেকে সরে যাবে।',
+        descriptionHint: 'লাইন ব্রেক থাকবে; HTML ব্যবহার করা যাবে।',
+      },
+      projects: { pageTitle: 'পোর্টফোলিও', title: 'প্রজেক্টসমূহ', technology: 'ব্যবহৃত প্রযুক্তি', link: 'লিংক', member: 'নির্মাতা' },
+      teams: { pageTitle: 'টিম ও দক্ষতা', title: 'টিমসমূহ', skills: 'দক্ষতার তালিকা', skillsHint: 'সদস্যরা এই তালিকা থেকে দক্ষতা বেছে নেন।' },
+      members: {
+        pageTitle: 'সদস্যবৃন্দ', pageSubtitle: 'প্রতিষ্ঠানের মানুষ ও তাদের প্রোফাইল।',
+        title: 'সদস্যবৃন্দ', designation: 'পদবি', photo: 'ছবি', objective: 'উদ্দেশ্য',
+        teams: 'টিম', skills: 'দক্ষতা', team: 'টিম', skill: 'দক্ষতা', level: 'স্তর',
+        levels: { Beginner: 'প্রাথমিক', Intermediate: 'মধ্যম', Advanced: 'উন্নত', Expert: 'বিশেষজ্ঞ' },
+        currentHint: 'বর্তমান পদের জন্য খালি রাখুন।',
+        editDetails: 'টিম, দক্ষতা, শিক্ষা ও অভিজ্ঞতা সম্পাদনা',
+        pick: 'টিম, দক্ষতা, শিক্ষা ও অভিজ্ঞতা সম্পাদনা করতে উপরে তালিকা আইকন দিয়ে একজন সদস্য বেছে নিন।',
+      },
+      contacts: {
+        pageTitle: 'যোগাযোগের বার্তা', pageSubtitle: 'ওয়েবসাইটের যোগাযোগ ফর্মে দর্শনার্থীরা যা পাঠিয়েছেন।',
+        statusLabel: 'অবস্থা', status: { unread: 'অপঠিত', read: 'পঠিত', replied: 'উত্তর দেওয়া হয়েছে' },
+      },
+      applications: {
+        pageTitle: 'চাকরির আবেদন', pageSubtitle: 'Careers পাতার মাধ্যমে পাঠানো আবেদন।',
+        title: 'আবেদনসমূহ', allJobs: 'সব চাকরি', empty: 'এখনো কোনো আবেদন নেই।', pending: 'পর্যালোচনা বাকি',
+        reviewed: 'পর্যালোচিত', approved: 'অনুমোদিত',
       },
     },
     pb: {

@@ -35,6 +35,12 @@ import { PfAbout } from './pages/Portfolio/PfAbout';
 import { PfProjects, PfExperience, PfTechStack, PfResearch } from './pages/Portfolio/PfWork';
 import { PfLabels } from './pages/Portfolio/PfLabels';
 import { PfMessages } from './pages/Portfolio/PfMessages';
+import { OrgAbout } from './pages/OrgSite/OrgAbout';
+import { OrgServices, OrgProducts, OrgFaqs } from './pages/OrgSite/OrgCatalog';
+import { OrgClients } from './pages/OrgSite/OrgClients';
+import { OrgBlogs, OrgJobs, OrgProjects } from './pages/OrgSite/OrgContent';
+import { OrgTeams, OrgMembers } from './pages/OrgSite/OrgPeople';
+import { OrgContacts, OrgApplications } from './pages/OrgSite/OrgInbox';
 
 /** Every Late Tracker page lives under this prefix. */
 const LT = '/late-tracker';
@@ -111,6 +117,19 @@ function AuthGate() {
         <Route path="/portfolio/research" element={<PfResearch />} />
         <Route path="/portfolio/labels" element={<PfLabels />} />
         <Route path="/portfolio/messages" element={<PfMessages />} />
+
+        <Route path="/org" element={<OrgAbout />} />
+        <Route path="/org/services" element={<OrgServices />} />
+        <Route path="/org/products" element={<OrgProducts />} />
+        <Route path="/org/projects" element={<OrgProjects />} />
+        <Route path="/org/clients" element={<OrgClients />} />
+        <Route path="/org/teams" element={<OrgTeams />} />
+        <Route path="/org/members" element={<OrgMembers />} />
+        <Route path="/org/blog" element={<OrgBlogs />} />
+        <Route path="/org/jobs" element={<OrgJobs />} />
+        <Route path="/org/faqs" element={<OrgFaqs />} />
+        <Route path="/org/applications" element={<OrgApplications />} />
+        <Route path="/org/contacts" element={<OrgContacts />} />
       </Routes>
     </AppLayout>
   );

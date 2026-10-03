@@ -4,6 +4,7 @@ import {
   clearSession,
   completeRedirectLogin,
   getTokenExpiry,
+  getTokenRealmId,
   iamLogin,
   iamRedirectLogin,
   iamLogout,
@@ -23,6 +24,8 @@ const REFRESH_LEAD_MS = 60_000;
 type AuthContextValue = {
   user: IamUser | null;
   userEmail: string | null;
+  /** The signed-in user's IAM realm id; each realm is one organization (org_ tables). */
+  orgId: string | null;
   loading: boolean;
   signIn: (email: string, password: string, captchaToken: string) => Promise<{ error: string | null }>;
   /** Leaves for the IAM frontend's /sso/login page; returns an error only if it can't. */
@@ -136,9 +139,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [refresh]);
 
   const user = session?.user ?? null;
+  const orgId = session ? getTokenRealmId(session.accessToken) : null;
 
   return (
-    <AuthContext.Provider value={{ user, userEmail: user?.email ?? null, loading, signIn, signInWithRedirect, completeRedirectSignIn, completeEmbeddedSignIn, signOut, getAccessToken }}>
+    <AuthContext.Provider value={{ user, userEmail: user?.email ?? null, orgId, loading, signIn, signInWithRedirect, completeRedirectSignIn, completeEmbeddedSignIn, signOut, getAccessToken }}>
       {children}
     </AuthContext.Provider>
   );
