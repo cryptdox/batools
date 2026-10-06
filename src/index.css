@@ -134,3 +134,11 @@ body {
 .ac-rich a { color: var(--ac-seq); text-decoration: underline; }
 .ac-rich .ProseMirror { outline: none; min-height: 7rem; }
 .ac-rich .ProseMirror p.is-editor-empty:first-child::before { content: attr(data-placeholder); float: left; height: 0; pointer-events: none; opacity: 0.45; }
+
+/* Music player */
+@keyframes mp-bar { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
+@keyframes mp-spin { to { transform: rotate(360deg); } }
+@keyframes mp-glow { 0%, 100% { opacity: 0.55; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1.06); } }
+@media (prefers-reduced-motion: reduce) {
+  .mp-motion { animation: none !important; }
+}

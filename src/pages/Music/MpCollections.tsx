@@ -1,0 +1,365 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { Plus, Pencil, Trash2, Play, Shuffle, ArrowLeft, ArrowUp, ArrowDown, X, ImagePlus, Disc3, ListMusic, Search, AlertTriangle } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
+import { useLanguage } from '../../lib/LanguageContext';
+import { errorMessage } from '../../lib/portfolio';
+import {
+  COLLECTION_SELECT, SONG_SELECT, deleteMusicFile, formatDuration, uploadMusicFile, useMpGenres, useMpUserId,
+  type MpCollection, type MpSong,
+} from '../../lib/music';
+import { usePlayer } from '../../lib/MusicPlayerContext';
+import { Button } from '../../components/ui/Button';
+import { Modal } from '../../components/ui/Modal';
+import { pfInputClass } from '../../components/portfolio/PfFieldInput';
+import { MpCover, MpPlayButton, MpPlayingBars } from '../../components/music/MpUi';
+import { EMPTY_FILTERS, fetchSongs, MpSongFilterBar, type SongFilters } from '../../components/music/MpSongFilters';
+import { PfPageHeader, PfTabs } from '../Portfolio/PfPageHeader';
+
+const card = 'bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700';
+const label = 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5';
+type Kind = 'all' | 'album' | 'mix';
+
+// ------------------------------------------------------------ form
+
+const CollectionForm = ({ userId, collection, onClose, onSaved }: {
+  userId: string; collection: MpCollection | null; onClose: () => void; onSaved: (id: string) => void;
+}) => {
+  const { t } = useLanguage();
+  const input = useRef<HTMLInputElement>(null);
+  const [kind, setKind] = useState<'album' | 'mix'>(collection?.kind ?? 'album');
+  const [title, setTitle] = useState(collection?.title ?? '');
+  const [artist, setArtist] = useState(collection?.artist ?? '');
+  const [year, setYear] = useState(collection?.release_year ? String(collection.release_year) : '');
+  const [description, setDescription] = useState(collection?.description ?? '');
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(collection?.cover?.url ?? null);
+  const [saving, setSaving] = useState(false);
+
+  const save = async () => {
+    if (!title.trim()) return;
+    setSaving(true);
+    try {
+      const coverId = coverFile ? await uploadMusicFile(coverFile, 'image', userId) : collection?.cover_file_id ?? null;
+      const row = {
+        kind, title: title.trim(), artist: kind === 'album' ? artist.trim() || null : null,
+        release_year: year.trim() ? Number(year) : null, description: description.trim() || null,
+        cover_file_id: coverId, updated_at: new Date().toISOString(),
+      };
+      let id = collection?.id;
+      if (collection) {
+        const { error } = await supabase.from('mp_collections').update(row).eq('id', collection.id).eq('created_by', userId);
+        if (error) throw error;
+        if (coverFile && collection.cover) await deleteMusicFile(collection.cover);
+      } else {
+        const { data, error } = await supabase.from('mp_collections').insert([{ ...row, created_by: userId }]).select('id').single();
+        if (error) throw error;
+        id = data.id as string;
+      }
+      toast.success(collection ? t('pf.common.updated') : t('pf.common.added'));
+      onSaved(id!);
+    } catch (e) {
+      toast.error(errorMessage(e, t('pf.common.saveError')));
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <Modal isOpen onClose={() => !saving && onClose()} title={collection ? t('mp.collections.edit') : t('mp.collections.create')}>
+      <div className="space-y-4">
+        <div className="flex gap-4">
+          <button type="button" onClick={() => input.current?.click()} className="relative group shrink-0">
+            <MpCover url={preview} className="w-28 h-28" rounded="rounded-xl" />
+            <span className="absolute inset-0 rounded-xl bg-black/0 group-hover:bg-black/40 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition"><ImagePlus size={20} /></span>
+          </button>
+          <input ref={input} type="file" accept="image/png,image/jpeg,image/webp,image/gif" className="hidden"
+            onChange={e => { const f = e.target.files?.[0]; if (f) { setCoverFile(f); setPreview(URL.createObjectURL(f)); } e.target.value = ''; }} />
+          <div className="flex-1 space-y-3">
+            <div className="flex gap-2">
+              {(['album', 'mix'] as const).map(k => (
+                <button key={k} type="button" onClick={() => setKind(k)}
+                  className={`flex-1 inline-flex items-center justify-center gap-1.5 h-9 rounded-lg text-sm font-medium border ${kind === k ? 'bg-primary text-white border-primary' : 'border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300'}`}>
+                  {k === 'album' ? <Disc3 size={15} /> : <ListMusic size={15} />}{t(`mp.kind.${k}`)}
+                </button>
+              ))}
+            </div>
+            <label className="block">
+              <span className={label}>{t('mp.form.title')} <span className="text-danger">*</span></span>
+              <input value={title} onChange={e => setTitle(e.target.value)} className={`${pfInputClass} h-10`} autoFocus />
+            </label>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {kind === 'album' && (
+            <label className="block">
+              <span className={label}>{t('mp.form.artist')}</span>
+              <input value={artist} onChange={e => setArtist(e.target.value)} className={`${pfInputClass} h-10`} />
+            </label>
+          )}
+          <label className="block">
+            <span className={label}>{t('mp.year')}</span>
+            <input type="number" min={1800} max={2200} value={year} onChange={e => setYear(e.target.value)} className={`${pfInputClass} h-10`} />
+          </label>
+        </div>
+        <label className="block">
+          <span className={label}>{t('org.common.description')}</span>
+          <textarea value={description} onChange={e => setDescription(e.target.value)} rows={3} className={pfInputClass} />
+        </label>
+        <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
+          <Button variant="ghost" onClick={onClose} disabled={saving}>{t('pf.common.cancel')}</Button>
+          <Button onClick={save} disabled={saving || !title.trim()}>{saving ? t('pf.common.saving') : t('pf.common.save')}</Button>
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+// ------------------------------------------------------------ list
+
+export const MpCollections = () => {
+  const { t } = useLanguage();
+  const userId = useMpUserId();
+  const navigate = useNavigate();
+  const [kind, setKind] = useState<Kind>('all');
+  const [search, setSearch] = useState('');
+  const [items, setItems] = useState<MpCollection[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [form, setForm] = useState<MpCollection | 'new' | null>(null);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    let q = supabase.from('mp_collections').select(COLLECTION_SELECT).order('created_at', { ascending: false });
+    if (kind !== 'all') q = q.eq('kind', kind);
+    if (search.trim()) q = q.ilike('title', `%${search.trim()}%`);
+    const { data, error } = await q;
+    if (error) toast.error(error.message);
+    setItems((data ?? []) as unknown as MpCollection[]);
+    setLoading(false);
+  }, [kind, search]);
+
+  useEffect(() => { const id = setTimeout(() => void load(), 250); return () => clearTimeout(id); }, [load]);
+
+  return (
+    <div className="max-w-6xl mx-auto space-y-6">
+      <PfPageHeader title="mp.collections.pageTitle" subtitle="mp.collections.pageSubtitle"
+        action={<Button onClick={() => setForm('new')}><Plus size={16} className="mr-1" />{t('mp.collections.create')}</Button>} />
+      <div className={`${card} p-4 flex flex-wrap items-center gap-3`}>
+        <PfTabs tabs={[{ key: 'all' as Kind, label: 'mp.collections.all' }, { key: 'album' as Kind, label: 'mp.collections.albums' }, { key: 'mix' as Kind, label: 'mp.collections.mixes' }]} active={kind} onChange={setKind} />
+        <div className="relative ml-auto">
+          <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input value={search} onChange={e => setSearch(e.target.value)} placeholder={t('pf.common.search')} className={`${pfInputClass} h-9 pl-8 w-56`} />
+        </div>
+      </div>
+      {loading ? (
+        <div className="p-12 text-center text-gray-500">{t('pf.common.loading')}</div>
+      ) : items.length === 0 ? (
+        <div className={`${card} p-12 text-center text-gray-500`}>{t('mp.collections.empty')}</div>
+      ) : (
+        <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+          {items.map(c => (
+            <button key={c.id} onClick={() => navigate(`/mp/collections/${c.id}`)} className={`${card} p-3 text-left group hover:shadow-lg transition-shadow`}>
+              <div className="relative">
+                <MpCover url={c.cover?.url} className="w-full aspect-square" rounded="rounded-lg" alt={c.title} />
+                <span className="absolute bottom-2 right-2 w-10 h-10 rounded-full bg-primary text-white shadow-lg flex items-center justify-center opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition">
+                  <Play size={18} fill="currentColor" className="ml-0.5" />
+                </span>
+              </div>
+              <div className="mt-2 font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">{c.title}</div>
+              <div className="text-xs text-gray-500 truncate">
+                {t(`mp.kind.${c.kind}`)} · {c.songs?.[0]?.count ?? 0} {t('mp.songs')}{c.artist ? ` · ${c.artist}` : ''}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+      {form && userId && (
+        <CollectionForm userId={userId} collection={form === 'new' ? null : form} onClose={() => setForm(null)}
+          onSaved={id => { setForm(null); navigate(`/mp/collections/${id}`); }} />
+      )}
+    </div>
+  );
+};
+
+// ------------------------------------------------------------ detail
+
+type Linked = { id: string; position: number; song: MpSong };
+
+export const MpCollectionDetail = () => {
+  const { t } = useLanguage();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const userId = useMpUserId();
+  const player = usePlayer();
+  const { genres } = useMpGenres();
+  const [collection, setCollection] = useState<MpCollection | null>(null);
+  const [links, setLinks] = useState<Linked[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [filters, setFilters] = useState<SongFilters>(EMPTY_FILTERS);
+  const [found, setFound] = useState<MpSong[]>([]);
+  const [busy, setBusy] = useState(false);
+
+  const load = useCallback(async () => {
+    if (!id) return;
+    const [c, l] = await Promise.all([
+      supabase.from('mp_collections').select(COLLECTION_SELECT).eq('id', id).maybeSingle(),
+      supabase.from('mp_collection_songs').select(`id, position, song:mp_songs!mp_collection_songs_song_fkey(${SONG_SELECT})`).eq('collection_id', id).order('position'),
+    ]);
+    if (c.error || l.error) toast.error((c.error ?? l.error)!.message);
+    setCollection((c.data ?? null) as unknown as MpCollection | null);
+    setLinks(((l.data ?? []) as unknown as Linked[]).filter(x => x.song));
+    setLoading(false);
+  }, [id]);
+
+  useEffect(() => { void load(); }, [load]);
+
+  useEffect(() => {
+    if (!adding) return;
+    void fetchSongs(filters, 0, 20).then(r => setFound(r.rows)).catch(() => setFound([]));
+  }, [adding, filters]);
+
+  const mine = collection?.created_by === userId;
+  const songs = links.map(l => l.song);
+  const total = songs.reduce((s, x) => s + (x.duration_seconds ?? 0), 0);
+
+  const addSong = async (s: MpSong) => {
+    if (!id || !userId) return;
+    const { error } = await supabase.from('mp_collection_songs').insert([{ collection_id: id, song_id: s.id, position: (links.at(-1)?.position ?? 0) + 1, added_by: userId }]);
+    if (error) return toast.error(errorMessage(error, t('pf.common.saveError')));
+    await load();
+  };
+  const removeLink = async (l: Linked) => {
+    const { error } = await supabase.from('mp_collection_songs').delete().eq('id', l.id);
+    if (error) return toast.error(error.message);
+    await load();
+  };
+  // Rewrites positions 1..n so moves are exact even after gaps.
+  const move = async (i: number, d: -1 | 1) => {
+    const j = i + d;
+    if (j < 0 || j >= links.length) return;
+    setBusy(true);
+    const next = [...links];
+    [next[i], next[j]] = [next[j], next[i]];
+    for (let k = 0; k < next.length; k++) if (next[k].position !== k + 1) await supabase.from('mp_collection_songs').update({ position: k + 1 }).eq('id', next[k].id);
+    setBusy(false);
+    await load();
+  };
+  const removeCollection = async () => {
+    if (!collection || !userId) return;
+    const { error } = await supabase.from('mp_collections').delete().eq('id', collection.id).eq('created_by', userId);
+    if (error) return toast.error(errorMessage(error, t('pf.common.deleteError')));
+    await deleteMusicFile(collection.cover);
+    toast.success(t('pf.common.deleted'));
+    navigate('/mp/collections');
+  };
+
+  if (loading) return <div className="p-12 text-center text-gray-500">{t('pf.common.loading')}</div>;
+  if (!collection) return <div className="p-12 text-center text-gray-500">{t('mp.collections.notFound')}</div>;
+
+  const inIt = new Set(songs.map(s => s.id));
+
+  return (
+    <div className="max-w-6xl mx-auto space-y-6">
+      <Link to="/mp/collections" className="inline-flex items-center gap-1 text-sm text-primary hover:underline"><ArrowLeft size={15} />{t('mp.collections.pageTitle')}</Link>
+
+      <div className={`${card} p-5 flex flex-col sm:flex-row gap-5 overflow-hidden relative`}>
+        <MpCover url={collection.cover?.url} className="w-44 h-44 shadow-xl" rounded="rounded-xl" alt={collection.title} />
+        <div className="flex-1 min-w-0 flex flex-col justify-end gap-2">
+          <span className="text-xs font-semibold uppercase tracking-wide text-gray-500">{t(`mp.kind.${collection.kind}`)}</span>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 truncate">{collection.title}</h2>
+          {collection.description && <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{collection.description}</p>}
+          <div className="text-sm text-gray-500">
+            {[collection.artist, collection.release_year, `${songs.length} ${t('mp.songs')}`, formatDuration(total)].filter(Boolean).join(' · ')}
+          </div>
+          <div className="flex flex-wrap gap-2 pt-1">
+            <Button onClick={() => player.playList(songs)} disabled={!songs.length}><Play size={16} className="mr-1" fill="currentColor" />{t('mp.playAll')}</Button>
+            <Button variant="outline" disabled={!songs.length} onClick={() => { player.setShuffle(true); player.playList(songs, Math.floor(Math.random() * songs.length)); }}>
+              <Shuffle size={16} className="mr-1" />{t('mp.shufflePlay')}
+            </Button>
+            {mine && (
+              <>
+                <Button variant="outline" onClick={() => setAdding(a => !a)}><Plus size={16} className="mr-1" />{t('mp.collections.addSongs')}</Button>
+                <Button variant="ghost" onClick={() => setEditing(true)}><Pencil size={15} /></Button>
+                <Button variant="ghost" onClick={() => setConfirmDelete(true)}><Trash2 size={15} className="text-danger" /></Button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {adding && mine && (
+        <div className={`${card} p-4 space-y-3`}>
+          <div className="flex items-center justify-between">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100">{t('mp.collections.findSongs')}</h3>
+            <button className="p-1 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => setAdding(false)}><X size={16} /></button>
+          </div>
+          <MpSongFilterBar value={filters} onChange={setFilters} genres={genres} showCollection={false} />
+          <ul className="divide-y divide-gray-100 dark:divide-gray-700 max-h-80 overflow-y-auto">
+            {found.length === 0 && <li className="p-3 text-sm text-gray-500">{t('pf.common.empty')}</li>}
+            {found.map(s => (
+              <li key={s.id} className="flex items-center gap-3 py-2">
+                <MpCover url={s.cover?.url} color={s.genre?.color} className="w-9 h-9" rounded="rounded" />
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-medium truncate text-gray-900 dark:text-gray-100">{s.title}</div>
+                  <div className="text-xs text-gray-500 truncate">{s.artist || t('mp.unknownArtist')}{s.genre ? ` · ${s.genre.name}` : ''}</div>
+                </div>
+                {inIt.has(s.id)
+                  ? <span className="text-xs text-gray-400">{t('mp.collections.added')}</span>
+                  : <Button size="sm" variant="outline" onClick={() => void addSong(s)}><Plus size={13} className="mr-1" />{t('pf.common.add')}</Button>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className={`${card} overflow-hidden`}>
+        {links.length === 0 ? (
+          <div className="p-12 text-center text-gray-500">{t('mp.collections.noSongs')}</div>
+        ) : (
+          <ul className="divide-y divide-gray-100 dark:divide-gray-700">
+            {links.map((l, i) => {
+              const s = l.song;
+              const isCurrent = player.current?.id === s.id;
+              return (
+                <li key={l.id} className={`flex items-center gap-3 px-4 py-2.5 ${isCurrent ? 'bg-primary/5' : 'hover:bg-gray-50 dark:hover:bg-gray-800/50'}`}>
+                  <span className="w-6 text-center text-xs tabular-nums text-gray-400">{isCurrent ? <MpPlayingBars active={player.playing} /> : i + 1}</span>
+                  <MpCover url={s.cover?.url} color={s.genre?.color} className="w-10 h-10" rounded="rounded-md" />
+                  <MpPlayButton song={s} list={songs} size={32} />
+                  <div className="flex-1 min-w-0">
+                    <div className={`text-sm font-semibold truncate ${isCurrent ? 'text-primary' : 'text-gray-900 dark:text-gray-100'}`}>{s.title}</div>
+                    <div className="text-xs text-gray-500 truncate">{s.artist || t('mp.unknownArtist')}</div>
+                  </div>
+                  <span className="text-xs tabular-nums text-gray-500">{formatDuration(s.duration_seconds)}</span>
+                  {mine && (
+                    <div className="flex">
+                      <button className="p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-30" disabled={busy || i === 0} onClick={() => void move(i, -1)}><ArrowUp size={15} /></button>
+                      <button className="p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-30" disabled={busy || i === links.length - 1} onClick={() => void move(i, 1)}><ArrowDown size={15} /></button>
+                      <button className="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => void removeLink(l)} title={t('mp.collections.removeSong')}><X size={15} className="text-danger" /></button>
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+
+      {editing && userId && <CollectionForm userId={userId} collection={collection} onClose={() => setEditing(false)} onSaved={async () => { setEditing(false); await load(); }} />}
+      <Modal isOpen={confirmDelete} onClose={() => setConfirmDelete(false)} title={t('pf.common.deleteTitle')}>
+        <div className="space-y-4">
+          <div className="flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg p-4 text-sm text-gray-700 dark:text-gray-300">
+            <AlertTriangle size={20} className="text-danger shrink-0" />{t('mp.collections.deleteHint').replace('{title}', collection.title)}
+          </div>
+          <div className="flex justify-end gap-3">
+            <Button variant="ghost" onClick={() => setConfirmDelete(false)}>{t('pf.common.cancel')}</Button>
+            <Button variant="danger" onClick={() => void removeCollection()}>{t('pf.common.delete')}</Button>
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+};

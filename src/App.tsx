@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AppLayout } from './components/layout/AppLayout';
@@ -46,6 +46,12 @@ import { AcBoard } from './pages/AchievementCycle/AcBoard';
 import { AcTopics } from './pages/AchievementCycle/AcTopics';
 import { AcExplore } from './pages/AchievementCycle/AcExplore';
 import { AcMilestones } from './pages/AchievementCycle/AcMilestones';
+import { MpLibrary } from './pages/Music/MpLibrary';
+import { MpCollections, MpCollectionDetail } from './pages/Music/MpCollections';
+import { MpNowPlaying } from './pages/Music/MpNowPlaying';
+import { MpGenres } from './pages/Music/MpGenres';
+import { MusicPlayerProvider, usePlayer } from './lib/MusicPlayerContext';
+import { MpMiniPlayer } from './components/music/MpControls';
 
 /** Every Late Tracker page lives under this prefix. */
 const LT = '/late-tracker';
@@ -59,6 +65,13 @@ const MOVED: Record<string, string> = {
   '/spend': `${LT}/spend`,
   '/settings': `${LT}/settings`,
 };
+
+/** Room under the page so the fixed mini player never covers content. */
+function MpBottomSpace() {
+  const { current } = usePlayer();
+  const { pathname } = useLocation();
+  return current && pathname !== '/mp/player' ? <div className="h-24" aria-hidden="true" /> : null;
+}
 
 function AuthGate() {
   const { userEmail, loading } = useAuth();
@@ -79,6 +92,7 @@ function AuthGate() {
   }
 
   return (
+    <MusicPlayerProvider>
     <AppLayout>
       <Routes>
         {/* Landing goes to the group's own page, which is the public board. */}
@@ -141,12 +155,20 @@ function AuthGate() {
         <Route path="/ac/topics" element={<AcTopics />} />
         <Route path="/ac/explore" element={<AcExplore />} />
         <Route path="/ac/milestones" element={<AcMilestones />} />
+        <Route path="/mp" element={<MpLibrary />} />
+        <Route path="/mp/collections" element={<MpCollections />} />
+        <Route path="/mp/collections/:id" element={<MpCollectionDetail />} />
+        <Route path="/mp/player" element={<MpNowPlaying />} />
+        <Route path="/mp/genres" element={<MpGenres />} />
         {/* Renamed from Learning Cycle (/lc); keep old links working. */}
         {['', '/board', '/topics', '/explore', '/milestones'].map(sub => (
           <Route key={sub} path={`/lc${sub}`} element={<Navigate to={`/ac${sub}`} replace />} />
         ))}
       </Routes>
+      <MpBottomSpace />
+      <MpMiniPlayer />
     </AppLayout>
+    </MusicPlayerProvider>
   );
 }
 
