@@ -95,3 +95,42 @@ body {
 .animate-slide-in {
   animation: slide-in 0.3s ease-out forwards;
 }
+
+/* Achievement Cycle charts. Progress is one sequential blue; Kanban statuses are
+   categorical slots 1–5 in fixed order (validated light + dark). Light-mode
+   status colours sit below 3:1, so they always appear with a text label. */
+:root {
+  --ac-seq: #2a78d6;
+  --ac-seq-track: #e8eef7;
+  /* Backlog is "not planned": a neutral grey, always shown with its label. */
+  --ac-status-backlog: #9aa3b2;
+  --ac-status-todo: #2a78d6;
+  --ac-status-hold: #eb6834;
+  --ac-status-in_progress: #1baf7a;
+  --ac-status-complete: #eda100;
+  --ac-status-cancel: #e87ba4;
+  --ac-edge: #b9c0cc;
+}
+.dark {
+  --ac-seq: #3987e5;
+  --ac-seq-track: #262b35;
+  --ac-status-backlog: #6b7280;
+  --ac-status-todo: #3987e5;
+  --ac-status-hold: #d95926;
+  --ac-status-in_progress: #199e70;
+  --ac-status-complete: #c98500;
+  --ac-status-cancel: #d55181;
+  --ac-edge: #4a5160;
+}
+
+/* Rich text written in the progress editor, and where it is shown. */
+.ac-rich p { margin: 0.25rem 0; }
+.ac-rich ul { list-style: disc; padding-left: 1.25rem; }
+.ac-rich ol { list-style: decimal; padding-left: 1.25rem; }
+.ac-rich h3 { font-weight: 600; font-size: 1rem; margin: 0.5rem 0 0.25rem; }
+.ac-rich code { font-family: ui-monospace, monospace; font-size: 0.85em; background: rgba(127,127,127,0.15); padding: 0 0.25rem; border-radius: 0.25rem; }
+.ac-rich pre { background: rgba(127,127,127,0.12); padding: 0.5rem; border-radius: 0.5rem; overflow-x: auto; }
+.ac-rich blockquote { border-left: 3px solid rgba(127,127,127,0.4); padding-left: 0.75rem; color: inherit; opacity: 0.85; }
+.ac-rich a { color: var(--ac-seq); text-decoration: underline; }
+.ac-rich .ProseMirror { outline: none; min-height: 7rem; }
+.ac-rich .ProseMirror p.is-editor-empty:first-child::before { content: attr(data-placeholder); float: left; height: 0; pointer-events: none; opacity: 0.45; }

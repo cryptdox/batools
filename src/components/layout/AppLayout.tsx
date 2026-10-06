@@ -6,6 +6,7 @@ import {
   Briefcase, Boxes, ShoppingCart, Tags, Receipt, Landmark, HandCoins, Scale, LayoutDashboard,
   Users2, UserCircle, User, FolderKanban, Building2, Cpu, Languages, Mail, FlaskConical,
   Globe, Layers, Package2, MessageSquareQuote, UsersRound, Newspaper, BriefcaseBusiness, HelpCircle, FileUser,
+  GraduationCap, KanbanSquare, Network, Flag, Gauge,
   type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
@@ -82,6 +83,18 @@ const NAV_TREE: NavGroup[] = [
       { to: '/org/faqs', label: 'FAQ', icon: HelpCircle },
       { to: '/org/applications', label: 'Applications', icon: FileUser },
       { to: '/org/contacts', label: 'Contact Messages', icon: Mail },
+    ],
+  },
+  {
+    key: 'achievement-cycle',
+    label: 'Achievement Cycle',
+    icon: GraduationCap,
+    children: [
+      { to: '/ac', label: 'Dashboard', icon: Gauge },
+      { to: '/ac/board', label: 'Kanban', icon: KanbanSquare },
+      { to: '/ac/topics', label: 'Topics & Domains', icon: Layers },
+      { to: '/ac/explore', label: 'Explore', icon: Network },
+      { to: '/ac/milestones', label: 'Milestones', icon: Flag },
     ],
   },
   {
@@ -182,11 +195,20 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
     document.title = `${pageTitle} · ${APP_NAME}`;
   }, [pageTitle]);
 
+  // Hiding the 64px top bar makes this scroll area 64px taller, which pulls
+  // scrollTop back at the bottom of a page. Reacting to that "scroll up" would
+  // show the bar again and loop (the page shakes), so: ignore tiny moves, don't
+  // re-show near the bottom, and never hide on pages too short to absorb it.
   const handleContentScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const scrollTop = e.currentTarget.scrollTop;
-    if (scrollTop > lastScrollTop.current && scrollTop > 40) {
+    const el = e.currentTarget;
+    const scrollTop = el.scrollTop;
+    const delta = scrollTop - lastScrollTop.current;
+    if (Math.abs(delta) < 8) return;
+    const scrollable = el.scrollHeight - el.clientHeight;
+    const nearBottom = scrollTop >= scrollable - 80;
+    if (delta > 0 && scrollTop > 40 && scrollable > 160) {
       setTopBarHidden(true);
-    } else if (scrollTop < lastScrollTop.current) {
+    } else if (delta < 0 && !nearBottom) {
       setTopBarHidden(false);
     }
     lastScrollTop.current = scrollTop;

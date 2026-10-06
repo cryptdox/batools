@@ -41,6 +41,11 @@ import { OrgClients } from './pages/OrgSite/OrgClients';
 import { OrgBlogs, OrgJobs, OrgProjects } from './pages/OrgSite/OrgContent';
 import { OrgTeams, OrgMembers } from './pages/OrgSite/OrgPeople';
 import { OrgContacts, OrgApplications } from './pages/OrgSite/OrgInbox';
+import { AcDashboard } from './pages/AchievementCycle/AcDashboard';
+import { AcBoard } from './pages/AchievementCycle/AcBoard';
+import { AcTopics } from './pages/AchievementCycle/AcTopics';
+import { AcExplore } from './pages/AchievementCycle/AcExplore';
+import { AcMilestones } from './pages/AchievementCycle/AcMilestones';
 
 /** Every Late Tracker page lives under this prefix. */
 const LT = '/late-tracker';
@@ -130,6 +135,16 @@ function AuthGate() {
         <Route path="/org/faqs" element={<OrgFaqs />} />
         <Route path="/org/applications" element={<OrgApplications />} />
         <Route path="/org/contacts" element={<OrgContacts />} />
+
+        <Route path="/ac" element={<AcDashboard />} />
+        <Route path="/ac/board" element={<AcBoard />} />
+        <Route path="/ac/topics" element={<AcTopics />} />
+        <Route path="/ac/explore" element={<AcExplore />} />
+        <Route path="/ac/milestones" element={<AcMilestones />} />
+        {/* Renamed from Learning Cycle (/lc); keep old links working. */}
+        {['', '/board', '/topics', '/explore', '/milestones'].map(sub => (
+          <Route key={sub} path={`/lc${sub}`} element={<Navigate to={`/ac${sub}`} replace />} />
+        ))}
       </Routes>
     </AppLayout>
   );
