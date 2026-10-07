@@ -6,7 +6,7 @@ import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
 import {
-  COLLECTION_SELECT, SONG_SELECT, deleteMusicFile, formatDuration, songArtist, uploadMusicFile, useMpGenres, useMpLookups, useMpRatings, useMpUserId,
+  COLLECTION_SELECT, SONG_SELECT, deleteMusicFile, discardUploads, formatDuration, songArtist, uploadMusicFile, useMpGenres, useMpLookups, useMpRatings, useMpUserId,
   type MpCollection, type MpSong,
 } from '../../lib/music';
 import { usePlayer } from '../../lib/MusicPlayerContext';
@@ -42,8 +42,10 @@ const CollectionForm = ({ userId, collection, onClose, onSaved }: {
   const save = async () => {
     if (!title.trim()) return;
     setSaving(true);
+    let uploadedId: string | null = null;
     try {
-      const coverId = coverFile ? await uploadMusicFile(coverFile, 'image', userId) : collection?.cover_file_id ?? null;
+      if (coverFile) uploadedId = await uploadMusicFile(coverFile, 'image', userId);
+      const coverId = uploadedId ?? collection?.cover_file_id ?? null;
       const row = {
         kind, title: title.trim(), singer_id: kind === 'album' ? singerIds[0] ?? null : null,
         release_year: year.trim() ? Number(year) : null, description: description.trim() || null,
@@ -62,6 +64,8 @@ const CollectionForm = ({ userId, collection, onClose, onSaved }: {
       toast.success(collection ? t('pf.common.updated') : t('pf.common.added'));
       onSaved(id!);
     } catch (e) {
+      // The row was not saved: drop the cover just uploaded for it.
+      await discardUploads([uploadedId]);
       toast.error(errorMessage(e, t('pf.common.saveError')));
     } finally {
       setSaving(false);

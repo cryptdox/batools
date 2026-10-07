@@ -144,6 +144,7 @@ export const MpNowPlaying = () => {
             <dl className="grid grid-cols-[8rem_1fr] gap-y-2 text-sm">
               {[
                 [t('mp.singers'), songArtist(s)],
+                [t('mp.source'), s.source && `${t(`mp.sourceKinds.${s.source.kind}`)}: ${s.source.name}`],
                 [t('mp.genre'), s.genre?.name],
                 [t('mp.country'), s.country?.name],
                 [t('mp.language'), s.language?.name],

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Upload, Play, ListPlus, ListEnd, Pencil, Trash2, AlertTriangle, Music } from 'lucide-react';
+import { Upload, Files, Play, ListPlus, ListEnd, Pencil, Trash2, AlertTriangle, Music } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
@@ -12,6 +12,7 @@ import { Modal } from '../../components/ui/Modal';
 import { Pagination } from '../../components/ui/Pagination';
 import { MpCover, MpPlayButton, MpPlayingBars, MpStars } from '../../components/music/MpUi';
 import { MpSongForm } from '../../components/music/MpSongForm';
+import { MpBulkUpload } from '../../components/music/MpBulkUpload';
 import { EMPTY_FILTERS, fetchSongs, MpSongFilterBar, type SongFilters } from '../../components/music/MpSongFilters';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
@@ -26,7 +27,11 @@ export const MpLibrary = () => {
   const player = usePlayer();
   // /mp?singer=<id> opens the library filtered to that singer (from the Singers page).
   const [params] = useSearchParams();
-  const [filters, setFilters] = useState<SongFilters>(() => ({ ...EMPTY_FILTERS, singerId: params.get('singer') ?? '' }));
+  const [filters, setFilters] = useState<SongFilters>(() => ({
+    ...EMPTY_FILTERS, singerId: params.get('singer') ?? '', sourceId: params.get('source') ?? '',
+    info: params.get('info') === 'pending' ? 'pending' : '',
+  }));
+  const [bulk, setBulk] = useState(false);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(25);
   const [rows, setRows] = useState<MpSong[]>([]);
@@ -75,6 +80,7 @@ export const MpLibrary = () => {
         action={
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => player.playList(rows)} disabled={!rows.length}><Play size={16} className="mr-1" />{t('mp.playAll')}</Button>
+            <Button variant="outline" onClick={() => setBulk(true)}><Files size={16} className="mr-1" />{t('mp.bulk.button')}</Button>
             <Button onClick={() => setForm('new')}><Upload size={16} className="mr-1" />{t('mp.form.upload')}</Button>
           </div>
         }
@@ -107,7 +113,7 @@ export const MpLibrary = () => {
                   <div className="flex-1 min-w-0">
                     <div className={`text-sm font-semibold truncate ${isCurrent ? 'text-primary' : 'text-gray-900 dark:text-gray-100'}`}>{s.title}</div>
                     <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                      {[songArtist(s) || t('mp.unknownArtist'), s.country?.name, s.language?.name, s.release_year].filter(Boolean).join(' · ')}
+                      {[songArtist(s) || t('mp.unknownArtist'), s.source && `${t(`mp.sourceKinds.${s.source.kind}`)}: ${s.source.name}`, s.country?.name, s.language?.name, s.release_year].filter(Boolean).join(' · ')}
                     </div>
                   </div>
                   <div className="hidden md:flex items-center gap-1.5 shrink-0">
@@ -115,6 +121,11 @@ export const MpLibrary = () => {
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300">
                         <span className="w-2 h-2 rounded-full" style={{ background: s.genre.color }} />{s.genre.name}
                       </span>
+                    )}
+                    {s.info_pending && (
+                      mine
+                        ? <button onClick={() => setForm(s)} title={t('mp.info.fillIn')}><Badge variant="warning">{t('mp.info.pendingShort')}</Badge></button>
+                        : <Badge variant="warning">{t('mp.info.pendingShort')}</Badge>
                     )}
                     {s.mood && <Badge variant="muted">{t(`mp.moods.${s.mood}`)}</Badge>}
                     {s.is_free ? <Badge variant="success">{t('mp.free')}</Badge> : <Badge variant="warning">{t('mp.paid')}</Badge>}
@@ -149,6 +160,8 @@ export const MpLibrary = () => {
 
       {form && userId && (
         <MpSongForm
+          key={form === 'new' ? 'new' : form.id}
+          onEditOther={s => setForm(s)}
           userId={userId}
           song={form === 'new' ? null : form}
           genres={genres}
@@ -156,6 +169,8 @@ export const MpLibrary = () => {
           onSaved={async () => { setForm(null); await load(); }}
         />
       )}
+
+      {bulk && userId && <MpBulkUpload userId={userId} onClose={() => setBulk(false)} onDone={() => void load()} />}
 
       <Modal isOpen={!!toDelete} onClose={() => !deleting && setToDelete(null)} title={t('pf.common.deleteTitle')}>
         {toDelete && (

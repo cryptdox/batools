@@ -7,7 +7,7 @@ import {
   Users2, UserCircle, User, FolderKanban, Building2, Cpu, Languages, Mail, FlaskConical,
   Globe, Layers, Package2, MessageSquareQuote, UsersRound, Newspaper, BriefcaseBusiness, HelpCircle, FileUser,
   GraduationCap, KanbanSquare, Network, Flag, Gauge,
-  Music, Library, Disc3, AudioLines, Palette, Mic2, Globe2,
+  Music, Library, Disc3, AudioLines, Palette, Mic2, Globe2, Clapperboard,
   type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
@@ -107,6 +107,7 @@ const NAV_TREE: NavGroup[] = [
       { to: '/mp/collections', label: 'Albums & Mixes', icon: Disc3 },
       { to: '/mp/player', label: 'Now Playing', icon: AudioLines },
       { to: '/mp/singers', label: 'Singers', icon: Mic2 },
+      { to: '/mp/sources', label: 'Bands, Movies & Concerts', icon: Clapperboard },
       { to: '/mp/genres', label: 'Genres', icon: Palette },
       { to: '/mp/places', label: 'Countries & Languages', icon: Globe2 },
     ],

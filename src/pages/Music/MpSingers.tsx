@@ -5,17 +5,24 @@ import { Plus, Pencil, Trash2, Search, Mic2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { useMpLookups, useMpRatings, useMpUserId, type MpSinger } from '../../lib/music';
+import { deleteMusicFile, FILE_FIELDS, useMpLookups, useMpRatings, useMpUserId, withCover, type MpFile, type MpSinger, type MpSourceKind } from '../../lib/music';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
-import { MpStars } from '../../components/music/MpUi';
+import { MpCover, MpCoverInput, MpStars } from '../../components/music/MpUi';
+import { activeItems } from '../../components/music/MpSongForm';
+import { MpCombo } from '../../components/music/MpCombo';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 const card = 'bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700';
 const label = 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5';
 
-type Row = MpSinger & { country: { name: string } | null; songs: { count: number }[] };
+type Row = MpSinger & {
+  country: { name: string } | null;
+  cover: MpFile | null;
+  songs: { count: number }[];
+  sources: { source: { id: string; kind: MpSourceKind; name: string } | null }[];
+};
 
 /** The shared singer list: add / edit names, rate singers, open their songs. */
 export const MpSingers = () => {
@@ -30,12 +37,15 @@ export const MpSingers = () => {
   const [name, setName] = useState('');
   const [countryId, setCountryId] = useState('');
   const [bio, setBio] = useState('');
+  const [cover, setCover] = useState<{ file: File | null; remove: boolean; preview: string | null }>({ file: null, remove: false, preview: null });
   const [saving, setSaving] = useState(false);
   const [toDelete, setToDelete] = useState<Row | null>(null);
 
   const load = useCallback(async () => {
     const { data, error } = await supabase.from('mp_singers')
-      .select('*, country:mp_countries!mp_singers_country_fkey(name), songs:mp_song_singers(count)').order('name');
+      .select(`*, country:mp_countries!mp_singers_country_fkey(name), cover:mp_files!mp_singers_cover_fkey(${FILE_FIELDS}), songs:mp_song_singers(count)`
+        + ', sources:mp_source_singers(source:mp_sources!mp_source_singers_source_fkey(id, kind, name))')
+      .order('name');
     if (error) toast.error(errorMessage(error, t('pf.common.loadError')));
     setRows((data ?? []) as unknown as Row[]);
     setLoading(false);
@@ -52,18 +62,25 @@ export const MpSingers = () => {
     setName(r === 'new' ? search.trim() : r.name);
     setCountryId(r === 'new' ? '' : r.country_id ?? '');
     setBio(r === 'new' ? '' : r.bio ?? '');
+    setCover({ file: null, remove: false, preview: r === 'new' ? null : r.cover?.url ?? null });
   };
 
   const save = async () => {
-    if (!form || !name.trim()) return;
+    if (!form || !name.trim() || !userId) return;
     setSaving(true);
-    const row = { name: name.trim(), country_id: countryId || null, bio: bio.trim() || null, updated_at: new Date().toISOString() };
-    const { error } = form === 'new'
-      ? await supabase.from('mp_singers').insert([{ ...row, created_by: userId }])
-      : await supabase.from('mp_singers').update(row).eq('id', form.id);
-    setSaving(false);
-    if (error) {
-      return toast.error(error.code === '23505' ? t('mp.singersPage.duplicate') : errorMessage(error, t('pf.common.saveError')));
+    try {
+      await withCover({ file: cover.file, remove: cover.remove, current: form === 'new' ? null : form.cover, userId }, async coverId => {
+        const row = { name: name.trim(), country_id: countryId || null, bio: bio.trim() || null, cover_file_id: coverId, updated_at: new Date().toISOString() };
+        const { error } = form === 'new'
+          ? await supabase.from('mp_singers').insert([{ ...row, created_by: userId }])
+          : await supabase.from('mp_singers').update(row).eq('id', form.id);
+        if (error) throw error;
+      });
+    } catch (e) {
+      const code = (e as { code?: string })?.code;
+      return toast.error(code === '23505' ? t('mp.singersPage.duplicate') : errorMessage(e, t('pf.common.saveError')));
+    } finally {
+      setSaving(false);
     }
     setForm(null);
     toast.success(form === 'new' ? t('pf.common.added') : t('pf.common.updated'));
@@ -74,6 +91,7 @@ export const MpSingers = () => {
     if (!toDelete) return;
     const { error } = await supabase.from('mp_singers').delete().eq('id', toDelete.id);
     if (error) return toast.error(errorMessage(error, t('pf.common.deleteError')));
+    if (toDelete.cover) await deleteMusicFile(toDelete.cover);
     setToDelete(null);
     toast.success(t('pf.common.deleted'));
     await load();
@@ -99,9 +117,13 @@ export const MpSingers = () => {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map(r => (
             <div key={r.id} className={`${card} p-4 flex gap-3 cursor-pointer hover:shadow-md transition-shadow`} onClick={() => navigate(`/mp?singer=${r.id}`)}>
-              <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 font-semibold">
-                {r.name.trim().charAt(0).toUpperCase() || <Mic2 size={18} />}
-              </div>
+              {r.cover
+                ? <MpCover url={r.cover.url} className="w-14 h-14" rounded="rounded-full" alt={r.name} />
+                : (
+                  <div className="w-14 h-14 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 font-semibold text-lg">
+                    {r.name.trim().charAt(0).toUpperCase() || <Mic2 size={18} />}
+                  </div>
+                )}
               <div className="flex-1 min-w-0 space-y-1">
                 <div className="flex items-start gap-1">
                   <span className="flex-1 font-semibold text-gray-900 dark:text-gray-100 truncate">{r.name}</span>
@@ -111,6 +133,16 @@ export const MpSingers = () => {
                 <div className="text-xs text-gray-500 truncate">
                   {[r.country?.name, `${r.songs?.[0]?.count ?? 0} ${t('mp.songs')}`].filter(Boolean).join(' · ')}
                 </div>
+                {r.sources.length > 0 && (
+                  <div className="flex flex-wrap gap-1">
+                    {r.sources.map(x => x.source && (
+                      <button key={x.source.id} onClick={e => { e.stopPropagation(); navigate(`/mp?source=${x.source!.id}`); }}
+                        className="px-1.5 py-0.5 rounded text-[11px] bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary">
+                        {t(`mp.sourceKinds.${x.source.kind}`)}: {x.source.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
                 <MpStars stat={ratings.stats[r.id]} mine={ratings.mine[r.id]} onRate={n => void ratings.rate(r.id, n)} />
               </div>
             </div>
@@ -120,17 +152,20 @@ export const MpSingers = () => {
 
       <Modal isOpen={!!form} onClose={() => !saving && setForm(null)} title={form === 'new' ? t('mp.singersPage.create') : t('mp.singersPage.edit')}>
         <div className="space-y-4">
-          <label className="block">
-            <span className={label}>{t('pf.common.name')} <span className="text-danger">*</span></span>
-            <input value={name} onChange={e => setName(e.target.value)} className={`${pfInputClass} h-10`} autoFocus />
-          </label>
-          <label className="block">
-            <span className={label}>{t('mp.country')}</span>
-            <select value={countryId} onChange={e => setCountryId(e.target.value)} className={`${pfInputClass} h-10`}>
-              <option value="">—</option>
-              {countries.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-            </select>
-          </label>
+          <div className="flex gap-4">
+            <MpCoverInput url={cover.preview} onChange={setCover} rounded="rounded-full" />
+            <div className="flex-1 min-w-0 space-y-3">
+              <label className="block">
+                <span className={label}>{t('pf.common.name')} <span className="text-danger">*</span></span>
+                <input value={name} onChange={e => setName(e.target.value)} className={`${pfInputClass} h-10`} autoFocus />
+              </label>
+              <div>
+                <span className={label}>{t('mp.country')}</span>
+                <MpCombo items={activeItems(countries, countryId, c => c.code)} value={countryId} onChange={setCountryId} />
+              </div>
+            </div>
+          </div>
+          <p className="text-xs text-gray-500">{t('mp.singersPage.sourcesHint')}</p>
           <label className="block">
             <span className={label}>{t('mp.singersPage.bio')}</span>
             <textarea value={bio} onChange={e => setBio(e.target.value)} rows={3} className={pfInputClass} />

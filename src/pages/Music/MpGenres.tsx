@@ -4,11 +4,12 @@ import { Plus, Pencil, Trash2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { PARTICLES, useMpGenres, useMpUserId, type MpGenre, type MpParticle } from '../../lib/music';
+import { deleteMusicFile, PARTICLES, useMpGenres, useMpUserId, withCover, type MpGenre, type MpParticle } from '../../lib/music';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
 import { MpParticles } from '../../components/music/MpParticles';
+import { MpCoverInput } from '../../components/music/MpUi';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 const COLORS = ['#6c5ce7', '#2a78d6', '#1baf7a', '#eb6834', '#e87ba4', '#eda100', '#008300', '#e34948', '#4a3aa7', '#9aa3b2'];
@@ -24,6 +25,7 @@ export const MpGenres = () => {
   const [name, setName] = useState('');
   const [particle, setParticle] = useState<MpParticle>('sparks');
   const [color, setColor] = useState(COLORS[0]);
+  const [cover, setCover] = useState<{ file: File | null; remove: boolean; preview: string | null }>({ file: null, remove: false, preview: null });
   const [saving, setSaving] = useState(false);
   const [toDelete, setToDelete] = useState<MpGenre | null>(null);
 
@@ -32,17 +34,25 @@ export const MpGenres = () => {
     setName(g === 'new' ? '' : g.name);
     setParticle(g === 'new' ? 'sparks' : g.particle);
     setColor(g === 'new' ? COLORS[genres.length % COLORS.length] : g.color);
+    setCover({ file: null, remove: false, preview: g === 'new' ? null : g.cover?.url ?? null });
   };
 
   const save = async () => {
-    if (!form || !name.trim()) return;
+    if (!form || !name.trim() || !userId) return;
     setSaving(true);
-    const row = { name: name.trim(), particle, color, updated_at: new Date().toISOString() };
-    const { error } = form === 'new'
-      ? await supabase.from('mp_genres').insert([{ ...row, created_by: userId }])
-      : await supabase.from('mp_genres').update(row).eq('id', form.id);
-    setSaving(false);
-    if (error) return toast.error(errorMessage(error, t('pf.common.saveError')));
+    try {
+      await withCover({ file: cover.file, remove: cover.remove, current: form === 'new' ? null : form.cover, userId }, async coverId => {
+        const row = { name: name.trim(), particle, color, cover_file_id: coverId, updated_at: new Date().toISOString() };
+        const { error } = form === 'new'
+          ? await supabase.from('mp_genres').insert([{ ...row, created_by: userId }])
+          : await supabase.from('mp_genres').update(row).eq('id', form.id);
+        if (error) throw error;
+      });
+    } catch (e) {
+      return toast.error(errorMessage(e, t('pf.common.saveError')));
+    } finally {
+      setSaving(false);
+    }
     setForm(null);
     toast.success(form === 'new' ? t('pf.common.added') : t('pf.common.updated'));
     await reload();
@@ -52,6 +62,7 @@ export const MpGenres = () => {
     if (!toDelete) return;
     const { error } = await supabase.from('mp_genres').delete().eq('id', toDelete.id);
     if (error) return toast.error(errorMessage(error, t('pf.common.deleteError')));
+    if (toDelete.cover) await deleteMusicFile(toDelete.cover);
     setToDelete(null);
     toast.success(t('pf.common.deleted'));
     await reload();
@@ -64,6 +75,7 @@ export const MpGenres = () => {
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
         {genres.map(g => (
           <div key={g.id} className="relative overflow-hidden rounded-xl h-28 text-white shadow-sm" style={{ background: `linear-gradient(140deg, ${g.color}, #131d3d)` }}>
+            {g.cover && <img src={g.cover.url} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-45" />}
             <MpParticles kind={g.particle} color="#ffffff" playing level={previewLevel} className="absolute inset-0 w-full h-full opacity-70" />
             <div className="relative p-3 h-full flex flex-col justify-between">
               <div className="flex items-start justify-between gap-1">
@@ -82,13 +94,17 @@ export const MpGenres = () => {
       <Modal isOpen={!!form} onClose={() => !saving && setForm(null)} title={form === 'new' ? t('mp.genres.create') : t('mp.genres.edit')}>
         <div className="space-y-4">
           <div className="relative overflow-hidden rounded-xl h-32" style={{ background: `linear-gradient(140deg, ${color}, #131d3d)` }}>
+            {cover.preview && <img src={cover.preview} alt="" className="absolute inset-0 w-full h-full object-cover opacity-45" />}
             <MpParticles kind={particle} color="#ffffff" playing level={previewLevel} className="absolute inset-0 w-full h-full" />
             <span className="absolute left-3 bottom-2 text-white font-semibold">{name || t('mp.genre')}</span>
           </div>
-          <label className="block">
-            <span className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t('pf.common.name')} <span className="text-danger">*</span></span>
-            <input value={name} onChange={e => setName(e.target.value)} className={`${pfInputClass} h-10`} autoFocus />
-          </label>
+          <div className="flex gap-4">
+            <MpCoverInput url={cover.preview} color={color} onChange={setCover} className="w-20 h-20" />
+            <label className="block flex-1 min-w-0">
+              <span className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t('pf.common.name')} <span className="text-danger">*</span></span>
+              <input value={name} onChange={e => setName(e.target.value)} className={`${pfInputClass} h-10`} autoFocus />
+            </label>
+          </div>
           <div>
             <span className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t('mp.genres.particle')}</span>
             <div className="grid grid-cols-4 gap-2">

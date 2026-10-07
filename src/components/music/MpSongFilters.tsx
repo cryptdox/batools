@@ -2,14 +2,18 @@ import { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
-import { MOODS, SONG_SELECT, useMpLookups, type MpGenre, type MpSong } from '../../lib/music';
+import { MOODS, SONG_SELECT, SOURCE_KINDS, useMpLookups, type MpGenre, type MpSong } from '../../lib/music';
 import { pfInputClass } from '../portfolio/PfFieldInput';
 
 export type SongFilters = {
   search: string; genreId: string; countryId: string; languageId: string; singerId: string; mood: string;
   price: '' | 'free' | 'paid'; collectionId: string;
+  sourceKind: string; sourceId: string; info: '' | 'pending' | 'complete';
 };
-export const EMPTY_FILTERS: SongFilters = { search: '', genreId: '', countryId: '', languageId: '', singerId: '', mood: '', price: '', collectionId: '' };
+export const EMPTY_FILTERS: SongFilters = {
+  search: '', genreId: '', countryId: '', languageId: '', singerId: '', mood: '', price: '', collectionId: '',
+  sourceKind: '', sourceId: '', info: '',
+};
 
 /** Ids of the songs sung by any of these singers. */
 async function songIdsBySingers(singerIds: string[]): Promise<string[]> {
@@ -26,10 +30,15 @@ const sel = `${pfInputClass.replace('w-full ', '')} h-9 max-w-44`;
  * Returns the rows and the total count.
  */
 export async function fetchSongs(f: SongFilters, from: number, size: number): Promise<{ rows: MpSong[]; total: number }> {
-  // Filtering by album / mix needs the link table joined in (inner join).
-  const select = f.collectionId ? `${SONG_SELECT}, mp_collection_songs!inner(collection_id)` : SONG_SELECT;
+  // Filtering by album / mix (or by source kind) needs that table joined in (inner join).
+  let select = SONG_SELECT;
+  if (f.collectionId) select += ', mp_collection_songs!inner(collection_id)';
+  if (f.sourceKind && !f.sourceId) select += ', src:mp_sources!mp_songs_source_fkey!inner(kind)';
   let q = supabase.from('mp_songs').select(select, { count: 'exact' });
   if (f.collectionId) q = q.eq('mp_collection_songs.collection_id', f.collectionId);
+  if (f.sourceId) q = q.eq('source_id', f.sourceId);
+  else if (f.sourceKind) q = q.eq('src.kind', f.sourceKind);
+  if (f.info) q = q.eq('info_pending', f.info === 'pending');
   const s = f.search.trim().replace(/[,()%*]/g, ' ').trim();
   if (s) {
     // Title, or sung by a singer whose name matches.
@@ -52,7 +61,7 @@ export async function fetchSongs(f: SongFilters, from: number, size: number): Pr
   return { rows: (data ?? []) as unknown as MpSong[], total: count ?? 0 };
 }
 
-/** Search + genre / singer / country / language / mood / free-paid / album-mix selects. */
+/** Search + genre / singer / source / country / language / mood / free-paid / info / album-mix selects. */
 export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true }: {
   value: SongFilters;
   onChange: (f: SongFilters) => void;
@@ -81,6 +90,7 @@ export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true
   }, [search, value, onChange]);
 
   const set = (k: keyof SongFilters, v: string) => onChange({ ...value, [k]: v });
+  const sources = lookups.sources.filter(o => !value.sourceKind || o.kind === value.sourceKind);
 
   return (
     <div className="flex flex-wrap items-center gap-2">
@@ -95,6 +105,14 @@ export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true
       <select value={value.singerId} onChange={e => set('singerId', e.target.value)} className={sel} aria-label={t('mp.singer')}>
         <option value="">{t('mp.allSingers')}</option>
         {lookups.singers.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
+      </select>
+      <select value={value.sourceKind} onChange={e => onChange({ ...value, sourceKind: e.target.value, sourceId: '' })} className={sel} aria-label={t('mp.sources.kind')}>
+        <option value="">{t('mp.allSourceKinds')}</option>
+        {SOURCE_KINDS.map(k => <option key={k} value={k}>{t(`mp.sourceKinds.${k}`)}</option>)}
+      </select>
+      <select value={value.sourceId} onChange={e => set('sourceId', e.target.value)} className={sel} aria-label={t('mp.source')}>
+        <option value="">{t('mp.allSources')}</option>
+        {sources.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
       </select>
       <select value={value.countryId} onChange={e => set('countryId', e.target.value)} className={sel} aria-label={t('mp.country')}>
         <option value="">{t('mp.allCountries')}</option>
@@ -112,6 +130,11 @@ export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true
         <option value="">{t('mp.freeAndPaid')}</option>
         <option value="free">{t('mp.free')}</option>
         <option value="paid">{t('mp.paid')}</option>
+      </select>
+      <select value={value.info} onChange={e => set('info', e.target.value)} className={sel} aria-label={t('mp.info.label')}>
+        <option value="">{t('mp.info.any')}</option>
+        <option value="pending">{t('mp.info.pending')}</option>
+        <option value="complete">{t('mp.info.complete')}</option>
       </select>
       {showCollection && (
         <select value={value.collectionId} onChange={e => set('collectionId', e.target.value)} className={sel} aria-label={t('mp.collection')}>

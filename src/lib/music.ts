@@ -14,20 +14,32 @@ export const PARTICLES: MpParticle[] = ['sparks', 'bubbles', 'embers', 'snow', '
 export const MOODS = ['calm', 'happy', 'energetic', 'sad', 'romantic', 'focus', 'party', 'chill', 'spiritual'];
 
 export type MpFile = { id: string; url: string; provider: string; bucket: string | null; path: string | null };
-export type MpGenre = { id: string; name: string; particle: MpParticle; color: string; created_by: string | null };
+export type MpGenre = {
+  id: string; name: string; particle: MpParticle; color: string; created_by: string | null;
+  cover_file_id: string | null; cover?: MpFile | null;
+};
 
-export type MpCountry = { id: string; name: string; code: string | null };
-export type MpLanguage = { id: string; name: string; native_name: string | null; code: string | null };
-export type MpSinger = { id: string; name: string; country_id: string | null; bio: string | null; created_by: string | null };
+export type MpCountry = { id: string; name: string; code: string | null; is_active: boolean };
+export type MpLanguage = { id: string; name: string; native_name: string | null; code: string | null; is_active: boolean };
+
+/** Where songs come from (mp_sources.kind, enum mp_source_kind). */
+export type MpSourceKind = 'band' | 'movie' | 'concert' | 'tv_show' | 'drama' | 'other';
+export const SOURCE_KINDS: MpSourceKind[] = ['band', 'movie', 'concert', 'tv_show', 'drama', 'other'];
+export type MpSource = {
+  id: string; kind: MpSourceKind; name: string; release_year: number | null; country_id: string | null;
+  description: string | null; created_by: string | null; cover_file_id: string | null;
+};
+export type MpSinger = { id: string; name: string; country_id: string | null; bio: string | null; created_by: string | null; cover_file_id: string | null };
 
 export type MpSong = {
   id: string; title: string; genre_id: string | null;
-  country_id: string | null; language_id: string | null; mood: string | null; release_year: number | null;
+  country_id: string | null; language_id: string | null; source_id: string | null; info_pending: boolean;
+  mood: string | null; release_year: number | null;
   tags: string[]; description: string | null; lyrics: string | null; is_free: boolean;
   audio_file_id: string; cover_file_id: string | null; duration_seconds: number | null;
   play_count: number; uploaded_by: string; created_at: string;
   audio: MpFile | null; cover: MpFile | null; genre: MpGenre | null;
-  country: MpCountry | null; language: MpLanguage | null;
+  country: MpCountry | null; language: MpLanguage | null; source: Pick<MpSource, 'id' | 'kind' | 'name'> | null;
   singers: { position: number; singer: { id: string; name: string } | null }[];
 };
 
@@ -37,11 +49,37 @@ export type MpCollection = {
   cover: MpFile | null; singer: { id: string; name: string } | null; songs: { count: number }[];
 };
 
+export const FILE_FIELDS = 'id, url, provider, bucket, path';
+export const SINGER_FIELDS = 'id, name, country_id, bio, created_by, cover_file_id';
+export const SOURCE_FIELDS = 'id, kind, name, release_year, country_id, description, created_by, cover_file_id';
+
+/**
+ * Saves a row's cover change: uploads `file` (if any), runs `write(coverId)`
+ * with the cover id to store, then deletes the replaced / removed cover. If
+ * `write` fails, the just-uploaded file is removed again and the error rethrown.
+ */
+export async function withCover<T>(
+  opts: { file: File | null; remove: boolean; current: MpFile | null | undefined; userId: string },
+  write: (coverId: string | null) => Promise<T>,
+): Promise<T> {
+  const uploaded = opts.file ? await uploadMusicFile(opts.file, 'image', opts.userId) : null;
+  let result: T;
+  try {
+    result = await write(uploaded ?? (opts.remove ? null : opts.current?.id ?? null));
+  } catch (e) {
+    await discardUploads([uploaded]);
+    throw e;
+  }
+  if ((uploaded || opts.remove) && opts.current) await deleteMusicFile(opts.current).catch(() => {});
+  return result;
+}
+
 /** Song row with its files, genre, country, language and singers, through the named FKs. */
 export const SONG_SELECT =
   '*, audio:mp_files!mp_songs_audio_fkey(id, url, provider, bucket, path), cover:mp_files!mp_songs_cover_fkey(id, url, provider, bucket, path), genre:mp_genres!mp_songs_genre_fkey(*)'
   + ', country:mp_countries!mp_songs_country_fkey(id, name, code), language:mp_languages!mp_songs_language_fkey(id, name, native_name, code)'
-  + ', singers:mp_song_singers(position, singer:mp_singers!mp_song_singers_singer_fkey(id, name))';
+  + ', singers:mp_song_singers(position, singer:mp_singers!mp_song_singers_singer_fkey(id, name))'
+  + ', source:mp_sources!mp_songs_source_fkey(id, kind, name)';
 
 export const COLLECTION_SELECT =
   '*, cover:mp_files!mp_collections_cover_fkey(id, url, provider, bucket, path), singer:mp_singers!mp_collections_singer_fkey(id, name), songs:mp_collection_songs(count)';
@@ -67,7 +105,7 @@ export const formatDuration = (seconds: number | null | undefined) => {
 export function useMpGenres() {
   const [genres, setGenres] = useState<MpGenre[]>([]);
   const reload = useCallback(async () => {
-    const { data, error } = await supabase.from('mp_genres').select('*').order('name');
+    const { data, error } = await supabase.from('mp_genres').select(`*, cover:mp_files!mp_genres_cover_fkey(${FILE_FIELDS})`).order('name');
     if (error) toast.error(errorMessage(error, 'Could not load genres'));
     setGenres((data ?? []) as MpGenre[]);
   }, []);
@@ -75,26 +113,43 @@ export function useMpGenres() {
   return { genres, reload };
 }
 
-/** The shared pick lists: countries, languages, singers (each sorted by name). */
+/**
+ * The shared pick lists: countries, languages, singers, sources (each sorted
+ * by name). Countries / languages include inactive ones; pickers hide them.
+ */
 export function useMpLookups() {
   const [countries, setCountries] = useState<MpCountry[]>([]);
   const [languages, setLanguages] = useState<MpLanguage[]>([]);
   const [singers, setSingers] = useState<MpSinger[]>([]);
+  const [sources, setSources] = useState<MpSource[]>([]);
   const reload = useCallback(async () => {
-    const [c, l, s] = await Promise.all([
-      supabase.from('mp_countries').select('id, name, code').order('name'),
-      supabase.from('mp_languages').select('id, name, native_name, code').order('name'),
-      supabase.from('mp_singers').select('id, name, country_id, bio, created_by').order('name'),
+    const [c, l, s, o] = await Promise.all([
+      supabase.from('mp_countries').select('id, name, code, is_active').order('name'),
+      supabase.from('mp_languages').select('id, name, native_name, code, is_active').order('name'),
+      supabase.from('mp_singers').select(SINGER_FIELDS).order('name'),
+      supabase.from('mp_sources').select(SOURCE_FIELDS).order('name'),
     ]);
-    const error = c.error ?? l.error ?? s.error;
-    if (error) toast.error(errorMessage(error, 'Could not load countries, languages and singers'));
+    const error = c.error ?? l.error ?? s.error ?? o.error;
+    if (error) toast.error(errorMessage(error, 'Could not load countries, languages, singers and sources'));
     setCountries((c.data ?? []) as MpCountry[]);
     setLanguages((l.data ?? []) as MpLanguage[]);
     setSingers((s.data ?? []) as MpSinger[]);
+    setSources((o.data ?? []) as MpSource[]);
   }, []);
   useEffect(() => { void reload(); }, [reload]);
-  return { countries, languages, singers, setSingers, reload };
+  return { countries, languages, singers, setSingers, sources, setSources, reload };
 }
+
+/** Songs whose title looks like `title` (mp_similar_songs, pg_trgm), best match first. */
+export async function findSimilarSongs(title: string, limit = 5): Promise<MpSong[]> {
+  if (title.trim().length < 3) return [];
+  const { data, error } = await supabase.rpc('mp_similar_songs', { p_title: title.trim(), p_limit: limit }).select(SONG_SELECT);
+  if (error) { console.error(error); return []; }
+  return (data ?? []) as unknown as MpSong[];
+}
+
+/** Title from a file name: drop the extension, underscores / dashes to spaces. */
+export const titleFromFile = (name: string) => name.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
 
 // ------------------------------------------------------------ ratings
 
@@ -169,6 +224,17 @@ export async function uploadMusicFile(file: File, kind: 'audio' | 'image', userI
     throw error;
   }
   return data.id as string;
+}
+
+/**
+ * Removes files uploaded during a save that then failed, so a half-finished
+ * upload leaves no mp_files row or stored object behind.
+ */
+export async function discardUploads(ids: (string | null | undefined)[]) {
+  const list = ids.filter(Boolean) as string[];
+  if (!list.length) return;
+  const { data } = await supabase.from('mp_files').select('id, url, provider, bucket, path').in('id', list);
+  for (const f of (data ?? []) as MpFile[]) await deleteMusicFile(f).catch(() => {});
 }
 
 /** Deletes a file row and its stored object (best effort on the object). */

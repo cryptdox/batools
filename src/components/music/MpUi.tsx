@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Lock, Music2, Pause, Play, Star } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+import { ImagePlus, Lock, Music2, Pause, Play, Star } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { usePlayer } from '../../lib/MusicPlayerContext';
 import { canPlay, useMpUserId, type MpRatingStat, type MpSong } from '../../lib/music';
@@ -100,5 +101,43 @@ export const MpStars = ({ stat, mine, onRate, size = 14, showCount = true, class
         </span>
       )}
     </span>
+  );
+};
+
+/**
+ * Cover photo field: shows the current / picked image (or the gradient),
+ * click to choose one, with a "remove" link. The parent saves it (withCover).
+ */
+export const MpCoverInput = ({ url, color, onChange, className = 'w-28 h-28', rounded = 'rounded-xl' }: {
+  url: string | null | undefined;
+  color?: string;
+  onChange: (v: { file: File | null; remove: boolean; preview: string | null }) => void;
+  className?: string;
+  rounded?: string;
+}) => {
+  const { t } = useLanguage();
+  const input = useRef<HTMLInputElement>(null);
+  const [blob, setBlob] = useState<string | null>(null);
+  useEffect(() => () => { if (blob) URL.revokeObjectURL(blob); }, [blob]);
+  return (
+    <div className="space-y-1 shrink-0">
+      <button type="button" onClick={() => input.current?.click()} className={`relative group block ${className}`} title={t('mp.form.cover')}>
+        <MpCover url={url} color={color} className={className} rounded={rounded} />
+        <span className={`absolute inset-0 ${rounded} bg-black/0 group-hover:bg-black/40 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition`}><ImagePlus size={20} /></span>
+      </button>
+      <input ref={input} type="file" accept="image/png,image/jpeg,image/webp,image/gif" className="hidden"
+        onChange={e => {
+          const f = e.target.files?.[0];
+          e.target.value = '';
+          if (!f) return;
+          if (!f.type.startsWith('image/')) { toast.error(t('mp.form.notImage')); return; }
+          const preview = URL.createObjectURL(f);
+          setBlob(preview);
+          onChange({ file: f, remove: false, preview });
+        }} />
+      {url && (
+        <button type="button" className="text-xs text-danger hover:underline" onClick={() => onChange({ file: null, remove: true, preview: null })}>{t('mp.form.removeCover')}</button>
+      )}
+    </div>
   );
 };

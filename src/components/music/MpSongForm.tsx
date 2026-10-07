@@ -4,17 +4,25 @@ import { FileAudio, ImagePlus, Search, X, Plus, Disc3, ListMusic, Mic2 } from 'l
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { deleteMusicFile, formatDuration, MOODS, readDuration, uploadMusicFile, useMpLookups, type MpGenre, type MpSinger, type MpSong } from '../../lib/music';
+import {
+  deleteMusicFile, discardUploads, findSimilarSongs, formatDuration, MOODS, songArtist, readDuration, SINGER_FIELDS, SOURCE_FIELDS, SOURCE_KINDS, titleFromFile, uploadMusicFile, useMpLookups,
+  type MpGenre, type MpSinger, type MpSong, type MpSource, type MpSourceKind,
+} from '../../lib/music';
 import { Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { pfInputClass } from '../portfolio/PfFieldInput';
-import { MpCover } from './MpUi';
+import { MpCover, MpPlayButton } from './MpUi';
+import { MpCombo } from './MpCombo';
 
 type CollectionRef = { id: string; kind: 'album' | 'mix'; title: string };
 
 const label = 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5';
 const AUDIO_ACCEPT = 'audio/mpeg,audio/mp3,audio/mp4,audio/x-m4a,audio/aac,audio/wav,audio/ogg,audio/webm,audio/flac,.mp3,.m4a,.aac,.wav,.ogg,.flac';
 const MAX_BYTES = 50 * 1024 * 1024;
+
+/** Active entries for a picker, plus the current one even if it was made inactive. */
+export const activeItems = <T extends { id: string; name: string; is_active: boolean }>(list: T[], current: string, hint?: (x: T) => string | null) =>
+  list.filter(x => x.is_active || x.id === current).map(x => ({ id: x.id, label: x.name, hint: hint?.(x) ?? null }));
 
 /** Pick one or more singers (in order), or add a new one by typing its name. */
 export const MpSingerPicker = ({ userId, singers, onSingersChange, value, onChange, max }: {
@@ -26,20 +34,13 @@ export const MpSingerPicker = ({ userId, singers, onSingersChange, value, onChan
   max?: number;
 }) => {
   const { t } = useLanguage();
-  const [search, setSearch] = useState('');
-  const needle = search.trim().toLowerCase();
-  const matches = singers.filter(s => !value.includes(s.id) && (!needle || s.name.toLowerCase().includes(needle))).slice(0, 8);
-  const exact = singers.find(s => s.name.toLowerCase() === needle);
   const full = max !== undefined && value.length >= max;
-  const pick = (id: string) => { onChange(max === 1 ? [id] : [...value, id]); setSearch(''); };
 
-  const create = async () => {
-    const name = search.trim();
-    if (!name) return;
-    const { data, error } = await supabase.from('mp_singers').insert([{ name, created_by: userId }]).select('id, name, country_id, bio, created_by').single();
-    if (error) return toast.error(errorMessage(error, t('pf.common.saveError')));
+  const create = async (name: string) => {
+    const { data, error } = await supabase.from('mp_singers').insert([{ name, created_by: userId }]).select(SINGER_FIELDS).single();
+    if (error) { toast.error(errorMessage(error, t('pf.common.saveError'))); return null; }
     onSingersChange([...singers, data as MpSinger].sort((a, b) => a.name.localeCompare(b.name)));
-    pick(data.id as string);
+    return data.id as string;
   };
 
   return (
@@ -49,8 +50,8 @@ export const MpSingerPicker = ({ userId, singers, onSingersChange, value, onChan
           {value.map(id => {
             const s = singers.find(x => x.id === id);
             return s && (
-              <span key={id} className="inline-flex items-center gap-1 pl-2 pr-1 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                <Mic2 size={12} />{s.name}
+              <span key={id} className="inline-flex items-center gap-1 pl-2 pr-1 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary max-w-full">
+                <Mic2 size={12} className="shrink-0" /><span className="truncate">{s.name}</span>
                 <button type="button" onClick={() => onChange(value.filter(x => x !== id))} className="p-0.5 rounded-full hover:bg-black/10" aria-label={`Remove ${s.name}`}><X size={12} /></button>
               </span>
             );
@@ -58,43 +59,76 @@ export const MpSingerPicker = ({ userId, singers, onSingersChange, value, onChan
         </div>
       )}
       {!full && (
-        <>
-          <div className="relative">
-            <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input value={search} onChange={e => setSearch(e.target.value)} placeholder={t('mp.form.findSinger')} className={`${pfInputClass} h-9 pl-8`}
-              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); if (exact && !value.includes(exact.id)) pick(exact.id); else if (needle && !exact) void create(); } }} />
-          </div>
-          {needle && (matches.length > 0 || !exact) && (
-            <div className="mt-1 rounded-md border border-gray-200 dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
-              {matches.map(s => (
-                <button key={s.id} type="button" onClick={() => pick(s.id)} className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700/40">
-                  <Mic2 size={14} className="text-gray-400" /><span className="text-gray-800 dark:text-gray-200">{s.name}</span>
-                </button>
-              ))}
-              {!exact && (
-                <div className="px-3 py-1.5">
-                  <Button size="sm" variant="ghost" type="button" onClick={() => void create()}><Plus size={13} className="mr-1" />{t('mp.form.newSinger').replace('{name}', search.trim())}</Button>
-                </div>
-              )}
-            </div>
-          )}
-        </>
+        <MpCombo
+          multi
+          items={singers.map(x => ({ id: x.id, label: x.name }))}
+          value=""
+          exclude={value}
+          onChange={id => onChange(max === 1 ? [id] : [...value, id])}
+          placeholder={t('mp.form.findSinger')}
+          onCreate={create}
+          createLabel={name => t('mp.form.newSinger').replace('{name}', name)}
+        />
       )}
     </div>
   );
 };
 
-/** Upload a song (audio + cover + info + albums / mixes), or edit one you uploaded. */
-export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
+/** Pick the song's source: choose a kind, then find or add a band / movie / ... */
+export const MpSourcePicker = ({ userId, sources, onSourcesChange, value, onChange }: {
+  userId: string;
+  sources: MpSource[];
+  onSourcesChange: (s: MpSource[]) => void;
+  value: string;
+  onChange: (id: string) => void;
+}) => {
+  const { t } = useLanguage();
+  const current = sources.find(s => s.id === value);
+  const [kind, setKind] = useState<MpSourceKind>(current?.kind ?? 'band');
+  useEffect(() => { if (current) setKind(current.kind); }, [current]);
+
+  const create = async (name: string) => {
+    const { data, error } = await supabase.from('mp_sources').insert([{ kind, name, created_by: userId }]).select(SOURCE_FIELDS).single();
+    if (error) { toast.error(errorMessage(error, t('pf.common.saveError'))); return null; }
+    onSourcesChange([...sources, data as MpSource].sort((a, b) => a.name.localeCompare(b.name)));
+    return data.id as string;
+  };
+
+  return (
+    <div className="flex gap-2">
+      <select value={kind} onChange={e => { setKind(e.target.value as MpSourceKind); if (current && current.kind !== e.target.value) onChange(''); }}
+        className={`${pfInputClass.replace('w-full ', '')} h-10 w-32 shrink-0`} aria-label={t('mp.sources.kind')}>
+        {SOURCE_KINDS.map(k => <option key={k} value={k}>{t(`mp.sourceKinds.${k}`)}</option>)}
+      </select>
+      <MpCombo
+        className="flex-1 min-w-0"
+        items={sources.filter(s => s.kind === kind).map(s => ({ id: s.id, label: s.name, hint: s.release_year ? String(s.release_year) : null }))}
+        value={value}
+        onChange={onChange}
+        placeholder={t('mp.form.findSource').replace('{kind}', t(`mp.sourceKinds.${kind}`).toLowerCase())}
+        onCreate={create}
+        createLabel={name => t('mp.form.newSource').replace('{kind}', t(`mp.sourceKinds.${kind}`)).replace('{name}', name)}
+      />
+    </div>
+  );
+};
+
+/**
+ * Upload a song (audio + cover + info + albums / mixes), or edit one you
+ * uploaded. While uploading, songs with a similar title are listed; picking
+ * one of yours switches to editing it (onEditOther).
+ */
+export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther }: {
   userId: string;
   song: MpSong | null;
   genres: MpGenre[];
   onClose: () => void;
   onSaved: () => void;
+  onEditOther?: (song: MpSong) => void;
 }) => {
   const { t } = useLanguage();
   const audioInput = useRef<HTMLInputElement>(null);
-  const { countries, languages, singers, setSingers } = useMpLookups();
+  const { countries, languages, singers, setSingers, sources, setSources } = useMpLookups();
   const coverInput = useRef<HTMLInputElement>(null);
 
   const [audioFile, setAudioFile] = useState<File | null>(null);
@@ -109,8 +143,14 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
   const [genreId, setGenreId] = useState(song?.genre_id ?? '');
   const [countryId, setCountryId] = useState(song?.country_id ?? '');
   const [languageId, setLanguageId] = useState(song?.language_id ?? '');
+  const [sourceId, setSourceId] = useState(song?.source_id ?? '');
+  // Saving the form marks the info as filled in, unless this is ticked.
+  const [keepPending, setKeepPending] = useState(false);
   const [mood, setMood] = useState(song?.mood ?? '');
-  const [year, setYear] = useState(song?.release_year ? String(song.release_year) : '');
+  // A new upload starts at this year; editable (clear it for "unknown").
+  const [year, setYear] = useState(song ? (song.release_year ? String(song.release_year) : '') : String(new Date().getFullYear()));
+  const [similar, setSimilar] = useState<MpSong[]>([]);
+  const [similarDismissed, setSimilarDismissed] = useState('');
   const [tags, setTags] = useState((song?.tags ?? []).join(', '));
   const [description, setDescription] = useState(song?.description ?? '');
   const [lyrics, setLyrics] = useState(song?.lyrics ?? '');
@@ -137,13 +177,20 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
     })();
   }, [song]);
 
+  // New uploads: look for songs already in the library with a similar title.
+  useEffect(() => {
+    if (song) return;
+    const id = setTimeout(() => { void findSimilarSongs(title).then(setSimilar); }, 350);
+    return () => clearTimeout(id);
+  }, [song, title]);
+
   useEffect(() => () => { if (coverFile && coverPreview) URL.revokeObjectURL(coverPreview); }, [coverFile, coverPreview]);
 
   const pickAudio = async (f: File) => {
     if (f.size > MAX_BYTES) return toast.error(t('mp.form.tooBig'));
     setAudioFile(f);
     setDuration(await readDuration(f));
-    if (!title.trim()) setTitle(f.name.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ').trim());
+    if (!title.trim()) setTitle(titleFromFile(f.name));
   };
 
   const pickCover = (f: File) => {
@@ -170,21 +217,26 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
   const save = async () => {
     if (!valid) return;
     setSaving(true);
+    const uploaded: string[] = [];
+    let songSaved = false;
     try {
       let audioId = song?.audio_file_id ?? null;
       let coverId = removeCover ? null : song?.cover_file_id ?? null;
       if (audioFile) {
         setStep(t('mp.form.uploadingAudio'));
         audioId = await uploadMusicFile(audioFile, 'audio', userId, duration);
+        uploaded.push(audioId);
       }
       if (coverFile) {
         setStep(t('mp.form.uploadingCover'));
         coverId = await uploadMusicFile(coverFile, 'image', userId);
+        uploaded.push(coverId);
       }
       setStep(t('pf.common.saving'));
       const row = {
         title: title.trim(), genre_id: genreId || null,
-        country_id: countryId || null, language_id: languageId || null, mood: mood || null,
+        country_id: countryId || null, language_id: languageId || null, source_id: sourceId || null,
+        info_pending: keepPending, mood: mood || null,
         release_year: yearNum, tags: tags.split(',').map(x => x.trim()).filter(Boolean),
         description: description.trim() || null, lyrics: lyrics.trim() || null, is_free: isFree,
         audio_file_id: audioId, cover_file_id: coverId, duration_seconds: duration, updated_at: new Date().toISOString(),
@@ -193,6 +245,7 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
       if (song) {
         const { error } = await supabase.from('mp_songs').update(row).eq('id', song.id).eq('uploaded_by', userId);
         if (error) throw error;
+        songSaved = true;
         // Replaced files are not referenced any more: remove them.
         if (audioFile && song.audio) await deleteMusicFile(song.audio);
         if ((coverFile || removeCover) && song.cover) await deleteMusicFile(song.cover);
@@ -200,6 +253,7 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
         const { data, error } = await supabase.from('mp_songs').insert([{ ...row, uploaded_by: userId }]).select('id').single();
         if (error) throw error;
         songId = data.id as string;
+        songSaved = true;
       }
 
       // Singers: rewrite the links in the picked order.
@@ -221,6 +275,8 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
       onSaved();
     } catch (e) {
       console.error(e);
+      // The song row never took the new files: don't leave them in storage.
+      if (!songSaved) await discardUploads(uploaded);
       toast.error(errorMessage(e, t('pf.upload.error')));
     } finally {
       setSaving(false);
@@ -229,7 +285,7 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
   };
 
   const needle = collSearch.trim().toLowerCase();
-  const matches = collections.filter(c => !picked.has(c.id) && (!needle || c.title.toLowerCase().includes(needle))).slice(0, 8);
+  const matches = collections.filter(c => !picked.has(c.id) && (!needle || c.title.toLowerCase().includes(needle))).slice(0, 5);
   const exact = collections.some(c => c.title.toLowerCase() === needle);
 
   return (
@@ -266,9 +322,40 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
               <span className={label}>{t('mp.form.title')} <span className="text-danger">*</span></span>
               <input value={title} onChange={e => setTitle(e.target.value)} className={`${pfInputClass} h-10`} />
             </label>
+            {!song && similar.length > 0 && similarDismissed !== title && (
+              <div className="-mt-1 rounded-lg border border-warning/40 bg-warning/5 overflow-hidden">
+                <div className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-gray-700 dark:text-gray-300">
+                  <span className="flex-1">{t('mp.form.similarFound')}</span>
+                  <button type="button" className="text-gray-500 hover:underline" onClick={() => setSimilarDismissed(title)}>{t('mp.form.notDuplicate')}</button>
+                </div>
+                <ul className="divide-y divide-warning/20 max-h-56 overflow-y-auto">
+                  {similar.map(s => {
+                    const mine = s.uploaded_by === userId;
+                    return (
+                      <li key={s.id} className="flex items-center gap-2 px-3 py-1.5">
+                        <MpCover url={s.cover?.url} color={s.genre?.color} className="w-8 h-8" rounded="rounded" />
+                        <MpPlayButton song={s} size={26} />
+                        <button type="button" disabled={!mine || saving} onClick={() => onEditOther?.(s)}
+                          title={mine ? t('mp.form.editThis') : t('mp.form.notYours')}
+                          className={`flex-1 min-w-0 text-left ${mine ? 'hover:text-primary' : 'cursor-default'}`}>
+                          <span className="block text-sm font-medium truncate text-gray-900 dark:text-gray-100">{s.title}</span>
+                          <span className="block text-[11px] text-gray-500 truncate">
+                            {[songArtist(s), s.release_year, mine ? t('mp.form.editThis') : t('mp.form.notYours')].filter(Boolean).join(' · ')}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
             <div>
               <span className={label}>{t('mp.singers')}</span>
               <MpSingerPicker userId={userId} singers={singers} onSingersChange={setSingers} value={singerIds} onChange={setSingerIds} />
+            </div>
+            <div>
+              <span className={label}>{t('mp.source')}</span>
+              <MpSourcePicker userId={userId} sources={sources} onSourcesChange={setSources} value={sourceId} onChange={setSourceId} />
             </div>
           </div>
         </div>
@@ -281,20 +368,14 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
               {genres.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
             </select>
           </label>
-          <label className="block">
+          <div>
             <span className={label}>{t('mp.country')}</span>
-            <select value={countryId} onChange={e => setCountryId(e.target.value)} className={`${pfInputClass} h-10`}>
-              <option value="">—</option>
-              {countries.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-            </select>
-          </label>
-          <label className="block">
+            <MpCombo items={activeItems(countries, countryId, c => c.code)} value={countryId} onChange={setCountryId} />
+          </div>
+          <div>
             <span className={label}>{t('mp.language')}</span>
-            <select value={languageId} onChange={e => setLanguageId(e.target.value)} className={`${pfInputClass} h-10`}>
-              <option value="">—</option>
-              {languages.map(l => <option key={l.id} value={l.id}>{l.name}{l.native_name && l.native_name !== l.name ? ` (${l.native_name})` : ''}</option>)}
-            </select>
-          </label>
+            <MpCombo items={activeItems(languages, languageId, l => (l.native_name !== l.name ? l.native_name : null))} value={languageId} onChange={setLanguageId} />
+          </div>
           <label className="block">
             <span className={label}>{t('mp.mood')}</span>
             <select value={mood} onChange={e => setMood(e.target.value)} className={`${pfInputClass} h-10`}>
@@ -363,6 +444,13 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
             </div>
           )}
         </div>
+
+        {song?.info_pending && (
+          <label className="flex items-start gap-2 rounded-lg bg-warning/10 border border-warning/30 p-3 cursor-pointer">
+            <input type="checkbox" checked={keepPending} onChange={e => setKeepPending(e.target.checked)} className="mt-0.5 w-4 h-4 text-primary rounded border-gray-300" />
+            <span className="text-sm text-gray-700 dark:text-gray-300">{t('mp.form.keepPending')}</span>
+          </label>
+        )}
 
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
           {step && <span className="mr-auto text-sm text-gray-500">{step}</span>}
