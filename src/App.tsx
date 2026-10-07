@@ -50,6 +50,8 @@ import { MpLibrary } from './pages/Music/MpLibrary';
 import { MpCollections, MpCollectionDetail } from './pages/Music/MpCollections';
 import { MpNowPlaying } from './pages/Music/MpNowPlaying';
 import { MpGenres } from './pages/Music/MpGenres';
+import { MpSingers } from './pages/Music/MpSingers';
+import { MpPlaces } from './pages/Music/MpPlaces';
 import { MusicPlayerProvider, usePlayer } from './lib/MusicPlayerContext';
 import { MpMiniPlayer } from './components/music/MpControls';
 
@@ -160,6 +162,8 @@ function AuthGate() {
         <Route path="/mp/collections/:id" element={<MpCollectionDetail />} />
         <Route path="/mp/player" element={<MpNowPlaying />} />
         <Route path="/mp/genres" element={<MpGenres />} />
+        <Route path="/mp/singers" element={<MpSingers />} />
+        <Route path="/mp/places" element={<MpPlaces />} />
         {/* Renamed from Learning Cycle (/lc); keep old links working. */}
         {['', '/board', '/topics', '/explore', '/milestones'].map(sub => (
           <Route key={sub} path={`/lc${sub}`} element={<Navigate to={`/ac${sub}`} replace />} />

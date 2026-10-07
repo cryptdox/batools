@@ -2,14 +2,22 @@ import { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
-import { MOODS, SONG_SELECT, type MpGenre, type MpSong } from '../../lib/music';
+import { MOODS, SONG_SELECT, useMpLookups, type MpGenre, type MpSong } from '../../lib/music';
 import { pfInputClass } from '../portfolio/PfFieldInput';
 
 export type SongFilters = {
-  search: string; genreId: string; origin: string; language: string; mood: string;
+  search: string; genreId: string; countryId: string; languageId: string; singerId: string; mood: string;
   price: '' | 'free' | 'paid'; collectionId: string;
 };
-export const EMPTY_FILTERS: SongFilters = { search: '', genreId: '', origin: '', language: '', mood: '', price: '', collectionId: '' };
+export const EMPTY_FILTERS: SongFilters = { search: '', genreId: '', countryId: '', languageId: '', singerId: '', mood: '', price: '', collectionId: '' };
+
+/** Ids of the songs sung by any of these singers. */
+async function songIdsBySingers(singerIds: string[]): Promise<string[]> {
+  if (!singerIds.length) return [];
+  const { data, error } = await supabase.from('mp_song_singers').select('song_id').in('singer_id', singerIds);
+  if (error) throw error;
+  return [...new Set((data ?? []).map(r => r.song_id as string))];
+}
 
 const sel = `${pfInputClass.replace('w-full ', '')} h-9 max-w-44`;
 
@@ -22,11 +30,21 @@ export async function fetchSongs(f: SongFilters, from: number, size: number): Pr
   const select = f.collectionId ? `${SONG_SELECT}, mp_collection_songs!inner(collection_id)` : SONG_SELECT;
   let q = supabase.from('mp_songs').select(select, { count: 'exact' });
   if (f.collectionId) q = q.eq('mp_collection_songs.collection_id', f.collectionId);
-  const s = f.search.trim().replace(/[,()]/g, ' ');
-  if (s) q = q.or(`title.ilike.%${s}%,artist.ilike.%${s}%`);
+  const s = f.search.trim().replace(/[,()%*]/g, ' ').trim();
+  if (s) {
+    // Title, or sung by a singer whose name matches.
+    const { data: hit } = await supabase.from('mp_singers').select('id').ilike('name', `%${s}%`);
+    const ids = await songIdsBySingers((hit ?? []).map(r => r.id as string));
+    q = q.or(ids.length ? `title.ilike.%${s}%,id.in.(${ids.join(',')})` : `title.ilike.%${s}%`);
+  }
+  if (f.singerId) {
+    const ids = await songIdsBySingers([f.singerId]);
+    if (!ids.length) return { rows: [], total: 0 };
+    q = q.in('id', ids);
+  }
   if (f.genreId) q = q.eq('genre_id', f.genreId);
-  if (f.origin) q = q.eq('origin', f.origin);
-  if (f.language) q = q.eq('language', f.language);
+  if (f.countryId) q = q.eq('country_id', f.countryId);
+  if (f.languageId) q = q.eq('language_id', f.languageId);
   if (f.mood) q = q.eq('mood', f.mood);
   if (f.price) q = q.eq('is_free', f.price === 'free');
   const { data, count, error } = await q.order('created_at', { ascending: false }).range(from, from + size - 1);
@@ -34,7 +52,7 @@ export async function fetchSongs(f: SongFilters, from: number, size: number): Pr
   return { rows: (data ?? []) as unknown as MpSong[], total: count ?? 0 };
 }
 
-/** Search + genre / origin / language / mood / free-paid / album-mix selects. */
+/** Search + genre / singer / country / language / mood / free-paid / album-mix selects. */
 export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true }: {
   value: SongFilters;
   onChange: (f: SongFilters) => void;
@@ -43,16 +61,15 @@ export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true
 }) => {
   const { t } = useLanguage();
   const [search, setSearch] = useState(value.search);
-  const [origins, setOrigins] = useState<string[]>([]);
-  const [languages, setLanguages] = useState<string[]>([]);
+  const lookups = useMpLookups();
+  const [used, setUsed] = useState<{ countries: Set<string>; languages: Set<string> }>({ countries: new Set(), languages: new Set() });
   const [collections, setCollections] = useState<{ id: string; kind: string; title: string }[]>([]);
 
-  // Options that actually occur in the library.
+  // Only offer countries / languages that actually occur in the library.
   useEffect(() => {
-    void supabase.from('mp_songs').select('origin, language').then(({ data }) => {
-      const uniq = (k: 'origin' | 'language') => [...new Set((data ?? []).map(r => r[k]).filter(Boolean) as string[])].sort();
-      setOrigins(uniq('origin'));
-      setLanguages(uniq('language'));
+    void supabase.from('mp_songs').select('country_id, language_id').then(({ data }) => {
+      const uniq = (k: 'country_id' | 'language_id') => new Set((data ?? []).map(r => r[k]).filter(Boolean) as string[]);
+      setUsed({ countries: uniq('country_id'), languages: uniq('language_id') });
     });
     if (showCollection) void supabase.from('mp_collections').select('id, kind, title').order('title').then(({ data }) => setCollections(data ?? []));
   }, [showCollection]);
@@ -75,13 +92,17 @@ export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true
         <option value="">{t('mp.allGenres')}</option>
         {genres.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
       </select>
-      <select value={value.origin} onChange={e => set('origin', e.target.value)} className={sel} aria-label={t('mp.origin')}>
-        <option value="">{t('mp.allOrigins')}</option>
-        {origins.map(o => <option key={o} value={o}>{o}</option>)}
+      <select value={value.singerId} onChange={e => set('singerId', e.target.value)} className={sel} aria-label={t('mp.singer')}>
+        <option value="">{t('mp.allSingers')}</option>
+        {lookups.singers.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
       </select>
-      <select value={value.language} onChange={e => set('language', e.target.value)} className={sel} aria-label={t('mp.language')}>
+      <select value={value.countryId} onChange={e => set('countryId', e.target.value)} className={sel} aria-label={t('mp.country')}>
+        <option value="">{t('mp.allCountries')}</option>
+        {lookups.countries.filter(o => used.countries.has(o.id) || o.id === value.countryId).map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
+      </select>
+      <select value={value.languageId} onChange={e => set('languageId', e.target.value)} className={sel} aria-label={t('mp.language')}>
         <option value="">{t('mp.allLanguages')}</option>
-        {languages.map(o => <option key={o} value={o}>{o}</option>)}
+        {lookups.languages.filter(o => used.languages.has(o.id) || o.id === value.languageId).map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
       </select>
       <select value={value.mood} onChange={e => set('mood', e.target.value)} className={sel} aria-label={t('mp.mood')}>
         <option value="">{t('mp.allMoods')}</option>

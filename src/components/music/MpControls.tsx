@@ -4,7 +4,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { usePlayer } from '../../lib/MusicPlayerContext';
-import { formatDuration } from '../../lib/music';
+import { formatDuration, songArtist } from '../../lib/music';
 import { MpCover } from './MpUi';
 
 export const SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 2];
@@ -99,7 +99,7 @@ export const MpMiniPlayer = () => {
           </div>
           <div className="min-w-0">
             <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{current.title}</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 truncate">{current.artist || t('mp.unknownArtist')}</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 truncate">{songArtist(current) || t('mp.unknownArtist')}</div>
           </div>
         </Link>
         <div className="hidden md:block space-y-1">

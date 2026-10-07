@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Upload, Play, ListPlus, ListEnd, Pencil, Trash2, AlertTriangle, Music } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { deleteMusicFile, formatDuration, useMpGenres, useMpUserId, type MpSong } from '../../lib/music';
+import { deleteMusicFile, formatDuration, songArtist, useMpGenres, useMpRatings, useMpUserId, type MpSong } from '../../lib/music';
 import { usePlayer } from '../../lib/MusicPlayerContext';
 import { Badge, Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
 import { Pagination } from '../../components/ui/Pagination';
-import { MpCover, MpPlayButton, MpPlayingBars } from '../../components/music/MpUi';
+import { MpCover, MpPlayButton, MpPlayingBars, MpStars } from '../../components/music/MpUi';
 import { MpSongForm } from '../../components/music/MpSongForm';
 import { EMPTY_FILTERS, fetchSongs, MpSongFilterBar, type SongFilters } from '../../components/music/MpSongFilters';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
@@ -23,7 +24,9 @@ export const MpLibrary = () => {
   const userId = useMpUserId();
   const { genres } = useMpGenres();
   const player = usePlayer();
-  const [filters, setFilters] = useState<SongFilters>(EMPTY_FILTERS);
+  // /mp?singer=<id> opens the library filtered to that singer (from the Singers page).
+  const [params] = useSearchParams();
+  const [filters, setFilters] = useState<SongFilters>(() => ({ ...EMPTY_FILTERS, singerId: params.get('singer') ?? '' }));
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(25);
   const [rows, setRows] = useState<MpSong[]>([]);
@@ -32,6 +35,7 @@ export const MpLibrary = () => {
   const [form, setForm] = useState<MpSong | 'new' | null>(null);
   const [toDelete, setToDelete] = useState<MpSong | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const ratings = useMpRatings('song', rows.map(r => r.id), userId);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -86,7 +90,7 @@ export const MpLibrary = () => {
         ) : rows.length === 0 ? (
           <div className="p-12 text-center text-gray-500 space-y-3">
             <Music size={32} className="mx-auto text-gray-400" />
-            <p>{total === 0 && filters === EMPTY_FILTERS ? t('mp.library.empty') : t('pf.common.empty')}</p>
+            <p>{total === 0 && JSON.stringify(filters) === JSON.stringify(EMPTY_FILTERS) ? t('mp.library.empty') : t('pf.common.empty')}</p>
           </div>
         ) : (
           <ul className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -103,7 +107,7 @@ export const MpLibrary = () => {
                   <div className="flex-1 min-w-0">
                     <div className={`text-sm font-semibold truncate ${isCurrent ? 'text-primary' : 'text-gray-900 dark:text-gray-100'}`}>{s.title}</div>
                     <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                      {[s.artist || t('mp.unknownArtist'), s.origin, s.language, s.release_year].filter(Boolean).join(' · ')}
+                      {[songArtist(s) || t('mp.unknownArtist'), s.country?.name, s.language?.name, s.release_year].filter(Boolean).join(' · ')}
                     </div>
                   </div>
                   <div className="hidden md:flex items-center gap-1.5 shrink-0">
@@ -115,6 +119,7 @@ export const MpLibrary = () => {
                     {s.mood && <Badge variant="muted">{t(`mp.moods.${s.mood}`)}</Badge>}
                     {s.is_free ? <Badge variant="success">{t('mp.free')}</Badge> : <Badge variant="warning">{t('mp.paid')}</Badge>}
                   </div>
+                  <MpStars className="hidden sm:inline-flex shrink-0" stat={ratings.stats[s.id]} mine={ratings.mine[s.id]} onRate={n => void ratings.rate(s.id, n)} size={13} />
                   <span className="hidden sm:block w-12 text-right text-xs tabular-nums text-gray-500 shrink-0">{formatDuration(s.duration_seconds)}</span>
                   <span className="hidden lg:block w-14 text-right text-[11px] tabular-nums text-gray-400 shrink-0" title={t('mp.plays')}>▶ {s.play_count}</span>
                   <div className="flex items-center shrink-0">

@@ -1,7 +1,8 @@
-import { Lock, Music2, Pause, Play } from 'lucide-react';
+import { useState } from 'react';
+import { Lock, Music2, Pause, Play, Star } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { usePlayer } from '../../lib/MusicPlayerContext';
-import { canPlay, useMpUserId, type MpSong } from '../../lib/music';
+import { canPlay, useMpUserId, type MpRatingStat, type MpSong } from '../../lib/music';
 
 /** Square cover that always fills its box (object-fit: cover); a gradient when there is none. */
 export const MpCover = ({ url, color = '#6c5ce7', className = '', rounded = 'rounded-lg', alt = '' }: {
@@ -54,5 +55,50 @@ export const MpPlayButton = ({ song, list, size = 36 }: { song: MpSong; list?: M
     >
       {locked ? <Lock size={size * 0.42} /> : isCurrent && playing ? <Pause size={size * 0.45} fill="currentColor" /> : <Play size={size * 0.45} fill="currentColor" className="ml-0.5" />}
     </button>
+  );
+};
+
+/**
+ * Five stars. Filled to your own rating when you have one (primary colour),
+ * otherwise to the average (amber). Click a star to rate; click your current
+ * rating again to clear it. Shows "avg (count)" next to them.
+ */
+export const MpStars = ({ stat, mine, onRate, size = 14, showCount = true, className = '' }: {
+  stat?: MpRatingStat; mine?: number; onRate?: (n: number) => void; size?: number; showCount?: boolean; className?: string;
+}) => {
+  const { t } = useLanguage();
+  const [hover, setHover] = useState(0);
+  const shown = hover || mine || stat?.avg || 0;
+  const own = hover > 0 || !!mine;
+  return (
+    <span className={`inline-flex items-center gap-1 ${className}`} onClick={e => e.stopPropagation()}>
+      <span className="inline-flex" onMouseLeave={() => setHover(0)}>
+        {[1, 2, 3, 4, 5].map(n => {
+          const fill = Math.max(0, Math.min(1, shown - (n - 1)));
+          return (
+            <button
+              key={n}
+              type="button"
+              disabled={!onRate}
+              onMouseEnter={() => onRate && setHover(n)}
+              onClick={() => onRate?.(n)}
+              title={onRate ? (mine === n ? t('mp.rating.clear') : t('mp.rating.rate').replace('{n}', String(n))) : undefined}
+              aria-label={t('mp.rating.rate').replace('{n}', String(n))}
+              className={`relative p-px ${onRate ? 'cursor-pointer' : 'cursor-default'}`}
+            >
+              <Star size={size} className="text-gray-300 dark:text-gray-600" />
+              <span className="absolute inset-0 p-px overflow-hidden" style={{ width: `${fill * 100}%` }}>
+                <Star size={size} className={own ? 'text-primary' : 'text-amber-400'} fill="currentColor" />
+              </span>
+            </button>
+          );
+        })}
+      </span>
+      {showCount && (
+        <span className="text-[11px] tabular-nums text-gray-500">
+          {stat ? `${stat.avg.toFixed(1)} (${stat.count})` : t('mp.rating.none')}
+        </span>
+      )}
+    </span>
   );
 };

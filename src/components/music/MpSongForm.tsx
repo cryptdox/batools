@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { FileAudio, ImagePlus, Search, X, Plus, Disc3, ListMusic } from 'lucide-react';
+import { FileAudio, ImagePlus, Search, X, Plus, Disc3, ListMusic, Mic2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { deleteMusicFile, formatDuration, MOODS, readDuration, uploadMusicFile, type MpGenre, type MpSong } from '../../lib/music';
+import { deleteMusicFile, formatDuration, MOODS, readDuration, uploadMusicFile, useMpLookups, type MpGenre, type MpSinger, type MpSong } from '../../lib/music';
 import { Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { pfInputClass } from '../portfolio/PfFieldInput';
@@ -16,6 +16,74 @@ const label = 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5
 const AUDIO_ACCEPT = 'audio/mpeg,audio/mp3,audio/mp4,audio/x-m4a,audio/aac,audio/wav,audio/ogg,audio/webm,audio/flac,.mp3,.m4a,.aac,.wav,.ogg,.flac';
 const MAX_BYTES = 50 * 1024 * 1024;
 
+/** Pick one or more singers (in order), or add a new one by typing its name. */
+export const MpSingerPicker = ({ userId, singers, onSingersChange, value, onChange, max }: {
+  userId: string;
+  singers: MpSinger[];
+  onSingersChange: (s: MpSinger[]) => void;
+  value: string[];
+  onChange: (ids: string[]) => void;
+  max?: number;
+}) => {
+  const { t } = useLanguage();
+  const [search, setSearch] = useState('');
+  const needle = search.trim().toLowerCase();
+  const matches = singers.filter(s => !value.includes(s.id) && (!needle || s.name.toLowerCase().includes(needle))).slice(0, 8);
+  const exact = singers.find(s => s.name.toLowerCase() === needle);
+  const full = max !== undefined && value.length >= max;
+  const pick = (id: string) => { onChange(max === 1 ? [id] : [...value, id]); setSearch(''); };
+
+  const create = async () => {
+    const name = search.trim();
+    if (!name) return;
+    const { data, error } = await supabase.from('mp_singers').insert([{ name, created_by: userId }]).select('id, name, country_id, bio, created_by').single();
+    if (error) return toast.error(errorMessage(error, t('pf.common.saveError')));
+    onSingersChange([...singers, data as MpSinger].sort((a, b) => a.name.localeCompare(b.name)));
+    pick(data.id as string);
+  };
+
+  return (
+    <div>
+      {value.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {value.map(id => {
+            const s = singers.find(x => x.id === id);
+            return s && (
+              <span key={id} className="inline-flex items-center gap-1 pl-2 pr-1 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                <Mic2 size={12} />{s.name}
+                <button type="button" onClick={() => onChange(value.filter(x => x !== id))} className="p-0.5 rounded-full hover:bg-black/10" aria-label={`Remove ${s.name}`}><X size={12} /></button>
+              </span>
+            );
+          })}
+        </div>
+      )}
+      {!full && (
+        <>
+          <div className="relative">
+            <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input value={search} onChange={e => setSearch(e.target.value)} placeholder={t('mp.form.findSinger')} className={`${pfInputClass} h-9 pl-8`}
+              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); if (exact && !value.includes(exact.id)) pick(exact.id); else if (needle && !exact) void create(); } }} />
+          </div>
+          {needle && (matches.length > 0 || !exact) && (
+            <div className="mt-1 rounded-md border border-gray-200 dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
+              {matches.map(s => (
+                <button key={s.id} type="button" onClick={() => pick(s.id)} className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700/40">
+                  <Mic2 size={14} className="text-gray-400" /><span className="text-gray-800 dark:text-gray-200">{s.name}</span>
+                </button>
+              ))}
+              {!exact && (
+                <div className="px-3 py-1.5">
+                  <Button size="sm" variant="ghost" type="button" onClick={() => void create()}><Plus size={13} className="mr-1" />{t('mp.form.newSinger').replace('{name}', search.trim())}</Button>
+                </div>
+              )}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
 /** Upload a song (audio + cover + info + albums / mixes), or edit one you uploaded. */
 export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
   userId: string;
@@ -26,6 +94,7 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
 }) => {
   const { t } = useLanguage();
   const audioInput = useRef<HTMLInputElement>(null);
+  const { countries, languages, singers, setSingers } = useMpLookups();
   const coverInput = useRef<HTMLInputElement>(null);
 
   const [audioFile, setAudioFile] = useState<File | null>(null);
@@ -35,10 +104,11 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
   const [removeCover, setRemoveCover] = useState(false);
 
   const [title, setTitle] = useState(song?.title ?? '');
-  const [artist, setArtist] = useState(song?.artist ?? '');
+  const initialSingers = [...(song?.singers ?? [])].sort((a, b) => a.position - b.position).map(x => x.singer?.id).filter(Boolean) as string[];
+  const [singerIds, setSingerIds] = useState<string[]>(initialSingers);
   const [genreId, setGenreId] = useState(song?.genre_id ?? '');
-  const [origin, setOrigin] = useState(song?.origin ?? '');
-  const [language, setLanguage] = useState(song?.language ?? '');
+  const [countryId, setCountryId] = useState(song?.country_id ?? '');
+  const [languageId, setLanguageId] = useState(song?.language_id ?? '');
   const [mood, setMood] = useState(song?.mood ?? '');
   const [year, setYear] = useState(song?.release_year ? String(song.release_year) : '');
   const [tags, setTags] = useState((song?.tags ?? []).join(', '));
@@ -113,8 +183,8 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
       }
       setStep(t('pf.common.saving'));
       const row = {
-        title: title.trim(), artist: artist.trim() || null, genre_id: genreId || null,
-        origin: origin.trim() || null, language: language.trim() || null, mood: mood || null,
+        title: title.trim(), genre_id: genreId || null,
+        country_id: countryId || null, language_id: languageId || null, mood: mood || null,
         release_year: yearNum, tags: tags.split(',').map(x => x.trim()).filter(Boolean),
         description: description.trim() || null, lyrics: lyrics.trim() || null, is_free: isFree,
         audio_file_id: audioId, cover_file_id: coverId, duration_seconds: duration, updated_at: new Date().toISOString(),
@@ -130,6 +200,13 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
         const { data, error } = await supabase.from('mp_songs').insert([{ ...row, uploaded_by: userId }]).select('id').single();
         if (error) throw error;
         songId = data.id as string;
+      }
+
+      // Singers: rewrite the links in the picked order.
+      if (song) await supabase.from('mp_song_singers').delete().eq('song_id', songId);
+      if (singerIds.length) {
+        const { error } = await supabase.from('mp_song_singers').insert(singerIds.map((singer_id, i) => ({ song_id: songId, singer_id, position: i + 1 })));
+        if (error) throw error;
       }
 
       const add = [...picked].filter(id => !initialPicked.has(id));
@@ -158,7 +235,7 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
   return (
     <Modal isOpen onClose={() => !saving && onClose()} title={song ? t('mp.form.edit') : t('mp.form.upload')} className="max-w-3xl">
       <div className="space-y-5">
-        <div className="grid sm:grid-cols-[10rem_1fr] gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-[10rem_minmax(0,1fr)] gap-4">
           <div className="space-y-2">
             <button type="button" onClick={() => coverInput.current?.click()} className="block w-40 h-40 group relative" title={t('mp.form.cover')}>
               <MpCover url={coverPreview} color={genres.find(g => g.id === genreId)?.color} className="w-40 h-40" rounded="rounded-xl" />
@@ -171,13 +248,13 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
               <button type="button" className="text-xs text-danger hover:underline" onClick={() => { setCoverFile(null); setCoverPreview(null); setRemoveCover(true); }}>{t('mp.form.removeCover')}</button>
             )}
           </div>
-          <div className="space-y-3">
+          <div className="space-y-3 min-w-0">
             <div>
               <span className={label}>{t('mp.form.audio')} {!song && <span className="text-danger">*</span>}</span>
               <button type="button" onClick={() => audioInput.current?.click()} className="w-full flex items-center gap-3 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 p-3 hover:border-primary text-left">
                 <FileAudio size={22} className="text-primary shrink-0" />
-                <span className="text-sm min-w-0">
-                  <span className="block font-medium text-gray-800 dark:text-gray-200 truncate">
+                <span className="text-sm min-w-0 flex-1">
+                  <span title={audioFile?.name} className="block font-medium text-gray-800 dark:text-gray-200 truncate">
                     {audioFile ? audioFile.name : song ? t('mp.form.replaceAudio') : t('mp.form.chooseAudio')}
                   </span>
                   <span className="text-xs text-gray-500">{duration ? formatDuration(duration) : t('mp.form.audioHint')}</span>
@@ -189,10 +266,10 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
               <span className={label}>{t('mp.form.title')} <span className="text-danger">*</span></span>
               <input value={title} onChange={e => setTitle(e.target.value)} className={`${pfInputClass} h-10`} />
             </label>
-            <label className="block">
-              <span className={label}>{t('mp.form.artist')}</span>
-              <input value={artist} onChange={e => setArtist(e.target.value)} className={`${pfInputClass} h-10`} />
-            </label>
+            <div>
+              <span className={label}>{t('mp.singers')}</span>
+              <MpSingerPicker userId={userId} singers={singers} onSingersChange={setSingers} value={singerIds} onChange={setSingerIds} />
+            </div>
           </div>
         </div>
 
@@ -205,12 +282,18 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved }: {
             </select>
           </label>
           <label className="block">
-            <span className={label}>{t('mp.origin')}</span>
-            <input value={origin} onChange={e => setOrigin(e.target.value)} placeholder={t('mp.form.originPlaceholder')} className={`${pfInputClass} h-10`} />
+            <span className={label}>{t('mp.country')}</span>
+            <select value={countryId} onChange={e => setCountryId(e.target.value)} className={`${pfInputClass} h-10`}>
+              <option value="">—</option>
+              {countries.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+            </select>
           </label>
           <label className="block">
             <span className={label}>{t('mp.language')}</span>
-            <input value={language} onChange={e => setLanguage(e.target.value)} placeholder={t('mp.form.languagePlaceholder')} className={`${pfInputClass} h-10`} />
+            <select value={languageId} onChange={e => setLanguageId(e.target.value)} className={`${pfInputClass} h-10`}>
+              <option value="">—</option>
+              {languages.map(l => <option key={l.id} value={l.id}>{l.name}{l.native_name && l.native_name !== l.name ? ` (${l.native_name})` : ''}</option>)}
+            </select>
           </label>
           <label className="block">
             <span className={label}>{t('mp.mood')}</span>

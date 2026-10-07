@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { X, Music } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { usePlayer } from '../../lib/MusicPlayerContext';
-import { formatDuration } from '../../lib/music';
+import { formatDuration, songArtist, useMpRatings, useMpUserId } from '../../lib/music';
 import { Badge, Button } from '../../components/ui/Button';
-import { MpCover, MpPlayingBars } from '../../components/music/MpUi';
+import { MpCover, MpPlayingBars, MpStars } from '../../components/music/MpUi';
 import { MpExtras, MpSeekBar, MpTransport } from '../../components/music/MpControls';
 import { MpParticles } from '../../components/music/MpParticles';
 import { PfTabs } from '../Portfolio/PfPageHeader';
@@ -58,6 +58,8 @@ export const MpNowPlaying = () => {
   const p = usePlayer();
   const [tab, setTab] = useState<Tab>('queue');
   const s = p.current;
+  const userId = useMpUserId();
+  const rating = useMpRatings('song', s ? [s.id] : [], userId);
   const color = s?.genre?.color ?? '#6c5ce7';
 
   if (!s) {
@@ -92,7 +94,8 @@ export const MpNowPlaying = () => {
 
         <div className="relative text-center space-y-1 max-w-full">
           <h2 className="text-2xl sm:text-3xl font-bold truncate">{s.title}</h2>
-          <p className="text-white/70 truncate">{s.artist || t('mp.unknownArtist')}</p>
+          <p className="text-white/70 truncate">{songArtist(s) || t('mp.unknownArtist')}</p>
+          <MpStars className="justify-center [&_.text-gray-500]:text-white/70" stat={rating.stats[s.id]} mine={rating.mine[s.id]} onRate={n => void rating.rate(s.id, n)} size={18} />
           <div className="flex flex-wrap justify-center gap-1.5 pt-1">
             {s.genre && <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold" style={{ background: `${color}55` }}>{s.genre.name}</span>}
             {s.mood && <span className="px-2 py-0.5 rounded-full text-[11px] bg-white/10">{t(`mp.moods.${s.mood}`)}</span>}
@@ -120,7 +123,7 @@ export const MpNowPlaying = () => {
                       <MpCover url={q.cover?.url} color={q.genre?.color} className="w-9 h-9" rounded="rounded" />
                       <span className="min-w-0">
                         <span className={`block text-sm font-medium truncate ${isCurrent ? 'text-primary' : 'text-gray-900 dark:text-gray-100'}`}>{q.title}</span>
-                        <span className="block text-xs text-gray-500 truncate">{q.artist || t('mp.unknownArtist')}</span>
+                        <span className="block text-xs text-gray-500 truncate">{songArtist(q) || t('mp.unknownArtist')}</span>
                       </span>
                     </button>
                     {isCurrent
@@ -140,10 +143,10 @@ export const MpNowPlaying = () => {
           {tab === 'info' && (
             <dl className="grid grid-cols-[8rem_1fr] gap-y-2 text-sm">
               {[
-                [t('mp.form.artist'), s.artist],
+                [t('mp.singers'), songArtist(s)],
                 [t('mp.genre'), s.genre?.name],
-                [t('mp.origin'), s.origin],
-                [t('mp.language'), s.language],
+                [t('mp.country'), s.country?.name],
+                [t('mp.language'), s.language?.name],
                 [t('mp.mood'), s.mood && t(`mp.moods.${s.mood}`)],
                 [t('mp.year'), s.release_year],
                 [t('mp.player.length'), formatDuration(s.duration_seconds)],

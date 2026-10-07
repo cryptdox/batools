@@ -16,27 +16,39 @@ export const MOODS = ['calm', 'happy', 'energetic', 'sad', 'romantic', 'focus', 
 export type MpFile = { id: string; url: string; provider: string; bucket: string | null; path: string | null };
 export type MpGenre = { id: string; name: string; particle: MpParticle; color: string; created_by: string | null };
 
+export type MpCountry = { id: string; name: string; code: string | null };
+export type MpLanguage = { id: string; name: string; native_name: string | null; code: string | null };
+export type MpSinger = { id: string; name: string; country_id: string | null; bio: string | null; created_by: string | null };
+
 export type MpSong = {
-  id: string; title: string; artist: string | null; genre_id: string | null;
-  origin: string | null; language: string | null; mood: string | null; release_year: number | null;
+  id: string; title: string; genre_id: string | null;
+  country_id: string | null; language_id: string | null; mood: string | null; release_year: number | null;
   tags: string[]; description: string | null; lyrics: string | null; is_free: boolean;
   audio_file_id: string; cover_file_id: string | null; duration_seconds: number | null;
   play_count: number; uploaded_by: string; created_at: string;
   audio: MpFile | null; cover: MpFile | null; genre: MpGenre | null;
+  country: MpCountry | null; language: MpLanguage | null;
+  singers: { position: number; singer: { id: string; name: string } | null }[];
 };
 
 export type MpCollection = {
-  id: string; kind: 'album' | 'mix'; title: string; artist: string | null; description: string | null;
+  id: string; kind: 'album' | 'mix'; title: string; singer_id: string | null; description: string | null;
   release_year: number | null; cover_file_id: string | null; created_by: string; created_at: string;
-  cover: MpFile | null; songs: { count: number }[];
+  cover: MpFile | null; singer: { id: string; name: string } | null; songs: { count: number }[];
 };
 
-/** Song row with its audio / cover file and genre, through the named FKs. */
+/** Song row with its files, genre, country, language and singers, through the named FKs. */
 export const SONG_SELECT =
-  '*, audio:mp_files!mp_songs_audio_fkey(id, url, provider, bucket, path), cover:mp_files!mp_songs_cover_fkey(id, url, provider, bucket, path), genre:mp_genres!mp_songs_genre_fkey(*)';
+  '*, audio:mp_files!mp_songs_audio_fkey(id, url, provider, bucket, path), cover:mp_files!mp_songs_cover_fkey(id, url, provider, bucket, path), genre:mp_genres!mp_songs_genre_fkey(*)'
+  + ', country:mp_countries!mp_songs_country_fkey(id, name, code), language:mp_languages!mp_songs_language_fkey(id, name, native_name, code)'
+  + ', singers:mp_song_singers(position, singer:mp_singers!mp_song_singers_singer_fkey(id, name))';
 
 export const COLLECTION_SELECT =
-  '*, cover:mp_files!mp_collections_cover_fkey(id, url, provider, bucket, path), songs:mp_collection_songs(count)';
+  '*, cover:mp_files!mp_collections_cover_fkey(id, url, provider, bucket, path), singer:mp_singers!mp_collections_singer_fkey(id, name), songs:mp_collection_songs(count)';
+
+/** The song's singers in order, e.g. "A, B"; null when none is set. */
+export const songArtist = (s: Pick<MpSong, 'singers'>) =>
+  [...(s.singers ?? [])].sort((a, b) => a.position - b.position).map(x => x.singer?.name).filter(Boolean).join(', ') || null;
 
 export function useMpUserId(): string | null {
   return useAuth().user?.userId ?? null;
@@ -61,6 +73,72 @@ export function useMpGenres() {
   }, []);
   useEffect(() => { void reload(); }, [reload]);
   return { genres, reload };
+}
+
+/** The shared pick lists: countries, languages, singers (each sorted by name). */
+export function useMpLookups() {
+  const [countries, setCountries] = useState<MpCountry[]>([]);
+  const [languages, setLanguages] = useState<MpLanguage[]>([]);
+  const [singers, setSingers] = useState<MpSinger[]>([]);
+  const reload = useCallback(async () => {
+    const [c, l, s] = await Promise.all([
+      supabase.from('mp_countries').select('id, name, code').order('name'),
+      supabase.from('mp_languages').select('id, name, native_name, code').order('name'),
+      supabase.from('mp_singers').select('id, name, country_id, bio, created_by').order('name'),
+    ]);
+    const error = c.error ?? l.error ?? s.error;
+    if (error) toast.error(errorMessage(error, 'Could not load countries, languages and singers'));
+    setCountries((c.data ?? []) as MpCountry[]);
+    setLanguages((l.data ?? []) as MpLanguage[]);
+    setSingers((s.data ?? []) as MpSinger[]);
+  }, []);
+  useEffect(() => { void reload(); }, [reload]);
+  return { countries, languages, singers, setSingers, reload };
+}
+
+// ------------------------------------------------------------ ratings
+
+/** What a rating is about (mp_ratings.target_type, enum mp_rating_target). */
+export type MpRatingTarget = 'song' | 'singer' | 'album';
+export type MpRatingStat = { avg: number; count: number };
+
+/**
+ * Average / count for each id, plus the signed-in user's own rating.
+ * rate(id, n) sets it; rating the same value again clears it.
+ */
+export function useMpRatings(target: MpRatingTarget, ids: string[], userId: string | null) {
+  const [stats, setStats] = useState<Record<string, MpRatingStat>>({});
+  const [mine, setMine] = useState<Record<string, number>>({});
+  const key = [...ids].sort().join(',');
+
+  const reload = useCallback(async () => {
+    const list = key ? key.split(',') : [];
+    if (!list.length) { setStats({}); setMine({}); return; }
+    const [s, m] = await Promise.all([
+      supabase.from('mp_rating_stats').select('target_id, avg_rating, rating_count').eq('target_type', target).in('target_id', list),
+      userId
+        ? supabase.from('mp_ratings').select('target_id, rating').eq('target_type', target).eq('user_id', userId).in('target_id', list)
+        : Promise.resolve({ data: [], error: null }),
+    ]);
+    setStats(Object.fromEntries((s.data ?? []).map(r => [r.target_id as string, { avg: Number(r.avg_rating), count: r.rating_count as number }])));
+    setMine(Object.fromEntries((m.data ?? []).map(r => [r.target_id as string, r.rating as number])));
+  }, [target, key, userId]);
+
+  useEffect(() => { void reload(); }, [reload]);
+
+  const rate = useCallback(async (id: string, rating: number) => {
+    if (!userId) return;
+    const { error } = mine[id] === rating
+      ? await supabase.from('mp_ratings').delete().eq('target_type', target).eq('target_id', id).eq('user_id', userId)
+      : await supabase.from('mp_ratings').upsert(
+        [{ target_type: target, target_id: id, user_id: userId, rating, updated_at: new Date().toISOString() }],
+        { onConflict: 'target_type,target_id,user_id' },
+      );
+    if (error) return toast.error(errorMessage(error, 'Could not save the rating'));
+    await reload();
+  }, [target, userId, mine, reload]);
+
+  return { stats, mine, rate, reload };
 }
 
 /** Reads an audio file's length in the browser before upload. */

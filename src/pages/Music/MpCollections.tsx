@@ -6,14 +6,15 @@ import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
 import {
-  COLLECTION_SELECT, SONG_SELECT, deleteMusicFile, formatDuration, uploadMusicFile, useMpGenres, useMpUserId,
+  COLLECTION_SELECT, SONG_SELECT, deleteMusicFile, formatDuration, songArtist, uploadMusicFile, useMpGenres, useMpLookups, useMpRatings, useMpUserId,
   type MpCollection, type MpSong,
 } from '../../lib/music';
 import { usePlayer } from '../../lib/MusicPlayerContext';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
-import { MpCover, MpPlayButton, MpPlayingBars } from '../../components/music/MpUi';
+import { MpCover, MpPlayButton, MpPlayingBars, MpStars } from '../../components/music/MpUi';
+import { MpSingerPicker } from '../../components/music/MpSongForm';
 import { EMPTY_FILTERS, fetchSongs, MpSongFilterBar, type SongFilters } from '../../components/music/MpSongFilters';
 import { PfPageHeader, PfTabs } from '../Portfolio/PfPageHeader';
 
@@ -30,7 +31,8 @@ const CollectionForm = ({ userId, collection, onClose, onSaved }: {
   const input = useRef<HTMLInputElement>(null);
   const [kind, setKind] = useState<'album' | 'mix'>(collection?.kind ?? 'album');
   const [title, setTitle] = useState(collection?.title ?? '');
-  const [artist, setArtist] = useState(collection?.artist ?? '');
+  const { singers, setSingers } = useMpLookups();
+  const [singerIds, setSingerIds] = useState<string[]>(collection?.singer_id ? [collection.singer_id] : []);
   const [year, setYear] = useState(collection?.release_year ? String(collection.release_year) : '');
   const [description, setDescription] = useState(collection?.description ?? '');
   const [coverFile, setCoverFile] = useState<File | null>(null);
@@ -43,7 +45,7 @@ const CollectionForm = ({ userId, collection, onClose, onSaved }: {
     try {
       const coverId = coverFile ? await uploadMusicFile(coverFile, 'image', userId) : collection?.cover_file_id ?? null;
       const row = {
-        kind, title: title.trim(), artist: kind === 'album' ? artist.trim() || null : null,
+        kind, title: title.trim(), singer_id: kind === 'album' ? singerIds[0] ?? null : null,
         release_year: year.trim() ? Number(year) : null, description: description.trim() || null,
         cover_file_id: coverId, updated_at: new Date().toISOString(),
       };
@@ -93,10 +95,10 @@ const CollectionForm = ({ userId, collection, onClose, onSaved }: {
         </div>
         <div className="grid grid-cols-2 gap-3">
           {kind === 'album' && (
-            <label className="block">
-              <span className={label}>{t('mp.form.artist')}</span>
-              <input value={artist} onChange={e => setArtist(e.target.value)} className={`${pfInputClass} h-10`} />
-            </label>
+            <div>
+              <span className={label}>{t('mp.singer')}</span>
+              <MpSingerPicker userId={userId} singers={singers} onSingersChange={setSingers} value={singerIds} onChange={setSingerIds} max={1} />
+            </div>
           )}
           <label className="block">
             <span className={label}>{t('mp.year')}</span>
@@ -168,7 +170,7 @@ export const MpCollections = () => {
               </div>
               <div className="mt-2 font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">{c.title}</div>
               <div className="text-xs text-gray-500 truncate">
-                {t(`mp.kind.${c.kind}`)} · {c.songs?.[0]?.count ?? 0} {t('mp.songs')}{c.artist ? ` · ${c.artist}` : ''}
+                {t(`mp.kind.${c.kind}`)} · {c.songs?.[0]?.count ?? 0} {t('mp.songs')}{c.singer ? ` · ${c.singer.name}` : ''}
               </div>
             </button>
           ))}
@@ -202,6 +204,7 @@ export const MpCollectionDetail = () => {
   const [filters, setFilters] = useState<SongFilters>(EMPTY_FILTERS);
   const [found, setFound] = useState<MpSong[]>([]);
   const [busy, setBusy] = useState(false);
+  const albumRating = useMpRatings('album', collection?.kind === 'album' ? [collection.id] : [], userId);
 
   const load = useCallback(async () => {
     if (!id) return;
@@ -273,8 +276,11 @@ export const MpCollectionDetail = () => {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 truncate">{collection.title}</h2>
           {collection.description && <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{collection.description}</p>}
           <div className="text-sm text-gray-500">
-            {[collection.artist, collection.release_year, `${songs.length} ${t('mp.songs')}`, formatDuration(total)].filter(Boolean).join(' · ')}
+            {[collection.singer?.name, collection.release_year, `${songs.length} ${t('mp.songs')}`, formatDuration(total)].filter(Boolean).join(' · ')}
           </div>
+          {collection.kind === 'album' && (
+            <MpStars stat={albumRating.stats[collection.id]} mine={albumRating.mine[collection.id]} onRate={n => void albumRating.rate(collection.id, n)} size={18} />
+          )}
           <div className="flex flex-wrap gap-2 pt-1">
             <Button onClick={() => player.playList(songs)} disabled={!songs.length}><Play size={16} className="mr-1" fill="currentColor" />{t('mp.playAll')}</Button>
             <Button variant="outline" disabled={!songs.length} onClick={() => { player.setShuffle(true); player.playList(songs, Math.floor(Math.random() * songs.length)); }}>
@@ -305,7 +311,7 @@ export const MpCollectionDetail = () => {
                 <MpCover url={s.cover?.url} color={s.genre?.color} className="w-9 h-9" rounded="rounded" />
                 <div className="flex-1 min-w-0">
                   <div className="text-sm font-medium truncate text-gray-900 dark:text-gray-100">{s.title}</div>
-                  <div className="text-xs text-gray-500 truncate">{s.artist || t('mp.unknownArtist')}{s.genre ? ` · ${s.genre.name}` : ''}</div>
+                  <div className="text-xs text-gray-500 truncate">{songArtist(s) || t('mp.unknownArtist')}{s.genre ? ` · ${s.genre.name}` : ''}</div>
                 </div>
                 {inIt.has(s.id)
                   ? <span className="text-xs text-gray-400">{t('mp.collections.added')}</span>
@@ -331,7 +337,7 @@ export const MpCollectionDetail = () => {
                   <MpPlayButton song={s} list={songs} size={32} />
                   <div className="flex-1 min-w-0">
                     <div className={`text-sm font-semibold truncate ${isCurrent ? 'text-primary' : 'text-gray-900 dark:text-gray-100'}`}>{s.title}</div>
-                    <div className="text-xs text-gray-500 truncate">{s.artist || t('mp.unknownArtist')}</div>
+                    <div className="text-xs text-gray-500 truncate">{songArtist(s) || t('mp.unknownArtist')}</div>
                   </div>
                   <span className="text-xs tabular-nums text-gray-500">{formatDuration(s.duration_seconds)}</span>
                   {mine && (
