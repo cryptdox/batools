@@ -6,9 +6,11 @@ import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
 import {
-  COLLECTION_SELECT, SONG_SELECT, deleteMusicFile, formatDuration, songArtist, useMpGenres, useMpLookups, useMpRatings, useMpUserId, withCover,
+  COLLECTION_SELECT, MP_COLLECTION_MAX, SONG_SELECT, deleteMusicFile, formatDuration, songArtist, useMpGenres, useMpLookups, useMpRatings, useMpUserId, withCover,
   type MpCollection, type MpSong,
 } from '../../lib/music';
+
+const isFullError = (e: { message?: string; hint?: string } | null) => !!e && (e.hint === 'mp_collection_full' || /at most 20 songs/.test(e.message ?? ''));
 import { usePlayer } from '../../lib/MusicPlayerContext';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
@@ -265,10 +267,12 @@ export const MpCollectionDetail = () => {
   const songs = links.map(l => l.song);
   const total = songs.reduce((s, x) => s + (x.duration_seconds ?? 0), 0);
 
+  const full = links.length >= MP_COLLECTION_MAX;
   const addSong = async (s: MpSong) => {
     if (!id || !userId) return;
+    if (full) return toast.error(t('mp.collections.full'));
     const { error } = await supabase.from('mp_collection_songs').insert([{ collection_id: id, song_id: s.id, position: (links.at(-1)?.position ?? 0) + 1, added_by: userId }]);
-    if (error) return toast.error(errorMessage(error, t('pf.common.saveError')));
+    if (error) return toast.error(isFullError(error) ? t('mp.collections.full') : errorMessage(error, t('pf.common.saveError')));
     await load();
   };
   const removeLink = async (l: Linked) => {
@@ -312,7 +316,7 @@ export const MpCollectionDetail = () => {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 truncate">{collection.title}</h2>
           {collection.description && <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{collection.description}</p>}
           <div className="text-sm text-gray-500">
-            {[collectionArtist(collection), collection.release_year, `${songs.length} ${t('mp.songs')}`, formatDuration(total)].filter(Boolean).join(' · ')}
+            {[collectionArtist(collection), collection.release_year, t('mp.collections.songCount').replace('{n}', String(songs.length)), formatDuration(total)].filter(Boolean).join(' · ')}
           </div>
           <div className="text-xs text-gray-500">
             {[
@@ -331,7 +335,7 @@ export const MpCollectionDetail = () => {
             </Button>
             {mine && (
               <>
-                <Button variant="outline" onClick={() => setAdding(a => !a)}><Plus size={16} className="mr-1" />{t('mp.collections.addSongs')}</Button>
+                <Button variant="outline" onClick={() => setAdding(a => !a)} disabled={full && !adding} title={full ? t('mp.collections.full') : undefined}><Plus size={16} className="mr-1" />{t('mp.collections.addSongs')}</Button>
                 <Button variant="ghost" onClick={() => setEditing(true)}><Pencil size={15} /></Button>
                 <Button variant="ghost" onClick={() => setConfirmDelete(true)}><Trash2 size={15} className="text-danger" /></Button>
               </>
@@ -346,6 +350,7 @@ export const MpCollectionDetail = () => {
             <h3 className="font-semibold text-gray-900 dark:text-gray-100">{t('mp.collections.findSongs')}</h3>
             <button className="p-1 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => setAdding(false)}><X size={16} /></button>
           </div>
+          {full && <p className="text-sm rounded-md bg-warning/10 border border-warning/30 text-warning px-3 py-2">{t('mp.collections.full')}</p>}
           <MpSongFilterBar value={filters} onChange={setFilters} genres={genres} showCollection={false} />
           <ul className="divide-y divide-gray-100 dark:divide-gray-700 max-h-80 overflow-y-auto">
             {found.length === 0 && <li className="p-3 text-sm text-gray-500">{t('pf.common.empty')}</li>}
@@ -358,7 +363,7 @@ export const MpCollectionDetail = () => {
                 </div>
                 {inIt.has(s.id)
                   ? <span className="text-xs text-gray-400">{t('mp.collections.added')}</span>
-                  : <Button size="sm" variant="outline" onClick={() => void addSong(s)}><Plus size={13} className="mr-1" />{t('pf.common.add')}</Button>}
+                  : <Button size="sm" variant="outline" onClick={() => void addSong(s)} disabled={full}><Plus size={13} className="mr-1" />{t('pf.common.add')}</Button>}
               </li>
             ))}
           </ul>

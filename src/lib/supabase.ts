@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { loadSession } from './iam'
 
 export type AttendanceState = 'NO_ENTRY' | 'ENTRY' | 'CONSIDER_ENTRY' | 'LEAVE'
 
@@ -67,4 +68,15 @@ if (!supabaseUrl || !supabaseKey) {
   throw new Error("Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Please provide this in your .env file (Vite requires the VITE_ prefix).");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+// Every request carries the signed-in user's IAM access token. The mp_ (music)
+// tables and the music bucket only accept writes with a valid one (migration
+// 047_mp_write_guard), because the anon key is public in the mumu app.
+const withIamToken: typeof fetch = (input, init) => {
+  const token = loadSession()?.accessToken;
+  if (!token) return fetch(input, init);
+  const headers = new Headers(init?.headers);
+  headers.set('x-iam-token', token);
+  return fetch(input, { ...init, headers });
+};
+
+export const supabase = createClient(supabaseUrl, supabaseKey, { global: { fetch: withIamToken } })

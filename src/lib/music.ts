@@ -80,6 +80,9 @@ export async function withCover<T>(
 }
 
 /** Song row with its files, genre, country, language and singers, through the named FKs. */
+/** An album or mix holds at most this many songs (also enforced in the DB: mp_collection_songs_limit). */
+export const MP_COLLECTION_MAX = 20;
+
 export const SONG_SELECT =
   '*, audio:mp_files!mp_songs_audio_fkey(id, url, provider, bucket, path), cover:mp_files!mp_songs_cover_fkey(id, url, provider, bucket, path), genre:mp_genres!mp_songs_genre_fkey(*)'
   + ', country:mp_countries!mp_songs_country_fkey(id, name, code), language:mp_languages!mp_songs_language_fkey(id, name, native_name, code)'
