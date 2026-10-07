@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { FileAudio, ImagePlus, Search, X, Plus, Disc3, ListMusic, Mic2 } from 'lucide-react';
+import { FileAudio, ImagePlus, Search, X, Plus, Disc3, ListMusic, Mic2, Pencil, Trash2, Ban } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
 import {
-  deleteMusicFile, discardUploads, findSimilarSongs, formatDuration, MOODS, songArtist, readDuration, SINGER_FIELDS, SOURCE_FIELDS, SOURCE_KINDS, titleFromFile, uploadMusicFile, useMpLookups,
-  type MpGenre, type MpSinger, type MpSong, type MpSource, type MpSourceKind,
+  deleteMusicFile, deleteSong, discardUploads, findSimilarSongs, isDuplicate, formatDuration, MOODS, songArtist, readDuration, SINGER_FIELDS, SOURCE_FIELDS, SOURCE_KINDS, titleFromFile, uploadMusicFile, useMpLookups,
+  type MpGenre, type MpSimilarSong, type MpSinger, type MpSong, type MpSource, type MpSourceKind,
 } from '../../lib/music';
 import { Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
@@ -102,6 +102,7 @@ export const MpSourcePicker = ({ userId, sources, onSourcesChange, value, onChan
       </select>
       <MpCombo
         className="flex-1 min-w-0"
+        limit={10}
         items={sources.filter(s => s.kind === kind).map(s => ({ id: s.id, label: s.name, hint: s.release_year ? String(s.release_year) : null }))}
         value={value}
         onChange={onChange}
@@ -149,8 +150,12 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
   const [mood, setMood] = useState(song?.mood ?? '');
   // A new upload starts at this year; editable (clear it for "unknown").
   const [year, setYear] = useState(song ? (song.release_year ? String(song.release_year) : '') : String(new Date().getFullYear()));
-  const [similar, setSimilar] = useState<MpSong[]>([]);
+  const [similar, setSimilar] = useState<MpSimilarSong[]>([]);
   const [similarDismissed, setSimilarDismissed] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [deletedAny, setDeletedAny] = useState(false);
+  // A new song this close to an existing one is a duplicate: no upload.
+  const duplicate = !song ? similar.find(isDuplicate) ?? null : null;
   const [tags, setTags] = useState((song?.tags ?? []).join(', '));
   const [description, setDescription] = useState(song?.description ?? '');
   const [lyrics, setLyrics] = useState(song?.lyrics ?? '');
@@ -178,11 +183,26 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
   }, [song]);
 
   // New uploads: look for songs already in the library with a similar title.
+  const checkSimilar = useCallback(() => { if (!song) void findSimilarSongs(title).then(setSimilar); }, [song, title]);
   useEffect(() => {
-    if (song) return;
-    const id = setTimeout(() => { void findSimilarSongs(title).then(setSimilar); }, 350);
+    const id = setTimeout(checkSimilar, 350);
     return () => clearTimeout(id);
-  }, [song, title]);
+  }, [checkSimilar]);
+
+  // Deleted an existing song from the list: the library must reload on close.
+  const close = () => (deletedAny ? onSaved() : onClose());
+
+  const removeExisting = async (s: MpSong) => {
+    try {
+      await deleteSong(s, userId);
+      toast.success(t('pf.common.deleted'));
+      setConfirmDelete(null);
+      checkSimilar();
+      setDeletedAny(true);
+    } catch (e) {
+      toast.error(errorMessage(e, t('pf.common.deleteError')));
+    }
+  };
 
   useEffect(() => () => { if (coverFile && coverPreview) URL.revokeObjectURL(coverPreview); }, [coverFile, coverPreview]);
 
@@ -212,7 +232,7 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
   };
 
   const yearNum = year.trim() ? Number(year) : null;
-  const valid = title.trim() !== '' && (song || audioFile) && (yearNum === null || (Number.isInteger(yearNum) && yearNum >= 1800 && yearNum <= 2200));
+  const valid = title.trim() !== '' && (song || audioFile) && !duplicate && (yearNum === null || (Number.isInteger(yearNum) && yearNum >= 1800 && yearNum <= 2200));
 
   const save = async () => {
     if (!valid) return;
@@ -277,7 +297,10 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
       console.error(e);
       // The song row never took the new files: don't leave them in storage.
       if (!songSaved) await discardUploads(uploaded);
-      toast.error(errorMessage(e, t('pf.upload.error')));
+      // The DB refuses near-duplicate titles too (mp_songs_block_duplicate).
+      const code = (e as { code?: string })?.code;
+      toast.error(code === '23505' ? t('mp.form.duplicateBlocked') : errorMessage(e, t('pf.upload.error')));
+      if (code === '23505') checkSimilar();
     } finally {
       setSaving(false);
       setStep('');
@@ -289,7 +312,7 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
   const exact = collections.some(c => c.title.toLowerCase() === needle);
 
   return (
-    <Modal isOpen onClose={() => !saving && onClose()} title={song ? t('mp.form.edit') : t('mp.form.upload')} className="max-w-3xl">
+    <Modal isOpen onClose={() => !saving && close()} title={song ? t('mp.form.edit') : t('mp.form.upload')} className="max-w-3xl">
       <div className="space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-[10rem_minmax(0,1fr)] gap-4">
           <div className="space-y-2">
@@ -322,27 +345,45 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
               <span className={label}>{t('mp.form.title')} <span className="text-danger">*</span></span>
               <input value={title} onChange={e => setTitle(e.target.value)} className={`${pfInputClass} h-10`} />
             </label>
-            {!song && similar.length > 0 && similarDismissed !== title && (
-              <div className="-mt-1 rounded-lg border border-warning/40 bg-warning/5 overflow-hidden">
-                <div className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-gray-700 dark:text-gray-300">
-                  <span className="flex-1">{t('mp.form.similarFound')}</span>
-                  <button type="button" className="text-gray-500 hover:underline" onClick={() => setSimilarDismissed(title)}>{t('mp.form.notDuplicate')}</button>
+            {!song && similar.length > 0 && (duplicate || similarDismissed !== title) && (
+              <div className={`-mt-1 rounded-lg border overflow-hidden ${duplicate ? 'border-danger/40 bg-danger/5' : 'border-warning/40 bg-warning/5'}`}>
+                <div className="flex items-start gap-2 px-3 py-1.5 text-xs font-medium text-gray-700 dark:text-gray-300">
+                  {duplicate && <Ban size={14} className="text-danger shrink-0 mt-px" />}
+                  <span className="flex-1">
+                    {duplicate
+                      ? duplicate.uploaded_by === userId ? t('mp.form.duplicateMine') : t('mp.form.duplicateOther')
+                      : t('mp.form.similarFound')}
+                  </span>
+                  {!duplicate && <button type="button" className="text-gray-500 hover:underline shrink-0" onClick={() => setSimilarDismissed(title)}>{t('mp.form.notDuplicate')}</button>}
                 </div>
-                <ul className="divide-y divide-warning/20 max-h-56 overflow-y-auto">
+                <ul className="divide-y divide-gray-200/60 dark:divide-gray-700 max-h-56 overflow-y-auto">
                   {similar.map(s => {
                     const mine = s.uploaded_by === userId;
+                    const dup = isDuplicate(s);
                     return (
                       <li key={s.id} className="flex items-center gap-2 px-3 py-1.5">
                         <MpCover url={s.cover?.url} color={s.genre?.color} className="w-8 h-8" rounded="rounded" />
                         <MpPlayButton song={s} size={26} />
-                        <button type="button" disabled={!mine || saving} onClick={() => onEditOther?.(s)}
-                          title={mine ? t('mp.form.editThis') : t('mp.form.notYours')}
-                          className={`flex-1 min-w-0 text-left ${mine ? 'hover:text-primary' : 'cursor-default'}`}>
-                          <span className="block text-sm font-medium truncate text-gray-900 dark:text-gray-100">{s.title}</span>
+                        <div className="flex-1 min-w-0">
+                          <span className="block text-sm font-medium truncate text-gray-900 dark:text-gray-100" title={s.title}>{s.title}</span>
                           <span className="block text-[11px] text-gray-500 truncate">
-                            {[songArtist(s), s.release_year, mine ? t('mp.form.editThis') : t('mp.form.notYours')].filter(Boolean).join(' · ')}
+                            {[songArtist(s), s.release_year, `${Math.round(s.score * 100)}% ${t('mp.form.match')}`, !mine && t('mp.form.notYours')].filter(Boolean).join(' · ')}
                           </span>
-                        </button>
+                        </div>
+                        {dup && <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-danger/15 text-danger shrink-0">{t('mp.form.duplicate')}</span>}
+                        {mine && (confirmDelete === s.id ? (
+                          <span className="flex items-center gap-1 shrink-0">
+                            <Button size="sm" variant="danger" type="button" onClick={() => void removeExisting(s)}>{t('pf.common.delete')}</Button>
+                            <Button size="sm" variant="ghost" type="button" onClick={() => setConfirmDelete(null)}>{t('pf.common.cancel')}</Button>
+                          </span>
+                        ) : (
+                          <span className="flex shrink-0">
+                            <button type="button" disabled={saving} onClick={() => onEditOther?.(s)} title={t('mp.form.editThis')}
+                              className="p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"><Pencil size={14} /></button>
+                            <button type="button" disabled={saving} onClick={() => setConfirmDelete(s.id)} title={t('pf.common.delete')}
+                              className="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"><Trash2 size={14} className="text-danger" /></button>
+                          </span>
+                        ))}
                       </li>
                     );
                   })}
@@ -454,7 +495,7 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
 
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
           {step && <span className="mr-auto text-sm text-gray-500">{step}</span>}
-          <Button variant="ghost" onClick={onClose} disabled={saving}>{t('pf.common.cancel')}</Button>
+          <Button variant="ghost" onClick={close} disabled={saving}>{t('pf.common.cancel')}</Button>
           <Button onClick={save} disabled={saving || !valid}>{saving ? t('pf.common.saving') : song ? t('pf.common.save') : t('mp.form.uploadBtn')}</Button>
         </div>
       </div>

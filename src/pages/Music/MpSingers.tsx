@@ -8,6 +8,7 @@ import { errorMessage } from '../../lib/portfolio';
 import { deleteMusicFile, FILE_FIELDS, useMpLookups, useMpRatings, useMpUserId, withCover, type MpFile, type MpSinger, type MpSourceKind } from '../../lib/music';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
+import { Pagination, usePagination } from '../../components/ui/Pagination';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
 import { MpCover, MpCoverInput, MpStars } from '../../components/music/MpUi';
 import { activeItems } from '../../components/music/MpSongForm';
@@ -55,7 +56,9 @@ export const MpSingers = () => {
 
   const needle = search.trim().toLowerCase();
   const shown = rows.filter(r => !needle || r.name.toLowerCase().includes(needle));
-  const ratings = useMpRatings('singer', shown.map(r => r.id), userId);
+  const pg = usePagination(shown);
+  const ratings = useMpRatings('singer', pg.pageRows.map(r => r.id), userId);
+  useEffect(() => { pg.setPage(1); }, [needle]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const open = (r: Row | 'new') => {
     setForm(r);
@@ -115,7 +118,7 @@ export const MpSingers = () => {
         <div className={`${card} p-12 text-center text-gray-500`}>{t('mp.singersPage.empty')}</div>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {shown.map(r => (
+          {pg.pageRows.map(r => (
             <div key={r.id} className={`${card} p-4 flex gap-3 cursor-pointer hover:shadow-md transition-shadow`} onClick={() => navigate(`/mp?singer=${r.id}`)}>
               {r.cover
                 ? <MpCover url={r.cover.url} className="w-14 h-14" rounded="rounded-full" alt={r.name} />
@@ -147,6 +150,11 @@ export const MpSingers = () => {
               </div>
             </div>
           ))}
+        </div>
+      )}
+      {!loading && pg.total > 0 && (
+        <div className={`${card} overflow-hidden`}>
+          <Pagination page={pg.page} pageCount={pg.pageCount} total={pg.total} pageSize={pg.pageSize} onPageChange={pg.setPage} onPageSizeChange={pg.setPageSize} />
         </div>
       )}
 

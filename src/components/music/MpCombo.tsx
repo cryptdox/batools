@@ -8,13 +8,13 @@ export type ComboItem = { id: string; label: string; hint?: string | null };
 const LIMIT = 5;
 
 /**
- * Searchable picker: focus shows the first 5 items, typing narrows them
+ * Searchable picker: focus shows the first `limit` items (default 5), typing narrows them
  * (names starting with the text come first). Shows the picked item's label
  * while closed. With `multi`, the box empties after each pick (the caller
  * shows the picked items, and passes them in `exclude`). With `onCreate`,
  * an unknown name can be added on the spot.
  */
-export const MpCombo = ({ items, value, onChange, placeholder, onCreate, createLabel, exclude = [], multi = false, className = '' }: {
+export const MpCombo = ({ items, value, onChange, placeholder, onCreate, createLabel, exclude = [], multi = false, limit = LIMIT, className = '' }: {
   items: ComboItem[];
   value: string;
   onChange: (id: string) => void;
@@ -23,6 +23,7 @@ export const MpCombo = ({ items, value, onChange, placeholder, onCreate, createL
   createLabel?: (name: string) => string;
   exclude?: string[];
   multi?: boolean;
+  limit?: number;
   className?: string;
 }) => {
   const { t } = useLanguage();
@@ -37,7 +38,7 @@ export const MpCombo = ({ items, value, onChange, placeholder, onCreate, createL
   const matches = (needle
     ? [...pool.filter(i => i.label.toLowerCase().startsWith(needle)), ...pool.filter(i => !i.label.toLowerCase().startsWith(needle) && i.label.toLowerCase().includes(needle))]
     : pool
-  ).slice(0, LIMIT);
+  ).slice(0, limit);
   const exact = items.some(i => i.label.toLowerCase() === needle);
   const canCreate = !!onCreate && !!needle && !exact;
   const total = matches.length + (canCreate ? 1 : 0);
@@ -100,3 +101,28 @@ export const MpCombo = ({ items, value, onChange, placeholder, onCreate, createL
     </div>
   );
 };
+
+/** Several items as removable chips, plus a 5-match search box to add more. */
+export const MpMultiPick = ({ items, value, onChange, placeholder }: {
+  items: ComboItem[];
+  value: string[];
+  onChange: (ids: string[]) => void;
+  placeholder?: string;
+}) => (
+  <div>
+    {value.length > 0 && (
+      <div className="flex flex-wrap gap-1.5 mb-2">
+        {value.map(id => {
+          const it = items.find(x => x.id === id);
+          return it && (
+            <span key={id} className="inline-flex items-center gap-1 pl-2 pr-1 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary max-w-full">
+              <span className="truncate">{it.label}</span>
+              <button type="button" onClick={() => onChange(value.filter(x => x !== id))} className="p-0.5 rounded-full hover:bg-black/10" aria-label={`Remove ${it.label}`}><X size={12} /></button>
+            </span>
+          );
+        })}
+      </div>
+    )}
+    <MpCombo multi items={items} value="" exclude={value} onChange={id => onChange([...value, id])} placeholder={placeholder} />
+  </div>
+);

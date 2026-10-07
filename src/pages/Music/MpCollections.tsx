@@ -1,20 +1,22 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Plus, Pencil, Trash2, Play, Shuffle, ArrowLeft, ArrowUp, ArrowDown, X, ImagePlus, Disc3, ListMusic, Search, AlertTriangle } from 'lucide-react';
+import { Plus, Pencil, Trash2, Play, Shuffle, ArrowLeft, ArrowUp, ArrowDown, X, Disc3, ListMusic, Search, AlertTriangle } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
 import {
-  COLLECTION_SELECT, SONG_SELECT, deleteMusicFile, discardUploads, formatDuration, songArtist, uploadMusicFile, useMpGenres, useMpLookups, useMpRatings, useMpUserId,
+  COLLECTION_SELECT, SONG_SELECT, deleteMusicFile, formatDuration, songArtist, useMpGenres, useMpLookups, useMpRatings, useMpUserId, withCover,
   type MpCollection, type MpSong,
 } from '../../lib/music';
 import { usePlayer } from '../../lib/MusicPlayerContext';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
+import { Pagination, usePagination } from '../../components/ui/Pagination';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
-import { MpCover, MpPlayButton, MpPlayingBars, MpStars } from '../../components/music/MpUi';
-import { MpSingerPicker } from '../../components/music/MpSongForm';
+import { MpCover, MpCoverInput, MpPlayButton, MpPlayingBars, MpStars } from '../../components/music/MpUi';
+import { MpCombo, MpMultiPick } from '../../components/music/MpCombo';
+import { activeItems, MpSingerPicker, MpSourcePicker } from '../../components/music/MpSongForm';
 import { EMPTY_FILTERS, fetchSongs, MpSongFilterBar, type SongFilters } from '../../components/music/MpSongFilters';
 import { PfPageHeader, PfTabs } from '../Portfolio/PfPageHeader';
 
@@ -28,44 +30,56 @@ const CollectionForm = ({ userId, collection, onClose, onSaved }: {
   userId: string; collection: MpCollection | null; onClose: () => void; onSaved: (id: string) => void;
 }) => {
   const { t } = useLanguage();
-  const input = useRef<HTMLInputElement>(null);
+  const { singers, setSingers, sources, setSources, countries, languages } = useMpLookups();
   const [kind, setKind] = useState<'album' | 'mix'>(collection?.kind ?? 'album');
   const [title, setTitle] = useState(collection?.title ?? '');
-  const { singers, setSingers } = useMpLookups();
-  const [singerIds, setSingerIds] = useState<string[]>(collection?.singer_id ? [collection.singer_id] : []);
-  const [year, setYear] = useState(collection?.release_year ? String(collection.release_year) : '');
+  const [singerIds, setSingerIds] = useState<string[]>(
+    [...(collection?.singers ?? [])].sort((a, b) => a.position - b.position).map(x => x.singer?.id).filter(Boolean) as string[]);
+  const [languageIds, setLanguageIds] = useState<string[]>((collection?.languages ?? []).map(x => x.language?.id).filter(Boolean) as string[]);
+  const [sourceId, setSourceId] = useState(collection?.source_id ?? '');
+  const [countryId, setCountryId] = useState(collection?.country_id ?? '');
+  const [year, setYear] = useState(collection ? (collection.release_year ? String(collection.release_year) : '') : String(new Date().getFullYear()));
   const [description, setDescription] = useState(collection?.description ?? '');
-  const [coverFile, setCoverFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(collection?.cover?.url ?? null);
+  const [cover, setCover] = useState<{ file: File | null; remove: boolean; preview: string | null }>({ file: null, remove: false, preview: collection?.cover?.url ?? null });
   const [saving, setSaving] = useState(false);
 
+  const yearNum = year.trim() ? Number(year) : null;
+  const valid = title.trim() !== '' && (yearNum === null || (Number.isInteger(yearNum) && yearNum >= 1800 && yearNum <= 2200));
+
   const save = async () => {
-    if (!title.trim()) return;
+    if (!valid) return;
     setSaving(true);
-    let uploadedId: string | null = null;
     try {
-      if (coverFile) uploadedId = await uploadMusicFile(coverFile, 'image', userId);
-      const coverId = uploadedId ?? collection?.cover_file_id ?? null;
-      const row = {
-        kind, title: title.trim(), singer_id: kind === 'album' ? singerIds[0] ?? null : null,
-        release_year: year.trim() ? Number(year) : null, description: description.trim() || null,
-        cover_file_id: coverId, updated_at: new Date().toISOString(),
-      };
-      let id = collection?.id;
-      if (collection) {
-        const { error } = await supabase.from('mp_collections').update(row).eq('id', collection.id).eq('created_by', userId);
-        if (error) throw error;
-        if (coverFile && collection.cover) await deleteMusicFile(collection.cover);
-      } else {
+      const id = await withCover({ file: cover.file, remove: cover.remove, current: collection?.cover, userId }, async coverId => {
+        const row = {
+          kind, title: title.trim(), release_year: yearNum, description: description.trim() || null,
+          source_id: sourceId || null, country_id: countryId || null, cover_file_id: coverId, updated_at: new Date().toISOString(),
+        };
+        if (collection) {
+          const { error } = await supabase.from('mp_collections').update(row).eq('id', collection.id).eq('created_by', userId);
+          if (error) throw error;
+          return collection.id;
+        }
         const { data, error } = await supabase.from('mp_collections').insert([{ ...row, created_by: userId }]).select('id').single();
         if (error) throw error;
-        id = data.id as string;
+        return data.id as string;
+      });
+      // Singers (in the picked order) and languages: rewrite the links.
+      if (collection) {
+        await supabase.from('mp_collection_singers').delete().eq('collection_id', id);
+        await supabase.from('mp_collection_languages').delete().eq('collection_id', id);
+      }
+      if (singerIds.length) {
+        const { error } = await supabase.from('mp_collection_singers').insert(singerIds.map((singer_id, i) => ({ collection_id: id, singer_id, position: i + 1 })));
+        if (error) throw error;
+      }
+      if (languageIds.length) {
+        const { error } = await supabase.from('mp_collection_languages').insert(languageIds.map(language_id => ({ collection_id: id, language_id })));
+        if (error) throw error;
       }
       toast.success(collection ? t('pf.common.updated') : t('pf.common.added'));
-      onSaved(id!);
+      onSaved(id);
     } catch (e) {
-      // The row was not saved: drop the cover just uploaded for it.
-      await discardUploads([uploadedId]);
       toast.error(errorMessage(e, t('pf.common.saveError')));
     } finally {
       setSaving(false);
@@ -73,16 +87,11 @@ const CollectionForm = ({ userId, collection, onClose, onSaved }: {
   };
 
   return (
-    <Modal isOpen onClose={() => !saving && onClose()} title={collection ? t('mp.collections.edit') : t('mp.collections.create')}>
+    <Modal isOpen onClose={() => !saving && onClose()} title={collection ? t('mp.collections.edit') : t('mp.collections.create')} className="max-w-2xl">
       <div className="space-y-4">
         <div className="flex gap-4">
-          <button type="button" onClick={() => input.current?.click()} className="relative group shrink-0">
-            <MpCover url={preview} className="w-28 h-28" rounded="rounded-xl" />
-            <span className="absolute inset-0 rounded-xl bg-black/0 group-hover:bg-black/40 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition"><ImagePlus size={20} /></span>
-          </button>
-          <input ref={input} type="file" accept="image/png,image/jpeg,image/webp,image/gif" className="hidden"
-            onChange={e => { const f = e.target.files?.[0]; if (f) { setCoverFile(f); setPreview(URL.createObjectURL(f)); } e.target.value = ''; }} />
-          <div className="flex-1 space-y-3">
+          <MpCoverInput url={cover.preview} onChange={setCover} />
+          <div className="flex-1 min-w-0 space-y-3">
             <div className="flex gap-2">
               {(['album', 'mix'] as const).map(k => (
                 <button key={k} type="button" onClick={() => setKind(k)}
@@ -97,13 +106,25 @@ const CollectionForm = ({ userId, collection, onClose, onSaved }: {
             </label>
           </div>
         </div>
+        <div>
+          <span className={label}>{t('mp.singers')}</span>
+          <MpSingerPicker userId={userId} singers={singers} onSingersChange={setSingers} value={singerIds} onChange={setSingerIds} />
+        </div>
+        <div>
+          <span className={label}>{t('mp.source')}</span>
+          <MpSourcePicker userId={userId} sources={sources} onSourcesChange={setSources} value={sourceId} onChange={setSourceId} />
+        </div>
+        <div>
+          <span className={label}>{t('mp.languages')}</span>
+          <MpMultiPick items={activeItems(languages, '', l => (l.native_name !== l.name ? l.native_name : null)).concat(
+            languages.filter(l => !l.is_active && languageIds.includes(l.id)).map(l => ({ id: l.id, label: l.name, hint: null })))}
+            value={languageIds} onChange={setLanguageIds} />
+        </div>
         <div className="grid grid-cols-2 gap-3">
-          {kind === 'album' && (
-            <div>
-              <span className={label}>{t('mp.singer')}</span>
-              <MpSingerPicker userId={userId} singers={singers} onSingersChange={setSingers} value={singerIds} onChange={setSingerIds} max={1} />
-            </div>
-          )}
+          <div>
+            <span className={label}>{t('mp.country')}</span>
+            <MpCombo items={activeItems(countries, countryId, c => c.code)} value={countryId} onChange={setCountryId} />
+          </div>
           <label className="block">
             <span className={label}>{t('mp.year')}</span>
             <input type="number" min={1800} max={2200} value={year} onChange={e => setYear(e.target.value)} className={`${pfInputClass} h-10`} />
@@ -115,12 +136,16 @@ const CollectionForm = ({ userId, collection, onClose, onSaved }: {
         </label>
         <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
           <Button variant="ghost" onClick={onClose} disabled={saving}>{t('pf.common.cancel')}</Button>
-          <Button onClick={save} disabled={saving || !title.trim()}>{saving ? t('pf.common.saving') : t('pf.common.save')}</Button>
+          <Button onClick={save} disabled={saving || !valid}>{saving ? t('pf.common.saving') : t('pf.common.save')}</Button>
         </div>
       </div>
     </Modal>
   );
 };
+
+/** "Singer A, Singer B" for an album / mix, in order. */
+const collectionArtist = (c: MpCollection) =>
+  [...(c.singers ?? [])].sort((a, b) => a.position - b.position).map(x => x.singer?.name).filter(Boolean).join(', ') || null;
 
 // ------------------------------------------------------------ list
 
@@ -146,6 +171,8 @@ export const MpCollections = () => {
   }, [kind, search]);
 
   useEffect(() => { const id = setTimeout(() => void load(), 250); return () => clearTimeout(id); }, [load]);
+  const pg = usePagination(items);
+  useEffect(() => { pg.setPage(1); }, [kind, search]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -164,7 +191,7 @@ export const MpCollections = () => {
         <div className={`${card} p-12 text-center text-gray-500`}>{t('mp.collections.empty')}</div>
       ) : (
         <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-          {items.map(c => (
+          {pg.pageRows.map(c => (
             <button key={c.id} onClick={() => navigate(`/mp/collections/${c.id}`)} className={`${card} p-3 text-left group hover:shadow-lg transition-shadow`}>
               <div className="relative">
                 <MpCover url={c.cover?.url} className="w-full aspect-square" rounded="rounded-lg" alt={c.title} />
@@ -174,10 +201,15 @@ export const MpCollections = () => {
               </div>
               <div className="mt-2 font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">{c.title}</div>
               <div className="text-xs text-gray-500 truncate">
-                {t(`mp.kind.${c.kind}`)} · {c.songs?.[0]?.count ?? 0} {t('mp.songs')}{c.singer ? ` · ${c.singer.name}` : ''}
+                {t(`mp.kind.${c.kind}`)} · {c.songs?.[0]?.count ?? 0} {t('mp.songs')}{collectionArtist(c) ? ` · ${collectionArtist(c)}` : ''}
               </div>
             </button>
           ))}
+        </div>
+      )}
+      {!loading && pg.total > 0 && (
+        <div className={`${card} overflow-hidden`}>
+          <Pagination page={pg.page} pageCount={pg.pageCount} total={pg.total} pageSize={pg.pageSize} onPageChange={pg.setPage} onPageSizeChange={pg.setPageSize} />
         </div>
       )}
       {form && userId && (
@@ -280,7 +312,14 @@ export const MpCollectionDetail = () => {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 truncate">{collection.title}</h2>
           {collection.description && <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{collection.description}</p>}
           <div className="text-sm text-gray-500">
-            {[collection.singer?.name, collection.release_year, `${songs.length} ${t('mp.songs')}`, formatDuration(total)].filter(Boolean).join(' · ')}
+            {[collectionArtist(collection), collection.release_year, `${songs.length} ${t('mp.songs')}`, formatDuration(total)].filter(Boolean).join(' · ')}
+          </div>
+          <div className="text-xs text-gray-500">
+            {[
+              collection.source && `${t(`mp.sourceKinds.${collection.source.kind}`)}: ${collection.source.name}`,
+              collection.country?.name,
+              collection.languages.map(l => l.language?.name).filter(Boolean).join(', '),
+            ].filter(Boolean).join(' · ')}
           </div>
           {collection.kind === 'album' && (
             <MpStars stat={albumRating.stats[collection.id]} mine={albumRating.mine[collection.id]} onRate={n => void albumRating.rate(collection.id, n)} size={18} />

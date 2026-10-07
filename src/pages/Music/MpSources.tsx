@@ -8,6 +8,7 @@ import { errorMessage } from '../../lib/portfolio';
 import { FILE_FIELDS, SOURCE_KINDS, deleteMusicFile, useMpLookups, useMpUserId, withCover, type MpFile, type MpSource, type MpSourceKind } from '../../lib/music';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
+import { Pagination, usePagination } from '../../components/ui/Pagination';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
 import { MpCombo } from '../../components/music/MpCombo';
 import { MpCover, MpCoverInput } from '../../components/music/MpUi';
@@ -62,12 +63,14 @@ export const MpSources = () => {
 
   const needle = search.trim().toLowerCase();
   const shown = rows.filter(r => (tab === 'all' || r.kind === tab) && (!needle || r.name.toLowerCase().includes(needle)));
+  const pg = usePagination(shown);
+  useEffect(() => { pg.setPage(1); }, [needle, tab]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const open = (r: Row | 'new') => {
     setForm(r);
     setKind(r === 'new' ? (tab === 'all' ? 'band' : tab) : r.kind);
     setName(r === 'new' ? search.trim() : r.name);
-    setYear(r === 'new' || !r.release_year ? '' : String(r.release_year));
+    setYear(r === 'new' ? String(new Date().getFullYear()) : r.release_year ? String(r.release_year) : '');
     setCountryId(r === 'new' ? '' : r.country_id ?? '');
     setDescription(r === 'new' ? '' : r.description ?? '');
     setCover({ file: null, remove: false, preview: r === 'new' ? null : r.cover?.url ?? null });
@@ -144,7 +147,7 @@ export const MpSources = () => {
         <div className={`${card} p-12 text-center text-gray-500`}>{t('mp.sources.empty')}</div>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {shown.map(r => {
+          {pg.pageRows.map(r => {
             const Icon = SOURCE_ICONS[r.kind];
             return (
               <div key={r.id} className={`${card} p-4 flex gap-3 cursor-pointer hover:shadow-md transition-shadow`} onClick={() => navigate(`/mp?source=${r.id}`)}>
@@ -171,6 +174,11 @@ export const MpSources = () => {
               </div>
             );
           })}
+        </div>
+      )}
+      {!loading && pg.total > 0 && (
+        <div className={`${card} overflow-hidden`}>
+          <Pagination page={pg.page} pageCount={pg.pageCount} total={pg.total} pageSize={pg.pageSize} onPageChange={pg.setPage} onPageSizeChange={pg.setPageSize} />
         </div>
       )}
 

@@ -44,9 +44,14 @@ export type MpSong = {
 };
 
 export type MpCollection = {
-  id: string; kind: 'album' | 'mix'; title: string; singer_id: string | null; description: string | null;
+  id: string; kind: 'album' | 'mix'; title: string; description: string | null;
+  source_id: string | null; country_id: string | null;
   release_year: number | null; cover_file_id: string | null; created_by: string; created_at: string;
-  cover: MpFile | null; singer: { id: string; name: string } | null; songs: { count: number }[];
+  cover: MpFile | null; songs: { count: number }[];
+  singers: { position: number; singer: { id: string; name: string } | null }[];
+  languages: { language: { id: string; name: string } | null }[];
+  source: Pick<MpSource, 'id' | 'kind' | 'name'> | null;
+  country: { id: string; name: string } | null;
 };
 
 export const FILE_FIELDS = 'id, url, provider, bucket, path';
@@ -82,7 +87,10 @@ export const SONG_SELECT =
   + ', source:mp_sources!mp_songs_source_fkey(id, kind, name)';
 
 export const COLLECTION_SELECT =
-  '*, cover:mp_files!mp_collections_cover_fkey(id, url, provider, bucket, path), singer:mp_singers!mp_collections_singer_fkey(id, name), songs:mp_collection_songs(count)';
+  '*, cover:mp_files!mp_collections_cover_fkey(id, url, provider, bucket, path), songs:mp_collection_songs(count)'
+  + ', singers:mp_collection_singers(position, singer:mp_singers!mp_collection_singers_singer_fkey(id, name))'
+  + ', languages:mp_collection_languages(language:mp_languages!mp_collection_languages_language_fkey(id, name))'
+  + ', source:mp_sources!mp_collections_source_fkey(id, kind, name), country:mp_countries!mp_collections_country_fkey(id, name)';
 
 /** The song's singers in order, e.g. "A, B"; null when none is set. */
 export const songArtist = (s: Pick<MpSong, 'singers'>) =>
@@ -140,12 +148,35 @@ export function useMpLookups() {
   return { countries, languages, singers, setSingers, sources, setSources, reload };
 }
 
-/** Songs whose title looks like `title` (mp_similar_songs, pg_trgm), best match first. */
-export async function findSimilarSongs(title: string, limit = 5): Promise<MpSong[]> {
+/**
+ * At or above this title score a new song counts as a duplicate: it cannot
+ * be uploaded (the DB trigger mp_songs_block_duplicate enforces the same).
+ */
+export const DUPLICATE_SCORE = 0.78;
+
+export type MpSimilarSong = MpSong & { score: number };
+
+/** Songs whose title looks like `title` (pg_trgm score 0..1), best match first. */
+export async function findSimilarSongs(title: string, limit = 5): Promise<MpSimilarSong[]> {
   if (title.trim().length < 3) return [];
-  const { data, error } = await supabase.rpc('mp_similar_songs', { p_title: title.trim(), p_limit: limit }).select(SONG_SELECT);
+  const { data: hits, error } = await supabase.rpc('mp_similar_song_scores', { p_title: title.trim(), p_limit: limit });
   if (error) { console.error(error); return []; }
-  return (data ?? []) as unknown as MpSong[];
+  const scores = new Map<string, number>(((hits ?? []) as { song_id: string; score: number }[]).map(h => [h.song_id, Number(h.score)]));
+  if (!scores.size) return [];
+  const { data } = await supabase.from('mp_songs').select(SONG_SELECT).in('id', [...scores.keys()]);
+  return ((data ?? []) as unknown as MpSong[])
+    .map(s => ({ ...s, score: scores.get(s.id) ?? 0 }))
+    .sort((a, b) => b.score - a.score);
+}
+
+export const isDuplicate = (s: { score: number } | null | undefined) => !!s && s.score >= DUPLICATE_SCORE;
+
+/** Deletes one of your songs, then its audio and cover files. */
+export async function deleteSong(song: MpSong, userId: string) {
+  const { error } = await supabase.from('mp_songs').delete().eq('id', song.id).eq('uploaded_by', userId);
+  if (error) throw error;
+  await deleteMusicFile(song.audio);
+  await deleteMusicFile(song.cover);
 }
 
 /** Title from a file name: drop the extension, underscores / dashes to spaces. */

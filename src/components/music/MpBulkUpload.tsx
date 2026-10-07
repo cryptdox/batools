@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { FileAudio, X, CheckCircle2, AlertCircle, AlertTriangle, Loader2 } from 'lucide-react';
+import { FileAudio, X, CheckCircle2, AlertCircle, AlertTriangle, Ban, Loader2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { discardUploads, findSimilarSongs, formatDuration, readDuration, titleFromFile, uploadMusicFile, type MpSong } from '../../lib/music';
+import { discardUploads, findSimilarSongs, formatDuration, isDuplicate, readDuration, titleFromFile, uploadMusicFile, type MpSimilarSong } from '../../lib/music';
 import { Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { pfInputClass } from '../portfolio/PfFieldInput';
@@ -15,7 +15,7 @@ const MAX_BYTES = 50 * 1024 * 1024;
 type Item = {
   key: string; file: File; title: string; duration: number | null;
   status: 'waiting' | 'uploading' | 'done' | 'failed'; error?: string;
-  similar?: MpSong | null;   // closest song already in the library, if any
+  similar?: MpSimilarSong | null;   // closest song already in the library, if any
 };
 
 /**
@@ -61,7 +61,8 @@ export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onCl
     setRunning(true);
     let ok = 0;
     for (const it of items) {
-      if (it.status === 'done') continue;
+      // Duplicates of a song already in the library are never uploaded.
+      if (it.status === 'done' || isDuplicate(it.similar)) continue;
       patch(it.key, { status: 'uploading', error: undefined });
       let audioId: string | null = null;
       try {
@@ -76,7 +77,10 @@ export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onCl
         ok++;
       } catch (e) {
         await discardUploads([audioId]);
-        patch(it.key, { status: 'failed', error: errorMessage(e, t('pf.upload.error')) });
+        // 23505: the DB found a near-duplicate (e.g. an earlier file in this batch).
+        const dup = (e as { code?: string })?.code === '23505';
+        patch(it.key, { status: 'failed', error: dup ? t('mp.form.duplicateBlocked') : errorMessage(e, t('pf.upload.error')) });
+        if (dup) void recheck(it.key, it.title);
       }
     }
     setRunning(false);
@@ -86,8 +90,9 @@ export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onCl
     }
   };
 
-  const pending = items.filter(i => i.status !== 'done');
-  const finished = items.length > 0 && pending.length === 0;
+  const blocked = items.filter(i => i.status !== 'done' && isDuplicate(i.similar));
+  const pending = items.filter(i => i.status !== 'done' && !isDuplicate(i.similar));
+  const finished = items.length > 0 && pending.length === 0 && blocked.length === 0;
   const valid = yearOk && pending.every(i => i.title.trim());
 
   return (
@@ -134,12 +139,17 @@ export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onCl
                     {it.file.name} · {(it.file.size / 1024 / 1024).toFixed(1)} MB{it.duration ? ` · ${formatDuration(it.duration)}` : ''}
                     {it.status === 'failed' && it.error && <span className="text-danger"> · {it.error}</span>}
                   </div>
-                  {it.similar && it.status !== 'done' && (
+                  {it.similar && it.status !== 'done' && (isDuplicate(it.similar) ? (
+                    <div className="flex items-center gap-1 text-[11px] text-danger truncate" title={it.similar.title}>
+                      <Ban size={12} className="shrink-0" />
+                      <span className="truncate">{t('mp.bulk.duplicate').replace('{title}', it.similar.title)}</span>
+                    </div>
+                  ) : (
                     <div className="flex items-center gap-1 text-[11px] text-warning truncate" title={it.similar.title}>
                       <AlertTriangle size={12} className="shrink-0" />
                       <span className="truncate">{t('mp.bulk.similar').replace('{title}', it.similar.title)}</span>
                     </div>
-                  )}
+                  ))}
                 </div>
                 {!running && it.status !== 'done' && (
                   <button type="button" className="p-1 rounded text-gray-400 hover:text-danger shrink-0" onClick={() => setItems(prev => prev.filter(x => x.key !== it.key))} aria-label={t('pf.common.delete')}>
@@ -154,7 +164,8 @@ export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onCl
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
           {items.length > 0 && (
             <span className="mr-auto text-sm text-gray-500">
-              {t('mp.bulk.progress').replace('{done}', String(items.length - pending.length)).replace('{total}', String(items.length))}
+              {t('mp.bulk.progress').replace('{done}', String(items.filter(i => i.status === 'done').length)).replace('{total}', String(items.length))}
+              {blocked.length > 0 && <span className="text-danger"> · {t('mp.bulk.skippedDup').replace('{n}', String(blocked.length))}</span>}
             </span>
           )}
           <Button variant="ghost" onClick={onClose} disabled={running}>{finished ? t('mp.bulk.close') : t('pf.common.cancel')}</Button>

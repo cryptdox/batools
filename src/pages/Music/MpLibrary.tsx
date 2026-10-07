@@ -2,10 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Upload, Files, Play, ListPlus, ListEnd, Pencil, Trash2, AlertTriangle, Music } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { deleteMusicFile, formatDuration, songArtist, useMpGenres, useMpRatings, useMpUserId, type MpSong } from '../../lib/music';
+import { deleteSong, formatDuration, songArtist, useMpGenres, useMpRatings, useMpUserId, type MpSong } from '../../lib/music';
 import { usePlayer } from '../../lib/MusicPlayerContext';
 import { Badge, Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
@@ -63,8 +62,7 @@ export const MpLibrary = () => {
   const remove = async () => {
     if (!toDelete || !userId) return;
     setDeleting(true);
-    const { error } = await supabase.from('mp_songs').delete().eq('id', toDelete.id).eq('uploaded_by', userId);
-    if (!error) { await deleteMusicFile(toDelete.audio); await deleteMusicFile(toDelete.cover); }
+    const error = await deleteSong(toDelete, userId).then(() => null, (e: unknown) => e);
     setDeleting(false);
     if (error) return toast.error(errorMessage(error, t('pf.common.deleteError')));
     setToDelete(null);
