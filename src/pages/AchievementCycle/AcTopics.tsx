@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, Search, Star, Layers, ChevronLeft, ChevronRight, ArchiveRestore } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -33,6 +33,12 @@ export const AcTopics = () => {
   // Domain (always one) → subject → level (both "all" by default).
   const filter = useTopicFilter(graph, domains);
   const { activeDomain, activeSubject, setDomain: setDomainFilter } = filter;
+  const topicList = useRef<HTMLDivElement>(null);
+  // Clicking a domain card shows that domain's topics in the list below.
+  const showDomainTopics = (id: string) => {
+    setDomainFilter(id);
+    topicList.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const [domainPage, setDomainPage] = useState(0);
   const [pageDomains, setPageDomains] = useState<AcDomain[]>([]);
@@ -130,15 +136,22 @@ export const AcTopics = () => {
               return (
                 <div
                   key={d.id}
-                  className={`rounded-lg border p-3 space-y-2 ${d.id === activeDomain ? 'border-primary bg-primary/5' : 'border-gray-100 dark:border-gray-700'} ${d.is_archived ? 'opacity-70' : ''}`}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => showDomainTopics(d.id)}
+                  onKeyDown={e => { if (e.target === e.currentTarget && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); showDomainTopics(d.id); } }}
+                  title={t('ac.domain.showTopics')}
+                  aria-pressed={d.id === activeDomain}
+                  className={`rounded-lg border p-3 space-y-2 cursor-pointer transition-colors hover:border-primary/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${d.id === activeDomain ? 'border-primary bg-primary/5' : 'border-gray-100 dark:border-gray-700'} ${d.is_archived ? 'opacity-70' : ''}`}
                   style={{ borderLeft: `4px solid ${d.color}` }}
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <button className="min-w-0 text-left" onClick={() => setDomainFilter(d.id)} title={t('ac.domain.showTopics')}>
+                    <div className="min-w-0">
                       <div className="font-medium text-gray-900 dark:text-gray-100 truncate">{d.name}</div>
                       <div className="text-xs text-gray-500">{graph.domainTopics(d.id).size} {t('ac.topicsCount')}</div>
-                    </button>
-                    <div className="flex shrink-0">
+                    </div>
+                    {/* Own actions: don't also select the domain. */}
+                    <div className="flex shrink-0" onClick={e => e.stopPropagation()}>
                       <button className="p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => openDomain(d)} title={t('pf.common.edit')}><Pencil size={14} /></button>
                       <button className="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => setDeleteDomain(d)} title={t('pf.common.delete')}><Trash2 size={14} className="text-danger" /></button>
                     </div>
@@ -151,7 +164,7 @@ export const AcTopics = () => {
                   )}
                   <AcProgress achieved={r?.achieved ?? 0} total={r?.total ?? 0} size="sm" />
                   {d.is_archived && (
-                    <Button size="sm" variant="outline" className="w-full" onClick={() => void restoreDomain(d)}>
+                    <Button size="sm" variant="outline" className="w-full" onClick={e => { e.stopPropagation(); void restoreDomain(d); }}>
                       <ArchiveRestore size={14} className="mr-1" />{t('ac.archive.restore')}
                     </Button>
                   )}
@@ -177,7 +190,7 @@ export const AcTopics = () => {
         )}
       </div>
 
-      <div className={`${acCard} overflow-hidden`}>
+      <div ref={topicList} className={`${acCard} overflow-hidden scroll-mt-20`}>
         <div className="flex flex-wrap items-center gap-2 p-4 border-b border-gray-100 dark:border-gray-700">
           <h3 className="font-semibold text-gray-900 dark:text-gray-100 mr-auto">{t('ac.topics.title')} ({shown.length})</h3>
           <div className="relative">
