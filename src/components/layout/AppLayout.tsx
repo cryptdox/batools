@@ -11,6 +11,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
+import { useAccess } from '../../lib/permissions';
 import { useLanguage } from '../../lib/LanguageContext';
 
 const APP_NAME = 'Bangla Tools';
@@ -168,7 +169,12 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   });
   const lastScrollTop = useRef(0);
   const location = useLocation();
-  const { userEmail, signOut } = useAuth();
+  const { userEmail, signOut, roles } = useAuth();
+  // Only the pages IAM lets this user open; a group shows while any of its pages does.
+  const { canOpen } = useAccess();
+  const navTree = NAV_TREE
+    .map(group => ({ ...group, to: group.to && canOpen(group.to) ? group.to : undefined, children: group.children.filter(c => canOpen(c.to)) }))
+    .filter(group => group.to || group.children.length > 0);
   const { language, setLanguage } = useLanguage();
   const userInitials = (userEmail ?? '').slice(0, 2).toUpperCase() || '?';
 
@@ -286,7 +292,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
 
           <nav className="flex-1 px-4 py-2 space-y-2 overflow-y-auto mt-2">
-            {NAV_TREE.map(group => {
+            {navTree.map(group => {
               const GroupIcon = group.icon;
               const isExpanded = collapsed || (expandedGroups[group.key] ?? true);
               const isGroupActive = group.to === location.pathname || group.children.some(child => child.to === location.pathname);
@@ -335,7 +341,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
                  </div>
                  <div className={`min-w-0 flex-1 ${collapsed ? 'md:hidden' : ''}`}>
                     <div className="font-medium text-sm truncate">{userEmail}</div>
-                    <div className="text-xs text-white/60">Admin</div>
+                    <div className="text-xs text-white/60 truncate" title={roles.join(', ')}>{roles.length ? roles.join(', ') : 'Signed in'}</div>
                  </div>
                  <button
                    onClick={signOut}

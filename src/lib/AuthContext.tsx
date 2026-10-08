@@ -12,6 +12,7 @@ import {
   iamLogout,
   iamRefresh,
   loadSession,
+  ensureSessionAccess,
   REFRESH_LEAD_MS,
   SESSION_EVENT,
   type IamSession,
@@ -38,6 +39,15 @@ type AuthContextValue = {
   /** Finishes an embedded login from the IAM iframe's message; false for any other message. */
   completeEmbeddedSignIn: (event: MessageEvent) => boolean;
   signOut: () => void;
+  /** Role names from IAM (/auth/me), loaded right after sign-in; empty until then. */
+  roles: string[];
+  /** Permission strings `CLIENTID:resource:action:type` from IAM, loaded right after sign-in. */
+  permissions: string[];
+  /** Whether the user has a permission (exact `CLIENTID:resource:action:type` string). */
+  hasPermission: (permission: string) => boolean;
+  /** 'loading' until roles / permissions arrive, 'error' if /auth/me failed (see reloadAccess). */
+  accessState: 'loading' | 'ready' | 'error';
+  reloadAccess: () => void;
   /** A non-expired access token, refreshing first if needed; null when signed out. */
   getAccessToken: () => Promise<string | null>;
 };
@@ -117,9 +127,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
+  // Roles / permissions come from /auth/me, fetched as soon as a sign-in succeeds
+  // (and once for a stored session that predates this, e.g. after an upgrade).
+  const accessLoading = useRef(false);
+  const [accessFailed, setAccessFailed] = useState(false);
+  const loadAccess = useCallback(() => {
+    if (accessLoading.current) return;
+    accessLoading.current = true;
+    setAccessFailed(false);
+    void ensureSessionAccess()
+      .then(next => { if (next) setSession(next); else if (loadSession()) setAccessFailed(true); })
+      .finally(() => { accessLoading.current = false; });
+  }, []);
+
+  useEffect(() => {
+    if (!loading && session && !session.permissions) loadAccess();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, session?.user.userId]);
+
   const signIn = async (email: string, password: string, captchaToken: string) => {
     try {
       setSession(await iamLogin(email, password, captchaToken));
+      loadAccess();
       return { error: null };
     } catch (err) {
       return { error: err instanceof Error ? err.message : 'Login failed.' };
@@ -137,13 +166,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const completeRedirectSignIn = (hash: string) => {
     const next = completeRedirectLogin(hash);
-    if (next) setSession(next);
+    if (next) { setSession(next); loadAccess(); }
     return !!next;
   };
 
   const completeEmbeddedSignIn = (event: MessageEvent) => {
     const next = acceptEmbeddedLogin(event);
-    if (next) setSession(next);
+    if (next) { setSession(next); loadAccess(); }
     return !!next;
   };
 
@@ -162,9 +191,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const user = session?.user ?? null;
   const orgId = session ? getTokenRealmId(session.accessToken) : null;
+  const roles = session?.roles ?? [];
+  const permissions = session?.permissions ?? [];
+  const hasPermission = (permission: string) => permissions.includes(permission);
+  const accessState = session?.permissions ? 'ready' : accessFailed ? 'error' : 'loading';
 
   return (
-    <AuthContext.Provider value={{ user, userEmail: user?.email ?? null, orgId, loading, signIn, signInWithRedirect, completeRedirectSignIn, completeEmbeddedSignIn, signOut, getAccessToken }}>
+    <AuthContext.Provider value={{ user, userEmail: user?.email ?? null, orgId, loading, signIn, signInWithRedirect, completeRedirectSignIn, completeEmbeddedSignIn, signOut, getAccessToken, roles, permissions, hasPermission, accessState, reloadAccess: loadAccess }}>
       {children}
     </AuthContext.Provider>
   );

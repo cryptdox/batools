@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
-import { iamRefresh, isExpiringSoon, loadSession } from './iam'
+import { ensureSessionAccess, iamRefresh, isExpiringSoon, loadSession } from './iam'
+import { allows, deniedResponse, requirementOf } from './dataAccess'
 
 export type AttendanceState = 'NO_ENTRY' | 'ENTRY' | 'CONSIDER_ENTRY' | 'LEAVE'
 
@@ -72,7 +73,18 @@ if (!supabaseUrl || !supabaseKey) {
 // tables and the music bucket only accept writes with a valid one (migration
 // 047_mp_write_guard), because the anon key is public in the mumu app.
 // A token about to expire is refreshed first (shared with AuthContext's refresh).
+// Before anything is sent, the call is checked against the user's IAM permissions
+// (lib/dataAccess.ts): a refused call never reaches Supabase and comes back as a 403.
 const withIamToken: typeof fetch = async (input, init) => {
+  const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+  const method = init?.method ?? (input instanceof Request ? input.method : 'GET');
+  const need = requirementOf(url, method, new Headers(init?.headers).get('Prefer'));
+  if (need) {
+    const access = await ensureSessionAccess();
+    // Signed out (the public Late Tracker board) may only read.
+    const permitted = access ? allows(access.permissions ?? [], need) : need.action === 'READ' && !loadSession();
+    if (!permitted) return deniedResponse(need);
+  }
   const session = loadSession();
   let token = session?.accessToken;
   if (token && isExpiringSoon(token)) token = (await iamRefresh().catch(() => null))?.accessToken ?? token;

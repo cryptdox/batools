@@ -19,11 +19,13 @@ export const AcTypeBadge = ({ type }: { type: AcDomainType }) => (
 );
 
 /** Domain types: add / edit / delete. Deleting a type leaves its domains untyped. */
-export const AcDomainTypes = ({ userId, types, domains, onChanged }: {
+export const AcDomainTypes = ({ userId, types, domains, onChanged, can = { create: true, update: true, remove: true } }: {
   userId: string;
   types: AcDomainType[];
   domains: AcDomain[];
   onChanged: () => Promise<void>;
+  /** What the user may do (IAM permissions); everything by default. */
+  can?: { create: boolean; update: boolean; remove: boolean };
 }) => {
   const { t } = useLanguage();
   const [form, setForm] = useState<AcDomainType | 'new' | null>(null);
@@ -69,7 +71,7 @@ export const AcDomainTypes = ({ userId, types, domains, onChanged }: {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <span className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">{t('ac.types.title')}</span>
-        <Button size="sm" variant="ghost" onClick={() => open('new')}><Plus size={14} className="mr-1" />{t('ac.types.create')}</Button>
+        {can.create && <Button size="sm" variant="ghost" onClick={() => open('new')}><Plus size={14} className="mr-1" />{t('ac.types.create')}</Button>}
       </div>
       {types.length === 0 ? (
         <p className="text-xs text-gray-500">{t('ac.types.none')}</p>
@@ -79,8 +81,8 @@ export const AcDomainTypes = ({ userId, types, domains, onChanged }: {
             <span key={x.id} className="inline-flex items-center gap-1 rounded-full border border-gray-200 dark:border-gray-700 pl-1 pr-1 py-0.5" title={x.description ?? undefined}>
               <AcTypeBadge type={x} />
               <span className="text-[11px] text-gray-500 tabular-nums">{usedBy(x.id)}</span>
-              <button className="p-1 rounded-full text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => open(x)} title={t('pf.common.edit')}><Pencil size={12} /></button>
-              <button className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => setToDelete(x)} title={t('pf.common.delete')}><Trash2 size={12} className="text-danger" /></button>
+              {can.update && <button className="p-1 rounded-full text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => open(x)} title={t('pf.common.edit')}><Pencil size={12} /></button>}
+              {can.remove && <button className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => setToDelete(x)} title={t('pf.common.delete')}><Trash2 size={12} className="text-danger" /></button>}
             </span>
           ))}
         </div>

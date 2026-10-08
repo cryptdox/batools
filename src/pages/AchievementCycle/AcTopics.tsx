@@ -14,6 +14,7 @@ import { AcRemoveModal } from '../../components/achievementCycle/AcRemoveModal';
 import { AcDomainTypes, AcTypeBadge } from '../../components/achievementCycle/AcDomainTypes';
 import { useAcDialogs } from '../../components/achievementCycle/useAcDialogs';
 import { AcTopicFilterSelects, UNASSIGNED, useTopicFilter } from '../../components/achievementCycle/AcTopicFilters';
+import { SECTION_RESOURCES, useAccess } from '../../lib/permissions';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 /** Domain cards are fetched this many at a time. */
@@ -34,6 +35,12 @@ export const AcTopics = () => {
   const filter = useTopicFilter(graph, domains);
   const { activeDomain, activeSubject, setDomain: setDomainFilter } = filter;
   const topicList = useRef<HTMLDivElement>(null);
+  // Domains and domain types are their own IAM resources (read / create / update / delete).
+  const { canRead, has } = useAccess();
+  const D = SECTION_RESOURCES.acDomains;
+  const T = SECTION_RESOURCES.acDomainTypes;
+  const domainCan = { create: has(D, 'CREATE'), update: has(D, 'UPDATE') || has(D, 'UPDATE_ALL'), remove: has(D, 'DELETE') || has(D, 'DELETE_ALL') };
+  const typeCan = { create: has(T, 'CREATE'), update: has(T, 'UPDATE') || has(T, 'UPDATE_ALL'), remove: has(T, 'DELETE') || has(T, 'DELETE_ALL') };
   // Clicking a domain card shows that domain's topics in the list below.
   const showDomainTopics = (id: string) => {
     setDomainFilter(id);
@@ -121,12 +128,13 @@ export const AcTopics = () => {
         }
       />
 
+      {canRead(D) && (
       <div className={`${acCard} p-5 space-y-3`}>
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-gray-900 dark:text-gray-100">{t('ac.domains')}</h3>
-          <Button size="sm" variant="outline" onClick={() => openDomain('new')}><Plus size={14} className="mr-1" />{t('ac.domain.create')}</Button>
+          {domainCan.create && <Button size="sm" variant="outline" onClick={() => openDomain('new')}><Plus size={14} className="mr-1" />{t('ac.domain.create')}</Button>}
         </div>
-        {userId && <AcDomainTypes userId={userId} types={domainTypes} domains={domains} onChanged={reload} />}
+        {userId && canRead(T) && <AcDomainTypes userId={userId} types={domainTypes} domains={domains} onChanged={reload} can={typeCan} />}
         {domainTotal === 0 ? (
           <p className="text-sm text-gray-500">{t('ac.domain.none')}</p>
         ) : (
@@ -152,8 +160,8 @@ export const AcTopics = () => {
                     </div>
                     {/* Own actions: don't also select the domain. */}
                     <div className="flex shrink-0" onClick={e => e.stopPropagation()}>
-                      <button className="p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => openDomain(d)} title={t('pf.common.edit')}><Pencil size={14} /></button>
-                      <button className="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => setDeleteDomain(d)} title={t('pf.common.delete')}><Trash2 size={14} className="text-danger" /></button>
+                      {domainCan.update && <button className="p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => openDomain(d)} title={t('pf.common.edit')}><Pencil size={14} /></button>}
+                      {domainCan.remove && <button className="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => setDeleteDomain(d)} title={t('pf.common.delete')}><Trash2 size={14} className="text-danger" /></button>}
                     </div>
                   </div>
                   {(d.type_id || d.is_archived) && (
@@ -163,7 +171,7 @@ export const AcTopics = () => {
                     </div>
                   )}
                   <AcProgress achieved={r?.achieved ?? 0} total={r?.total ?? 0} size="sm" />
-                  {d.is_archived && (
+                  {d.is_archived && domainCan.update && (
                     <Button size="sm" variant="outline" className="w-full" onClick={e => { e.stopPropagation(); void restoreDomain(d); }}>
                       <ArchiveRestore size={14} className="mr-1" />{t('ac.archive.restore')}
                     </Button>
@@ -189,6 +197,8 @@ export const AcTopics = () => {
           </div>
         )}
       </div>
+
+      )}
 
       <div ref={topicList} className={`${acCard} overflow-hidden scroll-mt-20`}>
         <div className="flex flex-wrap items-center gap-2 p-4 border-b border-gray-100 dark:border-gray-700">

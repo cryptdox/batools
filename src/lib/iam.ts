@@ -33,6 +33,16 @@ export type IamSession = {
   accessToken: string;
   refreshToken: string;
   user: IamUser;
+  /** Effective role names (direct, via groups and composites), from /auth/me after sign-in. */
+  roles?: string[];
+  /** Permission strings `CLIENTID:resource:action:type`, the same format the IAM backend caches. */
+  permissions?: string[];
+};
+
+/** A role as /auth/me returns it (only the fields batools reads). */
+type IamMeRole = {
+  name: string;
+  permissions: { action: string; resource: { name: string; type: string; clientId?: string | null } }[];
 };
 
 type ApiResponse<T> = {
@@ -243,6 +253,47 @@ export function iamRefresh(): Promise<IamSession> {
 /** Whether a refresh failure means the session is really gone (vs. a hiccup worth retrying). */
 export const isSessionRejected = (err: unknown) =>
   err instanceof IamError && (err.status === 400 || err.status === 401 || err.status === 403);
+
+/** The signed-in user's roles and permissions (GET /auth/me). */
+export async function iamFetchAccess(accessToken: string): Promise<{ roles: string[]; permissions: string[] }> {
+  const me = await request<{ roles?: IamMeRole[] }>('/auth/me', {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  const roles = me.roles ?? [];
+  const permissions = roles.flatMap(r => r.permissions.map(p =>
+    `${(p.resource.clientId ?? '').toUpperCase()}:${p.resource.name}:${p.action}:${p.resource.type}`));
+  return { roles: [...new Set(roles.map(r => r.name))], permissions: [...new Set(permissions)] };
+}
+
+/** Fetches roles / permissions for the stored session and saves them with it; null on failure. */
+export async function loadSessionAccess(): Promise<IamSession | null> {
+  const current = loadSession();
+  if (!current) return null;
+  try {
+    const access = await iamFetchAccess(current.accessToken);
+    // The session may have been refreshed or ended meanwhile: write onto the latest one.
+    const latest = loadSession();
+    if (!latest || latest.user.userId !== current.user.userId) return null;
+    const next: IamSession = { ...latest, ...access };
+    saveSession(next);
+    return next;
+  } catch {
+    return null;
+  }
+}
+
+// One /auth/me at a time, shared by AuthContext and the data guard (lib/supabase.ts).
+let accessInFlight: Promise<IamSession | null> | null = null;
+
+/** The stored session with its roles / permissions, loading them first if needed; null when signed out or they can't load. */
+export function ensureSessionAccess(): Promise<IamSession | null> {
+  const current = loadSession();
+  if (!current) return Promise.resolve(null);
+  if (current.permissions) return Promise.resolve(current);
+  accessInFlight ??= loadSessionAccess().finally(() => { accessInFlight = null; });
+  return accessInFlight;
+}
 
 export async function iamLogout(accessToken: string) {
   await request<null>('/auth/logout', {
