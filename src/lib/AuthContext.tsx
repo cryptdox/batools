@@ -5,12 +5,15 @@ import {
   completeRedirectLogin,
   getTokenExpiry,
   getTokenRealmId,
+  isExpiringSoon,
+  isSessionRejected,
   iamLogin,
   iamRedirectLogin,
   iamLogout,
   iamRefresh,
   loadSession,
-  IamError,
+  REFRESH_LEAD_MS,
+  SESSION_EVENT,
   type IamSession,
   type IamUser,
 } from './iam';
@@ -18,8 +21,8 @@ import {
 // Login is delegated to the Identity and Access Management service. Note this
 // only gates the UI: data access still goes through Supabase with the anon key.
 
-// Refresh this long before the access token's `exp` so requests never race it.
-const REFRESH_LEAD_MS = 60_000;
+// After a refresh that failed for a non-auth reason (offline, 429, 5xx), try again this soon.
+const RETRY_MS = 30_000;
 
 type AuthContextValue = {
   user: IamUser | null;
@@ -41,11 +44,6 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-const isExpiringSoon = (token: string) => {
-  const exp = getTokenExpiry(token);
-  return exp === null || exp * 1000 - Date.now() < REFRESH_LEAD_MS;
-};
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [session, setSession] = useState<IamSession | null>(() => loadSession());
   const [loading, setLoading] = useState(() => {
@@ -53,6 +51,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return !!stored && isExpiringSoon(stored.accessToken);
   });
   const refreshTimer = useRef<number | undefined>(undefined);
+  // Bumped after a failed (but not rejected) refresh, to schedule a retry.
+  const [retryTick, setRetryTick] = useState(0);
 
   const endSession = useCallback(() => {
     clearSession();
@@ -65,8 +65,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setSession(next);
       return next;
     } catch (err) {
-      // Only a rejected refresh token ends the session; network hiccups keep it.
-      if (err instanceof IamError && err.status !== 0) endSession();
+      // Only a rejected refresh token ends the session; offline / rate limit / server
+      // errors keep it and try again shortly.
+      if (isSessionRejected(err)) endSession();
+      else window.setTimeout(() => setRetryTick(n => n + 1), RETRY_MS);
       return null;
     }
   }, [endSession]);
@@ -86,13 +88,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const delay = exp === null ? 0 : Math.max(exp * 1000 - Date.now() - REFRESH_LEAD_MS, 0);
     refreshTimer.current = window.setTimeout(() => { void refresh(); }, delay);
     return () => window.clearTimeout(refreshTimer.current);
-  }, [session, loading, refresh]);
+  }, [session, loading, refresh, retryTick]);
 
-  // Other tabs rotate the refresh token too; stay in sync with what they store.
+  // Timers are throttled in background tabs and stop while the computer sleeps:
+  // check again when the tab comes back or the network returns.
   useEffect(() => {
-    const onStorage = () => setSession(loadSession());
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
+    const check = () => {
+      const current = loadSession();
+      if (document.visibilityState === 'visible' && current && isExpiringSoon(current.accessToken)) void refresh();
+    };
+    document.addEventListener('visibilitychange', check);
+    window.addEventListener('online', check);
+    return () => {
+      document.removeEventListener('visibilitychange', check);
+      window.removeEventListener('online', check);
+    };
+  }, [refresh]);
+
+  // Stay in sync with the stored session: other tabs (storage) and refreshes made
+  // outside this context, e.g. by the Supabase client (SESSION_EVENT).
+  useEffect(() => {
+    const sync = () => setSession(loadSession());
+    window.addEventListener('storage', sync);
+    window.addEventListener(SESSION_EVENT, sync);
+    return () => {
+      window.removeEventListener('storage', sync);
+      window.removeEventListener(SESSION_EVENT, sync);
+    };
   }, []);
 
   const signIn = async (email: string, password: string, captchaToken: string) => {

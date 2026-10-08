@@ -12,6 +12,9 @@ export const AcMilestonePicker = ({ milestones, value, onChange }: { milestones:
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
   const box = useRef<HTMLDivElement>(null);
+  // Opens to the right unless that would run past the window; then it hangs from the right edge.
+  const [alignRight, setAlignRight] = useState(false);
+  const PANEL_PX = 288;
   const selected = milestones.find(m => m.id === value) ?? null;
 
   useEffect(() => {
@@ -31,7 +34,11 @@ export const AcMilestonePicker = ({ milestones, value, onChange }: { milestones:
     <div ref={box} className="relative">
       <button
         type="button"
-        onClick={() => setOpen(o => !o)}
+        onClick={() => {
+          const rect = box.current?.getBoundingClientRect();
+          setAlignRight(!!rect && rect.left + PANEL_PX > document.documentElement.clientWidth - 8);
+          setOpen(o => !o);
+        }}
         className={`${pfInputClass.replace('w-full ', '')} h-9 inline-flex items-center gap-2 max-w-60`}
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -44,7 +51,7 @@ export const AcMilestonePicker = ({ milestones, value, onChange }: { milestones:
           : <ChevronDown size={14} className="text-gray-400 shrink-0" />}
       </button>
       {open && (
-        <div className="absolute z-30 mt-1 w-72 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg">
+        <div className={`absolute z-30 mt-1 w-72 max-w-[calc(100vw-2rem)] rounded-lg ${alignRight ? 'right-0' : 'left-0'} border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg`}>
           <div className="relative p-2 border-b border-gray-100 dark:border-gray-700">
             <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
             <input

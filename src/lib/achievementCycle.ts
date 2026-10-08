@@ -26,6 +26,8 @@ export type AcTopic = {
   id: string; name: string; description: string | null; story_point_description: string | null;
   default_points: number; is_milestone: boolean; created_at: string; updated_at: string;
   is_archived: boolean; archived_at: string | null;
+  /** Left off the Kanban (cycles and rollups unchanged). */
+  is_hibernated: boolean;
   /** Milestone schedule: weekdays (0 = Sunday … 6 = Saturday) and specific dates (yyyy-MM-dd). */
   schedule_weekdays: number[]; schedule_dates: string[];
 };
@@ -278,6 +280,22 @@ export async function acRpc<T>(fn: string, args: Record<string, unknown>, fallba
   }
   return data as T;
 }
+
+/** Hibernates (or wakes) topics; true on success. */
+export async function setHibernated(userId: string, topicIds: string[], value: boolean, fallback: string): Promise<boolean> {
+  if (topicIds.length === 0) return true;
+  const { error } = await supabase.from('ac_topics')
+    .update({ is_hibernated: value, updated_at: new Date().toISOString() })
+    .eq('user_id', userId).in('id', topicIds);
+  if (error) {
+    toast.error(errorMessage(error, fallback));
+    return false;
+  }
+  return true;
+}
+
+/** Statuses after which the board offers to hibernate the topic. */
+export const ASK_HIBERNATE: CycleStatus[] = ['complete', 'cancel', 'backlog'];
 
 /** Day of the week (0 = Sunday … 6 = Saturday) of a 'yyyy-MM-dd' calendar date. */
 export const weekdayOf = (day: string) => new Date(`${day}T00:00:00Z`).getUTCDay();

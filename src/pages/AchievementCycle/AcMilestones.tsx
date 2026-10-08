@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Star, CheckCircle2, Circle, CalendarPlus, Ban, RotateCcw, AlertTriangle, Inbox, KanbanSquare } from 'lucide-react';
+import { Star, CheckCircle2, Circle, CalendarPlus, Ban, RotateCcw, AlertTriangle, Inbox, KanbanSquare, Moon } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
-import { acRpc, cycleLabel, percent, useAcData, useSelectedCycle, type AcTopic, type CycleStatus } from '../../lib/achievementCycle';
+import { acRpc, cycleLabel, percent, setHibernated, useAcData, useSelectedCycle, type AcTopic, type CycleStatus } from '../../lib/achievementCycle';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
 import { acSelectClass, AcCyclePicker, AcLevelBadge, AcProgress, AcStat, acCard, AcArchiveToggle } from '../../components/achievementCycle/AcUi';
 import { useAcDialogs } from '../../components/achievementCycle/useAcDialogs';
-import { AcTopicFilterSelects, useTopicFilter } from '../../components/achievementCycle/AcTopicFilters';
+import { AcTopicFilterSelects, useTopicFilter, ALL } from '../../components/achievementCycle/AcTopicFilters';
 import { AcScheduleSummary } from '../../components/achievementCycle/AcSchedule';
 import { Pagination, usePagination } from '../../components/ui/Pagination';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
@@ -20,12 +20,13 @@ export const AcMilestones = () => {
   const { userId, loading, graph, domains, topics, cycles, cycleRefs, rollupOf, reload } = data;
   const { cycle, cycleKey, select } = useSelectedCycle(cycleRefs);
   const { openTopic, dialogs } = useAcDialogs(data, cycle);
-  // Same filter as the Topics page: one domain, then subject / level (all by default).
-  const filter = useTopicFilter(graph, domains);
+  // Same filter as the Topics page, plus "All domains" (the default here); then subject / level (all by default).
+  const filter = useTopicFilter(graph, domains, { domainId: ALL, allowAllDomains: true });
   // Open (not yet reached) milestones first: what is left to do.
   const [show, setShow] = useState<'all' | 'open' | 'done'>('open');
   const [busy, setBusy] = useState(false);
-  const [cancelling, setCancelling] = useState<AcTopic | null>(null);
+  // Cancel / Back to Backlog wait here to confirm and ask about hibernating.
+  const [asking, setAsking] = useState<{ m: AcTopic; to: 'cancel' | 'backlog' } | null>(null);
 
   const OPEN: CycleStatus[] = ['backlog', 'todo', 'hold', 'in_progress'];
 
@@ -41,15 +42,30 @@ export const AcMilestones = () => {
 
   // Plan (backlog → to do), cancel (anything open → cancel) or reopen (cancel → backlog),
   // for the milestone and everything beneath it, in the selected cycle.
-  const bulk = async (m: AcTopic, from: CycleStatus[], to: CycleStatus, done: string) => {
+  const bulk = async (m: AcTopic, from: CycleStatus[], to: CycleStatus, done: string, hibernate = false) => {
     if (!userId) return;
     setBusy(true);
     const n = await acRpc<number>('ac_bulk_status', {
       p_user_id: userId, p_topic_id: m.id, p_kind: cycle.kind, p_round: cycle.round, p_from: from, p_to: to,
     }, t('pf.common.saveError'));
+    if (n !== null && hibernate) await setHibernated(userId, hibernateIds(m), true, t('pf.common.saveError'));
     setBusy(false);
     if (n === null) return;
     toast.success(t(done).replace('{n}', String(n)));
+    await reload();
+  };
+
+  // The milestone's switch covers the milestone and its direct children, not grandchildren.
+  const hibernateIds = (m: AcTopic) => [m.id, ...graph.children(m.id).map(x => x.id)];
+
+  const toggleHibernate = async (m: AcTopic) => {
+    if (!userId) return;
+    const value = !m.is_hibernated;
+    setBusy(true);
+    const ok = await setHibernated(userId, hibernateIds(m), value, t('pf.common.saveError'));
+    setBusy(false);
+    if (!ok) return;
+    toast.success(t(value ? 'ac.hibernate.slept' : 'ac.hibernate.woken').replace('{n}', String(hibernateIds(m).length)));
     await reload();
   };
 
@@ -107,6 +123,7 @@ export const AcMilestones = () => {
               return (
                 <li key={m.id} className="p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer" onClick={() => openTopic(m.id)}>
                   <div className="flex flex-wrap items-center gap-2">
+                    {m.is_hibernated && <Moon size={15} className="text-primary shrink-0" aria-label={t('ac.hibernate.hibernated')} />}
                     {complete ? <CheckCircle2 size={18} className="text-success shrink-0" /> : <Circle size={18} className="text-gray-300 shrink-0" />}
                     <span className="font-semibold text-gray-900 dark:text-gray-100">{m.name}</span>
                     <AcLevelBadge level={graph.levelOf(m.id)} />
@@ -131,12 +148,12 @@ export const AcMilestones = () => {
                         )}
                         {planned > 0 && (
                           <button className={`${btn} border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700`} disabled={busy}
-                            onClick={() => void bulk(m, ['todo', 'hold'], 'backlog', 'ac.milestones.unplanned')}>
+                            onClick={() => (m.is_hibernated ? void bulk(m, ['todo', 'hold'], 'backlog', 'ac.milestones.unplanned') : setAsking({ m, to: 'backlog' }))}>
                             <Inbox size={13} />{t('ac.milestones.toBacklog')} ({planned})
                           </button>
                         )}
                         {open > 0 && (
-                          <button className={`${btn} border-danger/30 text-danger hover:bg-danger/10`} disabled={busy} onClick={() => setCancelling(m)}>
+                          <button className={`${btn} border-danger/30 text-danger hover:bg-danger/10`} disabled={busy} onClick={() => setAsking({ m, to: 'cancel' })}>
                             <Ban size={13} />{t('ac.milestones.cancel')} ({open})
                           </button>
                         )}
@@ -150,6 +167,23 @@ export const AcMilestones = () => {
                           <KanbanSquare size={13} />{t('ac.milestones.openBoard')}
                         </Link>
                         <span className="text-[11px] text-gray-400">{cycleLabel(cycle, t)}</span>
+                        <label
+                          className="ml-auto inline-flex items-center gap-2 text-xs font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
+                          title={t('ac.hibernate.switchHint').replace('{n}', String(graph.children(m.id).length))}
+                        >
+                          <Moon size={13} className={m.is_hibernated ? 'text-primary' : 'text-gray-400'} />
+                          {t('ac.hibernate.hibernate')}
+                          <button
+                            type="button"
+                            role="switch"
+                            aria-checked={m.is_hibernated}
+                            disabled={busy}
+                            onClick={() => void toggleHibernate(m)}
+                            className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors disabled:opacity-40 ${m.is_hibernated ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'}`}
+                          >
+                            <span className={`absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${m.is_hibernated ? 'translate-x-4' : ''}`} />
+                          </button>
+                        </label>
                       </div>
                     );
                   })()}
@@ -170,24 +204,53 @@ export const AcMilestones = () => {
           onPageSizeChange={pager.setPageSize}
         />
       </div>
-      <Modal isOpen={!!cancelling} onClose={() => !busy && setCancelling(null)} title={t('ac.milestones.cancelTitle')}>
-        {cancelling && (
-          <div className="space-y-4">
-            <div className="flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg p-4 text-sm text-gray-700 dark:text-gray-300">
-              <AlertTriangle size={20} className="text-danger shrink-0" />
-              {t('ac.milestones.cancelHint')
-                .replace('{name}', cancelling.name)
-                .replace('{cycle}', cycleLabel(cycle, t))
-                .replace('{n}', String(OPEN.reduce((a, st) => a + (statusCounts(cancelling)[st] ?? 0), 0)))}
+      <Modal
+        isOpen={!!asking}
+        onClose={() => !busy && setAsking(null)}
+        title={asking?.to === 'cancel' ? t('ac.milestones.cancelTitle') : t('ac.milestones.toBacklogTitle')}
+      >
+        {asking && (() => {
+          const { m, to } = asking;
+          const counts = statusCounts(m);
+          const cancel = to === 'cancel';
+          const from: CycleStatus[] = cancel ? OPEN : ['todo', 'hold'];
+          const n = from.reduce((a, st) => a + (counts[st] ?? 0), 0);
+          const go = (hibernate: boolean) => {
+            setAsking(null);
+            void bulk(m, from, to, cancel ? 'ac.milestones.cancelled' : 'ac.milestones.unplanned', hibernate);
+          };
+          const label = cancel ? t('ac.milestones.cancel') : t('ac.milestones.toBacklog');
+          return (
+            <div className="space-y-4">
+              {cancel && (
+                <div className="flex items-start gap-3 bg-danger/5 border border-danger/20 rounded-lg p-4 text-sm text-gray-700 dark:text-gray-300">
+                  <AlertTriangle size={20} className="text-danger shrink-0" />
+                  {t('ac.milestones.cancelHint').replace('{name}', m.name).replace('{cycle}', cycleLabel(cycle, t)).replace('{n}', String(n))}
+                </div>
+              )}
+              {!cancel && (
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  {t('ac.milestones.toBacklogHint').replace('{name}', m.name).replace('{cycle}', cycleLabel(cycle, t)).replace('{n}', String(n))}
+                </p>
+              )}
+              {!m.is_hibernated && (
+                <div className="flex items-start gap-3 bg-primary/5 border border-primary/20 rounded-lg p-4 text-sm text-gray-700 dark:text-gray-300">
+                  <Moon size={18} className="text-primary shrink-0 mt-0.5" />
+                  {t('ac.hibernate.askMilestone').replace('{name}', m.name).replace('{n}', String(graph.children(m.id).length))}
+                </div>
+              )}
+              <div className="flex flex-wrap justify-end gap-3">
+                <Button variant="ghost" onClick={() => setAsking(null)} disabled={busy}>{t('pf.common.cancel')}</Button>
+                <Button variant={m.is_hibernated ? (cancel ? 'danger' : 'primary') : 'outline'} disabled={busy} onClick={() => go(false)}>{label}</Button>
+                {!m.is_hibernated && (
+                  <Button variant={cancel ? 'danger' : 'primary'} disabled={busy} onClick={() => go(true)}>
+                    <Moon size={14} className="mr-1" />{t('ac.hibernate.andHibernate').replace('{action}', label)}
+                  </Button>
+                )}
+              </div>
             </div>
-            <div className="flex justify-end gap-3">
-              <Button variant="ghost" onClick={() => setCancelling(null)} disabled={busy}>{t('pf.common.cancel')}</Button>
-              <Button variant="danger" disabled={busy} onClick={async () => { const m = cancelling; setCancelling(null); await bulk(m, OPEN, 'cancel', 'ac.milestones.cancelled'); }}>
-                {t('ac.milestones.cancel')}
-              </Button>
-            </div>
-          </div>
-        )}
+          );
+        })()}
       </Modal>
       {dialogs}
     </div>

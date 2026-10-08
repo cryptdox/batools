@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';
-import { Pencil, Trash2, Plus, Minus, Star, ChevronRight, Link2, Unlink, History, Play, AlertTriangle, ArchiveRestore } from 'lucide-react';
+import { Pencil, Trash2, Plus, Minus, Star, ChevronRight, Link2, Unlink, History, Play, AlertTriangle, ArchiveRestore, Moon, Sun } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
 import {
-  cycleLabel, KINDS, STATUSES, acRpc, percent, type CycleKind, type CycleStatus, type CycleRef, type AcCycle, type AcLog, type LinkRole, type useAcData,
+  cycleLabel, KINDS, STATUSES, ASK_HIBERNATE, acRpc, percent, setHibernated, type CycleKind, type CycleStatus, type CycleRef, type AcCycle, type AcLog, type LinkRole, type useAcData,
 } from '../../lib/achievementCycle';
 import { Badge, Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
@@ -14,6 +14,7 @@ import { pfInputClass } from '../portfolio/PfFieldInput';
 import { AcArchivedBadge, AcLevelBadge, AcProgress, AcRichView, AcStatusDot } from './AcUi';
 import { AcRemoveModal } from './AcRemoveModal';
 import { AcProgressModal } from './AcProgressModal';
+import { AcTopicMultiPicker } from './AcTopicMultiPicker';
 
 type AcData = ReturnType<typeof useAcData>;
 
@@ -35,7 +36,7 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
   const { t } = useLanguage();
   const { userId, graph, topics, domains, cycles, reload, rollupOf } = data;
   const topic = graph.byId.get(topicId);
-  const [linkChild, setLinkChild] = useState('');
+  const [linkChildren, setLinkChildren] = useState<Set<string>>(new Set());
   const [cascade, setCascade] = useState(true);
   const [busy, setBusy] = useState(false);
   const [openLog, setOpenLog] = useState<string | null>(null);
@@ -48,6 +49,8 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
   const [progressOf, setProgressOf] = useState<{ cycle: AcCycle; direction: 1 | -1 } | null>(null);
   const [roundCascade, setRoundCascade] = useState(false);
   const [roundLogs, setRoundLogs] = useState<number | null>(null);
+  // A status change to Complete / Cancel / Backlog waits here to ask about hibernating.
+  const [pendingStatus, setPendingStatus] = useState<{ cycle: AcCycle; status: CycleStatus } | null>(null);
 
   const myCycles = cycles
     .filter(c => c.topic_id === topicId)
@@ -100,13 +103,14 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
     return true;
   });
 
-  const addExistingChild = () => run(async () => {
-    if (!linkChild) return false;
-    const { error } = await supabase.from('ac_topic_links').insert([{
-      user_id: userId, parent_id: topicId, child_id: linkChild, sort_order: (graph.childLinks.get(topicId)?.length ?? 0) + 1,
-    }]);
+  const addExistingChildren = () => run(async () => {
+    if (linkChildren.size === 0) return false;
+    const base = graph.childLinks.get(topicId)?.length ?? 0;
+    const { error } = await supabase.from('ac_topic_links').insert([...linkChildren].map((childId, i) => ({
+      user_id: userId, parent_id: topicId, child_id: childId, sort_order: base + i + 1,
+    })));
     if (error) { toast.error(errorMessage(error, t('pf.common.saveError'))); return false; }
-    setLinkChild('');
+    setLinkChildren(new Set());
     return true;
   });
 
@@ -132,11 +136,20 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
   });
 
   // Completing through the dropdown fills the remaining points (logged as "Marked complete").
-  const setStatus = (c: AcCycle, status: CycleStatus) => run(async () => {
+  const setStatus = (c: AcCycle, status: CycleStatus, hibernate = false) => run(async () => {
     if (status === c.status) return false;
     const res = await acRpc('ac_set_status', { p_user_id: userId, p_cycle_id: c.id, p_status: status, p_sort_order: null, p_comment_html: null }, t('pf.common.saveError'));
+    if (res && hibernate) await setHibernated(userId, [topicId], true, t('pf.common.saveError'));
     return !!res;
   });
+
+  const requestStatus = (c: AcCycle, status: CycleStatus) => {
+    if (status === c.status) return;
+    if (ASK_HIBERNATE.includes(status) && !topic?.is_hibernated) setPendingStatus({ cycle: c, status });
+    else void setStatus(c, status);
+  };
+
+  const toggleHibernate = () => run(() => setHibernated(userId, [topicId], !topic?.is_hibernated, t('pf.common.saveError')));
 
   const deleteRound = () => run(async () => {
     if (!roundToDelete) return false;
@@ -174,10 +187,16 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
           <div className="flex flex-wrap items-center gap-2">
             {topic.is_archived && <AcArchivedBadge />}
             <AcLevelBadge level={graph.levelOf(topicId)} />
+            {topic.is_hibernated && <Badge variant="muted"><Moon size={11} className="inline mr-1" />{t('ac.hibernate.hibernated')}</Badge>}
             {topic.is_milestone && <Badge variant="warning"><Star size={11} className="inline mr-1 fill-current" />{t('ac.topic.milestone')}</Badge>}
             <Badge variant="muted">{t('ac.topic.points')}: {topic.default_points}</Badge>
           </div>
           <div className="flex gap-2">
+            <Button size="sm" variant="outline" disabled={busy} onClick={() => void toggleHibernate()} title={t('ac.hibernate.topicHint')}>
+              {topic.is_hibernated
+                ? <><Sun size={14} className="mr-1" />{t('ac.hibernate.wake')}</>
+                : <><Moon size={14} className="mr-1" />{t('ac.hibernate.hibernate')}</>}
+            </Button>
             <Button size="sm" variant="outline" onClick={() => onEdit(topicId)}><Pencil size={14} className="mr-1" />{t('pf.common.edit')}</Button>
             {topic.is_archived && (
               <Button size="sm" onClick={() => void restore()} disabled={busy}><ArchiveRestore size={14} className="mr-1" />{t('ac.archive.restore')}</Button>
@@ -266,11 +285,10 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className={heading}>{t('ac.detail.children')} ({children.length})</div>
             <div className="flex flex-wrap items-center gap-2">
-              <select value={linkChild} onChange={e => setLinkChild(e.target.value)} className={`${pfInputClass} h-8 py-0 w-48 text-xs`}>
-                <option value="">{t('ac.detail.linkExisting')}</option>
-                {linkable.map(x => <option key={x.id} value={x.id}>{x.name}</option>)}
-              </select>
-              <Button size="sm" variant="outline" disabled={!linkChild || busy} onClick={() => void addExistingChild()}><Link2 size={14} className="mr-1" />{t('ac.detail.link')}</Button>
+              <AcTopicMultiPicker topics={linkable} value={linkChildren} onChange={setLinkChildren} placeholder={t('ac.detail.linkExisting')} />
+              <Button size="sm" variant="outline" disabled={linkChildren.size === 0 || busy} onClick={() => void addExistingChildren()}>
+                <Link2 size={14} className="mr-1" />{t('ac.detail.link')}{linkChildren.size > 1 ? ` (${linkChildren.size})` : ''}
+              </Button>
               <Button size="sm" onClick={() => onAddChild(topicId)}><Plus size={14} className="mr-1" />{t('ac.detail.newChild')}</Button>
             </div>
           </div>
@@ -335,7 +353,7 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
                           <select
                             value={c.status}
                             disabled={busy}
-                            onChange={e => void setStatus(c, e.target.value as CycleStatus)}
+                            onChange={e => requestStatus(c, e.target.value as CycleStatus)}
                             className="text-xs rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-1.5 py-1 text-gray-700 dark:text-gray-300"
                             aria-label={t('ac.detail.status')}
                           >
@@ -444,6 +462,30 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
             </div>
           );
         })()}
+      </Modal>
+
+      <Modal
+        isOpen={!!pendingStatus}
+        onClose={() => !busy && setPendingStatus(null)}
+        title={t('ac.board.moveTitle').replace('{status}', t(`ac.status.${pendingStatus?.status ?? 'todo'}`))}
+      >
+        {pendingStatus && (
+          <div className="space-y-4">
+            <div className="flex items-start gap-3 bg-primary/5 border border-primary/20 rounded-lg p-4 text-sm text-gray-700 dark:text-gray-300">
+              <Moon size={18} className="text-primary shrink-0 mt-0.5" />
+              {t('ac.hibernate.ask').replace('{name}', topic.name)}
+            </div>
+            <div className="flex flex-wrap justify-end gap-3">
+              <Button variant="ghost" onClick={() => setPendingStatus(null)} disabled={busy}>{t('pf.common.cancel')}</Button>
+              <Button variant="outline" disabled={busy} onClick={() => { const p = pendingStatus; setPendingStatus(null); void setStatus(p.cycle, p.status); }}>
+                {t('ac.board.move')}
+              </Button>
+              <Button disabled={busy} onClick={() => { const p = pendingStatus; setPendingStatus(null); void setStatus(p.cycle, p.status, true); }}>
+                <Moon size={14} className="mr-1" />{t('ac.hibernate.andHibernate').replace('{action}', t('ac.board.move'))}
+              </Button>
+            </div>
+          </div>
+        )}
       </Modal>
 
       {progressOf && (

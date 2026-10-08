@@ -4,7 +4,7 @@ import { Input } from '../../components/ui/Input';
 import { useAuth } from '../../lib/AuthContext';
 import { Turnstile } from '../../components/ui/Turnstile';
 import { Link } from 'react-router-dom';
-import { Briefcase, Clock, ExternalLink, ListTodo, LogIn, RotateCw, UserCircle, WifiOff } from 'lucide-react';
+import { Briefcase, Clock, ExternalLink, Globe, GraduationCap, ListTodo, LogIn, Music, RotateCw, UserCircle, WifiOff } from 'lucide-react';
 import { cn } from '../../components/ui/Button';
 import { IAM_LOGIN_MODE, embeddedLoginHeight, iamSsoLoginUrl } from '../../lib/iam';
 
@@ -35,11 +35,15 @@ const loginTheme = (): 'light' | 'dark' => {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 };
 
+/** Same modules (and icons) as the sidebar. */
 const MODULES = [
   { icon: Clock, label: 'Late Tracker', hint: 'Attendance, fines and reports' },
-  { icon: ListTodo, label: 'Task Manager', hint: 'Plan and track daily work' },
+  { icon: ListTodo, label: 'Task Manager', hint: 'Daily tasks and vocabulary' },
+  { icon: GraduationCap, label: 'Achievement Cycle', hint: 'Topics, milestones and Kanban' },
   { icon: Briefcase, label: 'Partner Business', hint: 'Buy, sell, costs and ledger' },
+  { icon: Music, label: 'Music', hint: 'Library, albums and player' },
   { icon: UserCircle, label: 'Portfolio', hint: 'Profile, projects and messages' },
+  { icon: Globe, label: 'Organization Site', hint: 'Services, blog, jobs and team' },
 ];
 
 /** If the form hasn't reported in by then, assume it can't load (offline, blocked, misconfigured). */
@@ -116,15 +120,15 @@ const EmbeddedLogin = () => {
         <div className="relative space-y-8">
           <div className="space-y-3">
             <h2 className="text-3xl font-bold leading-tight">Your team&apos;s everyday tools, in one place.</h2>
-            <p className="max-w-md text-white/80">One sign-in for attendance, tasks, business books and your portfolio.</p>
+            <p className="max-w-md text-white/80">One sign-in for attendance, tasks, learning goals, business books, music and your sites.</p>
           </div>
-          <ul className="grid max-w-md gap-3">
+          <ul className="grid max-w-xl grid-cols-2 gap-2.5">
             {MODULES.map(({ icon: Icon, label, hint }) => (
-              <li key={label} className="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3 backdrop-blur-sm">
+              <li key={label} className="flex items-center gap-3 rounded-xl bg-white/10 px-3.5 py-2.5 backdrop-blur-sm min-w-0">
                 <Icon size={20} className="shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold">{label}</p>
-                  <p className="text-xs text-white/70">{hint}</p>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold leading-tight">{label}</p>
+                  <p className="hidden xl:block mt-0.5 text-xs text-white/70 truncate">{hint}</p>
                 </div>
               </li>
             ))}

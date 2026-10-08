@@ -14,22 +14,24 @@ export const UNASSIGNED = '__unassigned';
 /**
  * Domain → subject → level filter over topics, shared by the Topics page and
  * the topic form's parent picker. Domain has no "all" (one is always chosen,
- * else the first); subject and level have "all" and default to it.
+ * else the first) unless `allowAllDomains` is on; subject and level have
+ * "all" and default to it.
  */
-export function useTopicFilter(graph: AcGraph, domains: AcDomain[], init: { domainId?: string | null; subjectId?: string | null; exclude?: Set<string> } = {}) {
+export function useTopicFilter(graph: AcGraph, domains: AcDomain[], init: { domainId?: string | null; subjectId?: string | null; exclude?: Set<string>; allowAllDomains?: boolean } = {}) {
   const [domainFilter, setDomain] = useState(init.domainId ?? '');
   const [subjectFilter, setSubject] = useState(init.subjectId ?? ALL);
   const [level, setLevel] = useState<Level | typeof ALL>(ALL);
   const exclude = init.exclude;
+  const allowAll = !!init.allowAllDomains;
 
   // Topics in no domain (e.g. restored after their parent was deleted) can be picked as "Unassigned".
   const unassigned = useMemo(() => graph.unassignedTopics(), [graph]);
-  const activeDomain = domainFilter === UNASSIGNED
-    ? UNASSIGNED
+  const activeDomain = domainFilter === UNASSIGNED || (allowAll && domainFilter === ALL)
+    ? domainFilter
     : domains.find(d => d.id === domainFilter)?.id ?? domains[0]?.id ?? (unassigned.size ? UNASSIGNED : '');
   const domainSet = useMemo(() => {
     if (activeDomain === UNASSIGNED) return unassigned;
-    return activeDomain ? graph.domainTopics(activeDomain) : null;
+    return activeDomain && activeDomain !== ALL ? graph.domainTopics(activeDomain) : null;
   }, [graph, activeDomain, unassigned]);
   const subjects = graph.roots.filter(r => (!domainSet || domainSet.has(r.id)) && !exclude?.has(r.id));
   // A chosen subject that is not in the current domain falls back to all.
@@ -41,7 +43,7 @@ export function useTopicFilter(graph: AcGraph, domains: AcDomain[], init: { doma
     (level === ALL || graph.levelOf(id) === level), [graph, subjectSet, domainSet, level]);
 
   return {
-    activeDomain, activeSubject, level, subjects, matches, unassignedCount: unassigned.size,
+    activeDomain, activeSubject, level, subjects, matches, unassignedCount: unassigned.size, allowAllDomains: allowAll,
     subjectValue: activeSubject || ALL,
     setDomain, setSubject, setLevel,
     /** Changes whenever the filter does (for resetting pages). */
@@ -59,6 +61,7 @@ export const AcTopicFilterSelects = ({ filter: f, domains, className = '' }: { f
     <>
       <select value={f.activeDomain} onChange={e => f.setDomain(e.target.value)} disabled={domains.length === 0 && f.unassignedCount === 0} className={cls} aria-label={t('ac.domains')}>
         {domains.length === 0 && f.unassignedCount === 0 && <option value="">{t('ac.domain.none')}</option>}
+        {f.allowAllDomains && <option value={ALL}>{t('ac.allDomains')}</option>}
         {domains.map(d => <option key={d.id} value={d.id}>{d.name}{d.is_archived ? ` (${t('ac.archive.archived')})` : ''}</option>)}
         {(f.unassignedCount > 0 || f.activeDomain === UNASSIGNED) && (
           <option value={UNASSIGNED}>{t('ac.domain.unassigned')} ({f.unassignedCount})</option>

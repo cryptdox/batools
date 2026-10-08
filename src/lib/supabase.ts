@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { loadSession } from './iam'
+import { iamRefresh, isExpiringSoon, loadSession } from './iam'
 
 export type AttendanceState = 'NO_ENTRY' | 'ENTRY' | 'CONSIDER_ENTRY' | 'LEAVE'
 
@@ -71,8 +71,11 @@ if (!supabaseUrl || !supabaseKey) {
 // Every request carries the signed-in user's IAM access token. The mp_ (music)
 // tables and the music bucket only accept writes with a valid one (migration
 // 047_mp_write_guard), because the anon key is public in the mumu app.
-const withIamToken: typeof fetch = (input, init) => {
-  const token = loadSession()?.accessToken;
+// A token about to expire is refreshed first (shared with AuthContext's refresh).
+const withIamToken: typeof fetch = async (input, init) => {
+  const session = loadSession();
+  let token = session?.accessToken;
+  if (token && isExpiringSoon(token)) token = (await iamRefresh().catch(() => null))?.accessToken ?? token;
   if (!token) return fetch(input, init);
   const headers = new Headers(init?.headers);
   headers.set('x-iam-token', token);

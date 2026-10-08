@@ -78,12 +78,17 @@ export function loadSession(): IamSession | null {
   }
 }
 
+/** Fired in this tab whenever the stored session changes (other tabs get `storage`). */
+export const SESSION_EVENT = 'batools-iam-session-change';
+
 export function saveSession(session: IamSession) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+  window.dispatchEvent(new Event(SESSION_EVENT));
 }
 
 export function clearSession() {
   localStorage.removeItem(STORAGE_KEY);
+  window.dispatchEvent(new Event(SESSION_EVENT));
 }
 
 /** The JWT's payload, or null if it can't be read. */
@@ -101,6 +106,14 @@ export function getTokenExpiry(token: string): number | null {
   const exp = getTokenClaims(token)?.exp;
   return typeof exp === 'number' ? exp : null;
 }
+
+/** Refresh this long before the access token's `exp` so requests never race it. */
+export const REFRESH_LEAD_MS = 60_000;
+
+export const isExpiringSoon = (token: string) => {
+  const exp = getTokenExpiry(token);
+  return exp === null || exp * 1000 - Date.now() < REFRESH_LEAD_MS;
+};
 
 /** The IAM realm the token was issued in (`realmId` claim), or null. */
 export function getTokenRealmId(token: string): string | null {
@@ -185,29 +198,51 @@ export function completeRedirectLogin(hash: string): IamSession | null {
   }
 }
 
-// Refresh tokens are single-use (the backend rotates them), so concurrent
-// callers must share one in-flight refresh instead of each spending the token.
+// Refresh tokens are single-use (the backend rotates them and rejects the old one
+// with a 401), so every caller — in this tab and in other tabs — must share one
+// refresh: in-tab through `refreshInFlight`, across tabs through a Web Lock, and
+// whoever gets the lock second re-reads storage and uses the tab-mate's result.
 let refreshInFlight: Promise<IamSession> | null = null;
 
+const REFRESH_LOCK = 'batools-iam-refresh';
+
+const withRefreshLock = <T,>(fn: () => Promise<T>): Promise<T> =>
+  typeof navigator !== 'undefined' && navigator.locks
+    ? navigator.locks.request(REFRESH_LOCK, fn)
+    : fn();
+
+/** A fresh session: the stored one if another tab already refreshed it, else a new one. */
 export function iamRefresh(): Promise<IamSession> {
   if (refreshInFlight) return refreshInFlight;
 
-  refreshInFlight = (async () => {
+  refreshInFlight = withRefreshLock(async () => {
     const current = loadSession();
     if (!current?.refreshToken) throw new IamError('No refresh token', 401);
-    const tokens = await request<{ accessToken: string; refreshToken: string }>('/auth/refresh', {
-      method: 'POST',
-      body: JSON.stringify({ refreshToken: current.refreshToken }),
-    });
-    const next: IamSession = { ...current, ...tokens };
-    saveSession(next);
-    return next;
-  })().finally(() => {
+    if (!isExpiringSoon(current.accessToken)) return current;
+    try {
+      const tokens = await request<{ accessToken: string; refreshToken: string }>('/auth/refresh', {
+        method: 'POST',
+        body: JSON.stringify({ refreshToken: current.refreshToken }),
+      });
+      const next: IamSession = { ...current, ...tokens };
+      saveSession(next);
+      return next;
+    } catch (err) {
+      // Rejected, but someone (e.g. a tab without Web Locks) rotated it meanwhile: use theirs.
+      const now = loadSession();
+      if (now && now.refreshToken !== current.refreshToken) return now;
+      throw err;
+    }
+  }).finally(() => {
     refreshInFlight = null;
   });
 
   return refreshInFlight;
 }
+
+/** Whether a refresh failure means the session is really gone (vs. a hiccup worth retrying). */
+export const isSessionRejected = (err: unknown) =>
+  err instanceof IamError && (err.status === 400 || err.status === 401 || err.status === 403);
 
 export async function iamLogout(accessToken: string) {
   await request<null>('/auth/logout', {

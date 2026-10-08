@@ -172,6 +172,7 @@ export const translations = {
         title: 'Topics', level: 'Level', empty: 'No topics yet. Create a subject to start.', emptyDomain: 'No topics in this domain match.', noSubject: 'No subject in this domain',
       },
       detail: {
+        nSelected: '{n} selected', selectShown: 'Select all shown', clearSelection: 'Clear',
         paths: 'Paths', isSubject: 'This is a Subject (no parent).', auto: 'auto', unlink: 'Remove from this parent',
         roleAutoHint: 'Click again to go back to automatic',
         children: 'Children', noChildren: 'Nothing beneath this topic yet.', newChild: 'New child', link: 'Link',
@@ -200,6 +201,16 @@ export const translations = {
         allRounds: 'All rounds', noRounds: 'No {kind} cycle yet. Start one from a topic (Topics & Domains or Explore).',
         completeTitle: 'Mark complete?', completeHint: 'Completing fills the remaining {n} story points. Add a note if you like.',
         markComplete: 'Mark complete',
+        moveTitle: 'Move to {status}?', move: 'Move', showHibernated: 'Show hibernated', hideHibernated: 'Hide hibernated',
+      },
+      hibernate: {
+        hibernate: 'Hibernate', hibernated: 'Hibernated', wake: 'Wake',
+        andHibernate: '{action} & hibernate',
+        ask: 'Hibernate "{name}" too? A hibernated topic is hidden from the Kanban; its cycles and points stay.',
+        askMilestone: 'Hibernate "{name}" and its {n} direct child topic(s) too? They are hidden from the Kanban; grandchildren are not touched.',
+        switchHint: 'Hides this milestone and its {n} direct child topic(s) from the Kanban (grandchildren keep their own setting).',
+        topicHint: 'A hibernated topic is hidden from the Kanban; its cycles and points stay.',
+        slept: '{n} topic(s) hibernated', woken: '{n} topic(s) woken',
       },
       explore: {
         pageTitle: 'Explore', pageSubtitle: 'Your topics as a tree, a graph and a cycle heatmap.',
@@ -221,6 +232,7 @@ export const translations = {
         planned: '{n} card(s) moved from Backlog to To do', cancelled: '{n} card(s) cancelled', reopened: '{n} card(s) back in Backlog',
         cancelTitle: 'Cancel this milestone?', cancelHint: 'Cancels {cycle} of "{name}" and everything beneath it: {n} card(s) not yet complete. Points already achieved stay. Use Reopen to bring them back to Backlog.',
         empty: 'No milestones here. Mark a topic as a milestone in its edit form.',
+        toBacklogTitle: 'Back to Backlog?', toBacklogHint: 'Moves {n} planned card(s) of "{name}" and everything beneath it back to Backlog ({cycle}).',
       },
     },
     mp: {
@@ -1021,6 +1033,7 @@ export const translations = {
         title: 'টপিক', level: 'স্তর', empty: 'এখনো কোনো টপিক নেই। শুরু করতে একটি বিষয় তৈরি করুন।', emptyDomain: 'এই ডোমেইনে মেলে এমন কোনো টপিক নেই।', noSubject: 'এই ডোমেইনে কোনো বিষয় নেই',
       },
       detail: {
+        nSelected: '{n}টি নির্বাচিত', selectShown: 'দেখানো সব নির্বাচন', clearSelection: 'মুছুন',
         paths: 'পাথ', isSubject: 'এটি একটি বিষয় (কোনো প্যারেন্ট নেই)।', auto: 'স্বয়ংক্রিয়', unlink: 'এই প্যারেন্ট থেকে সরান',
         roleAutoHint: 'স্বয়ংক্রিয়তে ফিরতে আবার ক্লিক করুন',
         children: 'চাইল্ড', noChildren: 'এই টপিকের নিচে এখনো কিছু নেই।', newChild: 'নতুন চাইল্ড', link: 'লিংক',
@@ -1049,6 +1062,16 @@ export const translations = {
         allRounds: 'সব রাউন্ড', noRounds: 'এখনো কোনো {kind} সাইকেল নেই। একটি টপিক থেকে শুরু করুন (টপিক ও ডোমেইন বা এক্সপ্লোর)।',
         completeTitle: 'সম্পন্ন করবেন?', completeHint: 'সম্পন্ন করলে বাকি {n} স্টোরি পয়েন্ট পূর্ণ হবে। চাইলে নোট যোগ করুন।',
         markComplete: 'সম্পন্ন করুন',
+        moveTitle: '{status}-এ সরাবেন?', move: 'সরান', showHibernated: 'হাইবারনেটেড দেখুন', hideHibernated: 'হাইবারনেটেড লুকান',
+      },
+      hibernate: {
+        hibernate: 'হাইবারনেট', hibernated: 'হাইবারনেটেড', wake: 'জাগান',
+        andHibernate: '{action} ও হাইবারনেট',
+        ask: '"{name}"-ও হাইবারনেট করবেন? হাইবারনেটেড টপিক কানবানে দেখায় না; এর সাইকেল ও পয়েন্ট থাকে।',
+        askMilestone: '"{name}" ও এর {n}টি সরাসরি চাইল্ড টপিক হাইবারনেট করবেন? এগুলো কানবানে দেখাবে না; গ্র্যান্ডচাইল্ডে কোনো পরিবর্তন হবে না।',
+        switchHint: 'এই মাইলস্টোন ও এর {n}টি সরাসরি চাইল্ড টপিক কানবান থেকে লুকায় (গ্র্যান্ডচাইল্ড নিজের সেটিং রাখে)।',
+        topicHint: 'হাইবারনেটেড টপিক কানবানে দেখায় না; এর সাইকেল ও পয়েন্ট থাকে।',
+        slept: '{n}টি টপিক হাইবারনেট হয়েছে', woken: '{n}টি টপিক জাগানো হয়েছে',
       },
       explore: {
         pageTitle: 'এক্সপ্লোর', pageSubtitle: 'আপনার টপিকগুলো ট্রি, গ্রাফ ও সাইকেল হিটম্যাপে।',
@@ -1068,6 +1091,7 @@ export const translations = {
         reached: 'অর্জিত', inProgress: 'এখনো অর্জিত হয়নি', nested: 'ভিতরে {done}/{n} মাইলস্টোন',
         plan: 'পরিকল্পনা', cancel: 'বাতিল', reopen: 'আবার খুলুন', toBacklog: 'ব্যাকলগে ফেরান', openBoard: 'বোর্ডে খুলুন', unplanned: '{n}টি কার্ড ব্যাকলগে ফেরানো হয়েছে',
         planned: '{n}টি কার্ড ব্যাকলগ থেকে করণীয়তে গেছে', cancelled: '{n}টি কার্ড বাতিল হয়েছে', reopened: '{n}টি কার্ড আবার ব্যাকলগে',
+        toBacklogTitle: 'ব্যাকলগে ফেরাবেন?', toBacklogHint: '"{name}" ও এর নিচের সবকিছুর {n}টি পরিকল্পিত কার্ড ব্যাকলগে ফিরবে ({cycle})।',
         cancelTitle: 'এই মাইলস্টোন বাতিল করবেন?', cancelHint: '"{name}" ও এর নিচের সবকিছুর {cycle} বাতিল হবে: {n}টি অসম্পূর্ণ কার্ড। অর্জিত পয়েন্ট থাকবে। ব্যাকলগে ফেরাতে "আবার খুলুন" ব্যবহার করুন।',
         empty: 'এখানে কোনো মাইলস্টোন নেই। টপিক সম্পাদনায় মাইলস্টোন চিহ্নিত করুন।',
       },
