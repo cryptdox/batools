@@ -52,10 +52,10 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
   // A status change to Complete / Cancel / Backlog waits here to ask about hibernating.
   const [pendingStatus, setPendingStatus] = useState<{ cycle: AcCycle; status: CycleStatus } | null>(null);
 
-  // A parent's points in a cycle are computed from its children (migration 050),
-  // whenever any child has that cycle: no hand-made progress there.
+  // A parent's points are always computed from its children (migrations 050 / 051):
+  // no hand-made progress on any topic with children.
   const childIds = new Set((graph.childLinks.get(topicId) ?? []).map(l => l.child_id));
-  const isComputed = (c: AcCycle) => cycles.some(x => childIds.has(x.topic_id) && x.kind === c.kind && x.round === c.round);
+  const isComputed = (_c: AcCycle) => childIds.size > 0;
 
   const myCycles = cycles
     .filter(c => c.topic_id === topicId)
