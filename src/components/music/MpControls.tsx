@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Shuffle, SkipBack, SkipForward, Play, Pause, Repeat, Repeat1, RotateCcw, RotateCw, Volume2, VolumeX, Maximize2, Gauge, Square, Music, X,
@@ -144,9 +145,20 @@ export const MpHeaderControls = () => {
   );
 };
 
+const FAB = 56; // floating button size (px)
+const EDGE = 16; // gap to the screen edges when snapped to a corner
+const FAB_POS_KEY = 'mp-fab-pos';
+type Point = { x: number; y: number };
+const clampPoint = (pt: Point): Point => ({
+  x: Math.min(Math.max(pt.x, 8), window.innerWidth - FAB - 8),
+  y: Math.min(Math.max(pt.y, 8), window.innerHeight - FAB - 8),
+});
+
 /**
- * Phones: a floating round button; tapping it stacks the same controls
- * vertically above it (tap again, or anywhere else, to fold them away).
+ * Phones: a floating round button, fixed on screen (stays put while the page
+ * scrolls). Drag it anywhere; where it was dropped is remembered. Tapping it
+ * moves it to the nearest corner and stacks the controls vertically toward the
+ * middle of the screen; closing (tap again, or anywhere else) sends it back.
  */
 export const MpFloatingControls = () => {
   const { t } = useLanguage();
@@ -154,20 +166,74 @@ export const MpFloatingControls = () => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const box = useRef<HTMLDivElement>(null);
+  // Sit above the bottom mini player when it shows (people with a music page).
+  const bottomGap = details && p.current ? 96 : EDGE;
+  const [pos, setPos] = useState<Point>(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(FAB_POS_KEY) ?? 'null') as Point | null;
+      if (saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)) return clampPoint(saved);
+    } catch { /* default below */ }
+    return { x: window.innerWidth - FAB - EDGE, y: window.innerHeight - FAB - bottomGap };
+  });
+  const drag = useRef<{ dx: number; dy: number; startX: number; startY: number; moved: boolean } | null>(null);
+  const [dragging, setDragging] = useState(false);
+
   useEffect(() => {
     if (!open) return;
     const close = (e: PointerEvent) => { if (!box.current?.contains(e.target as Node)) setOpen(false); };
     document.addEventListener('pointerdown', close);
     return () => document.removeEventListener('pointerdown', close);
   }, [open]);
+  // Keep it on screen when the window changes size (rotation, keyboard).
+  useEffect(() => {
+    const onResize = () => setPos(pt => clampPoint(pt));
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   if (!visible || pathname === '/mp/player') return null;
-  // Sit above the bottom mini player when it shows (people with a music page).
-  const lifted = details && !!p.current;
+
+  // Open: snapped to the nearest corner; closed: where the user left it.
+  const right = pos.x + FAB / 2 >= window.innerWidth / 2;
+  const bottom = pos.y + FAB / 2 >= window.innerHeight / 2;
+  const at: Point = open
+    ? { x: right ? window.innerWidth - FAB - EDGE : EDGE, y: bottom ? window.innerHeight - FAB - bottomGap : EDGE + 64 }
+    : pos;
+
+  const onPointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
+    if (open) return; // open: a tap just closes it
+    e.currentTarget.setPointerCapture(e.pointerId);
+    drag.current = { dx: e.clientX - pos.x, dy: e.clientY - pos.y, startX: e.clientX, startY: e.clientY, moved: false };
+  };
+  const onPointerMove = (e: React.PointerEvent<HTMLButtonElement>) => {
+    const d = drag.current;
+    if (!d) return;
+    if (!d.moved && Math.hypot(e.clientX - d.startX, e.clientY - d.startY) < 6) return;
+    if (!d.moved) { d.moved = true; setDragging(true); }
+    setPos(clampPoint({ x: e.clientX - d.dx, y: e.clientY - d.dy }));
+  };
+  const onPointerUp = () => {
+    const d = drag.current;
+    drag.current = null;
+    if (d?.moved) {
+      setDragging(false);
+      setPos(pt => { try { localStorage.setItem(FAB_POS_KEY, JSON.stringify(pt)); } catch { /* convenience only */ } return pt; });
+      return;
+    }
+    setOpen(o => !o);
+  };
+
   const item = 'w-11 h-11 rounded-full flex items-center justify-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 shadow-lg border border-gray-200 dark:border-gray-700 active:scale-95 transition disabled:opacity-40';
-  return (
-    <div ref={box} className={`md:hidden fixed right-4 z-50 flex flex-col items-end gap-2 ${lifted ? 'bottom-24' : 'bottom-4'}`}>
+  // Rendered on <body>: inside the animated page area "fixed" would scroll with the content.
+  return createPortal(
+    <div
+      ref={box}
+      className={`md:hidden fixed z-50 ${dragging ? '' : 'transition-[left,top] duration-300 ease-out'}`}
+      style={{ left: at.x, top: at.y, width: FAB, height: FAB }}
+    >
       {open && (
-        <div className="flex flex-col items-end gap-2 animate-fade-in-scale">
+        // Stacked toward the middle of the screen: above when snapped low, below when high.
+        <div className={`absolute flex gap-2 animate-fade-in-scale ${bottom ? 'bottom-full mb-2 flex-col' : 'top-full mt-2 flex-col-reverse'} ${right ? 'right-1.5 items-end' : 'left-1.5 items-start'}`}>
           {p.current && (
             <SongName className="max-w-[70vw] truncate rounded-full px-3 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow border border-gray-200 dark:border-gray-700" />
           )}
@@ -188,15 +254,19 @@ export const MpFloatingControls = () => {
         </div>
       )}
       <button
-        onClick={() => setOpen(o => !o)}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => { drag.current = null; setDragging(false); }}
         aria-expanded={open}
         aria-label={open ? t('mp.close') : t('mp.nowPlaying')}
-        className={`relative w-14 h-14 rounded-full flex items-center justify-center text-white shadow-xl bg-gradient-to-br from-primary to-secondary active:scale-95 transition ${p.playing && !open ? 'mp-motion' : ''}`}
+        className={`relative w-14 h-14 rounded-full flex items-center justify-center text-white shadow-xl bg-gradient-to-br from-primary to-secondary touch-none select-none ${dragging ? 'scale-110 cursor-grabbing' : 'active:scale-95 cursor-grab'} transition-transform`}
       >
-        {p.playing && !open && <span className="absolute inset-0 rounded-full bg-primary/40 animate-ping" aria-hidden="true" />}
+        {p.playing && !open && !dragging && <span className="absolute inset-0 rounded-full bg-primary/40 animate-ping" aria-hidden="true" />}
         {open ? <X size={22} /> : <Music size={22} />}
       </button>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
