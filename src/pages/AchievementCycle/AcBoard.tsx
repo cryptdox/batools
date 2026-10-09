@@ -238,7 +238,7 @@ export const AcBoard = () => {
       {loading ? (
         <div className="p-12 text-center text-gray-500">{t('pf.common.loading')}</div>
       ) : (
-        <div className={`grid gap-4 grid-cols-1 md:grid-cols-3 items-start ${showBacklog ? 'xl:grid-cols-6' : 'xl:grid-cols-5'}`}>
+        <div className={`grid gap-4 grid-cols-1 md:grid-cols-3 items-stretch ${showBacklog ? 'xl:grid-cols-6' : 'xl:grid-cols-5'}`}>
           {columns.map(col => (
             <div
               key={col.status}
