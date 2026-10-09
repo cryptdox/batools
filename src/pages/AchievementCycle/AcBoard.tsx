@@ -238,14 +238,16 @@ export const AcBoard = () => {
       {loading ? (
         <div className="p-12 text-center text-gray-500">{t('pf.common.loading')}</div>
       ) : (
-        <div className={`grid gap-4 grid-cols-1 md:grid-cols-3 items-stretch ${showBacklog ? 'xl:grid-cols-6' : 'xl:grid-cols-5'}`}>
+        // Fixed-width columns side by side on every screen; the board scrolls sideways
+        // when they don't fit, and every column is as tall as the tallest (easy drops).
+        <div className="flex items-stretch gap-4 overflow-x-auto pb-3">
           {columns.map(col => (
             <div
               key={col.status}
               onDragOver={e => { e.preventDefault(); setOverCol(col.status); }}
               onDragLeave={() => setOverCol(o => (o === col.status ? null : o))}
               onDrop={() => onDrop(col.status)}
-              className={`rounded-xl border-2 transition-colors min-h-40 ${overCol === col.status ? 'border-primary bg-primary/5' : 'border-transparent bg-gray-100/70 dark:bg-gray-900/40'}`}
+              className={`w-72 shrink-0 rounded-xl border-2 transition-colors min-h-40 ${overCol === col.status ? 'border-primary bg-primary/5' : 'border-transparent bg-gray-100/70 dark:bg-gray-900/40'}`}
             >
               <div className="flex items-center justify-between px-3 pt-3 pb-2">
                 <span className="inline-flex items-center gap-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
@@ -313,7 +315,7 @@ export const AcBoard = () => {
                           value={c.status}
                           disabled={busy}
                           onChange={e => requestMove(c, e.target.value as CycleStatus)}
-                          className="ml-auto text-xs rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-1.5 py-1 text-gray-600 dark:text-gray-300"
+                          className="ml-auto min-w-0 max-w-[9rem] text-xs rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-1.5 py-1 text-gray-600 dark:text-gray-300"
                           aria-label={t('ac.detail.status')}
                         >
                           {STATUSES.map(s => <option key={s} value={s}>{t(`ac.status.${s}`)}</option>)}
