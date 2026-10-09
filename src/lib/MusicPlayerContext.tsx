@@ -52,6 +52,12 @@ const read = (key: string, fallback: number) => {
   try { const v = Number(localStorage.getItem(key)); return Number.isFinite(v) && localStorage.getItem(key) !== null ? v : fallback; } catch { return fallback; }
 };
 const write = (key: string, v: number) => { try { localStorage.setItem(key, String(v)); } catch { /* convenience only */ } };
+// Shuffle and repeat start on (shuffle, repeat all) and remember the listener's choice in this browser.
+const readShuffle = () => { try { return localStorage.getItem('mp-shuffle') !== 'false'; } catch { return true; } };
+const readRepeat = (): RepeatMode => {
+  try { const v = localStorage.getItem('mp-repeat'); return v === 'off' || v === 'all' || v === 'one' ? v : 'all'; } catch { return 'all'; }
+};
+const writeText = (key: string, v: string) => { try { localStorage.setItem(key, v); } catch { /* convenience only */ } };
 
 export function MusicPlayerProvider({ children }: { children: ReactNode }) {
   const userId = useMpUserId();
@@ -65,10 +71,12 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [shuffle, setShuffleState] = useState(false);
+  const [shuffle, setShuffleState] = useState(readShuffle);
   // Play order when shuffling: positions into `queue`.
   const [order, setOrder] = useState<number[]>([]);
-  const [repeat, setRepeat] = useState<RepeatMode>('off');
+  const [repeat, setRepeat] = useState<RepeatMode>(readRepeat);
+  useEffect(() => { writeText('mp-shuffle', String(shuffle)); }, [shuffle]);
+  useEffect(() => { writeText('mp-repeat', repeat); }, [repeat]);
   const [rate, setRateState] = useState(() => read('mp-rate', 1));
   const [volume, setVolumeState] = useState(() => read('mp-volume', 0.9));
   const [muted, setMuted] = useState(false);
