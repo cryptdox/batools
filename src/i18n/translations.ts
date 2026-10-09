@@ -238,7 +238,7 @@ export const translations = {
       },
     },
     mp: {
-      play: 'Play', pause: 'Pause', next: 'Next', prev: 'Previous', back10: 'Back 10 s', forward10: 'Forward 10 s',
+      play: 'Play', pause: 'Pause', stop: 'Stop', next: 'Next', prev: 'Previous', back10: 'Back 10 s', forward10: 'Forward 10 s',
       shuffle: 'Shuffle', speed: 'Speed', volume: 'Volume', mute: 'Mute', unmute: 'Unmute',
       repeat: { off: 'Repeat: off', all: 'Repeat: all', one: 'Repeat: this song' },
       playAll: 'Play all', shufflePlay: 'Shuffle play', playNext: 'Play next', addToQueue: 'Add to queue', nowPlaying: 'Now playing',
@@ -1101,7 +1101,7 @@ export const translations = {
       },
     },
     mp: {
-      play: 'চালান', pause: 'থামান', next: 'পরের', prev: 'আগের', back10: '১০ সেকেন্ড পিছনে', forward10: '১০ সেকেন্ড সামনে',
+      play: 'চালান', pause: 'থামান', stop: 'বন্ধ করুন', next: 'পরের', prev: 'আগের', back10: '১০ সেকেন্ড পিছনে', forward10: '১০ সেকেন্ড সামনে',
       shuffle: 'এলোমেলো', speed: 'গতি', volume: 'ভলিউম', mute: 'নিঃশব্দ', unmute: 'শব্দ চালু',
       repeat: { off: 'পুনরাবৃত্তি: বন্ধ', all: 'পুনরাবৃত্তি: সব', one: 'পুনরাবৃত্তি: এই গান' },
       playAll: 'সব চালান', shufflePlay: 'এলোমেলো চালান', playNext: 'এরপর চালান', addToQueue: 'কিউতে যোগ', nowPlaying: 'এখন চলছে',

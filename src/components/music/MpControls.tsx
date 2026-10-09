@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
-  Shuffle, SkipBack, SkipForward, Play, Pause, Repeat, Repeat1, RotateCcw, RotateCw, Volume2, VolumeX, Maximize2, Gauge,
+  Shuffle, SkipBack, SkipForward, Play, Pause, Repeat, Repeat1, RotateCcw, RotateCw, Volume2, VolumeX, Maximize2, Gauge, Square,
 } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { usePlayer } from '../../lib/MusicPlayerContext';
@@ -12,7 +12,7 @@ export const SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 2];
 const iconBtn = (on = false) =>
   `inline-flex items-center justify-center rounded-full p-2 transition-colors ${on ? 'text-primary bg-primary/10' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'} disabled:opacity-30`;
 
-/** Shuffle · prev · −10 s · play · +10 s · next · repeat. */
+/** Shuffle · prev · −10 s · play · +10 s · next · repeat · stop. */
 export const MpTransport = ({ big = false }: { big?: boolean }) => {
   const { t } = useLanguage();
   const p = usePlayer();
@@ -35,6 +35,7 @@ export const MpTransport = ({ big = false }: { big?: boolean }) => {
       <button className={iconBtn(p.repeat !== 'off')} onClick={p.cycleRepeat} title={t(`mp.repeat.${p.repeat}`)} aria-label={t(`mp.repeat.${p.repeat}`)}>
         {p.repeat === 'one' ? <Repeat1 size={s - 2} /> : <Repeat size={s - 2} />}
       </button>
+      <button className={iconBtn()} onClick={p.stop} disabled={!p.current} title={t('mp.stop')} aria-label={t('mp.stop')}><Square size={s - 4} fill="currentColor" /></button>
     </div>
   );
 };
@@ -118,6 +119,7 @@ export const MpMiniPlayer = () => {
 
 /** Phone-size controls: prev · play · next. */
 const MpTransportCompact = () => {
+  const { t } = useLanguage();
   const p = usePlayer();
   return (
     <div className="flex items-center gap-1">
@@ -126,6 +128,7 @@ const MpTransportCompact = () => {
         {p.playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
       </button>
       <button className={iconBtn()} onClick={p.next}><SkipForward size={16} /></button>
+      <button className={iconBtn()} onClick={p.stop} title={t('mp.stop')} aria-label={t('mp.stop')}><Square size={13} fill="currentColor" /></button>
     </div>
   );
 };

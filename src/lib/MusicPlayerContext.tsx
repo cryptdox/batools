@@ -31,6 +31,8 @@ type PlayerContextValue = {
   removeFromQueue: (index: number) => void;
   jumpTo: (index: number) => void;
   toggle: () => void;
+  /** Stop playback and close the player (forgets the saved queue too). */
+  stop: () => void;
   next: () => void;
   prev: () => void;
   seek: (seconds: number) => void;
@@ -59,6 +61,25 @@ const readRepeat = (): RepeatMode => {
 };
 const writeText = (key: string, v: string) => { try { localStorage.setItem(key, v); } catch { /* convenience only */ } };
 
+// What is playing (queue, song, position), kept in this browser so a reload
+// brings the player back on the same song, paused where it was.
+const SESSION_KEY = 'mp-session';
+type SavedSession = { queue: MpSong[]; index: number; order: number[]; time: number };
+const readSession = (): SavedSession | null => {
+  try {
+    const v = JSON.parse(localStorage.getItem(SESSION_KEY) ?? 'null') as SavedSession | null;
+    return v && Array.isArray(v.queue) && v.queue[v.index] ? v : null;
+  } catch { return null; }
+};
+/** Updates just the saved position (on pause), without touching the rest. */
+const writeSessionTime = (time: number) => {
+  const v = readSession();
+  if (v) writeSession({ ...v, time });
+};
+const writeSession = (v: SavedSession | null) => {
+  try { if (v) localStorage.setItem(SESSION_KEY, JSON.stringify(v)); else localStorage.removeItem(SESSION_KEY); } catch { /* convenience only */ }
+};
+
 export function MusicPlayerProvider({ children }: { children: ReactNode }) {
   const userId = useMpUserId();
   const audio = useRef<HTMLAudioElement | null>(null);
@@ -66,14 +87,18 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
   const freq = useRef<Uint8Array<ArrayBuffer> | null>(null);
   const counted = useRef<string | null>(null);
 
-  const [queue, setQueue] = useState<MpSong[]>([]);
-  const [index, setIndex] = useState(-1);
+  const saved = useRef(readSession());
+  // Where to resume the restored song once its audio has loaded.
+  const resumeAt = useRef(saved.current?.time ?? 0);
+  const [queue, setQueue] = useState<MpSong[]>(() => saved.current?.queue ?? []);
+  const [index, setIndex] = useState(() => saved.current?.index ?? -1);
+  // A restored session starts paused.
   const [playing, setPlaying] = useState(false);
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(() => saved.current?.time ?? 0);
   const [duration, setDuration] = useState(0);
   const [shuffle, setShuffleState] = useState(readShuffle);
   // Play order when shuffling: positions into `queue`.
-  const [order, setOrder] = useState<number[]>([]);
+  const [order, setOrder] = useState<number[]>(() => saved.current?.order ?? []);
   const [repeat, setRepeat] = useState<RepeatMode>(readRepeat);
   useEffect(() => { writeText('mp-shuffle', String(shuffle)); }, [shuffle]);
   useEffect(() => { writeText('mp-repeat', repeat); }, [repeat]);
@@ -117,12 +142,34 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
     if (a.src !== current.audio.url) {
       a.src = current.audio.url;
       a.playbackRate = rate;
-      setTime(0);
       setDuration(current.duration_seconds ?? 0);
+      if (resumeAt.current > 0) {
+        // Restored after a reload: back to the saved position (still paused).
+        const at = resumeAt.current;
+        resumeAt.current = 0;
+        setTime(at);
+        a.addEventListener('loadedmetadata', () => { a.currentTime = at; }, { once: true });
+      } else {
+        setTime(0);
+      }
     }
     if (playing) void a.play().catch(() => setPlaying(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current?.id]);
+
+  // Keep the session saved: on every queue / song change, every few seconds of
+  // playback, and when the page is closed or reloaded.
+  const timeRef = useRef(time);
+  timeRef.current = time;
+  const saveSession = useCallback(() => {
+    writeSession(index >= 0 && queue[index] ? { queue, index, order, time: audio.current?.currentTime || timeRef.current } : null);
+  }, [queue, index, order]);
+  useEffect(() => { saveSession(); }, [saveSession]);
+  useEffect(() => {
+    const id = window.setInterval(() => { if (!audio.current?.paused) saveSession(); }, 5000);
+    window.addEventListener('pagehide', saveSession);
+    return () => { window.clearInterval(id); window.removeEventListener('pagehide', saveSession); };
+  }, [saveSession]);
 
   useEffect(() => { if (audio.current) audio.current.playbackRate = rate; write('mp-rate', rate); }, [rate]);
   useEffect(() => { if (audio.current) audio.current.volume = volume; write('mp-volume', volume); }, [volume]);
@@ -161,12 +208,13 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
         void supabase.rpc('mp_count_play', { p_song_id: current.id });
       }
     };
-    const onPause = () => setPlaying(false);
+    const onPause = () => { setPlaying(false); writeSessionTime(a.currentTime); };
     const onEnded = () => {
       if (repeat === 'one') { a.currentTime = 0; void a.play(); return; }
       next();
     };
-    const onError = () => { if (current) toast.error(`Could not play "${current.title}"`); setPlaying(false); };
+    // A stopped player has no source: that "error" is expected.
+    const onError = () => { if (!a.getAttribute('src')) return; if (current) toast.error(`Could not play "${current.title}"`); setPlaying(false); };
     a.addEventListener('timeupdate', onTime);
     a.addEventListener('loadedmetadata', onMeta);
     a.addEventListener('play', onPlay);
@@ -257,6 +305,19 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
     if (a.paused) void a.play().catch(() => {}); else a.pause();
   };
 
+  const stop = () => {
+    const a = audio.current;
+    if (a) { a.pause(); a.removeAttribute('src'); a.load(); }
+    resumeAt.current = 0;
+    setPlaying(false);
+    setQueue([]);
+    setIndex(-1);
+    setOrder([]);
+    setTime(0);
+    setDuration(0);
+    writeSession(null);
+  };
+
   const seek = (s: number) => { if (audio.current) audio.current.currentTime = Math.max(0, Math.min(s, duration || s)); };
   const skip = (d: number) => seek((audio.current?.currentTime ?? 0) + d);
 
@@ -289,7 +350,7 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<PlayerContextValue>(() => ({
     queue, index, current, playing, time, duration, shuffle, repeat, rate, volume, muted,
-    playList, playNow, playNext, addToQueue, removeFromQueue, jumpTo, toggle, next, prev, seek, skip,
+    playList, playNow, playNext, addToQueue, removeFromQueue, jumpTo, toggle, stop, next, prev, seek, skip,
     setShuffle, cycleRepeat, setRate: setRateState, setVolume: setVolumeState, toggleMute: () => setMuted(m => !m),
     level, bands,
     // eslint-disable-next-line react-hooks/exhaustive-deps
