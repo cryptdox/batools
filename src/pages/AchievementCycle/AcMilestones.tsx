@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Star, CheckCircle2, Circle, CalendarPlus, Ban, RotateCcw, AlertTriangle, Inbox, KanbanSquare, Moon } from 'lucide-react';
+import { Star, CheckCircle2, Circle, CalendarPlus, Ban, RotateCcw, AlertTriangle, Inbox, KanbanSquare, Moon, Sun } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { acRpc, cycleLabel, percent, setHibernated, useAcData, useSelectedCycle, type AcTopic, type CycleStatus } from '../../lib/achievementCycle';
 import { Button } from '../../components/ui/Button';
@@ -171,17 +171,17 @@ export const AcMilestones = () => {
                           className="ml-auto inline-flex items-center gap-2 text-xs font-medium text-gray-600 dark:text-gray-300 cursor-pointer"
                           title={t('ac.hibernate.switchHint').replace('{n}', String(graph.children(m.id).length))}
                         >
-                          <Moon size={13} className={m.is_hibernated ? 'text-primary' : 'text-gray-400'} />
-                          {t('ac.hibernate.hibernate')}
+                          <Sun size={13} className={m.is_hibernated ? 'text-gray-400' : 'text-warning'} />
+                          {t('ac.hibernate.awake')}
                           <button
                             type="button"
                             role="switch"
-                            aria-checked={m.is_hibernated}
+                            aria-checked={!m.is_hibernated}
                             disabled={busy}
                             onClick={() => void toggleHibernate(m)}
-                            className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors disabled:opacity-40 ${m.is_hibernated ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'}`}
+                            className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors disabled:opacity-40 ${m.is_hibernated ? 'bg-gray-300 dark:bg-gray-600' : 'bg-primary'}`}
                           >
-                            <span className={`absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${m.is_hibernated ? 'translate-x-4' : ''}`} />
+                            <span className={`absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${m.is_hibernated ? '' : 'translate-x-4'}`} />
                           </button>
                         </label>
                       </div>
