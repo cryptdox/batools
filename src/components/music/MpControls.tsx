@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
-  Shuffle, SkipBack, SkipForward, Play, Pause, Repeat, Repeat1, RotateCcw, RotateCw, Volume2, VolumeX, Maximize2, Gauge, Square,
+  Shuffle, SkipBack, SkipForward, Play, Pause, Repeat, Repeat1, RotateCcw, RotateCw, Volume2, VolumeX, Maximize2, Gauge, Square, Music, X,
 } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { usePlayer } from '../../lib/MusicPlayerContext';
@@ -86,40 +86,116 @@ export const MpExtras = () => {
   );
 };
 
-/**
- * Music buttons in the top bar, for anyone with MUSIC_QUICK_PLAY or a music page.
- * Stopped / paused: one Play button (resumes, or starts the whole library on
- * shuffle + repeat all). Playing: previous · pause · next · stop. The song's
- * name (linking to the player) shows only with access to a music page.
- */
-export const MpHeaderControls = () => {
-  const { t } = useLanguage();
+/** Shared by the top bar and the phone's floating button: who may use them, and what Play does. */
+function useQuickPlay() {
   const p = usePlayer();
   const { musicQuickPlay, musicDetails } = useAccess();
   const [starting, setStarting] = useState(false);
-  if (!musicQuickPlay) return null;
+  // Something loaded (paused, or restored after a reload): resume it. Nothing: the whole library.
+  const play = async () => {
+    if (p.current) { p.toggle(); return; }
+    setStarting(true);
+    try { await p.playLibrary(); } finally { setStarting(false); }
+  };
+  return { p, visible: musicQuickPlay, details: musicDetails, play, starting };
+}
+
+/** The playing song's name: a link to the player for people with a music page, plain text otherwise. */
+const SongName = ({ className }: { className: string }) => {
+  const { current } = usePlayer();
+  const { musicDetails } = useAccess();
+  if (!current) return null;
+  return musicDetails
+    ? <Link to="/mp/player" className={`${className} hover:underline`} title={current.title}>{current.title}</Link>
+    : <span className={className} title={current.title}>{current.title}</span>;
+};
+
+/**
+ * Music buttons in the top bar (tablet / desktop), for anyone with MUSIC_QUICK_PLAY
+ * or a music page. Not playing: one Play button (resumes what is loaded, else the
+ * whole library on shuffle + repeat all). Playing: the song's name · previous ·
+ * −10 s · pause · +10 s · next · stop. Phones get MpFloatingControls instead.
+ */
+export const MpHeaderControls = () => {
+  const { t } = useLanguage();
+  const { p, visible, play, starting } = useQuickPlay();
+  if (!visible) return null;
   const btn = 'p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors disabled:opacity-40';
   if (!p.playing) {
-    const play = async () => {
-      if (p.current) { p.toggle(); return; }
-      setStarting(true);
-      try { await p.playLibrary(); } finally { setStarting(false); }
-    };
     return (
-      <button onClick={() => void play()} disabled={starting} className={btn} title={t('mp.play')} aria-label={t('mp.play')}>
-        <Play size={18} fill="currentColor" />
-      </button>
+      <div className="hidden md:flex items-center gap-1 mr-1">
+        {p.current && <SongName className="max-w-40 truncate text-xs text-white/60" />}
+        <button onClick={() => void play()} disabled={starting} className={btn} title={t('mp.play')} aria-label={t('mp.play')}>
+          <Play size={18} fill="currentColor" />
+        </button>
+      </div>
     );
   }
   return (
-    <div className="flex items-center gap-0.5 mr-1">
-      {musicDetails && p.current && (
-        <Link to="/mp/player" className="hidden sm:block max-w-40 truncate text-xs text-white/80 hover:text-white mr-1" title={p.current.title}>{p.current.title}</Link>
-      )}
+    <div className="hidden md:flex items-center gap-0.5 mr-1">
+      <SongName className="max-w-48 truncate text-xs text-white/80 mr-1" />
       <button onClick={p.prev} className={btn} title={t('mp.prev')} aria-label={t('mp.prev')}><SkipBack size={16} /></button>
+      <button onClick={() => p.skip(-10)} className={btn} title={t('mp.back10')} aria-label={t('mp.back10')}><RotateCcw size={15} /></button>
       <button onClick={p.toggle} className={btn} title={t('mp.pause')} aria-label={t('mp.pause')}><Pause size={18} fill="currentColor" /></button>
+      <button onClick={() => p.skip(10)} className={btn} title={t('mp.forward10')} aria-label={t('mp.forward10')}><RotateCw size={15} /></button>
       <button onClick={p.next} className={btn} title={t('mp.next')} aria-label={t('mp.next')}><SkipForward size={16} /></button>
       <button onClick={p.stop} className={btn} title={t('mp.stop')} aria-label={t('mp.stop')}><Square size={13} fill="currentColor" /></button>
+    </div>
+  );
+};
+
+/**
+ * Phones: a floating round button; tapping it stacks the same controls
+ * vertically above it (tap again, or anywhere else, to fold them away).
+ */
+export const MpFloatingControls = () => {
+  const { t } = useLanguage();
+  const { p, visible, details, play, starting } = useQuickPlay();
+  const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const close = (e: PointerEvent) => { if (!box.current?.contains(e.target as Node)) setOpen(false); };
+    document.addEventListener('pointerdown', close);
+    return () => document.removeEventListener('pointerdown', close);
+  }, [open]);
+  if (!visible || pathname === '/mp/player') return null;
+  // Sit above the bottom mini player when it shows (people with a music page).
+  const lifted = details && !!p.current;
+  const item = 'w-11 h-11 rounded-full flex items-center justify-center bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 shadow-lg border border-gray-200 dark:border-gray-700 active:scale-95 transition disabled:opacity-40';
+  return (
+    <div ref={box} className={`md:hidden fixed right-4 z-50 flex flex-col items-end gap-2 ${lifted ? 'bottom-24' : 'bottom-4'}`}>
+      {open && (
+        <div className="flex flex-col items-end gap-2 animate-fade-in-scale">
+          {p.current && (
+            <SongName className="max-w-[70vw] truncate rounded-full px-3 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow border border-gray-200 dark:border-gray-700" />
+          )}
+          {p.playing ? (
+            <>
+              <button onClick={p.next} className={item} aria-label={t('mp.next')}><SkipForward size={18} /></button>
+              <button onClick={() => p.skip(10)} className={item} aria-label={t('mp.forward10')}><RotateCw size={17} /></button>
+              <button onClick={p.toggle} className={`${item} !bg-primary !text-white !border-primary`} aria-label={t('mp.pause')}><Pause size={20} fill="currentColor" /></button>
+              <button onClick={() => p.skip(-10)} className={item} aria-label={t('mp.back10')}><RotateCcw size={17} /></button>
+              <button onClick={p.prev} className={item} aria-label={t('mp.prev')}><SkipBack size={18} /></button>
+              <button onClick={() => { p.stop(); setOpen(false); }} className={item} aria-label={t('mp.stop')}><Square size={14} fill="currentColor" /></button>
+            </>
+          ) : (
+            <button onClick={() => void play()} disabled={starting} className={`${item} !bg-primary !text-white !border-primary`} aria-label={t('mp.play')}>
+              <Play size={20} fill="currentColor" className="ml-0.5" />
+            </button>
+          )}
+        </div>
+      )}
+      <button
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        aria-label={open ? t('mp.close') : t('mp.nowPlaying')}
+        className={`relative w-14 h-14 rounded-full flex items-center justify-center text-white shadow-xl bg-gradient-to-br from-primary to-secondary active:scale-95 transition ${p.playing && !open ? 'mp-motion' : ''}`}
+      >
+        {p.playing && !open && <span className="absolute inset-0 rounded-full bg-primary/40 animate-ping" aria-hidden="true" />}
+        {open ? <X size={22} /> : <Music size={22} />}
+      </button>
     </div>
   );
 };

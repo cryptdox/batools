@@ -55,7 +55,7 @@ import { MpSingers } from './pages/Music/MpSingers';
 import { MpPlaces } from './pages/Music/MpPlaces';
 import { MpSources } from './pages/Music/MpSources';
 import { MusicPlayerProvider, usePlayer } from './lib/MusicPlayerContext';
-import { MpMiniPlayer } from './components/music/MpControls';
+import { MpFloatingControls, MpMiniPlayer } from './components/music/MpControls';
 
 /** Every Late Tracker page lives under this prefix. */
 const LT = '/late-tracker';
@@ -218,6 +218,7 @@ function AuthGate() {
       </PageGate>
       <MpBottomSpace />
       <MpMiniPlayer />
+      <MpFloatingControls />
     </AppLayout>
     </MusicPlayerProvider>
   );
