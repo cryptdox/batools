@@ -33,10 +33,10 @@ export const AcBoard = () => {
   const [round, setRound] = useState<number | 'all'>('all');
   // "Show by day": only the work of milestones scheduled on `day` (remembered per browser).
   const [byDay, setByDayState] = useState(() => { try { return localStorage.getItem('ac-board-by-day') === 'true'; } catch { return false; } });
-  // Same Domain (one) → Subject → Level filter as Topics, plus an optional milestone.
-  // By day spans every domain ("All domains", offered only then); turning it off
+  // Same Domain → Subject → Level filter as Topics, plus an optional milestone.
+  // Starts on "All domains"; By day switches to it too, and turning By day off
   // goes back to the domain chosen before.
-  const filter = useTopicFilter(graph, domains, { domainId: byDay ? ALL : null, allowAllDomains: byDay });
+  const filter = useTopicFilter(graph, domains, { domainId: ALL, allowAllDomains: true });
   const prevDomain = useRef<string | null>(null);
   // Backlog (not planned yet) is hidden unless asked for; By day shows it by default.
   const [showBacklog, setShowBacklog] = useState(byDay);
@@ -44,7 +44,7 @@ export const AcBoard = () => {
     setByDayState(v);
     try { localStorage.setItem('ac-board-by-day', String(v)); } catch { /* convenience only */ }
     if (v) { prevDomain.current = filter.activeDomain; filter.setDomain(ALL); }
-    else filter.setDomain(prevDomain.current ?? '');
+    else filter.setDomain(prevDomain.current ?? ALL);
     setShowBacklog(v);
   };
   // ?milestone=<id> (from the Milestones page) opens the board on that milestone.
