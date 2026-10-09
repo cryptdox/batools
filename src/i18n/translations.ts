@@ -172,6 +172,7 @@ export const translations = {
         title: 'Topics', level: 'Level', empty: 'No topics yet. Create a subject to start.', emptyDomain: 'No topics in this domain match.', noSubject: 'No subject in this domain',
       },
       detail: {
+        computed: 'From children', computedHint: 'A parent’s points are the average of its children’s completion × its own total, updated automatically.',
         nSelected: '{n} selected', selectShown: 'Select all shown', clearSelection: 'Clear',
         paths: 'Paths', isSubject: 'This is a Subject (no parent).', auto: 'auto', unlink: 'Remove from this parent',
         roleAutoHint: 'Click again to go back to automatic',
@@ -1034,6 +1035,7 @@ export const translations = {
         title: 'টপিক', level: 'স্তর', empty: 'এখনো কোনো টপিক নেই। শুরু করতে একটি বিষয় তৈরি করুন।', emptyDomain: 'এই ডোমেইনে মেলে এমন কোনো টপিক নেই।', noSubject: 'এই ডোমেইনে কোনো বিষয় নেই',
       },
       detail: {
+        computed: 'চাইল্ড থেকে', computedHint: 'প্যারেন্টের পয়েন্ট = চাইল্ডদের সম্পন্নতার গড় × নিজের মোট, স্বয়ংক্রিয়ভাবে হালনাগাদ হয়।',
         nSelected: '{n}টি নির্বাচিত', selectShown: 'দেখানো সব নির্বাচন', clearSelection: 'মুছুন',
         paths: 'পাথ', isSubject: 'এটি একটি বিষয় (কোনো প্যারেন্ট নেই)।', auto: 'স্বয়ংক্রিয়', unlink: 'এই প্যারেন্ট থেকে সরান',
         roleAutoHint: 'স্বয়ংক্রিয়তে ফিরতে আবার ক্লিক করুন',

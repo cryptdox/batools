@@ -52,6 +52,11 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
   // A status change to Complete / Cancel / Backlog waits here to ask about hibernating.
   const [pendingStatus, setPendingStatus] = useState<{ cycle: AcCycle; status: CycleStatus } | null>(null);
 
+  // A parent's points in a cycle are computed from its children (migration 050),
+  // whenever any child has that cycle: no hand-made progress there.
+  const childIds = new Set((graph.childLinks.get(topicId) ?? []).map(l => l.child_id));
+  const isComputed = (c: AcCycle) => cycles.some(x => childIds.has(x.topic_id) && x.kind === c.kind && x.round === c.round);
+
   const myCycles = cycles
     .filter(c => c.topic_id === topicId)
     .sort((a, b) => KINDS.indexOf(a.kind) - KINDS.indexOf(b.kind) || a.round - b.round);
@@ -363,7 +368,10 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
                       </td>
                       <td className="px-3 py-2">
                         <span className="flex items-center gap-1.5">
-                          {c.status === 'in_progress' && (
+                          {isComputed(c) && (
+                            <span className="text-[11px] text-gray-500 whitespace-nowrap" title={t('ac.detail.computedHint')}>{t('ac.detail.computed')}</span>
+                          )}
+                          {c.status === 'in_progress' && !isComputed(c) && (
                             <>
                               <button className="p-1 rounded border border-gray-200 dark:border-gray-600 text-danger disabled:opacity-30" disabled={c.achieved_points === 0} onClick={() => setProgressOf({ cycle: c, direction: -1 })} title={t('ac.progress.remove')}><Minus size={12} /></button>
                               <button className="p-1 rounded border border-gray-200 dark:border-gray-600 text-success disabled:opacity-30" disabled={c.achieved_points >= c.total_points} onClick={() => setProgressOf({ cycle: c, direction: 1 })} title={t('ac.progress.add')}><Plus size={12} /></button>
