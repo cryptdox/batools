@@ -1,4 +1,4 @@
-import { PAGE_RESOURCES, permissionKey, type Action } from './permissions';
+import { PAGE_RESOURCES, SECTION_RESOURCES, permissionKey, type Action } from './permissions';
 
 // Authorization of batools' own Supabase calls (tables, views, functions and
 // the music storage bucket), checked in the browser before a request leaves:
@@ -144,7 +144,8 @@ const FUNCTIONS: Record<string, 'read' | { action: Action; resources: string[] }
 /** Storage buckets batools writes to, and the page that owns uploads. */
 const BUCKETS: Record<string, string[]> = { music: ['MUSIC_LIBRARY', 'MUSIC_COLLECTIONS'] };
 
-const ALL_RESOURCES = Object.values(PAGE_RESOURCES);
+// Section resources count for their module's reads too (e.g. MUSIC_QUICK_PLAY reads songs to play them).
+const ALL_RESOURCES = [...Object.values(PAGE_RESOURCES), ...Object.values(SECTION_RESOURCES)];
 const moduleOf = (name: string) => MODULES[name.split('_')[0]] ?? null;
 const moduleResources = (module: string) => ALL_RESOURCES.filter(r => r.startsWith(`${module}_`) || r === module);
 

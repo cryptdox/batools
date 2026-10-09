@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
 import { useAccess } from '../../lib/permissions';
+import { MpHeaderControls } from '../music/MpControls';
 import { useLanguage } from '../../lib/LanguageContext';
 
 const APP_NAME = 'Bangla Tools';
@@ -257,6 +258,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
           <span className="text-lg font-bold tracking-tight whitespace-nowrap">{APP_NAME}</span>
         </div>
         <div className="flex items-center gap-1">
+        <MpHeaderControls />
         <button
           onClick={() => setLanguage(language === 'en' ? 'bn' : 'en')}
           title={language === 'en' ? 'বাংলায় দেখুন' : 'View in English'}

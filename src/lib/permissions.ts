@@ -79,6 +79,8 @@ export const resourceOf = (path: string): string | null =>
 export const SECTION_RESOURCES = {
   acDomains: 'ACHIVEMENT_CYCLE_DOMAIN',
   acDomainTypes: 'ACHIVEMENT_CYCLE_DOMAIN_TYPE',
+  /** Play / pause / next in the top bar: the whole library on shuffle, no song details. */
+  musicQuickPlay: 'MUSIC_QUICK_PLAY',
 } as const;
 
 export type Action = 'READ' | 'READ_ALL' | 'CREATE' | 'UPDATE' | 'UPDATE_ALL' | 'DELETE' | 'DELETE_ALL';
@@ -95,5 +97,9 @@ export function useAccess() {
     const resource = resourceOf(path);
     return !resource || canRead(resource);
   };
-  return { has, canRead, canOpen, accessState, reloadAccess };
+  /** Any music page: may see what is playing and open the player. */
+  const musicDetails = Object.entries(PAGE_RESOURCES).some(([path, r]) => path.startsWith('/mp') && canRead(r));
+  /** The top-bar music buttons: quick play alone, or any music page. */
+  const musicQuickPlay = musicDetails || canRead(SECTION_RESOURCES.musicQuickPlay);
+  return { has, canRead, canOpen, accessState, reloadAccess, musicDetails, musicQuickPlay };
 }

@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Shuffle, SkipBack, SkipForward, Play, Pause, Repeat, Repeat1, RotateCcw, RotateCw, Volume2, VolumeX, Maximize2, Gauge, Square,
 } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { usePlayer } from '../../lib/MusicPlayerContext';
+import { useAccess } from '../../lib/permissions';
 import { formatDuration, songArtist } from '../../lib/music';
 import { MpCover } from './MpUi';
 
@@ -84,13 +86,52 @@ export const MpExtras = () => {
   );
 };
 
-/** Bottom bar on every page while something is queued. */
+/**
+ * Music buttons in the top bar, for anyone with MUSIC_QUICK_PLAY or a music page.
+ * Stopped / paused: one Play button (resumes, or starts the whole library on
+ * shuffle + repeat all). Playing: previous · pause · next · stop. The song's
+ * name (linking to the player) shows only with access to a music page.
+ */
+export const MpHeaderControls = () => {
+  const { t } = useLanguage();
+  const p = usePlayer();
+  const { musicQuickPlay, musicDetails } = useAccess();
+  const [starting, setStarting] = useState(false);
+  if (!musicQuickPlay) return null;
+  const btn = 'p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors disabled:opacity-40';
+  if (!p.playing) {
+    const play = async () => {
+      if (p.current) { p.toggle(); return; }
+      setStarting(true);
+      try { await p.playLibrary(); } finally { setStarting(false); }
+    };
+    return (
+      <button onClick={() => void play()} disabled={starting} className={btn} title={t('mp.play')} aria-label={t('mp.play')}>
+        <Play size={18} fill="currentColor" />
+      </button>
+    );
+  }
+  return (
+    <div className="flex items-center gap-0.5 mr-1">
+      {musicDetails && p.current && (
+        <Link to="/mp/player" className="hidden sm:block max-w-40 truncate text-xs text-white/80 hover:text-white mr-1" title={p.current.title}>{p.current.title}</Link>
+      )}
+      <button onClick={p.prev} className={btn} title={t('mp.prev')} aria-label={t('mp.prev')}><SkipBack size={16} /></button>
+      <button onClick={p.toggle} className={btn} title={t('mp.pause')} aria-label={t('mp.pause')}><Pause size={18} fill="currentColor" /></button>
+      <button onClick={p.next} className={btn} title={t('mp.next')} aria-label={t('mp.next')}><SkipForward size={16} /></button>
+      <button onClick={p.stop} className={btn} title={t('mp.stop')} aria-label={t('mp.stop')}><Square size={13} fill="currentColor" /></button>
+    </div>
+  );
+};
+
+/** Bottom bar on every page while something is queued (only with access to a music page: it shows song details). */
 export const MpMiniPlayer = () => {
   const { t } = useLanguage();
   const { current, playing } = usePlayer();
   const { pathname } = useLocation();
+  const { musicDetails } = useAccess();
   // The full player has its own controls.
-  if (!current || pathname === '/mp/player') return null;
+  if (!current || pathname === '/mp/player' || !musicDetails) return null;
   return (
     <div className="fixed bottom-0 inset-x-0 z-40 border-t border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-gray-900/95 backdrop-blur shadow-[0_-8px_24px_-12px_rgba(0,0,0,0.35)]">
       <div className="max-w-6xl mx-auto px-3 py-2 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_minmax(0,2fr)_1fr] items-center gap-3">

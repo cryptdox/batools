@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { toast } from 'react-toastify';
 import { supabase } from './supabase';
-import { canPlay, useMpUserId, type MpSong } from './music';
+import { canPlay, SONG_SELECT, useMpUserId, type MpSong } from './music';
 
 // One <audio> for the whole app, so music keeps playing across pages.
 // Holds the queue and every control the player / mini player use.
@@ -23,6 +23,8 @@ type PlayerContextValue = {
   muted: boolean;
   /** Replace the queue with `songs` and start at `start`. */
   playList: (songs: MpSong[], start?: number) => void;
+  /** Play the whole library (everything this user may play), with shuffle and repeat all on. */
+  playLibrary: () => Promise<void>;
   /** Play one song now, keeping the rest of the queue after it. */
   playNow: (song: MpSong) => void;
   /** Put a song right after the current one. */
@@ -261,6 +263,17 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
     start(playable, Math.max(0, first));
   };
 
+  const playLibrary = async () => {
+    // Fetched in the click, so playback starts inside the user's gesture as far as browsers care.
+    const { data, error } = await supabase.from('mp_songs').select(SONG_SELECT).order('created_at', { ascending: false }).limit(1000);
+    if (error) { toast.error(error.message); return; }
+    const songs = ((data ?? []) as unknown as MpSong[]).filter(s => canPlay(s, userId) && s.audio?.url);
+    if (!songs.length) { toast.info('Nothing to play yet.'); return; }
+    setShuffleState(true);
+    setRepeat('all');
+    start(songs, Math.floor(Math.random() * songs.length));
+  };
+
   const playNow = (song: MpSong) => {
     if (!guard(song)) return;
     if (current?.id === song.id) { toggle(); return; }
@@ -350,7 +363,7 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<PlayerContextValue>(() => ({
     queue, index, current, playing, time, duration, shuffle, repeat, rate, volume, muted,
-    playList, playNow, playNext, addToQueue, removeFromQueue, jumpTo, toggle, stop, next, prev, seek, skip,
+    playList, playLibrary, playNow, playNext, addToQueue, removeFromQueue, jumpTo, toggle, stop, next, prev, seek, skip,
     setShuffle, cycleRepeat, setRate: setRateState, setVolume: setVolumeState, toggleMute: () => setMuted(m => !m),
     level, bands,
     // eslint-disable-next-line react-hooks/exhaustive-deps

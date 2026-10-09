@@ -74,7 +74,8 @@ const MOVED: Record<string, string> = {
 function MpBottomSpace() {
   const { current } = usePlayer();
   const { pathname } = useLocation();
-  return current && pathname !== '/mp/player' ? <div className="h-24" aria-hidden="true" /> : null;
+  const { musicDetails } = useAccess();
+  return current && musicDetails && pathname !== '/mp/player' ? <div className="h-24" aria-hidden="true" /> : null;
 }
 
 /** Pages in sidebar order, for sending a user to the first one IAM lets them open. */
