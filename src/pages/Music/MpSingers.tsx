@@ -14,6 +14,7 @@ import { MpCover, MpCoverInput, MpStars } from '../../components/music/MpUi';
 import { activeItems } from '../../components/music/MpSongForm';
 import { MpCombo } from '../../components/music/MpCombo';
 import { MpAssignSongs } from '../../components/music/MpAssignSongs';
+import { MpUnknownCard } from '../../components/music/MpUnknownCard';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 const card = 'bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700';
@@ -120,6 +121,7 @@ export const MpSingers = () => {
         <div className={`${card} p-12 text-center text-gray-500`}>{t('mp.singersPage.empty')}</div>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {pg.page === 1 && !search.trim() && <MpUnknownCard what="singer" />}
           {pg.pageRows.map(r => (
             <div key={r.id} className={`${card} p-4 flex gap-3 cursor-pointer hover:shadow-md transition-shadow`} onClick={() => navigate(`/mp?singer=${r.id}`)}>
               {r.cover

@@ -257,6 +257,10 @@ export const translations = {
         label: 'Info', any: 'Any info', pending: 'Info incomplete', complete: 'Info complete',
         pendingShort: 'Needs info', fillIn: 'Fill in the details',
       },
+      unknown: {
+        singer: 'Unknown singer', source: 'Unknown band / movie / concert', album: 'Unknown album',
+        hint: 'songs with none yet',
+      },
       assign: {
         button: 'Assign songs', title: 'Assign songs to {name}', search: 'Search songs by title or singer...',
         hint: 'Tick songs to give them this singer (added after their current singers); untick to remove. Only songs you uploaded can be changed.',
@@ -1126,6 +1130,10 @@ export const translations = {
       info: {
         label: 'তথ্য', any: 'যেকোনো তথ্য', pending: 'তথ্য অসম্পূর্ণ', complete: 'তথ্য সম্পূর্ণ',
         pendingShort: 'তথ্য বাকি', fillIn: 'বিস্তারিত পূরণ করুন',
+      },
+      unknown: {
+        singer: 'অজানা শিল্পী', source: 'অজানা ব্যান্ড / সিনেমা / কনসার্ট', album: 'অজানা অ্যালবাম',
+        hint: 'যেসব গানে এখনো নেই',
       },
       assign: {
         button: 'গান যুক্ত করুন', title: '{name}-এর গান', search: 'শিরোনাম বা শিল্পী দিয়ে খুঁজুন...',

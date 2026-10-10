@@ -15,6 +15,34 @@ export const EMPTY_FILTERS: SongFilters = {
   sourceKind: '', sourceId: '', info: '',
 };
 
+/** Filter value for "no singer / no source / in no album": the Unknown groups. */
+export const UNKNOWN = 'none';
+
+/** Ids of songs that have a singer / are in an album (the complement is the Unknown group). */
+async function songIdsWithSinger(): Promise<string[]> {
+  const { data, error } = await supabase.from('mp_song_singers').select('song_id');
+  if (error) throw error;
+  return [...new Set((data ?? []).map(r => r.song_id as string))];
+}
+async function songIdsInAlbums(): Promise<string[]> {
+  const { data, error } = await supabase.from('mp_collection_songs').select('song_id, c:mp_collections!inner(kind)').eq('c.kind', 'album');
+  if (error) throw error;
+  return [...new Set((data ?? []).map(r => r.song_id as string))];
+}
+
+/** How many songs have no singer, no source, or are in no album. */
+export async function countUnknown(what: 'singer' | 'source' | 'album'): Promise<number> {
+  let q = supabase.from('mp_songs').select('id', { count: 'exact', head: true });
+  if (what === 'source') q = q.is('source_id', null);
+  else {
+    const ids = what === 'singer' ? await songIdsWithSinger() : await songIdsInAlbums();
+    if (ids.length) q = q.not('id', 'in', `(${ids.join(',')})`);
+  }
+  const { count, error } = await q;
+  if (error) throw error;
+  return count ?? 0;
+}
+
 /** Ids of the songs sung by any of these singers. */
 async function songIdsBySingers(singerIds: string[]): Promise<string[]> {
   if (!singerIds.length) return [];
@@ -32,11 +60,15 @@ const sel = `${pfInputClass.replace('w-full ', '')} h-9 max-w-44`;
 export async function fetchSongs(f: SongFilters, from: number, size: number): Promise<{ rows: MpSong[]; total: number }> {
   // Filtering by album / mix (or by source kind) needs that table joined in (inner join).
   let select = SONG_SELECT;
-  if (f.collectionId) select += ', mp_collection_songs!inner(collection_id)';
+  if (f.collectionId && f.collectionId !== UNKNOWN) select += ', mp_collection_songs!inner(collection_id)';
   if (f.sourceKind && !f.sourceId) select += ', src:mp_sources!mp_songs_source_fkey!inner(kind)';
   let q = supabase.from('mp_songs').select(select, { count: 'exact' });
-  if (f.collectionId) q = q.eq('mp_collection_songs.collection_id', f.collectionId);
-  if (f.sourceId) q = q.eq('source_id', f.sourceId);
+  if (f.collectionId === UNKNOWN) {
+    const ids = await songIdsInAlbums();
+    if (ids.length) q = q.not('id', 'in', `(${ids.join(',')})`);
+  } else if (f.collectionId) q = q.eq('mp_collection_songs.collection_id', f.collectionId);
+  if (f.sourceId === UNKNOWN) q = q.is('source_id', null);
+  else if (f.sourceId) q = q.eq('source_id', f.sourceId);
   else if (f.sourceKind) q = q.eq('src.kind', f.sourceKind);
   if (f.info) q = q.eq('info_pending', f.info === 'pending');
   const s = f.search.trim().replace(/[,()%*]/g, ' ').trim();
@@ -46,7 +78,10 @@ export async function fetchSongs(f: SongFilters, from: number, size: number): Pr
     const ids = await songIdsBySingers((hit ?? []).map(r => r.id as string));
     q = q.or(ids.length ? `title.ilike.%${s}%,id.in.(${ids.join(',')})` : `title.ilike.%${s}%`);
   }
-  if (f.singerId) {
+  if (f.singerId === UNKNOWN) {
+    const ids = await songIdsWithSinger();
+    if (ids.length) q = q.not('id', 'in', `(${ids.join(',')})`);
+  } else if (f.singerId) {
     const ids = await songIdsBySingers([f.singerId]);
     if (!ids.length) return { rows: [], total: 0 };
     q = q.in('id', ids);
@@ -104,6 +139,7 @@ export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true
       </select>
       <select value={value.singerId} onChange={e => set('singerId', e.target.value)} className={sel} aria-label={t('mp.singer')}>
         <option value="">{t('mp.allSingers')}</option>
+        <option value={UNKNOWN}>{t('mp.unknown.singer')}</option>
         {lookups.singers.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
       </select>
       <select value={value.sourceKind} onChange={e => onChange({ ...value, sourceKind: e.target.value, sourceId: '' })} className={sel} aria-label={t('mp.sources.kind')}>
@@ -112,6 +148,7 @@ export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true
       </select>
       <select value={value.sourceId} onChange={e => set('sourceId', e.target.value)} className={sel} aria-label={t('mp.source')}>
         <option value="">{t('mp.allSources')}</option>
+        <option value={UNKNOWN}>{t('mp.unknown.source')}</option>
         {sources.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
       </select>
       <select value={value.countryId} onChange={e => set('countryId', e.target.value)} className={sel} aria-label={t('mp.country')}>
@@ -139,6 +176,7 @@ export const MpSongFilterBar = ({ value, onChange, genres, showCollection = true
       {showCollection && (
         <select value={value.collectionId} onChange={e => set('collectionId', e.target.value)} className={sel} aria-label={t('mp.collection')}>
           <option value="">{t('mp.allCollections')}</option>
+          <option value={UNKNOWN}>{t('mp.unknown.album')}</option>
           {collections.map(c => <option key={c.id} value={c.id}>{c.kind === 'album' ? '💿' : '🎧'} {c.title}</option>)}
         </select>
       )}

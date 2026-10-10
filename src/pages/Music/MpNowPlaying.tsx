@@ -9,6 +9,7 @@ import { MpCover, MpPlayingBars, MpStars } from '../../components/music/MpUi';
 import { MpExtras, MpSeekBar, MpTransport } from '../../components/music/MpControls';
 import { MpParticles } from '../../components/music/MpParticles';
 import { PfTabs } from '../Portfolio/PfPageHeader';
+import { Pagination, usePagination } from '../../components/ui/Pagination';
 
 type Tab = 'queue' | 'lyrics' | 'info';
 const BARS = 32;
@@ -61,6 +62,10 @@ export const MpNowPlaying = () => {
   const userId = useMpUserId();
   const rating = useMpRatings('song', s ? [s.id] : [], userId);
   const color = s?.genre?.color ?? '#6c5ce7';
+  // The queue in pages; it follows the playing song to its page.
+  const queuePg = usePagination(p.queue, 25);
+  const { pageSize: qSize, setPage: setQueuePage } = queuePg;
+  useEffect(() => { if (p.index >= 0) setQueuePage(Math.floor(p.index / qSize) + 1); }, [p.index, qSize, setQueuePage]);
 
   if (!s) {
     return (
@@ -114,8 +119,10 @@ export const MpNowPlaying = () => {
         <PfTabs tabs={[{ key: 'queue' as Tab, label: 'mp.player.queue' }, { key: 'lyrics' as Tab, label: 'mp.lyrics' }, { key: 'info' as Tab, label: 'mp.player.info' }]} active={tab} onChange={setTab} />
         <div className="mt-4 flex-1 overflow-y-auto">
           {tab === 'queue' && (
+            <>
             <ul className="space-y-1">
-              {p.queue.map((q, i) => {
+              {queuePg.pageRows.map((q, k) => {
+                const i = (queuePg.page - 1) * queuePg.pageSize + k;
                 const isCurrent = i === p.index;
                 return (
                   <li key={`${q.id}-${i}`} className={`flex items-center gap-3 rounded-lg px-2 py-1.5 ${isCurrent ? 'bg-primary/10' : 'hover:bg-gray-50 dark:hover:bg-gray-700/40'}`}>
@@ -134,6 +141,13 @@ export const MpNowPlaying = () => {
                 );
               })}
             </ul>
+            {queuePg.total > queuePg.pageSize && (
+              <div className="mt-2 -mx-4 border-t border-gray-100 dark:border-gray-700">
+                <Pagination page={queuePg.page} pageCount={queuePg.pageCount} total={queuePg.total} pageSize={queuePg.pageSize}
+                  onPageChange={queuePg.setPage} onPageSizeChange={queuePg.setPageSize} />
+              </div>
+            )}
+            </>
           )}
           {tab === 'lyrics' && (
             s.lyrics

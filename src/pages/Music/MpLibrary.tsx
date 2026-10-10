@@ -27,7 +27,7 @@ export const MpLibrary = () => {
   // /mp?singer=<id> opens the library filtered to that singer (from the Singers page).
   const [params] = useSearchParams();
   const [filters, setFilters] = useState<SongFilters>(() => ({
-    ...EMPTY_FILTERS, singerId: params.get('singer') ?? '', sourceId: params.get('source') ?? '',
+    ...EMPTY_FILTERS, singerId: params.get('singer') ?? '', sourceId: params.get('source') ?? '', collectionId: params.get('collection') ?? '',
     info: params.get('info') === 'pending' ? 'pending' : '',
   }));
   const [bulk, setBulk] = useState(false);

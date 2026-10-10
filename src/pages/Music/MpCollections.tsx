@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { MpUnknownCard } from '../../components/music/MpUnknownCard';
 import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, Play, Shuffle, ArrowLeft, ArrowUp, ArrowDown, X, Disc3, ListMusic, Search, AlertTriangle } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -193,6 +194,7 @@ export const MpCollections = () => {
         <div className={`${card} p-12 text-center text-gray-500`}>{t('mp.collections.empty')}</div>
       ) : (
         <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+          {pg.page === 1 && <MpUnknownCard what="album" className="flex-col !items-start" />}
           {pg.pageRows.map(c => (
             <button key={c.id} onClick={() => navigate(`/mp/collections/${c.id}`)} className={`${card} p-3 text-left group hover:shadow-lg transition-shadow`}>
               <div className="relative">

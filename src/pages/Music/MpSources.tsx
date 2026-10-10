@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MpUnknownCard } from '../../components/music/MpUnknownCard';
 import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, Search, Users, Film, Ticket, Tv, Clapperboard, Shapes, type LucideIcon } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -147,6 +148,7 @@ export const MpSources = () => {
         <div className={`${card} p-12 text-center text-gray-500`}>{t('mp.sources.empty')}</div>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {pg.page === 1 && !search.trim() && <MpUnknownCard what="source" />}
           {pg.pageRows.map(r => {
             const Icon = SOURCE_ICONS[r.kind];
             return (
