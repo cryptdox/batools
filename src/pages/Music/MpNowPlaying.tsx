@@ -63,7 +63,7 @@ export const MpNowPlaying = () => {
   const rating = useMpRatings('song', s ? [s.id] : [], userId);
   const color = s?.genre?.color ?? '#6c5ce7';
   // The queue in pages; it follows the playing song to its page.
-  const queuePg = usePagination(p.queue, 25);
+  const queuePg = usePagination(p.queue, 10);
   const { pageSize: qSize, setPage: setQueuePage } = queuePg;
   useEffect(() => { if (p.index >= 0) setQueuePage(Math.floor(p.index / qSize) + 1); }, [p.index, qSize, setQueuePage]);
 
