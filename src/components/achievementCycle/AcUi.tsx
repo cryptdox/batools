@@ -88,6 +88,14 @@ export const AcStat = ({ label, value, hint }: { label: string; value: ReactNode
 );
 
 /** Stored rich text, sanitised before it reaches the DOM. */
+/** Text saved before descriptions became rich text: plain lines become paragraphs; HTML passes through. */
+export const asRichHtml = (text: string | null | undefined): string => {
+  if (!text) return '';
+  if (/<[a-z][\s\S]*>/i.test(text)) return text;
+  const esc = (x: string) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return text.split(/\n{2,}/).map(par => `<p>${esc(par).replace(/\n/g, '<br>')}</p>`).join('');
+};
+
 export const AcRichView = ({ html, className = '' }: { html: string | null; className?: string }) =>
   html ? <div className={`ac-rich text-sm text-gray-700 dark:text-gray-300 ${className}`} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} /> : null;
 

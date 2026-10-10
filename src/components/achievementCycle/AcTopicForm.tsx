@@ -10,6 +10,7 @@ import { Modal } from '../ui/Modal';
 import { pfInputClass } from '../portfolio/PfFieldInput';
 import { ALL, AcTopicFilterSelects, useTopicFilter } from './AcTopicFilters';
 import { AcScheduleEditor } from './AcSchedule';
+import { AcRichEditor, asRichHtml } from './AcUi';
 
 type Props = {
   userId: string;
@@ -60,7 +61,8 @@ const hint = 'mt-1 text-xs text-gray-500 dark:text-gray-400';
 export const AcTopicForm = ({ userId, graph, topics, domains, topic, parentId, domainId, onClose, onSaved }: Props) => {
   const { t } = useLanguage();
   const [name, setName] = useState(topic?.name ?? '');
-  const [description, setDescription] = useState(topic?.description ?? '');
+  // Rich text (HTML); older plain-text descriptions open as paragraphs.
+  const [description, setDescription] = useState(() => asRichHtml(topic?.description));
   const [spDescription, setSpDescription] = useState(topic?.story_point_description ?? '');
   const [points, setPoints] = useState(String(topic?.default_points ?? 1));
   const [milestone, setMilestone] = useState(topic?.is_milestone ?? false);
@@ -206,7 +208,7 @@ export const AcTopicForm = ({ userId, graph, topics, domains, topic, parentId, d
         </label>
         <label className="block">
           <span className={label}>{t('org.common.description')}</span>
-          <textarea value={description} onChange={e => setDescription(e.target.value)} rows={3} className={pfInputClass} />
+          <AcRichEditor value={description} onChange={setDescription} placeholder={t('org.common.description')} />
         </label>
         <div className="grid sm:grid-cols-[10rem_1fr] gap-4">
           <label className="block">

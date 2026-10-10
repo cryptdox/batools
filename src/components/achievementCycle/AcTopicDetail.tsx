@@ -11,7 +11,7 @@ import {
 import { Badge, Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { pfInputClass } from '../portfolio/PfFieldInput';
-import { AcArchivedBadge, AcLevelBadge, AcProgress, AcRichView, AcStatusDot } from './AcUi';
+import { AcArchivedBadge, AcLevelBadge, AcProgress, AcRichView, AcStatusDot, asRichHtml } from './AcUi';
 import { AcRemoveModal } from './AcRemoveModal';
 import { AcProgressModal } from './AcProgressModal';
 import { AcTopicMultiPicker } from './AcTopicMultiPicker';
@@ -219,7 +219,7 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
 
         {(topic.description || topic.story_point_description) && (
           <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-            {topic.description && <p className="whitespace-pre-line">{topic.description}</p>}
+            {topic.description && <AcRichView html={asRichHtml(topic.description)} />}
             {topic.story_point_description && <p><span className="font-medium">{t('ac.topic.spMeaning')}:</span> {topic.story_point_description}</p>}
           </div>
         )}
