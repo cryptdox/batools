@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Plus, Pencil, Trash2, Search, Mic2 } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Mic2, ListPlus } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
@@ -13,6 +13,7 @@ import { pfInputClass } from '../../components/portfolio/PfFieldInput';
 import { MpCover, MpCoverInput, MpStars } from '../../components/music/MpUi';
 import { activeItems } from '../../components/music/MpSongForm';
 import { MpCombo } from '../../components/music/MpCombo';
+import { MpAssignSongs } from '../../components/music/MpAssignSongs';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 const card = 'bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700';
@@ -41,6 +42,7 @@ export const MpSingers = () => {
   const [cover, setCover] = useState<{ file: File | null; remove: boolean; preview: string | null }>({ file: null, remove: false, preview: null });
   const [saving, setSaving] = useState(false);
   const [toDelete, setToDelete] = useState<Row | null>(null);
+  const [assigning, setAssigning] = useState<Row | null>(null);
 
   const load = useCallback(async () => {
     const { data, error } = await supabase.from('mp_singers')
@@ -130,6 +132,7 @@ export const MpSingers = () => {
               <div className="flex-1 min-w-0 space-y-1">
                 <div className="flex items-start gap-1">
                   <span className="flex-1 font-semibold text-gray-900 dark:text-gray-100 truncate">{r.name}</span>
+                  <button className="p-1 rounded text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" onClick={e => { e.stopPropagation(); setAssigning(r); }} title={t('mp.assign.button')} aria-label={t('mp.assign.button')}><ListPlus size={14} /></button>
                   <button className="p-1 rounded text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" onClick={e => { e.stopPropagation(); open(r); }} title={t('pf.common.edit')}><Pencil size={13} /></button>
                   <button className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700" onClick={e => { e.stopPropagation(); setToDelete(r); }} title={t('pf.common.delete')}><Trash2 size={13} className="text-danger" /></button>
                 </div>
@@ -184,6 +187,10 @@ export const MpSingers = () => {
           </div>
         </div>
       </Modal>
+
+      {assigning && userId && (
+        <MpAssignSongs userId={userId} singer={assigning} onClose={() => setAssigning(null)} onDone={() => { setAssigning(null); void load(); }} />
+      )}
 
       <Modal isOpen={!!toDelete} onClose={() => setToDelete(null)} title={t('pf.common.deleteTitle')}>
         <p className="text-sm text-gray-600 dark:text-gray-300">{t('mp.singersPage.deleteHint').replace('{name}', toDelete?.name ?? '')}</p>

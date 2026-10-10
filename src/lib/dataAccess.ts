@@ -107,7 +107,7 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   // Music
   mp_songs: ['MUSIC_LIBRARY'],
   mp_files: ['MUSIC_LIBRARY'],
-  mp_song_singers: ['MUSIC_LIBRARY'],
+  mp_song_singers: ['MUSIC_LIBRARY', 'MUSIC_SINGERS'],
   mp_ratings: ['MUSIC_LIBRARY', 'MUSIC_COLLECTIONS', 'MUSIC_PLAYER'],
   mp_collections: ['MUSIC_COLLECTIONS'],
   mp_collection_songs: ['MUSIC_COLLECTIONS', 'MUSIC_LIBRARY'],

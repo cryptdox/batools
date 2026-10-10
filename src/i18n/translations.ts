@@ -257,6 +257,12 @@ export const translations = {
         label: 'Info', any: 'Any info', pending: 'Info incomplete', complete: 'Info complete',
         pendingShort: 'Needs info', fillIn: 'Fill in the details',
       },
+      assign: {
+        button: 'Assign songs', title: 'Assign songs to {name}', search: 'Search songs by title or singer...',
+        hint: 'Tick songs to give them this singer (added after their current singers); untick to remove. Only songs you uploaded can be changed.',
+        notYours: 'Uploaded by someone else: only they can change its singers', more: '{n} more: refine the search',
+        count: '{n} song(s) with this singer', saved: 'Saved: {added} added, {removed} removed',
+      },
       bulk: {
         button: 'Bulk upload', title: 'Bulk upload songs',
         hint: 'Pick many audio files at once. Each becomes a song titled from its file name and marked "info incomplete". They can be played right away; fill in the details later.',
@@ -1120,6 +1126,12 @@ export const translations = {
       info: {
         label: 'তথ্য', any: 'যেকোনো তথ্য', pending: 'তথ্য অসম্পূর্ণ', complete: 'তথ্য সম্পূর্ণ',
         pendingShort: 'তথ্য বাকি', fillIn: 'বিস্তারিত পূরণ করুন',
+      },
+      assign: {
+        button: 'গান যুক্ত করুন', title: '{name}-এর গান', search: 'শিরোনাম বা শিল্পী দিয়ে খুঁজুন...',
+        hint: 'টিক দিলে গানে এই শিল্পী যুক্ত হবে (বর্তমান শিল্পীদের পরে); টিক তুললে বাদ যাবে। শুধু আপনার আপলোড করা গান বদলানো যায়।',
+        notYours: 'অন্য কেউ আপলোড করেছেন: শুধু তিনিই শিল্পী বদলাতে পারেন', more: 'আরও {n}টি: খোঁজ সুনির্দিষ্ট করুন',
+        count: 'এই শিল্পীর {n}টি গান', saved: 'সংরক্ষিত: {added}টি যুক্ত, {removed}টি বাদ',
       },
       bulk: {
         button: 'একসাথে আপলোড', title: 'একসাথে অনেক গান আপলোড',
