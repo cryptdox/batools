@@ -260,6 +260,10 @@ export const translations = {
       unknown: {
         singer: 'Unknown singer', source: 'Unknown band / movie / concert', album: 'Unknown album',
         hint: 'songs with none yet',
+        assign: 'Assign', assigned: '{n} song(s) updated', searchSongs: 'Search these songs...', selectAll: 'Select all', selectNone: 'Select none',
+        selected: '{n} song(s) selected', ownOnly: 'Singers and sources change the song itself: only songs you uploaded can be picked.',
+        assignTitle: { singer: 'Give songs a singer', source: 'Give songs a band / movie / concert', album: 'Put songs in an album or mix' },
+        target: { singer: 'Singer(s)', source: 'Band / movie / concert', album: 'Albums & mixes' },
       },
       assign: {
         button: 'Assign songs', title: 'Assign songs to {name}', search: 'Search songs by title or singer...',
@@ -1134,6 +1138,10 @@ export const translations = {
       unknown: {
         singer: 'অজানা শিল্পী', source: 'অজানা ব্যান্ড / সিনেমা / কনসার্ট', album: 'অজানা অ্যালবাম',
         hint: 'যেসব গানে এখনো নেই',
+        assign: 'যুক্ত করুন', assigned: '{n}টি গান হালনাগাদ', searchSongs: 'এই গানগুলোতে খুঁজুন...', selectAll: 'সব বাছুন', selectNone: 'সব বাদ',
+        selected: '{n}টি গান বাছা হয়েছে', ownOnly: 'শিল্পী ও উৎস গানটিকেই বদলায়: শুধু আপনার আপলোড করা গান বাছা যাবে।',
+        assignTitle: { singer: 'গানে শিল্পী যুক্ত করুন', source: 'গানে ব্যান্ড / সিনেমা / কনসার্ট যুক্ত করুন', album: 'গান অ্যালবাম বা মিক্সে রাখুন' },
+        target: { singer: 'শিল্পী', source: 'ব্যান্ড / সিনেমা / কনসার্ট', album: 'অ্যালবাম ও মিক্স' },
       },
       assign: {
         button: 'গান যুক্ত করুন', title: '{name}-এর গান', search: 'শিরোনাম বা শিল্পী দিয়ে খুঁজুন...',
