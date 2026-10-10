@@ -18,6 +18,7 @@ import {
   type IamSession,
   type IamUser,
 } from './iam';
+import { isRecentlyActive, trackActivity } from './activity';
 
 // Login is delegated to the Identity and Access Management service. Note this
 // only gates the UI: data access still goes through Supabase with the anon key.
@@ -90,27 +91,31 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Keep the access token fresh while signed in.
+  // Keep the access token fresh while the person is using batools: a minute
+  // before it expires, refresh it, but only if they were active in the last
+  // 15 minutes. After a longer break nothing is refreshed in the background;
+  // the next activity (below) refreshes it then (the refresh token lasts days).
   useEffect(() => {
     window.clearTimeout(refreshTimer.current);
     if (!session || loading) return;
     const exp = getTokenExpiry(session.accessToken);
     const delay = exp === null ? 0 : Math.max(exp * 1000 - Date.now() - REFRESH_LEAD_MS, 0);
-    refreshTimer.current = window.setTimeout(() => { void refresh(); }, delay);
+    refreshTimer.current = window.setTimeout(() => { if (isRecentlyActive()) void refresh(); }, delay);
     return () => window.clearTimeout(refreshTimer.current);
   }, [session, loading, refresh, retryTick]);
 
-  // Timers are throttled in background tabs and stop while the computer sleeps:
-  // check again when the tab comes back or the network returns.
+  // Activity (or coming back to the tab, or the network returning) refreshes a
+  // token that is about to expire or already has: covers the idle case above,
+  // and timers that were throttled or stopped while the computer slept.
   useEffect(() => {
     const check = () => {
       const current = loadSession();
       if (document.visibilityState === 'visible' && current && isExpiringSoon(current.accessToken)) void refresh();
     };
-    document.addEventListener('visibilitychange', check);
+    const stop = trackActivity(check);
     window.addEventListener('online', check);
     return () => {
-      document.removeEventListener('visibilitychange', check);
+      stop();
       window.removeEventListener('online', check);
     };
   }, [refresh]);

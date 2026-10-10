@@ -66,11 +66,13 @@ const writeText = (key: string, v: string) => { try { localStorage.setItem(key, 
 // What is playing (queue, song, position), kept in this browser so a reload
 // brings the player back on the same song, paused where it was.
 const SESSION_KEY = 'mp-session';
-type SavedSession = { queue: MpSong[]; index: number; order: number[]; time: number };
-const readSession = (): SavedSession | null => {
+// Saved per user: someone else signing in on this browser starts with an empty player.
+type SavedSession = { userId: string | null; queue: MpSong[]; index: number; order: number[]; time: number };
+const readSession = (userId?: string | null): SavedSession | null => {
   try {
     const v = JSON.parse(localStorage.getItem(SESSION_KEY) ?? 'null') as SavedSession | null;
-    return v && Array.isArray(v.queue) && v.queue[v.index] ? v : null;
+    if (!v || !Array.isArray(v.queue) || !v.queue[v.index]) return null;
+    return userId === undefined || v.userId === userId ? v : null;
   } catch { return null; }
 };
 /** Updates just the saved position (on pause), without touching the rest. */
@@ -88,8 +90,9 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
   const analyser = useRef<AnalyserNode | null>(null);
   const freq = useRef<Uint8Array<ArrayBuffer> | null>(null);
   const counted = useRef<string | null>(null);
+  const unmountStop = useRef<number | undefined>(undefined);
 
-  const saved = useRef(readSession());
+  const saved = useRef(readSession(userId));
   // Where to resume the restored song once its audio has loaded.
   const resumeAt = useRef(saved.current?.time ?? 0);
   const [queue, setQueue] = useState<MpSong[]>(() => saved.current?.queue ?? []);
@@ -164,14 +167,27 @@ export function MusicPlayerProvider({ children }: { children: ReactNode }) {
   const timeRef = useRef(time);
   timeRef.current = time;
   const saveSession = useCallback(() => {
-    writeSession(index >= 0 && queue[index] ? { queue, index, order, time: audio.current?.currentTime || timeRef.current } : null);
-  }, [queue, index, order]);
+    writeSession(index >= 0 && queue[index] ? { userId, queue, index, order, time: audio.current?.currentTime || timeRef.current } : null);
+  }, [queue, index, order, userId]);
   useEffect(() => { saveSession(); }, [saveSession]);
   useEffect(() => {
     const id = window.setInterval(() => { if (!audio.current?.paused) saveSession(); }, 5000);
     window.addEventListener('pagehide', saveSession);
     return () => { window.clearInterval(id); window.removeEventListener('pagehide', saveSession); };
   }, [saveSession]);
+
+  // Signing out (or the session ending) removes the player: stop the music with it.
+  // The saved session stays, so the same person gets their song back (paused) after
+  // signing in again. Deferred a tick so React's dev double-mount doesn't stop it.
+  useEffect(() => {
+    window.clearTimeout(unmountStop.current);
+    return () => {
+      unmountStop.current = window.setTimeout(() => {
+        const a = audio.current;
+        if (a) { a.pause(); a.removeAttribute('src'); a.load(); }
+      }, 0);
+    };
+  }, []);
 
   useEffect(() => { if (audio.current) audio.current.playbackRate = rate; write('mp-rate', rate); }, [rate]);
   useEffect(() => { if (audio.current) audio.current.volume = volume; write('mp-volume', volume); }, [volume]);
