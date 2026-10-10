@@ -1,13 +1,17 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { FileAudio, X, CheckCircle2, AlertCircle, AlertTriangle, Ban, Loader2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { discardUploads, findSimilarSongs, formatDuration, isDuplicate, readDuration, titleFromFile, uploadMusicFile, type MpSimilarSong } from '../../lib/music';
+import { discardUploads, findSimilarSongs, formatDuration, isDuplicate, MOODS, readDuration, titleFromFile, uploadMusicFile, useMpLookups, type MpGenre, type MpSimilarSong } from '../../lib/music';
 import { Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { pfInputClass } from '../portfolio/PfFieldInput';
+import { activeItems, addSongToCollections, loadCollections, MpCollectionPicker, MpSingerPicker, MpSourcePicker, type CollectionRef } from './MpSongForm';
+import { MpCombo } from './MpCombo';
+
+const label = 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5';
 
 const AUDIO_ACCEPT = 'audio/mpeg,audio/mp3,audio/mp4,audio/x-m4a,audio/aac,audio/wav,audio/ogg,audio/webm,audio/flac,.mp3,.m4a,.aac,.wav,.ogg,.flac';
 const MAX_BYTES = 50 * 1024 * 1024;
@@ -21,8 +25,10 @@ type Item = {
 /**
  * Upload many songs at once. Each file becomes a song titled from its file
  * name and marked info_pending: visible and playable now, details later.
+ * Optional details for the whole batch (singers, source, genre, country,
+ * language, mood, year, description, albums / mixes) are attached to every song.
  */
-export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onClose: () => void; onDone: () => void }) => {
+export const MpBulkUpload = ({ userId, genres, onClose, onDone }: { userId: string; genres: MpGenre[]; onClose: () => void; onDone: () => void }) => {
   const { t } = useLanguage();
   const input = useRef<HTMLInputElement>(null);
   const [items, setItems] = useState<Item[]>([]);
@@ -32,6 +38,18 @@ export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onCl
   const [year, setYear] = useState(String(new Date().getFullYear()));
   const yearNum = year.trim() ? Number(year) : null;
   const yearOk = yearNum === null || (Number.isInteger(yearNum) && yearNum >= 1800 && yearNum <= 2200);
+  // The rest of the batch details (all optional).
+  const { countries, languages, singers, setSingers, sources, setSources } = useMpLookups();
+  const [singerIds, setSingerIds] = useState<string[]>([]);
+  const [sourceId, setSourceId] = useState('');
+  const [genreId, setGenreId] = useState('');
+  const [countryId, setCountryId] = useState('');
+  const [languageId, setLanguageId] = useState('');
+  const [mood, setMood] = useState('');
+  const [description, setDescription] = useState('');
+  const [collections, setCollections] = useState<CollectionRef[]>([]);
+  const [picked, setPicked] = useState<Set<string>>(new Set());
+  useEffect(() => { void loadCollections().then(setCollections); }, []);
 
   const add = async (files: FileList | File[]) => {
     const list = [...files];
@@ -60,6 +78,8 @@ export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onCl
   const start = async () => {
     setRunning(true);
     let ok = 0;
+    // Albums / mixes that ran full (20 songs) during this batch: said once each.
+    const fullWarned = new Set<string>();
     for (const it of items) {
       // Duplicates of a song already in the library are never uploaded.
       if (it.status === 'done' || isDuplicate(it.similar)) continue;
@@ -68,11 +88,24 @@ export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onCl
       try {
         const duration = it.duration ?? await readDuration(it.file);
         audioId = await uploadMusicFile(it.file, 'audio', userId, duration);
-        const { error } = await supabase.from('mp_songs').insert([{
+        const { data: row, error } = await supabase.from('mp_songs').insert([{
           title: it.title.trim() || titleFromFile(it.file.name), audio_file_id: audioId, duration_seconds: duration,
           release_year: yearNum, info_pending: true, uploaded_by: userId,
-        }]);
+          genre_id: genreId || null, country_id: countryId || null, language_id: languageId || null,
+          source_id: sourceId || null, mood: mood || null, description: description.trim() || null,
+        }]).select('id').single();
         if (error) throw error;
+        const songId = row.id as string;
+        // The song is saved; its singers and albums / mixes follow (a failure there is only a warning).
+        if (singerIds.length) {
+          const { error: e2 } = await supabase.from('mp_song_singers').insert(singerIds.map((singer_id, i) => ({ song_id: songId, singer_id, position: i + 1 })));
+          if (e2) toast.warning(`${it.title}: ${errorMessage(e2, t('pf.common.saveError'))}`);
+        }
+        for (const f of await addSongToCollections(songId, [...picked], userId, collections)) {
+          if (f.full && fullWarned.has(f.title)) continue;
+          if (f.full) fullWarned.add(f.title);
+          toast.warning(`${f.title}: ${f.full ? t('mp.collections.full') : f.message}`);
+        }
         patch(it.key, { status: 'done' });
         ok++;
       } catch (e) {
@@ -115,12 +148,57 @@ export const MpBulkUpload = ({ userId, onClose, onDone }: { userId: string; onCl
         <input ref={input} type="file" multiple accept={AUDIO_ACCEPT} className="hidden"
           onChange={e => { if (e.target.files) void add(e.target.files); e.target.value = ''; }} />
 
-        <label className="flex items-center gap-2 text-sm">
-          <span className="font-medium text-gray-700 dark:text-gray-300">{t('mp.year')}</span>
-          <input type="number" min={1800} max={2200} value={year} onChange={e => setYear(e.target.value)} disabled={running}
-            className={`${pfInputClass.replace('w-full ', '')} h-9 w-28`} />
-          <span className="text-xs text-gray-500">{t('mp.bulk.yearHint')}</span>
-        </label>
+        {/* Details attached to every song of this batch; all optional. */}
+        <fieldset disabled={running} className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 space-y-3">
+          <legend className="px-1 text-sm font-semibold text-gray-800 dark:text-gray-200">{t('mp.bulk.details')}</legend>
+          <p className="text-xs text-gray-500 -mt-1">{t('mp.bulk.detailsHint')}</p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <div>
+              <span className={label}>{t('mp.singers')}</span>
+              <MpSingerPicker userId={userId} singers={singers} onSingersChange={setSingers} value={singerIds} onChange={setSingerIds} />
+            </div>
+            <div>
+              <span className={label}>{t('mp.source')}</span>
+              <MpSourcePicker userId={userId} sources={sources} onSourcesChange={setSources} value={sourceId} onChange={setSourceId} />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <label className="block">
+              <span className={label}>{t('mp.genre')}</span>
+              <select value={genreId} onChange={e => setGenreId(e.target.value)} className={`${pfInputClass} h-10`}>
+                <option value="">—</option>
+                {genres.map(g => <option key={g.id} value={g.id}>{g.name}</option>)}
+              </select>
+            </label>
+            <div>
+              <span className={label}>{t('mp.country')}</span>
+              <MpCombo items={activeItems(countries, countryId, c => c.code)} value={countryId} onChange={setCountryId} />
+            </div>
+            <div>
+              <span className={label}>{t('mp.language')}</span>
+              <MpCombo items={activeItems(languages, languageId, l => (l.native_name !== l.name ? l.native_name : null))} value={languageId} onChange={setLanguageId} />
+            </div>
+            <label className="block">
+              <span className={label}>{t('mp.mood')}</span>
+              <select value={mood} onChange={e => setMood(e.target.value)} className={`${pfInputClass} h-10`}>
+                <option value="">—</option>
+                {MOODS.map(m => <option key={m} value={m}>{t(`mp.moods.${m}`)}</option>)}
+              </select>
+            </label>
+            <label className="block">
+              <span className={label}>{t('mp.year')}</span>
+              <input type="number" min={1800} max={2200} value={year} onChange={e => setYear(e.target.value)} className={`${pfInputClass} h-10`} title={t('mp.bulk.yearHint')} />
+            </label>
+          </div>
+          <label className="block">
+            <span className={label}>{t('org.common.description')}</span>
+            <textarea value={description} onChange={e => setDescription(e.target.value)} rows={2} className={pfInputClass} />
+          </label>
+          <div>
+            <span className={label}>{t('mp.form.collections')}</span>
+            <MpCollectionPicker userId={userId} collections={collections} onCollectionsChange={setCollections} picked={picked} onPickedChange={setPicked} />
+          </div>
+        </fieldset>
 
         {items.length > 0 && (
           <ul className="divide-y divide-gray-100 dark:divide-gray-700 max-h-[50vh] overflow-y-auto rounded-lg border border-gray-200 dark:border-gray-700">

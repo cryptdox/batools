@@ -168,7 +168,7 @@ export const MpLibrary = () => {
         />
       )}
 
-      {bulk && userId && <MpBulkUpload userId={userId} onClose={() => setBulk(false)} onDone={() => void load()} />}
+      {bulk && userId && <MpBulkUpload userId={userId} genres={genres} onClose={() => setBulk(false)} onDone={() => void load()} />}
 
       <Modal isOpen={!!toDelete} onClose={() => !deleting && setToDelete(null)} title={t('pf.common.deleteTitle')}>
         {toDelete && (

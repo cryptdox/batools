@@ -16,7 +16,6 @@ import { pfInputClass } from '../portfolio/PfFieldInput';
 import { MpCover, MpPlayButton } from './MpUi';
 import { MpCombo } from './MpCombo';
 
-type CollectionRef = { id: string; kind: 'album' | 'mix'; title: string; songs?: { count: number }[] };
 
 const label = 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5';
 const AUDIO_ACCEPT = 'audio/mpeg,audio/mp3,audio/mp4,audio/x-m4a,audio/aac,audio/wav,audio/ogg,audio/webm,audio/flac,.mp3,.m4a,.aac,.wav,.ogg,.flac';
@@ -116,6 +115,95 @@ export const MpSourcePicker = ({ userId, sources, onSourcesChange, value, onChan
   );
 };
 
+export type CollectionRef = { id: string; kind: 'album' | 'mix'; title: string; songs?: { count: number }[] };
+
+/** Albums / mixes to put songs in: search, pick several, or create a new one by name. */
+export const MpCollectionPicker = ({ userId, collections, onCollectionsChange, picked, onPickedChange }: {
+  userId: string;
+  collections: CollectionRef[];
+  onCollectionsChange: (next: CollectionRef[]) => void;
+  picked: Set<string>;
+  onPickedChange: (next: Set<string>) => void;
+}) => {
+  const { t } = useLanguage();
+  const [search, setSearch] = useState('');
+  const needle = search.trim().toLowerCase();
+  const matches = collections.filter(c => !picked.has(c.id) && (!needle || c.title.toLowerCase().includes(needle))).slice(0, 5);
+  const exact = collections.some(c => c.title.toLowerCase() === needle);
+
+  // New album / mix straight from the search box.
+  const create = async (kind: 'album' | 'mix') => {
+    const name = search.trim();
+    if (!name) return;
+    const { data, error } = await supabase.from('mp_collections').insert([{ kind, title: name, created_by: userId }]).select('id, kind, title').single();
+    if (error) return toast.error(errorMessage(error, t('pf.common.saveError')));
+    onCollectionsChange([...collections, data as CollectionRef].sort((a, b) => a.title.localeCompare(b.title)));
+    onPickedChange(new Set([...picked, data.id as string]));
+    setSearch('');
+  };
+
+  return (
+    <>
+      {picked.size > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {[...picked].map(id => {
+            const c = collections.find(x => x.id === id);
+            return c && (
+              <span key={id} className="inline-flex items-center gap-1 pl-2 pr-1 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                {c.kind === 'album' ? <Disc3 size={12} /> : <ListMusic size={12} />}{c.title}
+                <button type="button" onClick={() => { const n = new Set(picked); n.delete(id); onPickedChange(n); }} className="p-0.5 rounded-full hover:bg-black/10" aria-label={`Remove ${c.title}`}><X size={12} /></button>
+              </span>
+            );
+          })}
+        </div>
+      )}
+      <div className="relative">
+        <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
+        <input value={search} onChange={e => setSearch(e.target.value)} placeholder={t('mp.form.findCollection')} className={`${pfInputClass} h-9 pl-8`} />
+      </div>
+      {(matches.length > 0 || (needle && !exact)) && (
+        <div className="mt-1 rounded-md border border-gray-200 dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
+          {matches.map(c => {
+            const isFull = (c.songs?.[0]?.count ?? 0) >= MP_COLLECTION_MAX;
+            return (
+              <button key={c.id} type="button" disabled={isFull} title={isFull ? t('mp.collections.full') : undefined}
+                onClick={() => onPickedChange(new Set([...picked, c.id]))}
+                className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700/40 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent">
+                {c.kind === 'album' ? <Disc3 size={14} className="text-gray-400" /> : <ListMusic size={14} className="text-gray-400" />}
+                <span className="text-gray-800 dark:text-gray-200">{c.title}</span>
+                <span className="text-[11px] text-gray-400 ml-auto">{isFull ? `${t('mp.collections.fullBadge')} · ${MP_COLLECTION_MAX}` : t(`mp.kind.${c.kind}`)}</span>
+              </button>
+            );
+          })}
+          {needle && !exact && (
+            <div className="flex gap-2 px-3 py-1.5">
+              <Button size="sm" variant="ghost" type="button" onClick={() => void create('album')}><Plus size={13} className="mr-1" />{t('mp.form.newAlbum').replace('{name}', search.trim())}</Button>
+              <Button size="sm" variant="ghost" type="button" onClick={() => void create('mix')}><Plus size={13} className="mr-1" />{t('mp.form.newMix').replace('{name}', search.trim())}</Button>
+            </div>
+          )}
+        </div>
+      )}
+    </>
+  );
+};
+
+/** Albums / mixes with their song counts (for the full badge). */
+export async function loadCollections(): Promise<CollectionRef[]> {
+  const { data } = await supabase.from('mp_collections').select('id, kind, title, songs:mp_collection_songs(count)').order('title');
+  return (data ?? []) as CollectionRef[];
+}
+
+/** Puts a saved song at the end of each album / mix; returns the ones that refused it (full at 20) or failed. */
+export async function addSongToCollections(songId: string, collectionIds: string[], userId: string, collections: CollectionRef[]): Promise<{ title: string; full: boolean; message: string }[]> {
+  const failed: { title: string; full: boolean; message: string }[] = [];
+  for (const cid of collectionIds) {
+    const { count } = await supabase.from('mp_collection_songs').select('id', { count: 'exact', head: true }).eq('collection_id', cid);
+    const { error } = await supabase.from('mp_collection_songs').insert([{ collection_id: cid, song_id: songId, position: (count ?? 0) + 1, added_by: userId }]);
+    if (error) failed.push({ title: collections.find(c => c.id === cid)?.title ?? '', full: isFullError(error), message: error.message });
+  }
+  return failed;
+}
+
 /**
  * Upload a song (audio + cover + info + albums / mixes), or edit one you
  * uploaded. While uploading, songs with a similar title are listed; picking
@@ -166,15 +254,13 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
   const [collections, setCollections] = useState<CollectionRef[]>([]);
   const [picked, setPicked] = useState<Set<string>>(new Set());
   const [initialPicked, setInitialPicked] = useState<Set<string>>(new Set());
-  const [collSearch, setCollSearch] = useState('');
 
   const [saving, setSaving] = useState(false);
   const [step, setStep] = useState('');
 
   useEffect(() => {
     void (async () => {
-      const { data } = await supabase.from('mp_collections').select('id, kind, title, songs:mp_collection_songs(count)').order('title');
-      setCollections((data ?? []) as CollectionRef[]);
+      setCollections(await loadCollections());
       if (song) {
         const { data: links } = await supabase.from('mp_collection_songs').select('collection_id').eq('song_id', song.id);
         const ids = new Set((links ?? []).map(l => l.collection_id as string));
@@ -220,17 +306,6 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
     setCoverFile(f);
     setCoverPreview(URL.createObjectURL(f));
     setRemoveCover(false);
-  };
-
-  // New album / mix straight from the search box.
-  const createCollection = async (kind: 'album' | 'mix') => {
-    const name = collSearch.trim();
-    if (!name) return;
-    const { data, error } = await supabase.from('mp_collections').insert([{ kind, title: name, created_by: userId }]).select('id, kind, title').single();
-    if (error) return toast.error(errorMessage(error, t('pf.common.saveError')));
-    setCollections(c => [...c, data as CollectionRef].sort((a, b) => a.title.localeCompare(b.title)));
-    setPicked(p => new Set([...p, data.id as string]));
-    setCollSearch('');
   };
 
   const yearNum = year.trim() ? Number(year) : null;
@@ -288,11 +363,9 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
       const add = [...picked].filter(id => !initialPicked.has(id));
       const drop = [...initialPicked].filter(id => !picked.has(id));
       if (drop.length) await supabase.from('mp_collection_songs').delete().eq('song_id', songId).in('collection_id', drop);
-      for (const cid of add) {
-        const { count } = await supabase.from('mp_collection_songs').select('id', { count: 'exact', head: true }).eq('collection_id', cid);
-        const { error } = await supabase.from('mp_collection_songs').insert([{ collection_id: cid, song_id: songId, position: (count ?? 0) + 1, added_by: userId }]);
-        // The song itself is saved; just say which album / mix refused it (full, at 20).
-        if (error) toast.warning(`${collections.find(c => c.id === cid)?.title ?? ''}: ${isFullError(error) ? t('mp.collections.full') : error.message}`);
+      // The song itself is saved; just say which album / mix refused it (full, at 20).
+      for (const f of await addSongToCollections(songId!, add, userId, collections)) {
+        toast.warning(`${f.title}: ${f.full ? t('mp.collections.full') : f.message}`);
       }
 
       toast.success(song ? t('pf.common.updated') : t('mp.form.uploaded'));
@@ -310,10 +383,6 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
       setStep('');
     }
   };
-
-  const needle = collSearch.trim().toLowerCase();
-  const matches = collections.filter(c => !picked.has(c.id) && (!needle || c.title.toLowerCase().includes(needle))).slice(0, 5);
-  const exact = collections.some(c => c.title.toLowerCase() === needle);
 
   return (
     <Modal isOpen onClose={() => !saving && close()} title={song ? t('mp.form.edit') : t('mp.form.upload')} className="max-w-3xl">
@@ -454,45 +523,7 @@ export const MpSongForm = ({ userId, song, genres, onClose, onSaved, onEditOther
 
         <div>
           <span className={label}>{t('mp.form.collections')}</span>
-          {picked.size > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-2">
-              {[...picked].map(id => {
-                const c = collections.find(x => x.id === id);
-                return c && (
-                  <span key={id} className="inline-flex items-center gap-1 pl-2 pr-1 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                    {c.kind === 'album' ? <Disc3 size={12} /> : <ListMusic size={12} />}{c.title}
-                    <button type="button" onClick={() => setPicked(p => { const n = new Set(p); n.delete(id); return n; })} className="p-0.5 rounded-full hover:bg-black/10" aria-label={`Remove ${c.title}`}><X size={12} /></button>
-                  </span>
-                );
-              })}
-            </div>
-          )}
-          <div className="relative">
-            <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input value={collSearch} onChange={e => setCollSearch(e.target.value)} placeholder={t('mp.form.findCollection')} className={`${pfInputClass} h-9 pl-8`} />
-          </div>
-          {(matches.length > 0 || (needle && !exact)) && (
-            <div className="mt-1 rounded-md border border-gray-200 dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
-              {matches.map(c => {
-                const isFull = (c.songs?.[0]?.count ?? 0) >= MP_COLLECTION_MAX;
-                return (
-                  <button key={c.id} type="button" disabled={isFull} title={isFull ? t('mp.collections.full') : undefined}
-                    onClick={() => setPicked(p => new Set([...p, c.id]))}
-                    className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-left hover:bg-gray-50 dark:hover:bg-gray-700/40 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent">
-                    {c.kind === 'album' ? <Disc3 size={14} className="text-gray-400" /> : <ListMusic size={14} className="text-gray-400" />}
-                    <span className="text-gray-800 dark:text-gray-200">{c.title}</span>
-                    <span className="text-[11px] text-gray-400 ml-auto">{isFull ? `${t('mp.collections.fullBadge')} · ${MP_COLLECTION_MAX}` : t(`mp.kind.${c.kind}`)}</span>
-                  </button>
-                );
-              })}
-              {needle && !exact && (
-                <div className="flex gap-2 px-3 py-1.5">
-                  <Button size="sm" variant="ghost" type="button" onClick={() => void createCollection('album')}><Plus size={13} className="mr-1" />{t('mp.form.newAlbum').replace('{name}', collSearch.trim())}</Button>
-                  <Button size="sm" variant="ghost" type="button" onClick={() => void createCollection('mix')}><Plus size={13} className="mr-1" />{t('mp.form.newMix').replace('{name}', collSearch.trim())}</Button>
-                </div>
-              )}
-            </div>
-          )}
+          <MpCollectionPicker userId={userId} collections={collections} onCollectionsChange={setCollections} picked={picked} onPickedChange={setPicked} />
         </div>
 
         {song?.info_pending && (
