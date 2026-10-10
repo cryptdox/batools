@@ -156,7 +156,11 @@ export const AcTopicForm = ({ userId, graph, topics, domains, topic, parentId, d
           if (pointsError) throw pointsError;
         }
       } else {
-        const { data, error } = await supabase.from('ac_topics').insert([{ ...row, user_id: userId }]).select('id').single();
+        // A new topic under a parent (e.g. a milestone) starts awake / hibernated like it:
+        // awake if any parent is awake. Without a parent the database default applies (hibernated).
+        const parents = [...parentIds].map(pid => graph.byId.get(pid)).filter(Boolean);
+        const inherit = parents.length ? { is_hibernated: parents.every(pt => pt!.is_hibernated) } : {};
+        const { data, error } = await supabase.from('ac_topics').insert([{ ...row, ...inherit, user_id: userId }]).select('id').single();
         if (error) throw error;
         id = data.id as string;
       }
