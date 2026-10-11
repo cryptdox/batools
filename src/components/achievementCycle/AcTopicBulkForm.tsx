@@ -171,6 +171,26 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
 
   const shared = [...parentIds];
 
+  // Pickers only offer topics in the chosen domain; layers only those under the chosen parents.
+  const inDomain = useMemo(() => {
+    if (!domain) return topics;
+    const ids = graph.domainTopics(domain);
+    return topics.filter(x => ids.has(x.id));
+  }, [domain, graph, topics]);
+  const layerTopicsPool = useMemo(() => {
+    if (parentIds.size === 0) return inDomain;
+    const below = new Set<string>();
+    for (const p of parentIds) for (const id of graph.subtree(p)) if (!parentIds.has(id)) below.add(id);
+    return inDomain.filter(x => below.has(x.id));
+  }, [inDomain, parentIds, graph]);
+  // A new domain drops picked parents that are outside it.
+  const changeDomain = (id: string) => {
+    setDomain(id);
+    if (!id) return;
+    const ids = graph.domainTopics(id);
+    setParentIds(s => new Set([...s].filter(p => ids.has(p))));
+  };
+
   const planned: Planned[] = useMemo(() => {
     if (mode === 'sequence') {
       const name = base.trim();
@@ -293,6 +313,26 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
           <button type="button" className={tab(mode === 'layers')} onClick={() => setMode('layers')}><Combine size={15} />{t('ac.bulk.layers')}</button>
         </div>
 
+        <div className="grid sm:grid-cols-[1fr_1fr_8rem] gap-4">
+          <label className="block">
+            <span className={label}>{t('ac.bulk.domain')}</span>
+            <select value={domain} onChange={e => changeDomain(e.target.value)} className={`${acSelectClass} h-10 w-full`}>
+              <option value="">{t('ac.allDomains')}</option>
+              {domains.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+            </select>
+            <span className={hint}>{t('ac.bulk.domainHint')}</span>
+          </label>
+          <div>
+            <span className={label}>{t('ac.topic.parents')}</span>
+            <AcTopicMultiPicker topics={inDomain} value={parentIds} onChange={setParentIds} placeholder={t('ac.bulk.noParent')} />
+            <p className={hint}>{mode === 'layers' && parentLayer ? t('ac.bulk.sharedParentsHint') : t('ac.bulk.parentsHint')}</p>
+          </div>
+          <label className="block">
+            <span className={label}>{t('ac.topic.points')}</span>
+            <input type="number" min={0} step={1} value={points} onChange={e => setPoints(e.target.value)} className={`${pfInputClass} h-10`} />
+          </label>
+        </div>
+
         {mode === 'sequence' ? (
           <div className="space-y-4">
             <label className="block">
@@ -340,7 +380,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
                     )}
                   </span>
                 </div>
-                <LayerPicker topics={topics} items={l.items} forceCreate={parentLayer === l.id} onChange={items => updateLayer(l.id, items)} />
+                <LayerPicker topics={layerTopicsPool} items={l.items} forceCreate={parentLayer === l.id} onChange={items => updateLayer(l.id, items)} />
               </div>
             ))}
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -354,25 +394,6 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
           </div>
         )}
 
-        <div className="grid sm:grid-cols-[8rem_1fr_1fr] gap-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-          <label className="block">
-            <span className={label}>{t('ac.topic.points')}</span>
-            <input type="number" min={0} step={1} value={points} onChange={e => setPoints(e.target.value)} className={`${pfInputClass} h-10`} />
-          </label>
-          <div>
-            <span className={label}>{t('ac.topic.parents')}</span>
-            <AcTopicMultiPicker topics={topics} value={parentIds} onChange={setParentIds} placeholder={t('ac.bulk.noParent')} />
-            {mode === 'layers' && parentLayer && <p className={hint}>{t('ac.bulk.sharedParentsHint')}</p>}
-          </div>
-          <label className="block">
-            <span className={label}>{t('ac.bulk.domain')}</span>
-            <select value={domain} onChange={e => setDomain(e.target.value)} className={`${acSelectClass} h-10 w-full`}>
-              <option value="">—</option>
-              {domains.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
-            </select>
-            <span className={hint}>{t('ac.bulk.domainHint')}</span>
-          </label>
-        </div>
 
         <div>
           <div className="flex flex-wrap items-baseline gap-x-3 mb-1.5">
