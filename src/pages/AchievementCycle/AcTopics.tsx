@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Plus, Pencil, Trash2, Search, Star, Layers, ChevronLeft, ChevronRight, ArchiveRestore } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Star, Layers, ListPlus, ChevronLeft, ChevronRight, ArchiveRestore } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
@@ -28,7 +28,7 @@ export const AcTopics = () => {
   const data = useAcData();
   const { userId, loading, domains, topics, graph, cycleRefs, rollupOf, domainRollupOf, reload, domainTypes, showArchived, setShowArchived } = data;
   const { cycle, cycleKey, select } = useSelectedCycle(cycleRefs);
-  const { openTopic, newTopic, dialogs } = useAcDialogs(data, cycle);
+  const { openTopic, newTopic, bulkTopics, dialogs } = useAcDialogs(data, cycle);
 
   const [search, setSearch] = useState('');
   // Domain (always one) → subject → level (both "all" by default).
@@ -123,6 +123,7 @@ export const AcTopics = () => {
           <div className="flex flex-wrap items-center gap-2">
             <AcArchiveToggle value={showArchived} onChange={setShowArchived} />
             <AcCyclePicker refs={cycleRefs} value={cycleKey} onChange={select} />
+            <Button variant="outline" onClick={() => bulkTopics(activeSubject || null, activeDomain && activeDomain !== UNASSIGNED ? activeDomain : null)}><ListPlus size={16} className="mr-1" />{t('ac.bulk.button')}</Button>
             <Button onClick={() => newTopic(activeSubject || null, activeDomain && activeDomain !== UNASSIGNED ? activeDomain : null)}><Plus size={16} className="mr-1" />{t('ac.topic.create')}</Button>
           </div>
         }

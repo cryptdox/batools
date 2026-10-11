@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';
-import { Pencil, Trash2, Plus, Minus, Star, ChevronRight, Link2, Unlink, History, Play, AlertTriangle, ArchiveRestore, Moon, Sun } from 'lucide-react';
+import { Pencil, Trash2, Plus, Minus, Star, ChevronRight, Link2, Unlink, History, Play, AlertTriangle, ArchiveRestore, Moon, Sun, ListPlus } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
@@ -26,13 +26,14 @@ type Props = {
   onOpenTopic: (id: string) => void;
   onEdit: (id: string) => void;
   onAddChild: (parentId: string) => void;
+  onBulkChildren: (parentId: string) => void;
 };
 
 const section = 'space-y-2';
 const heading = 'text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400';
 
 /** Everything about one topic: paths, children, domains, cycles and their log. */
-export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEdit, onAddChild }: Props) => {
+export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEdit, onAddChild, onBulkChildren }: Props) => {
   const { t } = useLanguage();
   const { userId, graph, topics, domains, cycles, reload, rollupOf } = data;
   const topic = graph.byId.get(topicId);
@@ -294,6 +295,7 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
               <Button size="sm" variant="outline" disabled={linkChildren.size === 0 || busy} onClick={() => void addExistingChildren()}>
                 <Link2 size={14} className="mr-1" />{t('ac.detail.link')}{linkChildren.size > 1 ? ` (${linkChildren.size})` : ''}
               </Button>
+              <Button size="sm" variant="outline" onClick={() => onBulkChildren(topicId)}><ListPlus size={14} className="mr-1" />{t('ac.bulk.button')}</Button>
               <Button size="sm" onClick={() => onAddChild(topicId)}><Plus size={14} className="mr-1" />{t('ac.detail.newChild')}</Button>
             </div>
           </div>

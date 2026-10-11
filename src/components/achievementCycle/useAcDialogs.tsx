@@ -2,25 +2,29 @@ import { useState } from 'react';
 import type { CycleRef, useAcData } from '../../lib/achievementCycle';
 import { AcTopicDetail } from './AcTopicDetail';
 import { AcTopicForm } from './AcTopicForm';
+import { AcTopicBulkForm } from './AcTopicBulkForm';
 
 type AcData = ReturnType<typeof useAcData>;
 type FormState = { topicId: string | null; parentId: string | null; domainId?: string | null } | null;
+type BulkState = { parentId: string | null; domainId: string | null } | null;
 
 /**
- * Topic detail + create/edit dialogs, shared by every Achievement Cycle page.
+ * Topic detail + create/edit / bulk-create dialogs, shared by every Achievement Cycle page.
  * Render `dialogs` once; call openTopic / newTopic / editTopic from anywhere.
  */
 export function useAcDialogs(data: AcData, cycle: CycleRef) {
   const [detailId, setDetailId] = useState<string | null>(null);
   const [form, setForm] = useState<FormState>(null);
+  const [bulk, setBulk] = useState<BulkState>(null);
 
   const openTopic = (id: string) => setDetailId(id);
   const newTopic = (parentId: string | null = null, domainId: string | null = null) => setForm({ topicId: null, parentId, domainId });
   const editTopic = (id: string) => setForm({ topicId: id, parentId: null });
+  const bulkTopics = (parentId: string | null = null, domainId: string | null = null) => setBulk({ parentId, domainId });
 
   const dialogs = data.userId ? (
     <>
-      {detailId && !form && (
+      {detailId && !form && !bulk && (
         <AcTopicDetail
           data={data}
           topicId={detailId}
@@ -29,6 +33,7 @@ export function useAcDialogs(data: AcData, cycle: CycleRef) {
           onOpenTopic={setDetailId}
           onEdit={editTopic}
           onAddChild={id => newTopic(id)}
+          onBulkChildren={id => bulkTopics(id)}
         />
       )}
       {form && (
@@ -48,8 +53,23 @@ export function useAcDialogs(data: AcData, cycle: CycleRef) {
           }}
         />
       )}
+      {bulk && (
+        <AcTopicBulkForm
+          userId={data.userId}
+          graph={data.graph}
+          topics={data.topics}
+          domains={data.domains}
+          parentId={bulk.parentId}
+          domainId={bulk.domainId}
+          onClose={() => setBulk(null)}
+          onSaved={async () => {
+            setBulk(null);
+            await data.reload();
+          }}
+        />
+      )}
     </>
   ) : null;
 
-  return { openTopic, newTopic, editTopic, dialogs };
+  return { openTopic, newTopic, editTopic, bulkTopics, dialogs };
 }
