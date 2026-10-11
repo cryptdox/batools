@@ -2,20 +2,29 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { AlertTriangle, Archive } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
+import { supabase } from '../../lib/supabase';
+import { errorMessage } from '../../lib/portfolio';
 import { acRpc } from '../../lib/achievementCycle';
 import { Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 
 type Counts = { topics: number; cycles: number; logs: number; domains: number };
 
+const sum = (all: Counts[]): Counts => all.reduce(
+  (a, c) => ({ topics: a.topics + c.topics, cycles: a.cycles + c.cycles, logs: a.logs + c.logs, domains: a.domains + c.domains }),
+  { topics: 0, cycles: 0, logs: 0, domains: 0 },
+);
+
 /**
- * Removes a topic or a domain (pass one) with everything beneath: archived
- * (hidden, restorable) or deleted for good. The counts come from the
+ * Removes a topic, several topics, or a domain (pass one) with everything beneath:
+ * archived (hidden, restorable) or deleted for good. The counts come from the
  * database's own dry run, so they match what will happen.
  */
-export const AcRemoveModal = ({ userId, topicId, domainId, name, alreadyArchived, onClose, onDone }: {
+export const AcRemoveModal = ({ userId, topicId, topicIds, domainId, name, alreadyArchived, onClose, onDone }: {
   userId: string;
   topicId?: string;
+  /** Several topics at once; leave out ones beneath another (they go with it). */
+  topicIds?: string[];
   domainId?: string;
   name: string;
   alreadyArchived: boolean;
@@ -29,16 +38,39 @@ export const AcRemoveModal = ({ userId, topicId, domainId, name, alreadyArchived
   const [busy, setBusy] = useState(false);
 
   const args = { p_user_id: userId, p_topic_id: topicId ?? null, p_domain_id: domainId ?? null, p_archive: archive };
+  const idsKey = topicIds?.join(',');
 
   useEffect(() => {
     setCounts(null);
-    void acRpc<Counts>('ac_remove', { ...args, p_dry_run: true }, t('pf.common.loadError')).then(setCounts);
+    if (!topicIds) {
+      void acRpc<Counts>('ac_remove', { ...args, p_dry_run: true }, t('pf.common.loadError')).then(setCounts);
+      return;
+    }
+    void Promise.all(topicIds.map(id => acRpc<Counts>('ac_remove', { ...args, p_topic_id: id, p_dry_run: true }, t('pf.common.loadError'))))
+      .then(all => setCounts(all.every(Boolean) ? sum(all as Counts[]) : null));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [archive, topicId, domainId, userId]);
+  }, [archive, topicId, idsKey, domainId, userId]);
+
+  // One at a time: a topic already removed with an earlier one ("not found") is skipped.
+  const removeMany = async (ids: string[]) => {
+    const done: Counts[] = [];
+    for (const id of ids) {
+      const { data, error } = await supabase.rpc('ac_remove', { ...args, p_topic_id: id, p_dry_run: false });
+      if (error?.code === 'P0002') continue;
+      if (error) {
+        toast.error(errorMessage(error, archive ? t('ac.archive.error') : t('pf.common.deleteError')));
+        return done.length ? sum(done) : null;
+      }
+      done.push(data as Counts);
+    }
+    return sum(done);
+  };
 
   const confirm = async () => {
     setBusy(true);
-    const res = await acRpc<Counts>('ac_remove', { ...args, p_dry_run: false }, archive ? t('ac.archive.error') : t('pf.common.deleteError'));
+    const res = topicIds
+      ? await removeMany(topicIds)
+      : await acRpc<Counts>('ac_remove', { ...args, p_dry_run: false }, archive ? t('ac.archive.error') : t('pf.common.deleteError'));
     setBusy(false);
     if (!res) return;
     toast.success((archive ? t('ac.archive.archivedToast') : t('ac.archive.deletedToast')).replace('{topics}', String(res.topics)));

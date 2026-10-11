@@ -169,7 +169,7 @@ export const translations = {
       domain: { create: 'New domain', edit: 'Edit domain', color: 'Colour', none: 'No domains yet.', showTopics: 'Show this domain\'s topics', deleteHint: 'Deletes the domain "{name}". Its topics stay, only untagged.', unassigned: 'Unassigned' },
       topics: {
         pageTitle: 'Topics & Domains', pageSubtitle: 'Domains, subjects, general topics and areas, with their story points.',
-        title: 'Topics', level: 'Level', empty: 'No topics yet. Create a subject to start.', emptyDomain: 'No topics in this domain match.', noSubject: 'No subject in this domain',
+        title: 'Topics', level: 'Level', selectAllShown: 'Select all {n} listed', removeSelected: 'Archive / delete', nTopics: '{n} topics', empty: 'No topics yet. Create a subject to start.', emptyDomain: 'No topics in this domain match.', noSubject: 'No subject in this domain',
       },
       detail: {
         computed: 'From children', computedHint: 'A parent’s points are the average of its children’s completion × its own total, updated automatically.',
@@ -1063,7 +1063,7 @@ export const translations = {
       domain: { create: 'নতুন ডোমেইন', edit: 'ডোমেইন সম্পাদনা', color: 'রং', none: 'এখনো কোনো ডোমেইন নেই।', showTopics: 'এই ডোমেইনের টপিক দেখুন', deleteHint: '"{name}" ডোমেইন মুছে যাবে। টপিকগুলো থাকবে, শুধু ট্যাগ সরবে।', unassigned: 'কোনো ডোমেইন নেই' },
       topics: {
         pageTitle: 'টপিক ও ডোমেইন', pageSubtitle: 'ডোমেইন, বিষয়, সাধারণ টপিক ও এরিয়া, তাদের স্টোরি পয়েন্টসহ।',
-        title: 'টপিক', level: 'স্তর', empty: 'এখনো কোনো টপিক নেই। শুরু করতে একটি বিষয় তৈরি করুন।', emptyDomain: 'এই ডোমেইনে মেলে এমন কোনো টপিক নেই।', noSubject: 'এই ডোমেইনে কোনো বিষয় নেই',
+        title: 'টপিক', level: 'স্তর', selectAllShown: 'তালিকার সব {n}টি নির্বাচন', removeSelected: 'আর্কাইভ / মুছুন', nTopics: '{n}টি টপিক', empty: 'এখনো কোনো টপিক নেই। শুরু করতে একটি বিষয় তৈরি করুন।', emptyDomain: 'এই ডোমেইনে মেলে এমন কোনো টপিক নেই।', noSubject: 'এই ডোমেইনে কোনো বিষয় নেই',
       },
       detail: {
         computed: 'চাইল্ড থেকে', computedHint: 'প্যারেন্টের পয়েন্ট = চাইল্ডদের সম্পন্নতার গড় × নিজের মোট, স্বয়ংক্রিয়ভাবে হালনাগাদ হয়।',

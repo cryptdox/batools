@@ -58,6 +58,9 @@ export const AcTopics = () => {
   const [dType, setDType] = useState('');
   const [dSaving, setDSaving] = useState(false);
   const [deleteDomain, setDeleteDomain] = useState<AcDomain | null>(null);
+  // Ticked topics in the list, for removing several at once.
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [removeSelected, setRemoveSelected] = useState(false);
 
   const openDomain = (d: AcDomain | 'new') => {
     setDomainForm(d);
@@ -113,6 +116,23 @@ export const AcTopics = () => {
   const { setPage } = pager;
   // A new filter starts from the first page.
   useEffect(() => { setPage(1); }, [filter.key, search, setPage]);
+
+  // Only topics still listed stay ticked (after a reload or archive toggle).
+  const picked = topics.filter(x => selected.has(x.id));
+  const pageIds = pager.pageItems.map(x => x.id);
+  const pageAllPicked = pageIds.length > 0 && pageIds.every(id => selected.has(id));
+  const toggleOne = (id: string) => setSelected(s => {
+    const next = new Set(s);
+    if (!next.delete(id)) next.add(id);
+    return next;
+  });
+  const togglePage = () => setSelected(s => {
+    const next = new Set(s);
+    for (const id of pageIds) if (pageAllPicked) next.delete(id); else next.add(id);
+    return next;
+  });
+  // A ticked topic beneath another ticked one goes with it, so only the top ones are removed.
+  const removeIds = picked.map(x => x.id).filter(id => !picked.some(o => o.id !== id && graph.subtree(o.id).has(id)));
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
@@ -210,6 +230,20 @@ export const AcTopics = () => {
           </div>
           <AcTopicFilterSelects filter={filter} domains={domains} />
         </div>
+        {picked.length > 0 && (
+          <div className="flex flex-wrap items-center gap-3 px-4 py-2 bg-primary/5 border-b border-gray-100 dark:border-gray-700 text-sm">
+            <span className="font-medium text-gray-800 dark:text-gray-200">{t('ac.detail.nSelected').replace('{n}', String(picked.length))}</span>
+            {picked.length < shown.length && (
+              <button className="text-primary hover:underline" onClick={() => setSelected(new Set(shown.map(x => x.id)))}>
+                {t('ac.topics.selectAllShown').replace('{n}', String(shown.length))}
+              </button>
+            )}
+            <button className="text-gray-500 hover:underline" onClick={() => setSelected(new Set())}>{t('ac.detail.clearSelection')}</button>
+            <Button size="sm" variant="outline" className="ml-auto" onClick={() => setRemoveSelected(true)}>
+              <Trash2 size={14} className="mr-1 text-danger" />{t('ac.topics.removeSelected')}
+            </Button>
+          </div>
+        )}
         {loading ? (
           <div className="p-12 text-center text-gray-500">{t('pf.common.loading')}</div>
         ) : shown.length === 0 ? (
@@ -222,6 +256,9 @@ export const AcTopics = () => {
             <table className="min-w-full text-sm">
               <thead className="bg-gray-50 dark:bg-gray-900/40 text-left text-xs text-gray-500">
                 <tr>
+                  <th className="pl-4 pr-1 py-2 w-8">
+                    <input type="checkbox" checked={pageAllPicked} onChange={togglePage} className="w-4 h-4 text-primary rounded border-gray-300" aria-label={t('ac.detail.selectShown')} />
+                  </th>
                   <th className="px-4 py-2">{t('pf.common.name')}</th>
                   <th className="px-4 py-2">{t('ac.topics.level')}</th>
                   <th className="px-4 py-2">{t('ac.topic.parents')}</th>
@@ -233,7 +270,10 @@ export const AcTopics = () => {
                 {pager.pageItems.map(x => {
                   const r = rollupOf(x.id, cycle);
                   return (
-                    <tr key={x.id} className={`hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer ${x.is_archived ? 'opacity-70' : ''}`} onClick={() => openTopic(x.id)}>
+                    <tr key={x.id} className={`hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer ${selected.has(x.id) ? 'bg-primary/5' : ''} ${x.is_archived ? 'opacity-70' : ''}`} onClick={() => openTopic(x.id)}>
+                      <td className="pl-4 pr-1 py-2.5" onClick={e => e.stopPropagation()}>
+                        <input type="checkbox" checked={selected.has(x.id)} onChange={() => toggleOne(x.id)} className="w-4 h-4 text-primary rounded border-gray-300" aria-label={x.name} />
+                      </td>
                       <td className="px-4 py-2.5">
                         <span className="inline-flex items-center gap-1.5 font-medium text-gray-900 dark:text-gray-100">
                           {x.is_milestone && <Star size={13} className="fill-warning text-warning" />}{x.name}
@@ -295,6 +335,17 @@ export const AcTopics = () => {
           </div>
         </div>
       </Modal>
+
+      {removeSelected && userId && removeIds.length > 0 && (
+        <AcRemoveModal
+          userId={userId}
+          topicIds={removeIds}
+          name={picked.length <= 3 ? picked.map(x => x.name).join(', ') : t('ac.topics.nTopics').replace('{n}', String(picked.length))}
+          alreadyArchived={picked.every(x => x.is_archived)}
+          onClose={() => setRemoveSelected(false)}
+          onDone={async () => { setRemoveSelected(false); setSelected(new Set()); await reload(); }}
+        />
+      )}
 
       {deleteDomain && userId && (
         <AcRemoveModal
