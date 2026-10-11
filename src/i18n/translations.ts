@@ -190,6 +190,12 @@ export const translations = {
         deleteRoundBeneath: 'Also delete {cycle} from the {n} topic(s) beneath',
         deleteHint: 'Deletes "{name}" with all its cycles and progress log. Topics beneath it stay (one with no other parent becomes a Subject).',
       },
+      assignParent: {
+        button: 'Assign parent', title: 'Assign a parent to {n} topic(s)', pick: 'Pick parent topics…',
+        add: 'Add to their parents', addHint: 'Keeps the parents they already have.',
+        replace: 'Replace their parents', replaceHint: 'Removes them from every other parent (the topics themselves stay).',
+        done: 'Updated {n} topic(s)',
+      },
       bulk: {
         button: 'Bulk create', title: 'Create topics in bulk', sequence: 'Sequence', layers: 'Combinations',
         baseName: 'Topic name', baseNamePlaceholder: 'e.g. Chapter', range: 'Range', values: 'Comma separated',
@@ -1083,6 +1089,12 @@ export const translations = {
         deleteRoundLogs: 'এর অগ্রগতি লগও মুছে যাবে: {n}টি এন্ট্রি।',
         deleteRoundBeneath: 'নিচের {n}টি টপিক থেকেও {cycle} মুছুন',
         deleteHint: '"{name}" তার সব সাইকেল ও অগ্রগতি লগসহ মুছে যাবে। নিচের টপিকগুলো থাকবে (অন্য প্যারেন্ট না থাকলে বিষয় হয়ে যাবে)।',
+      },
+      assignParent: {
+        button: 'প্যারেন্ট নির্ধারণ', title: '{n}টি টপিকের প্যারেন্ট নির্ধারণ', pick: 'প্যারেন্ট টপিক বাছুন…',
+        add: 'বিদ্যমান প্যারেন্টের সাথে যোগ', addHint: 'আগের প্যারেন্টগুলো থাকবে।',
+        replace: 'প্যারেন্ট বদলে দিন', replaceHint: 'অন্য সব প্যারেন্ট থেকে সরানো হবে (টপিকগুলো থাকবে)।',
+        done: '{n}টি টপিক হালনাগাদ হয়েছে',
       },
       bulk: {
         button: 'একসাথে তৈরি', title: 'একসাথে অনেক টপিক তৈরি', sequence: 'ক্রম', layers: 'সমন্বয়',

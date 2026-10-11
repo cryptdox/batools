@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Plus, Pencil, Trash2, Search, Star, Layers, ListPlus, ChevronLeft, ChevronRight, ArchiveRestore } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Star, Layers, ListPlus, FolderTree, ChevronLeft, ChevronRight, ArchiveRestore } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
@@ -11,6 +11,7 @@ import { Pagination, usePagination } from '../../components/ui/Pagination';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
 import { AcArchivedBadge, AcArchiveToggle, AcCyclePicker, AcLevelBadge, AcProgress, acCard, acSelectClass } from '../../components/achievementCycle/AcUi';
 import { AcRemoveModal } from '../../components/achievementCycle/AcRemoveModal';
+import { AcAssignParentModal } from '../../components/achievementCycle/AcAssignParentModal';
 import { AcDomainTypes, AcTypeBadge } from '../../components/achievementCycle/AcDomainTypes';
 import { useAcDialogs } from '../../components/achievementCycle/useAcDialogs';
 import { AcTopicFilterSelects, UNASSIGNED, useTopicFilter } from '../../components/achievementCycle/AcTopicFilters';
@@ -61,6 +62,7 @@ export const AcTopics = () => {
   // Ticked topics in the list, for removing several at once.
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [removeSelected, setRemoveSelected] = useState(false);
+  const [assignParent, setAssignParent] = useState(false);
 
   const openDomain = (d: AcDomain | 'new') => {
     setDomainForm(d);
@@ -239,7 +241,10 @@ export const AcTopics = () => {
               </button>
             )}
             <button className="text-gray-500 hover:underline" onClick={() => setSelected(new Set())}>{t('ac.detail.clearSelection')}</button>
-            <Button size="sm" variant="outline" className="ml-auto" onClick={() => setRemoveSelected(true)}>
+            <Button size="sm" variant="outline" className="ml-auto" onClick={() => setAssignParent(true)}>
+              <FolderTree size={14} className="mr-1" />{t('ac.assignParent.button')}
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => setRemoveSelected(true)}>
               <Trash2 size={14} className="mr-1 text-danger" />{t('ac.topics.removeSelected')}
             </Button>
           </div>
@@ -335,6 +340,17 @@ export const AcTopics = () => {
           </div>
         </div>
       </Modal>
+
+      {assignParent && userId && picked.length > 0 && (
+        <AcAssignParentModal
+          userId={userId}
+          graph={graph}
+          topics={topics}
+          childIds={picked.map(x => x.id)}
+          onClose={() => setAssignParent(false)}
+          onDone={async () => { setAssignParent(false); setSelected(new Set()); await reload(); }}
+        />
+      )}
 
       {removeSelected && userId && removeIds.length > 0 && (
         <AcRemoveModal
