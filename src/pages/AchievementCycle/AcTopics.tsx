@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Plus, Pencil, Trash2, Search, Star, Layers, ListPlus, FolderTree, ChevronLeft, ChevronRight, ArchiveRestore } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Star, Layers, ListPlus, FolderTree, Unlink, ChevronLeft, ChevronRight, ArchiveRestore } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
@@ -63,6 +63,9 @@ export const AcTopics = () => {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [removeSelected, setRemoveSelected] = useState(false);
   const [assignParent, setAssignParent] = useState(false);
+  // Unlinking the ticked topics from all their parents, or all their children from them.
+  const [clearLinks, setClearLinks] = useState<'parents' | 'children' | null>(null);
+  const [clearing, setClearing] = useState(false);
 
   const openDomain = (d: AcDomain | 'new') => {
     setDomainForm(d);
@@ -133,6 +136,20 @@ export const AcTopics = () => {
     for (const id of pageIds) if (pageAllPicked) next.delete(id); else next.add(id);
     return next;
   });
+  const linkCount = (side: 'parents' | 'children') =>
+    picked.reduce((n, x) => n + ((side === 'parents' ? graph.parentLinks : graph.childLinks).get(x.id)?.length ?? 0), 0);
+  const doClearLinks = async () => {
+    if (!userId || !clearLinks) return;
+    setClearing(true);
+    const { error } = await supabase.from('ac_topic_links').delete().eq('user_id', userId)
+      .in(clearLinks === 'parents' ? 'child_id' : 'parent_id', picked.map(x => x.id));
+    setClearing(false);
+    if (error) return toast.error(errorMessage(error, t('pf.common.deleteError')));
+    toast.success(t('ac.clearLinks.done').replace('{n}', String(linkCount(clearLinks))));
+    setClearLinks(null);
+    setSelected(new Set());
+    await reload();
+  };
   // A ticked topic beneath another ticked one goes with it, so only the top ones are removed.
   const removeIds = picked.map(x => x.id).filter(id => !picked.some(o => o.id !== id && graph.subtree(o.id).has(id)));
 
@@ -244,6 +261,12 @@ export const AcTopics = () => {
             <Button size="sm" variant="outline" className="ml-auto" onClick={() => setAssignParent(true)}>
               <FolderTree size={14} className="mr-1" />{t('ac.assignParent.button')}
             </Button>
+            <Button size="sm" variant="outline" disabled={linkCount('parents') === 0} onClick={() => setClearLinks('parents')}>
+              <Unlink size={14} className="mr-1" />{t('ac.clearLinks.parentsBtn')}
+            </Button>
+            <Button size="sm" variant="outline" disabled={linkCount('children') === 0} onClick={() => setClearLinks('children')}>
+              <Unlink size={14} className="mr-1" />{t('ac.clearLinks.childrenBtn')}
+            </Button>
             <Button size="sm" variant="outline" onClick={() => setRemoveSelected(true)}>
               <Trash2 size={14} className="mr-1 text-danger" />{t('ac.topics.removeSelected')}
             </Button>
@@ -351,6 +374,20 @@ export const AcTopics = () => {
           onDone={async () => { setAssignParent(false); setSelected(new Set()); await reload(); }}
         />
       )}
+
+      <Modal isOpen={!!clearLinks} onClose={() => !clearing && setClearLinks(null)} title={clearLinks === 'children' ? t('ac.clearLinks.childrenTitle') : t('ac.clearLinks.parentsTitle')}>
+        <div className="space-y-4">
+          <p className="text-sm text-gray-700 dark:text-gray-300">
+            {(clearLinks === 'children' ? t('ac.clearLinks.childrenHint') : t('ac.clearLinks.parentsHint'))
+              .replace('{links}', String(clearLinks ? linkCount(clearLinks) : 0))
+              .replace('{n}', String(picked.length))}
+          </p>
+          <div className="flex justify-end gap-3 pt-2">
+            <Button variant="ghost" onClick={() => setClearLinks(null)} disabled={clearing}>{t('pf.common.cancel')}</Button>
+            <Button variant="danger" onClick={() => void doClearLinks()} disabled={clearing}>{clearing ? t('pf.common.saving') : t('ac.clearLinks.confirm')}</Button>
+          </div>
+        </div>
+      </Modal>
 
       {removeSelected && userId && removeIds.length > 0 && (
         <AcRemoveModal

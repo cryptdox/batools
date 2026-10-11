@@ -190,6 +190,13 @@ export const translations = {
         deleteRoundBeneath: 'Also delete {cycle} from the {n} topic(s) beneath',
         deleteHint: 'Deletes "{name}" with all its cycles and progress log. Topics beneath it stay (one with no other parent becomes a Subject).',
       },
+      clearLinks: {
+        parentsBtn: 'Clear parents', childrenBtn: 'Clear children', confirm: 'Unlink',
+        parentsTitle: 'Clear all parents?', childrenTitle: 'Clear all children?',
+        parentsHint: 'Removes {links} link(s): the {n} selected topic(s) leave every parent and become Subjects. No topic is deleted.',
+        childrenHint: 'Removes {links} link(s): everything directly under the {n} selected topic(s) is unlinked from them. A child with no other parent becomes a Subject. No topic is deleted.',
+        done: 'Removed {n} link(s)',
+      },
       assignParent: {
         button: 'Assign parent', title: 'Assign a parent to {n} topic(s)', pick: 'Pick parent topics…',
         add: 'Add to their parents', addHint: 'Keeps the parents they already have.',
@@ -1089,6 +1096,13 @@ export const translations = {
         deleteRoundLogs: 'এর অগ্রগতি লগও মুছে যাবে: {n}টি এন্ট্রি।',
         deleteRoundBeneath: 'নিচের {n}টি টপিক থেকেও {cycle} মুছুন',
         deleteHint: '"{name}" তার সব সাইকেল ও অগ্রগতি লগসহ মুছে যাবে। নিচের টপিকগুলো থাকবে (অন্য প্যারেন্ট না থাকলে বিষয় হয়ে যাবে)।',
+      },
+      clearLinks: {
+        parentsBtn: 'প্যারেন্ট মুছুন', childrenBtn: 'চাইল্ড মুছুন', confirm: 'আনলিংক',
+        parentsTitle: 'সব প্যারেন্ট মুছবেন?', childrenTitle: 'সব চাইল্ড মুছবেন?',
+        parentsHint: '{links}টি লিংক সরানো হবে: নির্বাচিত {n}টি টপিক সব প্যারেন্ট থেকে সরে বিষয় হবে। কোনো টপিক মোছা হবে না।',
+        childrenHint: '{links}টি লিংক সরানো হবে: নির্বাচিত {n}টি টপিকের সরাসরি নিচের সব টপিক আনলিংক হবে। অন্য প্যারেন্ট না থাকলে চাইল্ড বিষয় হবে। কোনো টপিক মোছা হবে না।',
+        done: '{n}টি লিংক সরানো হয়েছে',
       },
       assignParent: {
         button: 'প্যারেন্ট নির্ধারণ', title: '{n}টি টপিকের প্যারেন্ট নির্ধারণ', pick: 'প্যারেন্ট টপিক বাছুন…',
