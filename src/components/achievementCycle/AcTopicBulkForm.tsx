@@ -188,7 +188,8 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
 
   // Layers
   const [layers, setLayers] = useState<Layer[]>(() => [{ id: newKey(), items: [] }, { id: newKey(), items: [] }]);
-  const [parentLayer, setParentLayer] = useState<string | null>(null);
+  // Layers whose values the generated topics go under (any number: one parent per layer).
+  const [parentLayers, setParentLayers] = useState<Set<string>>(new Set());
   const [separator, setSeparator] = useState(' ');
 
   // "Base 1…n" already there: a range continues after the highest number.
@@ -241,13 +242,15 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
       combos = combos.flatMap(c => l.items.map(i => [...c, i]));
       if (combos.length > MAX_TOPICS) break;
     }
-    const pIndex = used.findIndex(l => l.id === parentLayer);
-    return combos.map(c => ({
-      name: c.map(i => i.name).join(separator || ' '),
-      parents: pIndex >= 0 ? [c[pIndex].topicId ?? c[pIndex]] : shared,
-    }));
+    const pIdx = used.map((l, k) => (parentLayers.has(l.id) ? k : -1)).filter(k => k >= 0);
+    return combos.map(c => {
+      // Its value in every parent layer (the same topic picked in two layers counts once).
+      const ps = pIdx.map(k => c[k].topicId ?? c[k]);
+      const unique = ps.filter((x, k) => ps.findIndex(y => (typeof y === 'string' ? y : y.name.trim().toLowerCase()) === (typeof x === 'string' ? x : x.name.trim().toLowerCase())) === k);
+      return { name: c.map(i => i.name).join(separator || ' '), parents: pIdx.length ? unique : shared };
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mode, base, seqKind, valuesText, count, start, nextNumber, layers, parentLayer, separator, parentIds]);
+  }, [mode, base, seqKind, valuesText, count, start, nextNumber, layers, parentLayers, separator, parentIds]);
 
   // Skip names already under the same parent (or already a subject, without a parent).
   const existsUnder = (p: string | LayerItem | undefined, name: string) => {
@@ -275,7 +278,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
   // Layer values to create as topics: ticked "topic", and every text value of the parent layer.
   // A name that is already a topic reuses it; the same name in two layers is created once.
   const layerValues = mode === 'layers'
-    ? layers.flatMap(l => l.items.filter(i => !i.topicId && (i.create || l.id === parentLayer)))
+    ? layers.flatMap(l => l.items.filter(i => !i.topicId && (i.create || parentLayers.has(l.id))))
     : [];
   const layerTopics = layerValues.filter((i, k) => {
     const lower = i.name.trim().toLowerCase();
@@ -289,7 +292,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
   const updateLayer = (id: string, items: LayerItem[]) => setLayers(ls => ls.map(l => (l.id === id ? { ...l, items } : l)));
   const removeLayer = (id: string) => {
     setLayers(ls => ls.filter(l => l.id !== id));
-    if (parentLayer === id) setParentLayer(null);
+    setParentLayers(s => { const n = new Set(s); n.delete(id); return n; });
   };
 
   const save = async () => {
@@ -375,7 +378,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
           <div>
             <span className={label}>{t('ac.topic.parents')}</span>
             <AcTopicMultiPicker topics={inDomain} value={parentIds} onChange={setParentIds} placeholder={t('ac.bulk.noParent')} />
-            <p className={hint}>{mode === 'layers' && parentLayer ? t('ac.bulk.sharedParentsHint') : t('ac.bulk.parentsHint')}</p>
+            <p className={hint}>{mode === 'layers' && parentLayers.size > 0 ? t('ac.bulk.sharedParentsHint') : t('ac.bulk.parentsHint')}</p>
           </div>
           <label className="block">
             <span className={label}>{t('ac.topic.points')}</span>
@@ -415,13 +418,13 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
         ) : (
           <div className="space-y-3">
             {layers.map((l, i) => (
-              <div key={l.id} className={`rounded-lg border p-3 space-y-2 ${parentLayer === l.id ? 'border-warning bg-warning/5' : 'border-gray-200 dark:border-gray-700'}`}>
+              <div key={l.id} className={`rounded-lg border p-3 space-y-2 ${parentLayers.has(l.id) ? 'border-warning bg-warning/5' : 'border-gray-200 dark:border-gray-700'}`}>
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{t('ac.bulk.layer').replace('{n}', String(i + 1))}</span>
                   <span className="flex items-center gap-1">
                     <label className="inline-flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300 cursor-pointer" title={t('ac.bulk.parentLayerHint')}>
-                      <input type="checkbox" checked={parentLayer === l.id} onChange={e => setParentLayer(e.target.checked ? l.id : null)} className="w-3.5 h-3.5 text-primary rounded border-gray-300" />
-                      <Crown size={13} className={parentLayer === l.id ? 'text-warning' : 'text-gray-400'} />{t('ac.bulk.parentLayer')}
+                      <input type="checkbox" checked={parentLayers.has(l.id)} onChange={e => setParentLayers(s => { const n = new Set(s); if (e.target.checked) n.add(l.id); else n.delete(l.id); return n; })} className="w-3.5 h-3.5 text-primary rounded border-gray-300" />
+                      <Crown size={13} className={parentLayers.has(l.id) ? 'text-warning' : 'text-gray-400'} />{t('ac.bulk.parentLayer')}
                     </label>
                     {layers.length > 1 && (
                       <button type="button" className="p-1.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" onClick={() => removeLayer(l.id)} title={t('pf.common.delete')}>
@@ -430,7 +433,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
                     )}
                   </span>
                 </div>
-                <LayerPicker graph={graph} domains={domains} domainId={domain} topics={layerTopicsPool} items={l.items} forceCreate={parentLayer === l.id} onChange={items => updateLayer(l.id, items)} />
+                <LayerPicker graph={graph} domains={domains} domainId={domain} topics={layerTopicsPool} items={l.items} forceCreate={parentLayers.has(l.id)} onChange={items => updateLayer(l.id, items)} />
               </div>
             ))}
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -457,10 +460,10 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
           {toCreate.length > 0 && (
             <div className="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto rounded-md border border-gray-100 dark:border-gray-700 p-2">
               {toCreate.slice(0, PREVIEW).map((p, i) => {
-                const parent = p.parents.length === 1 ? (typeof p.parents[0] === 'string' ? graph.byId.get(p.parents[0])?.name : p.parents[0].name) : null;
+                const parent = p.parents.map(x => (typeof x === 'string' ? graph.byId.get(x)?.name : x.name)).filter(Boolean).join(' + ');
                 return (
                   <span key={i} className="px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-700 text-xs text-gray-700 dark:text-gray-200">
-                    {parentLayer && parent && <span className="text-gray-400">{parent} › </span>}{p.name}
+                    {parentLayers.size > 0 && parent && <span className="text-gray-400">{parent} › </span>}{p.name}
                   </span>
                 );
               })}
