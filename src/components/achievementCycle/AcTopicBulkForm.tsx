@@ -256,18 +256,31 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
     if (typeof p !== 'string') return false;
     return graph.children(p).some(c => c.name.toLowerCase() === lower);
   };
+  // Combinations never repeat a name: one that is already a topic anywhere is skipped.
+  const existingByName = useMemo(() => new Map(topics.map(x => [x.name.trim().toLowerCase(), x.id])), [topics]);
   const seen = new Set<string>();
   const toCreate = planned.filter(p => {
-    const key = `${p.parents.map(x => (typeof x === 'string' ? x : x.key)).join('|')}::${p.name.toLowerCase()}`;
+    const lower = p.name.trim().toLowerCase();
+    if (mode === 'layers') {
+      if (seen.has(lower) || existingByName.has(lower)) return false;
+      seen.add(lower);
+      return true;
+    }
+    const key = `${p.parents.map(x => (typeof x === 'string' ? x : x.key)).join('|')}::${lower}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return !(p.parents.length ? p.parents.every(x => existsUnder(x, p.name)) : existsUnder(undefined, p.name));
   });
   const skipped = planned.length - toCreate.length;
   // Layer values to create as topics: ticked "topic", and every text value of the parent layer.
-  const layerTopics = mode === 'layers'
+  // A name that is already a topic reuses it; the same name in two layers is created once.
+  const layerValues = mode === 'layers'
     ? layers.flatMap(l => l.items.filter(i => !i.topicId && (i.create || l.id === parentLayer)))
     : [];
+  const layerTopics = layerValues.filter((i, k) => {
+    const lower = i.name.trim().toLowerCase();
+    return !existingByName.has(lower) && layerValues.findIndex(o => o.name.trim().toLowerCase() === lower) === k;
+  });
 
   const pointsNum = Number(points);
   const tooMany = toCreate.length > MAX_TOPICS;
@@ -316,11 +329,15 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
       const created = new Map<string, string>();
       if (layerTopics.length) {
         const ids = await insert(layerTopics.map(i => ({ name: i.name, parents: shared })));
-        layerTopics.forEach((i, k) => created.set(i.key, ids[k]));
+        layerTopics.forEach((i, k) => created.set(i.name.trim().toLowerCase(), ids[k]));
       }
+      const layerTopicId = (i: LayerItem) => {
+        const lower = i.name.trim().toLowerCase();
+        return created.get(lower) ?? existingByName.get(lower)!;
+      };
       await insert(toCreate.map(p => ({
         name: p.name,
-        parents: p.parents.map(x => (typeof x === 'string' ? x : created.get(x.key)!)),
+        parents: p.parents.map(x => (typeof x === 'string' ? x : layerTopicId(x))),
       })));
 
       toast.success(t('ac.bulk.created').replace('{n}', String(toCreate.length + layerTopics.length)));
