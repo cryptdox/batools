@@ -314,6 +314,9 @@ export const AcTopicDetail = ({ data, topicId, cycle, onClose, onOpenTopic, onEd
                       </span>
                     </button>
                     <div className="w-48"><AcProgress achieved={r?.achieved ?? 0} total={r?.total ?? 0} size="sm" /></div>
+                    <button className="p-1.5 rounded-md text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700" disabled={busy} onClick={() => void unlink(l.id)} title={t('ac.detail.unlink')}>
+                      <Unlink size={14} />
+                    </button>
                   </li>
                 );
               })}
