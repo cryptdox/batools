@@ -272,6 +272,27 @@ export function useSelectedCycle(refs: CycleRef[]) {
 }
 
 /** Calls a database function, toasting its error message; null on failure. */
+/**
+ * Name search with the best matches first: exact name, then starts with, then a word
+ * starts with, then contains anywhere; shorter names first within each. No search keeps the order.
+ */
+export function rankByName<T extends { name: string }>(items: T[], search: string): T[] {
+  const needle = search.trim().toLowerCase();
+  if (!needle) return items;
+  const score = (name: string) => {
+    const n = name.trim().toLowerCase();
+    if (n === needle) return 0;
+    if (n.startsWith(needle)) return 1;
+    if (n.split(/[\s\-_.,:;/()]+/).some(w => w.startsWith(needle))) return 2;
+    return n.includes(needle) ? 3 : -1;
+  };
+  return items
+    .map(x => ({ x, s: score(x.name) }))
+    .filter(r => r.s >= 0)
+    .sort((a, b) => a.s - b.s || a.x.name.length - b.x.name.length || a.x.name.localeCompare(b.x.name))
+    .map(r => r.x);
+}
+
 export async function acRpc<T>(fn: string, args: Record<string, unknown>, fallback: string): Promise<T | null> {
   const { data, error } = await supabase.rpc(fn, args);
   if (error) {

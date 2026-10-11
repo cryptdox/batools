@@ -4,7 +4,7 @@ import { Search, Star, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import type { AcDomain, AcGraph, AcTopic } from '../../lib/achievementCycle';
+import { rankByName, type AcDomain, type AcGraph, type AcTopic } from '../../lib/achievementCycle';
 import { Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { pfInputClass } from '../portfolio/PfFieldInput';
@@ -98,11 +98,7 @@ export const AcTopicForm = ({ userId, graph, topics, domains, topic, parentId, d
     subjectId: !topic && fromRoot && !blocked.has(fromRoot) ? fromRoot : ALL,
     exclude: blocked,
   });
-  const needle = search.trim().toLowerCase();
-  const candidates = topics
-    .filter(x => !blocked.has(x.id))
-    .filter(x => filter.matches(x.id))
-    .filter(x => !needle || x.name.toLowerCase().includes(needle));
+  const candidates = rankByName(topics.filter(x => !blocked.has(x.id) && filter.matches(x.id)), search);
   // A new filter starts from the first page.
   useEffect(() => { setParentPage(0); }, [filter.key]);
   const parentPageCount = Math.max(1, Math.ceil(candidates.length / PARENTS_PER_PAGE));

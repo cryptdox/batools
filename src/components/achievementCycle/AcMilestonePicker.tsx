@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Search, Star, X } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
-import type { AcTopic } from '../../lib/achievementCycle';
+import { rankByName, type AcTopic } from '../../lib/achievementCycle';
 import { pfInputClass } from '../portfolio/PfFieldInput';
 
 const MAX_SHOWN = 10;
@@ -24,8 +24,7 @@ export const AcMilestonePicker = ({ milestones, value, onChange }: { milestones:
     return () => document.removeEventListener('mousedown', close);
   }, [open]);
 
-  const needle = search.trim().toLowerCase();
-  const matches = milestones.filter(m => !needle || m.name.toLowerCase().includes(needle));
+  const matches = rankByName(milestones, search);
   const shown = matches.slice(0, MAX_SHOWN);
 
   const pick = (id: string) => { onChange(id); setOpen(false); setSearch(''); };

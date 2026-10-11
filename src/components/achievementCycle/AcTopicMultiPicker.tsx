@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Search, Star, X } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
-import type { AcTopic } from '../../lib/achievementCycle';
+import { rankByName, type AcTopic } from '../../lib/achievementCycle';
 import { pfInputClass } from '../portfolio/PfFieldInput';
 
 const MAX_SHOWN = 50;
@@ -25,8 +25,7 @@ export const AcTopicMultiPicker = ({ topics, value, onChange, placeholder }: {
     return () => document.removeEventListener('mousedown', close);
   }, [open]);
 
-  const needle = search.trim().toLowerCase();
-  const matches = topics.filter(x => !needle || x.name.toLowerCase().includes(needle));
+  const matches = rankByName(topics, search);
   const shown = matches.slice(0, MAX_SHOWN);
 
   const toggle = (id: string) => {

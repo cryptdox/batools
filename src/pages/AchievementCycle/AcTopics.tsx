@@ -4,7 +4,7 @@ import { Plus, Pencil, Trash2, Search, Star, Layers, ListPlus, FolderTree, Unlin
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { acRpc, useAcData, useSelectedCycle, type AcDomain } from '../../lib/achievementCycle';
+import { acRpc, rankByName, useAcData, useSelectedCycle, type AcDomain } from '../../lib/achievementCycle';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
 import { Pagination, usePagination } from '../../components/ui/Pagination';
@@ -116,7 +116,7 @@ export const AcTopics = () => {
 
   useEffect(() => { void fetchDomainPage(); }, [fetchDomainPage]);
 
-  const shown = topics.filter(x => filter.matches(x.id) && (!search.trim() || x.name.toLowerCase().includes(search.trim().toLowerCase())));
+  const shown = rankByName(topics.filter(x => filter.matches(x.id)), search);
   const pager = usePagination(shown, 25);
   const { setPage } = pager;
   // A new filter starts from the first page.

@@ -4,12 +4,13 @@ import { Plus, Trash2, X, Crown, ListOrdered, Combine } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import type { AcDomain, AcGraph, AcTopic } from '../../lib/achievementCycle';
+import { rankByName, type AcDomain, type AcGraph, type AcTopic } from '../../lib/achievementCycle';
 import { Button } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { pfInputClass } from '../portfolio/PfFieldInput';
 import { AcTopicMultiPicker } from './AcTopicMultiPicker';
 import { acSelectClass } from './AcUi';
+import { ALL, AcTopicFilterSelects, useTopicFilter } from './AcTopicFilters';
 
 type Props = {
   userId: string;
@@ -42,10 +43,16 @@ const splitValues = (s: string) => [...new Set(s.split(',').map(x => x.trim()).f
 const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 /** Values of one layer: tick existing topics, or add typed text (as text or as a new topic). */
-const LayerPicker = ({ topics, items, forceCreate, onChange }: {
+const LayerPicker = ({ graph, domains, domainId, topics, items, forceCreate, onChange }: {
+  graph: AcGraph; domains: AcDomain[]; domainId: string;
   topics: AcTopic[]; items: LayerItem[]; forceCreate: boolean; onChange: (items: LayerItem[]) => void;
 }) => {
   const { t } = useLanguage();
+  // This layer's own domain → subject → level filter, inside what the form already allows.
+  const filter = useTopicFilter(graph, domains, { domainId: domainId || ALL, allowAllDomains: true });
+  // The form's domain changing resets this layer's domain to match.
+  const { setDomain } = filter;
+  useEffect(() => { setDomain(domainId || ALL); }, [domainId, setDomain]);
   const [text, setText] = useState('');
   const [open, setOpen] = useState(false);
   const box = useRef<HTMLDivElement>(null);
@@ -59,13 +66,22 @@ const LayerPicker = ({ topics, items, forceCreate, onChange }: {
 
   const needle = text.trim().toLowerCase();
   const picked = new Set(items.map(i => i.topicId).filter(Boolean));
-  const matches = topics.filter(x => !needle || x.name.toLowerCase().includes(needle)).slice(0, 30);
+  const ranked = rankByName(topics.filter(x => filter.matches(x.id)), needle);
+  const matches = ranked.slice(0, 50);
   const values = splitValues(text);
   const has = (name: string) => items.some(i => i.name.toLowerCase() === name.toLowerCase());
 
   const toggleTopic = (x: AcTopic) => onChange(picked.has(x.id)
     ? items.filter(i => i.topicId !== x.id)
     : [...items, { key: newKey(), name: x.name, topicId: x.id, create: false }]);
+  // Every topic the filter and search currently match (not only the first 50 shown).
+  const allPicked = ranked.length > 0 && ranked.every(x => picked.has(x.id));
+  const selectAll = () => onChange([...items, ...ranked.filter(x => !picked.has(x.id))
+    .map(x => ({ key: newKey(), name: x.name, topicId: x.id, create: false }))]);
+  const unselectAll = () => {
+    const ids = new Set(ranked.map(x => x.id));
+    onChange(items.filter(i => !i.topicId || !ids.has(i.topicId)));
+  };
   const addText = (create: boolean) => {
     const add = values.filter(v => !has(v)).map(v => ({ key: newKey(), name: v, topicId: null, create }));
     if (add.length) onChange([...items, ...add]);
@@ -100,6 +116,9 @@ const LayerPicker = ({ topics, items, forceCreate, onChange }: {
           })}
         </div>
       )}
+      <div className="flex flex-wrap gap-2">
+        <AcTopicFilterSelects filter={filter} domains={domains} className="flex-1 min-w-28 text-xs" />
+      </div>
       <input
         value={text}
         onChange={e => { setText(e.target.value); setOpen(true); }}
@@ -117,6 +136,16 @@ const LayerPicker = ({ topics, items, forceCreate, onChange }: {
               <Button size="sm" onClick={() => addText(true)}>{t('ac.bulk.createTopic')}</Button>
             </div>
           )}
+          {ranked.length > 0 && (
+            <div className="flex items-center justify-between px-3 pt-1.5 text-xs">
+              {!allPicked
+                ? <button type="button" className="text-primary hover:underline" onClick={selectAll}>{t('ac.topics.selectAllShown').replace('{n}', String(ranked.length))}</button>
+                : <span />}
+              {ranked.some(x => picked.has(x.id)) && (
+                <button type="button" className="text-gray-500 hover:underline" onClick={unselectAll}>{t('ac.detail.clearSelection')}</button>
+              )}
+            </div>
+          )}
           <ul className="max-h-56 overflow-y-auto py-1 text-sm">
             {matches.map(x => (
               <li key={x.id}>
@@ -126,6 +155,10 @@ const LayerPicker = ({ topics, items, forceCreate, onChange }: {
                 </label>
               </li>
             ))}
+            {matches.length === 0 && <li className="px-3 py-2 text-gray-500">{t('pf.common.empty')}</li>}
+            {ranked.length > matches.length && (
+              <li className="px-3 py-1.5 text-xs text-gray-500">{t('ac.board.moreMilestones').replace('{n}', String(ranked.length - matches.length))}</li>
+            )}
           </ul>
         </div>
       )}
@@ -380,7 +413,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
                     )}
                   </span>
                 </div>
-                <LayerPicker topics={layerTopicsPool} items={l.items} forceCreate={parentLayer === l.id} onChange={items => updateLayer(l.id, items)} />
+                <LayerPicker graph={graph} domains={domains} domainId={domain} topics={layerTopicsPool} items={l.items} forceCreate={parentLayer === l.id} onChange={items => updateLayer(l.id, items)} />
               </div>
             ))}
             <div className="flex flex-wrap items-center justify-between gap-3">
