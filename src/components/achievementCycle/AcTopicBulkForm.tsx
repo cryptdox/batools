@@ -29,7 +29,9 @@ type Props = {
 type LayerItem = { key: string; name: string; topicId: string | null; create: boolean };
 type Layer = { id: string; items: LayerItem[] };
 /** A topic to create: its name and the parents it goes under (ids, or layer items still to be created). */
-type Planned = { name: string; parents: (string | LayerItem)[] };
+type Planned = { name: string; parents: (string | LayerItem)[]; key?: string };
+/** A combination whose name is already taken: by a topic, or by an earlier combination of this batch. */
+type Duplicate = Planned & { key: string; reason: 'exists' | 'repeat' };
 
 const MAX_TOPICS = 500;
 const PREVIEW = 40;
@@ -190,6 +192,8 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
   const [layers, setLayers] = useState<Layer[]>(() => [{ id: newKey(), items: [] }, { id: newKey(), items: [] }]);
   // Layers whose values the generated topics go under (any number: one parent per layer).
   const [parentLayers, setParentLayers] = useState<Set<string>>(new Set());
+  // Combinations taken out of the batch with their ✕ (by combination key).
+  const [removed, setRemoved] = useState<Set<string>>(new Set());
   const [separator, setSeparator] = useState(' ');
 
   // "Base 1…n" already there: a range continues after the highest number.
@@ -247,7 +251,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
       // Its value in every parent layer (the same topic picked in two layers counts once).
       const ps = pIdx.map(k => c[k].topicId ?? c[k]);
       const unique = ps.filter((x, k) => ps.findIndex(y => (typeof y === 'string' ? y : y.name.trim().toLowerCase()) === (typeof x === 'string' ? x : x.name.trim().toLowerCase())) === k);
-      return { name: c.map(i => i.name).join(separator || ' '), parents: pIdx.length ? unique : shared };
+      return { name: c.map(i => i.name).join(separator || ' '), parents: pIdx.length ? unique : shared, key: c.map(i => i.key).join('|') };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, base, seqKind, valuesText, count, start, nextNumber, layers, parentLayers, separator, parentIds]);
@@ -259,13 +263,19 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
     if (typeof p !== 'string') return false;
     return graph.children(p).some(c => c.name.toLowerCase() === lower);
   };
-  // Combinations never repeat a name: one that is already a topic anywhere is skipped.
+  // Combinations never repeat a name. One already taken (by a topic, or earlier in this
+  // batch) is listed as a duplicate, in red with a ✕: nothing is created until each is removed.
   const existingByName = useMemo(() => new Map(topics.map(x => [x.name.trim().toLowerCase(), x.id])), [topics]);
   const seen = new Set<string>();
+  const duplicates: Duplicate[] = [];
   const toCreate = planned.filter(p => {
     const lower = p.name.trim().toLowerCase();
     if (mode === 'layers') {
-      if (seen.has(lower) || existingByName.has(lower)) return false;
+      if (p.key && removed.has(p.key)) return false;
+      if (existingByName.has(lower) || seen.has(lower)) {
+        duplicates.push({ ...p, key: p.key ?? lower, reason: existingByName.has(lower) ? 'exists' : 'repeat' });
+        return false;
+      }
       seen.add(lower);
       return true;
     }
@@ -274,7 +284,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
     seen.add(key);
     return !(p.parents.length ? p.parents.every(x => existsUnder(x, p.name)) : existsUnder(undefined, p.name));
   });
-  const skipped = planned.length - toCreate.length;
+  const skipped = mode === 'layers' ? 0 : planned.length - toCreate.length;
   // Layer values to create as topics: ticked "topic", and every text value of the parent layer.
   // A name that is already a topic reuses it; the same name in two layers is created once.
   const layerValues = mode === 'layers'
@@ -287,7 +297,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
 
   const pointsNum = Number(points);
   const tooMany = toCreate.length > MAX_TOPICS;
-  const valid = toCreate.length > 0 && !tooMany && Number.isInteger(pointsNum) && pointsNum >= 0;
+  const valid = toCreate.length > 0 && duplicates.length === 0 && !tooMany && Number.isInteger(pointsNum) && pointsNum >= 0;
 
   const updateLayer = (id: string, items: LayerItem[]) => setLayers(ls => ls.map(l => (l.id === id ? { ...l, items } : l)));
   const removeLayer = (id: string) => {
@@ -377,7 +387,7 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
           </label>
           <div>
             <span className={label}>{t('ac.topic.parents')}</span>
-            <AcTopicMultiPicker topics={inDomain} value={parentIds} onChange={setParentIds} placeholder={t('ac.bulk.noParent')} />
+            <AcTopicMultiPicker topics={inDomain} value={parentIds} onChange={setParentIds} placeholder={t('ac.bulk.noParent')} levelOf={graph.levelOf} maxShown={20} />
             <p className={hint}>{mode === 'layers' && parentLayers.size > 0 ? t('ac.bulk.sharedParentsHint') : t('ac.bulk.parentsHint')}</p>
           </div>
           <label className="block">
@@ -420,7 +430,12 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
             {layers.map((l, i) => (
               <div key={l.id} className={`rounded-lg border p-3 space-y-2 ${parentLayers.has(l.id) ? 'border-warning bg-warning/5' : 'border-gray-200 dark:border-gray-700'}`}>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{t('ac.bulk.layer').replace('{n}', String(i + 1))}</span>
+                  <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                    {t('ac.bulk.layer').replace('{n}', String(i + 1))}
+                    <span className={`ml-2 px-1.5 py-0.5 rounded-full text-[11px] font-medium tabular-nums ${l.items.length ? 'bg-primary/10 text-primary' : 'bg-gray-100 dark:bg-gray-700 text-gray-500'}`}>
+                      {t('ac.bulk.layerCount').replace('{n}', String(l.items.length))}
+                    </span>
+                  </span>
                   <span className="flex items-center gap-1">
                     <label className="inline-flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300 cursor-pointer" title={t('ac.bulk.parentLayerHint')}>
                       <input type="checkbox" checked={parentLayers.has(l.id)} onChange={e => setParentLayers(s => { const n = new Set(s); if (e.target.checked) n.add(l.id); else n.delete(l.id); return n; })} className="w-3.5 h-3.5 text-primary rounded border-gray-300" />
@@ -457,6 +472,22 @@ export const AcTopicBulkForm = ({ userId, graph, topics, domains, parentId, doma
             {skipped > 0 && <span className="text-xs text-gray-500">{t('ac.bulk.skipped').replace('{n}', String(skipped))}</span>}
           </div>
           {tooMany && <p className="text-sm text-danger mb-1.5">{t('ac.bulk.tooMany').replace('{n}', String(MAX_TOPICS))}</p>}
+          {duplicates.length > 0 && (
+            <div className="mb-2 rounded-md border border-danger/30 bg-danger/5 p-2 space-y-1.5">
+              <p className="text-xs font-medium text-danger">{t('ac.bulk.duplicates').replace('{n}', String(duplicates.length))}</p>
+              <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
+                {duplicates.map(d => (
+                  <span key={d.key} title={t(d.reason === 'exists' ? 'ac.bulk.dupExists' : 'ac.bulk.dupRepeat')}
+                    className="inline-flex items-center gap-1 pl-2 pr-1 py-0.5 rounded-md bg-danger/10 border border-danger/30 text-xs text-danger line-through decoration-danger/50">
+                    {d.name}
+                    <button type="button" onClick={() => setRemoved(r => new Set([...r, d.key]))} className="p-0.5 rounded hover:bg-danger/20 no-underline" aria-label={`${t('ac.bulk.removeDup')}: ${d.name}`} title={t('ac.bulk.removeDup')}>
+                      <X size={12} />
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
           {toCreate.length > 0 && (
             <div className="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto rounded-md border border-gray-100 dark:border-gray-700 p-2">
               {toCreate.slice(0, PREVIEW).map((p, i) => {

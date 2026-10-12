@@ -169,7 +169,7 @@ export const translations = {
       domain: { create: 'New domain', edit: 'Edit domain', color: 'Colour', none: 'No domains yet.', showTopics: 'Show this domain\'s topics', deleteHint: 'Deletes the domain "{name}". Its topics stay, only untagged.', unassigned: 'Unassigned' },
       topics: {
         pageTitle: 'Topics & Domains', pageSubtitle: 'Domains, subjects, general topics and areas, with their story points.',
-        title: 'Topics', level: 'Level', selectAllShown: 'Select all {n} listed', removeSelected: 'Archive / delete', nTopics: '{n} topics', empty: 'No topics yet. Create a subject to start.', emptyDomain: 'No topics in this domain match.', noSubject: 'No subject in this domain',
+        title: 'Topics', level: 'Level', selectAllShown: 'Select all {n} listed', removeSelected: 'Archive / delete', makeMilestones: 'Make milestones', msAll: 'Milestones and others', msYes: 'Milestones only', msNo: 'Not milestones', unmakeMilestones: 'Not milestones', makeMilestonesTitle: 'Make {n} topic(s) milestones', makeMilestonesHint: 'Each selected topic becomes a milestone of its own, with the settings below.', scheduleKeepHint: 'Leave empty to keep each topic\'s own schedule.', awake_keep: 'Keep as is', awake_awake: 'Awake', awake_asleep: 'Hibernated', awakeHint: 'Awake / Hibernated also applies to their direct children (like the Milestones page switch).', madeMilestones: '{n} topic(s) made milestones', unmadeMilestones: '{n} topic(s) no longer milestones', setPoints: 'Set story points', setPointsHint: 'The same story points for all {n} selected topic(s). Cycles not yet complete follow the new value.', applyPoints: 'Apply to {n}', pointsSet: '{n} topic(s) set to {p} point(s)', nTopics: '{n} topics', empty: 'No topics yet. Create a subject to start.', emptyDomain: 'No topics in this domain match.', noSubject: 'No subject in this domain',
       },
       detail: {
         computed: 'From children', computedHint: 'A parent’s points are the average of its children’s completion × its own total, updated automatically.',
@@ -208,7 +208,7 @@ export const translations = {
         baseName: 'Topic name', baseNamePlaceholder: 'e.g. Chapter', range: 'Range', values: 'Comma separated',
         count: 'How many', startAt: 'Start at', valuesLabel: 'Values',
         rangeHint: 'Numbering continues after the highest existing "Name n" topic.',
-        layer: 'Layer {n}', addLayer: 'Add layer', separator: 'Join with', parentLayer: 'Parent',
+        layer: 'Layer {n}', layerCount: '{n} selected', addLayer: 'Add layer', separator: 'Join with', parentLayer: 'Parent',
         parentLayerHint: 'Put every generated topic under its value of this layer (values are created as topics if needed). Tick several layers to put it under its value of each.',
         layerPlaceholder: 'Search topics, or type values (a, b, c)…', useText: 'Use as text', createTopic: 'Create as topics',
         existing: 'Existing topic', willCreate: 'Will be created as a topic', textOnly: 'Only used in the names', topic: 'topic', text: 'text',
@@ -217,6 +217,7 @@ export const translations = {
         domain: 'Domain', domainHint: 'Narrows the parent and layer pickers; tags topics created without a parent.',
         parentsHint: 'Layer pickers then only offer topics beneath these parents.',
         preview: '{n} topic(s) to create', plusLayerTopics: '+ {n} layer topic(s)', skipped: '{n} already exist, skipped',
+        duplicates: '{n} duplicate name(s): remove them (✕) to create the rest', dupExists: 'A topic with this name already exists', dupRepeat: 'Another combination in this batch has the same name', removeDup: 'Remove from this batch',
         tooMany: 'At most {n} topics at once.', submit: 'Create {n}', created: 'Created {n} topic(s)',
       },
       progress: {
@@ -1076,7 +1077,7 @@ export const translations = {
       domain: { create: 'নতুন ডোমেইন', edit: 'ডোমেইন সম্পাদনা', color: 'রং', none: 'এখনো কোনো ডোমেইন নেই।', showTopics: 'এই ডোমেইনের টপিক দেখুন', deleteHint: '"{name}" ডোমেইন মুছে যাবে। টপিকগুলো থাকবে, শুধু ট্যাগ সরবে।', unassigned: 'কোনো ডোমেইন নেই' },
       topics: {
         pageTitle: 'টপিক ও ডোমেইন', pageSubtitle: 'ডোমেইন, বিষয়, সাধারণ টপিক ও এরিয়া, তাদের স্টোরি পয়েন্টসহ।',
-        title: 'টপিক', level: 'স্তর', selectAllShown: 'তালিকার সব {n}টি নির্বাচন', removeSelected: 'আর্কাইভ / মুছুন', nTopics: '{n}টি টপিক', empty: 'এখনো কোনো টপিক নেই। শুরু করতে একটি বিষয় তৈরি করুন।', emptyDomain: 'এই ডোমেইনে মেলে এমন কোনো টপিক নেই।', noSubject: 'এই ডোমেইনে কোনো বিষয় নেই',
+        title: 'টপিক', level: 'স্তর', selectAllShown: 'তালিকার সব {n}টি নির্বাচন', removeSelected: 'আর্কাইভ / মুছুন', makeMilestones: 'মাইলস্টোন করুন', msAll: 'মাইলস্টোন ও অন্যান্য', msYes: 'শুধু মাইলস্টোন', msNo: 'মাইলস্টোন নয়', unmakeMilestones: 'মাইলস্টোন বাদ', makeMilestonesTitle: '{n}টি টপিককে মাইলস্টোন করুন', makeMilestonesHint: 'নির্বাচিত প্রতিটি টপিক নিচের সেটিং নিয়ে আলাদা মাইলস্টোন হবে।', scheduleKeepHint: 'ফাঁকা রাখলে প্রতিটি টপিকের নিজের সময়সূচি থাকবে।', awake_keep: 'যেমন আছে', awake_awake: 'জাগ্রত', awake_asleep: 'হাইবারনেটেড', awakeHint: 'জাগ্রত / হাইবারনেটেড এদের সরাসরি চাইল্ডেও প্রযোজ্য (মাইলস্টোন পেজের সুইচের মতো)।', madeMilestones: '{n}টি টপিক মাইলস্টোন হয়েছে', unmadeMilestones: '{n}টি টপিক আর মাইলস্টোন নয়', setPoints: 'স্টোরি পয়েন্ট দিন', setPointsHint: 'নির্বাচিত {n}টি টপিকের সবগুলোর একই স্টোরি পয়েন্ট। অসম্পূর্ণ সাইকেলগুলো নতুন মান নেবে।', applyPoints: '{n}টিতে প্রয়োগ', pointsSet: '{n}টি টপিক {p} পয়েন্টে সেট', nTopics: '{n}টি টপিক', empty: 'এখনো কোনো টপিক নেই। শুরু করতে একটি বিষয় তৈরি করুন।', emptyDomain: 'এই ডোমেইনে মেলে এমন কোনো টপিক নেই।', noSubject: 'এই ডোমেইনে কোনো বিষয় নেই',
       },
       detail: {
         computed: 'চাইল্ড থেকে', computedHint: 'প্যারেন্টের পয়েন্ট = চাইল্ডদের সম্পন্নতার গড় × নিজের মোট, স্বয়ংক্রিয়ভাবে হালনাগাদ হয়।',
@@ -1115,7 +1116,7 @@ export const translations = {
         baseName: 'টপিকের নাম', baseNamePlaceholder: 'যেমন অধ্যায়', range: 'রেঞ্জ', values: 'কমা দিয়ে আলাদা',
         count: 'কয়টি', startAt: 'শুরু', valuesLabel: 'মানগুলো',
         rangeHint: 'বিদ্যমান সর্বোচ্চ "নাম n" টপিকের পর থেকে নম্বর চলবে।',
-        layer: 'স্তর {n}', addLayer: 'স্তর যোগ', separator: 'যুক্ত করুন', parentLayer: 'প্যারেন্ট',
+        layer: 'স্তর {n}', layerCount: '{n}টি বাছাই', addLayer: 'স্তর যোগ', separator: 'যুক্ত করুন', parentLayer: 'প্যারেন্ট',
         parentLayerHint: 'তৈরি হওয়া প্রতিটি টপিক এই স্তরের সংশ্লিষ্ট মানের নিচে যাবে (প্রয়োজনে মানগুলো টপিক হিসেবে তৈরি হবে)। একাধিক স্তরে টিক দিলে প্রতিটির সংশ্লিষ্ট মানের নিচে যাবে।',
         layerPlaceholder: 'টপিক খুঁজুন, বা মান লিখুন (a, b, c)…', useText: 'শুধু লেখা হিসেবে', createTopic: 'টপিক হিসেবে তৈরি',
         existing: 'বিদ্যমান টপিক', willCreate: 'টপিক হিসেবে তৈরি হবে', textOnly: 'শুধু নামে ব্যবহৃত', topic: 'টপিক', text: 'লেখা',
@@ -1124,6 +1125,7 @@ export const translations = {
         domain: 'ডোমেইন', domainHint: 'প্যারেন্ট ও স্তরের তালিকা এই ডোমেইনে সীমিত হয়; প্যারেন্ট ছাড়া তৈরি টপিকে ট্যাগ হবে।',
         parentsHint: 'স্তরের তালিকায় তখন শুধু এই প্যারেন্টগুলোর নিচের টপিক আসবে।',
         preview: '{n}টি টপিক তৈরি হবে', plusLayerTopics: '+ {n}টি স্তর-টপিক', skipped: '{n}টি আগে থেকেই আছে, বাদ',
+        duplicates: '{n}টি নাম ডুপ্লিকেট: বাকিগুলো তৈরি করতে এগুলো (✕) সরান', dupExists: 'এই নামে টপিক আগে থেকেই আছে', dupRepeat: 'এই ব্যাচের আরেকটি কম্বিনেশনের একই নাম', removeDup: 'এই ব্যাচ থেকে সরান',
         tooMany: 'একবারে সর্বোচ্চ {n}টি টপিক।', submit: '{n}টি তৈরি', created: '{n}টি টপিক তৈরি হয়েছে',
       },
       progress: {

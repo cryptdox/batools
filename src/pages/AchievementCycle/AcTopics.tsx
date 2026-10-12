@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Plus, Pencil, Trash2, Search, Star, Layers, ListPlus, FolderTree, Unlink, ChevronLeft, ChevronRight, ArchiveRestore } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Star, Layers, ListPlus, FolderTree, Unlink, ChevronLeft, ChevronRight, ArchiveRestore, Hash } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
@@ -12,6 +12,7 @@ import { pfInputClass } from '../../components/portfolio/PfFieldInput';
 import { AcArchivedBadge, AcArchiveToggle, AcCyclePicker, AcLevelBadge, AcProgress, acCard, acSelectClass } from '../../components/achievementCycle/AcUi';
 import { AcRemoveModal } from '../../components/achievementCycle/AcRemoveModal';
 import { AcAssignParentModal } from '../../components/achievementCycle/AcAssignParentModal';
+import { AcScheduleEditor } from '../../components/achievementCycle/AcSchedule';
 import { AcDomainTypes, AcTypeBadge } from '../../components/achievementCycle/AcDomainTypes';
 import { useAcDialogs } from '../../components/achievementCycle/useAcDialogs';
 import { AcTopicFilterSelects, UNASSIGNED, useTopicFilter } from '../../components/achievementCycle/AcTopicFilters';
@@ -32,6 +33,8 @@ export const AcTopics = () => {
   const { openTopic, newTopic, bulkTopics, dialogs } = useAcDialogs(data, cycle);
 
   const [search, setSearch] = useState('');
+  // Milestones only / no milestones / everything.
+  const [msFilter, setMsFilter] = useState<'' | 'yes' | 'no'>('');
   // Domain (always one) → subject → level (both "all" by default).
   const filter = useTopicFilter(graph, domains);
   const { activeDomain, activeSubject, setDomain: setDomainFilter } = filter;
@@ -62,6 +65,11 @@ export const AcTopics = () => {
   // Ticked topics in the list, for removing several at once.
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [removeSelected, setRemoveSelected] = useState(false);
+  // Bulk: story points for every ticked topic (null = closed), and a running bulk action.
+  const [bulkPoints, setBulkPoints] = useState<string | null>(null);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  // "Make milestones" form: a schedule for all of them, and whether they (and their direct children) wake up.
+  const [msForm, setMsForm] = useState<{ weekdays: number[]; dates: string[]; awake: 'keep' | 'awake' | 'asleep' } | null>(null);
   const [assignParent, setAssignParent] = useState(false);
   // Unlinking the ticked topics from all their parents, or all their children from them.
   const [clearLinks, setClearLinks] = useState<'parents' | 'children' | null>(null);
@@ -116,11 +124,11 @@ export const AcTopics = () => {
 
   useEffect(() => { void fetchDomainPage(); }, [fetchDomainPage]);
 
-  const shown = rankByName(topics.filter(x => filter.matches(x.id)), search);
+  const shown = rankByName(topics.filter(x => filter.matches(x.id) && (!msFilter || x.is_milestone === (msFilter === 'yes'))), search);
   const pager = usePagination(shown, 25);
   const { setPage } = pager;
   // A new filter starts from the first page.
-  useEffect(() => { setPage(1); }, [filter.key, search, setPage]);
+  useEffect(() => { setPage(1); }, [filter.key, search, msFilter, setPage]);
 
   // Only topics still listed stay ticked (after a reload or archive toggle).
   const picked = topics.filter(x => selected.has(x.id));
@@ -150,6 +158,58 @@ export const AcTopics = () => {
     setSelected(new Set());
     await reload();
   };
+  // Every ticked topic becomes a milestone of its own (or, when all already are, stops being one).
+  const allMilestones = picked.length > 0 && picked.every(x => x.is_milestone);
+  const doMilestones = async () => {
+    if (!userId) return;
+    const make = !allMilestones;
+    const form = msForm;
+    // Making: every ticked topic (also ones that already were, to take the schedule); unmaking: the milestones.
+    const ids = make ? picked.map(x => x.id) : picked.filter(x => x.is_milestone).map(x => x.id);
+    setBulkBusy(true);
+    try {
+      // Like the topic form: a topic that stops being a milestone drops its schedule.
+      // An empty schedule in the form leaves each topic's own schedule as it is.
+      const scheduled = !!form && (form.weekdays.length > 0 || form.dates.length > 0);
+      const patch = make
+        ? { is_milestone: true, ...(scheduled ? { schedule_weekdays: form!.weekdays, schedule_dates: form!.dates } : {}) }
+        : { is_milestone: false, schedule_weekdays: [], schedule_dates: [] };
+      const { error } = await supabase.from('ac_topics').update({ ...patch, updated_at: new Date().toISOString() }).eq('user_id', userId).in('id', ids);
+      if (error) throw error;
+      // Awake / hibernated like the Milestones page switch: the milestone and its direct children.
+      if (make && form && form.awake !== 'keep') {
+        const all = [...new Set(ids.flatMap(id => [id, ...graph.children(id).map(c => c.id)]))];
+        const { error: e2 } = await supabase.from('ac_topics').update({ is_hibernated: form.awake === 'asleep', updated_at: new Date().toISOString() }).eq('user_id', userId).in('id', all);
+        if (e2) throw e2;
+      }
+      toast.success(t(make ? 'ac.topics.madeMilestones' : 'ac.topics.unmadeMilestones').replace('{n}', String(ids.length)));
+      setMsForm(null);
+      setSelected(new Set());
+      await reload();
+    } catch (e) {
+      toast.error(errorMessage(e, t('pf.common.saveError')));
+    } finally {
+      setBulkBusy(false);
+    }
+  };
+  // Story points go through the database per topic, so each topic's open cycles follow.
+  const bulkPointsNum = bulkPoints === null ? NaN : Number(bulkPoints);
+  const doPoints = async () => {
+    if (!userId || !Number.isInteger(bulkPointsNum) || bulkPointsNum < 0) return;
+    setBulkBusy(true);
+    let failed = 0;
+    for (const x of picked) {
+      if (x.default_points === bulkPointsNum) continue;
+      const res = await acRpc('ac_set_topic_points', { p_user_id: userId, p_topic_id: x.id, p_points: bulkPointsNum }, t('pf.common.saveError'));
+      if (res === null) failed++;
+    }
+    setBulkBusy(false);
+    if (failed < picked.length) toast.success(t('ac.topics.pointsSet').replace('{n}', String(picked.length - failed)).replace('{p}', String(bulkPointsNum)));
+    setBulkPoints(null);
+    setSelected(new Set());
+    await reload();
+  };
+
   // A ticked topic beneath another ticked one goes with it, so only the top ones are removed.
   const removeIds = picked.map(x => x.id).filter(id => !picked.some(o => o.id !== id && graph.subtree(o.id).has(id)));
 
@@ -248,6 +308,11 @@ export const AcTopics = () => {
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder={t('pf.common.search')} className={`${pfInputClass} h-9 pl-8 w-48`} />
           </div>
           <AcTopicFilterSelects filter={filter} domains={domains} />
+          <select value={msFilter} onChange={e => setMsFilter(e.target.value as typeof msFilter)} className={`${acSelectClass} h-9`} aria-label={t('ac.topic.milestone')}>
+            <option value="">{t('ac.topics.msAll')}</option>
+            <option value="yes">{t('ac.topics.msYes')}</option>
+            <option value="no">{t('ac.topics.msNo')}</option>
+          </select>
         </div>
         {picked.length > 0 && (
           <div className="flex flex-wrap items-center gap-3 px-4 py-2 bg-primary/5 border-b border-gray-100 dark:border-gray-700 text-sm">
@@ -258,7 +323,14 @@ export const AcTopics = () => {
               </button>
             )}
             <button className="text-gray-500 hover:underline" onClick={() => setSelected(new Set())}>{t('ac.detail.clearSelection')}</button>
-            <Button size="sm" variant="outline" className="ml-auto" onClick={() => setAssignParent(true)}>
+            <Button size="sm" variant="outline" className="ml-auto" disabled={bulkBusy}
+              onClick={() => (allMilestones ? void doMilestones() : setMsForm({ weekdays: [], dates: [], awake: 'keep' }))}>
+              <Star size={14} className={`mr-1 ${allMilestones ? '' : 'text-warning'}`} />{allMilestones ? t('ac.topics.unmakeMilestones') : t('ac.topics.makeMilestones')}
+            </Button>
+            <Button size="sm" variant="outline" disabled={bulkBusy} onClick={() => setBulkPoints(String(picked[0]?.default_points ?? 1))}>
+              <Hash size={14} className="mr-1" />{t('ac.topics.setPoints')}
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => setAssignParent(true)}>
               <FolderTree size={14} className="mr-1" />{t('ac.assignParent.button')}
             </Button>
             <Button size="sm" variant="outline" disabled={linkCount('parents') === 0} onClick={() => setClearLinks('parents')}>
@@ -360,6 +432,50 @@ export const AcTopics = () => {
           <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
             <Button variant="ghost" onClick={() => setDomainForm(null)} disabled={dSaving}>{t('pf.common.cancel')}</Button>
             <Button onClick={saveDomain} disabled={dSaving || !dName.trim()}>{dSaving ? t('pf.common.saving') : t('pf.common.save')}</Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal isOpen={!!msForm} onClose={() => !bulkBusy && setMsForm(null)} title={t('ac.topics.makeMilestonesTitle').replace('{n}', String(picked.length))} className="max-w-xl">
+        {msForm && (
+          <div className="space-y-4">
+            <p className="text-sm text-gray-600 dark:text-gray-300">{t('ac.topics.makeMilestonesHint')}</p>
+            <div>
+              <AcScheduleEditor weekdays={msForm.weekdays} dates={msForm.dates} onChange={(weekdays, dates) => setMsForm(f => f && { ...f, weekdays, dates })} />
+              <p className="mt-1 text-xs text-gray-500">{t('ac.topics.scheduleKeepHint')}</p>
+            </div>
+            <div>
+              <span className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t('ac.hibernate.awake')}</span>
+              <div className="flex flex-wrap gap-2">
+                {(['keep', 'awake', 'asleep'] as const).map(v => (
+                  <label key={v} className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm cursor-pointer ${msForm.awake === v ? 'border-primary bg-primary/10 text-primary' : 'border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300'}`}>
+                    <input type="radio" name="ms-awake" className="sr-only" checked={msForm.awake === v} onChange={() => setMsForm(f => f && { ...f, awake: v })} />
+                    {t(`ac.topics.awake_${v}`)}
+                  </label>
+                ))}
+              </div>
+              <p className="mt-1 text-xs text-gray-500">{t('ac.topics.awakeHint')}</p>
+            </div>
+            <div className="flex justify-end gap-3 pt-2">
+              <Button variant="ghost" onClick={() => setMsForm(null)} disabled={bulkBusy}>{t('pf.common.cancel')}</Button>
+              <Button onClick={() => void doMilestones()} disabled={bulkBusy}>
+                <Star size={14} className="mr-1" />{bulkBusy ? t('pf.common.saving') : t('ac.topics.makeMilestones')}
+              </Button>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      <Modal isOpen={bulkPoints !== null} onClose={() => !bulkBusy && setBulkPoints(null)} title={t('ac.topics.setPoints')}>
+        <div className="space-y-4">
+          <p className="text-sm text-gray-600 dark:text-gray-300">{t('ac.topics.setPointsHint').replace('{n}', String(picked.length))}</p>
+          <input type="number" min={0} step={1} autoFocus value={bulkPoints ?? ''} onChange={e => setBulkPoints(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') void doPoints(); }} className={`${pfInputClass} h-10 w-32`} aria-label={t('ac.topic.points')} />
+          <div className="flex justify-end gap-3">
+            <Button variant="ghost" onClick={() => setBulkPoints(null)} disabled={bulkBusy}>{t('pf.common.cancel')}</Button>
+            <Button onClick={() => void doPoints()} disabled={bulkBusy || !Number.isInteger(bulkPointsNum) || bulkPointsNum < 0}>
+              {bulkBusy ? t('pf.common.saving') : t('ac.topics.applyPoints').replace('{n}', String(picked.length))}
+            </Button>
           </div>
         </div>
       </Modal>

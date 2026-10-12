@@ -3,17 +3,24 @@ import { ChevronDown, Search, Star, X } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { rankByName, type AcTopic } from '../../lib/achievementCycle';
 import { pfInputClass } from '../portfolio/PfFieldInput';
+import { LEVELS, type Level } from './AcTopicFilters';
 
 const MAX_SHOWN = 50;
 const PANEL_PX = 320;
 
-/** Searchable checkbox dropdown for picking several topics at once. */
-export const AcTopicMultiPicker = ({ topics, value, onChange, placeholder }: {
+/**
+ * Searchable checkbox dropdown for picking several topics at once. With
+ * `levelOf` it also filters by level (subject / general / area / mixed);
+ * `maxShown` caps the listed matches (best name matches first).
+ */
+export const AcTopicMultiPicker = ({ topics, value, onChange, placeholder, levelOf, maxShown = MAX_SHOWN }: {
   topics: AcTopic[]; value: Set<string>; onChange: (ids: Set<string>) => void; placeholder: string;
+  levelOf?: (id: string) => Level; maxShown?: number;
 }) => {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
+  const [level, setLevel] = useState<Level | ''>('');
   const box = useRef<HTMLDivElement>(null);
   // Opens to the right unless that would run past the window; then it hangs from the right edge.
   const [alignRight, setAlignRight] = useState(false);
@@ -25,8 +32,8 @@ export const AcTopicMultiPicker = ({ topics, value, onChange, placeholder }: {
     return () => document.removeEventListener('mousedown', close);
   }, [open]);
 
-  const matches = rankByName(topics, search);
-  const shown = matches.slice(0, MAX_SHOWN);
+  const matches = rankByName(level && levelOf ? topics.filter(x => levelOf(x.id) === level) : topics, search);
+  const shown = matches.slice(0, maxShown);
 
   const toggle = (id: string) => {
     const next = new Set(value);
@@ -60,15 +67,23 @@ export const AcTopicMultiPicker = ({ topics, value, onChange, placeholder }: {
           className={`absolute z-30 mt-1 max-w-[calc(100vw-2rem)] rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg ${alignRight ? 'right-0' : 'left-0'}`}
           style={{ width: PANEL_PX }}
         >
-          <div className="relative p-2 border-b border-gray-100 dark:border-gray-700">
-            <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input
-              autoFocus
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              placeholder={t('pf.common.search')}
-              className={`${pfInputClass} h-8 pl-7`}
-            />
+          <div className="flex gap-2 p-2 border-b border-gray-100 dark:border-gray-700">
+            <div className="relative flex-1 min-w-0">
+              <Search size={14} className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400" />
+              <input
+                autoFocus
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder={t('pf.common.search')}
+                className={`${pfInputClass} h-8 pl-7`}
+              />
+            </div>
+            {levelOf && (
+              <select value={level} onChange={e => setLevel(e.target.value as Level | '')} className={`${pfInputClass.replace('w-full ', '')} h-8 py-0 text-xs w-28`} aria-label={t('ac.topics.level')}>
+                <option value="">{t('ac.allLevels')}</option>
+                {LEVELS.map(l => <option key={l} value={l}>{t(`ac.level.${l}`)}</option>)}
+              </select>
+            )}
           </div>
           {shown.length > 0 && (
             <div className="flex items-center justify-between px-3 pt-1.5 text-xs">
@@ -87,8 +102,8 @@ export const AcTopicMultiPicker = ({ topics, value, onChange, placeholder }: {
               </li>
             ))}
             {matches.length === 0 && <li className="px-3 py-2 text-gray-500">{t('pf.common.empty')}</li>}
-            {matches.length > MAX_SHOWN && (
-              <li className="px-3 py-1.5 text-xs text-gray-500">{t('ac.board.moreMilestones').replace('{n}', String(matches.length - MAX_SHOWN))}</li>
+            {matches.length > maxShown && (
+              <li className="px-3 py-1.5 text-xs text-gray-500">{t('ac.board.moreMilestones').replace('{n}', String(matches.length - maxShown))}</li>
             )}
           </ul>
         </div>
