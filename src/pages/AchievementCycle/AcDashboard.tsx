@@ -9,6 +9,7 @@ import {
 import { Button } from '../../components/ui/Button';
 import { acSelectClass, AcCyclePicker, AcLevelBadge, AcProgress, AcRichView, AcStat, AcStatusBreakdown, acCard, AcArchiveToggle } from '../../components/achievementCycle/AcUi';
 import { useAcDialogs } from '../../components/achievementCycle/useAcDialogs';
+import { AcPointsChart } from '../../components/achievementCycle/AcPointsChart';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 /** Completion, counts and activity for any slice of the learning plan. */
@@ -134,6 +135,8 @@ export const AcDashboard = () => {
             <h3 className="font-semibold text-gray-900 dark:text-gray-100">{t('ac.dashboard.statuses')} · {cycleLabel(cycle, t)}</h3>
             <AcStatusBreakdown counts={counts} />
           </div>
+
+          {userId && <AcPointsChart userId={userId} scope={scope} cycles={cycles} graph={graph} cycle={cycle} />}
 
           <div className="grid gap-4 lg:grid-cols-2">
             <div className={`${acCard} p-5 space-y-3`}>

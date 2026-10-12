@@ -249,6 +249,16 @@ export const translations = {
         tree: 'Tree', graph: 'Graph', heatmap: 'Heatmap', expandAll: 'Expand all', collapseAll: 'Collapse all',
         graphHint: 'Hover a topic to highlight its links; click to open it.',
       },
+      points: {
+        title: 'Points gained', range: 'Range', from: 'From', to: 'To', by: 'Group by', allCycles: 'All cycles',
+        preset: { '7d': 'Last 7 days', '30d': 'Last 30 days', '90d': 'Last 90 days', '12w': 'Last 12 weeks', '12m': 'Last 12 months', '5y': 'Last 5 years', custom: 'Custom range' },
+        grainBy: { day: 'Daily', week: 'Weekly', month: 'Monthly', year: 'Yearly' },
+        grain: { day: 'day', week: 'week', month: 'month', year: 'year' },
+        kind: { bar: 'Bar', line: 'Line', area: 'Area', pie: 'Pie', table: 'Table' },
+        total: 'Points in range', average: 'Average per {grain}', best: 'Best {grain}', active: '{grain}s with progress',
+        pts: 'points', period: 'Period', other: 'Other', byTopic: 'Points by topic', noGain: 'No points gained in this range.',
+        tooMany: 'Too many periods (over {n}): pick a longer grouping or a shorter range.',
+      },
       dashboard: {
         pageTitle: 'Achievement Dashboard', pageSubtitle: 'Completion of any domain, subject or topic, cycle by cycle.',
         everything: 'Everything', complete: 'complete', points: 'Story points', cyclesDone: 'Cycles complete', cycles: 'Cycles',
@@ -1156,6 +1166,16 @@ export const translations = {
         pageTitle: 'এক্সপ্লোর', pageSubtitle: 'আপনার টপিকগুলো ট্রি, গ্রাফ ও সাইকেল হিটম্যাপে।',
         tree: 'ট্রি', graph: 'গ্রাফ', heatmap: 'হিটম্যাপ', expandAll: 'সব খুলুন', collapseAll: 'সব বন্ধ করুন',
         graphHint: 'লিংক দেখতে টপিকের উপর রাখুন; খুলতে ক্লিক করুন।',
+      },
+      points: {
+        title: 'অর্জিত পয়েন্ট', range: 'সময়সীমা', from: 'থেকে', to: 'পর্যন্ত', by: 'অনুযায়ী', allCycles: 'সব সাইকেল',
+        preset: { '7d': 'গত ৭ দিন', '30d': 'গত ৩০ দিন', '90d': 'গত ৯০ দিন', '12w': 'গত ১২ সপ্তাহ', '12m': 'গত ১২ মাস', '5y': 'গত ৫ বছর', custom: 'নিজের মতো সময়' },
+        grainBy: { day: 'দৈনিক', week: 'সাপ্তাহিক', month: 'মাসিক', year: 'বার্ষিক' },
+        grain: { day: 'দিন', week: 'সপ্তাহ', month: 'মাস', year: 'বছর' },
+        kind: { bar: 'বার', line: 'লাইন', area: 'এরিয়া', pie: 'পাই', table: 'টেবিল' },
+        total: 'এই সময়ে পয়েন্ট', average: 'প্রতি {grain}ে গড়', best: 'সেরা {grain}', active: 'অগ্রগতিসহ {grain}',
+        pts: 'পয়েন্ট', period: 'সময়', other: 'অন্যান্য', byTopic: 'টপিক অনুযায়ী পয়েন্ট', noGain: 'এই সময়ে কোনো পয়েন্ট অর্জিত হয়নি।',
+        tooMany: 'অনেক বেশি সময়-ভাগ ({n}-এর বেশি): বড় ভাগ বা ছোট সময়সীমা বেছে নিন।',
       },
       dashboard: {
         pageTitle: 'অ্যাচিভমেন্ট ড্যাশবোর্ড', pageSubtitle: 'যেকোনো ডোমেইন, বিষয় বা টপিকের সম্পন্নতা, সাইকেল অনুযায়ী।',
