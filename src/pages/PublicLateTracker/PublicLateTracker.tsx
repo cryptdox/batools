@@ -10,6 +10,7 @@ import { SummaryBar, formatTaka } from '../../components/ui/SummaryBar';
 import { SpendListModal, sumSpends, type SpendRow } from '../../components/spend/SpendTable';
 import { usePeriodNav } from '../../hooks/usePeriodNav';
 import { getDhakaDateString, getDhakaTimeOfDay } from '../../lib/dhakaTime';
+import { LateNotice } from './LateNotice';
 
 type PublicMember = { id: string; name: string; created_at: string
   is_active: boolean;
@@ -405,6 +406,7 @@ export const PublicLateTracker = ({ embedded = false }: PublicLateTrackerProps) 
           {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
         </button>
       </header>
+      <LateNotice />
       <main className="max-w-7xl mx-auto p-4 sm:p-6 space-y-6">{body}</main>
     </div>
   );
