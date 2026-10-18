@@ -1,28 +1,41 @@
 import { useEffect, useState } from 'react';
-import { format, parse } from 'date-fns';
+import { format, parse, subMinutes } from 'date-fns';
 import { Clock, X } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { formatTaka } from '../../components/ui/SummaryBar';
 import { getDhakaDateString } from '../../lib/dhakaTime';
 
-// The notice is shown for this long, then hidden for the same long, repeating.
-const CYCLE_MS = 20_000;
+// The notice is shown once per page load for this long, then fades out.
+const SHOW_MS = 30_000;
+// Closing the notice hides it for the rest of the browser session.
+const DISMISSED_KEY = 'lateNoticeDismissed';
+
+const wasDismissed = () => {
+  try {
+    return sessionStorage.getItem(DISMISSED_KEY) === '1';
+  } catch {
+    return false;
+  }
+};
 
 type CurrentSetting = { late_threshold: string; punishment_amount: number; effective_from: string };
 
-// "10:00:00" -> "10:00 AM"
-const formatThreshold = (t: string) => format(parse(t, 'HH:mm:ss', new Date()), 'h:mm a');
+// Last on-time minute, since arriving at the threshold itself counts as late:
+// "10:00:00" -> "9:59 AM"
+const formatLastOnTime = (t: string) =>
+  format(subMinutes(parse(t, 'HH:mm:ss', new Date()), 1), 'h:mm a');
 
 /**
  * Banner reminding everyone of the current late time and late fee. It fades in
- * and out on a fixed cycle; closing it hides it until the page is reloaded.
+ * on load and out after a while; closing it hides it for the whole session.
  */
 export const LateNotice = () => {
   const [setting, setSetting] = useState<CurrentSetting | null>(null);
-  const [visible, setVisible] = useState(true);
-  const [dismissed, setDismissed] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [dismissed, setDismissed] = useState(wasDismissed);
 
   useEffect(() => {
+    if (dismissed) return;
     const load = async () => {
       // Settings are versioned; the current one is the latest already in effect.
       const { data, error } = await supabase
@@ -40,13 +53,29 @@ export const LateNotice = () => {
       });
     };
     void load();
+    // Only the first mount matters: once dismissed there is nothing to load.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (!setting || dismissed) return;
-    const id = setInterval(() => setVisible(v => !v), CYCLE_MS);
-    return () => clearInterval(id);
-  }, [setting, dismissed]);
+    if (!setting) return;
+    // Mount hidden, then show on the next tick so the fade-in transition runs.
+    const showId = setTimeout(() => setVisible(true), 50);
+    const hideId = setTimeout(() => setVisible(false), SHOW_MS);
+    return () => {
+      clearTimeout(showId);
+      clearTimeout(hideId);
+    };
+  }, [setting]);
+
+  const dismiss = () => {
+    setDismissed(true);
+    try {
+      sessionStorage.setItem(DISMISSED_KEY, '1');
+    } catch {
+      // Storage unavailable: it still stays hidden until the page reloads.
+    }
+  };
 
   if (!setting || dismissed) return null;
 
@@ -61,15 +90,16 @@ export const LateNotice = () => {
       <div className="flex items-center gap-3 rounded-xl border border-warning/40 bg-white dark:bg-gray-800 shadow-lg px-4 py-3">
         <Clock size={20} className="text-[#d49a15] dark:text-warning shrink-0" />
         <p className="flex-1 text-sm text-gray-700 dark:text-gray-200">
-          Late time is <span className="font-bold text-gray-900 dark:text-gray-100">{formatThreshold(setting.late_threshold)}</span>.
-          Arriving at or after it costs a late fee of{' '}
+          Please arrive by{' '}
+          <span className="font-bold text-gray-900 dark:text-gray-100">{formatLastOnTime(setting.late_threshold)}</span>.
+          Arriving after this time adds a late fee of{' '}
           <span className="font-bold text-danger">{formatTaka(setting.punishment_amount)}</span>.
           <span className="block text-xs text-gray-500 dark:text-gray-400 mt-0.5">
             In effect since {format(parse(getDhakaDateString(new Date(setting.effective_from)), 'yyyy-MM-dd', new Date()), 'MMMM d, yyyy')}
           </span>
         </p>
         <button
-          onClick={() => setDismissed(true)}
+          onClick={dismiss}
           className="p-1 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-200 dark:hover:bg-gray-700 transition-colors"
           aria-label="Dismiss notice"
           tabIndex={visible ? 0 : -1}
