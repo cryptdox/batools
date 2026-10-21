@@ -8,6 +8,7 @@ import {
   Globe, Layers, Package2, MessageSquareQuote, UsersRound, Newspaper, BriefcaseBusiness, HelpCircle, FileUser,
   GraduationCap, KanbanSquare, Network, Flag, Gauge,
   Music, Library, Disc3, AudioLines, Palette, Mic2, Globe2, Clapperboard,
+  ScrollText, Files,
   type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
@@ -115,6 +116,14 @@ const NAV_TREE: NavGroup[] = [
     ],
   },
   {
+    key: 'cv-maker',
+    label: 'CV Maker',
+    icon: ScrollText,
+    children: [
+      { to: '/cv', label: 'My CVs', icon: Files },
+    ],
+  },
+  {
     key: 'task-manager',
     label: 'Task Manager',
     icon: ListTodo,
@@ -156,7 +165,8 @@ const SidebarChildLink = ({ to, icon: Icon, label, onClick, collapsed }: NavChil
 };
 
 const findActiveGroup = (pathname: string) =>
-  NAV_TREE.find(group => group.to === pathname || group.children.some(child => child.to === pathname));
+  NAV_TREE.find(group => group.to === pathname || group.children.some(child => child.to === pathname))
+  ?? (pathname.startsWith('/cv/') ? NAV_TREE.find(group => group.key === 'cv-maker') : undefined);
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');

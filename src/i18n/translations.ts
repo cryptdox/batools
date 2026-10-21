@@ -741,6 +741,39 @@ export const translations = {
         loadError: 'Unable to load dashboard.',
       },
     },
+    cv: {
+      list: {
+        pageTitle: 'My CVs', pageSubtitle: 'Build CVs with a live preview and download them as PDF.',
+        create: 'New CV', fromPortfolio: 'From portfolio', untitled: 'Untitled CV', portfolioTitle: 'CV from portfolio',
+        copy: 'copy', duplicate: 'Duplicate', edited: 'edited', createError: 'Could not create the CV',
+        emptyTitle: 'No CVs yet', emptyHint: 'Start a blank CV, or fill one from your portfolio in one click.',
+        deleteTitle: 'Delete this CV?', deleteHint: 'it will be removed permanently.',
+      },
+      templates: { classic: 'Classic', modern: 'Modern', minimal: 'Minimal' },
+      editor: {
+        back: 'Back to my CVs', cvTitle: 'CV name', template: 'Template', accent: 'Accent colour', customColor: 'Custom colour',
+        download: 'Download PDF', saved: 'Saved', saving: 'Saving…', saveError: 'Not saved — retry',
+        notFound: 'This CV was not found.', addItem: 'Add', hideSection: 'Hide from CV', showSection: 'Show on CV',
+        printHint: 'In the print dialog choose "Save as PDF". Turn off headers and footers for a clean page.',
+      },
+      sections: {
+        personal: 'Personal details', summary: 'Profile summary', experience: 'Experience', education: 'Education',
+        projects: 'Projects', skills: 'Skills', certifications: 'Certifications', languages: 'Languages',
+      },
+      fields: {
+        name: 'Full name', headline: 'Headline', email: 'Email', phone: 'Phone', location: 'Location', website: 'Website',
+        linkedin: 'LinkedIn', github: 'GitHub', photoUrl: 'Photo URL',
+        role: 'Job title', company: 'Company', current: 'I work here now', start: 'Start', end: 'End', details: 'Highlights',
+        degree: 'Degree', school: 'Institution', projectName: 'Project name', link: 'Link', tech: 'Technologies',
+        skillGroup: 'Group', skillItems: 'Skills', certName: 'Certificate', issuer: 'Issuer', date: 'Date',
+        language: 'Language', level: 'Level',
+      },
+      hints: {
+        bullets: 'One bullet point per line.', commas: 'Separate with commas.',
+        photo: 'Optional. A public image link; leave empty for no photo.',
+        summary: 'Two or three sentences about who you are and what you are looking for.',
+      },
+    },
     app: {
       title: 'CryptDox Task Manager'
     },
@@ -1658,6 +1691,39 @@ export const translations = {
         noStock: 'স্টকে কিছু নেই।',
         noPartners: 'কোনো পার্টনার নেই।',
         loadError: 'ড্যাশবোর্ড লোড করা যায়নি।',
+      },
+    },
+    cv: {
+      list: {
+        pageTitle: 'আমার সিভি', pageSubtitle: 'লাইভ প্রিভিউ দেখে সিভি তৈরি করুন এবং PDF হিসেবে ডাউনলোড করুন।',
+        create: 'নতুন সিভি', fromPortfolio: 'পোর্টফোলিও থেকে', untitled: 'নামহীন সিভি', portfolioTitle: 'পোর্টফোলিও থেকে সিভি',
+        copy: 'কপি', duplicate: 'ডুপ্লিকেট', edited: 'সম্পাদিত', createError: 'সিভি তৈরি করা যায়নি',
+        emptyTitle: 'এখনও কোনো সিভি নেই', emptyHint: 'একটি ফাঁকা সিভি শুরু করুন, অথবা এক ক্লিকে পোর্টফোলিও থেকে পূরণ করুন।',
+        deleteTitle: 'এই সিভি মুছবেন?', deleteHint: 'এটি স্থায়ীভাবে মুছে যাবে।',
+      },
+      templates: { classic: 'ক্লাসিক', modern: 'মডার্ন', minimal: 'মিনিমাল' },
+      editor: {
+        back: 'আমার সিভিতে ফিরুন', cvTitle: 'সিভির নাম', template: 'টেমপ্লেট', accent: 'রং', customColor: 'নিজের রং',
+        download: 'PDF ডাউনলোড', saved: 'সংরক্ষিত', saving: 'সংরক্ষণ হচ্ছে…', saveError: 'সংরক্ষণ হয়নি — আবার চেষ্টা করুন',
+        notFound: 'এই সিভি পাওয়া যায়নি।', addItem: 'যোগ করুন', hideSection: 'সিভি থেকে লুকান', showSection: 'সিভিতে দেখান',
+        printHint: 'প্রিন্ট ডায়ালগে "Save as PDF" বেছে নিন। পরিষ্কার পাতার জন্য হেডার ও ফুটার বন্ধ করুন।',
+      },
+      sections: {
+        personal: 'ব্যক্তিগত তথ্য', summary: 'প্রোফাইল সারসংক্ষেপ', experience: 'অভিজ্ঞতা', education: 'শিক্ষা',
+        projects: 'প্রজেক্ট', skills: 'দক্ষতা', certifications: 'সার্টিফিকেশন', languages: 'ভাষা',
+      },
+      fields: {
+        name: 'পূর্ণ নাম', headline: 'শিরোনাম', email: 'ইমেইল', phone: 'ফোন', location: 'ঠিকানা', website: 'ওয়েবসাইট',
+        linkedin: 'LinkedIn', github: 'GitHub', photoUrl: 'ছবির লিংক',
+        role: 'পদবি', company: 'প্রতিষ্ঠান', current: 'এখন এখানে কাজ করছি', start: 'শুরু', end: 'শেষ', details: 'মূল কাজ',
+        degree: 'ডিগ্রি', school: 'শিক্ষাপ্রতিষ্ঠান', projectName: 'প্রজেক্টের নাম', link: 'লিংক', tech: 'প্রযুক্তি',
+        skillGroup: 'গ্রুপ', skillItems: 'দক্ষতা', certName: 'সার্টিফিকেট', issuer: 'প্রদানকারী', date: 'তারিখ',
+        language: 'ভাষা', level: 'দক্ষতার মাত্রা',
+      },
+      hints: {
+        bullets: 'প্রতি লাইনে একটি পয়েন্ট।', commas: 'কমা দিয়ে আলাদা করুন।',
+        photo: 'ঐচ্ছিক। ছবির একটি পাবলিক লিংক; ছবি না চাইলে ফাঁকা রাখুন।',
+        summary: 'আপনি কে এবং কী খুঁজছেন, দুই-তিন বাক্যে লিখুন।',
       },
     },
     app: {

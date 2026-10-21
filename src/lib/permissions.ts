@@ -66,10 +66,11 @@ export const PAGE_RESOURCES: Record<string, string> = {
   '/mp/sources': 'MUSIC_SOURCES',
   '/mp/genres': 'MUSIC_GENRES',
   '/mp/places': 'MUSIC_PLACES',
+  '/cv': 'CV_MAKER',
 };
 
 /** Pages under a path (e.g. one album) use that path's resource. */
-const PREFIX_RESOURCES: [string, string][] = [['/mp/collections/', 'MUSIC_COLLECTIONS']];
+const PREFIX_RESOURCES: [string, string][] = [['/mp/collections/', 'MUSIC_COLLECTIONS'], ['/cv/', 'CV_MAKER']];
 
 /** The IAM resource guarding a path, or null for paths that are not pages (redirects, callback). */
 export const resourceOf = (path: string): string | null =>

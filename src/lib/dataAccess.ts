@@ -21,6 +21,7 @@ const MODULES: Record<string, string> = {
   pf: 'PORTFOLIO',
   org: 'ORG_SITE',
   mp: 'MUSIC',
+  cv: 'CV_MAKER',
 };
 
 /** Pages (IAM resources) that may change each table. Unlisted tables of a module fall back to any of its pages. */
@@ -119,6 +120,8 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   mp_genres: ['MUSIC_GENRES'],
   mp_countries: ['MUSIC_PLACES'],
   mp_languages: ['MUSIC_PLACES'],
+  // CV Maker
+  cv_resumes: ['CV_MAKER'],
 };
 
 /** Database functions: read-only ones, and writes with the action and pages they need. */
