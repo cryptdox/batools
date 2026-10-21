@@ -192,8 +192,10 @@ function Modern({ data, accent }: Props) {
   const side = keys.filter(k => SIDE.includes(k));
   const main = keys.filter(k => !SIDE.includes(k));
   return (
-    <Sheet className="flex">
-      <aside className="shrink-0 text-white px-7 space-y-6" style={{ width: CV_SIDE_WIDTH, background: accent }}>
+    // The side column's colour is painted by each page (CvPages), so it runs the
+    // full page height with no seam; the sheet itself stays transparent.
+    <Sheet className="flex" style={{ background: 'transparent' }}>
+      <aside className="shrink-0 text-white px-7 space-y-6" style={{ width: CV_SIDE_WIDTH }}>
         {p.photoUrl && <div data-cv-block="" className="flex justify-center"><Photo url={p.photoUrl} size={120} ring="rgba(255,255,255,0.6)" /></div>}
         <div data-cv-block="" className="space-y-1.5 text-[11.5px] break-words">
           <h2 className="text-[12px] font-bold uppercase tracking-[0.14em] mb-2 opacity-90">Contact</h2>
