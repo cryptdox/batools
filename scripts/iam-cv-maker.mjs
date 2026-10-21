@@ -140,7 +140,7 @@ async function main() {
     console.log(`  ✔ granted ${missing.length}`);
   }
 
-  console.log(DRY ? "\nDry run only — re-run without --dry-run to apply." : "\n✔ Done. Users see CV Maker after their next login / token refresh.");
+  console.log(DRY ? "\nDry run only — re-run without --dry-run to apply." : "\n✔ Done. Users see CV Maker after a page reload (or sign out and in on older batools builds).");
 }
 
 main().catch((err) => die(err.message));

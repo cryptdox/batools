@@ -13,6 +13,7 @@ import {
   iamRefresh,
   loadSession,
   ensureSessionAccess,
+  loadSessionAccess,
   REFRESH_LEAD_MS,
   SESSION_EVENT,
   type IamSession,
@@ -146,7 +147,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    if (!loading && session && !session.permissions) loadAccess();
+    if (loading || !session) return;
+    if (!session.permissions) loadAccess();
+    // Stored permissions date from sign-in: refetch them in the background on
+    // every app load, so roles / resources changed in IAM show after a reload.
+    else void loadSessionAccess().then(next => { if (next) setSession(next); });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, session?.user.userId]);
 
