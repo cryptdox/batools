@@ -6,13 +6,15 @@
  *   2. grant the role matrix below. Additive only — never removes a permission.
  * Safe to re-run.
  *
- *   node scripts/iam-cv-maker.mjs --dry-run   # show what would change
- *   node scripts/iam-cv-maker.mjs             # do it
+ *   node --env-file=.env scripts/iam-cv-maker.mjs --dry-run   # show what would change
+ *   node --env-file=.env scripts/iam-cv-maker.mjs             # do it
+ *
+ * Run from the app folder: values come from its .env (Node 20.6+ --env-file).
  *
  * Env (all optional):
  *   IAM_URL           default https://crypt-iam-latest.onrender.com
  *   IAM_CLIENT_ID     default batools
- *   IAM_ACCESS_CODE   default XfweB1 (batools @ CRYPTDOX)
+ *   IAM_ACCESS_CODE   default VITE_IAM_CR_ACCESS_CODE from .env (batools @ CRYPTDOX)
  *   IAM_EMAIL         default cryptdox.ethos@gmail.com (CRYPTDOX owner — can manage resources and roles)
  *   IAM_PASSWORD      prompted for (hidden) when unset
  *   IAM_TOKEN         skip login and use this access token
@@ -22,7 +24,7 @@ import readline from "node:readline";
 
 const IAM_URL = (process.env.IAM_URL ?? "https://crypt-iam-latest.onrender.com").replace(/\/+$/, "");
 const CLIENT_ID = process.env.IAM_CLIENT_ID ?? "batools";
-const ACCESS_CODE = process.env.IAM_ACCESS_CODE || "XfweB1";
+const ACCESS_CODE = process.env.IAM_ACCESS_CODE || process.env.VITE_IAM_CR_ACCESS_CODE;
 const EMAIL = process.env.IAM_EMAIL || "cryptdox.ethos@gmail.com";
 const DRY = process.argv.includes("--dry-run");
 
@@ -100,6 +102,7 @@ async function loadPermissions(cid) {
 }
 
 async function main() {
+  if (!ACCESS_CODE) die("No access code: run with --env-file=.env (VITE_IAM_CR_ACCESS_CODE) or set IAM_ACCESS_CODE");
   console.log(`IAM ${IAM_URL} · client ${CLIENT_ID} · ${RESOURCE} (${TYPE})${DRY ? " · DRY RUN" : ""}`);
   await login();
 
