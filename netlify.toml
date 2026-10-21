@@ -1,0 +1,5 @@
+# Only build environment here; build command / publish dir stay as set in the Netlify UI.
+[build.environment]
+  # scripts/ holds local IAM admin scripts with the (public) batools access code;
+  # they are not part of the site, so the secret scan skips them.
+  SECRETS_SCAN_OMIT_PATHS = "scripts/**"

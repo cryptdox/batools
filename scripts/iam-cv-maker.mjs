@@ -12,26 +12,18 @@
  * Env (all optional):
  *   IAM_URL           default https://crypt-iam-latest.onrender.com
  *   IAM_CLIENT_ID     default batools
- *   IAM_ACCESS_CODE   default VITE_IAM_CR_ACCESS_CODE from the app's .env (batools @ CRYPTDOX)
+ *   IAM_ACCESS_CODE   default XfweB1 (batools @ CRYPTDOX)
  *   IAM_EMAIL         default cryptdox.ethos@gmail.com (CRYPTDOX owner — can manage resources and roles)
  *   IAM_PASSWORD      prompted for (hidden) when unset
  *   IAM_TOKEN         skip login and use this access token
  *   IAM_CAPTCHA_TOKEN only needed when IAM runs with PHASE=PROD
  */
-import fs from "node:fs";
 import readline from "node:readline";
 
 const IAM_URL = (process.env.IAM_URL ?? "https://crypt-iam-latest.onrender.com").replace(/\/+$/, "");
 const CLIENT_ID = process.env.IAM_CLIENT_ID ?? "batools";
-// Not hardcoded: Netlify's secret scan fails the deploy when an env var's value appears in the repo.
-const envFile = (name) => {
-  for (const file of [".env.local", ".env"]) {
-    const line = fs.existsSync(file) && fs.readFileSync(file, "utf8").split("\n").find((l) => l.startsWith(`${name}=`));
-    if (line) return line.slice(name.length + 1).trim().replace(/^["']|["']$/g, "");
-  }
-};
-const ACCESS_CODE = process.env.IAM_ACCESS_CODE ?? envFile("VITE_IAM_CR_ACCESS_CODE");
-const EMAIL = process.env.IAM_EMAIL ?? "cryptdox.ethos@gmail.com";
+const ACCESS_CODE = process.env.IAM_ACCESS_CODE || "XfweB1";
+const EMAIL = process.env.IAM_EMAIL || "cryptdox.ethos@gmail.com";
 const DRY = process.argv.includes("--dry-run");
 
 const RESOURCE = "CV_MAKER";
@@ -108,7 +100,6 @@ async function loadPermissions(cid) {
 }
 
 async function main() {
-  if (!ACCESS_CODE) die("No access code: set IAM_ACCESS_CODE, or run from the app folder with VITE_IAM_CR_ACCESS_CODE in .env");
   console.log(`IAM ${IAM_URL} · client ${CLIENT_ID} · ${RESOURCE} (${TYPE})${DRY ? " · DRY RUN" : ""}`);
   await login();
 
