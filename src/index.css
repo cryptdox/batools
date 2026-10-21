@@ -143,16 +143,15 @@ body {
   .mp-motion { animation: none !important; }
 }
 
-/* CV Maker: printing shows only the CV (portalled into <body> as .cv-print-root). */
+/* CV Maker: printing shows only the CV pages (portalled into <body> as
+   .cv-print-root), one A4 sheet each; @page margin 0 is set by the editor. */
 .cv-print-root { display: none; }
 @media print {
   body > *:not(.cv-print-root) { display: none !important; }
-  html, body { background: #fff !important; }
+  html, body { background: #fff !important; margin: 0 !important; }
   .cv-print-root { display: block; }
   .cv-print-root * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .cv-print-root .cv-sheet { width: auto !important; min-height: 0 !important; }
-  /* Page margins (@page) give the vertical room on paper. */
-  .cv-print-root .cv-pad { padding-top: 0 !important; padding-bottom: 0 !important; }
-  /* The modern template prints edge to edge; keep its side column a full page tall. */
-  .cv-print-root .cv-sheet.flex { min-height: 296mm !important; }
+  /* 297mm is a hair under 1123px: never let a page spill onto an extra sheet. */
+  .cv-print-root .cv-page { height: 297mm !important; break-after: page; }
+  .cv-print-root .cv-page:last-child { break-after: auto; }
 }

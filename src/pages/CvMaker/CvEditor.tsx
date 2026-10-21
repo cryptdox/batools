@@ -8,7 +8,8 @@ import { errorMessage } from '../../lib/portfolio';
 import { CV_ACCENTS, CV_TEMPLATES, loadCv, saveCv, type CvData, type CvListKey, type CvPersonal, type CvResume, type CvSectionKey } from '../../lib/cvMaker';
 import { Button } from '../../components/ui/Button';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
-import { CvPreview, CV_PAGE_WIDTH } from '../../components/cvMaker/CvPreview';
+import { CV_PAGE_WIDTH } from '../../components/cvMaker/CvPreview';
+import { CvPages } from '../../components/cvMaker/CvPages';
 import { CvFieldInput, CvListEditor, CvSectionCard, type CvField } from '../../components/cvMaker/CvForm';
 
 const PERSONAL_FIELDS: (CvField & { key: keyof CvPersonal })[] = [
@@ -125,9 +126,11 @@ export const CvEditor = () => {
     updateData({ hidden: data.hidden.includes(k) ? data.hidden.filter(x => x !== k) : [...data.hidden, k] });
 
   return (
-    <div className="max-w-[1600px] mx-auto space-y-4">
+    // On wide screens the editor fills the window and the form and the preview
+    // scroll on their own (64px top bar + 2×25px page padding); narrower, it stacks.
+    <div className="max-w-[1600px] mx-auto flex flex-col gap-4 xl:h-[calc(100vh-114px)]">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-3 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="shrink-0 flex flex-wrap items-center gap-3 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
         <Link to="/cv" className="p-2 rounded-lg text-gray-500 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-700" title={t('cv.editor.back')}><ArrowLeft size={18} /></Link>
         <input
           value={cv.title}
@@ -170,9 +173,9 @@ export const CvEditor = () => {
         <Button onClick={print}><Download size={16} className="mr-1.5" />{t('cv.editor.download')}</Button>
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-start">
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:flex-1 xl:min-h-0">
         {/* Form */}
-        <div className="space-y-4 min-w-0">
+        <div className="space-y-4 min-w-0 xl:overflow-y-auto xl:pr-2 overscroll-contain">
           <CvSectionCard title={t('cv.sections.personal')}>
             <div className="grid gap-3 sm:grid-cols-2">
               {PERSONAL_FIELDS.map(f => (
@@ -202,19 +205,20 @@ export const CvEditor = () => {
         </div>
 
         {/* Live preview */}
-        <div className="xl:sticky xl:top-0 min-w-0">
+        <div className="min-w-0 rounded-xl bg-gray-200/70 dark:bg-gray-900 p-4 sm:p-6 xl:overflow-y-auto overscroll-contain">
           <ScaledPreview>
-            <CvPreview data={data} template={cv.template} accent={cv.accent} />
+            <CvPages data={data} template={cv.template} accent={cv.accent} className="[&>.cv-page]:shadow-xl" />
           </ScaledPreview>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">{t('cv.editor.printHint')}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">{t('cv.editor.printHint')}</p>
         </div>
       </div>
 
       {/* What window.print() puts on paper: everything else on the page is hidden by the print CSS. */}
       {createPortal(
         <div className="cv-print-root">
-          <style>{`@page { size: A4; margin: ${cv.template === 'modern' ? '0' : '14mm 0'}; }`}</style>
-          <CvPreview data={data} template={cv.template} accent={cv.accent} />
+          {/* No page margin: the pages carry their own, and browsers have nowhere to print their URL / date header and footer. */}
+          <style>{'@page { size: A4; margin: 0; }'}</style>
+          <CvPages data={data} template={cv.template} accent={cv.accent} gap={0} />
         </div>,
         document.body,
       )}
@@ -222,7 +226,7 @@ export const CvEditor = () => {
   );
 };
 
-/** Fits the A4 page to the column width. */
+/** Fits the A4 pages to the column width. */
 function ScaledPreview({ children }: { children: React.ReactNode }) {
   const box = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -237,7 +241,7 @@ function ScaledPreview({ children }: { children: React.ReactNode }) {
   }, []);
   return (
     <div ref={box} className="w-full">
-      <div className="mx-auto shadow-2xl rounded-sm overflow-hidden bg-white" style={{ width: CV_PAGE_WIDTH * scale }}>
+      <div className="mx-auto" style={{ width: CV_PAGE_WIDTH * scale }}>
         <div style={{ zoom: scale }}>{children}</div>
       </div>
     </div>

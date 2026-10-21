@@ -1,9 +1,11 @@
 import type { CSSProperties, ReactNode } from 'react';
 import type { CvData, CvSectionKey, CvTemplate } from '../../lib/cvMaker';
 
-// The printed CV. Always black on white paper (no dark: styles), A4 wide
-// (794px at 96dpi). Section titles stay English: they are part of the
-// document, not of the app's UI language.
+// The CV as one continuous sheet. Always black on white paper (no dark:
+// styles), A4 wide (794px at 96dpi). Section titles stay English: they are
+// part of the document, not of the app's UI language. CvPages cuts this sheet
+// into A4 pages: `data-cv-block` marks what must not be split across pages,
+// `data-cv-keep` (headings) stays on the same page as the block after it.
 
 export const CV_PAGE_WIDTH = 794;
 export const CV_PAGE_HEIGHT = 1123;
@@ -26,8 +28,6 @@ type Props = { data: CvData; template: CvTemplate; accent: string };
 const bullets = (text: string) => text.split('\n').map(l => l.replace(/^\s*[-•*]\s*/, '').trim()).filter(Boolean);
 const range = (start: string, end: string, current = false) => [start, current ? 'Present' : end].filter(Boolean).join(' – ');
 const stripUrl = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
-
-const avoidBreak: CSSProperties = { breakInside: 'avoid' };
 
 const Bullets = ({ text, className = '' }: { text: string; className?: string }) => {
   const items = bullets(text);
@@ -56,12 +56,12 @@ function contacts(data: CvData): string[] {
 function SectionBody({ data, k, accent, compact = false }: { data: CvData; k: CvSectionKey; accent: string; compact?: boolean }) {
   switch (k) {
     case 'summary':
-      return <p className="whitespace-pre-line leading-relaxed">{data.summary}</p>;
+      return <p data-cv-block="" className="whitespace-pre-line leading-relaxed">{data.summary}</p>;
     case 'experience':
       return (
         <div className="space-y-3">
           {data.experience.map(e => (
-            <div key={e.id} style={avoidBreak}>
+            <div key={e.id} data-cv-block="">
               <div className="flex justify-between gap-3 items-baseline">
                 <div className="font-semibold text-[#111827]">{e.role}{e.company && <span className="font-normal" style={{ color: accent }}>{e.role ? ' · ' : ''}{e.company}</span>}</div>
                 <div className="text-[11px] text-[#6b7280] whitespace-nowrap">{range(e.start, e.end, e.current)}</div>
@@ -76,7 +76,7 @@ function SectionBody({ data, k, accent, compact = false }: { data: CvData; k: Cv
       return (
         <div className="space-y-2.5">
           {data.education.map(e => (
-            <div key={e.id} style={avoidBreak}>
+            <div key={e.id} data-cv-block="">
               <div className="flex justify-between gap-3 items-baseline">
                 <div className="font-semibold text-[#111827]">{e.degree}</div>
                 <div className="text-[11px] text-[#6b7280] whitespace-nowrap">{range(e.start, e.end)}</div>
@@ -91,7 +91,7 @@ function SectionBody({ data, k, accent, compact = false }: { data: CvData; k: Cv
       return (
         <div className="space-y-2.5">
           {data.projects.map(p => (
-            <div key={p.id} style={avoidBreak}>
+            <div key={p.id} data-cv-block="">
               <div className="flex justify-between gap-3 items-baseline">
                 <div className="font-semibold text-[#111827]">{p.name}</div>
                 {p.link && <div className="text-[11px] whitespace-nowrap" style={{ color: accent }}>{stripUrl(p.link)}</div>}
@@ -108,14 +108,14 @@ function SectionBody({ data, k, accent, compact = false }: { data: CvData; k: Cv
           {data.skills.map(g => {
             const items = g.items.split(',').map(x => x.trim()).filter(Boolean);
             return compact ? (
-              <div key={g.id} style={avoidBreak}>
+              <div key={g.id} data-cv-block="">
                 {g.name && <div className="font-semibold mb-1">{g.name}</div>}
                 <div className="flex flex-wrap gap-1">
                   {items.map(it => <span key={it} className="px-1.5 py-0.5 rounded text-[10.5px] bg-white/15">{it}</span>)}
                 </div>
               </div>
             ) : (
-              <div key={g.id} style={avoidBreak}>
+              <div key={g.id} data-cv-block="">
                 {g.name && <span className="font-semibold text-[#111827]">{g.name}: </span>}
                 <span>{items.join(', ')}</span>
               </div>
@@ -127,7 +127,7 @@ function SectionBody({ data, k, accent, compact = false }: { data: CvData; k: Cv
       return (
         <div className="space-y-1.5">
           {data.certifications.map(c => (
-            <div key={c.id} style={avoidBreak}>
+            <div key={c.id} data-cv-block="">
               <div className="font-semibold">{c.name}</div>
               <div className={compact ? 'text-[11px] opacity-80' : 'text-[11px] text-[#6b7280]'}>{[c.issuer, c.date].filter(Boolean).join(' · ')}</div>
             </div>
@@ -138,7 +138,7 @@ function SectionBody({ data, k, accent, compact = false }: { data: CvData; k: Cv
       return (
         <div className={compact ? 'space-y-1' : 'flex flex-wrap gap-x-5 gap-y-1'}>
           {data.languages.map(l => (
-            <div key={l.id} className={compact ? 'flex justify-between gap-2' : ''}>
+            <div key={l.id} data-cv-block="" className={compact ? 'flex justify-between gap-2' : ''}>
               <span className="font-semibold">{l.name}</span>
               {l.level && <span className={compact ? 'opacity-80' : 'text-[#6b7280]'}>{compact ? l.level : ` — ${l.level}`}</span>}
             </div>
@@ -154,7 +154,7 @@ const Photo = ({ url, size, ring }: { url: string; size: number; ring?: string }
 const Sheet = ({ children, className = '', style }: { children: ReactNode; className?: string; style?: CSSProperties }) => (
   <div
     className={`cv-sheet bg-white text-[#374151] text-[12.5px] leading-snug ${className}`}
-    style={{ width: CV_PAGE_WIDTH, minHeight: CV_PAGE_HEIGHT, fontFamily: 'Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif', ...style }}
+    style={{ width: CV_PAGE_WIDTH, fontFamily: 'Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif', ...style }}
   >
     {children}
   </div>
@@ -164,8 +164,8 @@ function Classic({ data, accent }: Props) {
   const p = data.personal;
   const keys = data.order.filter(k => hasContent(data, k));
   return (
-    <Sheet className="cv-pad px-14 py-12">
-      <header className="text-center" style={avoidBreak}>
+    <Sheet className="px-14">
+      <header className="text-center" data-cv-block="">
         {p.photoUrl && <div className="flex justify-center mb-3"><Photo url={p.photoUrl} size={88} ring={accent} /></div>}
         <h1 className="text-[30px] font-bold tracking-tight text-[#111827]">{p.name || 'Your Name'}</h1>
         {p.headline && <div className="text-[14px] mt-0.5" style={{ color: accent }}>{p.headline}</div>}
@@ -177,7 +177,7 @@ function Classic({ data, accent }: Props) {
       <div className="space-y-5">
         {keys.map(k => (
           <section key={k}>
-            <h2 className="text-[13px] font-bold uppercase tracking-[0.12em] pb-1 mb-2 border-b" style={{ color: accent, borderColor: `${accent}55`, breakAfter: 'avoid' }}>{TITLES[k]}</h2>
+            <h2 data-cv-keep="" className="text-[13px] font-bold uppercase tracking-[0.12em] pb-1 mb-2 border-b" style={{ color: accent, borderColor: `${accent}55` }}>{TITLES[k]}</h2>
             <SectionBody data={data} k={k} accent={accent} />
           </section>
         ))}
@@ -193,28 +193,28 @@ function Modern({ data, accent }: Props) {
   const main = keys.filter(k => !SIDE.includes(k));
   return (
     <Sheet className="flex">
-      <aside className="w-[250px] shrink-0 text-white px-7 py-10 space-y-6" style={{ background: accent }}>
-        {p.photoUrl && <div className="flex justify-center"><Photo url={p.photoUrl} size={120} ring="rgba(255,255,255,0.6)" /></div>}
-        <div className="space-y-1.5 text-[11.5px] break-words">
+      <aside className="shrink-0 text-white px-7 space-y-6" style={{ width: CV_SIDE_WIDTH, background: accent }}>
+        {p.photoUrl && <div data-cv-block="" className="flex justify-center"><Photo url={p.photoUrl} size={120} ring="rgba(255,255,255,0.6)" /></div>}
+        <div data-cv-block="" className="space-y-1.5 text-[11.5px] break-words">
           <h2 className="text-[12px] font-bold uppercase tracking-[0.14em] mb-2 opacity-90">Contact</h2>
           {contacts(data).map((c, i) => <div key={i}>{c}</div>)}
         </div>
         {side.map(k => (
           <section key={k} className="text-[11.5px]">
-            <h2 className="text-[12px] font-bold uppercase tracking-[0.14em] mb-2 opacity-90">{TITLES[k]}</h2>
+            <h2 data-cv-keep="" className="text-[12px] font-bold uppercase tracking-[0.14em] mb-2 opacity-90">{TITLES[k]}</h2>
             <SectionBody data={data} k={k} accent="#ffffff" compact />
           </section>
         ))}
       </aside>
-      <main className="flex-1 px-9 py-10 min-w-0">
-        <header className="mb-6" style={avoidBreak}>
+      <main className="flex-1 px-9 min-w-0">
+        <header className="mb-6" data-cv-block="">
           <h1 className="text-[32px] font-extrabold leading-tight text-[#111827]">{p.name || 'Your Name'}</h1>
           {p.headline && <div className="text-[15px] font-medium mt-1" style={{ color: accent }}>{p.headline}</div>}
         </header>
         <div className="space-y-6">
           {main.map(k => (
             <section key={k}>
-              <h2 className="flex items-center gap-2 text-[14px] font-bold uppercase tracking-[0.1em] text-[#111827] mb-2.5" style={{ breakAfter: 'avoid' }}>
+              <h2 data-cv-keep="" className="flex items-center gap-2 text-[14px] font-bold uppercase tracking-[0.1em] text-[#111827] mb-2.5">
                 <span className="w-5 h-[3px] rounded-full" style={{ background: accent }} />{TITLES[k]}
               </h2>
               <SectionBody data={data} k={k} accent={accent} />
@@ -230,8 +230,8 @@ function Minimal({ data, accent }: Props) {
   const p = data.personal;
   const keys = data.order.filter(k => hasContent(data, k));
   return (
-    <Sheet className="cv-pad px-14 py-12">
-      <header className="flex items-center gap-5 mb-8" style={avoidBreak}>
+    <Sheet className="px-14">
+      <header className="flex items-center gap-5 mb-8" data-cv-block="">
         <Photo url={p.photoUrl} size={76} />
         <div className="min-w-0">
           <h1 className="text-[28px] font-light tracking-tight text-[#111827]">{p.name || 'Your Name'}</h1>
@@ -244,7 +244,7 @@ function Minimal({ data, accent }: Props) {
       <div className="space-y-5">
         {keys.map(k => (
           <section key={k} className="grid grid-cols-[130px_1fr] gap-5">
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.14em] pt-0.5" style={{ color: accent }}>{TITLES[k]}</h2>
+            <h2 data-cv-keep="" className="text-[11px] font-semibold uppercase tracking-[0.14em] pt-0.5" style={{ color: accent }}>{TITLES[k]}</h2>
             <div className="min-w-0"><SectionBody data={data} k={k} accent={accent} /></div>
           </section>
         ))}
@@ -252,6 +252,9 @@ function Minimal({ data, accent }: Props) {
     </Sheet>
   );
 }
+
+/** Width of the modern template's side column (its colour runs down every page). */
+export const CV_SIDE_WIDTH = 250;
 
 export const CvPreview = (props: Props) =>
   props.template === 'modern' ? <Modern {...props} /> : props.template === 'minimal' ? <Minimal {...props} /> : <Classic {...props} />;

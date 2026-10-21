@@ -8,7 +8,9 @@ import { errorMessage } from '../../lib/portfolio';
 import { CV_ACCENTS, CV_TEMPLATES, createCv, cvFromPortfolio, deleteCv, emptyCv, sampleCv, useCvList, type CvResume, type CvTemplate } from '../../lib/cvMaker';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
-import { CvPreview, CV_PAGE_WIDTH } from '../../components/cvMaker/CvPreview';
+import { CV_PAGE_WIDTH } from '../../components/cvMaker/CvPreview';
+import { CvPages } from '../../components/cvMaker/CvPages';
+import { PAGE_RESOURCES, useAccess } from '../../lib/permissions';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 /** Thumbnail width of a CV card; the A4 preview is zoomed down to it. */
@@ -25,6 +27,9 @@ export const CvList = () => {
   const { userId, resumes, loading, error, reload } = useCvList();
   const [busy, setBusy] = useState(false);
   const [toDelete, setToDelete] = useState<CvResume | null>(null);
+  // Importing reads the pf_ tables, which needs read access to a Portfolio page.
+  const { canRead } = useAccess();
+  const canImport = Object.entries(PAGE_RESOURCES).some(([path, r]) => path.startsWith('/portfolio') && canRead(r));
 
   const start = async (make: () => Promise<{ title: string; data: CvResume['data']; template?: CvResume['template']; accent?: string }>) => {
     if (!userId || busy) return;
@@ -63,7 +68,7 @@ export const CvList = () => {
         action={
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" onClick={() => fromSample()} disabled={busy}><Sparkles size={16} className="mr-1" />{t('cv.list.fromSample')}</Button>
-            <Button variant="outline" onClick={fromPortfolio} disabled={busy}><UserCircle size={16} className="mr-1" />{t('cv.list.fromPortfolio')}</Button>
+            {canImport && <Button variant="outline" onClick={fromPortfolio} disabled={busy}><UserCircle size={16} className="mr-1" />{t('cv.list.fromPortfolio')}</Button>}
             <Button onClick={blank} disabled={busy}><Plus size={16} className="mr-1" />{t('cv.list.create')}</Button>
           </div>
         } />
@@ -85,7 +90,7 @@ export const CvList = () => {
                 <div className="overflow-hidden rounded shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 group-hover:ring-2 group-hover:ring-primary transition-shadow"
                   style={{ width: THUMB, height: THUMB * 1.414 }} aria-hidden="true">
                   <div className="pointer-events-none" style={{ zoom: THUMB / CV_PAGE_WIDTH }}>
-                    <CvPreview data={SAMPLE} template={tpl} accent={SAMPLE_ACCENT[tpl]} />
+                    <CvPages data={SAMPLE} template={tpl} accent={SAMPLE_ACCENT[tpl]} maxPages={1} />
                   </div>
                 </div>
                 <div className="mt-2 text-sm font-medium text-gray-700 dark:text-gray-200 group-hover:text-primary">
@@ -102,7 +107,7 @@ export const CvList = () => {
               <Link to={`/cv/${cv.id}`} className="block bg-gray-100 dark:bg-gray-900 p-3" title={t('pf.common.edit')}>
                 <div className="mx-auto overflow-hidden rounded shadow-sm pointer-events-none" style={{ width: THUMB, height: THUMB * 1.414 }} aria-hidden="true">
                   <div style={{ zoom: THUMB / CV_PAGE_WIDTH }}>
-                    <CvPreview data={cv.data} template={cv.template} accent={cv.accent} />
+                    <CvPages data={cv.data} template={cv.template} accent={cv.accent} maxPages={1} />
                   </div>
                 </div>
               </Link>
