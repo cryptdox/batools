@@ -192,3 +192,81 @@ export async function cvFromPortfolio(userId: string): Promise<CvData> {
   cv.skills = tech.map(r => ({ ...EMPTY_ITEM.skills(), name: s(r.title_en), items: Array.isArray(r.skills) ? r.skills.join(', ') : '' }));
   return cv;
 }
+
+// --- Sample: a complete CV anyone can start from (every section filled) ---
+
+export const sampleCv = (): CvData => ({
+  personal: {
+    name: 'Rahim Uddin',
+    headline: 'Senior Full-Stack Engineer',
+    email: 'rahim.uddin@example.com',
+    phone: '+880 1700 000000',
+    location: 'Dhaka, Bangladesh',
+    website: 'https://rahim.example.com',
+    linkedin: 'https://linkedin.com/in/rahim-example',
+    github: 'https://github.com/rahim-example',
+    photoUrl: '',
+  },
+  summary:
+    'Full-stack engineer with 6+ years of experience building secure, scalable web products with React, Node.js and PostgreSQL. ' +
+    'Led teams of up to five engineers, shipped identity and payments platforms used by 50,000+ users, and enjoy turning messy requirements into simple, reliable software.',
+  experience: [
+    {
+      ...EMPTY_ITEM.experience(), role: 'Senior Software Engineer', company: 'Cryptdox Ltd', location: 'Dhaka (Hybrid)',
+      start: 'Jan 2023', current: true,
+      details: 'Designed and built a multi-tenant identity and access management service (SSO, roles, permissions) used by 8 internal products\n' +
+        'Cut average API response time by 45% with Redis caching and query tuning\n' +
+        'Lead a team of 4 engineers; introduced code review guidelines and CI checks that halved production incidents\n' +
+        'Mentored 3 junior developers, two promoted within a year',
+    },
+    {
+      ...EMPTY_ITEM.experience(), role: 'Software Engineer', company: 'Nimbus Commerce', location: 'Dhaka',
+      start: 'Mar 2020', end: 'Dec 2022',
+      details: 'Built the checkout and payment flow (bKash, card) processing 20,000+ orders a month\n' +
+        'Migrated a legacy jQuery storefront to React + TypeScript, improving Lighthouse score from 52 to 94\n' +
+        'Wrote integration tests that raised coverage from 30% to 80%',
+    },
+    {
+      ...EMPTY_ITEM.experience(), role: 'Junior Web Developer', company: 'Pixel Bridge', location: 'Chattogram',
+      start: 'Jul 2018', end: 'Feb 2020',
+      details: 'Delivered 15+ client websites with Laravel and Vue.js\nAutomated deployments with GitHub Actions, saving ~5 hours a week',
+    },
+  ],
+  education: [
+    {
+      ...EMPTY_ITEM.education(), degree: 'BSc in Computer Science and Engineering', school: 'University of Dhaka', location: 'Dhaka',
+      start: '2014', end: '2018', details: 'CGPA 3.72 / 4.00\nThesis: Real-time fraud detection for mobile payments',
+    },
+    {
+      ...EMPTY_ITEM.education(), degree: 'Higher Secondary Certificate (Science)', school: 'Notre Dame College', location: 'Dhaka',
+      start: '2011', end: '2013', details: 'GPA 5.00 / 5.00',
+    },
+  ],
+  projects: [
+    {
+      ...EMPTY_ITEM.projects(), name: 'Bangla Tools', link: 'https://tools.example.com', tech: 'React, TypeScript, Supabase, Tailwind CSS',
+      details: 'Internal multi-tool: attendance tracker, task manager, business ledger and CV maker\nRole-based access driven by a central IAM',
+    },
+    {
+      ...EMPTY_ITEM.projects(), name: 'MuMu RTC', link: 'https://github.com/rahim-example/mumu-rtc', tech: 'WebRTC, mediasoup, Node.js, Redis',
+      details: 'Video calling platform with peer-to-peer and SFU modes\nToken-based channel access and usage metering per project',
+    },
+  ],
+  skills: [
+    { ...EMPTY_ITEM.skills(), name: 'Frontend', items: 'React, TypeScript, Next.js, Redux Toolkit, Tailwind CSS' },
+    { ...EMPTY_ITEM.skills(), name: 'Backend', items: 'Node.js, Express, NestJS, Prisma, REST, GraphQL' },
+    { ...EMPTY_ITEM.skills(), name: 'Data & DevOps', items: 'PostgreSQL, Redis, Docker, GitHub Actions, AWS' },
+    { ...EMPTY_ITEM.skills(), name: 'Practices', items: 'System design, Code review, Testing, Agile' },
+  ],
+  certifications: [
+    { ...EMPTY_ITEM.certifications(), name: 'AWS Certified Solutions Architect – Associate', issuer: 'Amazon Web Services', date: '2024' },
+    { ...EMPTY_ITEM.certifications(), name: 'Professional Scrum Master I', issuer: 'Scrum.org', date: '2022' },
+  ],
+  languages: [
+    { ...EMPTY_ITEM.languages(), name: 'Bangla', level: 'Native' },
+    { ...EMPTY_ITEM.languages(), name: 'English', level: 'Professional (IELTS 7.5)' },
+    { ...EMPTY_ITEM.languages(), name: 'Hindi', level: 'Conversational' },
+  ],
+  order: [...CV_SECTIONS],
+  hidden: [],
+});

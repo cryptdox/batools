@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';
-import { Plus, UserCircle, Copy, Trash2, Pencil } from 'lucide-react';
+import { Plus, UserCircle, Copy, Trash2, Pencil, Sparkles } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
-import { createCv, cvFromPortfolio, deleteCv, emptyCv, useCvList, type CvResume } from '../../lib/cvMaker';
+import { CV_ACCENTS, CV_TEMPLATES, createCv, cvFromPortfolio, deleteCv, emptyCv, sampleCv, useCvList, type CvResume, type CvTemplate } from '../../lib/cvMaker';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';
 import { CvPreview, CV_PAGE_WIDTH } from '../../components/cvMaker/CvPreview';
@@ -14,7 +14,11 @@ import { PfPageHeader } from '../Portfolio/PfPageHeader';
 /** Thumbnail width of a CV card; the A4 preview is zoomed down to it. */
 const THUMB = 220;
 
-/** The signed-in user's CVs: start a new one (blank or from the portfolio), open, copy, delete. */
+/** Accent each template's sample starts with. */
+const SAMPLE_ACCENT: Record<CvTemplate, string> = { classic: CV_ACCENTS[0], modern: CV_ACCENTS[6], minimal: CV_ACCENTS[1] };
+const SAMPLE = sampleCv();
+
+/** The signed-in user's CVs: start a new one (blank, from the sample or from the portfolio), open, copy, delete. */
 export const CvList = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
@@ -37,6 +41,8 @@ export const CvList = () => {
 
   const blank = () => start(async () => ({ title: t('cv.list.untitled'), data: emptyCv() }));
   const fromPortfolio = () => start(async () => ({ title: t('cv.list.portfolioTitle'), data: await cvFromPortfolio(userId!) }));
+  const fromSample = (template: CvTemplate = 'classic') =>
+    start(async () => ({ title: t('cv.list.sampleTitle'), data: sampleCv(), template, accent: SAMPLE_ACCENT[template] }));
   const duplicate = (cv: CvResume) => start(async () => ({ title: `${cv.title} (${t('cv.list.copy')})`, data: cv.data, template: cv.template, accent: cv.accent }));
 
   const remove = async () => {
@@ -56,6 +62,7 @@ export const CvList = () => {
       <PfPageHeader title="cv.list.pageTitle" subtitle="cv.list.pageSubtitle"
         action={
           <div className="flex flex-wrap gap-2">
+            <Button variant="outline" onClick={() => fromSample()} disabled={busy}><Sparkles size={16} className="mr-1" />{t('cv.list.fromSample')}</Button>
             <Button variant="outline" onClick={fromPortfolio} disabled={busy}><UserCircle size={16} className="mr-1" />{t('cv.list.fromPortfolio')}</Button>
             <Button onClick={blank} disabled={busy}><Plus size={16} className="mr-1" />{t('cv.list.create')}</Button>
           </div>
@@ -66,9 +73,27 @@ export const CvList = () => {
       ) : error ? (
         <p className="text-danger">{errorMessage(error, t('pf.common.loadError'))}</p>
       ) : resumes.length === 0 ? (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-dashed border-gray-300 dark:border-gray-600 p-10 text-center space-y-3">
-          <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('cv.list.emptyTitle')}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{t('cv.list.emptyHint')}</p>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-dashed border-gray-300 dark:border-gray-600 p-8 space-y-6">
+          <div className="text-center space-y-2">
+            <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('cv.list.emptyTitle')}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{t('cv.list.emptyHint')}</p>
+          </div>
+          {/* The complete sample in every template: pick one to start from. */}
+          <div className="flex flex-wrap justify-center gap-6">
+            {CV_TEMPLATES.map(tpl => (
+              <button key={tpl} onClick={() => fromSample(tpl)} disabled={busy} className="group text-center disabled:opacity-60">
+                <div className="overflow-hidden rounded shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 group-hover:ring-2 group-hover:ring-primary transition-shadow"
+                  style={{ width: THUMB, height: THUMB * 1.414 }} aria-hidden="true">
+                  <div className="pointer-events-none" style={{ zoom: THUMB / CV_PAGE_WIDTH }}>
+                    <CvPreview data={SAMPLE} template={tpl} accent={SAMPLE_ACCENT[tpl]} />
+                  </div>
+                </div>
+                <div className="mt-2 text-sm font-medium text-gray-700 dark:text-gray-200 group-hover:text-primary">
+                  {t('cv.list.useSample')} · {t(`cv.templates.${tpl}`)}
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       ) : (
         <div className="grid gap-5 grid-cols-[repeat(auto-fill,minmax(220px,1fr))]">

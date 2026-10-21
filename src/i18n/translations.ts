@@ -744,9 +744,9 @@ export const translations = {
     cv: {
       list: {
         pageTitle: 'My CVs', pageSubtitle: 'Build CVs with a live preview and download them as PDF.',
-        create: 'New CV', fromPortfolio: 'From portfolio', untitled: 'Untitled CV', portfolioTitle: 'CV from portfolio',
+        create: 'New CV', fromPortfolio: 'From portfolio', fromSample: 'Sample CV', sampleTitle: 'Sample CV', useSample: 'Use sample', untitled: 'Untitled CV', portfolioTitle: 'CV from portfolio',
         copy: 'copy', duplicate: 'Duplicate', edited: 'edited', createError: 'Could not create the CV',
-        emptyTitle: 'No CVs yet', emptyHint: 'Start a blank CV, or fill one from your portfolio in one click.',
+        emptyTitle: 'No CVs yet', emptyHint: 'Start from the complete sample below and replace it with your details, or start blank or from your portfolio.',
         deleteTitle: 'Delete this CV?', deleteHint: 'it will be removed permanently.',
       },
       templates: { classic: 'Classic', modern: 'Modern', minimal: 'Minimal' },
@@ -1696,9 +1696,9 @@ export const translations = {
     cv: {
       list: {
         pageTitle: 'আমার সিভি', pageSubtitle: 'লাইভ প্রিভিউ দেখে সিভি তৈরি করুন এবং PDF হিসেবে ডাউনলোড করুন।',
-        create: 'নতুন সিভি', fromPortfolio: 'পোর্টফোলিও থেকে', untitled: 'নামহীন সিভি', portfolioTitle: 'পোর্টফোলিও থেকে সিভি',
+        create: 'নতুন সিভি', fromPortfolio: 'পোর্টফোলিও থেকে', fromSample: 'নমুনা সিভি', sampleTitle: 'নমুনা সিভি', useSample: 'নমুনা ব্যবহার করুন', untitled: 'নামহীন সিভি', portfolioTitle: 'পোর্টফোলিও থেকে সিভি',
         copy: 'কপি', duplicate: 'ডুপ্লিকেট', edited: 'সম্পাদিত', createError: 'সিভি তৈরি করা যায়নি',
-        emptyTitle: 'এখনও কোনো সিভি নেই', emptyHint: 'একটি ফাঁকা সিভি শুরু করুন, অথবা এক ক্লিকে পোর্টফোলিও থেকে পূরণ করুন।',
+        emptyTitle: 'এখনও কোনো সিভি নেই', emptyHint: 'নিচের সম্পূর্ণ নমুনা থেকে শুরু করে নিজের তথ্য বসান, অথবা ফাঁকা বা পোর্টফোলিও থেকে শুরু করুন।',
         deleteTitle: 'এই সিভি মুছবেন?', deleteHint: 'এটি স্থায়ীভাবে মুছে যাবে।',
       },
       templates: { classic: 'ক্লাসিক', modern: 'মডার্ন', minimal: 'মিনিমাল' },
