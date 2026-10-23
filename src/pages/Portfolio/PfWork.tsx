@@ -106,6 +106,7 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'doi', label: 'DOI', type: 'text', hint: 'pf.research.doiHint' },
   { name: 'url', label: 'pf.research.url', type: 'text' },
   { name: 'pdf_url', label: 'pf.research.pdfUrl', type: 'text', upload: 'application/pdf', hint: 'pf.research.pdfHint' },
+  { name: 'pdf_public', label: 'pf.research.pdfPublic', type: 'boolean', initial: true, hint: 'pf.research.pdfPublicHint' },
   { name: 'code_url', label: 'pf.research.codeUrl', type: 'text' },
   { name: 'citation', label: 'pf.research.citation', type: 'textarea', hint: 'pf.research.citationHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
@@ -132,6 +133,7 @@ export const PfResearch = () => {
                 <Badge variant="default">{t(`pf.research.types.${r.pub_type}`)}</Badge>
                 {r.status !== 'published' && <Badge variant="warning">{t(`pf.research.status.${r.status}`)}</Badge>}
                 {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
+                {!!r.pdf_url && r.pdf_public === false && <Badge variant="muted">{t('pf.research.pdfPrivate')}</Badge>}
               </>
             }
           />
