@@ -1,9 +1,11 @@
 import { createClient } from '@supabase/supabase-js'
+import { scopeToLtOrganization } from './ltOrganization'
 
 export type AttendanceState = 'NO_ENTRY' | 'ENTRY' | 'CONSIDER_ENTRY' | 'LEAVE'
 
 export type TeamMemberType = {
   id: string
+  organization_id: string
   name: string
   created_at: string
   updated_at: string
@@ -11,6 +13,7 @@ export type TeamMemberType = {
 
 export type TeamMember = {
   id: string
+  organization_id: string
   name: string
   is_active: boolean
   is_deleted: boolean
@@ -21,6 +24,7 @@ export type TeamMember = {
 
 export type AttendanceRecord = {
   id: string
+  organization_id: string
   team_member_id: string
   attendance_date: string
   state: AttendanceState
@@ -32,6 +36,7 @@ export type AttendanceRecord = {
 
 export type AttendanceSetting = {
   id: string
+  organization_id: string
   late_threshold: string
   punishment_amount: number
   effective_from: string
@@ -41,6 +46,7 @@ export type AttendanceSetting = {
 
 export type Punishment = {
   id: string
+  organization_id: string
   team_member_id: string
   attendance_record_id: string
   attendance_date: string
@@ -53,6 +59,7 @@ export type Punishment = {
 
 export type Spend = {
   id: string
+  organization_id: string
   spend_date: string
   amount: number
   description: string
@@ -67,4 +74,7 @@ if (!supabaseUrl || !supabaseKey) {
   throw new Error("Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Please provide this in your .env file (Vite requires the VITE_ prefix).");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+// Late Tracker data is limited to this build's organization (lib/ltOrganization.ts).
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+  global: { fetch: scopeToLtOrganization(supabaseUrl, supabaseKey) },
+})

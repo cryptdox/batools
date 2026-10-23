@@ -94,6 +94,7 @@ export const LateTracker = () => {
     const dbDate = getDbDateString(selectedDate);
     const blankRecord: AttendanceRecord = {
       id: memberId,
+      organization_id: '', // local placeholder only; the database sets it
       team_member_id: memberId,
       attendance_date: dbDate,
       state: 'NO_ENTRY',
