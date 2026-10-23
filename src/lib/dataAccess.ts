@@ -34,6 +34,8 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   lt_punishments: ['LATE_TRACKER_PUNISHMENT'],
   lt_punishment_transactions: ['LATE_TRACKER_PUNISHMENT'],
   lt_spends: ['LATE_TRACKER_SPEND'],
+  lt_organizations: ['LATE_TRACKER_SETTINGS'],
+  lt_organization_users: ['LATE_TRACKER_SETTINGS'],
   // Achievement Cycle
   ac_topics: ['ACHIVEMENT_CYCLE_TOPICS'],
   ac_topic_links: ['ACHIVEMENT_CYCLE_TOPICS'],
@@ -131,6 +133,16 @@ const FUNCTIONS: Record<string, 'read' | { action: Action; resources: string[] }
   mp_similar_song_scores: 'read',
   // The player counts a play while listening: part of reading music.
   mp_count_play: 'read',
+  // Anyone who may open Late Tracker loads their organizations, and may start
+  // one when they have none (the database ties it to the caller's IAM token).
+  lt_my_organizations: 'read',
+  lt_create_organization: 'read',
+  // Membership changes: only an organization's owners may make them, which the
+  // database checks itself; here they need any Late Tracker page, like the above.
+  lt_organization_members: 'read',
+  lt_add_organization_member: 'read',
+  lt_set_organization_owner: 'read',
+  lt_remove_organization_member: 'read',
   record_attendance: { action: 'UPDATE', resources: ['LATE_TRACKER_DAILY'] },
   add_punishment_transaction: { action: 'UPDATE', resources: ['LATE_TRACKER_PUNISHMENT'] },
   waive_all_remaining: { action: 'UPDATE', resources: ['LATE_TRACKER_PUNISHMENT'] },

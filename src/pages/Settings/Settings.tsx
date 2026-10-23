@@ -6,8 +6,11 @@ import { Modal } from '../../components/ui/Modal';
 import { format } from 'date-fns';
 import { Save, Plus, Trash2, AlertTriangle, Tag, Pencil, Check, X } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useLtOrgId } from '../../lib/LtOrgContext';
+import { LtOrgMembers } from '../../components/lateTracker/LtOrgMembers';
 
 export const SettingsPage = () => {
+  const orgId = useLtOrgId();
   const [settings, setSettings] = useState<AttendanceSetting[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -58,7 +61,7 @@ export const SettingsPage = () => {
     if (!name) return;
     setAddingType(true);
     try {
-      const { error } = await supabase.from('lt_team_member_types').insert({ name });
+      const { error } = await supabase.from('lt_team_member_types').insert({ name, organization_id: orgId });
       if (error) throw error;
       setNewTypeName('');
       await fetchTypes();
@@ -153,7 +156,8 @@ export const SettingsPage = () => {
       const { error } = await supabase.from('lt_attendance_settings').insert({
         late_threshold: `${thresholdStr}:00`,
         punishment_amount: Number(amountStr),
-        effective_from: new Date().toISOString()
+        effective_from: new Date().toISOString(),
+        organization_id: orgId,
       });
       if (error) throw error;
       
@@ -175,6 +179,8 @@ export const SettingsPage = () => {
           <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Configure organizational rules. Historical records remain unaffected.</p>
         </div>
       </div>
+
+      <LtOrgMembers />
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Current Active Rules</h3>

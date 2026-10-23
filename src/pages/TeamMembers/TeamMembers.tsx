@@ -6,9 +6,11 @@ import { Modal } from '../../components/ui/Modal';
 import { Pencil, Plus, ShieldCheck, ShieldAlert, Users, Trash2, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
+import { useLtOrgId } from '../../lib/LtOrgContext';
 import { SortableHeader, useSort } from '../../components/ui/SortableHeader';
 
 export const TeamMembers = () => {
+  const orgId = useLtOrgId();
   const [members, setMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,7 +79,7 @@ export const TeamMembers = () => {
       } else {
         const { error } = await supabase
           .from('lt_team_members')
-          .insert([{ name, is_active: isActive, type_id: typeId || null }]);
+          .insert([{ name, is_active: isActive, type_id: typeId || null, organization_id: orgId }]);
         if (error) throw error;
       }
       

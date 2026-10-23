@@ -4,6 +4,7 @@ import { Button, Badge } from '../../components/ui/Button';
 import { TimeEditor } from '../../components/ui/TimeEditor';
 import { Modal } from '../../components/ui/Modal';
 import { toast } from 'react-toastify';
+import { useLtOrgId } from '../../lib/LtOrgContext';
 import { SortableHeader, useSort } from '../../components/ui/SortableHeader';
 import { Clock, Check, Calendar as CalendarIcon, ChevronLeft, ChevronRight, AlertTriangle } from 'lucide-react';
 import { format, addDays, subDays, parse, getDay, isToday, isFuture } from 'date-fns';
@@ -15,6 +16,7 @@ const isOffDay = (date: Date) => {
 };
 
 export const LateTracker = () => {
+  const orgId = useLtOrgId();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [members, setMembers] = useState<TeamMember[]>([]);
   const [types, setTypes] = useState<TeamMemberType[]>([]);
@@ -94,6 +96,7 @@ export const LateTracker = () => {
     const dbDate = getDbDateString(selectedDate);
     const blankRecord: AttendanceRecord = {
       id: memberId,
+      organization_id: orgId ?? '',
       team_member_id: memberId,
       attendance_date: dbDate,
       state: 'NO_ENTRY',

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { supabase, type Spend } from '../../lib/supabase';
 import { toast } from 'react-toastify';
+import { useLtOrgId } from '../../lib/LtOrgContext';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { Modal } from '../../components/ui/Modal';
@@ -15,6 +16,7 @@ import { AlertTriangle, Download, Plus } from 'lucide-react';
 import { format, parse, startOfMonth } from 'date-fns';
 
 export const SpendPage = () => {
+  const orgId = useLtOrgId();
   const [spends, setSpends] = useState<Spend[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -83,7 +85,7 @@ export const SpendPage = () => {
       const payload = { spend_date: spendDate, amount: Number(amount), description: description.trim() };
       const { error } = editing
         ? await supabase.from('lt_spends').update({ ...payload, updated_at: new Date().toISOString() }).eq('id', editing.id)
-        : await supabase.from('lt_spends').insert(payload);
+        : await supabase.from('lt_spends').insert({ ...payload, organization_id: orgId });
       if (error) throw error;
 
       await fetchSpends();

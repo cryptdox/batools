@@ -4,6 +4,7 @@ import { Button, Badge } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { Modal } from '../../components/ui/Modal';
 import { toast } from 'react-toastify';
+import { useLtOrgId } from '../../lib/LtOrgContext';
 import { DateRangeFilter, type FilterPreset } from '../../components/ui/DateRangeFilter';
 import { PeriodNav } from '../../components/ui/PeriodNav';
 import { RotateCcw, AlertTriangle } from 'lucide-react';
@@ -24,6 +25,7 @@ type PunishmentWithDetails = Punishment & {
 };
 
 export const PunishmentPage = () => {
+  const orgId = useLtOrgId();
   const [punishments, setPunishments] = useState<PunishmentWithDetails[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -196,6 +198,7 @@ export const PunishmentPage = () => {
         p_from: dateRange ? format(dateRange.from, 'yyyy-MM-dd') : null,
         p_to: dateRange ? format(dateRange.to, 'yyyy-MM-dd') : null,
         p_note: 'Bulk waiver (reset dues)',
+        p_organization_id: orgId,
       });
 
       if (error) throw error;

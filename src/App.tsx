@@ -17,6 +17,8 @@ import { PublicLateTracker } from './pages/PublicLateTracker/PublicLateTracker';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { PAGE_RESOURCES, resourceOf, useAccess } from './lib/permissions';
 import { LanguageProvider } from './lib/LanguageContext';
+import { LtOrgProvider } from './lib/LtOrgContext';
+import { LtOrgGate } from './components/lateTracker/LtOrgGate';
 import { TaskManagerPage } from './pages/TaskManager/TaskManagerPage';
 import { TaskStorePage } from './pages/TaskManager/TaskStorePage';
 import { VocabularyPage } from './pages/TaskManager/VocabularyPage';
@@ -141,6 +143,7 @@ function AuthGate() {
 
   return (
     <MusicPlayerProvider>
+    <LtOrgProvider>
     <AppLayout>
       <PageGate>
       <Routes>
@@ -148,14 +151,14 @@ function AuthGate() {
         <Route path="/" element={<Landing />} />
         <Route path={REDIRECT_PATH} element={<Navigate to="/" replace />} />
 
-        <Route path={LT} element={<PublicLateTracker embedded />} />
-        <Route path={`${LT}/daily-tracker`} element={<LateTracker />} />
-        <Route path={`${LT}/team`} element={<TeamMembers />} />
-        <Route path={`${LT}/punishment`} element={<PunishmentPage />} />
-        <Route path={`${LT}/reports`} element={<ReportsPage />} />
-        <Route path={`${LT}/attendance-report`} element={<AttendanceReportPage />} />
-        <Route path={`${LT}/spend`} element={<SpendPage />} />
-        <Route path={`${LT}/settings`} element={<SettingsPage />} />
+        <Route path={LT} element={<LtOrgGate><PublicLateTracker embedded /></LtOrgGate>} />
+        <Route path={`${LT}/daily-tracker`} element={<LtOrgGate><LateTracker /></LtOrgGate>} />
+        <Route path={`${LT}/team`} element={<LtOrgGate><TeamMembers /></LtOrgGate>} />
+        <Route path={`${LT}/punishment`} element={<LtOrgGate><PunishmentPage /></LtOrgGate>} />
+        <Route path={`${LT}/reports`} element={<LtOrgGate><ReportsPage /></LtOrgGate>} />
+        <Route path={`${LT}/attendance-report`} element={<LtOrgGate><AttendanceReportPage /></LtOrgGate>} />
+        <Route path={`${LT}/spend`} element={<LtOrgGate><SpendPage /></LtOrgGate>} />
+        <Route path={`${LT}/settings`} element={<LtOrgGate><SettingsPage /></LtOrgGate>} />
 
         {Object.entries(MOVED).map(([from, to]) => (
           <Route key={from} path={from} element={<Navigate to={to} replace />} />
@@ -224,6 +227,7 @@ function AuthGate() {
       <MpMiniPlayer />
       <MpFloatingControls />
     </AppLayout>
+    </LtOrgProvider>
     </MusicPlayerProvider>
   );
 }
