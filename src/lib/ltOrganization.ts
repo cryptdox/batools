@@ -10,7 +10,7 @@
 // If the organization can't be resolved the request fails; it is never sent unscoped.
 //
 // VITE_LT_ORGANIZATION_ID picks the organization explicitly; without it, the
-// GHL organization created by migration 054 (name GHL, created_by NULL) is used.
+// oldest organization named GHL is used (the one migration 054 created).
 
 const ORG_NAME = 'GHL';
 /** Organization tables themselves are not scoped. */
@@ -24,7 +24,7 @@ function resolveOrgId(supabaseUrl: string, key: string, baseFetch: typeof fetch)
   const configured = (import.meta.env.VITE_LT_ORGANIZATION_ID as string | undefined)?.trim();
   if (configured) return Promise.resolve(configured);
   orgIdPromise ??= (async () => {
-    const url = `${supabaseUrl}/rest/v1/lt_organizations?select=id&name=eq.${ORG_NAME}&created_by=is.null&order=created_at.asc&limit=1`;
+    const url = `${supabaseUrl}/rest/v1/lt_organizations?select=id&name=eq.${ORG_NAME}&order=created_at.asc&limit=1`;
     const res = await baseFetch(url, { headers: { apikey: key, Authorization: `Bearer ${key}` } });
     const rows = res.ok ? ((await res.json()) as { id: string }[]) : [];
     if (!rows[0]?.id) throw new Error(`Late Tracker organization "${ORG_NAME}" was not found.`);
