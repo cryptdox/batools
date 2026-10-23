@@ -6,7 +6,7 @@ import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage, formFromRow, isFormComplete, rowFromForm, usePfUserId, type PfField, type PfFormValues, type PfRow } from '../../lib/portfolio';
 import { Button, Badge } from '../ui/Button';
 import { Modal } from '../ui/Modal';
-import { PfFieldInput, pfInputClass, type PfUploadTarget } from './PfFieldInput';
+import { PfFieldInput, pfInputClass, removeUploads, type PfUploadTarget } from './PfFieldInput';
 
 type Props = {
   table: string;
@@ -44,6 +44,9 @@ type Props = {
 /**
  * Generic editor for one pf_ list table, scoped to the signed-in user:
  * add / edit / delete, and for ordered tables move up/down and show/hide.
+ * Files uploaded through `upload` fields are cleaned up: a replaced file is
+ * deleted once the new one is saved, uploads from a cancelled form are
+ * deleted, and deleting a row deletes its files.
  */
 export const PfListEditor = ({
   table, title, subtitle, fields, renderRow, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
@@ -65,6 +68,9 @@ export const PfListEditor = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [values, setValues] = useState<PfFormValues>({});
   const [saving, setSaving] = useState(false);
+  /** Files uploaded while the form is open; whichever end up unused are deleted. */
+  const formUploads = useRef<string[]>([]);
+  const uploadFields = fields.filter(f => f.upload).map(f => f.name);
 
   const [toDelete, setToDelete] = useState<PfRow | null>(null);
   const [deleting, setDeleting] = useState(false);
@@ -104,12 +110,14 @@ export const PfListEditor = ({
   }, [rows, search]);
 
   const openAdd = () => {
+    formUploads.current = [];
     setEditing(null);
     setValues(formFromRow(fields, null));
     setIsModalOpen(true);
   };
 
   const openEdit = (row: PfRow) => {
+    formUploads.current = [];
     setEditing(row);
     setValues(formFromRow(fields, row));
     setIsModalOpen(true);
@@ -135,6 +143,13 @@ export const PfListEditor = ({
             ...(ordered ? { sort_order: Math.max(0, ...rows.map(r => Number(r.sort_order) || 0)) + 1 } : {}),
           }]);
       if (error) throw error;
+      if (upload) {
+        // Everything uploaded this time plus the file the row had, minus what it keeps now.
+        const kept = new Set(uploadFields.map(name => (payload as Record<string, unknown>)[name]));
+        const candidates = [...formUploads.current, ...uploadFields.map(name => editing?.[name] as string | null)];
+        await removeUploads(upload, candidates.filter(url => !kept.has(url)));
+      }
+      formUploads.current = [];
       await fetchRows();
       setIsModalOpen(false);
       toast.success(editing ? t('pf.common.updated') : t('pf.common.added'));
@@ -152,6 +167,7 @@ export const PfListEditor = ({
     try {
       const { error } = await supabase.from(table).delete().eq('id', toDelete.id).eq(ownerColumn, ownerId);
       if (error) throw error;
+      if (upload) await removeUploads(upload, uploadFields.map(name => toDelete[name] as string | null));
       await fetchRows();
       setToDelete(null);
       toast.success(t('pf.common.deleted'));
@@ -192,6 +208,14 @@ export const PfListEditor = ({
       .map((r, i) => ({ id: r.id, patch: { sort_order: i + 1 }, changed: Number(r.sort_order) !== i + 1 }))
       .filter(c => c.changed)
       .map(({ id, patch }) => ({ id, patch })));
+  };
+
+  /** Closes the form without saving: its uploads were never used. */
+  const closeForm = () => {
+    if (saving) return;
+    if (upload && formUploads.current.length) void removeUploads(upload, formUploads.current);
+    formUploads.current = [];
+    setIsModalOpen(false);
   };
 
   const iconButton = 'p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-30 disabled:pointer-events-none';
@@ -279,16 +303,23 @@ export const PfListEditor = ({
 
       <Modal
         isOpen={isModalOpen}
-        onClose={() => !saving && setIsModalOpen(false)}
+        onClose={closeForm}
         title={`${editing ? t('pf.common.edit') : t('pf.common.add')} · ${t(title)}`}
         className="max-w-3xl"
       >
         <div className="space-y-4">
           {fields.map(f => (
-            <PfFieldInput key={f.name} field={f} values={values} upload={upload} onChange={(key, value) => setValues(prev => ({ ...prev, [key]: value }))} />
+            <PfFieldInput
+              key={f.name}
+              field={f}
+              values={values}
+              upload={upload}
+              onUploaded={url => { formUploads.current.push(url); }}
+              onChange={(key, value) => setValues(prev => ({ ...prev, [key]: value }))}
+            />
           ))}
           <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
-            <Button variant="ghost" onClick={() => setIsModalOpen(false)} disabled={saving}>{t('pf.common.cancel')}</Button>
+            <Button variant="ghost" onClick={closeForm} disabled={saving}>{t('pf.common.cancel')}</Button>
             <Button onClick={handleSave} disabled={saving || !isFormComplete(fields, values)}>
               {saving ? t('pf.common.saving') : t('pf.common.save')}
             </Button>

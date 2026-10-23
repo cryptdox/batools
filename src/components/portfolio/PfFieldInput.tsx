@@ -18,15 +18,32 @@ const LangTag = ({ lang }: { lang: 'EN' | 'BN' }) => (
 /** Where fields with `upload` put their files: `<bucket>/<folder>/…` (public). */
 export type PfUploadTarget = { bucket: string; folder: string };
 
+/** Deletes files we uploaded: only public URLs of `target`'s bucket inside its folder;
+ * anything else (an external link, another folder) is left alone. Failures are only logged. */
+export async function removeUploads(target: PfUploadTarget, urls: (string | null | undefined)[]) {
+  const marker = `/storage/v1/object/public/${target.bucket}/`;
+  const paths = [...new Set(urls)].flatMap(url => {
+    const at = url ? url.indexOf(marker) : -1;
+    const path = url && at >= 0 ? decodeURIComponent(url.slice(at + marker.length).split('?')[0]) : null;
+    return path?.startsWith(`${target.folder}/`) ? [path] : [];
+  });
+  if (!paths.length) return;
+  const { error } = await supabase.storage.from(target.bucket).remove(paths);
+  if (error) console.warn('Could not delete replaced files', error);
+}
+
 type Props = {
   field: PfField;
   values: PfFormValues;
   onChange: (key: string, value: string | boolean) => void;
   upload?: PfUploadTarget;
+  /** Told about every file uploaded, so the form can delete the unused ones on save / cancel. */
+  onUploaded?: (url: string) => void;
 };
 
-/** Uploads one file and hands back its public URL. Replaced files are left in
- * the bucket: the old URL may still be in use until the form is saved. */
+/** Uploads one file and hands back its public URL. The file it replaces stays
+ * until the form is saved (the saved row still points at it); PfListEditor
+ * then deletes it. */
 const UploadButton = ({ accept, target, onUploaded }: { accept: string; target: PfUploadTarget; onUploaded: (url: string) => void }) => {
   const { t } = useLanguage();
   const input = useRef<HTMLInputElement>(null);
@@ -63,7 +80,7 @@ const UploadButton = ({ accept, target, onUploaded }: { accept: string; target: 
 };
 
 /** Renders one PfField; bilingual kinds render as an EN | BN pair. */
-export const PfFieldInput = ({ field: f, values, onChange, upload }: Props) => {
+export const PfFieldInput = ({ field: f, values, onChange, upload, onUploaded }: Props) => {
   const { t } = useLanguage();
   const label = (
     <span className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
@@ -138,7 +155,7 @@ export const PfFieldInput = ({ field: f, values, onChange, upload }: Props) => {
             <img src={textValue(f.name)} alt="" className="h-10 w-10 rounded object-cover border border-gray-200 dark:border-gray-700 shrink-0" />
           )}
           <input value={textValue(f.name)} onChange={e => onChange(f.name, e.target.value)} className={`${pfInputClass} h-10`} />
-          <UploadButton accept={f.upload} target={upload} onUploaded={url => onChange(f.name, url)} />
+          <UploadButton accept={f.upload} target={upload} onUploaded={url => { onUploaded?.(url); onChange(f.name, url); }} />
         </div>
       ) : (
         <input

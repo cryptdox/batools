@@ -1,7 +1,8 @@
 import { Badge } from '../../components/ui/Button';
 import { PfListEditor, PfRowText } from '../../components/portfolio/PfListEditor';
 import { useLanguage } from '../../lib/LanguageContext';
-import { PF_ICON_OPTIONS, type PfField } from '../../lib/portfolio';
+import { PF_ICON_OPTIONS, usePfUserId, type PfField } from '../../lib/portfolio';
+import { PF_BUCKET } from '../../components/portfolio/PfFileUpload';
 import { PfPageHeader } from './PfPageHeader';
 
 const PROJECT_FIELDS: PfField[] = [
@@ -104,7 +105,7 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'keywords', label: 'pf.research.keywords', type: 'tags' },
   { name: 'doi', label: 'DOI', type: 'text', hint: 'pf.research.doiHint' },
   { name: 'url', label: 'pf.research.url', type: 'text' },
-  { name: 'pdf_url', label: 'pf.research.pdfUrl', type: 'text' },
+  { name: 'pdf_url', label: 'pf.research.pdfUrl', type: 'text', upload: 'application/pdf', hint: 'pf.research.pdfHint' },
   { name: 'code_url', label: 'pf.research.codeUrl', type: 'text' },
   { name: 'citation', label: 'pf.research.citation', type: 'textarea', hint: 'pf.research.citationHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
@@ -112,6 +113,7 @@ const PUBLICATION_FIELDS: PfField[] = [
 
 export const PfResearch = () => {
   const { t } = useLanguage();
+  const userId = usePfUserId();
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.research.pageTitle" subtitle="pf.common.orderHint" />
@@ -119,6 +121,7 @@ export const PfResearch = () => {
         table="pf_publications"
         title="pf.research.publications"
         fields={PUBLICATION_FIELDS}
+        upload={userId ? { bucket: PF_BUCKET, folder: `${userId}/research` } : undefined}
         searchable
         renderRow={r => (
           <PfRowText
