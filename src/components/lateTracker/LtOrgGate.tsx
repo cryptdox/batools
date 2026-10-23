@@ -67,7 +67,7 @@ export const LtCreateOrgModal = ({ isOpen, onClose }: { isOpen: boolean; onClose
 };
 
 export const LtOrgGate = ({ children }: { children: ReactNode }) => {
-  const { current, state, reload } = useLtOrg();
+  const { current, state, error, reload } = useLtOrg();
   const [modalOpen, setModalOpen] = useState(true);
 
   if (state === 'idle' || state === 'loading') {
@@ -77,6 +77,7 @@ export const LtOrgGate = ({ children }: { children: ReactNode }) => {
     return (
       <div className="max-w-md mx-auto mt-16 text-center space-y-3">
         <p className="font-semibold text-gray-900 dark:text-gray-100">Couldn&apos;t load your organizations</p>
+        {error && <p className="text-sm text-gray-500 break-words">{error}</p>}
         <Button onClick={() => void reload()}>Try again</Button>
       </div>
     );

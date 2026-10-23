@@ -34,6 +34,8 @@ type LtOrgContextValue = {
   /** The organization Late Tracker pages work in; null until loaded or when the user has none. */
   current: LtOrganization | null;
   state: 'idle' | 'loading' | 'ready' | 'error';
+  /** Why loading failed, as the database reported it. */
+  error: string | null;
   select: (id: string) => void;
   reload: () => Promise<void>;
   /** Creates an organization with the user as its owner, and switches to it. */
@@ -54,6 +56,7 @@ export const LtOrgProvider = ({ children }: { children: ReactNode }) => {
   const [orgs, setOrgs] = useState<LtOrganization[]>([]);
   const [state, setState] = useState<LtOrgContextValue['state']>('idle');
   const [currentId, setCurrentId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const load = useCallback(async (): Promise<LtOrganization[]> => {
     const { data, error } = await supabase.rpc('lt_my_organizations');
@@ -64,6 +67,7 @@ export const LtOrgProvider = ({ children }: { children: ReactNode }) => {
   const reload = useCallback(async () => {
     if (!userId) return;
     setState('loading');
+    setError(null);
     try {
       const list = await load();
       setOrgs(list);
@@ -73,6 +77,8 @@ export const LtOrgProvider = ({ children }: { children: ReactNode }) => {
       setState('ready');
     } catch (e) {
       console.error(e);
+      // supabase-js errors are plain objects with a message, not Error instances.
+      setError((e as { message?: string })?.message ?? String(e));
       setState('error');
     }
   }, [load, userId]);
@@ -109,7 +115,7 @@ export const LtOrgProvider = ({ children }: { children: ReactNode }) => {
   const current = useMemo(() => orgs.find(o => o.id === currentId) ?? null, [orgs, currentId]);
 
   return (
-    <LtOrgContext.Provider value={{ orgs, current, state, select, reload, create }}>
+    <LtOrgContext.Provider value={{ orgs, current, state, error, select, reload, create }}>
       {children}
     </LtOrgContext.Provider>
   );
