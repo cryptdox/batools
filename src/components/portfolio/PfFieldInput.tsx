@@ -53,8 +53,10 @@ const UploadButton = ({ accept, target, onUploaded }: { accept: string; target: 
     setBusy(true);
     try {
       const ext = file.name.includes('.') ? file.name.split('.').pop()!.toLowerCase() : 'bin';
-      // A fresh name per upload, so browsers and CDNs never serve an old file.
-      const path = `${target.folder}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+      // The original name, made URL-safe, so the link stays readable; plus a
+      // short unique tail so browsers and CDNs never serve a replaced file.
+      const base = file.name.replace(/\.[^.]*$/, '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 80) || 'file';
+      const path = `${target.folder}/${base}-${Date.now().toString(36)}.${ext}`;
       const { error } = await supabase.storage.from(target.bucket).upload(path, file, { contentType: file.type, upsert: false });
       if (error) throw error;
       onUploaded(supabase.storage.from(target.bucket).getPublicUrl(path).data.publicUrl);
