@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { Upload } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
-import { errorMessage, type PfField, type PfFormValues } from '../../lib/portfolio';
+import { errorMessage, uploadFileName, type PfField, type PfFormValues } from '../../lib/portfolio';
 import { Button } from '../ui/Button';
 
 export const pfInputClass =
@@ -52,11 +52,7 @@ const UploadButton = ({ accept, target, onUploaded }: { accept: string; target: 
   const upload = async (file: File) => {
     setBusy(true);
     try {
-      const ext = file.name.includes('.') ? file.name.split('.').pop()!.toLowerCase() : 'bin';
-      // The original name, made URL-safe, so the link stays readable; plus a
-      // short unique tail so browsers and CDNs never serve a replaced file.
-      const base = file.name.replace(/\.[^.]*$/, '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 80) || 'file';
-      const path = `${target.folder}/${base}-${Date.now().toString(36)}.${ext}`;
+      const path = `${target.folder}/${uploadFileName(file)}`;
       const { error } = await supabase.storage.from(target.bucket).upload(path, file, { contentType: file.type, upsert: false });
       if (error) throw error;
       onUploaded(supabase.storage.from(target.bucket).getPublicUrl(path).data.publicUrl);

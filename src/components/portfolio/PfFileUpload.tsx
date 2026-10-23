@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { FileText, Upload, Trash2, ExternalLink } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
-import { errorMessage } from '../../lib/portfolio';
+import { errorMessage, uploadFileName } from '../../lib/portfolio';
 import { Button } from '../ui/Button';
 
 // Public bucket from migration 028; files are kept under `<user_id>/`.
@@ -20,7 +20,7 @@ type Props = {
   userId: string;
   /** Translation key. */
   label: string;
-  /** File name prefix inside the user's folder, e.g. "resume". */
+  /** Name used when the uploaded file's own name has nothing usable, e.g. "resume". */
   name: string;
   accept: string;
   url: string | null;
@@ -46,9 +46,7 @@ export const PfFileUpload = ({ userId, label, name, accept, url, onChange }: Pro
   const upload = async (file: File) => {
     setBusy(true);
     try {
-      const ext = file.name.includes('.') ? file.name.split('.').pop()!.toLowerCase() : 'bin';
-      // A fresh name per upload, so browsers and CDNs never serve the old file.
-      const path = `${userId}/${name}-${Date.now()}.${ext}`;
+      const path = `${userId}/${uploadFileName(file, name)}`;
       const { error } = await supabase.storage.from(PF_BUCKET).upload(path, file, { contentType: file.type, upsert: false });
       if (error) throw error;
       const { data } = supabase.storage.from(PF_BUCKET).getPublicUrl(path);

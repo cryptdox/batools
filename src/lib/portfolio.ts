@@ -6,6 +6,18 @@ export function usePfUserId(): string | null {
   return useAuth().user?.userId ?? null;
 }
 
+/**
+ * A storage name for an uploaded file: its own name made URL-safe (accents
+ * dropped, other symbols as `-`) plus a short unique tail, so links stay
+ * readable and a replaced file is never served from a cache.
+ */
+export function uploadFileName(file: File, fallback = 'file'): string {
+  const ext = file.name.includes('.') ? file.name.split('.').pop()!.toLowerCase() : 'bin';
+  const base = file.name.replace(/\.[^.]*$/, '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\w-]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '').slice(0, 80) || fallback;
+  return `${base}-${Date.now().toString(36)}.${ext}`;
+}
+
 /** Supabase errors are plain objects, not Error instances; keep their message. */
 export const errorMessage = (e: unknown, fallback: string): string => {
   const message = e && typeof e === 'object' && 'message' in e ? e.message : null;
