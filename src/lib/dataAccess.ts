@@ -143,6 +143,7 @@ const FUNCTIONS: Record<string, 'read' | { action: Action; resources: string[] }
   lt_add_organization_member: 'read',
   lt_set_organization_owner: 'read',
   lt_remove_organization_member: 'read',
+  lt_set_organization_member_user: 'read',
   record_attendance: { action: 'UPDATE', resources: ['LATE_TRACKER_DAILY'] },
   add_punishment_transaction: { action: 'UPDATE', resources: ['LATE_TRACKER_PUNISHMENT'] },
   waive_all_remaining: { action: 'UPDATE', resources: ['LATE_TRACKER_PUNISHMENT'] },

@@ -9,7 +9,11 @@ import { Modal } from '../ui/Modal';
 
 // The current organization's members. Owners add users by email, make or
 // unmake owners and remove members; the database refuses any change that
-// would leave the organization without an owner (migration 054).
+// would leave the organization without an owner (migration 054). A member's
+// IAM user id is filled in when they first open Late Tracker, or an owner can
+// set it here (055).
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 type Member = {
   id: string;
@@ -28,6 +32,9 @@ export const LtOrgMembers = () => {
   const [asOwner, setAsOwner] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
   const [toRemove, setToRemove] = useState<Member | null>(null);
+  /** Member whose IAM user id is being entered, and the text typed so far. */
+  const [idFor, setIdFor] = useState<string | null>(null);
+  const [idInput, setIdInput] = useState('');
 
   const orgId = current?.id ?? null;
   const isOwner = !!current?.is_owner;
@@ -75,6 +82,17 @@ export const LtOrgMembers = () => {
     p_member_id: m.id, p_is_owner: !m.is_owner,
   }), m.is_owner ? `${m.email} is no longer an owner.` : `${m.email} is now an owner.`, m.is_me);
 
+  const openIdEditor = (m: Member) => { setIdFor(m.id); setIdInput(m.iam_user_id ?? ''); };
+
+  const handleSaveId = async (m: Member) => {
+    const id = idInput.trim();
+    if (!UUID_RE.test(id)) { toast.error('Enter a valid IAM user id (UUID).'); return; }
+    const ok = await run(m.id, () => supabase.rpc('lt_set_organization_member_user', {
+      p_member_id: m.id, p_iam_user_id: id,
+    }), `IAM user id set for ${m.email}.`);
+    if (ok) setIdFor(null);
+  };
+
   const handleRemove = async () => {
     if (!toRemove) return;
     const m = toRemove;
@@ -120,7 +138,30 @@ export const LtOrgMembers = () => {
                 <div className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
                   {m.email}{m.is_me && <span className="text-gray-400 font-normal"> (you)</span>}
                 </div>
-                {!m.iam_user_id && <div className="text-xs text-gray-500">Joins when they next sign in</div>}
+                {idFor === m.id ? (
+                  <form onSubmit={e => { e.preventDefault(); void handleSaveId(m); }} className="flex flex-wrap items-center gap-2 mt-1">
+                    <input
+                      value={idInput}
+                      onChange={e => setIdInput(e.target.value)}
+                      placeholder="IAM user id (UUID)"
+                      autoFocus
+                      className="h-8 w-80 max-w-full rounded-md border border-gray-300 bg-white px-2 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-primary dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50"
+                    />
+                    <Button type="submit" size="sm" disabled={busy === m.id || !idInput.trim()}>Save</Button>
+                    <Button type="button" size="sm" variant="ghost" onClick={() => setIdFor(null)}>Cancel</Button>
+                  </form>
+                ) : (
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                    {m.iam_user_id
+                      ? <span className="font-mono select-all" title="IAM user id">{m.iam_user_id}</span>
+                      : <span>Joins when they next sign in</span>}
+                    {isOwner && (
+                      <button type="button" onClick={() => openIdEditor(m)} className="text-primary hover:underline">
+                        {m.iam_user_id ? 'Change ID' : 'Add ID'}
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
               {m.is_owner ? <Badge>Owner</Badge> : <Badge variant="muted">Member</Badge>}
               {isOwner && (
