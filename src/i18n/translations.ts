@@ -16,6 +16,9 @@ export const translations = {
       profile: {
         pageTitle: 'Portfolio Profile', pageSubtitle: 'Who you are, the hero section, and your links.',
         identity: 'Identity', hero: 'Hero & Objective', social: 'Social handles',
+        display: 'Portfolio display',
+        showCaseStudies: 'Show case studies', showCaseStudiesHint: 'Off hides every case-study section on all projects and papers at once. On leaves it to each project / paper and item.',
+        showChallenges: 'Show challenges & solutions', showChallengesHint: 'Off hides every challenge on all projects and papers at once. On leaves it to each project / paper and item.',
         name: 'Name', email: 'Email', phone: 'Phone', resumeUrl: 'Resume URL',
         careerStartYear: 'Career start year', careerStartYearHint: 'Used for "years of experience" everywhere.',
         greeting: 'Greeting', title: 'Title', titleHint: 'Also used as the browser tab title.',
@@ -978,6 +981,9 @@ export const translations = {
       profile: {
         pageTitle: 'পোর্টফোলিও প্রোফাইল', pageSubtitle: 'আপনার পরিচয়, হিরো অংশ ও লিংক।',
         identity: 'পরিচয়', hero: 'হিরো ও লক্ষ্য', social: 'সোশ্যাল হ্যান্ডেল',
+        display: 'পোর্টফোলিওতে প্রদর্শন',
+        showCaseStudies: 'কেস স্টাডি দেখান', showCaseStudiesHint: 'বন্ধ করলে সব প্রকল্প ও পেপারের কেস স্টাডি একসাথে লুকায়। চালু থাকলে প্রতিটি প্রকল্প / পেপার ও আইটেমের নিজস্ব সেটিং কাজ করে।',
+        showChallenges: 'চ্যালেঞ্জ ও সমাধান দেখান', showChallengesHint: 'বন্ধ করলে সব প্রকল্প ও পেপারের চ্যালেঞ্জ একসাথে লুকায়। চালু থাকলে প্রতিটি প্রকল্প / পেপার ও আইটেমের নিজস্ব সেটিং কাজ করে।',
         name: 'নাম', email: 'ইমেইল', phone: 'ফোন', resumeUrl: 'রেজিউমে লিংক',
         careerStartYear: 'ক্যারিয়ার শুরুর বছর', careerStartYearHint: 'সব জায়গায় "অভিজ্ঞতার বছর" এখান থেকে হিসাব হয়।',
         greeting: 'সম্ভাষণ', title: 'শিরোনাম', titleHint: 'ব্রাউজার ট্যাবের শিরোনামেও ব্যবহৃত হয়।',

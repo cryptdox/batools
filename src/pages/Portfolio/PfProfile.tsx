@@ -28,7 +28,13 @@ const HERO: PfField[] = [
 const SOCIAL: PfField[] = ['github', 'linkedin', 'medium', 'youtube', 'facebook', 'x', 'gitlab', 'kaggle']
   .map(name => ({ name, label: `pf.profile.${name}`, type: 'text' as const }));
 
-const ALL = [...IDENTITY, ...HERO, ...SOCIAL];
+// Site-wide switches for the case-study lists (059); on by default.
+const DISPLAY: PfField[] = [
+  { name: 'show_case_studies', label: 'pf.profile.showCaseStudies', type: 'boolean', initial: true, hint: 'pf.profile.showCaseStudiesHint' },
+  { name: 'show_challenges', label: 'pf.profile.showChallenges', type: 'boolean', initial: true, hint: 'pf.profile.showChallengesHint' },
+];
+
+const ALL = [...IDENTITY, ...HERO, ...SOCIAL, ...DISPLAY];
 
 const ROLE_FIELDS: PfField[] = [
   { name: 'text', label: 'pf.profile.roleText', type: 'i18n', required: true },
@@ -126,6 +132,7 @@ export const PfProfile = () => {
           <Card title={t('pf.profile.social')}>
             <div className="grid sm:grid-cols-2 gap-4">{section(SOCIAL)}</div>
           </Card>
+          <Card title={t('pf.profile.display')}>{section(DISPLAY)}</Card>
           <div className="flex justify-end">
             <Button onClick={handleSave} disabled={saving || !isFormComplete(ALL, values)}>
               {saving ? t('pf.common.saving') : t('pf.common.save')}
