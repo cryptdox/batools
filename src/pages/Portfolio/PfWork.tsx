@@ -17,6 +17,7 @@ const PROJECT_FIELDS: PfField[] = [
   { name: 'link', label: 'pf.work.link', type: 'text' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.work.featuredHint' },
   { name: 'show_case_study', label: 'pf.work.showCaseStudy', type: 'boolean', hint: 'pf.work.showCaseStudyHint' },
+  { name: 'show_challenges', label: 'pf.work.showChallenges', type: 'boolean', hint: 'pf.work.showChallengesHint' },
 ];
 
 
@@ -70,6 +71,7 @@ export const PfProjects = () => {
             extra={<>
               {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
               {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}
+              {r.show_challenges === true && <Badge variant="warning">{t('pf.work.challengesShown')}</Badge>}
               <Tags items={r.tech_stack} />
             </>}
           />
@@ -142,6 +144,7 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'citation', label: 'pf.research.citation', type: 'textarea', hint: 'pf.research.citationHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
   { name: 'show_case_study', label: 'pf.work.showCaseStudy', type: 'boolean', hint: 'pf.work.showCaseStudyHint' },
+  { name: 'show_challenges', label: 'pf.work.showChallenges', type: 'boolean', hint: 'pf.work.showChallengesHint' },
 ];
 
 export const PfResearch = () => {
@@ -172,6 +175,7 @@ export const PfResearch = () => {
                 {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
                 {!!r.pdf_url && r.pdf_public === false && <Badge variant="muted">{t('pf.research.pdfPrivate')}</Badge>}
                 {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}
+                {r.show_challenges === true && <Badge variant="warning">{t('pf.work.challengesShown')}</Badge>}
               </>
             }
           />

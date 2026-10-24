@@ -1,9 +1,14 @@
 -- Migration: 059_pf_profile_display_switches.sql
--- Site-wide switches for the case-study lists (058). Off hides that list on
--- every project and publication at once, whatever each item's own show / hide
--- or its parent's master switch; on (the default) leaves those in charge.
+-- Site-wide show / hide for each portfolio section. The portfolio leaves out
+-- every section whose key is listed (and its menu / footer links):
+--
+--   about, projects, experience, research, techStack, contact, summary,
+--   caseStudies, challenges
+--
+-- caseStudies / challenges hide those lists (058) on every project and
+-- publication at once, whatever each parent's master switch or item's own
+-- show / hide. Empty (the default) shows everything.
 
-ALTER TABLE pf_profile ADD COLUMN IF NOT EXISTS show_case_studies BOOLEAN NOT NULL DEFAULT true;
-ALTER TABLE pf_profile ADD COLUMN IF NOT EXISTS show_challenges BOOLEAN NOT NULL DEFAULT true;
+ALTER TABLE pf_profile ADD COLUMN IF NOT EXISTS hidden_sections TEXT[] NOT NULL DEFAULT '{}';
 
 NOTIFY pgrst, 'reload schema';
