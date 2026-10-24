@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage, uploadFileName, type PfField, type PfFormValues } from '../../lib/portfolio';
 import { Button } from '../ui/Button';
+import { RichEditor } from '../ui/RichText';
 
 export const pfInputClass =
   'w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50';
@@ -117,7 +118,9 @@ export const PfFieldInput = ({ field: f, values, onChange, upload, onUploaded }:
             return (
               <div key={lang}>
                 <span className="block mb-1"><LangTag lang={lang === 'en' ? 'EN' : 'BN'} /></span>
-                {isArea ? (
+                {f.rich ? (
+                  <RichEditor value={textValue(key)} onChange={html => onChange(key, html)} />
+                ) : isArea ? (
                   <textarea
                     value={textValue(key)}
                     onChange={e => onChange(key, e.target.value)}

@@ -21,7 +21,7 @@ const HERO: PfField[] = [
   { name: 'title', label: 'pf.profile.title', type: 'i18n', hint: 'pf.profile.titleHint' },
   { name: 'subtitle', label: 'pf.profile.subtitle', type: 'i18n', multiline: true },
   { name: 'slogan', label: 'pf.profile.slogan', type: 'i18n', multiline: true },
-  { name: 'objective', label: 'pf.profile.objective', type: 'i18n', multiline: true, hint: 'pf.common.richTextHint' },
+  { name: 'objective', label: 'pf.profile.objective', type: 'i18n', rich: true, hint: 'pf.common.richTextHint' },
 ];
 
 // Handles only — the site builds each platform's URL.

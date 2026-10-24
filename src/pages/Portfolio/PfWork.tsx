@@ -1,18 +1,30 @@
+import { useState } from 'react';
+import { Lightbulb } from 'lucide-react';
 import { Badge } from '../../components/ui/Button';
 import { PfListEditor, PfRowText } from '../../components/portfolio/PfListEditor';
 import { useLanguage } from '../../lib/LanguageContext';
-import { PF_ICON_OPTIONS, usePfUserId, type PfField } from '../../lib/portfolio';
+import { PF_ICON_OPTIONS, usePfUserId, type PfField, type PfRow } from '../../lib/portfolio';
 import { PF_BUCKET } from '../../components/portfolio/PfFileUpload';
 import { PfPageHeader } from './PfPageHeader';
+import { richPlainText } from '../../components/ui/RichText';
 
 const PROJECT_FIELDS: PfField[] = [
   { name: 'title', label: 'pf.work.title', type: 'i18n', required: true },
   { name: 'duration', label: 'pf.work.duration', type: 'i18n' },
-  { name: 'description', label: 'pf.work.description', type: 'i18n', multiline: true },
+  { name: 'description', label: 'pf.work.description', type: 'i18n', rich: true },
   { name: 'responsibilities', label: 'pf.work.responsibilities', type: 'i18nList' },
   { name: 'tech_stack', label: 'pf.work.techStack', type: 'tags' },
   { name: 'link', label: 'pf.work.link', type: 'text' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.work.featuredHint' },
+  { name: 'overview', label: 'pf.work.overview', type: 'i18n', rich: true, hint: 'pf.work.overviewHint' },
+  { name: 'show_case_study', label: 'pf.work.showCaseStudy', type: 'boolean', hint: 'pf.work.showCaseStudyHint' },
+];
+
+/** One challenge of a project's case study (pf_project_challenges, 057). */
+const CHALLENGE_FIELDS: PfField[] = [
+  { name: 'challenge', label: 'pf.work.challenge', type: 'i18n', rich: true, required: true, hint: 'pf.work.challengeHint' },
+  { name: 'solution', label: 'pf.work.solution', type: 'i18n', rich: true, hint: 'pf.work.solutionHint' },
+  { name: 'result', label: 'pf.work.result', type: 'i18n', rich: true, hint: 'pf.work.resultHint' },
 ];
 
 const EXPERIENCE_FIELDS: PfField[] = [
@@ -36,6 +48,8 @@ const Tags = ({ items }: { items: unknown }) => (
 
 export const PfProjects = () => {
   const { t } = useLanguage();
+  // The project whose challenges are open below the list.
+  const [project, setProject] = useState<PfRow | null>(null);
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.work.projectsTitle" subtitle="pf.common.orderHint" />
@@ -48,10 +62,38 @@ export const PfProjects = () => {
           <PfRowText
             primary={String(r.title_en)}
             secondary={String(r.duration_en ?? '')}
-            extra={<>{r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}<Tags items={r.tech_stack} /></>}
+            extra={<>
+              {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
+              {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}
+              <Tags items={r.tech_stack} />
+            </>}
           />
         )}
+        onRowsChange={rows => setProject(p => (p ? rows.find(r => r.id === p.id) ?? null : null))}
+        isRowSelected={r => r.id === project?.id}
+        rowActions={r => (
+          <button
+            className="p-1.5 rounded-md text-primary hover:bg-primary/10"
+            onClick={() => setProject(r)}
+            title={t('pf.work.editChallenges')}
+          >
+            <Lightbulb size={16} />
+          </button>
+        )}
       />
+      {project ? (
+        <PfListEditor
+          key={project.id}
+          table="pf_project_challenges"
+          title="pf.work.challenges"
+          subtitle={`${project.title_en}${project.show_case_study === true ? '' : ` · ${t('pf.work.caseStudyHiddenNote')}`}`}
+          fields={CHALLENGE_FIELDS}
+          scope={{ project_id: project.id }}
+          renderRow={r => <PfRowText primary={richPlainText(String(r.challenge_en))} secondary={richPlainText(String(r.solution_en ?? ''))} />}
+        />
+      ) : (
+        <p className="text-sm text-center text-gray-500 dark:text-gray-400">{t('pf.work.pickProject')}</p>
+      )}
     </div>
   );
 };
@@ -101,7 +143,7 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'pub_type', label: 'pf.research.type', type: 'select', options: PUB_TYPES, initial: 'journal' },
   { name: 'status', label: 'pf.research.statusLabel', type: 'select', options: PUB_STATUSES, initial: 'published' },
   { name: 'year', label: 'pf.about.year', type: 'number', min: 1950, max: 2100 },
-  { name: 'abstract', label: 'pf.research.abstract', type: 'i18n', multiline: true },
+  { name: 'abstract', label: 'pf.research.abstract', type: 'i18n', rich: true },
   { name: 'keywords', label: 'pf.research.keywords', type: 'tags' },
   { name: 'doi', label: 'DOI', type: 'text', hint: 'pf.research.doiHint' },
   { name: 'url', label: 'pf.research.url', type: 'text' },

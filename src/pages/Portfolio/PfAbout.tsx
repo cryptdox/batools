@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ListTree } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import type { PfField, PfRow } from '../../lib/portfolio';
+import { richPlainText } from '../../components/ui/RichText';
 import { Badge } from '../../components/ui/Button';
 import { PfListEditor, PfRowText } from '../../components/portfolio/PfListEditor';
 import { PfPageHeader, PfTabs } from './PfPageHeader';
@@ -21,7 +22,7 @@ const BLOCK_FIELDS: PfField[] = [
     { value: 'paragraph', label: 'pf.about.paragraph' },
     { value: 'list', label: 'pf.about.list' },
   ] },
-  { name: 'text', label: 'pf.about.paragraphText', type: 'i18n', multiline: true, hint: 'pf.about.paragraphHint' },
+  { name: 'text', label: 'pf.about.paragraphText', type: 'i18n', rich: true, hint: 'pf.about.paragraphHint' },
   { name: 'items', label: 'pf.about.listItems', type: 'i18nList', hint: 'pf.about.listHint' },
 ];
 
@@ -54,7 +55,7 @@ const TABS: { key: Tab; label: string }[] = [
 ];
 
 const blockPreview = (r: PfRow) =>
-  r.kind === 'list' ? (r.items_en as string[]).map(i => `• ${i}`).join('  ') : String(r.text_en ?? '');
+  r.kind === 'list' ? (r.items_en as string[]).map(i => `• ${i}`).join('  ') : richPlainText(String(r.text_en ?? ''));
 
 export const PfAbout = () => {
   const { t } = useLanguage();

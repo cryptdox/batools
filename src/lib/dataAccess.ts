@@ -81,6 +81,7 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   pf_interests: ['PORTFOLIO_ABOUT'],
   pf_checklist: ['PORTFOLIO_ABOUT'],
   pf_projects: ['PORTFOLIO_PROJECTS'],
+  pf_project_challenges: ['PORTFOLIO_PROJECTS'],
   pf_experiences: ['PORTFOLIO_EXPERIENCE'],
   pf_education: ['PORTFOLIO_EXPERIENCE'],
   pf_tech_categories: ['PORTFOLIO_TECH_STACK'],

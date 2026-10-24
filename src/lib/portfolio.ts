@@ -43,6 +43,8 @@ export type PfField = {
   type: 'text' | 'textarea' | 'i18n' | 'i18nList' | 'tags' | 'number' | 'boolean' | 'select' | 'date';
   /** i18n only: render as a textarea instead of an input. */
   multiline?: boolean;
+  /** i18n only: a rich text editor per language; the value is stored as HTML. */
+  rich?: boolean;
   required?: boolean;
   /** Translation key shown under the field. */
   hint?: string;
