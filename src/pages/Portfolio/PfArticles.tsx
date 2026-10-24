@@ -38,6 +38,7 @@ const POST_FIELDS: PfField[] = [
     { value: 'published', label: 'pf.articles.statuses.published' },
     { value: 'draft', label: 'pf.articles.statuses.draft' },
   ], hint: 'pf.articles.statusHint' },
+  { name: 'show_on_home', label: 'pf.common.showOnHome', type: 'boolean', hint: 'pf.common.showOnHomeHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.articles.featuredHint' },
 ];
 
@@ -139,6 +140,7 @@ export const PfArticles = () => {
               <Badge variant="default">{t(`pf.articles.kinds.${r.kind}`)}</Badge>
               {r.status === 'draft' && <Badge variant="warning">{t('pf.articles.statuses.draft')}</Badge>}
               {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
+              {r.show_on_home === true && <Badge variant="default">{t('pf.common.onHome')}</Badge>}
             </>}
           />
         )}

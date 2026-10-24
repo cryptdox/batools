@@ -15,7 +15,8 @@ const PROJECT_FIELDS: PfField[] = [
   { name: 'responsibilities', label: 'pf.work.responsibilities', type: 'i18nList' },
   { name: 'tech_stack', label: 'pf.work.techStack', type: 'tags' },
   { name: 'link', label: 'pf.work.link', type: 'text' },
-  { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.work.featuredHint' },
+  { name: 'show_on_home', label: 'pf.common.showOnHome', type: 'boolean', hint: 'pf.common.showOnHomeHint' },
+  { name: 'is_featured', label: 'pf.work.featureProject', type: 'boolean', hint: 'pf.work.featureProjectHint' },
   { name: 'show_case_study', label: 'pf.work.showCaseStudy', type: 'boolean', hint: 'pf.work.showCaseStudyHint' },
   { name: 'show_challenges', label: 'pf.work.showChallenges', type: 'boolean', hint: 'pf.work.showChallengesHint' },
 ];
@@ -28,6 +29,7 @@ const EXPERIENCE_FIELDS: PfField[] = [
   { name: 'duration', label: 'pf.work.duration', type: 'i18n' },
   { name: 'responsibilities', label: 'pf.work.responsibilities', type: 'i18nList' },
   { name: 'is_current', label: 'pf.work.current', type: 'boolean', hint: 'pf.work.currentHint' },
+  { name: 'show_on_home', label: 'pf.common.showOnHome', type: 'boolean', hint: 'pf.common.showOnHomeHint' },
 ];
 
 const TECH_FIELDS: PfField[] = [
@@ -69,7 +71,8 @@ export const PfProjects = () => {
             primary={String(r.title_en)}
             secondary={String(r.duration_en ?? '')}
             extra={<>
-              {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
+              {r.show_on_home === true && <Badge variant="default">{t('pf.common.onHome')}</Badge>}
+              <Badge variant={r.is_featured === true ? 'success' : 'muted'}>{t(r.is_featured === true ? 'pf.work.featureProject' : 'pf.work.enterprise')}</Badge>
               {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}
               {r.show_challenges === true && <Badge variant="warning">{t('pf.work.challengesShown')}</Badge>}
               <Tags items={r.tech_stack} />
@@ -102,7 +105,10 @@ export const PfExperience = () => {
           <PfRowText
             primary={`${r.position_en} · ${r.company_en}`}
             secondary={String(r.duration_en ?? '')}
-            extra={r.is_current === true ? <Badge variant="success">{t('pf.work.current')}</Badge> : undefined}
+            extra={<>
+              {r.is_current === true && <Badge variant="success">{t('pf.work.current')}</Badge>}
+              {r.show_on_home === true && <Badge variant="default">{t('pf.common.onHome')}</Badge>}
+            </>}
           />
         )}
       />
@@ -142,6 +148,7 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'pdf_public', label: 'pf.research.pdfPublic', type: 'boolean', initial: true, hint: 'pf.research.pdfPublicHint' },
   { name: 'code_url', label: 'pf.research.codeUrl', type: 'text' },
   { name: 'citation', label: 'pf.research.citation', type: 'textarea', hint: 'pf.research.citationHint' },
+  { name: 'show_on_home', label: 'pf.common.showOnHome', type: 'boolean', hint: 'pf.common.showOnHomeHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
   { name: 'show_case_study', label: 'pf.work.showCaseStudy', type: 'boolean', hint: 'pf.work.showCaseStudyHint' },
   { name: 'show_challenges', label: 'pf.work.showChallenges', type: 'boolean', hint: 'pf.work.showChallengesHint' },
@@ -172,6 +179,7 @@ export const PfResearch = () => {
               <>
                 <Badge variant="default">{t(`pf.research.types.${r.pub_type}`)}</Badge>
                 {r.status !== 'published' && <Badge variant="warning">{t(`pf.research.status.${r.status}`)}</Badge>}
+                {r.show_on_home === true && <Badge variant="default">{t('pf.common.onHome')}</Badge>}
                 {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
                 {!!r.pdf_url && r.pdf_public === false && <Badge variant="muted">{t('pf.research.pdfPrivate')}</Badge>}
                 {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}

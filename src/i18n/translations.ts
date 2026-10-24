@@ -2,6 +2,7 @@ export const translations = {
   en: {
     pf: {
       common: {
+        showOnHome: 'Show on home page', showOnHomeHint: 'Listed on the portfolio home page; "View all" always lists everything.', onHome: 'On home',
         add: 'Add', added: 'Added', updated: 'Saved', deleted: 'Deleted',
         edit: 'Edit', delete: 'Delete', deleting: 'Deleting...', cancel: 'Cancel',
         save: 'Save', saving: 'Saving...', loading: 'Loading...', search: 'Search',
@@ -43,6 +44,7 @@ export const translations = {
         techTitle: 'Portfolio Tech Stack', categories: 'Categories',
         title: 'Title', duration: 'Duration', description: 'Description', responsibilities: 'Responsibilities',
         techStack: 'Tech stack', link: 'Link', featured: 'Featured', featuredHint: 'Shown on the main page, not only in "all projects".',
+        featureProject: 'Feature project', featureProjectHint: 'A feature-specific build (e.g. a module or tool). Unticked = enterprise grade. Shown as a tag on the portfolio.', enterprise: 'Enterprise grade',
         showCaseStudy: 'Show case study on portfolio', showCaseStudyHint: 'Shows or hides all of its case-study sections at once (each also has its own show / hide). Edit them with the light-bulb button.',
         showChallenges: 'Show challenges & solutions on portfolio', showChallengesHint: 'Shows or hides all of its challenges at once (each also has its own show / hide). Edit them with the light-bulb button.',
         listOnHint: 'On: every visible item below shows on the portfolio.', listOffHint: 'Off: none of the items below show on the portfolio, whatever their own show / hide.',
@@ -990,6 +992,7 @@ export const translations = {
   bn: {
     pf: {
       common: {
+        showOnHome: 'হোম পাতায় দেখান', showOnHomeHint: 'পোর্টফোলিওর হোম পাতায় দেখায়; "সব দেখুন"-এ সবসময় সব থাকে।', onHome: 'হোমে',
         add: 'যোগ করুন', added: 'যোগ হয়েছে', updated: 'সংরক্ষিত', deleted: 'মুছে ফেলা হয়েছে',
         edit: 'সম্পাদনা', delete: 'মুছুন', deleting: 'মুছছে...', cancel: 'বাতিল',
         save: 'সংরক্ষণ', saving: 'সংরক্ষণ হচ্ছে...', loading: 'লোড হচ্ছে...', search: 'খুঁজুন',
@@ -1031,6 +1034,7 @@ export const translations = {
         techTitle: 'পোর্টফোলিও প্রযুক্তি', categories: 'বিভাগ',
         title: 'শিরোনাম', duration: 'সময়কাল', description: 'বিবরণ', responsibilities: 'দায়িত্বসমূহ',
         techStack: 'প্রযুক্তি', link: 'লিংক', featured: 'বিশেষ', featuredHint: 'শুধু "সকল প্রকল্প" নয়, মূল পাতাতেও দেখায়।',
+        featureProject: 'ফিচার প্রকল্প', featureProjectHint: 'নির্দিষ্ট ফিচারভিত্তিক কাজ (যেমন একটি মডিউল বা টুল)। টিক না থাকলে = এন্টারপ্রাইজ গ্রেড। পোর্টফোলিওতে ট্যাগ হিসেবে দেখায়।', enterprise: 'এন্টারপ্রাইজ গ্রেড',
         showCaseStudy: 'পোর্টফোলিওতে কেস স্টাডি দেখান', showCaseStudyHint: 'এর সব কেস স্টাডি অংশ একসাথে দেখায় বা লুকায় (প্রতিটির নিজস্ব দেখান / লুকান-ও আছে)। বাল্ব বাটন দিয়ে সম্পাদনা করুন।',
         showChallenges: 'পোর্টফোলিওতে চ্যালেঞ্জ ও সমাধান দেখান', showChallengesHint: 'এর সব চ্যালেঞ্জ একসাথে দেখায় বা লুকায় (প্রতিটির নিজস্ব দেখান / লুকান-ও আছে)। বাল্ব বাটন দিয়ে সম্পাদনা করুন।',
         listOnHint: 'চালু: নিচের দৃশ্যমান সব আইটেম পোর্টফোলিওতে দেখায়।', listOffHint: 'বন্ধ: নিচের কোনো আইটেম পোর্টফোলিওতে দেখায় না, নিজস্ব দেখান / লুকান যা-ই হোক।',
