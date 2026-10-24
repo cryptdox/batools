@@ -66,6 +66,7 @@ const NAV_TREE: NavGroup[] = [
       { to: '/portfolio/experience', label: 'Experience', icon: Building2 },
       { to: '/portfolio/tech-stack', label: 'Tech Stack', icon: Cpu },
       { to: '/portfolio/research', label: 'Research', icon: FlaskConical },
+      { to: '/portfolio/articles', label: 'Articles', icon: Newspaper },
       { to: '/portfolio/labels', label: 'Labels', icon: Languages },
       { to: '/portfolio/messages', label: 'Messages', icon: Mail },
     ],

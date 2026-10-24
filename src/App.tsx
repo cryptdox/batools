@@ -36,6 +36,7 @@ import { PbProfitAdjust } from './pages/PartnerBusiness/PbProfitAdjust';
 import { PfProfile } from './pages/Portfolio/PfProfile';
 import { PfAbout } from './pages/Portfolio/PfAbout';
 import { PfProjects, PfExperience, PfTechStack, PfResearch } from './pages/Portfolio/PfWork';
+import { PfArticles } from './pages/Portfolio/PfArticles';
 import { PfLabels } from './pages/Portfolio/PfLabels';
 import { PfMessages } from './pages/Portfolio/PfMessages';
 import { OrgAbout } from './pages/OrgSite/OrgAbout';
@@ -186,6 +187,7 @@ function AuthGate() {
         <Route path="/portfolio/experience" element={<PfExperience />} />
         <Route path="/portfolio/tech-stack" element={<PfTechStack />} />
         <Route path="/portfolio/research" element={<PfResearch />} />
+        <Route path="/portfolio/articles" element={<PfArticles />} />
         <Route path="/portfolio/labels" element={<PfLabels />} />
         <Route path="/portfolio/messages" element={<PfMessages />} />
 

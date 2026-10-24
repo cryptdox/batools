@@ -60,7 +60,15 @@ export type PfField = {
   max?: number;
   /** Value a new row starts with (in form shape). */
   initial?: string | boolean;
+  /** Shown (and saved) only while this holds; a hidden field is stored as NULL. */
+  showIf?: (values: PfFormValues) => boolean;
+  /** text only: a "Fetch details" button that reads the link's preview and fills
+   *  these (form keys) when they are still empty. */
+  fetchPreview?: { title?: string; description?: string; image?: string; date?: string };
 };
+
+/** The fields of a form that apply to its current values. */
+export const shownFields = (fields: PfField[], values: PfFormValues) => fields.filter(f => !f.showIf || f.showIf(values));
 
 /** The form keeps everything as strings/booleans; this is the column → form map. */
 export type PfFormValues = Record<string, string | boolean>;
@@ -127,6 +135,17 @@ export function rowFromForm(fields: PfField[], values: PfFormValues): Record<str
       default:
         row[f.name] = text(values[f.name], f.required);
     }
+  }
+  return row;
+}
+
+/** Form → columns, with fields hidden by `showIf` cleared (NULL, [] or false). */
+export function rowFromShownForm(fields: PfField[], values: PfFormValues): Record<string, unknown> {
+  const row = rowFromForm(fields, values);
+  for (const f of fields) {
+    if (!f.showIf || f.showIf(values)) continue;
+    const cols = f.type === 'i18n' || f.type === 'i18nList' ? [`${f.name}_en`, `${f.name}_bn`] : [f.name];
+    for (const c of cols) row[c] = f.type === 'tags' || f.type === 'i18nList' ? [] : f.type === 'boolean' ? false : null;
   }
   return row;
 }

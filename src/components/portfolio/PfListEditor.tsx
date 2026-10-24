@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, AlertTriangle, ArrowUp, ArrowDown, Eye, EyeOff, Search, Inbox } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
-import { errorMessage, formFromRow, isFormComplete, rowFromForm, usePfUserId, type PfField, type PfFormValues, type PfRow } from '../../lib/portfolio';
+import { errorMessage, formFromRow, isFormComplete, rowFromShownForm, shownFields, usePfUserId, type PfField, type PfFormValues, type PfRow } from '../../lib/portfolio';
 import { Button, Badge } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { PfFieldInput, pfInputClass, removeUploads, type PfUploadTarget } from './PfFieldInput';
@@ -41,6 +41,10 @@ type Props = {
   isRowSelected?: (row: PfRow) => boolean;
   /** Bump to reload the rows after they were changed elsewhere. */
   reloadSignal?: number;
+  /** Last say over a row before it is saved (derived columns, e.g. a slug from the title). */
+  transform?: (row: Record<string, unknown>, values: PfFormValues) => Record<string, unknown>;
+  /** Extra buttons in the list's header, before Add. */
+  headerActions?: ReactNode;
 };
 
 /**
@@ -52,7 +56,7 @@ type Props = {
  */
 export const PfListEditor = ({
   table, title, subtitle, fields, renderRow, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
-  owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal,
+  owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal, transform, headerActions,
 }: Props) => {
   const { t } = useLanguage();
   const pfUserId = usePfUserId();
@@ -126,11 +130,11 @@ export const PfListEditor = ({
   };
 
   const handleSave = async () => {
-    if (!ownerId || !isFormComplete(fields, values)) return;
+    if (!ownerId || !isFormComplete(shownFields(fields, values), values)) return;
     setSaving(true);
     try {
       const payload = {
-        ...rowFromForm(fields, values),
+        ...(transform ? transform(rowFromShownForm(fields, values), values) : rowFromShownForm(fields, values)),
         updated_at: new Date().toISOString(),
         ...(auditUserId ? { updated_by: auditUserId } : {}),
       };
@@ -241,6 +245,7 @@ export const PfListEditor = ({
               />
             </div>
           )}
+          {headerActions}
           <Button size="sm" onClick={openAdd}><Plus size={16} className="mr-1" /> {t('pf.common.add')}</Button>
         </div>
       </div>
@@ -310,7 +315,7 @@ export const PfListEditor = ({
         className="max-w-3xl"
       >
         <div className="space-y-4">
-          {fields.map(f => (
+          {shownFields(fields, values).map(f => (
             <PfFieldInput
               key={f.name}
               field={f}
@@ -322,7 +327,7 @@ export const PfListEditor = ({
           ))}
           <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
             <Button variant="ghost" onClick={closeForm} disabled={saving}>{t('pf.common.cancel')}</Button>
-            <Button onClick={handleSave} disabled={saving || !isFormComplete(fields, values)}>
+            <Button onClick={handleSave} disabled={saving || !isFormComplete(shownFields(fields, values), values)}>
               {saving ? t('pf.common.saving') : t('pf.common.save')}
             </Button>
           </div>

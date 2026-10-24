@@ -45,6 +45,7 @@ export const PAGE_RESOURCES: Record<string, string> = {
   '/portfolio/experience': 'PORTFOLIO_EXPERIENCE',
   '/portfolio/tech-stack': 'PORTFOLIO_TECH_STACK',
   '/portfolio/research': 'PORTFOLIO_RESEARCH',
+  '/portfolio/articles': 'PORTFOLIO_ARTICLES',
   '/portfolio/labels': 'PORTFOLIO_LABELS',
   '/portfolio/messages': 'PORTFOLIO_MESSAGES',
   '/org': 'ORG_SITE_ABOUT',

@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Upload } from 'lucide-react';
+import { Upload, Wand2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage, uploadFileName, type PfField, type PfFormValues } from '../../lib/portfolio';
 import { Button } from '../ui/Button';
 import { RichEditor } from '../ui/RichText';
+import { fetchLinkPreview, type LinkPreview } from '../../lib/linkPreview';
 
 export const pfInputClass =
   'w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50';
@@ -75,6 +76,36 @@ const UploadButton = ({ accept, target, onUploaded }: { accept: string; target: 
         {busy ? t('pf.upload.uploading') : t('pf.upload.upload')}
       </Button>
     </>
+  );
+};
+
+/** Fills the empty fields named in `targets` from the link's preview (best effort). */
+const FetchPreviewButton = ({ url, targets, values, onChange }: {
+  url: string;
+  targets: NonNullable<PfField['fetchPreview']>;
+  values: PfFormValues;
+  onChange: (key: string, value: string) => void;
+}) => {
+  const { t } = useLanguage();
+  const [busy, setBusy] = useState(false);
+  const run = async () => {
+    setBusy(true);
+    const { preview, error } = await fetchLinkPreview(url.trim());
+    let filled = 0;
+    for (const [from, key] of Object.entries(targets) as [keyof LinkPreview, string][]) {
+      const value = preview[from];
+      if (key && value && !String(values[key] ?? '').trim()) { onChange(key, value); filled++; }
+    }
+    if (filled) toast.success(t('pf.fetch.filled').replace('{n}', String(filled)));
+    else if (error) toast.warn(`${t('pf.fetch.failed')} (${error})`);
+    else toast.info(t('pf.fetch.nothing'));
+    setBusy(false);
+  };
+  return (
+    <Button type="button" size="sm" variant="outline" className="h-10 shrink-0" onClick={() => void run()} disabled={busy || !/^https?:\/\/\S+\.\S+/.test(url.trim())} title={t('pf.fetch.hint')}>
+      <Wand2 size={14} className="mr-1.5" />
+      {busy ? t('pf.fetch.fetching') : t('pf.fetch.button')}
+    </Button>
   );
 };
 
@@ -150,6 +181,11 @@ export const PfFieldInput = ({ field: f, values, onChange, upload, onUploaded }:
           {f.allowEmpty && <option value="">—</option>}
           {f.options?.map(o => <option key={o.value} value={o.value}>{t(o.label)}</option>)}
         </select>
+      ) : f.fetchPreview ? (
+        <div className="flex items-center gap-2">
+          <input value={textValue(f.name)} onChange={e => onChange(f.name, e.target.value)} placeholder="https://" className={`${pfInputClass} h-10`} />
+          <FetchPreviewButton url={textValue(f.name)} targets={f.fetchPreview} values={values} onChange={onChange} />
+        </div>
       ) : f.upload && upload ? (
         <div className="flex items-center gap-2">
           {f.upload.startsWith('image') && textValue(f.name) && (

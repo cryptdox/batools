@@ -25,7 +25,7 @@ const HERO: PfField[] = [
 ];
 
 // Handles only — the site builds each platform's URL.
-const SOCIAL: PfField[] = ['github', 'linkedin', 'medium', 'youtube', 'facebook', 'x', 'gitlab', 'kaggle']
+const SOCIAL: PfField[] = ['github', 'linkedin', 'medium', 'youtube', 'facebook', 'instagram', 'x', 'gitlab', 'kaggle']
   .map(name => ({ name, label: `pf.profile.${name}`, type: 'text' as const }));
 
 const ALL = [...IDENTITY, ...HERO, ...SOCIAL];

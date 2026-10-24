@@ -83,6 +83,8 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   pf_projects: ['PORTFOLIO_PROJECTS'],
   pf_case_study_sections: ['PORTFOLIO_PROJECTS', 'PORTFOLIO_RESEARCH'],
   pf_challenges: ['PORTFOLIO_PROJECTS', 'PORTFOLIO_RESEARCH'],
+  pf_posts: ['PORTFOLIO_ARTICLES'],
+  pf_post_blocks: ['PORTFOLIO_ARTICLES'],
   pf_experiences: ['PORTFOLIO_EXPERIENCE'],
   pf_education: ['PORTFOLIO_EXPERIENCE'],
   pf_tech_categories: ['PORTFOLIO_TECH_STACK'],
