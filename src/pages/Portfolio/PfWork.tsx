@@ -7,13 +7,17 @@ import { PF_ICON_OPTIONS, usePfUserId, type PfField, type PfRow } from '../../li
 import { PF_BUCKET } from '../../components/portfolio/PfFileUpload';
 import { PfPageHeader } from './PfPageHeader';
 import { PfCaseStudyModal } from '../../components/portfolio/PfCaseStudyModal';
+import { Button } from '../../components/ui/Button';
+import { supabase } from '../../lib/supabase';
+import { addMissingSkills } from '../../lib/techSkills';
+import { toast } from 'react-toastify';
 
 const PROJECT_FIELDS: PfField[] = [
   { name: 'title', label: 'pf.work.title', type: 'i18n', required: true },
   { name: 'duration', label: 'pf.work.duration', type: 'i18n' },
   { name: 'description', label: 'pf.work.description', type: 'i18n', rich: true },
   { name: 'responsibilities', label: 'pf.work.responsibilities', type: 'i18nList' },
-  { name: 'tech_stack', label: 'pf.work.techStack', type: 'tags' },
+  { name: 'tech_stack', label: 'pf.work.techStack', type: 'tags', skillPicker: true, hint: 'pf.skills.hint' },
   { name: 'link', label: 'pf.work.link', type: 'text' },
   { name: 'show_on_home', label: 'pf.common.showOnHome', type: 'boolean', hint: 'pf.common.showOnHomeHint' },
   { name: 'is_featured', label: 'pf.work.featureProject', type: 'boolean', hint: 'pf.work.featureProjectHint' },
@@ -57,6 +61,32 @@ export const PfProjects = () => {
   // The project whose details (case study, challenges) are open in the modal.
   const [project, setProject] = useState<PfRow | null>(null);
   const [reload, setReload] = useState(0);
+  const userId = usePfUserId();
+  const [syncing, setSyncing] = useState(false);
+
+  /** A saved project's new skills join Tech Stack → Others. */
+  const afterSave = async (row: Record<string, unknown>) => {
+    if (!userId) return;
+    const added = await addMissingSkills(userId, (row.tech_stack as string[] | undefined) ?? []);
+    return added.length ? t('pf.skills.added').replace('{list}', added.join(', ')) : undefined;
+  };
+
+  /** Every project's skills that the Tech Stack does not list yet, added to Others. */
+  const syncSkills = async () => {
+    if (!userId) return;
+    setSyncing(true);
+    try {
+      const { data, error } = await supabase.from('pf_projects').select('tech_stack').eq('user_id', userId);
+      if (error) throw error;
+      const added = await addMissingSkills(userId, (data ?? []).flatMap(p => (p.tech_stack as string[]) ?? []));
+      toast.success(added.length ? t('pf.skills.added').replace('{list}', added.join(', ')) : t('pf.skills.inSync'));
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : String((e as { message?: string })?.message ?? e));
+    } finally {
+      setSyncing(false);
+    }
+  };
+
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.work.projectsTitle" subtitle="pf.common.orderHint" />
@@ -66,6 +96,12 @@ export const PfProjects = () => {
         fields={PROJECT_FIELDS}
         searchable
         reloadSignal={reload}
+        afterSave={afterSave}
+        headerActions={
+          <Button size="sm" variant="outline" onClick={() => void syncSkills()} disabled={syncing} title={t('pf.skills.syncHint')}>
+            {syncing ? t('pf.skills.syncing') : t('pf.skills.sync')}
+          </Button>
+        }
         renderRow={r => (
           <PfRowText
             primary={String(r.title_en)}

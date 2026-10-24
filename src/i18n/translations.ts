@@ -93,6 +93,12 @@ export const translations = {
         thumbnail: 'Banner image', thumbnailHint: 'Filled in from YouTube links; upload or paste one for others.',
         caption: 'Caption', code: 'Code', codeLanguage: 'Language',
       },
+      skills: {
+        placeholder: 'Type to pick from your Tech Stack…', hint: 'Picked from Tech Stack. A new name is added to Tech Stack → Others when you save.',
+        newHint: 'Not in your Tech Stack yet: joins Others when saved', addNew: 'Add "{name}" (new skill)',
+        added: 'Added to Tech Stack → Others: {list}', inSync: 'Every project skill is already in your Tech Stack.',
+        sync: 'Sync skills', syncing: 'Syncing…', syncHint: 'Add every project skill missing from Tech Stack to its Others category.',
+      },
       fetch: {
         button: 'Fetch details', fetching: 'Fetching…', hint: 'Fill empty fields from the link (when the site allows it).',
         filled: 'Filled {n} field(s) from the link.', nothing: 'No details found for this link: fill them in by hand.',
@@ -1082,6 +1088,12 @@ export const translations = {
         linkUrl: 'লিংক', linkUrlHint: 'ভিডিও আপলোড হয় না: ভিডিওর লিংক দিন, পোর্টফোলিও একটি ব্যানার দেখাবে যা ভিডিওটি খোলে।',
         thumbnail: 'ব্যানার ছবি', thumbnailHint: 'YouTube লিংক থেকে নিজে পূরণ হয়; অন্যগুলোর জন্য আপলোড করুন বা লিংক দিন।',
         caption: 'ক্যাপশন', code: 'কোড', codeLanguage: 'ভাষা',
+      },
+      skills: {
+        placeholder: 'আপনার টেক স্ট্যাক থেকে বাছতে লিখুন…', hint: 'টেক স্ট্যাক থেকে বাছাই। নতুন নাম সেভ করলে টেক স্ট্যাক → অন্যান্য-তে যোগ হয়।',
+        newHint: 'এখনো টেক স্ট্যাকে নেই: সেভ করলে অন্যান্য-তে যোগ হবে', addNew: '"{name}" যোগ করুন (নতুন দক্ষতা)',
+        added: 'টেক স্ট্যাক → অন্যান্য-তে যোগ হয়েছে: {list}', inSync: 'প্রকল্পের সব দক্ষতা ইতিমধ্যে টেক স্ট্যাকে আছে।',
+        sync: 'দক্ষতা মেলান', syncing: 'মেলানো হচ্ছে…', syncHint: 'টেক স্ট্যাকে না থাকা প্রকল্পের সব দক্ষতা অন্যান্য বিভাগে যোগ করুন।',
       },
       fetch: {
         button: 'তথ্য আনুন', fetching: 'আনা হচ্ছে…', hint: 'লিংক থেকে খালি ঘর পূরণ করুন (সাইট অনুমতি দিলে)।',

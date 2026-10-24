@@ -45,6 +45,8 @@ type Props = {
   transform?: (row: Record<string, unknown>, values: PfFormValues) => Record<string, unknown>;
   /** Extra buttons in the list's header, before Add. */
   headerActions?: ReactNode;
+  /** Runs after a row is saved (with the saved columns); a returned message is shown. */
+  afterSave?: (row: Record<string, unknown>) => Promise<string | void>;
 };
 
 /**
@@ -56,7 +58,7 @@ type Props = {
  */
 export const PfListEditor = ({
   table, title, subtitle, fields, renderRow, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
-  owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal, transform, headerActions,
+  owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal, transform, headerActions, afterSave,
 }: Props) => {
   const { t } = useLanguage();
   const pfUserId = usePfUserId();
@@ -156,9 +158,11 @@ export const PfListEditor = ({
         await removeUploads(upload, candidates.filter(url => !kept.has(url)));
       }
       formUploads.current = [];
+      const note = afterSave ? await afterSave(payload).catch(e => { console.error(e); return undefined; }) : undefined;
       await fetchRows();
       setIsModalOpen(false);
       toast.success(editing ? t('pf.common.updated') : t('pf.common.added'));
+      if (note) toast.info(note);
     } catch (e) {
       console.error(e);
       toast.error(errorMessage(e, t('pf.common.saveError')));

@@ -60,6 +60,8 @@ export type PfField = {
   max?: number;
   /** Value a new row starts with (in form shape). */
   initial?: string | boolean;
+  /** tags only: pick from the Tech Stack skills (new names allowed). */
+  skillPicker?: boolean;
   /** Shown (and saved) only while this holds; a hidden field is stored as NULL. */
   showIf?: (values: PfFormValues) => boolean;
   /** text only: a "Fetch details" button that reads the link's preview and fills

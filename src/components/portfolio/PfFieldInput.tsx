@@ -7,6 +7,7 @@ import { errorMessage, uploadFileName, type PfField, type PfFormValues } from '.
 import { Button } from '../ui/Button';
 import { RichEditor } from '../ui/RichText';
 import { fetchLinkPreview, type LinkPreview } from '../../lib/linkPreview';
+import { PfSkillPicker } from './PfSkillPicker';
 
 export const pfInputClass =
   'w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50';
@@ -181,6 +182,8 @@ export const PfFieldInput = ({ field: f, values, onChange, upload, onUploaded }:
           {f.allowEmpty && <option value="">—</option>}
           {f.options?.map(o => <option key={o.value} value={o.value}>{t(o.label)}</option>)}
         </select>
+      ) : f.type === 'tags' && f.skillPicker ? (
+        <PfSkillPicker value={textValue(f.name)} onChange={v => onChange(f.name, v)} />
       ) : f.fetchPreview ? (
         <div className="flex items-center gap-2">
           <input value={textValue(f.name)} onChange={e => onChange(f.name, e.target.value)} placeholder="https://" className={`${pfInputClass} h-10`} />
@@ -205,7 +208,7 @@ export const PfFieldInput = ({ field: f, values, onChange, upload, onUploaded }:
           className={`${pfInputClass} h-10`}
         />
       )}
-      {f.type === 'tags' && <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('pf.common.commaSeparated')}</p>}
+      {f.type === 'tags' && !f.skillPicker && <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{t('pf.common.commaSeparated')}</p>}
       {hint}
     </div>
   );
