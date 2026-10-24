@@ -39,6 +39,8 @@ type Props = {
   rowActions?: (row: PfRow) => ReactNode;
   /** Highlights the row (e.g. the one whose children are shown below). */
   isRowSelected?: (row: PfRow) => boolean;
+  /** Bump to reload the rows after they were changed elsewhere. */
+  reloadSignal?: number;
 };
 
 /**
@@ -50,7 +52,7 @@ type Props = {
  */
 export const PfListEditor = ({
   table, title, subtitle, fields, renderRow, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
-  owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange,
+  owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal,
 }: Props) => {
   const { t } = useLanguage();
   const pfUserId = usePfUserId();
@@ -100,7 +102,7 @@ export const PfListEditor = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table, ownerColumn, ownerId, scopeKey, sortKey]);
 
-  useEffect(() => { void fetchRows(); }, [fetchRows]);
+  useEffect(() => { void fetchRows(); }, [fetchRows, reloadSignal]);
 
   const visibleRows = useMemo(() => {
     const needle = search.trim().toLowerCase();

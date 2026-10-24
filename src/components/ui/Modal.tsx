@@ -12,24 +12,31 @@ interface ModalProps {
   className?: string;
 }
 
+/** Open modals, innermost last: Escape closes only the top one, and the page
+ * stays locked until the last one closes (a form can open over a modal). */
+const openStack: object[] = [];
+
 export const Modal = ({ isOpen, onClose, title, children, className }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const token = useRef({});
+  const onCloseRef = useRef(onClose);
+  useEffect(() => { onCloseRef.current = onClose; });
 
   useEffect(() => {
+    if (!isOpen) return;
+    const me = token.current;
+    openStack.push(me);
+    document.body.style.overflow = 'hidden';
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape' && openStack[openStack.length - 1] === me) onCloseRef.current();
     };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
-    }
-
+    document.addEventListener('keydown', handleEscape);
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      openStack.splice(openStack.indexOf(me), 1);
+      if (openStack.length === 0) document.body.style.overflow = 'unset';
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

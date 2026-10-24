@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Lightbulb } from 'lucide-react';
 import { Badge } from '../../components/ui/Button';
 import { PfListEditor, PfRowText } from '../../components/portfolio/PfListEditor';
@@ -6,7 +6,7 @@ import { useLanguage } from '../../lib/LanguageContext';
 import { PF_ICON_OPTIONS, usePfUserId, type PfField, type PfRow } from '../../lib/portfolio';
 import { PF_BUCKET } from '../../components/portfolio/PfFileUpload';
 import { PfPageHeader } from './PfPageHeader';
-import { richPlainText } from '../../components/ui/RichText';
+import { PfCaseStudyModal } from '../../components/portfolio/PfCaseStudyModal';
 
 const PROJECT_FIELDS: PfField[] = [
   { name: 'title', label: 'pf.work.title', type: 'i18n', required: true },
@@ -16,16 +16,9 @@ const PROJECT_FIELDS: PfField[] = [
   { name: 'tech_stack', label: 'pf.work.techStack', type: 'tags' },
   { name: 'link', label: 'pf.work.link', type: 'text' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.work.featuredHint' },
-  { name: 'overview', label: 'pf.work.overview', type: 'i18n', rich: true, hint: 'pf.work.overviewHint' },
   { name: 'show_case_study', label: 'pf.work.showCaseStudy', type: 'boolean', hint: 'pf.work.showCaseStudyHint' },
 ];
 
-/** One challenge of a project's case study (pf_project_challenges, 057). */
-const CHALLENGE_FIELDS: PfField[] = [
-  { name: 'challenge', label: 'pf.work.challenge', type: 'i18n', rich: true, required: true, hint: 'pf.work.challengeHint' },
-  { name: 'solution', label: 'pf.work.solution', type: 'i18n', rich: true, hint: 'pf.work.solutionHint' },
-  { name: 'result', label: 'pf.work.result', type: 'i18n', rich: true, hint: 'pf.work.resultHint' },
-];
 
 const EXPERIENCE_FIELDS: PfField[] = [
   { name: 'position', label: 'pf.work.position', type: 'i18n', required: true },
@@ -42,20 +35,25 @@ const TECH_FIELDS: PfField[] = [
   { name: 'skills', label: 'pf.work.skills', type: 'tags' },
 ];
 
+/** Opens a project's / publication's case study and challenges. */
+const DetailsButton = ({ onClick }: { onClick: () => void }) => {
+  const { t } = useLanguage();
+  return (
+    <button className="p-1.5 rounded-md text-primary hover:bg-primary/10" onClick={onClick} title={t('pf.work.details')}>
+      <Lightbulb size={16} />
+    </button>
+  );
+};
+
 const Tags = ({ items }: { items: unknown }) => (
   <>{(items as string[]).map(s => <Badge key={s} variant="muted">{s}</Badge>)}</>
 );
 
 export const PfProjects = () => {
   const { t } = useLanguage();
-  // The project whose challenges are open below the list.
+  // The project whose details (case study, challenges) are open in the modal.
   const [project, setProject] = useState<PfRow | null>(null);
-  // The challenges open below a long list: bring them into view on each pick.
-  const challengesRef = useRef<HTMLDivElement>(null);
-  const projectId = project?.id;
-  useEffect(() => {
-    if (projectId) challengesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, [projectId]);
+  const [reload, setReload] = useState(0);
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.work.projectsTitle" subtitle="pf.common.orderHint" />
@@ -64,6 +62,7 @@ export const PfProjects = () => {
         title="pf.work.projects"
         fields={PROJECT_FIELDS}
         searchable
+        reloadSignal={reload}
         renderRow={r => (
           <PfRowText
             primary={String(r.title_en)}
@@ -75,33 +74,15 @@ export const PfProjects = () => {
             </>}
           />
         )}
-        onRowsChange={rows => setProject(p => (p ? rows.find(r => r.id === p.id) ?? null : null))}
-        isRowSelected={r => r.id === project?.id}
-        rowActions={r => (
-          <button
-            className="p-1.5 rounded-md text-primary hover:bg-primary/10"
-            onClick={() => setProject(r)}
-            title={t('pf.work.editChallenges')}
-          >
-            <Lightbulb size={16} />
-          </button>
-        )}
+        rowActions={r => <DetailsButton onClick={() => setProject(r)} />}
       />
-      {project ? (
-        <div ref={challengesRef} className="scroll-mt-4">
-        <PfListEditor
-          key={project.id}
-          table="pf_project_challenges"
-          title="pf.work.challenges"
-          subtitle={`${project.title_en}${project.show_case_study === true ? '' : ` · ${t('pf.work.caseStudyHiddenNote')}`}`}
-          fields={CHALLENGE_FIELDS}
-          scope={{ project_id: project.id }}
-          renderRow={r => <PfRowText primary={richPlainText(String(r.challenge_en))} secondary={richPlainText(String(r.solution_en ?? ''))} />}
-        />
-        </div>
-      ) : (
-        <p className="text-sm text-center text-gray-500 dark:text-gray-400">{t('pf.work.pickProject')}</p>
-      )}
+      <PfCaseStudyModal
+        row={project}
+        table="pf_projects"
+        parentColumn="project_id"
+        onClose={() => setProject(null)}
+        onSwitchChange={() => setReload(n => n + 1)}
+      />
     </div>
   );
 };
@@ -160,11 +141,15 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'code_url', label: 'pf.research.codeUrl', type: 'text' },
   { name: 'citation', label: 'pf.research.citation', type: 'textarea', hint: 'pf.research.citationHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
+  { name: 'show_case_study', label: 'pf.work.showCaseStudy', type: 'boolean', hint: 'pf.work.showCaseStudyHint' },
 ];
 
 export const PfResearch = () => {
   const { t } = useLanguage();
   const userId = usePfUserId();
+  // The publication whose details (case study, challenges) are open in the modal.
+  const [publication, setPublication] = useState<PfRow | null>(null);
+  const [reload, setReload] = useState(0);
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.research.pageTitle" subtitle="pf.common.orderHint" />
@@ -174,6 +159,8 @@ export const PfResearch = () => {
         fields={PUBLICATION_FIELDS}
         upload={userId ? { bucket: PF_BUCKET, folder: `${userId}/research` } : undefined}
         searchable
+        reloadSignal={reload}
+        rowActions={r => <DetailsButton onClick={() => setPublication(r)} />}
         renderRow={r => (
           <PfRowText
             primary={String(r.title_en)}
@@ -184,10 +171,18 @@ export const PfResearch = () => {
                 {r.status !== 'published' && <Badge variant="warning">{t(`pf.research.status.${r.status}`)}</Badge>}
                 {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
                 {!!r.pdf_url && r.pdf_public === false && <Badge variant="muted">{t('pf.research.pdfPrivate')}</Badge>}
+                {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}
               </>
             }
           />
         )}
+      />
+      <PfCaseStudyModal
+        row={publication}
+        table="pf_publications"
+        parentColumn="publication_id"
+        onClose={() => setPublication(null)}
+        onSwitchChange={() => setReload(n => n + 1)}
       />
     </div>
   );
