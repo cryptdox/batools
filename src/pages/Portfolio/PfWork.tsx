@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Lightbulb } from 'lucide-react';
 import { Badge } from '../../components/ui/Button';
 import { PfListEditor, PfRowText } from '../../components/portfolio/PfListEditor';
@@ -50,6 +50,12 @@ export const PfProjects = () => {
   const { t } = useLanguage();
   // The project whose challenges are open below the list.
   const [project, setProject] = useState<PfRow | null>(null);
+  // The challenges open below a long list: bring them into view on each pick.
+  const challengesRef = useRef<HTMLDivElement>(null);
+  const projectId = project?.id;
+  useEffect(() => {
+    if (projectId) challengesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [projectId]);
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.work.projectsTitle" subtitle="pf.common.orderHint" />
@@ -82,6 +88,7 @@ export const PfProjects = () => {
         )}
       />
       {project ? (
+        <div ref={challengesRef} className="scroll-mt-4">
         <PfListEditor
           key={project.id}
           table="pf_project_challenges"
@@ -91,6 +98,7 @@ export const PfProjects = () => {
           scope={{ project_id: project.id }}
           renderRow={r => <PfRowText primary={richPlainText(String(r.challenge_en))} secondary={richPlainText(String(r.solution_en ?? ''))} />}
         />
+        </div>
       ) : (
         <p className="text-sm text-center text-gray-500 dark:text-gray-400">{t('pf.work.pickProject')}</p>
       )}
