@@ -28,7 +28,22 @@ const HERO: PfField[] = [
 const SOCIAL: PfField[] = ['github', 'linkedin', 'medium', 'youtube', 'facebook', 'instagram', 'x', 'gitlab', 'kaggle']
   .map(name => ({ name, label: `pf.profile.${name}`, type: 'text' as const }));
 
-const ALL = [...IDENTITY, ...HERO, ...SOCIAL];
+// For the researcher-style portfolio (063).
+const RESEARCH: PfField[] = [
+  { name: 'research_title', label: 'pf.profile.researchTitle', type: 'i18n', hint: 'pf.profile.researchTitleHint' },
+  { name: 'affiliation', label: 'pf.profile.affiliation', type: 'i18n' },
+  { name: 'research_statement', label: 'pf.profile.researchStatement', type: 'i18n', rich: true },
+  { name: 'research_interests', label: 'pf.profile.researchInterests', type: 'i18nList', hint: 'pf.common.onePerLine' },
+];
+
+const ACADEMIC: PfField[] = [
+  { name: 'huggingface', label: 'pf.profile.huggingface', type: 'text' },
+  { name: 'google_scholar', label: 'pf.profile.google_scholar', type: 'text', hint: 'pf.profile.google_scholarHint' },
+  { name: 'orcid', label: 'pf.profile.orcid', type: 'text', hint: 'pf.profile.orcidHint' },
+  { name: 'researchgate', label: 'pf.profile.researchgate', type: 'text', hint: 'pf.profile.researchgateHint' },
+];
+
+const ALL = [...IDENTITY, ...HERO, ...SOCIAL, ...RESEARCH, ...ACADEMIC];
 
 const ROLE_FIELDS: PfField[] = [
   { name: 'text', label: 'pf.profile.roleText', type: 'i18n', required: true },
@@ -48,6 +63,7 @@ export const PfProfile = () => {
   const [values, setValues] = useState<PfFormValues>(() => formFromRow(ALL, null));
   // Saved on its own the moment a file is uploaded, not by the Save button.
   const [resumeUrl, setResumeUrl] = useState<string | null>(null);
+  const [researchCvUrl, setResearchCvUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
@@ -59,6 +75,7 @@ export const PfProfile = () => {
       if (error) toast.error(error.message);
       setValues(formFromRow(ALL, data));
       setResumeUrl(data?.resume_url ?? null);
+      setResearchCvUrl(data?.research_cv_url ?? null);
       setLoading(false);
     })();
   }, [userId]);
@@ -89,6 +106,13 @@ export const PfProfile = () => {
     const { error } = await supabase.from('pf_profile').upsert({ user_id: userId, resume_url: url, updated_at: new Date().toISOString() });
     if (error) throw error;
     setResumeUrl(url);
+  };
+
+  const saveResearchCvUrl = async (url: string | null) => {
+    if (!userId) return;
+    const { error } = await supabase.from('pf_profile').upsert({ user_id: userId, research_cv_url: url, updated_at: new Date().toISOString() });
+    if (error) throw error;
+    setResearchCvUrl(url);
   };
 
   const section = (fields: PfField[]) => fields.map(f => <PfFieldInput key={f.name} field={f} values={values} onChange={onChange} />);
@@ -125,6 +149,23 @@ export const PfProfile = () => {
           <Card title={t('pf.profile.hero')}>{section(HERO)}</Card>
           <Card title={t('pf.profile.social')}>
             <div className="grid sm:grid-cols-2 gap-4">{section(SOCIAL)}</div>
+          </Card>
+          <Card title={t('pf.profile.research')}>
+            <p className="text-sm text-gray-500 dark:text-gray-400 -mt-2">{t('pf.profile.researchHint')}</p>
+            {section(RESEARCH)}
+            {userId && (
+              <PfFileUpload
+                userId={userId}
+                label="pf.profile.researchCv"
+                name="research-cv"
+                accept="application/pdf"
+                url={researchCvUrl}
+                onChange={saveResearchCvUrl}
+              />
+            )}
+          </Card>
+          <Card title={t('pf.profile.academicLinks')}>
+            <div className="grid sm:grid-cols-2 gap-4">{section(ACADEMIC)}</div>
           </Card>
           <div className="flex justify-end">
             <Button onClick={handleSave} disabled={saving || !isFormComplete(ALL, values)}>

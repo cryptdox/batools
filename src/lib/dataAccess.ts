@@ -90,6 +90,7 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   pf_tech_categories: ['PORTFOLIO_TECH_STACK'],
   pf_core_skills: ['PORTFOLIO_TECH_STACK'],
   pf_publications: ['PORTFOLIO_RESEARCH'],
+  pf_research_artifacts: ['PORTFOLIO_RESEARCH'],
   pf_labels: ['PORTFOLIO_LABELS'],
   pf_messages: ['PORTFOLIO_MESSAGES'],
   // Organization site

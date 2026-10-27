@@ -26,7 +26,11 @@ const PROJECT_FIELDS: PfField[] = [
 ];
 
 
+const EXPERIENCE_KINDS = ['industry', 'research', 'teaching']
+  .map(value => ({ value, label: `pf.work.experienceKinds.${value}` }));
+
 const EXPERIENCE_FIELDS: PfField[] = [
+  { name: 'kind', label: 'pf.work.experienceKind', type: 'select', options: EXPERIENCE_KINDS, initial: 'industry', hint: 'pf.work.experienceKindHint' },
   { name: 'position', label: 'pf.work.position', type: 'i18n', required: true },
   { name: 'company', label: 'pf.work.company', type: 'i18n', required: true },
   { name: 'location', label: 'pf.about.location', type: 'i18n' },
@@ -142,6 +146,7 @@ export const PfExperience = () => {
             primary={`${r.position_en} · ${r.company_en}`}
             secondary={String(r.duration_en ?? '')}
             extra={<>
+              {r.kind && r.kind !== 'industry' && <Badge variant="warning">{t(`pf.work.experienceKinds.${r.kind}`)}</Badge>}
               {r.is_current === true && <Badge variant="success">{t('pf.work.current')}</Badge>}
               {r.show_on_home === true && <Badge variant="default">{t('pf.common.onHome')}</Badge>}
             </>}
@@ -190,12 +195,35 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'show_challenges', label: 'pf.work.showChallenges', type: 'boolean', hint: 'pf.work.showChallengesHint' },
 ];
 
+const ARTIFACT_KINDS = ['model', 'dataset', 'demo', 'code']
+  .map(value => ({ value, label: `pf.research.kinds.${value}` }));
+const ARTIFACT_PLATFORMS = ['huggingface', 'kaggle', 'github', 'zenodo', 'website', 'other']
+  .map(value => ({ value, label: `pf.research.platforms.${value}` }));
+
+/** A released model / dataset / demo / code (063); `papers` are the publications to link it to. */
+const artifactFields = (papers: { value: string; label: string }[]): PfField[] => [
+  { name: 'kind', label: 'pf.research.artifactKind', type: 'select', options: ARTIFACT_KINDS, initial: 'model' },
+  { name: 'platform', label: 'pf.research.platform', type: 'select', options: ARTIFACT_PLATFORMS, initial: 'huggingface' },
+  { name: 'title', label: 'pf.work.title', type: 'i18n', required: true },
+  { name: 'description', label: 'pf.work.description', type: 'i18n', multiline: true },
+  { name: 'url', label: 'pf.research.artifactUrl', type: 'text', required: true },
+  { name: 'demo_url', label: 'pf.research.demoUrl', type: 'text', hint: 'pf.research.demoUrlHint' },
+  { name: 'publication_id', label: 'pf.research.paper', type: 'select', options: papers, allowEmpty: true, hint: 'pf.research.paperHint' },
+  { name: 'metrics', label: 'pf.research.metrics', type: 'tags', hint: 'pf.research.metricsHint' },
+  { name: 'tags', label: 'pf.research.tags', type: 'tags' },
+  { name: 'released_on', label: 'pf.research.releasedOn', type: 'date' },
+  { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
+];
+
 export const PfResearch = () => {
   const { t } = useLanguage();
   const userId = usePfUserId();
   // The publication whose details (case study, challenges) are open in the modal.
   const [publication, setPublication] = useState<PfRow | null>(null);
   const [reload, setReload] = useState(0);
+  // Publications, for linking an artifact to its paper.
+  const [papers, setPapers] = useState<{ value: string; label: string }[]>([]);
+  const paperTitle = (id: unknown) => papers.find(p => p.value === id)?.label;
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.research.pageTitle" subtitle="pf.common.orderHint" />
@@ -206,6 +234,7 @@ export const PfResearch = () => {
         upload={userId ? { bucket: PF_BUCKET, folder: `${userId}/research` } : undefined}
         searchable
         reloadSignal={reload}
+        onRowsChange={rows => setPapers(rows.map(r => ({ value: r.id, label: String(r.title_en) })))}
         rowActions={r => <DetailsButton onClick={() => setPublication(r)} />}
         renderRow={r => (
           <PfRowText
@@ -222,6 +251,25 @@ export const PfResearch = () => {
                 {r.show_challenges === true && <Badge variant="warning">{t('pf.work.challengesShown')}</Badge>}
               </>
             }
+          />
+        )}
+      />
+      <PfListEditor
+        table="pf_research_artifacts"
+        title="pf.research.artifacts"
+        subtitle="pf.research.artifactsHint"
+        fields={artifactFields(papers)}
+        searchable
+        renderRow={r => (
+          <PfRowText
+            primary={String(r.title_en)}
+            secondary={[paperTitle(r.publication_id), String(r.url)].filter(Boolean).join(' · ')}
+            extra={<>
+              <Badge variant="default">{t(`pf.research.kinds.${r.kind}`)}</Badge>
+              <Badge variant="muted">{t(`pf.research.platforms.${r.platform}`)}</Badge>
+              {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
+              <Tags items={r.metrics} />
+            </>}
           />
         )}
       />
