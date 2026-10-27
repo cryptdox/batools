@@ -1,39 +1,47 @@
 -- Research portfolio content for Abir Hosen (IAM user 88b3efb5-…).
 -- Run once in the Supabase SQL editor AFTER migration 063. Safe to re-run:
 -- it updates the profile and inserts only rows that are not there yet
--- (publications by title, experience by position + company, artifacts by URL).
+-- (versions by slug, publications by title, experience by position, artifacts
+-- by URL). New rows are in every version unless tagged otherwise.
 -- Everything stays editable in batools → Portfolio afterwards.
 
 BEGIN;
 
 ------------------------------------------------------------------------------
--- Profile: research headline, affiliation, statement, interests, links
+-- Versions: Developer (today's site, the default) and Researcher
 ------------------------------------------------------------------------------
-UPDATE pf_profile SET
-  research_title_en = 'AI Researcher · Machine Learning & Bengali NLP',
-  research_title_bn = 'এআই গবেষক · মেশিন লার্নিং ও বাংলা এনএলপি',
-  affiliation_en = 'Dept. of Information & Communication Engineering, Noakhali Science & Technology University',
-  affiliation_bn = 'তথ্য ও যোগাযোগ প্রকৌশল বিভাগ, নোয়াখালী বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়',
-  research_statement_en = $t$<p>I work on <strong>machine learning for healthcare risk prediction</strong>, <strong>climate forecasting</strong> and <strong>low-resource Bengali NLP</strong> (fake news and cyberbullying detection), with two years of academic research at Noakhali Science &amp; Technology University and about six years of industry engineering.</p><p>My focus is <strong>evaluation you can trust</strong>: removing train/test leakage, reporting honest numbers and giving uncertainty with conformal prediction intervals. I release my research models with live demos on Hugging Face so the results can be checked, and I build LLM systems with RAG and agentic tooling (MCP) in industry.</p>$t$,
-  research_interests_en = ARRAY[
-    'Machine learning for clinical risk prediction',
-    'Low-resource Bengali NLP: fake news and cyberbullying',
-    'Climate and weather forecasting',
-    'Trustworthy evaluation: leakage control, conformal prediction',
-    'LLM systems: RAG and agentic tooling (MCP)',
-    'Efficient deployment: ONNX and in-browser inference'
-  ],
-  research_interests_bn = ARRAY[
-    'ক্লিনিক্যাল ঝুঁকি পূর্বাভাসে মেশিন লার্নিং',
-    'স্বল্প-সম্পদ বাংলা এনএলপি: ভুয়া খবর ও সাইবার বুলিং',
-    'জলবায়ু ও আবহাওয়ার পূর্বাভাস',
-    'বিশ্বাসযোগ্য মূল্যায়ন: লিকেজ নিয়ন্ত্রণ, কনফরমাল প্রেডিকশন',
-    'এলএলএম সিস্টেম: RAG ও এজেন্টিক টুলিং (MCP)',
-    'দক্ষ ডিপ্লয়মেন্ট: ONNX ও ব্রাউজারে ইনফারেন্স'
-  ],
-  huggingface = 'abir71',
-  updated_at = now()
-WHERE user_id = '88b3efb5-8c58-486e-a3f7-751cc4b23e60';
+INSERT INTO pf_versions (user_id, slug, name_en, name_bn, layout, is_active, is_default, sort_order,
+  title_en, title_bn, affiliation_en, affiliation_bn, statement_en, interests_en, interests_bn)
+VALUES
+  ('88b3efb5-8c58-486e-a3f7-751cc4b23e60', 'developer', 'Developer', 'ডেভেলপার', 'developer', true, true, 1,
+   NULL, NULL, NULL, NULL, NULL, '{}', '{}'),
+  ('88b3efb5-8c58-486e-a3f7-751cc4b23e60', 'researcher', 'Researcher', 'গবেষক', 'researcher', true, false, 2,
+   'AI Researcher · Machine Learning & Bengali NLP',
+   'এআই গবেষক · মেশিন লার্নিং ও বাংলা এনএলপি',
+   'Dept. of Information & Communication Engineering, Noakhali Science & Technology University',
+   'তথ্য ও যোগাযোগ প্রকৌশল বিভাগ, নোয়াখালী বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়',
+   $t$<p>I work on <strong>machine learning for healthcare risk prediction</strong>, <strong>climate forecasting</strong> and <strong>low-resource Bengali NLP</strong> (fake news and cyberbullying detection), with two years of academic research at Noakhali Science &amp; Technology University and about six years of industry engineering.</p><p>My focus is <strong>evaluation you can trust</strong>: removing train/test leakage, reporting honest numbers and giving uncertainty with conformal prediction intervals. I release my research models with live demos on Hugging Face so the results can be checked, and I build LLM systems with RAG and agentic tooling (MCP) in industry.</p>$t$,
+   ARRAY[
+     'Machine learning for clinical risk prediction',
+     'Low-resource Bengali NLP: fake news and cyberbullying',
+     'Climate and weather forecasting',
+     'Trustworthy evaluation: leakage control, conformal prediction',
+     'LLM systems: RAG and agentic tooling (MCP)',
+     'Efficient deployment: ONNX and in-browser inference'
+   ],
+   ARRAY[
+     'ক্লিনিক্যাল ঝুঁকি পূর্বাভাসে মেশিন লার্নিং',
+     'স্বল্প-সম্পদ বাংলা এনএলপি: ভুয়া খবর ও সাইবার বুলিং',
+     'জলবায়ু ও আবহাওয়ার পূর্বাভাস',
+     'বিশ্বাসযোগ্য মূল্যায়ন: লিকেজ নিয়ন্ত্রণ, কনফরমাল প্রেডিকশন',
+     'এলএলএম সিস্টেম: RAG ও এজেন্টিক টুলিং (MCP)',
+     'দক্ষ ডিপ্লয়মেন্ট: ONNX ও ব্রাউজারে ইনফারেন্স'
+   ])
+ON CONFLICT (user_id, slug) DO NOTHING;
+
+-- Academic links.
+UPDATE pf_profile SET huggingface = 'abir71', updated_at = now()
+WHERE user_id = '88b3efb5-8c58-486e-a3f7-751cc4b23e60' AND huggingface IS NULL;
 
 ------------------------------------------------------------------------------
 -- Publications under review
@@ -64,11 +72,12 @@ WHERE NOT EXISTS (
 );
 
 ------------------------------------------------------------------------------
--- Research experience. Kept off the current site's home page (show_on_home
--- false); the research site lists research roles on their own.
+-- Research experience, shown in the Researcher version only.
 ------------------------------------------------------------------------------
-INSERT INTO pf_experiences (user_id, kind, position_en, position_bn, company_en, company_bn, location_en, location_bn, duration_en, duration_bn, responsibilities_en, is_current, show_on_home, sort_order)
-SELECT '88b3efb5-8c58-486e-a3f7-751cc4b23e60', 'research',
+INSERT INTO pf_experiences (user_id, versions, kind, position_en, position_bn, company_en, company_bn, location_en, location_bn, duration_en, duration_bn, responsibilities_en, is_current, show_on_home, sort_order)
+SELECT '88b3efb5-8c58-486e-a3f7-751cc4b23e60',
+  ARRAY(SELECT id FROM pf_versions WHERE user_id = '88b3efb5-8c58-486e-a3f7-751cc4b23e60' AND slug = 'researcher'),
+  'research',
   'Research Assistant', 'রিসার্চ অ্যাসিস্ট্যান্ট',
   'Dept. of ICE, Noakhali Science & Technology University (under Dr. Md. Ashikur Rahman Khan)',
   'আইসিই বিভাগ, নোয়াখালী বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় (ড. মো. আশিকুর রহমান খানের তত্ত্বাবধানে)',
@@ -82,7 +91,7 @@ SELECT '88b3efb5-8c58-486e-a3f7-751cc4b23e60', 'research',
     'Weather forecasting: leakage-controlled monthly forecasts for 24 BMD stations with conformal prediction intervals.',
     'Co-authored 2 peer-reviewed journal articles, with 2 more under review; released the models with live demos on Hugging Face.'
   ],
-  false, false, 6
+  false, true, 0
 WHERE NOT EXISTS (
   SELECT 1 FROM pf_experiences e
   WHERE e.user_id = '88b3efb5-8c58-486e-a3f7-751cc4b23e60' AND e.kind = 'research' AND e.position_en = 'Research Assistant'

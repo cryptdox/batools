@@ -95,6 +95,7 @@ export const PfProjects = () => {
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.work.projectsTitle" subtitle="pf.common.orderHint" />
       <PfListEditor
+        versioned
         table="pf_projects"
         title="pf.work.projects"
         fields={PROJECT_FIELDS}
@@ -138,6 +139,7 @@ export const PfExperience = () => {
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.work.experienceTitle" subtitle="pf.common.orderHint" />
       <PfListEditor
+        versioned
         table="pf_experiences"
         title="pf.work.experience"
         fields={EXPERIENCE_FIELDS}
@@ -161,6 +163,7 @@ export const PfTechStack = () => (
   <div className="max-w-5xl mx-auto space-y-6">
     <PfPageHeader title="pf.work.techTitle" subtitle="pf.common.orderHint" />
     <PfListEditor
+      versioned
       table="pf_tech_categories"
       title="pf.work.categories"
       fields={TECH_FIELDS}
@@ -228,6 +231,7 @@ export const PfResearch = () => {
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.research.pageTitle" subtitle="pf.common.orderHint" />
       <PfListEditor
+        versioned
         table="pf_publications"
         title="pf.research.publications"
         fields={PUBLICATION_FIELDS}
@@ -255,6 +259,7 @@ export const PfResearch = () => {
         )}
       />
       <PfListEditor
+        versioned
         table="pf_research_artifacts"
         title="pf.research.artifacts"
         subtitle="pf.research.artifactsHint"

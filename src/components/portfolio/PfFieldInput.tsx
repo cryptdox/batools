@@ -182,6 +182,24 @@ export const PfFieldInput = ({ field: f, values, onChange, upload, onUploaded }:
           {f.allowEmpty && <option value="">—</option>}
           {f.options?.map(o => <option key={o.value} value={o.value}>{t(o.label)}</option>)}
         </select>
+      ) : f.type === 'multi' ? (
+        <div className="flex flex-wrap gap-x-5 gap-y-2 py-1">
+          {f.options?.map(o => {
+            const picked = textValue(f.name).split(',').filter(Boolean);
+            const on = picked.includes(o.value);
+            return (
+              <label key={o.value} className="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                <input
+                  type="checkbox"
+                  checked={on}
+                  onChange={() => onChange(f.name, (on ? picked.filter(v => v !== o.value) : [...picked, o.value]).join(','))}
+                  className="w-4 h-4 accent-primary"
+                />
+                {t(o.label)}
+              </label>
+            );
+          })}
+        </div>
       ) : f.type === 'tags' && f.skillPicker ? (
         <PfSkillPicker value={textValue(f.name)} onChange={v => onChange(f.name, v)} />
       ) : f.fetchPreview ? (

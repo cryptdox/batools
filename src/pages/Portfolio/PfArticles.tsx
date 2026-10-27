@@ -120,6 +120,7 @@ export const PfArticles = () => {
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="pf.articles.pageTitle" subtitle="pf.articles.pageSubtitle" />
       <PfListEditor
+        versioned
         table="pf_posts"
         title="pf.articles.posts"
         fields={POST_FIELDS}

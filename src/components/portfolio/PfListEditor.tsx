@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { Plus, Pencil, Trash2, AlertTriangle, ArrowUp, ArrowDown, Eye, EyeOff, Search, Inbox } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
-import { errorMessage, formFromRow, isFormComplete, rowFromShownForm, shownFields, usePfUserId, type PfField, type PfFormValues, type PfRow } from '../../lib/portfolio';
+import { errorMessage, formFromRow, isFormComplete, loadPfVersions, rowFromShownForm, shownFields, usePfUserId, type PfField, type PfFormValues, type PfRow } from '../../lib/portfolio';
 import { Button, Badge } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { PfFieldInput, pfInputClass, removeUploads, type PfUploadTarget } from './PfFieldInput';
@@ -47,6 +47,8 @@ type Props = {
   headerActions?: ReactNode;
   /** Runs after a row is saved (with the saved columns); a returned message is shown. */
   afterSave?: (row: Record<string, unknown>) => Promise<string | void>;
+  /** The table has a `versions` column (063): adds the version picker and shows each row's versions. */
+  versioned?: boolean;
 };
 
 /**
@@ -57,7 +59,7 @@ type Props = {
  * deleted, and deleting a row deletes its files.
  */
 export const PfListEditor = ({
-  table, title, subtitle, fields, renderRow, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
+  table, title, subtitle, fields: baseFields, renderRow, versioned, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
   owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal, transform, headerActions, afterSave,
 }: Props) => {
   const { t } = useLanguage();
@@ -67,6 +69,14 @@ export const PfListEditor = ({
   // Kept in a ref so a new callback each render doesn't refetch.
   const onRowsChangeRef = useRef(onRowsChange);
   useEffect(() => { onRowsChangeRef.current = onRowsChange; });
+  // The owner's versions, offered as the `versions` field; none yet means no picker.
+  const [versions, setVersions] = useState<{ value: string; label: string }[]>([]);
+  useEffect(() => {
+    if (versioned && pfUserId) void loadPfVersions(pfUserId).then(setVersions);
+  }, [versioned, pfUserId]);
+  const fields = useMemo<PfField[]>(() => (versions.length
+    ? [...baseFields, { name: 'versions', label: 'pf.versions.field', type: 'multi', options: versions, hint: 'pf.versions.fieldHint' }]
+    : baseFields), [baseFields, versions]);
   const [rows, setRows] = useState<PfRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -276,6 +286,11 @@ export const PfListEditor = ({
                 <div className="flex-1 min-w-0 text-sm text-gray-700 dark:text-gray-300">
                   {renderRow(row)}
                   {hidden && <Badge variant="muted" className="mt-1 inline-block">{t('pf.common.hidden')}</Badge>}
+                  {versions.length > 0 && Array.isArray(row.versions) && (row.versions as string[]).some(id => versions.some(v => v.value === id)) && (
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {versions.filter(v => (row.versions as string[]).includes(v.value)).map(v => <Badge key={v.value} variant="default">{v.label}</Badge>)}
+                    </div>
+                  )}
                 </div>
                 <div className="flex items-center gap-0.5 shrink-0">
                   {rowActions?.(row)}

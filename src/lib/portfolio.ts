@@ -1,4 +1,5 @@
 import { useAuth } from './AuthContext';
+import { supabase } from './supabase';
 
 // Portfolio (pf_) rows belong to the signed-in IAM user, like the tm_ tables.
 // The public site reads the rows of one fixed user id (its own .env).
@@ -34,13 +35,14 @@ export type PfRow = Record<string, unknown> & { id: string };
  *   i18n             — `_en`/`_bn` strings, shown side by side
  *   i18nList         — `_en`/`_bn` TEXT[], edited one item per line
  *   tags             — one TEXT[], edited comma separated (tech names)
+ *   multi            — one array column, picked from `options` (checkboxes)
  *   number / boolean / select / date — as named
  */
 export type PfField = {
   name: string;
   /** Translation key. */
   label: string;
-  type: 'text' | 'textarea' | 'i18n' | 'i18nList' | 'tags' | 'number' | 'boolean' | 'select' | 'date';
+  type: 'text' | 'textarea' | 'i18n' | 'i18nList' | 'tags' | 'multi' | 'number' | 'boolean' | 'select' | 'date';
   /** i18n only: render as a textarea instead of an input. */
   multiline?: boolean;
   /** i18n only: a rich text editor per language; the value is stored as HTML. */
@@ -95,6 +97,9 @@ export function formFromRow(fields: PfField[], row: Record<string, unknown> | nu
       case 'tags':
         values[f.name] = row && Array.isArray(row[f.name]) ? (row[f.name] as string[]).join(', ') : '';
         break;
+      case 'multi':
+        values[f.name] = row && Array.isArray(row[f.name]) ? (row[f.name] as string[]).join(',') : '';
+        break;
       case 'boolean':
         values[f.name] = row ? !!row[f.name] : f.initial === true;
         break;
@@ -124,6 +129,7 @@ export function rowFromForm(fields: PfField[], values: PfFormValues): Record<str
         row[`${f.name}_bn`] = fromLines(String(values[`${f.name}_bn`]));
         break;
       case 'tags':
+      case 'multi':
         row[f.name] = fromCommas(String(values[f.name]));
         break;
       case 'boolean':
@@ -147,7 +153,7 @@ export function rowFromShownForm(fields: PfField[], values: PfFormValues): Recor
   for (const f of fields) {
     if (!f.showIf || f.showIf(values)) continue;
     const cols = f.type === 'i18n' || f.type === 'i18nList' ? [`${f.name}_en`, `${f.name}_bn`] : [f.name];
-    for (const c of cols) row[c] = f.type === 'tags' || f.type === 'i18nList' ? [] : f.type === 'boolean' ? false : null;
+    for (const c of cols) row[c] = f.type === 'tags' || f.type === 'multi' || f.type === 'i18nList' ? [] : f.type === 'boolean' ? false : null;
   }
   return row;
 }
@@ -159,6 +165,13 @@ export function isFormComplete(fields: PfField[], values: PfFormValues): boolean
     const key = f.type === 'i18n' || f.type === 'i18nList' ? `${f.name}_en` : f.name;
     return String(values[key] ?? '').trim() !== '';
   });
+}
+
+/** The owner's portfolio versions (063), for tagging rows. Empty before 063 or before any version exists. */
+export async function loadPfVersions(userId: string): Promise<{ value: string; label: string }[]> {
+  const { data, error } = await supabase.from('pf_versions').select('id, name_en, is_active').eq('user_id', userId).order('sort_order');
+  if (error) return [];
+  return (data ?? []).map(v => ({ value: v.id as string, label: `${v.name_en}${v.is_active ? '' : ' (inactive)'}` }));
 }
 
 /** Icon keys the portfolio site knows how to draw. */

@@ -70,6 +70,7 @@ export const PfAbout = () => {
       {tab === 'about' && (
         <>
           <PfListEditor
+            versioned
             table="pf_about_sections"
             title="pf.about.sections"
             subtitle="pf.about.sectionsHint"
@@ -116,6 +117,7 @@ export const PfAbout = () => {
 
       {tab === 'education' && (
         <PfListEditor
+          versioned
           table="pf_education"
           title="pf.about.education"
           fields={EDUCATION_FIELDS}
@@ -125,6 +127,7 @@ export const PfAbout = () => {
 
       {tab === 'interests' && (
         <PfListEditor
+          versioned
           table="pf_interests"
           title="pf.about.interests"
           fields={TEXT_FIELDS}
@@ -134,6 +137,7 @@ export const PfAbout = () => {
 
       {tab === 'core' && (
         <PfListEditor
+          versioned
           table="pf_core_skills"
           title="pf.about.core"
           fields={CORE_FIELDS}
@@ -143,6 +147,7 @@ export const PfAbout = () => {
 
       {tab === 'checklist' && (
         <PfListEditor
+          versioned
           table="pf_checklist"
           title="pf.about.checklist"
           subtitle="pf.about.checklistHint"

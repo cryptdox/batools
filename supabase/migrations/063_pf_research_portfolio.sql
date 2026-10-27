@@ -1,12 +1,19 @@
 -- Migration: 063_pf_research_portfolio.sql
--- What a researcher-style portfolio needs on top of the publications (027).
--- Additive only: the current portfolio ignores all of it.
+-- Portfolio versions (developer, researcher, …) and what the researcher
+-- version needs. Additive only: until a version exists the site shows
+-- everything, as before.
 --
---   pf_profile              research headline, affiliation, research statement
---                           (rich text), research interests, academic links
---                           (Hugging Face, Google Scholar, ORCID, ResearchGate)
---                           and a research CV, kept apart from the industry
---                           resume_url.
+--   pf_versions             one row per version of the portfolio. `layout`
+--                           picks how the site draws it; is_active publishes
+--                           it; the is_default one is shown when the visitor
+--                           asks for none. A version can override the hero
+--                           title, carry its own statement (rich text),
+--                           interests, affiliation and CV.
+--   versions UUID[]         on every content table: the versions a row is
+--                           shown in. Empty = every version (the default).
+--                           Ids of deleted versions are ignored.
+--   pf_profile              academic links (Hugging Face, Google Scholar,
+--                           ORCID, ResearchGate).
 --   pf_experiences.kind     industry | research | teaching, so research roles
 --                           can be listed on their own.
 --   pf_research_artifacts   released models, datasets, demos and code, each
@@ -14,21 +21,45 @@
 --
 -- Same conventions and RLS as the other pf_ tables (see 025).
 
+CREATE TABLE IF NOT EXISTS pf_versions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL,
+  -- Address of the version: ?version=<slug>. "all" is reserved.
+  slug TEXT NOT NULL CHECK (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$' AND slug <> 'all'),
+  name_en TEXT NOT NULL,
+  name_bn TEXT NOT NULL DEFAULT '',
+  layout TEXT NOT NULL DEFAULT 'developer' CHECK (layout IN ('developer', 'researcher')),
+  is_active BOOLEAN NOT NULL DEFAULT true,
+  is_default BOOLEAN NOT NULL DEFAULT false,
+  -- Overrides; empty falls back to the profile.
+  title_en TEXT,
+  title_bn TEXT,
+  statement_en TEXT,
+  statement_bn TEXT,
+  -- Researcher layout.
+  affiliation_en TEXT,
+  affiliation_bn TEXT,
+  interests_en TEXT[] NOT NULL DEFAULT '{}',
+  interests_bn TEXT[] NOT NULL DEFAULT '{}',
+  cv_url TEXT,
+  sort_order INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (user_id, slug)
+);
+
+CREATE INDEX IF NOT EXISTS idx_pf_versions_user ON pf_versions(user_id, sort_order);
+
+ALTER TABLE pf_versions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow all access" ON pf_versions;
+CREATE POLICY "Allow all access" ON pf_versions FOR ALL USING (true);
+
 ALTER TABLE pf_profile
-  ADD COLUMN IF NOT EXISTS research_title_en TEXT,
-  ADD COLUMN IF NOT EXISTS research_title_bn TEXT,
-  ADD COLUMN IF NOT EXISTS affiliation_en TEXT,
-  ADD COLUMN IF NOT EXISTS affiliation_bn TEXT,
-  ADD COLUMN IF NOT EXISTS research_statement_en TEXT,
-  ADD COLUMN IF NOT EXISTS research_statement_bn TEXT,
-  ADD COLUMN IF NOT EXISTS research_interests_en TEXT[] NOT NULL DEFAULT '{}',
-  ADD COLUMN IF NOT EXISTS research_interests_bn TEXT[] NOT NULL DEFAULT '{}',
   -- Handles / ids only, like the social columns; the site builds the URLs.
   ADD COLUMN IF NOT EXISTS huggingface TEXT,
   ADD COLUMN IF NOT EXISTS google_scholar TEXT,  -- the `user=` id of the profile URL
   ADD COLUMN IF NOT EXISTS orcid TEXT,           -- 0000-0000-0000-0000
-  ADD COLUMN IF NOT EXISTS researchgate TEXT,    -- profile name, e.g. Abir-Hosen
-  ADD COLUMN IF NOT EXISTS research_cv_url TEXT;
+  ADD COLUMN IF NOT EXISTS researchgate TEXT;    -- profile name, e.g. Abir-Hosen
 
 ALTER TABLE pf_experiences
   ADD COLUMN IF NOT EXISTS kind TEXT NOT NULL DEFAULT 'industry';
@@ -72,5 +103,19 @@ CREATE INDEX IF NOT EXISTS idx_pf_research_artifacts_user ON pf_research_artifac
 ALTER TABLE pf_research_artifacts ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Allow all access" ON pf_research_artifacts;
 CREATE POLICY "Allow all access" ON pf_research_artifacts FOR ALL USING (true);
+
+-- The version tag on every content table (children such as about blocks,
+-- case-study sections and article blocks follow their parent).
+DO $$
+DECLARE
+  t TEXT;
+BEGIN
+  FOREACH t IN ARRAY ARRAY[
+    'pf_hero_roles', 'pf_about_sections', 'pf_education', 'pf_interests', 'pf_core_skills', 'pf_checklist',
+    'pf_projects', 'pf_experiences', 'pf_tech_categories', 'pf_publications', 'pf_posts', 'pf_research_artifacts'
+  ] LOOP
+    EXECUTE format('ALTER TABLE %I ADD COLUMN IF NOT EXISTS versions UUID[] NOT NULL DEFAULT ''{}''', t);
+  END LOOP;
+END $$;
 
 NOTIFY pgrst, 'reload schema';

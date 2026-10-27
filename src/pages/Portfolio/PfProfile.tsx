@@ -3,10 +3,10 @@ import { toast } from 'react-toastify';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage, formFromRow, isFormComplete, rowFromForm, usePfUserId, PF_ICON_OPTIONS, type PfField, type PfFormValues } from '../../lib/portfolio';
-import { Button } from '../../components/ui/Button';
+import { Badge, Button } from '../../components/ui/Button';
 import { PfFieldInput } from '../../components/portfolio/PfFieldInput';
 import { PfListEditor, PfRowText } from '../../components/portfolio/PfListEditor';
-import { PfFileUpload } from '../../components/portfolio/PfFileUpload';
+import { PfFileUpload, PF_BUCKET } from '../../components/portfolio/PfFileUpload';
 import { PfPageHeader } from './PfPageHeader';
 
 const IDENTITY: PfField[] = [
@@ -28,12 +28,21 @@ const HERO: PfField[] = [
 const SOCIAL: PfField[] = ['github', 'linkedin', 'medium', 'youtube', 'facebook', 'instagram', 'x', 'gitlab', 'kaggle']
   .map(name => ({ name, label: `pf.profile.${name}`, type: 'text' as const }));
 
-// For the researcher-style portfolio (063).
-const RESEARCH: PfField[] = [
-  { name: 'research_title', label: 'pf.profile.researchTitle', type: 'i18n', hint: 'pf.profile.researchTitleHint' },
-  { name: 'affiliation', label: 'pf.profile.affiliation', type: 'i18n' },
-  { name: 'research_statement', label: 'pf.profile.researchStatement', type: 'i18n', rich: true },
-  { name: 'research_interests', label: 'pf.profile.researchInterests', type: 'i18nList', hint: 'pf.common.onePerLine' },
+const LAYOUTS = ['developer', 'researcher'].map(value => ({ value, label: `pf.versions.layouts.${value}` }));
+const isResearcher = (v: PfFormValues) => v.layout === 'researcher';
+
+/** A version of the portfolio (063): its address, layout, switches and overrides. */
+const VERSION_FIELDS: PfField[] = [
+  { name: 'name', label: 'pf.versions.name', type: 'i18n', required: true },
+  { name: 'slug', label: 'pf.versions.slug', type: 'text', required: true, hint: 'pf.versions.slugHint' },
+  { name: 'layout', label: 'pf.versions.layout', type: 'select', options: LAYOUTS, initial: 'developer', hint: 'pf.versions.layoutHint' },
+  { name: 'is_active', label: 'pf.versions.active', type: 'boolean', initial: true, hint: 'pf.versions.activeHint' },
+  { name: 'is_default', label: 'pf.versions.default', type: 'boolean', hint: 'pf.versions.defaultHint' },
+  { name: 'title', label: 'pf.versions.title', type: 'i18n', hint: 'pf.versions.titleHint' },
+  { name: 'statement', label: 'pf.versions.statement', type: 'i18n', rich: true, hint: 'pf.versions.statementHint' },
+  { name: 'affiliation', label: 'pf.versions.affiliation', type: 'i18n', showIf: isResearcher },
+  { name: 'interests', label: 'pf.versions.interests', type: 'i18nList', showIf: isResearcher },
+  { name: 'cv_url', label: 'pf.versions.cv', type: 'text', upload: 'application/pdf', hint: 'pf.versions.cvHint' },
 ];
 
 const ACADEMIC: PfField[] = [
@@ -43,7 +52,7 @@ const ACADEMIC: PfField[] = [
   { name: 'researchgate', label: 'pf.profile.researchgate', type: 'text', hint: 'pf.profile.researchgateHint' },
 ];
 
-const ALL = [...IDENTITY, ...HERO, ...SOCIAL, ...RESEARCH, ...ACADEMIC];
+const ALL = [...IDENTITY, ...HERO, ...SOCIAL, ...ACADEMIC];
 
 const ROLE_FIELDS: PfField[] = [
   { name: 'text', label: 'pf.profile.roleText', type: 'i18n', required: true },
@@ -63,8 +72,8 @@ export const PfProfile = () => {
   const [values, setValues] = useState<PfFormValues>(() => formFromRow(ALL, null));
   // Saved on its own the moment a file is uploaded, not by the Save button.
   const [resumeUrl, setResumeUrl] = useState<string | null>(null);
-  const [researchCvUrl, setResearchCvUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [versionsReload, setVersionsReload] = useState(0);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -75,7 +84,6 @@ export const PfProfile = () => {
       if (error) toast.error(error.message);
       setValues(formFromRow(ALL, data));
       setResumeUrl(data?.resume_url ?? null);
-      setResearchCvUrl(data?.research_cv_url ?? null);
       setLoading(false);
     })();
   }, [userId]);
@@ -108,11 +116,13 @@ export const PfProfile = () => {
     setResumeUrl(url);
   };
 
-  const saveResearchCvUrl = async (url: string | null) => {
-    if (!userId) return;
-    const { error } = await supabase.from('pf_profile').upsert({ user_id: userId, research_cv_url: url, updated_at: new Date().toISOString() });
+  /** One default version: saving a default turns the others off. */
+  const keepOneDefault = async (row: Record<string, unknown>) => {
+    if (!userId || row.is_default !== true) return;
+    const { error } = await supabase.from('pf_versions').update({ is_default: false })
+      .eq('user_id', userId).eq('is_default', true).neq('slug', String(row.slug));
     if (error) throw error;
-    setResearchCvUrl(url);
+    setVersionsReload(n => n + 1);
   };
 
   const section = (fields: PfField[]) => fields.map(f => <PfFieldInput key={f.name} field={f} values={values} onChange={onChange} />);
@@ -150,20 +160,6 @@ export const PfProfile = () => {
           <Card title={t('pf.profile.social')}>
             <div className="grid sm:grid-cols-2 gap-4">{section(SOCIAL)}</div>
           </Card>
-          <Card title={t('pf.profile.research')}>
-            <p className="text-sm text-gray-500 dark:text-gray-400 -mt-2">{t('pf.profile.researchHint')}</p>
-            {section(RESEARCH)}
-            {userId && (
-              <PfFileUpload
-                userId={userId}
-                label="pf.profile.researchCv"
-                name="research-cv"
-                accept="application/pdf"
-                url={researchCvUrl}
-                onChange={saveResearchCvUrl}
-              />
-            )}
-          </Card>
           <Card title={t('pf.profile.academicLinks')}>
             <div className="grid sm:grid-cols-2 gap-4">{section(ACADEMIC)}</div>
           </Card>
@@ -176,6 +172,30 @@ export const PfProfile = () => {
       )}
 
       <PfListEditor
+        table="pf_versions"
+        title="pf.versions.listTitle"
+        subtitle="pf.versions.hint"
+        fields={VERSION_FIELDS}
+        hideable={false}
+        upload={userId ? { bucket: PF_BUCKET, folder: `${userId}/versions` } : undefined}
+        transform={row => ({ ...row, slug: String(row.slug ?? '').trim().toLowerCase() })}
+        afterSave={keepOneDefault}
+        reloadSignal={versionsReload}
+        renderRow={r => (
+          <PfRowText
+            primary={`${r.name_en} · ?version=${r.slug}`}
+            secondary={String(r.title_en ?? '')}
+            extra={<>
+              <Badge variant="default">{t(`pf.versions.layouts.${r.layout}`)}</Badge>
+              <Badge variant={r.is_active === true ? 'success' : 'muted'}>{t(r.is_active === true ? 'pf.versions.active' : 'pf.versions.inactive')}</Badge>
+              {r.is_default === true && <Badge variant="warning">{t('pf.versions.default')}</Badge>}
+            </>}
+          />
+        )}
+      />
+
+      <PfListEditor
+        versioned
         table="pf_hero_roles"
         title="pf.profile.roles"
         subtitle="pf.profile.rolesHint"
