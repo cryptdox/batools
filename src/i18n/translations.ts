@@ -95,6 +95,7 @@ export const translations = {
         paper: 'From paper', paperHint: 'Optional. Shown with that publication on the research site.',
         metrics: 'Headline results', metricsHint: 'Comma separated, e.g. 94.49% accuracy, 98.36% ROC-AUC.',
         tags: 'Tags', releasedOn: 'Released on',
+        private: 'Private', privateHint: 'Still listed and linked, tagged Private, with a note to message you for access.',
       },
       articles: {
         pageTitle: 'Portfolio Articles', pageSubtitle: 'Posts you published elsewhere, linked from the portfolio, and articles written here with their own page.',
@@ -1114,6 +1115,7 @@ export const translations = {
         paper: 'যে পেপার থেকে', paperHint: 'ঐচ্ছিক। গবেষণা সাইটে সেই প্রকাশনার সাথে দেখায়।',
         metrics: 'প্রধান ফলাফল', metricsHint: 'কমা দিয়ে আলাদা, যেমন 94.49% accuracy, 98.36% ROC-AUC।',
         tags: 'ট্যাগ', releasedOn: 'প্রকাশের তারিখ',
+        private: 'প্রাইভেট', privateHint: 'তালিকায় ও লিংকসহ থাকবে, প্রাইভেট ট্যাগসহ; অ্যাক্সেসের জন্য আপনাকে মেসেজ দিতে বলা হবে।',
       },
       articles: {
         pageTitle: 'পোর্টফোলিও আর্টিকেল', pageSubtitle: 'অন্য জায়গায় প্রকাশিত পোস্ট (লিংক) এবং এখানে লেখা আর্টিকেল, যার নিজস্ব পাতা আছে।',

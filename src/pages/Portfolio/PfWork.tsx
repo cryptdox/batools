@@ -215,6 +215,7 @@ const artifactFields = (papers: { value: string; label: string }[]): PfField[] =
   { name: 'metrics', label: 'pf.research.metrics', type: 'tags', hint: 'pf.research.metricsHint' },
   { name: 'tags', label: 'pf.research.tags', type: 'tags' },
   { name: 'released_on', label: 'pf.research.releasedOn', type: 'date' },
+  { name: 'is_private', label: 'pf.research.private', type: 'boolean', hint: 'pf.research.privateHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
 ];
 
@@ -272,6 +273,7 @@ export const PfResearch = () => {
             extra={<>
               <Badge variant="default">{t(`pf.research.kinds.${r.kind}`)}</Badge>
               <Badge variant="muted">{t(`pf.research.platforms.${r.platform}`)}</Badge>
+              {r.is_private === true && <Badge variant="warning">{t('pf.research.private')}</Badge>}
               {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
               <Tags items={r.metrics} />
             </>}
