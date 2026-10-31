@@ -55,7 +55,8 @@ export const translations = {
       versions: {
         manageHint: 'Add, clone, reorder or remove versions. Edit a version\'s details in its own tab above.',
         listTitle: 'Portfolio versions', hint: 'Versions of the site for different audiences (Developer, Researcher, …). A version\'s own title, statement, photo and CV replace the defaults above; left empty, it uses them. Every list item (here and on the other pages) is in all versions unless you tick some.',
-        name: 'Name', slug: 'Address', slugHint: 'Lowercase letters, digits and dashes. The site shows it at ?version=<address>; "all" is reserved.',
+        name: 'Name', slug: 'Address', slugHint: 'Lowercase letters, digits and dashes. The site opens it at ?version=<address>; "all" is reserved.',
+        shortCode: 'Short address', shortCodeHint: 'Optional, e.g. rch or dev: the site shows ?v=<short address> and links use it. Old ?version= links keep working.',
         layout: 'Layout', layoutHint: 'How the site draws this version.', layouts: { developer: 'Developer', researcher: 'Researcher' },
         active: 'Active', inactive: 'Inactive', activeHint: 'Off hides this version from the site.',
         default: 'Default', defaultHint: 'Shown when a visitor asks for no version. Only one can be the default.',
@@ -1117,6 +1118,7 @@ export const translations = {
         manageHint: 'সংস্করণ যোগ, কপি, ক্রম বদল বা মুছে ফেলুন। কোনো সংস্করণের বিস্তারিত ওপরে তার নিজের ট্যাবে সম্পাদনা করুন।',
         listTitle: 'পোর্টফোলিও সংস্করণ', hint: 'ভিন্ন ভিন্ন দর্শকের জন্য সাইটের সংস্করণ (ডেভেলপার, গবেষক, …)। কোনো সংস্করণের নিজস্ব শিরোনাম, বক্তব্য, ছবি ও সিভি ওপরের ডিফল্টকে বদলে দেয়; খালি রাখলে ডিফল্ট ব্যবহার হয়। তালিকার প্রতিটি আইটেম (এখানে ও অন্য পাতায়) সব সংস্করণে দেখায়, যদি না কিছু টিক দেন।',
         name: 'নাম', slug: 'ঠিকানা', slugHint: 'ছোট হাতের অক্ষর, সংখ্যা ও ড্যাশ। সাইটে ?version=<ঠিকানা> দিয়ে খোলে; "all" সংরক্ষিত।',
+        shortCode: 'সংক্ষিপ্ত ঠিকানা', shortCodeHint: 'ঐচ্ছিক, যেমন rch বা dev: সাইটে ?v=<সংক্ষিপ্ত ঠিকানা> দেখায় ও লিংকে ব্যবহৃত হয়। পুরোনো ?version= লিংকও কাজ করে।',
         layout: 'লেআউট', layoutHint: 'সাইট এই সংস্করণ কীভাবে দেখাবে।', layouts: { developer: 'ডেভেলপার', researcher: 'গবেষক' },
         active: 'সক্রিয়', inactive: 'নিষ্ক্রিয়', activeHint: 'বন্ধ থাকলে সাইটে এই সংস্করণ দেখায় না।',
         default: 'ডিফল্ট', defaultHint: 'কোনো সংস্করণ না চাইলে এটি দেখায়। একটিই ডিফল্ট হতে পারে।',

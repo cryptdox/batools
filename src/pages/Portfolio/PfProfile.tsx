@@ -58,6 +58,7 @@ const isResearcher = (v: PfFormValues) => v.layout === 'researcher';
 const VERSION_SETTINGS: PfField[] = [
   { name: 'name', label: 'pf.versions.name', type: 'i18n', required: true },
   { name: 'slug', label: 'pf.versions.slug', type: 'text', required: true, hint: 'pf.versions.slugHint' },
+  { name: 'short_code', label: 'pf.versions.shortCode', type: 'text', hint: 'pf.versions.shortCodeHint' },
   { name: 'layout', label: 'pf.versions.layout', type: 'select', options: LAYOUTS, initial: 'developer', hint: 'pf.versions.layoutHint' },
   { name: 'is_active', label: 'pf.versions.active', type: 'boolean', initial: true, hint: 'pf.versions.activeHint' },
   { name: 'is_default', label: 'pf.versions.default', type: 'boolean', hint: 'pf.versions.defaultHint' },
@@ -212,6 +213,7 @@ export const PfProfile = () => {
         const before = versionRows.find(v => v.id === id);
         const row = rowFromForm(VERSION_FIELDS, versionForms[id]);
         row.slug = String(row.slug ?? '').trim().toLowerCase();
+        row.short_code = String(row.short_code ?? '').trim().toLowerCase() || null;
         const { error: vError } = await supabase.from('pf_versions')
           .update({ ...row, updated_at: new Date().toISOString() }).eq('id', id).eq('user_id', userId);
         if (vError) throw vError;
@@ -391,7 +393,7 @@ export const PfProfile = () => {
                       >
                         <div className="font-semibold">{String(v.name_en)}{v.is_active === true ? '' : ` (${t('pf.versions.inactive')})`}</div>
                         <div className="text-xs font-normal text-gray-500 dark:text-gray-400">
-                          {t(`pf.versions.layouts.${v.layout}`)} {t('pf.profile.layoutWord')} · ?version={String(v.slug)}
+                          {t(`pf.versions.layouts.${v.layout}`)} {t('pf.profile.layoutWord')} · ?v={String(v.short_code || v.slug)}
                         </div>
                       </button>
                     </th>
@@ -432,13 +434,17 @@ export const PfProfile = () => {
         fields={VERSION_FIELDS}
         hideable={false}
         upload={versionUpload}
-        transform={row => ({ ...row, slug: String(row.slug ?? '').trim().toLowerCase() })}
+        transform={row => ({
+          ...row,
+          slug: String(row.slug ?? '').trim().toLowerCase(),
+          short_code: String(row.short_code ?? '').trim().toLowerCase() || null,
+        })}
         afterSave={keepOneDefault}
         reloadSignal={versionsReload}
         onRowsChange={applyVersionRows}
         renderRow={r => (
           <PfRowText
-            primary={`${r.name_en} · ?version=${r.slug}`}
+            primary={`${r.name_en} · ?v=${r.short_code || r.slug}`}
             secondary={String(r.title_en ?? '')}
             extra={<>
               <Badge variant="default">{t(`pf.versions.layouts.${r.layout}`)}</Badge>
