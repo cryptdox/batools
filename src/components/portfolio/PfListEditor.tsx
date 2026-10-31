@@ -155,7 +155,8 @@ export const PfListEditor = ({
   const visibleRows = useMemo(() => {
     const known = new Set(versions.map(v => v.value));
     const inTab = rows.filter(r => inVersionTab(r, activeTab, known)
-      && Object.entries(picked).every(([col, value]) => !value || String(r[col] ?? '') === value));
+      && Object.entries(picked).every(([col, value]) => !value
+        || (Array.isArray(r[col]) ? (r[col] as unknown[]).map(String).includes(value) : String(r[col] ?? '') === value)));
     const needle = search.trim().toLowerCase();
     if (!needle) return inTab;
     return inTab.filter(r => Object.values(r).some(v =>

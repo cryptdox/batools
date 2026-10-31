@@ -280,28 +280,52 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'show_challenges', label: 'pf.work.showChallenges', type: 'boolean', hint: 'pf.work.showChallengesHint' },
 ];
 
-const ARTIFACT_KINDS = ['model', 'dataset', 'demo', 'code']
-  .map(value => ({ value, label: `pf.research.kinds.${value}` }));
-const ARTIFACT_PLATFORMS = ['huggingface', 'kaggle', 'github', 'zenodo', 'website', 'other']
-  .map(value => ({ value, label: `pf.research.platforms.${value}` }));
+const KIND_ORDER = ['model', 'dataset', 'code', 'demo'];
+const ARTIFACT_KINDS = KIND_ORDER.map(value => ({ value, label: `pf.research.kinds.${value}` }));
+/** The link column of each kind (073). */
+const KIND_LINK: Record<string, string> = { model: 'model_url', dataset: 'dataset_url', code: 'code_url', demo: 'demo_url' };
 
-/** A released model / dataset / demo / code (063); `papers` are the publications to link it to. */
+const pickedKinds = (v: PfFormValues) => String(v.kinds ?? '').split(',').filter(Boolean);
+const has = (kind: string) => (v: PfFormValues) => pickedKinds(v).includes(kind);
+
+/** A released item (063, 073): one or more kinds, each with its own link; `papers` are the publications to link it to. */
 const artifactFields = (papers: { value: string; label: string }[]): PfField[] => [
-  { name: 'kind', label: 'pf.research.artifactKind', type: 'select', options: ARTIFACT_KINDS, initial: 'model' },
-  { name: 'platform', label: 'pf.research.platform', type: 'select', options: ARTIFACT_PLATFORMS, initial: 'huggingface' },
+  { name: 'kinds', label: 'pf.research.artifactKinds', type: 'multi', options: ARTIFACT_KINDS, initial: 'model', hint: 'pf.research.artifactKindsHint' },
   { name: 'title', label: 'pf.work.title', type: 'i18n', required: true },
   { name: 'description', label: 'pf.work.description', type: 'i18n', multiline: true },
-  { name: 'url', label: 'pf.research.artifactUrl', type: 'text', required: true },
-  { name: 'demo_url', label: 'pf.research.demoUrl', type: 'text', hint: 'pf.research.demoUrlHint' },
+  { name: 'model_url', label: 'pf.research.modelUrl', type: 'text', showIf: has('model'), hint: 'pf.research.modelUrlHint' },
+  { name: 'demo_url', label: 'pf.research.demoUrl', type: 'text', showIf: v => has('model')(v) || has('demo')(v), hint: 'pf.research.demoUrlHint' },
+  { name: 'dataset_url', label: 'pf.research.datasetUrl', type: 'text', showIf: has('dataset'), hint: 'pf.research.datasetUrlHint' },
+  { name: 'code_url', label: 'pf.research.codeLink', type: 'text', showIf: has('code'), hint: 'pf.research.codeLinkHint' },
+  { name: 'private_kinds', label: 'pf.research.privateKinds', type: 'multi', options: ARTIFACT_KINDS, hint: 'pf.research.privateKindsHint' },
   { name: 'publication_id', label: 'pf.research.paper', type: 'select', options: papers, allowEmpty: true, hint: 'pf.research.paperHint' },
   { name: 'metrics', label: 'pf.research.metrics', type: 'tags', hint: 'pf.research.metricsHint' },
   { name: 'tags', label: 'pf.research.tags', type: 'tags' },
   { name: 'released_on', label: 'pf.research.releasedOn', type: 'date' },
-  { name: 'is_private', label: 'pf.research.private', type: 'boolean', hint: 'pf.research.privateHint' },
   { name: 'show_case_study', label: 'pf.work.showCaseStudy', type: 'boolean', hint: 'pf.work.showCaseStudyHint' },
   { name: 'show_challenges', label: 'pf.work.showChallenges', type: 'boolean', hint: 'pf.work.showChallengesHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
 ];
+
+/** The platform a link is on, from its address. */
+const platformOf = (url: unknown) => {
+  const host = (() => { try { return new URL(String(url)).hostname; } catch { return ''; } })();
+  return host.includes('huggingface') ? 'huggingface' : host.includes('kaggle') ? 'kaggle' : host.includes('github') ? 'github'
+    : host.includes('zenodo') ? 'zenodo' : host ? 'website' : 'other';
+};
+
+/**
+ * Keeps the older columns in step: kind and url are the first kind and its
+ * link, platform comes from that link, is_private is "any link private", and
+ * private kinds the item does not have are dropped.
+ */
+const shapeArtifact = (row: Record<string, unknown>) => {
+  const kinds = KIND_ORDER.filter(k => ((row.kinds as string[]) ?? []).includes(k));
+  const first = kinds.find(k => row[KIND_LINK[k]]) ?? kinds[0] ?? 'model';
+  const url = row[KIND_LINK[first]] ?? null;
+  const privateKinds = ((row.private_kinds as string[]) ?? []).filter(k => kinds.includes(k));
+  return { ...row, kinds, kind: first, url, platform: platformOf(url), private_kinds: privateKinds, is_private: privateKinds.length > 0 };
+};
 
 export const PfResearch = () => {
   const { t } = useLanguage();
@@ -365,16 +389,19 @@ export const PfResearch = () => {
         reloadSignal={artifactReload}
         rowActions={r => <DetailsButton onClick={() => setArtifact(r)} />}
         pageSize={10}
-        filters={[{ name: 'kind', label: 'pf.research.artifactKind', options: ARTIFACT_KINDS }]}
+        transform={shapeArtifact}
+        filters={[{ name: 'kinds', label: 'pf.research.artifactKind', options: ARTIFACT_KINDS }]}
         searchable
         renderRow={r => (
           <PfRowText
             primary={String(r.title_en)}
-            secondary={[paperTitle(r.publication_id), String(r.url)].filter(Boolean).join(' · ')}
+            secondary={[paperTitle(r.publication_id), r.url ? String(r.url) : ''].filter(Boolean).join(' · ')}
             extra={<>
-              <Badge variant="default">{t(`pf.research.kinds.${r.kind}`)}</Badge>
-              <Badge variant="muted">{t(`pf.research.platforms.${r.platform}`)}</Badge>
-              {r.is_private === true && <Badge variant="warning">{t('pf.research.private')}</Badge>}
+              {(((r.kinds as string[]) ?? []).length ? (r.kinds as string[]) : [String(r.kind)]).map(k => (
+                <Badge key={k} variant={((r.private_kinds as string[]) ?? []).includes(k) ? 'warning' : 'default'}>
+                  {t(`pf.research.kinds.${k}`)}{((r.private_kinds as string[]) ?? []).includes(k) ? ` · ${t('pf.research.private')}` : ''}
+                </Badge>
+              ))}
               {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}
               {r.show_challenges === true && <Badge variant="warning">{t('pf.work.challengesShown')}</Badge>}
               {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
