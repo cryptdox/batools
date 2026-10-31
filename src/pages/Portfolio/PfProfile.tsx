@@ -43,6 +43,7 @@ const VERSION_FIELDS: PfField[] = [
   { name: 'statement', label: 'pf.versions.statement', type: 'i18n', rich: true, hint: 'pf.versions.statementHint' },
   { name: 'affiliation', label: 'pf.versions.affiliation', type: 'i18n', showIf: isResearcher },
   { name: 'interests', label: 'pf.versions.interests', type: 'i18nList', showIf: isResearcher },
+  { name: 'photo_url', label: 'pf.versions.photo', type: 'text', upload: 'image/*', hint: 'pf.versions.photoHint' },
   { name: 'cv_url', label: 'pf.versions.cv', type: 'text', upload: 'application/pdf', hint: 'pf.versions.cvHint' },
 ];
 
@@ -73,6 +74,7 @@ export const PfProfile = () => {
   const [values, setValues] = useState<PfFormValues>(() => formFromRow(ALL, null));
   // Saved on its own the moment a file is uploaded, not by the Save button.
   const [resumeUrl, setResumeUrl] = useState<string | null>(null);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [versionsReload, setVersionsReload] = useState(0);
   const [saving, setSaving] = useState(false);
@@ -85,6 +87,7 @@ export const PfProfile = () => {
       if (error) toast.error(error.message);
       setValues(formFromRow(ALL, data));
       setResumeUrl(data?.resume_url ?? null);
+      setPhotoUrl(data?.photo_url ?? null);
       setLoading(false);
     })();
   }, [userId]);
@@ -117,6 +120,13 @@ export const PfProfile = () => {
     setResumeUrl(url);
   };
 
+  const savePhotoUrl = async (url: string | null) => {
+    if (!userId) return;
+    const { error } = await supabase.from('pf_profile').upsert({ user_id: userId, photo_url: url, updated_at: new Date().toISOString() });
+    if (error) throw error;
+    setPhotoUrl(url);
+  };
+
   /** One default version: saving a default turns the others off. */
   const keepOneDefault = async (row: Record<string, unknown>) => {
     if (!userId || row.is_default !== true) return;
@@ -146,6 +156,16 @@ export const PfProfile = () => {
         <>
           <Card title={t('pf.profile.identity')}>
             {section(IDENTITY)}
+            {userId && (
+              <PfFileUpload
+                userId={userId}
+                label="pf.profile.photo"
+                name="photo"
+                accept="image/*"
+                url={photoUrl}
+                onChange={savePhotoUrl}
+              />
+            )}
             {userId && (
               <PfFileUpload
                 userId={userId}

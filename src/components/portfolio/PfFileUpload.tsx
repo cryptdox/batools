@@ -80,7 +80,11 @@ export const PfFileUpload = ({ userId, label, name, accept, url, onChange }: Pro
     <div>
       <span className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{t(label)}</span>
       <div className="flex flex-wrap items-center gap-3 rounded-lg border border-dashed border-gray-300 dark:border-gray-600 p-3">
-        <FileText size={20} className="text-gray-400 shrink-0" />
+        {accept.startsWith('image') && url ? (
+          <img src={url} alt="" className="h-14 w-14 rounded-full object-cover border border-gray-200 dark:border-gray-700 shrink-0" />
+        ) : (
+          <FileText size={20} className="text-gray-400 shrink-0" />
+        )}
         <div className="flex-1 min-w-0 text-sm">
           {url ? (
             <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline truncate max-w-full">
