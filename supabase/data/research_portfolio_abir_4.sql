@@ -48,3 +48,69 @@ FROM (VALUES
 ) AS v(title, highlights, contributions, methods)
 WHERE p.user_id = '88b3efb5-8c58-486e-a3f7-751cc4b23e60' AND p.title_en ILIKE v.title || '%'
   AND p.highlights_en = '{}' AND p.contributions_en = '{}';
+
+------------------------------------------------------------------------------
+-- Case study and challenges & solutions for the papers that have none yet
+-- (the maternal & fetal health paper already has its own, so it is left as is).
+------------------------------------------------------------------------------
+INSERT INTO pf_case_study_sections (user_id, publication_id, heading_en, body_en, sort_order)
+SELECT p.user_id, p.id, v.heading, v.body, v.ord
+FROM pf_publications p
+JOIN (VALUES
+  ('Combating deep-fake news in Bengali', 1, 'Problem',
+   '<p>Manipulated news spreads fast on Bangla social media, but Bengali is a low-resource language: few labelled datasets and few models built for it.</p>'),
+  ('Combating deep-fake news in Bengali', 2, 'Approach',
+   '<p>TF-IDF baselines with Logistic Regression, Decision Tree, Random Forest and Gradient Boosting, compared against a fine-tuned <strong>Bangla BERT</strong>, with class-imbalance handling and cross-validation on BanFakeNews.</p>'),
+  ('Combating deep-fake news in Bengali', 3, 'Results',
+   '<p>Bangla BERT reached <strong>94.49% accuracy</strong> and <strong>98.36% ROC-AUC</strong>, well ahead of the classical models; learning curves show it keeps improving with more data. The model is public, with a browser demo.</p>'),
+  ('Leakage Controlled Machine Learning Forecasting', 1, 'Problem',
+   '<p>Monthly rainfall, temperature and humidity forecasts matter for agriculture and planning in Bangladesh, but many published ML results quietly use information from the future and report numbers that do not hold up.</p>'),
+  ('Leakage Controlled Machine Learning Forecasting', 2, 'Approach',
+   '<p>Only data observed up to the end of the current month is used: target lags, neighbouring stations and station climatology. Models are chosen by rolling-origin cross-validation on data up to 2017 and tested on 2018–2022 with annual re-fitting, against climatology and SARIMA baselines.</p>'),
+  ('Leakage Controlled Machine Learning Forecasting', 3, 'Results',
+   '<p>Every model beats climatology; temperature RMSE <strong>0.74 °C</strong> (R² 0.963) and humidity RMSE <strong>4.35%</strong>. Conformal intervals give honest 90% ranges with 0.90–0.94 coverage.</p>'),
+  ('Artificial Neural Networks from Classical Models to Foundation Models', 1, 'Problem',
+   '<p>Existing reviews cover either classical networks or a single modern family, rarely say how their literature was chosen, and seldom compare architectures side by side.</p>'),
+  ('Artificial Neural Networks from Classical Models to Foundation Models', 2, 'Approach',
+   '<p>A PRISMA 2020-guided systematic review over OpenAlex (cross-checked in IEEE Xplore and SpringerLink) with a citation-stratified two-tier design, plus a bibliometric analysis of over a million records.</p>'),
+  ('Artificial Neural Networks from Classical Models to Foundation Models', 3, 'Results',
+   '<p>396 studies synthesised into a five-dimension taxonomy, 22 comparative tables, a conceptual framework and a prioritised research agenda.</p>')
+) AS v(title, ord, heading, body) ON p.title_en ILIKE v.title || '%'
+WHERE p.user_id = '88b3efb5-8c58-486e-a3f7-751cc4b23e60'
+  AND NOT EXISTS (SELECT 1 FROM pf_case_study_sections s WHERE s.publication_id = p.id);
+
+INSERT INTO pf_challenges (user_id, publication_id, challenge_en, solution_en, result_en, sort_order)
+SELECT p.user_id, p.id, v.challenge, v.solution, v.result, v.ord
+FROM pf_publications p
+JOIN (VALUES
+  ('Combating deep-fake news in Bengali', 1,
+   '<p>Far fewer fake than authentic articles (about 1 to 3), so a model can look accurate while missing fakes.</p>',
+   '<p>Kept the natural ratio, handled the imbalance in training, and reported F1 and recall on the fake class besides accuracy.</p>',
+   '<p>89.03% F1 and 90.28% recall on fake news.</p>'),
+  ('Combating deep-fake news in Bengali', 2,
+   '<p>The fine-tuned model is 658 MB, too heavy for a simple public demo.</p>',
+   '<p>Exported an 8-bit ONNX copy that runs in the visitor''s browser.</p>',
+   '<p>165 MB, with probabilities within a hair of the full model.</p>'),
+  ('Leakage Controlled Machine Learning Forecasting', 1,
+   '<p>Random train/test splits and features computed over the whole series leak the future into training.</p>',
+   '<p>Built every feature from data up to the forecast month only, and evaluated with rolling origins and annual re-fitting.</p>',
+   '<p>Results that reflect real forecasting, compared fairly with climatology and SARIMA.</p>'),
+  ('Leakage Controlled Machine Learning Forecasting', 2,
+   '<p>A single number per forecast hides how uncertain it is, especially for monsoon rainfall.</p>',
+   '<p>Added season-stratified split-conformal prediction intervals.</p>',
+   '<p>90% intervals with 0.90–0.94 empirical coverage.</p>'),
+  ('Artificial Neural Networks from Classical Models to Foundation Models', 1,
+   '<p>Hundreds of thousands of candidate papers: far too many to screen by hand.</p>',
+   '<p>A two-tier design: citation-stratified selection per year for the qualitative review, and the full set for the bibliometric analysis.</p>',
+   '<p>545 records screened, 396 included, 1,118,496 analysed bibliometrically.</p>'),
+  ('Artificial Neural Networks from Classical Models to Foundation Models', 2,
+   '<p>Reviewers asked for a reproducible method and verified references.</p>',
+   '<p>Reported the full search protocol and PRISMA flow, and checked every reference against its source.</p>',
+   '<p>A fully verified list of 257 references.</p>')
+) AS v(title, ord, challenge, solution, result) ON p.title_en ILIKE v.title || '%'
+WHERE p.user_id = '88b3efb5-8c58-486e-a3f7-751cc4b23e60'
+  AND NOT EXISTS (SELECT 1 FROM pf_challenges c WHERE c.publication_id = p.id);
+
+-- Show them on the site.
+UPDATE pf_publications SET show_case_study = true, show_challenges = true, updated_at = now()
+WHERE user_id = '88b3efb5-8c58-486e-a3f7-751cc4b23e60';
