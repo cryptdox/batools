@@ -20,7 +20,7 @@ VALUES
    'এআই গবেষক · মেশিন লার্নিং ও বাংলা এনএলপি',
    'Dept. of Information & Communication Engineering, Noakhali Science & Technology University',
    'তথ্য ও যোগাযোগ প্রকৌশল বিভাগ, নোয়াখালী বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়',
-   $t$<p>I work on <strong>machine learning for healthcare risk prediction</strong>, <strong>climate forecasting</strong> and <strong>low-resource Bengali NLP</strong> (fake news and cyberbullying detection), with two years of academic research at Noakhali Science &amp; Technology University and about six years of industry engineering.</p><p>My focus is <strong>evaluation you can trust</strong>: removing train/test leakage, reporting honest numbers and giving uncertainty with conformal prediction intervals. I release my research models with live demos on Hugging Face so the results can be checked, and I build LLM systems with RAG and agentic tooling (MCP) in industry.</p>$t$,
+   $t$<p>I work on <strong>machine learning for healthcare risk prediction</strong>, <strong>climate forecasting</strong> and <strong>low-resource Bengali NLP</strong> (fake news and cyberbullying detection), with academic research at Noakhali Science &amp; Technology University since 2021 (Research Assistant since 2023) and about six years of industry engineering.</p><p>My focus is <strong>evaluation you can trust</strong>: removing train/test leakage, reporting honest numbers and giving uncertainty with conformal prediction intervals. I release my research models with live demos on Hugging Face so the results can be checked, and I build LLM systems with RAG and agentic tooling (MCP) in industry.</p>$t$,
    ARRAY[
      'Machine learning for clinical risk prediction',
      'Low-resource Bengali NLP: fake news and cyberbullying',
