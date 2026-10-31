@@ -98,7 +98,7 @@ export function formFromRow(fields: PfField[], row: Record<string, unknown> | nu
         values[f.name] = row && Array.isArray(row[f.name]) ? (row[f.name] as string[]).join(', ') : '';
         break;
       case 'multi':
-        values[f.name] = row && Array.isArray(row[f.name]) ? (row[f.name] as string[]).join(',') : '';
+        values[f.name] = row ? (Array.isArray(row[f.name]) ? (row[f.name] as string[]).join(',') : '') : str(f.initial);
         break;
       case 'boolean':
         values[f.name] = row ? !!row[f.name] : f.initial === true;

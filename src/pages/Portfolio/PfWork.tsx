@@ -297,7 +297,8 @@ const has = (kind: string) => (v: PfFormValues) => pickedKinds(v).includes(kind)
 
 /** A released item (063, 073): one or more kinds, each with its own link; `papers` are the publications to link it to. */
 const artifactFields = (papers: { value: string; label: string }[]): PfField[] => [
-  { name: 'kinds', label: 'pf.research.artifactKinds', type: 'multi', options: ARTIFACT_KINDS, initial: 'model', hint: 'pf.research.artifactKindsHint' },
+  // At least one: Save stays off until a kind is ticked.
+  { name: 'kinds', label: 'pf.research.artifactKinds', type: 'multi', options: ARTIFACT_KINDS, initial: 'model', required: true, hint: 'pf.research.artifactKindsHint' },
   { name: 'title', label: 'pf.work.title', type: 'i18n', required: true },
   { name: 'description', label: 'pf.work.description', type: 'i18n', multiline: true },
   { name: 'model_url', label: 'pf.research.modelUrl', type: 'text', showIf: has('model'), hint: 'pf.research.modelUrlHint' },
