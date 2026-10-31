@@ -14,6 +14,7 @@ export const translations = {
         onePerLine: 'One item per line.', commaSeparated: 'Separate with commas.',
         richTextHint: 'Use the toolbar for bold, lists and more. {years} becomes the years since the career start year.',
         orderHint: 'The site shows these in this order. Use the arrows to reorder and the eye to hide.',
+        prevPage: 'Previous page', nextPage: 'Next page', filterAll: 'All',
       },
       profile: {
         pageTitle: 'Portfolio Profile', pageSubtitle: 'Who you are, the hero section, and your links.',
@@ -75,7 +76,7 @@ export const translations = {
         challenge: 'Challenge', challengeHint: 'What made it hard: scale, constraints, unclear requirements…',
         solution: 'How I solved it', solutionHint: 'The approach, design or technique that worked.',
         result: 'Result', resultHint: 'Optional: what it achieved, with numbers if you have them.',
-        position: 'Position', company: 'Company', current: 'Current', currentHint: 'Shows the CURRENT badge.',
+        kind: 'Kind', position: 'Position', company: 'Company', current: 'Current', currentHint: 'Shows the CURRENT badge.',
         experienceKind: 'Kind', experienceKindHint: 'Research roles are listed on their own on the research site.',
         experienceKinds: { industry: 'Industry', research: 'Research', teaching: 'Teaching' },
         category: 'Category', skills: 'Skills', iconHint: 'Also picks the category colour.',
@@ -146,6 +147,7 @@ export const translations = {
       messages: {
         pageTitle: 'Portfolio Messages', pageSubtitle: 'Sent through the contact form on your portfolio.',
         empty: 'No messages yet.', unread: 'unread', markRead: 'Mark as read', markUnread: 'Mark as unread',
+        all: 'All', unreadTab: 'Unread', noVersion: 'No version', message: 'Message', from: 'From', contact: 'Contact', sent: 'Sent', reply: 'Reply',
       },
     },
     org: {
@@ -1040,6 +1042,7 @@ export const translations = {
         onePerLine: 'প্রতি লাইনে একটি।', commaSeparated: 'কমা দিয়ে আলাদা করুন।',
         richTextHint: 'বোল্ড, তালিকা ইত্যাদির জন্য টুলবার ব্যবহার করুন। {years} ক্যারিয়ার শুরুর পর থেকে বছর সংখ্যা হয়ে যায়।',
         orderHint: 'সাইটে এই ক্রমেই দেখায়। তীর দিয়ে ক্রম বদলান, চোখ দিয়ে লুকান।',
+        prevPage: 'আগের পাতা', nextPage: 'পরের পাতা', filterAll: 'সব',
       },
       profile: {
         pageTitle: 'পোর্টফোলিও প্রোফাইল', pageSubtitle: 'আপনার পরিচয়, হিরো অংশ ও লিংক।',
@@ -1101,7 +1104,7 @@ export const translations = {
         challenge: 'চ্যালেঞ্জ', challengeHint: 'কী কঠিন ছিল: স্কেল, সীমাবদ্ধতা, অস্পষ্ট চাহিদা…',
         solution: 'কীভাবে সমাধান করেছি', solutionHint: 'যে পদ্ধতি, ডিজাইন বা কৌশল কাজ করেছে।',
         result: 'ফলাফল', resultHint: 'ঐচ্ছিক: কী অর্জিত হয়েছে, সংখ্যা থাকলে দিন।',
-        position: 'পদ', company: 'প্রতিষ্ঠান', current: 'বর্তমান', currentHint: 'বর্তমান ব্যাজ দেখায়।',
+        kind: 'ধরন', position: 'পদ', company: 'প্রতিষ্ঠান', current: 'বর্তমান', currentHint: 'বর্তমান ব্যাজ দেখায়।',
         experienceKind: 'ধরন', experienceKindHint: 'গবেষণা সাইটে গবেষণার পদগুলো আলাদাভাবে দেখায়।',
         experienceKinds: { industry: 'ইন্ডাস্ট্রি', research: 'গবেষণা', teaching: 'শিক্ষকতা' },
         category: 'বিভাগ', skills: 'দক্ষতা', iconHint: 'বিভাগের রঙও এটি ঠিক করে।',
@@ -1172,6 +1175,7 @@ export const translations = {
       messages: {
         pageTitle: 'পোর্টফোলিও বার্তা', pageSubtitle: 'আপনার পোর্টফোলিওর যোগাযোগ ফর্ম থেকে পাঠানো।',
         empty: 'এখনো কোনো বার্তা নেই।', unread: 'অপঠিত', markRead: 'পঠিত চিহ্নিত করুন', markUnread: 'অপঠিত চিহ্নিত করুন',
+        all: 'সব', unreadTab: 'অপঠিত', noVersion: 'সংস্করণ নেই', message: 'বার্তা', from: 'প্রেরক', contact: 'যোগাযোগ', sent: 'পাঠানো', reply: 'উত্তর দিন',
       },
     },
     org: {

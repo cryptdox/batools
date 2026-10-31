@@ -128,6 +128,14 @@ export const PfArticles = () => {
         transform={shapePost}
         upload={upload}
         searchable
+        pageSize={10}
+        filters={[
+          { name: 'kind', label: 'pf.articles.kind', options: [
+            { value: 'article', label: 'pf.articles.kinds.article' }, { value: 'external', label: 'pf.articles.kinds.external' }] },
+          { name: 'platform', label: 'pf.articles.platform', options: ['native', ...PLATFORMS].map(value => ({ value, label: `pf.articles.platforms.${value}` })) },
+          { name: 'status', label: 'pf.articles.status', options: [
+            { value: 'published', label: 'pf.articles.statuses.published' }, { value: 'draft', label: 'pf.articles.statuses.draft' }] },
+        ]}
         reloadSignal={reload}
         renderRow={r => (
           <PfRowText

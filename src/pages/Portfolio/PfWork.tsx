@@ -101,6 +101,9 @@ export const PfProjects = () => {
         title="pf.work.projects"
         fields={PROJECT_FIELDS}
         searchable
+        pageSize={10}
+        filters={[{ name: 'is_featured', label: 'pf.work.kind', options: [
+          { value: 'true', label: 'pf.work.featureProject' }, { value: 'false', label: 'pf.work.enterprise' }] }]}
         reloadSignal={reload}
         afterSave={afterSave}
         headerActions={
@@ -145,6 +148,9 @@ export const PfExperience = () => {
         table="pf_experiences"
         title="pf.work.experience"
         fields={EXPERIENCE_FIELDS}
+        searchable
+        pageSize={10}
+        filters={[{ name: 'kind', label: 'pf.work.experienceKind', options: EXPERIENCE_KINDS }]}
         renderRow={r => (
           <PfRowText
             primary={`${r.position_en} · ${r.company_en}`}
@@ -240,6 +246,11 @@ export const PfResearch = () => {
         table="pf_publications"
         title="pf.research.publications"
         fields={PUBLICATION_FIELDS}
+        pageSize={10}
+        filters={[
+          { name: 'status', label: 'pf.research.statusLabel', options: PUB_STATUSES },
+          { name: 'pub_type', label: 'pf.research.type', options: PUB_TYPES },
+        ]}
         upload={userId ? { bucket: PF_BUCKET, folder: `${userId}/research` } : undefined}
         searchable
         reloadSignal={reload}
@@ -270,6 +281,8 @@ export const PfResearch = () => {
         title="pf.research.artifacts"
         subtitle="pf.research.artifactsHint"
         fields={artifactFields(papers)}
+        pageSize={10}
+        filters={[{ name: 'kind', label: 'pf.research.artifactKind', options: ARTIFACT_KINDS }]}
         searchable
         renderRow={r => (
           <PfRowText

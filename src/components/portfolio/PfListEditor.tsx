@@ -8,6 +8,7 @@ import { Button, Badge } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { PfFieldInput, pfInputClass, removeUploads, type PfUploadTarget } from './PfFieldInput';
 import { inVersionTab, usePfVersionTab } from '../../lib/pfVersionTab';
+import { PfPager, pageOf } from './PfPager';
 
 /** Rows that belong to a row of these tables and are copied with it on Clone. */
 const CLONE_CHILDREN: Record<string, { table: string; column: string }[]> = {
@@ -67,6 +68,10 @@ type Props = {
   versioned?: boolean;
   /** A Clone button per row: a copy (with its child rows) named "… v1", "… v2", … */
   cloneable?: boolean;
+  /** Rows per page; without it the list is not paged. */
+  pageSize?: number;
+  /** Dropdowns in the header that narrow the list to rows whose column equals the pick. */
+  filters?: { name: string; label: string; options: { value: string; label: string }[] }[];
 };
 
 /**
@@ -77,7 +82,7 @@ type Props = {
  * deleted, and deleting a row deletes its files.
  */
 export const PfListEditor = ({
-  table, title, subtitle, fields: baseFields, renderRow, versioned, cloneable, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
+  table, title, subtitle, fields: baseFields, renderRow, versioned, cloneable, pageSize, filters, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
   owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal, transform, headerActions, afterSave,
 }: Props) => {
   const { t } = useLanguage();
@@ -142,14 +147,18 @@ export const PfListEditor = ({
   // The page's version tab (PfVersionTabs) narrows a versioned list.
   const versionTab = usePfVersionTab();
   const activeTab = versioned && versions.some(v => v.value === versionTab) ? versionTab : 'all';
+  const [picked, setPicked] = useState<Record<string, string>>({});
+  const [page, setPage] = useState(0);
   const visibleRows = useMemo(() => {
     const known = new Set(versions.map(v => v.value));
-    const inTab = rows.filter(r => inVersionTab(r, activeTab, known));
+    const inTab = rows.filter(r => inVersionTab(r, activeTab, known)
+      && Object.entries(picked).every(([col, value]) => !value || String(r[col] ?? '') === value));
     const needle = search.trim().toLowerCase();
     if (!needle) return inTab;
     return inTab.filter(r => Object.values(r).some(v =>
       (Array.isArray(v) ? v.join(' ') : String(v ?? '')).toLowerCase().includes(needle)));
-  }, [rows, search, activeTab, versions]);
+  }, [rows, search, activeTab, versions, picked]);
+  const paged = pageOf(visibleRows, page, pageSize ?? Math.max(1, visibleRows.length));
 
   const openAdd = () => {
     formUploads.current = [];
@@ -343,12 +352,24 @@ export const PfListEditor = ({
           {subtitle && <p className="text-sm text-gray-500 dark:text-gray-400">{t(subtitle)}</p>}
         </div>
         <div className="flex items-center gap-2">
+          {filters?.map(f => (
+            <select
+              key={f.name}
+              value={picked[f.name] ?? ''}
+              onChange={e => { setPicked(p => ({ ...p, [f.name]: e.target.value })); setPage(0); }}
+              className={`${pfInputClass} h-9 w-auto`}
+              title={t(f.label)}
+            >
+              <option value="">{t(f.label)}: {t('pf.common.filterAll')}</option>
+              {f.options.map(o => <option key={o.value} value={o.value}>{t(o.label)}</option>)}
+            </select>
+          ))}
           {searchable && (
             <div className="relative">
               <Search size={16} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 value={search}
-                onChange={e => setSearch(e.target.value)}
+                onChange={e => { setSearch(e.target.value); setPage(0); }}
                 placeholder={t('pf.common.search')}
                 className={`${pfInputClass} h-9 pl-8 w-48`}
               />
@@ -368,7 +389,7 @@ export const PfListEditor = ({
         </div>
       ) : (
         <ul className="divide-y divide-gray-100 dark:divide-gray-700">
-          {visibleRows.map(row => {
+          {paged.slice.map(row => {
             const index = visibleRows.indexOf(row);
             const hidden = hideable && row.is_visible === false;
             return (
@@ -426,6 +447,7 @@ export const PfListEditor = ({
           })}
         </ul>
       )}
+      {pageSize && <PfPager page={paged.current} pages={paged.pages} onChange={setPage} />}
 
       <Modal
         isOpen={isModalOpen}
