@@ -53,6 +53,8 @@ export type PfField = {
   options?: { value: string; label: string }[];
   /** select only: offers a blank choice, stored as NULL. */
   allowEmpty?: boolean;
+  /** select only: a type-to-filter list whose labels wrap (long lists, long labels). */
+  searchable?: boolean;
   /** textarea only: visible rows (default 4). */
   rows?: number;
   /** text only: adds an upload button that fills in the file's public URL.

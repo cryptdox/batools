@@ -8,6 +8,7 @@ import { Button } from '../ui/Button';
 import { RichEditor } from '../ui/RichText';
 import { fetchLinkPreview, type LinkPreview } from '../../lib/linkPreview';
 import { PfSkillPicker } from './PfSkillPicker';
+import { PfSearchSelect } from './PfSearchSelect';
 
 export const pfInputClass =
   'w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-50';
@@ -177,6 +178,8 @@ export const PfFieldInput = ({ field: f, values, onChange, upload, onUploaded }:
       {label}
       {f.type === 'textarea' ? (
         <textarea value={textValue(f.name)} onChange={e => onChange(f.name, e.target.value)} rows={f.rows ?? 4} className={pfInputClass} />
+      ) : f.type === 'select' && f.searchable ? (
+        <PfSearchSelect value={textValue(f.name)} options={f.options ?? []} allowEmpty={f.allowEmpty} onChange={v => onChange(f.name, v)} />
       ) : f.type === 'select' ? (
         <select value={textValue(f.name)} onChange={e => onChange(f.name, e.target.value)} className={`${pfInputClass} h-10`}>
           {f.allowEmpty && <option value="">—</option>}

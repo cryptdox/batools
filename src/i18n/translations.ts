@@ -14,7 +14,7 @@ export const translations = {
         onePerLine: 'One item per line.', commaSeparated: 'Separate with commas.',
         richTextHint: 'Use the toolbar for bold, lists and more. {years} becomes the years since the career start year.',
         orderHint: 'The site shows these in this order. Use the arrows to reorder and the eye to hide.',
-        prevPage: 'Previous page', nextPage: 'Next page', filterAll: 'All',
+        prevPage: 'Previous page', nextPage: 'Next page', filterAll: 'All', clear: 'Clear',
       },
       profile: {
         pageTitle: 'Portfolio Profile', pageSubtitle: 'Who you are, the hero section, and your links.',
@@ -1053,7 +1053,7 @@ export const translations = {
         onePerLine: 'প্রতি লাইনে একটি।', commaSeparated: 'কমা দিয়ে আলাদা করুন।',
         richTextHint: 'বোল্ড, তালিকা ইত্যাদির জন্য টুলবার ব্যবহার করুন। {years} ক্যারিয়ার শুরুর পর থেকে বছর সংখ্যা হয়ে যায়।',
         orderHint: 'সাইটে এই ক্রমেই দেখায়। তীর দিয়ে ক্রম বদলান, চোখ দিয়ে লুকান।',
-        prevPage: 'আগের পাতা', nextPage: 'পরের পাতা', filterAll: 'সব',
+        prevPage: 'আগের পাতা', nextPage: 'পরের পাতা', filterAll: 'সব', clear: 'মুছুন',
       },
       profile: {
         pageTitle: 'পোর্টফোলিও প্রোফাইল', pageSubtitle: 'আপনার পরিচয়, হিরো অংশ ও লিংক।',

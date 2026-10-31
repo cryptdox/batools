@@ -306,7 +306,7 @@ const artifactFields = (papers: { value: string; label: string }[]): PfField[] =
   { name: 'dataset_url', label: 'pf.research.datasetUrl', type: 'text', showIf: has('dataset'), hint: 'pf.research.datasetUrlHint' },
   { name: 'code_url', label: 'pf.research.codeLink', type: 'text', showIf: has('code'), hint: 'pf.research.codeLinkHint' },
   { name: 'private_kinds', label: 'pf.research.privateKinds', type: 'multi', options: ARTIFACT_KINDS, hint: 'pf.research.privateKindsHint' },
-  { name: 'publication_id', label: 'pf.research.paper', type: 'select', options: papers, allowEmpty: true, hint: 'pf.research.paperHint' },
+  { name: 'publication_id', label: 'pf.research.paper', type: 'select', options: papers, allowEmpty: true, searchable: true, hint: 'pf.research.paperHint' },
   { name: 'metrics', label: 'pf.research.metrics', type: 'tags', hint: 'pf.research.metricsHint' },
   { name: 'tags', label: 'pf.research.tags', type: 'tags' },
   { name: 'released_on', label: 'pf.research.releasedOn', type: 'date' },
