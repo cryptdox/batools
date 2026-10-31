@@ -4,6 +4,7 @@
 --   kinds          model / dataset / code / demo, any combination
 --   model_url, dataset_url, code_url   one link per kind (demo_url exists)
 --   private_kinds  which of those links are private (access on request)
+-- and publications get private_links (pdf / code / paper), see the end.
 -- Existing rows are converted from kind + url + is_private. kind and url stay
 -- (optional now) and are kept in step with the first kind and its link.
 
@@ -24,5 +25,14 @@ UPDATE pf_research_artifacts SET
   demo_url = CASE WHEN kind = 'demo' THEN COALESCE(demo_url, url) ELSE demo_url END,
   private_kinds = CASE WHEN is_private THEN ARRAY[kind] ELSE '{}' END
 WHERE kinds = '{}';
+
+-- Publications get the same per-link privacy: private_links lists which of
+-- pdf / code / paper are shared on request. pdf_public = false becomes 'pdf';
+-- pdf_public stays and is kept in step.
+ALTER TABLE pf_publications
+  ADD COLUMN IF NOT EXISTS private_links TEXT[] NOT NULL DEFAULT '{}';
+
+UPDATE pf_publications SET private_links = ARRAY['pdf']
+WHERE pdf_public = false AND private_links = '{}';
 
 NOTIFY pgrst, 'reload schema';

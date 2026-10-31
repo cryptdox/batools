@@ -253,6 +253,13 @@ const PUB_TYPES = ['journal', 'conference', 'preprint', 'thesis', 'book_chapter'
 const PUB_STATUSES = ['published', 'accepted', 'under_review']
   .map(value => ({ value, label: `pf.research.status.${value}` }));
 
+/** The links of a paper that can be shared on request (073). */
+const PAPER_LINKS = ['pdf', 'code', 'paper'].map(value => ({ value, label: `pf.research.paperLinks.${value}` }));
+
+/** pdf_public (056) follows the PDF's privacy. */
+const shapePublication = (row: Record<string, unknown>) =>
+  ({ ...row, pdf_public: !((row.private_links as string[]) ?? []).includes('pdf') });
+
 const PUBLICATION_FIELDS: PfField[] = [
   { name: 'title', label: 'pf.work.title', type: 'i18n', required: true, hint: 'pf.research.titleHint' },
   { name: 'authors', label: 'pf.research.authors', type: 'tags', hint: 'pf.research.authorsHint' },
@@ -271,8 +278,8 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'doi', label: 'DOI', type: 'text', hint: 'pf.research.doiHint' },
   { name: 'url', label: 'pf.research.url', type: 'text' },
   { name: 'pdf_url', label: 'pf.research.pdfUrl', type: 'text', upload: 'application/pdf', hint: 'pf.research.pdfHint' },
-  { name: 'pdf_public', label: 'pf.research.pdfPublic', type: 'boolean', initial: true, hint: 'pf.research.pdfPublicHint' },
   { name: 'code_url', label: 'pf.research.codeUrl', type: 'text' },
+  { name: 'private_links', label: 'pf.research.privateKinds', type: 'multi', options: PAPER_LINKS, hint: 'pf.research.privateLinksHint' },
   { name: 'citation', label: 'pf.research.citation', type: 'textarea', hint: 'pf.research.citationHint' },
   { name: 'show_on_home', label: 'pf.common.showOnHome', type: 'boolean', hint: 'pf.common.showOnHomeHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
@@ -348,6 +355,7 @@ export const PfResearch = () => {
         table="pf_publications"
         title="pf.research.publications"
         fields={PUBLICATION_FIELDS}
+        transform={shapePublication}
         pageSize={10}
         filters={[
           { name: 'status', label: 'pf.research.statusLabel', options: PUB_STATUSES },
@@ -368,7 +376,9 @@ export const PfResearch = () => {
                 {r.status !== 'published' && <Badge variant="warning">{t(`pf.research.status.${r.status}`)}</Badge>}
                 {r.show_on_home === true && <Badge variant="default">{t('pf.common.onHome')}</Badge>}
                 {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
-                {!!r.pdf_url && r.pdf_public === false && <Badge variant="muted">{t('pf.research.pdfPrivate')}</Badge>}
+                {((r.private_links as string[] | undefined) ?? (r.pdf_public === false ? ['pdf'] : [])).map(l => (
+                  <Badge key={l} variant="warning">{t(`pf.research.paperLinks.${l}`)} · {t('pf.research.private')}</Badge>
+                ))}
                 {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}
                 {r.show_challenges === true && <Badge variant="warning">{t('pf.work.challengesShown')}</Badge>}
                 {r.show_highlights === false && <Badge variant="muted">{t('pf.research.highlightsHidden')}</Badge>}
