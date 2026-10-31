@@ -92,7 +92,7 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   pf_publications: ['PORTFOLIO_RESEARCH'],
   pf_research_artifacts: ['PORTFOLIO_RESEARCH'],
   // Edited under Profile; read by every list that tags rows with versions.
-  pf_versions: ['PORTFOLIO_PROFILE', 'PORTFOLIO_ABOUT', 'PORTFOLIO_PROJECTS', 'PORTFOLIO_EXPERIENCE', 'PORTFOLIO_TECH_STACK', 'PORTFOLIO_RESEARCH', 'PORTFOLIO_ARTICLES'],
+  pf_versions: ['PORTFOLIO_PROFILE', 'PORTFOLIO_ABOUT', 'PORTFOLIO_PROJECTS', 'PORTFOLIO_EXPERIENCE', 'PORTFOLIO_TECH_STACK', 'PORTFOLIO_RESEARCH', 'PORTFOLIO_ARTICLES', 'PORTFOLIO_MESSAGES'],
   pf_labels: ['PORTFOLIO_LABELS'],
   pf_messages: ['PORTFOLIO_MESSAGES'],
   // Organization site

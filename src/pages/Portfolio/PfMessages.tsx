@@ -17,6 +17,8 @@ type PfMessage = {
   message: string;
   is_read: boolean;
   created_at: string;
+  /** Slug of the portfolio version it was sent from (066). */
+  version?: string | null;
 };
 
 /** What visitors sent through the portfolio's contact form. */
@@ -27,6 +29,14 @@ export const PfMessages = () => {
   const [loading, setLoading] = useState(true);
   const [toDelete, setToDelete] = useState<PfMessage | null>(null);
   const [deleting, setDeleting] = useState(false);
+  // Version names by slug, for the tag on each message.
+  const [versionNames, setVersionNames] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (!userId) return;
+    void supabase.from('pf_versions').select('slug, name_en').eq('user_id', userId).then(({ data }) =>
+      setVersionNames(Object.fromEntries((data ?? []).map(v => [v.slug as string, v.name_en as string]))));
+  }, [userId]);
 
   const fetchMessages = useCallback(async () => {
     if (!userId) return;
@@ -81,7 +91,10 @@ export const PfMessages = () => {
               <li key={m.id} className={`p-4 ${m.is_read ? '' : 'bg-primary/5'}`}>
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <div className="font-semibold text-gray-900 dark:text-gray-100">{m.subject || '—'}</div>
+                    <div className="font-semibold text-gray-900 dark:text-gray-100 flex flex-wrap items-center gap-2">
+                      {m.subject || '—'}
+                      {m.version && <Badge variant="default">{versionNames[m.version] ?? m.version}</Badge>}
+                    </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
                       {m.name || '—'} · <a href={`mailto:${m.contact}`} className="text-primary hover:underline">{m.contact}</a>
                       {' · '}{format(new Date(m.created_at), 'dd MMM yyyy, h:mm a')}
