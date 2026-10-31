@@ -173,6 +173,7 @@ export const PfProfile = () => {
       )}
 
       <PfListEditor
+        cloneable
         table="pf_versions"
         title="pf.versions.listTitle"
         subtitle="pf.versions.hint"
@@ -197,6 +198,7 @@ export const PfProfile = () => {
 
       <PfListEditor
         versioned
+        cloneable
         table="pf_hero_roles"
         title="pf.profile.roles"
         subtitle="pf.profile.rolesHint"

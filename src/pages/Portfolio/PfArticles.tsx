@@ -121,6 +121,7 @@ export const PfArticles = () => {
       <PfPageHeader title="pf.articles.pageTitle" subtitle="pf.articles.pageSubtitle" />
       <PfListEditor
         versioned
+        cloneable
         table="pf_posts"
         title="pf.articles.posts"
         fields={POST_FIELDS}

@@ -1,12 +1,27 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { toast } from 'react-toastify';
-import { Plus, Pencil, Trash2, AlertTriangle, ArrowUp, ArrowDown, Eye, EyeOff, Search, Inbox } from 'lucide-react';
+import { Plus, Pencil, Trash2, AlertTriangle, ArrowUp, ArrowDown, Eye, EyeOff, Search, Inbox, Copy } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage, formFromRow, isFormComplete, loadPfVersions, rowFromShownForm, shownFields, usePfUserId, type PfField, type PfFormValues, type PfRow } from '../../lib/portfolio';
 import { Button, Badge } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { PfFieldInput, pfInputClass, removeUploads, type PfUploadTarget } from './PfFieldInput';
+
+/** Rows that belong to a row of these tables and are copied with it on Clone. */
+const CLONE_CHILDREN: Record<string, { table: string; column: string }[]> = {
+  pf_about_sections: [{ table: 'pf_about_blocks', column: 'section_id' }],
+  pf_projects: [{ table: 'pf_case_study_sections', column: 'project_id' }, { table: 'pf_challenges', column: 'project_id' }],
+  pf_publications: [{ table: 'pf_case_study_sections', column: 'publication_id' }, { table: 'pf_challenges', column: 'publication_id' }],
+  pf_posts: [{ table: 'pf_post_blocks', column: 'post_id' }],
+};
+
+/** Columns a copy never takes from its original. */
+const withoutIdentity = ({ id: _id, created_at: _c, updated_at: _u, ...rest }: Record<string, unknown>) => rest;
+
+/** "Title v3" → "Title"; "my-post-v3" → "my-post". */
+const baseLabel = (s: string) => s.replace(/\s+v\d+$/, '');
+const baseSlug = (s: string) => s.replace(/-v\d+$/, '');
 
 type Props = {
   table: string;
@@ -49,6 +64,8 @@ type Props = {
   afterSave?: (row: Record<string, unknown>) => Promise<string | void>;
   /** The table has a `versions` column (063): adds the version picker and shows each row's versions. */
   versioned?: boolean;
+  /** A Clone button per row: a copy (with its child rows) named "… v1", "… v2", … */
+  cloneable?: boolean;
 };
 
 /**
@@ -59,7 +76,7 @@ type Props = {
  * deleted, and deleting a row deletes its files.
  */
 export const PfListEditor = ({
-  table, title, subtitle, fields: baseFields, renderRow, versioned, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
+  table, title, subtitle, fields: baseFields, renderRow, versioned, cloneable, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
   owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal, transform, headerActions, afterSave,
 }: Props) => {
   const { t } = useLanguage();
@@ -166,7 +183,7 @@ export const PfListEditor = ({
         // Everything uploaded this time plus the file the row had, minus what it keeps now.
         const kept = new Set(uploadFields.map(name => (payload as Record<string, unknown>)[name]));
         const candidates = [...formUploads.current, ...uploadFields.map(name => editing?.[name] as string | null)];
-        await removeUploads(upload, candidates.filter(url => !kept.has(url)));
+        await removeUploads(upload, await unshared(candidates.filter(url => !kept.has(url))));
       }
       formUploads.current = [];
       const note = afterSave ? await afterSave(payload).catch(e => { console.error(e); return undefined; }) : undefined;
@@ -188,7 +205,7 @@ export const PfListEditor = ({
     try {
       const { error } = await supabase.from(table).delete().eq('id', toDelete.id).eq(ownerColumn, ownerId);
       if (error) throw error;
-      if (upload) await removeUploads(upload, uploadFields.map(name => toDelete[name] as string | null));
+      if (upload) await removeUploads(upload, await unshared(uploadFields.map(name => toDelete[name] as string | null), toDelete.id));
       await fetchRows(true);
       setToDelete(null);
       toast.success(t('pf.common.deleted'));
@@ -235,6 +252,67 @@ export const PfListEditor = ({
       .map((r, i) => ({ id: r.id, patch: { sort_order: i + 1 }, changed: Number(r.sort_order) !== i + 1 }))
       .filter(c => c.changed)
       .map(({ id, patch }) => ({ id, patch })));
+  };
+
+  /** Of these files, the ones no other row of the table still points at (a clone shares its original's files). */
+  const unshared = async (urls: (string | null | undefined)[], rowId?: string) => {
+    const result: string[] = [];
+    for (const url of new Set(urls.filter((u): u is string => !!u))) {
+      let used = false;
+      for (const col of uploadFields) {
+        let query = supabase.from(table).select('id', { head: true, count: 'exact' }).eq(col, url);
+        if (rowId) query = query.neq('id', rowId);
+        const { count } = await query;
+        if (count) { used = true; break; }
+      }
+      if (!used) result.push(url);
+    }
+    return result;
+  };
+
+  /** Copies a row and its child rows; the copy is named "… vN" (the next free N) and goes last. */
+  const cloneRow = async (row: PfRow) => {
+    if (!ownerId) return;
+    setBusy(true);
+    try {
+      const label = baseFields.find(f => f.type === 'i18n') ?? baseFields.find(f => f.type === 'text');
+      const labelKey = label ? (label.type === 'i18n' ? `${label.name}_en` : label.name) : null;
+      const base = labelKey ? baseLabel(String(row[labelKey] ?? '')) : '';
+      const taken = labelKey
+        ? rows.map(r => String(r[labelKey] ?? '').match(new RegExp(`^${base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s+v(\\d+)$`))?.[1]).filter(Boolean).map(Number)
+        : [];
+      const n = Math.max(0, ...taken) + 1;
+
+      const copy: Record<string, unknown> = withoutIdentity(row);
+      if (label) {
+        const keys = label.type === 'i18n' ? [`${label.name}_en`, `${label.name}_bn`] : [label.name];
+        for (const k of keys) if (typeof copy[k] === 'string' && copy[k]) copy[k] = `${baseLabel(copy[k] as string)} v${n}`;
+      }
+      // Unique per owner: the copy gets its own.
+      if (typeof copy.slug === 'string' && copy.slug) copy.slug = `${baseSlug(copy.slug)}-v${n}`;
+      if (copy.is_default === true) copy.is_default = false;
+      if (ordered) copy.sort_order = Math.max(0, ...rows.map(r => Number(r.sort_order) || 0)) + 1;
+      if (auditUserId) Object.assign(copy, { created_by: auditUserId, updated_by: auditUserId });
+
+      const { data, error } = await supabase.from(table).insert([copy]).select('id').single();
+      if (error) throw error;
+      for (const child of CLONE_CHILDREN[table] ?? []) {
+        const { data: kids, error: kidsError } = await supabase.from(child.table).select('*').eq(child.column, row.id);
+        if (kidsError) throw kidsError;
+        if (kids?.length) {
+          const { error: insertError } = await supabase.from(child.table)
+            .insert(kids.map(k => ({ ...withoutIdentity(k), [child.column]: data.id })));
+          if (insertError) throw insertError;
+        }
+      }
+      await fetchRows(true);
+      toast.success(t('pf.common.cloned'));
+    } catch (e) {
+      console.error(e);
+      toast.error(errorMessage(e, t('pf.common.saveError')));
+    } finally {
+      setBusy(false);
+    }
   };
 
   /** Closes the form without saving: its uploads were never used. */
@@ -301,6 +379,11 @@ export const PfListEditor = ({
                 </div>
                 <div className="flex items-center gap-0.5 shrink-0">
                   {rowActions?.(row)}
+                  {cloneable && (
+                    <button className={iconButton} disabled={busy} onClick={() => void cloneRow(row)} title={t('pf.common.clone')}>
+                      <Copy size={16} />
+                    </button>
+                  )}
                   {ordered && !search && (
                     <>
                       <button className={iconButton} disabled={busy || index === 0} onClick={() => move(index, -1)} title={t('pf.common.moveUp')}>
