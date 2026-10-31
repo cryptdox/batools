@@ -102,6 +102,9 @@ export const translations = {
         paper: 'From paper', paperHint: 'Optional. Shown with that publication on the research site.',
         metrics: 'Headline results', metricsHint: 'Comma separated, e.g. 94.49% accuracy, 98.36% ROC-AUC.',
         tags: 'Tags', releasedOn: 'Released on',
+        highlights: 'Key findings', highlightsHint: 'The main results, one per line.',
+        contributions: 'My contribution', contributionsHint: 'What you did on this paper, one per line.',
+        methods: 'Methods & tools', methodsHint: 'Like a project\'s tech stack.',
         private: 'Private', privateHint: 'Still listed and linked, tagged Private, with a note to message you for access.',
       },
       articles: {
@@ -1130,6 +1133,9 @@ export const translations = {
         paper: 'যে পেপার থেকে', paperHint: 'ঐচ্ছিক। গবেষণা সাইটে সেই প্রকাশনার সাথে দেখায়।',
         metrics: 'প্রধান ফলাফল', metricsHint: 'কমা দিয়ে আলাদা, যেমন 94.49% accuracy, 98.36% ROC-AUC।',
         tags: 'ট্যাগ', releasedOn: 'প্রকাশের তারিখ',
+        highlights: 'মূল ফলাফল', highlightsHint: 'প্রধান ফলাফলগুলো, প্রতি লাইনে একটি।',
+        contributions: 'আমার অবদান', contributionsHint: 'এই পেপারে আপনি যা করেছেন, প্রতি লাইনে একটি।',
+        methods: 'পদ্ধতি ও টুল', methodsHint: 'প্রকল্পের টেক স্ট্যাকের মতো।',
         private: 'প্রাইভেট', privateHint: 'তালিকায় ও লিংকসহ থাকবে, প্রাইভেট ট্যাগসহ; অ্যাক্সেসের জন্য আপনাকে মেসেজ দিতে বলা হবে।',
       },
       articles: {
