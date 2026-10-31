@@ -79,7 +79,7 @@ export const translations = {
         kind: 'Kind', position: 'Position', company: 'Company', current: 'Current', currentHint: 'Shows the CURRENT badge.',
         experienceKind: 'Kind', experienceKindHint: 'Research roles are listed on their own on the research site.',
         experienceKinds: { industry: 'Industry', research: 'Research', teaching: 'Teaching' },
-        category: 'Category', skills: 'Skills', iconHint: 'Also picks the category colour.',
+        category: 'Category', skills: 'Skills', otherSkillsHint: 'Skills in your other categories: click one to move it here. On Save it leaves the category it came from.', iconHint: 'Also picks the category colour.',
       },
       research: {
         pageTitle: 'Portfolio Research', publications: 'Publications',
@@ -1107,7 +1107,7 @@ export const translations = {
         kind: 'ধরন', position: 'পদ', company: 'প্রতিষ্ঠান', current: 'বর্তমান', currentHint: 'বর্তমান ব্যাজ দেখায়।',
         experienceKind: 'ধরন', experienceKindHint: 'গবেষণা সাইটে গবেষণার পদগুলো আলাদাভাবে দেখায়।',
         experienceKinds: { industry: 'ইন্ডাস্ট্রি', research: 'গবেষণা', teaching: 'শিক্ষকতা' },
-        category: 'বিভাগ', skills: 'দক্ষতা', iconHint: 'বিভাগের রঙও এটি ঠিক করে।',
+        category: 'বিভাগ', skills: 'দক্ষতা', otherSkillsHint: 'অন্য ক্যাটাগরির স্কিল: ক্লিক করলে এখানে আসবে; সেভ করলে আগের ক্যাটাগরি থেকে সরে যাবে।', iconHint: 'বিভাগের রঙও এটি ঠিক করে।',
       },
       research: {
         pageTitle: 'পোর্টফোলিও গবেষণা', publications: 'প্রকাশনা',

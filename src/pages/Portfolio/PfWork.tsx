@@ -3,7 +3,7 @@ import { Lightbulb } from 'lucide-react';
 import { Badge } from '../../components/ui/Button';
 import { PfListEditor, PfRowText } from '../../components/portfolio/PfListEditor';
 import { useLanguage } from '../../lib/LanguageContext';
-import { PF_ICON_OPTIONS, usePfUserId, type PfField, type PfRow } from '../../lib/portfolio';
+import { PF_ICON_OPTIONS, usePfUserId, type PfField, type PfFormValues, type PfRow } from '../../lib/portfolio';
 import { PF_BUCKET } from '../../components/portfolio/PfFileUpload';
 import { PfPageHeader } from './PfPageHeader';
 import { PfCaseStudyModal } from '../../components/portfolio/PfCaseStudyModal';
@@ -167,19 +167,86 @@ export const PfExperience = () => {
   );
 };
 
-export const PfTechStack = () => (
-  <div className="max-w-5xl mx-auto space-y-6">
-    <PfPageHeader versions title="pf.work.techTitle" subtitle="pf.common.orderHint" />
-    <PfListEditor
-      versioned
-      cloneable
-      table="pf_tech_categories"
-      title="pf.work.categories"
-      fields={TECH_FIELDS}
-      renderRow={r => <PfRowText primary={`${r.title_en} (${r.icon})`} extra={<Tags items={r.skills} />} />}
-    />
-  </div>
-);
+const splitSkills = (v: unknown) => String(v ?? '').split(',').map(x => x.trim()).filter(Boolean);
+const lower = (xs: string[]) => new Set(xs.map(x => x.toLowerCase()));
+
+/**
+ * Under a category's skills: the other categories' skills as chips. A click
+ * moves the skill here; on Save it is also taken off the category it came from.
+ * The moves ride along in the hidden form value `__moved`.
+ */
+const OtherSkills = ({ values, setValue, rows, editing }: {
+  values: PfFormValues; setValue: (key: string, value: string | boolean) => void; rows: PfRow[]; editing: PfRow | null;
+}) => {
+  const { t } = useLanguage();
+  const here = splitSkills(values.skills);
+  const taken = lower(here);
+  const others = rows
+    .filter(r => r.id !== editing?.id)
+    .map(r => ({ id: r.id, title: String(r.title_en), skills: ((r.skills as string[]) ?? []).filter(s => !taken.has(s.toLowerCase())) }))
+    .filter(c => c.skills.length);
+  if (!others.length) return null;
+  const take = (skill: string) => {
+    setValue('skills', [...here, skill].join(', '));
+    setValue('__moved', [...splitSkills(values.__moved), skill].join(', '));
+  };
+  return (
+    <div className="rounded-lg border border-dashed border-gray-300 dark:border-gray-600 p-3 space-y-3">
+      <p className="text-xs text-gray-500 dark:text-gray-400">{t('pf.work.otherSkillsHint')}</p>
+      {others.map(c => (
+        <div key={c.id}>
+          <div className="text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1.5">{c.title}</div>
+          <div className="flex flex-wrap gap-1.5">
+            {c.skills.map(skill => (
+              <button key={skill} type="button" onClick={() => take(skill)}
+                className="px-2 py-0.5 rounded-md text-xs border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-primary/5">
+                + {skill}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export const PfTechStack = () => {
+  const userId = usePfUserId();
+  const [rows, setRows] = useState<PfRow[]>([]);
+
+  /** Skills moved into the saved category leave the categories they came from. */
+  const afterSave = async (row: Record<string, unknown>, values: PfFormValues) => {
+    const moved = lower(splitSkills(values.__moved));
+    if (!userId || !moved.size) return;
+    const kept = lower((row.skills as string[]) ?? []);
+    for (const r of rows) {
+      const skills = (r.skills as string[]) ?? [];
+      const left = skills.filter(s => !(moved.has(s.toLowerCase()) && kept.has(s.toLowerCase())));
+      // Untouched categories (the saved one included: moved skills were never in it) stay as they are.
+      if (left.length === skills.length) continue;
+      const { error } = await supabase.from('pf_tech_categories').update({ skills: left, updated_at: new Date().toISOString() })
+        .eq('id', r.id).eq('user_id', userId);
+      if (error) throw error;
+    }
+  };
+
+  return (
+    <div className="max-w-5xl mx-auto space-y-6">
+      <PfPageHeader versions title="pf.work.techTitle" subtitle="pf.common.orderHint" />
+      <PfListEditor
+        versioned
+        cloneable
+        table="pf_tech_categories"
+        title="pf.work.categories"
+        fields={TECH_FIELDS}
+        onRowsChange={setRows}
+        afterSave={afterSave}
+        formExtra={ctx => <OtherSkills {...ctx} />}
+        renderRow={r => <PfRowText primary={`${r.title_en} (${r.icon})`} extra={<Tags items={r.skills} />} />}
+      />
+    </div>
+  );
+};
 
 const PUB_TYPES = ['journal', 'conference', 'preprint', 'thesis', 'book_chapter', 'other']
   .map(value => ({ value, label: `pf.research.types.${value}` }));

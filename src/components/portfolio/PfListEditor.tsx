@@ -63,7 +63,9 @@ type Props = {
   /** Extra buttons in the list's header, before Add. */
   headerActions?: ReactNode;
   /** Runs after a row is saved (with the saved columns); a returned message is shown. */
-  afterSave?: (row: Record<string, unknown>) => Promise<string | void>;
+  afterSave?: (row: Record<string, unknown>, values: PfFormValues) => Promise<string | void>;
+  /** Extra content under the form's fields; `setValue` changes a form value (keys outside `fields` are not saved but reach afterSave). */
+  formExtra?: (ctx: { values: PfFormValues; setValue: (key: string, value: string | boolean) => void; rows: PfRow[]; editing: PfRow | null }) => ReactNode;
   /** The table has a `versions` column (063): adds the version picker and shows each row's versions. */
   versioned?: boolean;
   /** A Clone button per row: a copy (with its child rows) named "… v1", "… v2", … */
@@ -83,7 +85,7 @@ type Props = {
  */
 export const PfListEditor = ({
   table, title, subtitle, fields: baseFields, renderRow, versioned, cloneable, pageSize, filters, scope, ordered = true, orderBy, searchable, rowActions, isRowSelected,
-  owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal, transform, headerActions, afterSave,
+  owner, auditUserId, hideable = ordered, deleteHint = 'pf.common.deleteHint', upload, onRowsChange, reloadSignal, transform, headerActions, afterSave, formExtra,
 }: Props) => {
   const { t } = useLanguage();
   const pfUserId = usePfUserId();
@@ -202,7 +204,7 @@ export const PfListEditor = ({
         await removeUploads(upload, await unshared(candidates.filter(url => !kept.has(url))));
       }
       formUploads.current = [];
-      const note = afterSave ? await afterSave(payload).catch(e => { console.error(e); return undefined; }) : undefined;
+      const note = afterSave ? await afterSave(payload, values).catch(e => { console.error(e); return undefined; }) : undefined;
       await fetchRows(true);
       setIsModalOpen(false);
       toast.success(editing ? t('pf.common.updated') : t('pf.common.added'));
@@ -466,6 +468,7 @@ export const PfListEditor = ({
               onChange={(key, value) => setValues(prev => ({ ...prev, [key]: value }))}
             />
           ))}
+          {formExtra?.({ values, setValue: (key, value) => setValues(prev => ({ ...prev, [key]: value })), rows, editing })}
           <div className="flex justify-end gap-3 pt-4 mt-2 border-t border-gray-100 dark:border-gray-700">
             <Button variant="ghost" onClick={closeForm} disabled={saving}>{t('pf.common.cancel')}</Button>
             <Button onClick={handleSave} disabled={saving || !isFormComplete(shownFields(fields, values), values)}>
