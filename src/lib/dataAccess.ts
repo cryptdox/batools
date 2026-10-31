@@ -77,6 +77,7 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   pf_profile: ['PORTFOLIO_PROFILE'],
   pf_hero_roles: ['PORTFOLIO_PROFILE'],
   pf_about_sections: ['PORTFOLIO_ABOUT'],
+  pf_about_audiences: ['PORTFOLIO_ABOUT'],
   pf_about_blocks: ['PORTFOLIO_ABOUT'],
   pf_interests: ['PORTFOLIO_ABOUT'],
   pf_checklist: ['PORTFOLIO_ABOUT'],

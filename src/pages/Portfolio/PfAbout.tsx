@@ -7,13 +7,14 @@ import { Badge } from '../../components/ui/Button';
 import { PfListEditor, PfRowText } from '../../components/portfolio/PfListEditor';
 import { PfPageHeader, PfTabs } from './PfPageHeader';
 
-const AUDIENCES = [
-  { value: 'general', label: 'pf.about.general' },
-  { value: 'client', label: 'pf.about.client' },
+/** The tabs of "More about me" (067); each version shows its own. */
+const AUDIENCE_FIELDS: PfField[] = [
+  { name: 'name', label: 'pf.common.name', type: 'i18n', required: true },
 ];
 
-const SECTION_FIELDS: PfField[] = [
-  { name: 'audience', label: 'pf.about.audience', type: 'select', options: AUDIENCES, initial: 'general' },
+/** `audiences` are the owner's audiences, for the section's tab. */
+const sectionFields = (audiences: { value: string; label: string }[]): PfField[] => [
+  { name: 'audience_id', label: 'pf.about.audience', type: 'select', options: audiences, initial: audiences[0]?.value ?? '', hint: 'pf.about.audienceHint' },
   { name: 'heading', label: 'pf.about.heading', type: 'i18n', required: true },
 ];
 
@@ -61,6 +62,8 @@ export const PfAbout = () => {
   const { t } = useLanguage();
   const [tab, setTab] = useState<Tab>('about');
   const [section, setSection] = useState<PfRow | null>(null);
+  const [audiences, setAudiences] = useState<{ value: string; label: string }[]>([]);
+  const audienceName = (id: unknown) => audiences.find(a => a.value === id)?.label;
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
@@ -72,16 +75,25 @@ export const PfAbout = () => {
           <PfListEditor
             versioned
             cloneable
+            table="pf_about_audiences"
+            title="pf.about.audiences"
+            subtitle="pf.about.audiencesHint"
+            fields={AUDIENCE_FIELDS}
+            onRowsChange={rows => setAudiences(rows.map(r => ({ value: r.id, label: String(r.name_en) })))}
+            renderRow={r => <PfRowText primary={String(r.name_en)} secondary={String(r.name_bn ?? '')} />}
+          />
+          <PfListEditor
+            versioned
+            cloneable
             table="pf_about_sections"
             title="pf.about.sections"
             subtitle="pf.about.sectionsHint"
-            fields={SECTION_FIELDS}
-            orderBy={['audience', 'sort_order']}
+            fields={sectionFields(audiences)}
             renderRow={r => (
               <PfRowText
                 primary={String(r.heading_en)}
                 secondary={String(r.heading_bn ?? '')}
-                extra={<Badge variant={r.audience === 'client' ? 'warning' : 'default'}>{t(`pf.about.${r.audience}`)}</Badge>}
+                extra={<Badge variant="default">{audienceName(r.audience_id) ?? t('pf.about.noAudience')}</Badge>}
               />
             )}
             isRowSelected={r => r.id === section?.id}
