@@ -56,17 +56,18 @@ export const Modal = ({ isOpen, onClose, title, children, className }: ModalProp
         className={cn(
           // max-h + overflow so a tall form (the buy batch, with many lines)
           // scrolls inside the dialog instead of running off the viewport.
-          "relative w-full max-w-md max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 transform transition-all animate-fade-in-scale",
+          "relative w-full max-w-md max-h-[90vh] overflow-y-auto overflow-x-hidden bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 transform transition-all animate-fade-in-scale",
           className
         )}
       >
-        <div className="flex items-center justify-between mb-5">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <div className="flex items-start justify-between gap-3 mb-5">
+          {/* Long titles (e.g. a paper's) wrap inside the dialog. */}
+          <h3 className="min-w-0 flex-1 break-words text-xl font-semibold text-gray-900 dark:text-white">
             {title}
           </h3>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors rounded-full p-1 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="shrink-0 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors rounded-full p-1 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <X size={20} />
           </button>
