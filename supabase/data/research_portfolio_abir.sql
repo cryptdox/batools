@@ -82,7 +82,7 @@ SELECT '88b3efb5-8c58-486e-a3f7-751cc4b23e60',
   'Dept. of ICE, Noakhali Science & Technology University (under Dr. Md. Ashikur Rahman Khan)',
   'আইসিই বিভাগ, নোয়াখালী বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় (ড. মো. আশিকুর রহমান খানের তত্ত্বাবধানে)',
   'Noakhali, Bangladesh', 'নোয়াখালী, বাংলাদেশ',
-  'Apr 2021 – May 2023', 'এপ্রিল ২০২১ – মে ২০২৩',
+  'Apr 2023 – Present', 'এপ্রিল ২০২৩ – বর্তমান',
   ARRAY[
     'Machine learning and deep learning research on clinical risk prediction, climate forecasting and low-resource Bengali NLP.',
     'Maternal & fetal health: built the preprocessing pipeline for hospital records and compared 7 classifiers (MLR, NB, KNN, SVM, DT, RF, MLP); later detected train/test record duplication and re-evaluated on unique patients with repeated cross-validation.',

@@ -24,7 +24,7 @@ FROM (VALUES
    'Dept. of Information & Communication Engineering, Noakhali Science & Technology University · Supervisor: Dr. Md. Ashikur Rahman Khan',
    'তথ্য ও যোগাযোগ প্রকৌশল বিভাগ, নোয়াখালী বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় · তত্ত্বাবধায়ক: ড. মো. আশিকুর রহমান খান',
    'Noakhali, Bangladesh', 'নোয়াখালী, বাংলাদেশ',
-   'Apr 2021 – May 2023', 'এপ্রিল ২০২১ – মে ২০২৩',
+   'Apr 2023 – Present', 'এপ্রিল ২০২৩ – বর্তমান',
    ARRAY[
      'Machine learning and deep learning research on clinical risk prediction, climate forecasting and low-resource Bengali NLP.',
      'Maternal & fetal health: prepared hospital records from Noakhali, compared seven classifiers and ran a sensitivity analysis of 19 clinical inputs; later found repeated patient records and re-evaluated on unique patients with repeated cross-validation.',
