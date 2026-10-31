@@ -27,8 +27,8 @@ type Props = {
   /** The project or publication; null keeps the modal closed. */
   row: PfRow | null;
   /** Its table, and the column the detail rows point at it with. */
-  table: 'pf_projects' | 'pf_publications';
-  parentColumn: 'project_id' | 'publication_id';
+  table: 'pf_projects' | 'pf_publications' | 'pf_research_artifacts';
+  parentColumn: 'project_id' | 'publication_id' | 'artifact_id';
   onClose: () => void;
   /** Called after a list switch is saved, so the parent list can refresh. */
   onSwitchChange: () => void;

@@ -298,6 +298,8 @@ const artifactFields = (papers: { value: string; label: string }[]): PfField[] =
   { name: 'tags', label: 'pf.research.tags', type: 'tags' },
   { name: 'released_on', label: 'pf.research.releasedOn', type: 'date' },
   { name: 'is_private', label: 'pf.research.private', type: 'boolean', hint: 'pf.research.privateHint' },
+  { name: 'show_case_study', label: 'pf.work.showCaseStudy', type: 'boolean', hint: 'pf.work.showCaseStudyHint' },
+  { name: 'show_challenges', label: 'pf.work.showChallenges', type: 'boolean', hint: 'pf.work.showChallengesHint' },
   { name: 'is_featured', label: 'pf.work.featured', type: 'boolean', hint: 'pf.research.featuredHint' },
 ];
 
@@ -307,6 +309,9 @@ export const PfResearch = () => {
   // The publication whose details (case study, challenges) are open in the modal.
   const [publication, setPublication] = useState<PfRow | null>(null);
   const [reload, setReload] = useState(0);
+  // The model / dataset whose details (case study, challenges) are open.
+  const [artifact, setArtifact] = useState<PfRow | null>(null);
+  const [artifactReload, setArtifactReload] = useState(0);
   // Publications, for linking an artifact to its paper.
   const [papers, setPapers] = useState<{ value: string; label: string }[]>([]);
   const paperTitle = (id: unknown) => papers.find(p => p.value === id)?.label;
@@ -357,6 +362,8 @@ export const PfResearch = () => {
         title="pf.research.artifacts"
         subtitle="pf.research.artifactsHint"
         fields={artifactFields(papers)}
+        reloadSignal={artifactReload}
+        rowActions={r => <DetailsButton onClick={() => setArtifact(r)} />}
         pageSize={10}
         filters={[{ name: 'kind', label: 'pf.research.artifactKind', options: ARTIFACT_KINDS }]}
         searchable
@@ -368,6 +375,8 @@ export const PfResearch = () => {
               <Badge variant="default">{t(`pf.research.kinds.${r.kind}`)}</Badge>
               <Badge variant="muted">{t(`pf.research.platforms.${r.platform}`)}</Badge>
               {r.is_private === true && <Badge variant="warning">{t('pf.research.private')}</Badge>}
+              {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}
+              {r.show_challenges === true && <Badge variant="warning">{t('pf.work.challengesShown')}</Badge>}
               {r.is_featured === true && <Badge variant="success">{t('pf.work.featured')}</Badge>}
               <Tags items={r.metrics} />
             </>}
@@ -380,6 +389,13 @@ export const PfResearch = () => {
         parentColumn="publication_id"
         onClose={() => setPublication(null)}
         onSwitchChange={() => setReload(n => n + 1)}
+      />
+      <PfCaseStudyModal
+        row={artifact}
+        table="pf_research_artifacts"
+        parentColumn="artifact_id"
+        onClose={() => setArtifact(null)}
+        onSwitchChange={() => setArtifactReload(n => n + 1)}
       />
     </div>
   );

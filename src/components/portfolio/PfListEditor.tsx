@@ -16,6 +16,7 @@ const CLONE_CHILDREN: Record<string, { table: string; column: string }[]> = {
   pf_projects: [{ table: 'pf_case_study_sections', column: 'project_id' }, { table: 'pf_challenges', column: 'project_id' }],
   pf_publications: [{ table: 'pf_case_study_sections', column: 'publication_id' }, { table: 'pf_challenges', column: 'publication_id' }],
   pf_posts: [{ table: 'pf_post_blocks', column: 'post_id' }],
+  pf_research_artifacts: [{ table: 'pf_case_study_sections', column: 'artifact_id' }, { table: 'pf_challenges', column: 'artifact_id' }],
 };
 
 /** Columns a copy never takes from its original. */
