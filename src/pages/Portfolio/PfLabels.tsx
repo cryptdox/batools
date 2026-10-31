@@ -17,6 +17,7 @@ export const PfLabels = () => (
       ordered={false}
       orderBy={['key']}
       searchable
+      pageSize={20}
       renderRow={r => (
         <PfRowText
           primary={<span className="font-mono text-xs text-primary">{String(r.key)}</span>}

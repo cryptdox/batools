@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
-import { errorMessage, formFromRow, isFormComplete, rowFromForm, usePfUserId, PF_ICON_OPTIONS, type PfField, type PfFormValues } from '../../lib/portfolio';
+import { errorMessage, formFromRow, isFormComplete, loadPfVersions, rowFromForm, usePfUserId, PF_ICON_OPTIONS, type PfField, type PfFormValues } from '../../lib/portfolio';
 import { Badge, Button } from '../../components/ui/Button';
 import { PfFieldInput } from '../../components/portfolio/PfFieldInput';
 import { PfListEditor, PfRowText } from '../../components/portfolio/PfListEditor';
@@ -77,6 +77,12 @@ export const PfProfile = () => {
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [versionsReload, setVersionsReload] = useState(0);
+  // Which versions show each link (069): a link missing here shows in all.
+  const [linkVersions, setLinkVersions] = useState<Record<string, string[]>>({});
+  const [versions, setVersions] = useState<{ value: string; label: string }[]>([]);
+  useEffect(() => {
+    if (userId) void loadPfVersions(userId).then(setVersions);
+  }, [userId, versionsReload]);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -86,6 +92,7 @@ export const PfProfile = () => {
       const { data, error } = await supabase.from('pf_profile').select('*').eq('user_id', userId).maybeSingle();
       if (error) toast.error(error.message);
       setValues(formFromRow(ALL, data));
+      setLinkVersions((data?.link_versions as Record<string, string[]> | null) ?? {});
       setResumeUrl(data?.resume_url ?? null);
       setPhotoUrl(data?.photo_url ?? null);
       setLoading(false);
@@ -100,6 +107,7 @@ export const PfProfile = () => {
     try {
       const { error } = await supabase.from('pf_profile').upsert({
         ...rowFromForm(ALL, values),
+        link_versions: linkVersions,
         user_id: userId,
         updated_at: new Date().toISOString(),
       });
@@ -135,6 +143,38 @@ export const PfProfile = () => {
     if (error) throw error;
     setVersionsReload(n => n + 1);
   };
+
+  /** Ticks or unticks a version for a link; all ticked is stored as "every version". */
+  const toggleLinkVersion = (link: string, version: string) => setLinkVersions(prev => {
+    const shown = prev[link] ?? versions.map(v => v.value);
+    const next = shown.includes(version) ? shown.filter(v => v !== version) : [...shown, version];
+    const rest = { ...prev };
+    delete rest[link];
+    return versions.every(v => next.includes(v.value)) ? rest : { ...rest, [link]: next };
+  });
+
+  /** A link field with "Show in: ☑ Developer ☑ Researcher" under it. */
+  const linkSection = (fields: PfField[]) => fields.map(f => (
+    <div key={f.name}>
+      <PfFieldInput field={f} values={values} onChange={onChange} />
+      {versions.length > 0 && (
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500 dark:text-gray-400">
+          <span>{t('pf.profile.showIn')}:</span>
+          {versions.map(v => (
+            <label key={v.value} className="inline-flex items-center gap-1.5">
+              <input
+                type="checkbox"
+                className="w-3.5 h-3.5 accent-primary"
+                checked={(linkVersions[f.name] ?? versions.map(x => x.value)).includes(v.value)}
+                onChange={() => toggleLinkVersion(f.name, v.value)}
+              />
+              {v.label}
+            </label>
+          ))}
+        </div>
+      )}
+    </div>
+  ));
 
   const section = (fields: PfField[]) => fields.map(f => <PfFieldInput key={f.name} field={f} values={values} onChange={onChange} />);
 
@@ -179,10 +219,10 @@ export const PfProfile = () => {
           </Card>
           <Card title={t('pf.profile.hero')}>{section(HERO)}</Card>
           <Card title={t('pf.profile.social')}>
-            <div className="grid sm:grid-cols-2 gap-4">{section(SOCIAL)}</div>
+            <div className="grid sm:grid-cols-2 gap-4">{linkSection(SOCIAL)}</div>
           </Card>
           <Card title={t('pf.profile.academicLinks')}>
-            <div className="grid sm:grid-cols-2 gap-4">{section(ACADEMIC)}</div>
+            <div className="grid sm:grid-cols-2 gap-4">{linkSection(ACADEMIC)}</div>
           </Card>
           <div className="flex justify-end">
             <Button onClick={handleSave} disabled={saving || !isFormComplete(ALL, values)}>
