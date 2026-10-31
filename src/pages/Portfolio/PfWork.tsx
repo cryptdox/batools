@@ -93,7 +93,7 @@ export const PfProjects = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <PfPageHeader title="pf.work.projectsTitle" subtitle="pf.common.orderHint" />
+      <PfPageHeader versions title="pf.work.projectsTitle" subtitle="pf.common.orderHint" />
       <PfListEditor
         versioned
         cloneable
@@ -138,7 +138,7 @@ export const PfExperience = () => {
   const { t } = useLanguage();
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <PfPageHeader title="pf.work.experienceTitle" subtitle="pf.common.orderHint" />
+      <PfPageHeader versions title="pf.work.experienceTitle" subtitle="pf.common.orderHint" />
       <PfListEditor
         versioned
         cloneable
@@ -163,7 +163,7 @@ export const PfExperience = () => {
 
 export const PfTechStack = () => (
   <div className="max-w-5xl mx-auto space-y-6">
-    <PfPageHeader title="pf.work.techTitle" subtitle="pf.common.orderHint" />
+    <PfPageHeader versions title="pf.work.techTitle" subtitle="pf.common.orderHint" />
     <PfListEditor
       versioned
       cloneable
@@ -233,7 +233,7 @@ export const PfResearch = () => {
   const paperTitle = (id: unknown) => papers.find(p => p.value === id)?.label;
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <PfPageHeader title="pf.research.pageTitle" subtitle="pf.common.orderHint" />
+      <PfPageHeader versions title="pf.research.pageTitle" subtitle="pf.common.orderHint" />
       <PfListEditor
         versioned
         cloneable

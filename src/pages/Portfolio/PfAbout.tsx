@@ -67,7 +67,7 @@ export const PfAbout = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <PfPageHeader title="pf.about.pageTitle" subtitle="pf.about.pageSubtitle" />
+      <PfPageHeader versions title="pf.about.pageTitle" subtitle="pf.about.pageSubtitle" />
       <PfTabs tabs={TABS} active={tab} onChange={setTab} />
 
       {tab === 'about' && (

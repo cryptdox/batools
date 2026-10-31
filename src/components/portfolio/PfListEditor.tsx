@@ -7,6 +7,7 @@ import { errorMessage, formFromRow, isFormComplete, loadPfVersions, rowFromShown
 import { Button, Badge } from '../ui/Button';
 import { Modal } from '../ui/Modal';
 import { PfFieldInput, pfInputClass, removeUploads, type PfUploadTarget } from './PfFieldInput';
+import { inVersionTab, usePfVersionTab } from '../../lib/pfVersionTab';
 
 /** Rows that belong to a row of these tables and are copied with it on Clone. */
 const CLONE_CHILDREN: Record<string, { table: string; column: string }[]> = {
@@ -138,17 +139,23 @@ export const PfListEditor = ({
 
   useEffect(() => { void fetchRows(); }, [fetchRows, reloadSignal]);
 
+  // The page's version tab (PfVersionTabs) narrows a versioned list.
+  const versionTab = usePfVersionTab();
+  const activeTab = versioned && versions.some(v => v.value === versionTab) ? versionTab : 'all';
   const visibleRows = useMemo(() => {
+    const known = new Set(versions.map(v => v.value));
+    const inTab = rows.filter(r => inVersionTab(r, activeTab, known));
     const needle = search.trim().toLowerCase();
-    if (!needle) return rows;
-    return rows.filter(r => Object.values(r).some(v =>
+    if (!needle) return inTab;
+    return inTab.filter(r => Object.values(r).some(v =>
       (Array.isArray(v) ? v.join(' ') : String(v ?? '')).toLowerCase().includes(needle)));
-  }, [rows, search]);
+  }, [rows, search, activeTab, versions]);
 
   const openAdd = () => {
     formUploads.current = [];
     setEditing(null);
-    setValues(formFromRow(fields, null));
+    // Added under a version tab: starts in that version.
+    setValues({ ...formFromRow(fields, null), ...(activeTab !== 'all' ? { versions: activeTab } : {}) });
     setIsModalOpen(true);
   };
 
@@ -242,9 +249,12 @@ export const PfListEditor = ({
 
   // Rewrites the whole order as 1..n so rows that share a sort_order (or
   // have gaps) still move exactly one place.
-  const move = (index: number, delta: -1 | 1) => {
-    const target = index + delta;
-    if (target < 0 || target >= rows.length) return;
+  // Moves among the rows on screen (a version tab hides some): it trades
+  // places with its visible neighbour.
+  const move = (row: PfRow, delta: -1 | 1) => {
+    const neighbour = visibleRows[visibleRows.indexOf(row) + delta];
+    if (!neighbour) return;
+    const index = rows.indexOf(row), target = rows.indexOf(neighbour);
     const next = [...rows];
     [next[index], next[target]] = [next[target], next[index]];
     setRows(next);
@@ -359,7 +369,7 @@ export const PfListEditor = ({
       ) : (
         <ul className="divide-y divide-gray-100 dark:divide-gray-700">
           {visibleRows.map(row => {
-            const index = rows.indexOf(row);
+            const index = visibleRows.indexOf(row);
             const hidden = hideable && row.is_visible === false;
             return (
               <li
@@ -386,10 +396,10 @@ export const PfListEditor = ({
                   )}
                   {ordered && !search && (
                     <>
-                      <button className={iconButton} disabled={busy || index === 0} onClick={() => move(index, -1)} title={t('pf.common.moveUp')}>
+                      <button className={iconButton} disabled={busy || index === 0} onClick={() => move(row, -1)} title={t('pf.common.moveUp')}>
                         <ArrowUp size={16} />
                       </button>
-                      <button className={iconButton} disabled={busy || index === rows.length - 1} onClick={() => move(index, 1)} title={t('pf.common.moveDown')}>
+                      <button className={iconButton} disabled={busy || index === visibleRows.length - 1} onClick={() => move(row, 1)} title={t('pf.common.moveDown')}>
                         <ArrowDown size={16} />
                       </button>
                     </>

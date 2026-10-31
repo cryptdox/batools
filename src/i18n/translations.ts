@@ -42,6 +42,7 @@ export const translations = {
         photo: 'Photo', photoHint: 'This version\'s photo; empty uses the profile photo.',
         cv: 'CV (PDF)', cvHint: 'This version\'s CV; empty uses the profile resume.',
         field: 'Versions', fieldHint: 'None ticked = shown in every version.',
+        allTab: 'All versions', tabHint: 'A version tab shows that version\'s items plus those in every version; items added there start in that version.',
       },
       about: {
         pageTitle: 'Portfolio About', pageSubtitle: 'About me, education, interests and expertise.',
@@ -1067,6 +1068,7 @@ export const translations = {
         photo: 'ছবি', photoHint: 'এই সংস্করণের ছবি; ফাঁকা থাকলে প্রোফাইলের ছবি।',
         cv: 'সিভি (PDF)', cvHint: 'এই সংস্করণের সিভি; ফাঁকা থাকলে প্রোফাইলের রেজিউমে।',
         field: 'সংস্করণ', fieldHint: 'কিছু টিক না দিলে সব সংস্করণে দেখায়।',
+        allTab: 'সব সংস্করণ', tabHint: 'কোনো সংস্করণের ট্যাবে সেই সংস্করণের আইটেম ও সব সংস্করণের আইটেম দেখায়; সেখানে যোগ করা আইটেম সেই সংস্করণে শুরু হয়।',
       },
       about: {
         pageTitle: 'পোর্টফোলিও সম্পর্কে', pageSubtitle: 'আমার সম্পর্কে, শিক্ষা, আগ্রহ ও দক্ষতা।',

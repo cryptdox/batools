@@ -118,7 +118,7 @@ export const PfArticles = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <PfPageHeader title="pf.articles.pageTitle" subtitle="pf.articles.pageSubtitle" />
+      <PfPageHeader versions title="pf.articles.pageTitle" subtitle="pf.articles.pageSubtitle" />
       <PfListEditor
         versioned
         cloneable

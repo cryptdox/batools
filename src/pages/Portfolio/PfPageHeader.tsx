@@ -1,9 +1,12 @@
 import type { ReactNode } from 'react';
 import { useLanguage } from '../../lib/LanguageContext';
+import { PfVersionTabs } from '../../components/portfolio/PfVersionTabs';
 
-export const PfPageHeader = ({ title, subtitle, action }: { title: string; subtitle?: string; action?: ReactNode }) => {
+/** `versions` adds the version tabs that filter the page's versioned lists. */
+export const PfPageHeader = ({ title, subtitle, action, versions }: { title: string; subtitle?: string; action?: ReactNode; versions?: boolean }) => {
   const { t } = useLanguage();
   return (
+    <>
     <div className="flex flex-wrap justify-between items-center gap-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
       <div>
         <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{t(title)}</h2>
@@ -11,6 +14,8 @@ export const PfPageHeader = ({ title, subtitle, action }: { title: string; subti
       </div>
       {action}
     </div>
+    {versions && <PfVersionTabs />}
+    </>
   );
 };
 

@@ -140,7 +140,7 @@ export const PfProfile = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <PfPageHeader
+      <PfPageHeader versions
         title="pf.profile.pageTitle"
         subtitle="pf.profile.pageSubtitle"
         action={
