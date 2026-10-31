@@ -13,6 +13,7 @@ const IDENTITY: PfField[] = [
   { name: 'name', label: 'pf.profile.name', type: 'i18n', required: true },
   { name: 'email', label: 'pf.profile.email', type: 'text' },
   { name: 'phone', label: 'pf.profile.phone', type: 'i18n' },
+  { name: 'location', label: 'pf.profile.location', type: 'i18n', hint: 'pf.profile.locationHint' },
   { name: 'career_start_year', label: 'pf.profile.careerStartYear', type: 'number', min: 1950, max: 2100, hint: 'pf.profile.careerStartYearHint' },
 ];
 

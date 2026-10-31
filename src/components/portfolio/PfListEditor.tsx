@@ -96,9 +96,10 @@ export const PfListEditor = ({
   const scopeKey = JSON.stringify(scope ?? {});
   const sortKey = (orderBy ?? [ordered ? 'sort_order' : 'created_at']).join(',');
 
-  const fetchRows = useCallback(async () => {
+  /** Reads the rows; `quiet` keeps the list on screen (after a change) instead of showing Loading. */
+  const fetchRows = useCallback(async (quiet = false) => {
     if (!ownerId) return;
-    setLoading(true);
+    if (!quiet) setLoading(true);
     try {
       let query = supabase.from(table).select('*').eq(ownerColumn, ownerId);
       for (const [col, val] of Object.entries(JSON.parse(scopeKey) as Record<string, string>)) query = query.eq(col, val);
@@ -169,7 +170,7 @@ export const PfListEditor = ({
       }
       formUploads.current = [];
       const note = afterSave ? await afterSave(payload).catch(e => { console.error(e); return undefined; }) : undefined;
-      await fetchRows();
+      await fetchRows(true);
       setIsModalOpen(false);
       toast.success(editing ? t('pf.common.updated') : t('pf.common.added'));
       if (note) toast.info(note);
@@ -188,7 +189,7 @@ export const PfListEditor = ({
       const { error } = await supabase.from(table).delete().eq('id', toDelete.id).eq(ownerColumn, ownerId);
       if (error) throw error;
       if (upload) await removeUploads(upload, uploadFields.map(name => toDelete[name] as string | null));
-      await fetchRows();
+      await fetchRows(true);
       setToDelete(null);
       toast.success(t('pf.common.deleted'));
     } catch (e) {
@@ -202,17 +203,22 @@ export const PfListEditor = ({
   const update = async (changes: { id: string; patch: Record<string, unknown> }[]) => {
     if (!ownerId) return;
     setBusy(true);
+    // Shown at once; the quiet re-read afterwards confirms (or undoes) it.
+    setRows(prev => prev.map(r => {
+      const change = changes.find(c => c.id === r.id);
+      return change ? { ...r, ...change.patch } : r;
+    }));
     try {
       for (const { id, patch } of changes) {
         const audited = auditUserId ? { ...patch, updated_by: auditUserId, updated_at: new Date().toISOString() } : patch;
         const { error } = await supabase.from(table).update(audited).eq('id', id).eq(ownerColumn, ownerId);
         if (error) throw error;
       }
-      await fetchRows();
     } catch (e) {
       console.error(e);
       toast.error(errorMessage(e, t('pf.common.saveError')));
     } finally {
+      await fetchRows(true);
       setBusy(false);
     }
   };
@@ -224,6 +230,7 @@ export const PfListEditor = ({
     if (target < 0 || target >= rows.length) return;
     const next = [...rows];
     [next[index], next[target]] = [next[target], next[index]];
+    setRows(next);
     void update(next
       .map((r, i) => ({ id: r.id, patch: { sort_order: i + 1 }, changed: Number(r.sort_order) !== i + 1 }))
       .filter(c => c.changed)
