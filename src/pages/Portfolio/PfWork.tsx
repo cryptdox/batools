@@ -262,8 +262,11 @@ const PUBLICATION_FIELDS: PfField[] = [
   { name: 'year', label: 'pf.about.year', type: 'number', min: 1950, max: 2100 },
   { name: 'abstract', label: 'pf.research.abstract', type: 'i18n', rich: true },
   { name: 'highlights', label: 'pf.research.highlights', type: 'i18nList', hint: 'pf.research.highlightsHint' },
+  { name: 'show_highlights', label: 'pf.research.showHighlights', type: 'boolean', initial: true },
   { name: 'contributions', label: 'pf.research.contributions', type: 'i18nList', hint: 'pf.research.contributionsHint' },
+  { name: 'show_contributions', label: 'pf.research.showContributions', type: 'boolean', initial: true },
   { name: 'methods', label: 'pf.research.methods', type: 'tags', hint: 'pf.research.methodsHint' },
+  { name: 'show_methods', label: 'pf.research.showMethods', type: 'boolean', initial: true },
   { name: 'keywords', label: 'pf.research.keywords', type: 'tags' },
   { name: 'doi', label: 'DOI', type: 'text', hint: 'pf.research.doiHint' },
   { name: 'url', label: 'pf.research.url', type: 'text' },
@@ -339,6 +342,9 @@ export const PfResearch = () => {
                 {!!r.pdf_url && r.pdf_public === false && <Badge variant="muted">{t('pf.research.pdfPrivate')}</Badge>}
                 {r.show_case_study === true && <Badge variant="warning">{t('pf.work.caseStudyShown')}</Badge>}
                 {r.show_challenges === true && <Badge variant="warning">{t('pf.work.challengesShown')}</Badge>}
+                {r.show_highlights === false && <Badge variant="muted">{t('pf.research.highlightsHidden')}</Badge>}
+                {r.show_contributions === false && <Badge variant="muted">{t('pf.research.contributionsHidden')}</Badge>}
+                {r.show_methods === false && <Badge variant="muted">{t('pf.research.methodsHidden')}</Badge>}
               </>
             }
           />
