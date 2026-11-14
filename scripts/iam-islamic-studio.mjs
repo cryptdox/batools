@@ -48,12 +48,13 @@ const RESOURCES = [
   "ISLAMIC_STUDIO_ZAKAT",
   "ISLAMIC_STUDIO_TRACKER",
   "ISLAMIC_STUDIO_SCORES",
+  "ISLAMIC_STUDIO_ACADEMY",
 ];
 
 /**
  * Roles: ADMIN (batools' own) already gets everything from IAM.
  *   ISLAMIC_STUDIO_ADMIN   runs the app: everything, including switching features and approving content.
- *   ISLAMIC_STUDIO_EDITOR  writes content (announcements, prayer, calendar, duas, Quran); their edits go to review.
+ *   ISLAMIC_STUDIO_EDITOR  writes content (announcements, prayer, calendar, duas, Quran, quizzes, Academy); their edits go to review.
  *   ISLAMIC_STUDIO_SCHOLAR reviews: reads content, approves or rejects it (UPDATE on Content Review).
  */
 const MATRIX = {
@@ -72,6 +73,7 @@ const MATRIX = {
     ISLAMIC_STUDIO_ZAKAT: ALL,
     ISLAMIC_STUDIO_TRACKER: ALL,
     ISLAMIC_STUDIO_SCORES: ["READ"],
+    ISLAMIC_STUDIO_ACADEMY: ALL,
   },
   ISLAMIC_STUDIO_SCHOLAR: {
     ISLAMIC_STUDIO_DASHBOARD: ["READ"],
@@ -80,6 +82,7 @@ const MATRIX = {
     ISLAMIC_STUDIO_REVIEW: ["READ", "UPDATE"],
     ISLAMIC_STUDIO_QUIZ: ["READ"],
     ISLAMIC_STUDIO_ZAKAT: ["READ"],
+    ISLAMIC_STUDIO_ACADEMY: ["READ"],
   },
 };
 

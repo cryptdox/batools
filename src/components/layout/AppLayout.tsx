@@ -132,6 +132,7 @@ const NAV_TREE: NavGroup[] = [
       { to: '/is/duas', label: 'Duas & Dhikr', icon: HandHeart },
       { to: '/is/quran', label: 'Quran & Hadith', icon: BookOpenText },
       { to: '/is/quiz', label: 'Quiz & Challenges', icon: Trophy },
+      { to: '/is/academy', label: 'Academy', icon: GraduationCap },
       { to: '/is/zakat', label: 'Zakat', icon: Calculator },
       { to: '/is/tracker', label: 'Worship Tracker', icon: ListChecks },
       { to: '/is/review', label: 'Content Review', icon: ShieldCheck },

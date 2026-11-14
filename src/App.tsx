@@ -70,6 +70,7 @@ import { IsQuran } from './pages/IslamicStudio/IsQuran';
 import { IsReview } from './pages/IslamicStudio/IsReview';
 import { IsFeedback } from './pages/IslamicStudio/IsFeedback';
 import { IsQuiz } from './pages/IslamicStudio/IsQuiz';
+import { IsAcademy } from './pages/IslamicStudio/IsAcademy';
 import { IsTracker, IsZakat } from './pages/IslamicStudio/IsZakatTracker';
 import { IsScores } from './pages/IslamicStudio/IsScores';
 import { MusicPlayerProvider, usePlayer } from './lib/MusicPlayerContext';
@@ -243,6 +244,7 @@ function AuthGate() {
         <Route path="/is/review" element={<IsReview />} />
         <Route path="/is/feedback" element={<IsFeedback />} />
         <Route path="/is/quiz" element={<IsQuiz />} />
+        <Route path="/is/academy" element={<IsAcademy />} />
         <Route path="/is/zakat" element={<IsZakat />} />
         <Route path="/is/tracker" element={<IsTracker />} />
         <Route path="/is/scores" element={<IsScores />} />

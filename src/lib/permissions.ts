@@ -79,6 +79,7 @@ export const PAGE_RESOURCES: Record<string, string> = {
   '/is/review': 'ISLAMIC_STUDIO_REVIEW',
   '/is/feedback': 'ISLAMIC_STUDIO_FEEDBACK',
   '/is/quiz': 'ISLAMIC_STUDIO_QUIZ',
+  '/is/academy': 'ISLAMIC_STUDIO_ACADEMY',
   '/is/zakat': 'ISLAMIC_STUDIO_ZAKAT',
   '/is/tracker': 'ISLAMIC_STUDIO_TRACKER',
   '/is/scores': 'ISLAMIC_STUDIO_SCORES',

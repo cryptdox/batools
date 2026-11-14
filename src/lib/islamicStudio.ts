@@ -3,7 +3,7 @@ import { supabase } from './supabase';
 import { useAuth } from './AuthContext';
 import { useAccess } from './permissions';
 
-// Islamic Studio (is_ tables, migrations 074–076): batools controls the
+// Islamic Studio (is_ tables, migrations 074–079): batools controls the
 // Android app com.cryptdox.islamicstudio. The app reads with the anon key and
 // sees only what is switched on and approved; batools writes with its IAM
 // token (same database guard as the music tables).
@@ -54,7 +54,7 @@ export function isText(value: unknown, lang: string): string {
 }
 
 /** Tables whose rows need a reviewer's approval before the app shows them. */
-export const IS_REVIEWED_TABLES = ['is_duas', 'is_dhikr_presets', 'is_content_packs', 'is_quizzes', 'is_zakat_settings'] as const;
+export const IS_REVIEWED_TABLES = ['is_duas', 'is_dhikr_presets', 'is_content_packs', 'is_quizzes', 'is_zakat_settings', 'is_learn_units'] as const;
 
 export type IsReviewStatus = 'draft' | 'in_review' | 'approved' | 'rejected';
 
@@ -75,6 +75,7 @@ export type IsFeatureStatus = (typeof IS_FEATURE_STATUSES)[number];
 export function isErrorKey(e: unknown): string | null {
   const message = e && typeof e === 'object' && 'message' in e ? String(e.message) : '';
   if (message.includes('is_features_built')) return 'is.features.notBuilt';
+  if (message.includes('is_learn_items_data_ok')) return 'is.academy.badItem';
   if (message.includes('duplicate key')) return 'is.common.duplicate';
   if (message.includes('row-level security')) return 'is.common.notAllowed';
   return null;

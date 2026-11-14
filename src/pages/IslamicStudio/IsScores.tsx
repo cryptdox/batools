@@ -12,7 +12,7 @@ type Device = { device_id: string; display_name: string | null; platform: string
 type Score = { device_id: string; feature: string; ref: string; day: string; score: number; max_score: number | null };
 type Leader = { rank: number; display_name: string; score: number; quizzes: number };
 
-const FEATURES = ['quiz', 'tracker', 'ramadan', 'quran_audio', 'hadith', 'tasbih'] as const;
+const FEATURES = ['quiz', 'learn', 'tracker', 'ramadan', 'quran_audio', 'hadith', 'tasbih'] as const;
 const DAYS = 30;
 
 /** Read-only: devices using the app (no sign-in) and their scores per feature. */

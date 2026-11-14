@@ -8,6 +8,7 @@ import { supabase } from '../../lib/supabase';
 import { errorMessage } from '../../lib/portfolio';
 import { IS_REVIEWED_TABLES, isText, useIsReviewer, useIsUserId, type IsRow } from '../../lib/islamicStudio';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
+import { LearnUnitPreview } from '../../components/islamicStudio/IsLearnItem';
 
 type Item = { table: (typeof IS_REVIEWED_TABLES)[number]; row: IsRow };
 type QuizQuestion = { id: string; question: unknown; explanation: unknown; source_ref: string | null; is_quiz_options: { id: string; text: unknown; is_correct: boolean; sort_order: number }[] };
@@ -43,8 +44,9 @@ const QuizPreview = ({ quizId }: { quizId: string }) => {
 const arabicStyle = { fontFamily: '"Amiri", "Scheherazade New", "Noto Naskh Arabic", serif' };
 
 /**
- * Religious content waiting for a reviewer: duas, tasbih presets and
- * translation / hadith packs. The app shows a row only once it is approved.
+ * Religious content waiting for a reviewer: duas, tasbih presets,
+ * translation / hadith packs, quizzes, zakat guidance and Academy units.
+ * The app shows a row only once it is approved.
  */
 export const IsReview = () => {
   const { t, language } = useLanguage();
@@ -123,6 +125,7 @@ export const IsReview = () => {
                   {Boolean(r.translation) && <p className="text-sm text-gray-700 dark:text-gray-300">{isText(r.translation, language)}</p>}
                   {item.table === 'is_zakat_settings' && <p className="text-sm whitespace-pre-line text-gray-700 dark:text-gray-300">{isText(r.guidance, language)}</p>}
                   {item.table === 'is_quizzes' && open === String(r.id) && <QuizPreview quizId={String(r.id)} />}
+                  {item.table === 'is_learn_units' && open === String(r.id) && <LearnUnitPreview unitId={String(r.id)} />}
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     {[
                       r.source_ref ? `${t('is.duas.source')}: ${r.source_ref}` : '',
@@ -134,7 +137,7 @@ export const IsReview = () => {
                   </p>
                   {noLicense && <p className="text-xs text-danger">{t('is.review.needsLicense')}</p>}
                   <div className="flex flex-wrap gap-2">
-                    {item.table === 'is_quizzes' && (
+                    {(item.table === 'is_quizzes' || item.table === 'is_learn_units') && (
                       <Button size="sm" variant="outline" onClick={() => setOpen(open === String(r.id) ? null : String(r.id))}>
                         <BookOpen size={14} className="mr-1" /> {t('is.text.read')}
                       </Button>
