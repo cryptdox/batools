@@ -202,7 +202,10 @@ DECLARE
   me UUID := private.is_device_id();
   waiting INT;
 BEGIN
-  IF private.lt_iam_claims() IS NOT NULL THEN
+  -- batools, and loads run in the SQL editor (not through the API, which
+  -- switches the session's role to anon / authenticated), aren't limited.
+  -- (current_user is this function's owner here, so the role setting is checked.)
+  IF private.lt_iam_claims() IS NOT NULL OR coalesce(current_setting('role', true), 'none') NOT IN ('anon', 'authenticated') THEN
     IF NEW.review_status = 'approved' AND NEW.published_at IS NULL THEN
       NEW.published_at := now();
     END IF;

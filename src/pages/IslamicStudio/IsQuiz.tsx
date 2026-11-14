@@ -83,6 +83,13 @@ export const IsQuiz = () => {
             fields={QUIZ_FIELDS}
             reviewed
             audited="both"
+            searchable
+            pageSize={25}
+            filters={[
+              { name: 'topic', label: 'is.quiz.topic', options: TOPICS.map(v => ({ value: v, label: `is.quiz.topics.${v}` })) },
+              { name: 'difficulty', label: 'is.quiz.difficulty', options: ['easy', 'medium', 'hard'].map(v => ({ value: v, label: `is.quiz.levels.${v}` })) },
+              { name: 'review_status', label: 'is.review.status', options: ['draft', 'in_review', 'approved', 'rejected'].map(v => ({ value: v, label: `is.review.${v}` })) },
+            ]}
             defaults={{ topic: 'general', difficulty: 'easy', points_per_question: '10' }}
             renderRow={r => (
               <IsRowText
@@ -134,6 +141,7 @@ export const IsQuiz = () => {
         <IsListEditor
           table="is_challenges"
           title="is.quiz.challengesTitle"
+          searchable
           subtitle="is.quiz.challengesSubtitle"
           fields={challengeFields}
           renderRow={r => {
