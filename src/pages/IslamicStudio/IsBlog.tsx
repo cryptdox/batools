@@ -58,6 +58,8 @@ export const IsBlog = () => {
   const [page, setPage] = useState(0);
   const [query, setQuery] = useState('');
   const [source, setSource] = useState('');
+  const [status, setStatus] = useState('');
+  const [lang, setLang] = useState('');
   const [reports, setReports] = useState<Report[]>([]);
   const [editing, setEditing] = useState<Partial<Post> | null>(null);
   const [reading, setReading] = useState<Post | null>(null);
@@ -73,13 +75,15 @@ export const IsBlog = () => {
     let q = supabase.from('is_blog_posts').select('*', { count: 'exact' });
     if (tab === 'review') q = q.eq('review_status', 'in_review');
     if (source) q = q.eq('source', source);
+    if (status && tab === 'posts') q = q.eq('review_status', status);
+    if (lang) q = q.eq('language', lang);
     const needle = query.trim().toLowerCase();
     if (needle) q = q.ilike('search_text', `%${needle.replace(/[%_]/g, '')}%`);
     const { data, error, count: total } = await q.order(tab === 'review' ? 'updated_at' : 'created_at', { ascending: tab === 'review' }).range(page * PAGE, page * PAGE + PAGE - 1);
     if (error) toast.error(errorMessage(error, t('pf.common.loadError')));
     setPosts((data ?? []) as Post[]);
     setCount(total ?? 0);
-  }, [tab, source, query, page, t]);
+  }, [tab, source, status, lang, query, page, t]);
 
   useEffect(() => { void load(); }, [load]);
 
@@ -145,6 +149,17 @@ export const IsBlog = () => {
             <option value="team">{t('is.blog.team')}</option>
             <option value="user">{t('is.blog.readers')}</option>
           </select>
+          {tab === 'posts' && (
+            <select value={status} onChange={e => { setStatus(e.target.value); setPage(0); }} className={`${pfInputClass} h-10 w-auto`}>
+              <option value="">{t('is.blog.allStatuses')}</option>
+              {['draft', 'in_review', 'approved', 'rejected'].map(st => <option key={st} value={st}>{t(`is.review.${st}`)}</option>)}
+            </select>
+          )}
+          <select value={lang} onChange={e => { setLang(e.target.value); setPage(0); }} className={`${pfInputClass} h-10 w-auto`}>
+            <option value="">{t('is.blog.allLanguages')}</option>
+            {['bn', 'en', 'ar'].map(l => <option key={l} value={l}>{t(`is.media.languages.${l}`)}</option>)}
+          </select>
+          <span className="text-sm text-gray-500">{count} {t('is.blog.posts')}</span>
           {canEdit && <Button onClick={() => setEditing({ source: 'team', language: 'bn', review_status: 'draft', image_paths: [], tags: [], body_html: '' })}><Plus size={16} className="mr-1" /> {t('is.blog.new')}</Button>}
         </div>
       )}
