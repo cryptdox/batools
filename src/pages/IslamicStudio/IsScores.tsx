@@ -1,21 +1,26 @@
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Smartphone, Trophy, Activity } from 'lucide-react';
+import { Smartphone, Trophy, Activity, Search, EyeOff, Eye, Trash2 } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { supabase } from '../../lib/supabase';
+import { useAccess } from '../../lib/permissions';
 import { errorMessage } from '../../lib/portfolio';
 import { isText } from '../../lib/islamicStudio';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
-type Device = { device_id: string; display_name: string | null; platform: string | null; app_version_code: number | null; language: string | null; created_at: string; last_seen_at: string };
+type Device = { device_id: string; display_name: string | null; name_hidden?: boolean; platform: string | null; app_version_code: number | null; language: string | null; created_at: string; last_seen_at: string };
 type Score = { device_id: string; feature: string; ref: string; day: string; score: number; max_score: number | null };
 type Leader = { rank: number; display_name: string; score: number; quizzes: number };
 
 const FEATURES = ['quiz', 'learn', 'tracker', 'ramadan', 'quran_audio', 'hadith', 'tasbih'] as const;
 const DAYS = 30;
 
-/** Read-only: devices using the app (no sign-in) and their scores per feature. */
+/**
+ * Devices using the app (no sign-in) and their scores per feature. With UPDATE a
+ * device's name can be hidden from leaderboards; with DELETE a device and all
+ * its scores can be removed (a user's deletion request, by installation id).
+ */
 export const IsScores = () => {
   const { t, language } = useLanguage();
   const [devices, setDevices] = useState<Device[] | null>(null);
@@ -23,6 +28,11 @@ export const IsScores = () => {
   const [challenges, setChallenges] = useState<{ id: string; title: unknown }[]>([]);
   const [challenge, setChallenge] = useState('');
   const [board, setBoard] = useState<Leader[]>([]);
+  const [query, setQuery] = useState('');
+  const [busy, setBusy] = useState('');
+  const { has } = useAccess();
+  const canHide = has('ISLAMIC_STUDIO_SCORES', 'UPDATE');
+  const canDelete = has('ISLAMIC_STUDIO_SCORES', 'DELETE');
   const [since, week] = useMemo(() => {
     const d = new Date();
     d.setDate(d.getDate() - DAYS);
@@ -51,10 +61,39 @@ export const IsScores = () => {
     })();
   }, [since, t]);
 
+  const loadBoard = (id: string) =>
+    void supabase.rpc('is_challenge_leaderboard', { p_challenge: id, p_limit: 50 }).then(({ data }) => setBoard((data ?? []) as Leader[]));
+
   useEffect(() => {
-    if (!challenge) return;
-    void supabase.rpc('is_challenge_leaderboard', { p_challenge: challenge, p_limit: 50 }).then(({ data }) => setBoard((data ?? []) as Leader[]));
+    if (challenge) loadBoard(challenge);
   }, [challenge]);
+
+  /** Hides (or shows again) a name; while hidden the app can't set one. */
+  const setHidden = async (d: Device, hidden: boolean) => {
+    setBusy(d.device_id);
+    const { data, error } = await supabase.from('is_devices').update({ name_hidden: hidden }).eq('device_id', d.device_id).select('*').single();
+    setBusy('');
+    if (error) return toast.error(errorMessage(error, t('pf.common.saveError')));
+    setDevices(list => list?.map(x => (x.device_id === d.device_id ? (data as Device) : x)) ?? null);
+    if (challenge) loadBoard(challenge);
+    toast.success(t(hidden ? 'is.scores.nameHidden' : 'is.scores.nameShown'));
+  };
+
+  /** Deletes a device and (cascade) all its scores. */
+  const remove = async (d: Device) => {
+    if (!window.confirm(t('is.scores.deleteConfirm').replace('{id}', d.device_id))) return;
+    setBusy(d.device_id);
+    const { error } = await supabase.from('is_devices').delete().eq('device_id', d.device_id);
+    setBusy('');
+    if (error) return toast.error(errorMessage(error, t('pf.common.deleteError')));
+    setDevices(list => list?.filter(x => x.device_id !== d.device_id) ?? null);
+    setScores(list => list.filter(x => x.device_id !== d.device_id));
+    if (challenge) loadBoard(challenge);
+    toast.success(t('is.scores.deleted'));
+  };
+
+  const q = query.trim().toLowerCase();
+  const shown = (devices ?? []).filter(d => !q || d.device_id.startsWith(q) || (d.display_name ?? '').toLowerCase().includes(q));
 
   const active = devices?.filter(d => d.last_seen_at >= week).length ?? 0;
   const byFeature = FEATURES.map(f => {
@@ -109,16 +148,39 @@ export const IsScores = () => {
           )}
 
           <div className={`${tile} overflow-x-auto`}>
-            <h3 className="mb-2 font-semibold">{t('is.scores.recent')}</h3>
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <h3 className="font-semibold">{t('is.scores.recent')}</h3>
+              <label className="relative w-full sm:w-72">
+                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input value={query} onChange={e => setQuery(e.target.value)} placeholder={t('is.scores.search')} className={`${pfInputClass} h-9 pl-9`} />
+              </label>
+            </div>
             <table className="w-full text-sm">
-              <thead><tr className="text-left text-gray-500"><th className="py-1">{t('is.scores.name')}</th><th>{t('is.scores.lastSeen')}</th><th>{t('is.scores.version')}</th><th className="text-right">{t('is.scores.points')} ({DAYS}d)</th></tr></thead>
+              <thead><tr className="text-left text-gray-500"><th className="py-1">{t('is.scores.name')}</th><th>{t('is.scores.lastSeen')}</th><th>{t('is.scores.version')}</th><th className="text-right">{t('is.scores.points')} ({DAYS}d)</th>{(canHide || canDelete) && <th />}</tr></thead>
               <tbody>
-                {devices.slice(0, 100).map(d => (
+                {shown.slice(0, 100).map(d => (
                   <tr key={d.device_id} className="border-t border-gray-100 dark:border-gray-700">
-                    <td className="py-2">{d.display_name ?? <span className="text-gray-400 font-mono text-xs">{d.device_id.slice(0, 8)}</span>}</td>
+                    <td className="py-2">
+                      {d.display_name ?? <span className="text-gray-400 font-mono text-xs">{d.device_id.slice(0, 8)}</span>}
+                      {d.name_hidden && <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">{t('is.scores.hiddenBadge')}</span>}
+                    </td>
                     <td>{new Date(d.last_seen_at).toLocaleString()}</td>
                     <td>{d.app_version_code ?? '—'} · {d.language ?? ''}</td>
                     <td className="text-right font-semibold">{Math.round(perDevice(d.device_id))}</td>
+                    {(canHide || canDelete) && (
+                      <td className="whitespace-nowrap text-right">
+                        {canHide && (d.display_name || d.name_hidden) && (
+                          <button disabled={busy === d.device_id} onClick={() => void setHidden(d, !d.name_hidden)} title={t(d.name_hidden ? 'is.scores.showName' : 'is.scores.hideName')} className="p-1.5 text-gray-500 hover:text-amber-600 disabled:opacity-40">
+                            {d.name_hidden ? <Eye size={16} /> : <EyeOff size={16} />}
+                          </button>
+                        )}
+                        {canDelete && (
+                          <button disabled={busy === d.device_id} onClick={() => void remove(d)} title={t('is.scores.delete')} className="p-1.5 text-gray-500 hover:text-red-600 disabled:opacity-40">
+                            <Trash2 size={16} />
+                          </button>
+                        )}
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
