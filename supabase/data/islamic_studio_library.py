@@ -11,12 +11,13 @@ and the Blog (migration 081 first).
   * Audio & Video: islamic_studio_media_seed.json — YouTube ids checked with
     YouTube's oEmbed (embeddable) and IslamHouse MP3s checked with HEAD.
     Nothing here is typed from memory.
-  * Blog: 7 team posts. Quran is referenced by surah:ayah and paraphrased,
-    hadith only by well-known references; a scholar should still read them.
+  * Blog: 15 long team posts (islamic_studio_blog.py). Quran is referenced by
+    surah:ayah and paraphrased, hadith only by well-known references; a scholar
+    should still read them. Re-running updates posts not yet approved.
 
 Everything goes in as 'in_review' / draft, so it appears in batools for
 approval (Content Review for books and media, Blog → Waiting for review) and
-nothing is public until approved. Re-runnable: fixed ids, nothing overwritten.
+nothing is public until approved. Re-runnable: fixed ids; books and media are never overwritten.
 
     python3 islamic_studio_library.py
 """
@@ -101,72 +102,8 @@ BOOKS = [
      'https://islamhouse.com/bn/books/2830999/', 'https://d1.islamhouse.com/data/bn/ih_books/single2/bn-sirat-alnabi.pdf', 1929546),
 ]
 
-# Blog -------------------------------------------------------------------------
-# (key, language, title, summary, body html, tags)
-POSTS = [
-    ('fajr-bn', 'bn', 'ফজরের নামাজ: দিনের সবচেয়ে বরকতময় শুরু',
-     'ফজরের নামাজের গুরুত্ব, এর ফজিলত এবং নিয়মিত জাগার কয়েকটি সহজ উপায়।',
-     '<p>দিনের প্রথম ফরজ নামাজ ফজর। আল্লাহ তাআলা কুরআনে বলেছেন, ফজরের কুরআন পাঠ (সালাত) উপস্থিত হওয়ার সময়, অর্থাৎ ফেরেশতারা তখন উপস্থিত থাকেন (সূরা আল-ইসরা ১৭:৭৮)।</p>'
-     '<h2>ফজরের ফজিলত</h2>'
-     '<ul><li>রাসূল ﷺ বলেছেন, যে ব্যক্তি ফজরের নামাজ আদায় করে সে আল্লাহর জিম্মায় থাকে (সহীহ মুসলিম ৬৫৭)।</li>'
-     '<li>ফজরের দুই রাকআত সুন্নাত দুনিয়া ও এর মধ্যে যা আছে তার চেয়ে উত্তম (সহীহ মুসলিম ৭২৫)।</li></ul>'
-     '<h2>নিয়মিত জাগার কয়েকটি উপায়</h2>'
-     '<ul><li>ইশার পর তাড়াতাড়ি ঘুমাতে যান।</li><li>ঘুমানোর আগে অজু করুন ও ঘুমের দোয়া পড়ুন।</li>'
-     '<li>অ্যালার্ম ফোনটি বিছানা থেকে একটু দূরে রাখুন।</li><li>পরিবারের কাউকে সঙ্গী করুন, একে অপরকে জাগিয়ে দিন।</li></ul>'
-     '<p>ইসলামিক স্টুডিওর ইবাদত ট্র্যাকারে প্রতিদিন ফজর চিহ্নিত করুন; অল্প কয়েক দিনেই অভ্যাস তৈরি হবে, ইনশাআল্লাহ।</p>',
-     ['salah', 'fajr']),
-    ('consistency-bn', 'bn', 'অল্প হলেও নিয়মিত আমল',
-     'বড় লক্ষ্যের চেয়ে ছোট কিন্তু নিয়মিত আমল কেন আল্লাহর কাছে বেশি প্রিয়।',
-     '<p>অনেকে শুরুতে অনেক বড় লক্ষ্য নেন, তারপর কয়েক দিনেই ক্লান্ত হয়ে থেমে যান। অথচ রাসূল ﷺ শিখিয়েছেন, আল্লাহর কাছে সবচেয়ে প্রিয় আমল হলো যা নিয়মিত করা হয়, যদিও তা অল্প হয় (সহীহ বুখারী ৬৪৬৪, সহীহ মুসলিম ৭৮৩)।</p>'
-     '<h2>কীভাবে শুরু করবেন</h2>'
-     '<ul><li>প্রতিদিন কুরআনের মাত্র এক পৃষ্ঠা।</li><li>প্রতি নামাজের পর ৩৩ বার সুবহানাল্লাহ, আলহামদুলিল্লাহ ও আল্লাহু আকবার।</li>'
-     '<li>সকাল-সন্ধ্যার জিকির, অল্প কয়েকটি দিয়ে শুরু।</li></ul>'
-     '<blockquote>ছোট শুরু করুন, কিন্তু থামবেন না।</blockquote>'
-     '<p>ইবাদত ট্র্যাকারে নিজের লক্ষ্য ঠিক করুন, আর সাপ্তাহিক চার্টে দেখুন কতটা ধারাবাহিক থাকছেন।</p>',
-     ['habits', 'tazkiyah']),
-    ('dhikr-bn', 'bn', 'সকাল-সন্ধ্যার জিকির: অন্তরের প্রশান্তি',
-     'জিকিরের গুরুত্ব, কুরআন-হাদিসের আলোকে কয়েকটি সহজ জিকির।',
-     '<p>আল্লাহ বলেছেন, জেনে রাখো, আল্লাহর স্মরণেই অন্তর প্রশান্ত হয় (সূরা আর-রাদ ১৩:২৮)। তিনি মুমিনদের বেশি বেশি আল্লাহকে স্মরণ করতে এবং সকাল-সন্ধ্যা তাঁর পবিত্রতা ঘোষণা করতে বলেছেন (সূরা আল-আহযাব ৩৩:৪১-৪২)।</p>'
-     '<h2>একটি সহজ জিকির</h2>'
-     '<p>রাসূল ﷺ বলেছেন, যে ব্যক্তি দিনে একশ বার "সুবহানাল্লাহি ওয়া বিহামদিহি" বলে, তার গুনাহ মাফ করে দেওয়া হয়, যদিও তা সমুদ্রের ফেনার মতো হয় (সহীহ বুখারী ৬৪০৫, সহীহ মুসলিম ২৬৯১)।</p>'
-     '<h2>অভ্যাস গড়তে</h2>'
-     '<ul><li>ফজরের পর ও আসরের পর নির্দিষ্ট সময় রাখুন।</li><li>অ্যাপের তাসবিহ কাউন্টার ব্যবহার করুন।</li><li>দোয়া ও জিকির অংশে সকাল-সন্ধ্যার জিকির পড়ুন।</li></ul>',
-     ['dhikr', 'adhkar']),
-    ('character-bn', 'bn', 'উত্তম চরিত্র: হাসি থেকে কথা পর্যন্ত',
-     'ছোট ছোট আচরণে কীভাবে ইসলামের সৌন্দর্য ফুটে ওঠে।',
-     '<p>রাসূল ﷺ বলেছেন, তোমাদের মধ্যে সেই উত্তম, যার চরিত্র সবচেয়ে সুন্দর (সহীহ বুখারী ৩৫৫৯)।</p>'
-     '<h2>প্রতিদিনের ছোট ছোট সুন্নাত</h2>'
-     '<ul><li><strong>হাসিমুখ:</strong> তোমার ভাইয়ের সামনে হাসিমুখে থাকাও সদকা (জামে তিরমিযী ১৯৫৬)।</li>'
-     '<li><strong>ভালো কথা অথবা চুপ থাকা:</strong> যে আল্লাহ ও শেষ দিনে বিশ্বাস করে, সে যেন ভালো কথা বলে অথবা চুপ থাকে (সহীহ বুখারী ৬০১৮, সহীহ মুসলিম ৪৭)।</li>'
-     '<li><strong>অন্যের জন্য ভালো চাওয়া:</strong> তোমাদের কেউ পূর্ণ মুমিন হবে না, যতক্ষণ না সে নিজের জন্য যা পছন্দ করে ভাইয়ের জন্যও তা পছন্দ করে (সহীহ বুখারী ১৩, সহীহ মুসলিম ৪৫)।</li></ul>'
-     '<p>আজ একটি সুন্নাত বেছে নিন এবং সারাদিন তা মনে রাখার চেষ্টা করুন।</p>',
-     ['akhlaq', 'sunnah']),
-    ('intentions-en', 'en', 'Intentions: the start of every deed',
-     'Why the intention behind an act matters, and how to renew it through the day.',
-     '<p>The first hadith in Sahih al-Bukhari teaches that actions are judged by their intentions, and each person will have what they intended (Sahih al-Bukhari 1, Sahih Muslim 1907).</p>'
-     '<h2>Small acts, big rewards</h2>'
-     '<p>Eating, sleeping, working and studying can all become worship when done with a good intention: to stay strong for prayer, to provide for one\'s family, to learn something useful.</p>'
-     '<h2>Renewing the intention</h2>'
-     '<ul><li>Pause for a second before starting something and ask: who is this for?</li>'
-     '<li>Begin with "Bismillah".</li><li>If showing off creeps in, correct the intention and carry on; don\'t abandon the good deed.</li></ul>',
-     ['niyyah', 'basics']),
-    ('quran-daily-en', 'en', 'A little Quran every day',
-     'Simple ways to build a lasting relationship with the Quran.',
-     '<p>The Prophet ﷺ said the best of you are those who learn the Quran and teach it (Sahih al-Bukhari 5027). Allah tells us He has made the Quran easy to remember (Surah al-Qamar 54:17), and asks us to recite it in a measured, unhurried way (Surah al-Muzzammil 73:4).</p>'
-     '<h2>A plan that lasts</h2>'
-     '<ul><li>Fix a time: after Fajr or before sleeping.</li><li>Start with one page, or even five ayahs, with the meaning.</li>'
-     '<li>Listen along with a reciter to improve your recitation.</li><li>Memorise short surahs you can use in your prayers.</li></ul>'
-     '<p>Use the Quran reader\'s bookmarks and "Continue reading" to pick up where you left off.</p>',
-     ['quran']),
-    ('dua-en', 'en', 'Dua: asking Allah for everything',
-     'Dua is worship. Some reminders on how and when to ask.',
-     '<p>Allah says: "Call upon Me; I will respond to you" (Surah Ghafir 40:60), and that He is near and answers the one who calls on Him (Surah al-Baqarah 2:186). The Prophet ﷺ said that dua is worship (Sunan Abi Dawud 1479, Jami at-Tirmidhi 2969).</p>'
-     '<h2>Good habits in dua</h2>'
-     '<ul><li>Begin by praising Allah and sending salawat on the Prophet ﷺ.</li><li>Ask with certainty and don\'t lose hope.</li>'
-     '<li>Ask for this world and the next, for yourself and for others.</li><li>Make use of the blessed times, such as the last part of the night and while fasting.</li></ul>'
-     '<p>You will find many authentic duas in the Duas & Dhikr section of the app.</p>',
-     ['dua']),
-]
+# Blog: the posts live in islamic_studio_blog.py.
+from islamic_studio_blog import POSTS  # noqa: E402
 
 
 def build() -> str:
@@ -211,7 +148,9 @@ ON CONFLICT (slug) DO NOTHING;
         out.append(
             'INSERT INTO is_blog_posts (id, source, author_name, language, title, summary, body_html, tags, review_status) VALUES ('
             f"{sql(uid('post', key))}, 'team', 'Islamic Studio', {sql(lang)}, {sql(title)}, {sql(summary)}, {sql(body)}, {sql(tags)}, 'in_review') "
-            'ON CONFLICT (id) DO NOTHING;')
+            # A post not yet approved takes the newer text; an approved one is never touched.
+            'ON CONFLICT (id) DO UPDATE SET title = EXCLUDED.title, summary = EXCLUDED.summary, body_html = EXCLUDED.body_html, tags = EXCLUDED.tags '
+            "WHERE is_blog_posts.review_status <> 'approved';")
 
     out.append("""
 COMMIT;
