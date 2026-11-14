@@ -59,6 +59,19 @@ import { MpPlaces } from './pages/Music/MpPlaces';
 import { MpSources } from './pages/Music/MpSources';
 import { CvList } from './pages/CvMaker/CvList';
 import { CvEditor } from './pages/CvMaker/CvEditor';
+import { IsDashboard } from './pages/IslamicStudio/IsDashboard';
+import { IsFeatures } from './pages/IslamicStudio/IsFeatures';
+import { IsSettings } from './pages/IslamicStudio/IsSettings';
+import { IsAnnouncements } from './pages/IslamicStudio/IsAnnouncements';
+import { IsPrayer } from './pages/IslamicStudio/IsPrayer';
+import { IsCalendar } from './pages/IslamicStudio/IsCalendar';
+import { IsDuas } from './pages/IslamicStudio/IsDuas';
+import { IsQuran } from './pages/IslamicStudio/IsQuran';
+import { IsReview } from './pages/IslamicStudio/IsReview';
+import { IsFeedback } from './pages/IslamicStudio/IsFeedback';
+import { IsQuiz } from './pages/IslamicStudio/IsQuiz';
+import { IsTracker, IsZakat } from './pages/IslamicStudio/IsZakatTracker';
+import { IsScores } from './pages/IslamicStudio/IsScores';
 import { MusicPlayerProvider, usePlayer } from './lib/MusicPlayerContext';
 import { MpFloatingControls, MpMiniPlayer } from './components/music/MpControls';
 
@@ -219,6 +232,20 @@ function AuthGate() {
         <Route path="/mp/sources" element={<MpSources />} />
         <Route path="/cv" element={<CvList />} />
         <Route path="/cv/:id" element={<CvEditor />} />
+        <Route path="/is" element={<IsDashboard />} />
+        <Route path="/is/features" element={<IsFeatures />} />
+        <Route path="/is/settings" element={<IsSettings />} />
+        <Route path="/is/announcements" element={<IsAnnouncements />} />
+        <Route path="/is/prayer" element={<IsPrayer />} />
+        <Route path="/is/calendar" element={<IsCalendar />} />
+        <Route path="/is/duas" element={<IsDuas />} />
+        <Route path="/is/quran" element={<IsQuran />} />
+        <Route path="/is/review" element={<IsReview />} />
+        <Route path="/is/feedback" element={<IsFeedback />} />
+        <Route path="/is/quiz" element={<IsQuiz />} />
+        <Route path="/is/zakat" element={<IsZakat />} />
+        <Route path="/is/tracker" element={<IsTracker />} />
+        <Route path="/is/scores" element={<IsScores />} />
         {/* Renamed from Learning Cycle (/lc); keep old links working. */}
         {['', '/board', '/topics', '/explore', '/milestones'].map(sub => (
           <Route key={sub} path={`/lc${sub}`} element={<Navigate to={`/ac${sub}`} replace />} />

@@ -1,5 +1,8 @@
+import { islamicStudioTranslations } from './islamicStudio';
+
 export const translations = {
   en: {
+    is: islamicStudioTranslations.en,
     pf: {
       common: {
         showOnHome: 'Show on home page', showOnHomeHint: 'Listed on the portfolio home page; "View all" always lists everything.', onHome: 'On home',
@@ -1061,6 +1064,7 @@ export const translations = {
     }
   },
   bn: {
+    is: islamicStudioTranslations.bn,
     pf: {
       common: {
         showOnHome: 'হোম পাতায় দেখান', showOnHomeHint: 'পোর্টফোলিওর হোম পাতায় দেখায়; "সব দেখুন"-এ সবসময় সব থাকে।', onHome: 'হোমে',

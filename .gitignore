@@ -27,3 +27,6 @@ dist-ssr
 
 # Supabase CLI cache
 supabase/.temp/
+
+# Generated Quran translation SQL (~14 MB); regenerate with supabase/data/islamic_studio_translation.py
+supabase/data/islamic_studio_translation_*.sql

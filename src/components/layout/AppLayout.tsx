@@ -9,6 +9,8 @@ import {
   GraduationCap, KanbanSquare, Network, Flag, Gauge,
   Music, Library, Disc3, AudioLines, Palette, Mic2, Globe2, Clapperboard,
   ScrollText, Files,
+  MoonStar, ToggleRight, Megaphone, Clock4, CalendarDays, HandHeart, BookOpenText, ShieldCheck, MessageSquareText,
+  Trophy, Calculator, ListChecks, BarChart3,
   type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
@@ -114,6 +116,27 @@ const NAV_TREE: NavGroup[] = [
       { to: '/mp/sources', label: 'Bands, Movies & Concerts', icon: Clapperboard },
       { to: '/mp/genres', label: 'Genres', icon: Palette },
       { to: '/mp/places', label: 'Countries & Languages', icon: Globe2 },
+    ],
+  },
+  {
+    key: 'islamic-studio',
+    label: 'Islamic Studio',
+    icon: MoonStar,
+    children: [
+      { to: '/is', label: 'Dashboard', icon: Gauge },
+      { to: '/is/features', label: 'App Features', icon: ToggleRight },
+      { to: '/is/settings', label: 'App Settings', icon: Settings },
+      { to: '/is/announcements', label: 'Announcements', icon: Megaphone },
+      { to: '/is/prayer', label: 'Prayer & Regions', icon: Clock4 },
+      { to: '/is/calendar', label: 'Calendar & Ramadan', icon: CalendarDays },
+      { to: '/is/duas', label: 'Duas & Dhikr', icon: HandHeart },
+      { to: '/is/quran', label: 'Quran & Hadith', icon: BookOpenText },
+      { to: '/is/quiz', label: 'Quiz & Challenges', icon: Trophy },
+      { to: '/is/zakat', label: 'Zakat', icon: Calculator },
+      { to: '/is/tracker', label: 'Worship Tracker', icon: ListChecks },
+      { to: '/is/review', label: 'Content Review', icon: ShieldCheck },
+      { to: '/is/feedback', label: 'App Feedback', icon: MessageSquareText },
+      { to: '/is/scores', label: 'Device Scores', icon: BarChart3 },
     ],
   },
   {

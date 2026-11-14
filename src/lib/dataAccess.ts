@@ -22,6 +22,7 @@ const MODULES: Record<string, string> = {
   org: 'ORG_SITE',
   mp: 'MUSIC',
   cv: 'CV_MAKER',
+  is: 'ISLAMIC_STUDIO',
 };
 
 /** Pages (IAM resources) that may change each table. Unlisted tables of a module fall back to any of its pages. */
@@ -132,6 +133,40 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   mp_languages: ['MUSIC_PLACES'],
   // CV Maker
   cv_resumes: ['CV_MAKER'],
+  // Islamic Studio (religious content is also changed by Content Review: approve / reject)
+  is_files: ['ISLAMIC_STUDIO_QURAN', 'ISLAMIC_STUDIO_DUAS', 'ISLAMIC_STUDIO_PRAYER'],
+  is_languages: ['ISLAMIC_STUDIO_SETTINGS'],
+  is_features: ['ISLAMIC_STUDIO_FEATURES'],
+  is_app_settings: ['ISLAMIC_STUDIO_SETTINGS'],
+  is_home_sections: ['ISLAMIC_STUDIO_SETTINGS'],
+  is_announcements: ['ISLAMIC_STUDIO_ANNOUNCEMENTS'],
+  is_feedback: ['ISLAMIC_STUDIO_FEEDBACK'],
+  is_prayer_regions: ['ISLAMIC_STUDIO_PRAYER'],
+  is_adhan_sounds: ['ISLAMIC_STUDIO_PRAYER'],
+  is_dhikr_presets: ['ISLAMIC_STUDIO_DUAS', 'ISLAMIC_STUDIO_REVIEW'],
+  is_dua_categories: ['ISLAMIC_STUDIO_DUAS'],
+  is_duas: ['ISLAMIC_STUDIO_DUAS', 'ISLAMIC_STUDIO_REVIEW'],
+  is_dua_category_items: ['ISLAMIC_STUDIO_DUAS'],
+  is_islamic_events: ['ISLAMIC_STUDIO_CALENDAR'],
+  is_hijri_month_starts: ['ISLAMIC_STUDIO_CALENDAR'],
+  is_ramadan_seasons: ['ISLAMIC_STUDIO_CALENDAR'],
+  is_checklist_items: ['ISLAMIC_STUDIO_CALENDAR'],
+  is_content_packs: ['ISLAMIC_STUDIO_QURAN', 'ISLAMIC_STUDIO_REVIEW'],
+  is_reciters: ['ISLAMIC_STUDIO_QURAN'],
+  is_hadith_collections: ['ISLAMIC_STUDIO_QURAN'],
+  is_daily_items: ['ISLAMIC_STUDIO_QURAN'],
+  is_hadith_sections: ['ISLAMIC_STUDIO_QURAN'],
+  is_translation_ayahs: ['ISLAMIC_STUDIO_QURAN'],
+  is_quizzes: ['ISLAMIC_STUDIO_QUIZ', 'ISLAMIC_STUDIO_REVIEW'],
+  is_quiz_questions: ['ISLAMIC_STUDIO_QUIZ'],
+  is_quiz_options: ['ISLAMIC_STUDIO_QUIZ'],
+  is_challenges: ['ISLAMIC_STUDIO_QUIZ'],
+  is_zakat_settings: ['ISLAMIC_STUDIO_ZAKAT', 'ISLAMIC_STUDIO_REVIEW'],
+  is_metal_prices: ['ISLAMIC_STUDIO_ZAKAT'],
+  is_habit_templates: ['ISLAMIC_STUDIO_TRACKER'],
+  // Written only by the app (each device its own rows); batools may delete.
+  is_devices: ['ISLAMIC_STUDIO_SCORES'],
+  is_device_scores: ['ISLAMIC_STUDIO_SCORES'],
 };
 
 /** Database functions: read-only ones, and writes with the action and pages they need. */
@@ -166,7 +201,10 @@ const FUNCTIONS: Record<string, 'read' | { action: Action; resources: string[] }
 };
 
 /** Storage buckets batools writes to, and the page that owns uploads. */
-const BUCKETS: Record<string, string[]> = { music: ['MUSIC_LIBRARY', 'MUSIC_COLLECTIONS'] };
+const BUCKETS: Record<string, string[]> = {
+  music: ['MUSIC_LIBRARY', 'MUSIC_COLLECTIONS'],
+  'islamic-studio': ['ISLAMIC_STUDIO_ANNOUNCEMENTS', 'ISLAMIC_STUDIO_PRAYER', 'ISLAMIC_STUDIO_DUAS', 'ISLAMIC_STUDIO_QURAN'],
+};
 
 // Section resources count for their module's reads too (e.g. MUSIC_QUICK_PLAY reads songs to play them).
 const ALL_RESOURCES = [...Object.values(PAGE_RESOURCES), ...Object.values(SECTION_RESOURCES)];

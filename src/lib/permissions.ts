@@ -68,6 +68,20 @@ export const PAGE_RESOURCES: Record<string, string> = {
   '/mp/genres': 'MUSIC_GENRES',
   '/mp/places': 'MUSIC_PLACES',
   '/cv': 'CV_MAKER',
+  '/is': 'ISLAMIC_STUDIO_DASHBOARD',
+  '/is/features': 'ISLAMIC_STUDIO_FEATURES',
+  '/is/settings': 'ISLAMIC_STUDIO_SETTINGS',
+  '/is/announcements': 'ISLAMIC_STUDIO_ANNOUNCEMENTS',
+  '/is/prayer': 'ISLAMIC_STUDIO_PRAYER',
+  '/is/calendar': 'ISLAMIC_STUDIO_CALENDAR',
+  '/is/duas': 'ISLAMIC_STUDIO_DUAS',
+  '/is/quran': 'ISLAMIC_STUDIO_QURAN',
+  '/is/review': 'ISLAMIC_STUDIO_REVIEW',
+  '/is/feedback': 'ISLAMIC_STUDIO_FEEDBACK',
+  '/is/quiz': 'ISLAMIC_STUDIO_QUIZ',
+  '/is/zakat': 'ISLAMIC_STUDIO_ZAKAT',
+  '/is/tracker': 'ISLAMIC_STUDIO_TRACKER',
+  '/is/scores': 'ISLAMIC_STUDIO_SCORES',
 };
 
 /** Pages under a path (e.g. one album) use that path's resource. */
