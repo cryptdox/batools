@@ -299,7 +299,7 @@ const en = {
   },
   academy: {
     pageTitle: 'Academy',
-    pageSubtitle: 'The learning path in the app: units of short lessons, played like Duolingo.',
+    pageSubtitle: 'The learning path in the app: units of short lessons, played like a game.',
     units: 'Units',
     unitsSubtitle: 'The app shows a unit only when it is on and approved. Use the layers icon for its lessons.',
     lessons: 'Lessons',
@@ -718,7 +718,7 @@ const bn: Dict = {
   },
   academy: {
     pageTitle: 'একাডেমি',
-    pageSubtitle: 'অ্যাপের শেখার পথ: ছোট ছোট লেসনের ইউনিট, ডুওলিঙ্গোর মতো খেলা।',
+    pageSubtitle: 'অ্যাপের শেখার পথ: ছোট ছোট লেসনের ইউনিট, খেলার মতো করে।',
     units: 'ইউনিট',
     unitsSubtitle: 'ইউনিট চালু ও অনুমোদিত হলেই অ্যাপে দেখা যায়। লেসনের জন্য লেয়ার আইকন চাপুন।',
     lessons: 'লেসন',

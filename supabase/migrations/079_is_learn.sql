@@ -1,5 +1,5 @@
 -- Migration: 079_is_learn.sql
--- Islamic Studio "Islamic Academy": a Duolingo-style learning path.
+-- Islamic Studio "Islamic Academy": a game-style learning path.
 --   is_learn_units    a unit on the path (reviewed like quizzes: the app shows approved units only)
 --   is_learn_lessons  the lesson bubbles of a unit; the last is usually a checkpoint
 --   is_learn_items    what a lesson asks, one row per item; `type` says how `data` looks:
