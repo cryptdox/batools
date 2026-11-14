@@ -9,7 +9,7 @@ import { isText } from '../../lib/islamicStudio';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
-type Device = { device_id: string; display_name: string | null; name_hidden?: boolean; can_post?: boolean; platform: string | null; app_version_code: number | null; language: string | null; created_at: string; last_seen_at: string };
+type Device = { device_id: string; display_name: string | null; name_hidden?: boolean; can_post?: boolean; friend_code?: string | null; platform: string | null; app_version_code: number | null; language: string | null; created_at: string; last_seen_at: string };
 type Score = { device_id: string; feature: string; ref: string; day: string; score: number; max_score: number | null };
 type Leader = { rank: number; display_name: string; score: number; quizzes: number };
 
@@ -103,7 +103,8 @@ export const IsScores = () => {
   };
 
   const q = query.trim().toLowerCase();
-  const shown = (devices ?? []).filter(d => !q || d.device_id.startsWith(q) || (d.display_name ?? '').toLowerCase().includes(q));
+  const shown = (devices ?? []).filter(d => !q || d.device_id.startsWith(q) || (d.display_name ?? '').toLowerCase().includes(q)
+    || (d.friend_code ?? '').toLowerCase().replace('-', '').includes(q.replace('-', '')));
 
   const active = devices?.filter(d => d.last_seen_at >= week).length ?? 0;
   const byFeature = FEATURES.map(f => {
@@ -172,6 +173,7 @@ export const IsScores = () => {
                   <tr key={d.device_id} className="border-t border-gray-100 dark:border-gray-700">
                     <td className="py-2">
                       {d.display_name ?? <span className="text-gray-400 font-mono text-xs">{d.device_id.slice(0, 8)}</span>}
+                      {d.friend_code && <span className="ml-2 font-mono text-xs text-gray-400">{d.friend_code}</span>}
                       {d.name_hidden && <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">{t('is.scores.hiddenBadge')}</span>}
                       {d.can_post === false && <span className="ml-2 rounded bg-red-100 px-1.5 py-0.5 text-xs text-red-700 dark:bg-red-900/40 dark:text-red-300">{t('is.scores.blockedBadge')}</span>}
                     </td>
