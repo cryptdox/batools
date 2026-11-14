@@ -12,6 +12,7 @@ import {
   MoonStar, ToggleRight, Megaphone, Clock4, CalendarDays, HandHeart, BookOpenText, ShieldCheck, MessageSquareText,
   Trophy, Calculator, ListChecks, BarChart3,
   type LucideIcon,
+
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
 import { useAccess } from '../../lib/permissions';
@@ -133,6 +134,9 @@ const NAV_TREE: NavGroup[] = [
       { to: '/is/quran', label: 'Quran & Hadith', icon: BookOpenText },
       { to: '/is/quiz', label: 'Quiz & Challenges', icon: Trophy },
       { to: '/is/academy', label: 'Academy', icon: GraduationCap },
+      { to: '/is/media', label: 'Audio & Video', icon: Clapperboard },
+      { to: '/is/books', label: 'Books', icon: Library },
+      { to: '/is/blog', label: 'Blog', icon: Newspaper },
       { to: '/is/zakat', label: 'Zakat', icon: Calculator },
       { to: '/is/tracker', label: 'Worship Tracker', icon: ListChecks },
       { to: '/is/review', label: 'Content Review', icon: ShieldCheck },

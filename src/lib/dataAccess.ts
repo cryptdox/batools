@@ -164,11 +164,17 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   is_learn_units: ['ISLAMIC_STUDIO_ACADEMY', 'ISLAMIC_STUDIO_REVIEW'],
   is_learn_lessons: ['ISLAMIC_STUDIO_ACADEMY', 'ISLAMIC_STUDIO_REVIEW'],
   is_learn_items: ['ISLAMIC_STUDIO_ACADEMY', 'ISLAMIC_STUDIO_REVIEW'],
+  is_media_categories: ['ISLAMIC_STUDIO_MEDIA'],
+  is_media_items: ['ISLAMIC_STUDIO_MEDIA', 'ISLAMIC_STUDIO_REVIEW'],
+  is_book_categories: ['ISLAMIC_STUDIO_BOOKS'],
+  is_books: ['ISLAMIC_STUDIO_BOOKS', 'ISLAMIC_STUDIO_REVIEW'],
+  is_blog_posts: ['ISLAMIC_STUDIO_BLOG', 'ISLAMIC_STUDIO_REVIEW'],
+  is_blog_reports: ['ISLAMIC_STUDIO_BLOG'],
   is_zakat_settings: ['ISLAMIC_STUDIO_ZAKAT', 'ISLAMIC_STUDIO_REVIEW'],
   is_metal_prices: ['ISLAMIC_STUDIO_ZAKAT'],
   is_habit_templates: ['ISLAMIC_STUDIO_TRACKER'],
   // Written only by the app (each device its own rows); batools may delete.
-  is_devices: ['ISLAMIC_STUDIO_SCORES'],
+  is_devices: ['ISLAMIC_STUDIO_SCORES', 'ISLAMIC_STUDIO_BLOG'],
   is_device_scores: ['ISLAMIC_STUDIO_SCORES'],
 };
 
@@ -206,7 +212,8 @@ const FUNCTIONS: Record<string, 'read' | { action: Action; resources: string[] }
 /** Storage buckets batools writes to, and the page that owns uploads. */
 const BUCKETS: Record<string, string[]> = {
   music: ['MUSIC_LIBRARY', 'MUSIC_COLLECTIONS'],
-  'islamic-studio': ['ISLAMIC_STUDIO_ANNOUNCEMENTS', 'ISLAMIC_STUDIO_PRAYER', 'ISLAMIC_STUDIO_DUAS', 'ISLAMIC_STUDIO_QURAN'],
+  'islamic-studio': ['ISLAMIC_STUDIO_ANNOUNCEMENTS', 'ISLAMIC_STUDIO_PRAYER', 'ISLAMIC_STUDIO_DUAS', 'ISLAMIC_STUDIO_QURAN', 'ISLAMIC_STUDIO_MEDIA', 'ISLAMIC_STUDIO_BOOKS'],
+  'is-blog-images': ['ISLAMIC_STUDIO_BLOG'],
 };
 
 // Section resources count for their module's reads too (e.g. MUSIC_QUICK_PLAY reads songs to play them).

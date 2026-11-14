@@ -111,7 +111,7 @@ export const IsReview = () => {
           <ul className="divide-y divide-gray-100 dark:divide-gray-700">
             {items.map(item => {
               const r = item.row;
-              const noLicense = item.table === 'is_content_packs' && !String(r.license ?? '').trim();
+              const noLicense = (item.table === 'is_content_packs' || item.table === 'is_books') && !String(r.license ?? '').trim();
               return (
                 <li key={`${item.table}:${r.id}`} className="p-4 space-y-2">
                   <div className="flex flex-wrap items-center gap-2">
@@ -141,6 +141,12 @@ export const IsReview = () => {
                       <Button size="sm" variant="outline" onClick={() => setOpen(open === String(r.id) ? null : String(r.id))}>
                         <BookOpen size={14} className="mr-1" /> {t('is.text.read')}
                       </Button>
+                    )}
+                    {(item.table === 'is_media_items' || item.table === 'is_books') && Boolean(r.youtube_id || r.audio_url || r.file_url) && (
+                      <a href={r.youtube_id ? `https://www.youtube.com/watch?v=${r.youtube_id}` : String(r.audio_url ?? r.file_url)} target="_blank" rel="noreferrer"
+                        className="inline-flex items-center rounded-lg border border-gray-300 dark:border-gray-700 px-3 py-1.5 text-xs font-medium hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <BookOpen size={14} className="mr-1" /> {t(item.table === 'is_books' ? 'is.text.read' : 'is.review.open')}
+                      </a>
                     )}
                     {item.table === 'is_content_packs' && (r.kind === 'quran_translation' && r.is_stored || r.kind === 'hadith') && (
                       <Link to={r.kind === 'hadith' ? `/is/quran?tab=hadithText&book=${r.hadith_collection_id}` : `/is/quran?tab=text&pack=${r.id}`}

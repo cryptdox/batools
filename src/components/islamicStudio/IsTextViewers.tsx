@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
-import { AlertTriangle, ChevronLeft, ChevronRight, Pencil, Search } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Lock, Search } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
 import { isText, type IsRow } from '../../lib/islamicStudio';
-import { Badge, Button } from '../ui/Button';
-import { Modal } from '../ui/Modal';
+import { Badge } from '../ui/Button';
 import { pfInputClass } from '../portfolio/PfFieldInput';
 
 const arabicStyle = { fontFamily: '"Amiri", "Scheherazade New", "Noto Naskh Arabic", serif' };
@@ -37,7 +36,8 @@ const ReviewBadge = ({ status }: { status: unknown }) => {
 
 /**
  * Read a stored translation (is_translation_ayahs) surah by surah, next to the
- * Arabic, with the translator's footnotes; each ayah can be corrected.
+ * Arabic, with the translator's footnotes. Read only: Quran and hadith text is
+ * changed only by re-running the loader from the source (see 078 / data/).
  */
 export const TranslationText = ({ initialPack }: { initialPack?: string | null }) => {
   const { t, language } = useLanguage();
@@ -48,8 +48,6 @@ export const TranslationText = ({ initialPack }: { initialPack?: string | null }
   const [rows, setRows] = useState<{ ayah: number; text: string; note: string | null }[] | null>(null);
   const [arabic, setArabic] = useState<string[]>([]);
   const [search, setSearch] = useState('');
-  const [editing, setEditing] = useState<{ ayah: number; text: string; note: string } | null>(null);
-  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     void supabase.from('is_content_packs').select('id, name, slug, language, license, review_status')
@@ -75,29 +73,11 @@ export const TranslationText = ({ initialPack }: { initialPack?: string | null }
   }, [packId, surah, t]);
 
   const pack = packs.find(p => String(p.id) === packId);
-  const keepUnchanged = /unchanged|no change|without change/i.test(String(pack?.license ?? ''));
   const meta = surahs.find(s => s.number === surah);
   const shown = useMemo(() => {
     const needle = search.trim().toLowerCase();
     return (rows ?? []).filter(r => !needle || r.text.toLowerCase().includes(needle) || (r.note ?? '').toLowerCase().includes(needle) || String(r.ayah) === needle);
   }, [rows, search]);
-
-  const save = async () => {
-    if (!editing) return;
-    setSaving(true);
-    const { error } = await supabase.from('is_translation_ayahs')
-      .update({ text: editing.text.trim(), note: editing.note.trim() || null })
-      .eq('pack_id', packId).eq('surah', surah).eq('ayah', editing.ayah);
-    setSaving(false);
-    if (error) {
-      toast.error(errorMessage(error, t('pf.common.saveError')));
-      return;
-    }
-    setRows(prev => (prev ?? []).map(r => (r.ayah === editing.ayah ? { ...r, text: editing.text.trim(), note: editing.note.trim() || null } : r)));
-    setEditing(null);
-    toast.success(t('pf.common.updated'));
-    toast.info(t('is.text.appNote'));
-  };
 
   return (
     <div className="space-y-4">
@@ -128,6 +108,9 @@ export const TranslationText = ({ initialPack }: { initialPack?: string | null }
           {t('is.quran.license')}: {String(pack.license ?? '—')}
         </p>
       )}
+      {pack && (
+        <p className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400 px-1"><Lock size={12} /> {t('is.text.readOnly')}</p>
+      )}
 
       <div className={`${card} overflow-hidden`}>
         {meta && <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between"><span className="font-semibold">{meta.number}. {meta.englishName}</span><span dir="rtl" style={arabicStyle} className="text-lg">{meta.name}</span></div>}
@@ -149,9 +132,6 @@ export const TranslationText = ({ initialPack }: { initialPack?: string | null }
                       </details>
                     )}
                   </div>
-                  <button onClick={() => setEditing({ ayah: r.ayah, text: r.text, note: r.note ?? '' })} className="p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" title={t('pf.common.edit')}>
-                    <Pencil size={16} />
-                  </button>
                 </div>
               </li>
             ))}
@@ -159,30 +139,6 @@ export const TranslationText = ({ initialPack }: { initialPack?: string | null }
         )}
       </div>
 
-      <Modal isOpen={!!editing} onClose={() => !saving && setEditing(null)} title={`${t('pf.common.edit')} · ${surah}:${editing?.ayah ?? ''}`} className="max-w-3xl">
-        {editing && (
-          <div className="space-y-4">
-            {keepUnchanged && (
-              <div className="flex items-start gap-2 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-3 text-sm">
-                <AlertTriangle size={18} className="text-amber-500 shrink-0 mt-0.5" /> {t('is.text.noChangesWarning')}
-              </div>
-            )}
-            {arabic[editing.ayah - 1] && <p dir="rtl" lang="ar" className="text-2xl leading-loose" style={arabicStyle}>{arabic[editing.ayah - 1]}</p>}
-            <label className="block">
-              <span className="block text-sm font-medium mb-1.5">{t('is.text.translation')}</span>
-              <textarea value={editing.text} onChange={e => setEditing({ ...editing, text: e.target.value })} rows={4} className={pfInputClass} />
-            </label>
-            <label className="block">
-              <span className="block text-sm font-medium mb-1.5">{t('is.text.notes')}</span>
-              <textarea value={editing.note} onChange={e => setEditing({ ...editing, note: e.target.value })} rows={6} className={`${pfInputClass} text-sm`} />
-            </label>
-            <div className="flex justify-end gap-3 pt-2 border-t border-gray-100 dark:border-gray-700">
-              <Button variant="ghost" onClick={() => setEditing(null)} disabled={saving}>{t('pf.common.cancel')}</Button>
-              <Button onClick={() => void save()} disabled={saving || !editing.text.trim()}>{saving ? t('pf.common.saving') : t('pf.common.save')}</Button>
-            </div>
-          </div>
-        )}
-      </Modal>
     </div>
   );
 };

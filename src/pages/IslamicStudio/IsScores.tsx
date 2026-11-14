@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Smartphone, Trophy, Activity, Search, EyeOff, Eye, Trash2 } from 'lucide-react';
+import { Smartphone, Trophy, Activity, Search, EyeOff, Eye, Trash2, Ban, PenLine } from 'lucide-react';
 import { useLanguage } from '../../lib/LanguageContext';
 import { supabase } from '../../lib/supabase';
 import { useAccess } from '../../lib/permissions';
@@ -9,7 +9,7 @@ import { isText } from '../../lib/islamicStudio';
 import { pfInputClass } from '../../components/portfolio/PfFieldInput';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
-type Device = { device_id: string; display_name: string | null; name_hidden?: boolean; platform: string | null; app_version_code: number | null; language: string | null; created_at: string; last_seen_at: string };
+type Device = { device_id: string; display_name: string | null; name_hidden?: boolean; can_post?: boolean; platform: string | null; app_version_code: number | null; language: string | null; created_at: string; last_seen_at: string };
 type Score = { device_id: string; feature: string; ref: string; day: string; score: number; max_score: number | null };
 type Leader = { rank: number; display_name: string; score: number; quizzes: number };
 
@@ -77,6 +77,16 @@ export const IsScores = () => {
     setDevices(list => list?.map(x => (x.device_id === d.device_id ? (data as Device) : x)) ?? null);
     if (challenge) loadBoard(challenge);
     toast.success(t(hidden ? 'is.scores.nameHidden' : 'is.scores.nameShown'));
+  };
+
+  /** Lets a device blocked from the blog write again (or blocks it). */
+  const setCanPost = async (d: Device, allowed: boolean) => {
+    setBusy(d.device_id);
+    const { data, error } = await supabase.from('is_devices').update({ can_post: allowed }).eq('device_id', d.device_id).select('*').single();
+    setBusy('');
+    if (error) return toast.error(errorMessage(error, t('pf.common.saveError')));
+    setDevices(list => list?.map(x => (x.device_id === d.device_id ? (data as Device) : x)) ?? null);
+    toast.success(t(allowed ? 'is.blog.unblocked' : 'is.blog.blocked'));
   };
 
   /** Deletes a device and (cascade) all its scores. */
@@ -163,6 +173,7 @@ export const IsScores = () => {
                     <td className="py-2">
                       {d.display_name ?? <span className="text-gray-400 font-mono text-xs">{d.device_id.slice(0, 8)}</span>}
                       {d.name_hidden && <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">{t('is.scores.hiddenBadge')}</span>}
+                      {d.can_post === false && <span className="ml-2 rounded bg-red-100 px-1.5 py-0.5 text-xs text-red-700 dark:bg-red-900/40 dark:text-red-300">{t('is.scores.blockedBadge')}</span>}
                     </td>
                     <td>{new Date(d.last_seen_at).toLocaleString()}</td>
                     <td>{d.app_version_code ?? '—'} · {d.language ?? ''}</td>
@@ -172,6 +183,11 @@ export const IsScores = () => {
                         {canHide && (d.display_name || d.name_hidden) && (
                           <button disabled={busy === d.device_id} onClick={() => void setHidden(d, !d.name_hidden)} title={t(d.name_hidden ? 'is.scores.showName' : 'is.scores.hideName')} className="p-1.5 text-gray-500 hover:text-amber-600 disabled:opacity-40">
                             {d.name_hidden ? <Eye size={16} /> : <EyeOff size={16} />}
+                          </button>
+                        )}
+                        {canHide && (
+                          <button disabled={busy === d.device_id} onClick={() => void setCanPost(d, d.can_post === false)} title={t(d.can_post === false ? 'is.scores.allowPosting' : 'is.blog.block')} className="p-1.5 text-gray-500 hover:text-amber-600 disabled:opacity-40">
+                            {d.can_post === false ? <PenLine size={16} /> : <Ban size={16} />}
                           </button>
                         )}
                         {canDelete && (
