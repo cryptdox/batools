@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { ListChecks } from 'lucide-react';
 import { IsListEditor, IsRowText } from '../../components/islamicStudio/IsListEditor';
 import type { IsField } from '../../components/islamicStudio/IsFieldInput';
-import { Badge } from '../../components/ui/Button';
+import { Badge, Button } from '../../components/ui/Button';
 import { useLanguage } from '../../lib/LanguageContext';
 import { supabase } from '../../lib/supabase';
 import { isText, type IsRow } from '../../lib/islamicStudio';
@@ -136,11 +136,22 @@ export const IsQuiz = () => {
           title="is.quiz.challengesTitle"
           subtitle="is.quiz.challengesSubtitle"
           fields={challengeFields}
-          renderRow={r => (
-            <IsRowText
-              primary={isText(r.title, language)}
-              secondary={`${new Date(String(r.starts_at)).toLocaleDateString()} → ${new Date(String(r.ends_at)).toLocaleDateString()} · ${(r.quiz_ids as string[]).length} ${t('is.quiz.quizzes')}`}
-            />
+          renderRow={r => {
+            // Live / upcoming / ended by its dates; "off" hides it whatever the dates.
+            const now = Date.now();
+            const phase = r.is_active === false ? 'off' : now < Date.parse(String(r.starts_at)) ? 'upcoming' : now > Date.parse(String(r.ends_at)) ? 'ended' : 'live';
+            return (
+              <IsRowText
+                primary={isText(r.title, language)}
+                secondary={`${new Date(String(r.starts_at)).toLocaleDateString()} → ${new Date(String(r.ends_at)).toLocaleDateString()} · ${(r.quiz_ids as string[]).length} ${t('is.quiz.quizzes')}`}
+                extra={<Badge variant={phase === 'live' ? 'success' : phase === 'upcoming' ? 'warning' : 'muted'}>{t(`is.quiz.phase.${phase}`)}</Badge>}
+              />
+            );
+          }}
+          rowActions={(r, patch) => (
+            <Button size="sm" variant={r.is_active === false ? 'primary' : 'outline'} className="h-7 px-2 text-xs mr-1" onClick={() => patch({ is_active: r.is_active === false })}>
+              {t(r.is_active === false ? 'is.quiz.turnOn' : 'is.quiz.turnOff')}
+            </Button>
           )}
         />
       )}

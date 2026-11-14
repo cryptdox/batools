@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { toast } from 'react-toastify';
-import { Plus, Pencil, Trash2, AlertTriangle, ArrowUp, ArrowDown, Eye, EyeOff, Search, Inbox } from 'lucide-react';
+import { Plus, Pencil, Trash2, AlertTriangle, ArrowUp, ArrowDown, Eye, EyeOff, Search, Inbox, Check, X, Send } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage } from '../../lib/portfolio';
@@ -239,6 +239,12 @@ export const IsListEditor = ({
   };
   const patchRow = (row: IsRow) => (changes: IsRow) => void update([{ row, patch: changes }]);
 
+  /** Quick status change from the list: a reviewer's pick is signed; others can only send for review. */
+  const setStatus = (row: IsRow, status: string) => {
+    const signed = status === 'approved' ? { reviewed_by: userId, reviewed_at: new Date().toISOString() } : {};
+    void update([{ row, patch: { review_status: status, ...signed } }]).then(() => toast.success(t(`is.review.set.${status}`)));
+  };
+
   const move = (row: IsRow, delta: -1 | 1) => {
     const neighbour = visibleRows[visibleRows.indexOf(row) + delta];
     if (!neighbour) return;
@@ -309,12 +315,32 @@ export const IsListEditor = ({
                   {renderRow(row, patchRow(row))}
                   <div className="mt-1 flex flex-wrap gap-1">
                     {off && <Badge variant="muted">{t('is.common.off')}</Badge>}
-                    {status && (
+                    {status && !isReviewer && (
                       <Badge variant={status === 'approved' ? 'success' : status === 'rejected' ? 'danger' : 'warning'}>
                         {t(`is.review.${status}`)}
                       </Badge>
                     )}
                   </div>
+                  {status && (
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      {isReviewer ? (
+                        <>
+                          <select value={status} disabled={busy} onChange={e => setStatus(row, e.target.value)} title={t('is.review.status')}
+                            className={`h-7 rounded-md border px-1.5 text-xs font-medium ${status === 'approved' ? 'border-success/40 bg-success/10 text-success' : status === 'rejected' ? 'border-danger/40 bg-danger/10 text-danger' : 'border-warning/40 bg-warning/10 text-gray-700 dark:text-gray-200'}`}>
+                            {['draft', 'in_review', 'approved', 'rejected'].map(s => <option key={s} value={s}>{t(`is.review.${s}`)}</option>)}
+                          </select>
+                          {status !== 'approved' && (
+                            <Button size="sm" disabled={busy} onClick={() => setStatus(row, 'approved')} className="h-7 px-2 text-xs"><Check size={13} className="mr-1" /> {t('is.review.approve')}</Button>
+                          )}
+                          {status === 'in_review' && (
+                            <Button size="sm" variant="outline" disabled={busy} onClick={() => setStatus(row, 'rejected')} className="h-7 px-2 text-xs"><X size={13} className="mr-1" /> {t('is.review.reject')}</Button>
+                          )}
+                        </>
+                      ) : (status === 'draft' || status === 'rejected') && (
+                        <Button size="sm" variant="outline" disabled={busy} onClick={() => setStatus(row, 'in_review')} className="h-7 px-2 text-xs"><Send size={13} className="mr-1" /> {t('is.review.sendForReview')}</Button>
+                      )}
+                    </div>
+                  )}
                 </div>
                 <div className="flex items-center gap-0.5 shrink-0">
                   {rowActions?.(row, patchRow(row))}
