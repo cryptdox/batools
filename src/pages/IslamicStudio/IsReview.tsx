@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Check, X, Inbox } from 'lucide-react';
+import { Check, X, Inbox, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button, Badge } from '../../components/ui/Button';
 import { useLanguage } from '../../lib/LanguageContext';
 import { supabase } from '../../lib/supabase';
@@ -9,6 +10,35 @@ import { IS_REVIEWED_TABLES, isText, useIsReviewer, useIsUserId, type IsRow } fr
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 type Item = { table: (typeof IS_REVIEWED_TABLES)[number]; row: IsRow };
+type QuizQuestion = { id: string; question: unknown; explanation: unknown; source_ref: string | null; is_quiz_options: { id: string; text: unknown; is_correct: boolean; sort_order: number }[] };
+
+/** A quiz's questions with every answer; the correct one is marked. */
+const QuizPreview = ({ quizId }: { quizId: string }) => {
+  const { t, language } = useLanguage();
+  const [questions, setQuestions] = useState<QuizQuestion[] | null>(null);
+  useEffect(() => {
+    void supabase.from('is_quiz_questions').select('id, question, explanation, source_ref, is_quiz_options(id, text, is_correct, sort_order)')
+      .eq('quiz_id', quizId).order('sort_order').then(({ data }) => setQuestions((data ?? []) as QuizQuestion[]));
+  }, [quizId]);
+  if (!questions) return <p className="text-sm text-gray-500">{t('pf.common.loading')}</p>;
+  return (
+    <ol className="space-y-3 list-decimal pl-5 text-sm">
+      {questions.map(q => (
+        <li key={q.id} className="space-y-1">
+          <p className="font-medium text-gray-900 dark:text-gray-100">{isText(q.question, language)}</p>
+          <ul className="flex flex-wrap gap-1">
+            {[...q.is_quiz_options].sort((a, b) => a.sort_order - b.sort_order).map(o => (
+              <li key={o.id} className={`px-2 py-0.5 rounded-full text-xs border ${o.is_correct ? 'bg-success/10 text-success border-success/30 font-semibold' : 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400'}`}>
+                {o.is_correct ? '✓ ' : ''}{isText(o.text, language)}
+              </li>
+            ))}
+          </ul>
+          {isText(q.explanation, language) && <p className="text-xs text-gray-500">{isText(q.explanation, language)}{q.source_ref ? ` · ${q.source_ref}` : ''}</p>}
+        </li>
+      ))}
+    </ol>
+  );
+};
 
 const arabicStyle = { fontFamily: '"Amiri", "Scheherazade New", "Noto Naskh Arabic", serif' };
 
@@ -23,6 +53,7 @@ export const IsReview = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState<string | null>(null);
+  const [open, setOpen] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -90,6 +121,8 @@ export const IsReview = () => {
                     <p dir="rtl" lang="ar" className="text-2xl leading-loose text-gray-900 dark:text-gray-100" style={arabicStyle}>{r.arabic}</p>
                   )}
                   {Boolean(r.translation) && <p className="text-sm text-gray-700 dark:text-gray-300">{isText(r.translation, language)}</p>}
+                  {item.table === 'is_zakat_settings' && <p className="text-sm whitespace-pre-line text-gray-700 dark:text-gray-300">{isText(r.guidance, language)}</p>}
+                  {item.table === 'is_quizzes' && open === String(r.id) && <QuizPreview quizId={String(r.id)} />}
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     {[
                       r.source_ref ? `${t('is.duas.source')}: ${r.source_ref}` : '',
@@ -100,6 +133,18 @@ export const IsReview = () => {
                     ].filter(Boolean).join(' · ')}
                   </p>
                   {noLicense && <p className="text-xs text-danger">{t('is.review.needsLicense')}</p>}
+                  <div className="flex flex-wrap gap-2">
+                    {item.table === 'is_quizzes' && (
+                      <Button size="sm" variant="outline" onClick={() => setOpen(open === String(r.id) ? null : String(r.id))}>
+                        <BookOpen size={14} className="mr-1" /> {t('is.text.read')}
+                      </Button>
+                    )}
+                    {item.table === 'is_content_packs' && (r.kind === 'quran_translation' && r.is_stored || r.kind === 'hadith') && (
+                      <Link to={r.kind === 'hadith' ? `/is/quran?tab=hadithText&book=${r.hadith_collection_id}` : `/is/quran?tab=text&pack=${r.id}`}
+                        className="inline-flex items-center rounded-lg border border-gray-300 dark:border-gray-700 px-3 py-1.5 text-xs font-medium hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <BookOpen size={14} className="mr-1" /> {t('is.text.read')}
+                      </Link>
+                    )}
                   {isReviewer && (
                     <div className="flex gap-2">
                       <Button size="sm" onClick={() => void decide(item, 'approved')} disabled={busy === String(r.id) || noLicense}>
@@ -110,6 +155,7 @@ export const IsReview = () => {
                       </Button>
                     </div>
                   )}
+                  </div>
                 </li>
               );
             })}

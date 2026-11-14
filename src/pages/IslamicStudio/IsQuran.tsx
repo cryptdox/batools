@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { HadithText, TranslationText } from '../../components/islamicStudio/IsTextViewers';
 import { IsListEditor, IsRowText } from '../../components/islamicStudio/IsListEditor';
 import type { IsField } from '../../components/islamicStudio/IsFieldInput';
 import { Badge } from '../../components/ui/Button';
@@ -38,11 +40,15 @@ const COLLECTION_FIELDS: IsField[] = [
   { name: 'is_active', label: 'is.common.active', type: 'boolean' },
 ];
 
-type Tab = 'packs' | 'daily' | 'reciters' | 'hadith';
+type Tab = 'packs' | 'text' | 'hadithText' | 'daily' | 'reciters' | 'hadith';
+const TABS: Tab[] = ['packs', 'text', 'hadithText', 'daily', 'reciters', 'hadith'];
 
 export const IsQuran = () => {
   const { t, language } = useLanguage();
-  const [tab, setTab] = useState<Tab>('packs');
+  // ?tab=text&pack=<id> / ?tab=hadithText&book=<id> open a viewer directly (Content Review links here).
+  const [params, setParams] = useSearchParams();
+  const tab: Tab = TABS.includes(params.get('tab') as Tab) ? (params.get('tab') as Tab) : 'packs';
+  const setTab = (next: Tab) => setParams({ tab: next });
   const [languages, setLanguages] = useState<{ value: string; label: string }[]>([]);
   const [collections, setCollections] = useState<{ value: string; label: string }[]>([]);
   useEffect(() => {
@@ -78,6 +84,8 @@ export const IsQuran = () => {
       <PfTabs<Tab>
         tabs={[
           { key: 'packs', label: 'is.quran.tabPacks' },
+          { key: 'text', label: 'is.text.tabTranslation' },
+          { key: 'hadithText', label: 'is.text.tabHadith' },
           { key: 'daily', label: 'is.quran.tabDaily' },
           { key: 'reciters', label: 'is.quran.tabReciters' },
           { key: 'hadith', label: 'is.quran.tabHadith' },
@@ -85,6 +93,8 @@ export const IsQuran = () => {
         active={tab}
         onChange={setTab}
       />
+      {tab === 'text' && <TranslationText key={params.get('pack') ?? ''} initialPack={params.get('pack')} />}
+      {tab === 'hadithText' && <HadithText key={params.get('book') ?? ''} initialBook={params.get('book')} />}
       {tab === 'packs' && (
         <IsListEditor
           table="is_content_packs"
