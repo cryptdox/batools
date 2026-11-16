@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { IsListEditor, IsRowText } from '../../components/islamicStudio/IsListEditor';
-import type { IsField } from '../../components/islamicStudio/IsFieldInput';
+import type { IsField, IsFormValues } from '../../components/islamicStudio/IsFieldInput';
+import type { IsRow } from '../../lib/islamicStudio';
 import { useLanguage } from '../../lib/LanguageContext';
 import { isText, loadIsLanguages } from '../../lib/islamicStudio';
 import { PfPageHeader, PfTabs } from '../Portfolio/PfPageHeader';
@@ -40,7 +41,33 @@ const SECTION_FIELDS: IsField[] = [
   { name: 'is_active', label: 'is.common.active', type: 'boolean' },
 ];
 
-type Tab = 'app' | 'home' | 'languages';
+/** Moments a sound style can replace with an uploaded file (088). */
+const SOUND_MOMENTS = ['correct', 'wrong', 'combo', 'm50', 'm75', 'm100', 'star', 'complete', 'tap', 'laugh'] as const;
+const AUDIO = 'audio/mpeg,audio/ogg,audio/mp4,audio/aac,.mp3,.ogg,.m4a,.aac';
+
+const SOUND_FIELDS: IsField[] = [
+  { name: 'key', label: 'is.sounds.key', type: 'text', required: true, hint: 'is.sounds.keyHint' },
+  { name: 'name', label: 'is.common.name', type: 'i18n', required: true },
+  { name: 'description', label: 'is.common.description', type: 'i18nArea' },
+  { name: 'icon', label: 'is.sounds.icon', type: 'text', hint: 'is.sounds.iconHint' },
+  { name: 'builtin', label: 'is.sounds.builtin', type: 'select', required: true, hint: 'is.sounds.builtinHint',
+    options: ['spark', 'ertugrul', 'sufi'].map(v => ({ value: v, label: `is.sounds.builtins.${v}` })) },
+  { name: 'is_default', label: 'is.sounds.isDefault', type: 'boolean', hint: 'is.sounds.isDefaultHint' },
+  { name: 'is_active', label: 'is.sounds.shown', type: 'boolean', hint: 'is.sounds.shownHint' },
+  ...SOUND_MOMENTS.map((m): IsField => ({ name: `sound_${m}`, label: `is.sounds.moments.${m}`, type: 'upload', accept: AUDIO, virtual: true, hint: m === 'correct' ? 'is.sounds.uploadHint' : undefined })),
+];
+
+/** The uploads as {moment: link}; empty ones play the built-in sound. */
+function soundsFrom(values: IsFormValues): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const m of SOUND_MOMENTS) {
+    const url = String(values[`sound_${m}`] ?? '').trim();
+    if (url) out[m] = url;
+  }
+  return out;
+}
+
+type Tab = 'app' | 'home' | 'languages' | 'sounds';
 
 export const IsSettings = () => {
   const { t, language } = useLanguage();
@@ -49,7 +76,7 @@ export const IsSettings = () => {
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="is.settings.pageTitle" subtitle="is.settings.pageSubtitle" />
       <PfTabs<Tab>
-        tabs={[{ key: 'app', label: 'is.settings.tabApp' }, { key: 'home', label: 'is.settings.tabHome' }, { key: 'languages', label: 'is.settings.tabLanguages' }]}
+        tabs={[{ key: 'app', label: 'is.settings.tabApp' }, { key: 'home', label: 'is.settings.tabHome' }, { key: 'languages', label: 'is.settings.tabLanguages' }, { key: 'sounds', label: 'is.settings.tabSounds' }]}
         active={tab}
         onChange={setTab}
       />
@@ -97,6 +124,26 @@ export const IsSettings = () => {
           renderRow={r => (
             <IsRowText primary={`${r.name} (${r.code})`} secondary={[r.is_default ? t('is.common.default') : '', r.is_rtl ? t('is.settings.rtl') : ''].filter(Boolean).join(' · ')} />
           )}
+        />
+      )}
+      {tab === 'sounds' && (
+        <IsListEditor
+          table="is_sound_styles"
+          title="is.sounds.title"
+          subtitle="is.sounds.subtitle"
+          fields={SOUND_FIELDS}
+          defaults={{ builtin: 'spark' }}
+          formFromRow={(r: IsRow) => Object.fromEntries(SOUND_MOMENTS.map(m => [`sound_${m}`, String((r.sounds as Record<string, string> | null)?.[m] ?? '')]))}
+          transform={(row, values) => ({ ...row, key: String(row.key ?? '').trim().toLowerCase(), sounds: soundsFrom(values) })}
+          renderRow={r => {
+            const uploaded = Object.keys((r.sounds as Record<string, string> | null) ?? {}).length;
+            return (
+              <IsRowText
+                primary={`${String(r.icon ?? '🔊')} ${isText(r.name, language)}${r.is_default ? ` · ${t('is.common.default')}` : ''}`}
+                secondary={t('is.sounds.summary').replace('{n}', String(uploaded)).replace('{total}', String(SOUND_MOMENTS.length)).replace('{builtin}', t(`is.sounds.builtins.${r.builtin}`))}
+              />
+            );
+          }}
         />
       )}
     </div>
