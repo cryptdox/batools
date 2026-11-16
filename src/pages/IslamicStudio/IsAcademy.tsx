@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ListChecks, Layers } from 'lucide-react';
+import { FolderTree, ListChecks, Layers, Route } from 'lucide-react';
 import { IsListEditor, IsRowText } from '../../components/islamicStudio/IsListEditor';
 import type { IsField, IsFormValues } from '../../components/islamicStudio/IsFieldInput';
 import { LEARN_ITEM_TYPES, LearnItemView, type LearnItemData } from '../../components/islamicStudio/IsLearnItem';
@@ -10,9 +10,23 @@ import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 const MAX_OPTIONS = 4;
 const MAX_PAIRS = 6;
-const MAX_PIECES = 8;
+const MAX_PIECES = 10;
 /** Icons the app knows (islamic-studio-app/src/components/ui.tsx). */
 const ICONS = ['sparkles', 'clock', 'book-open', 'hand-heart', 'moon', 'compass', 'library', 'graduation-cap', 'trophy', 'calendar', 'calculator', 'users'];
+
+const CATEGORY_FIELDS: IsField[] = [
+  { name: 'title', label: 'is.common.title', type: 'i18n', required: true },
+  { name: 'description', label: 'is.common.description', type: 'i18nArea' },
+  { name: 'color', label: 'is.academy.color', type: 'text', hint: 'is.academy.colorHint' },
+  { name: 'icon', label: 'is.academy.icon', type: 'select', allowEmpty: true, options: ICONS.map(v => ({ value: v, label: v })) },
+  { name: 'is_active', label: 'is.common.active', type: 'boolean' },
+];
+
+const SECTION_FIELDS: IsField[] = [
+  { name: 'title', label: 'is.common.title', type: 'i18n', required: true },
+  { name: 'description', label: 'is.common.description', type: 'i18nArea' },
+  { name: 'is_active', label: 'is.common.active', type: 'boolean' },
+];
 
 const UNIT_FIELDS: IsField[] = [
   { name: 'title', label: 'is.common.title', type: 'i18n', required: true },
@@ -104,6 +118,8 @@ export const IsAcademy = () => {
   const { t, language } = useLanguage();
   const isReviewer = useIsReviewer();
   const userId = useIsUserId();
+  const [category, setCategory] = useState<IsRow | null>(null);
+  const [section, setSection] = useState<IsRow | null>(null);
   const [unit, setUnit] = useState<IsRow | null>(null);
   const [lesson, setLesson] = useState<IsRow | null>(null);
   const [unitsReload, setUnitsReload] = useState(0);
@@ -127,9 +143,37 @@ export const IsAcademy = () => {
     <div className="max-w-5xl mx-auto space-y-6">
       <PfPageHeader title="is.academy.pageTitle" subtitle="is.academy.pageSubtitle" />
       <IsListEditor
+        table="is_learn_categories"
+        title="is.academy.categories"
+        subtitle="is.academy.categoriesSubtitle"
+        fields={CATEGORY_FIELDS}
+        audited="both"
+        renderRow={r => (
+          <div className="flex items-center gap-3 min-w-0">
+            <span className="h-8 w-8 shrink-0 rounded-xl" style={{ background: String(r.color ?? '#44bd32') }} />
+            <IsRowText primary={isText(r.title, language)} secondary={isText(r.description, language)} />
+          </div>
+        )}
+        rowActions={r => toggle(category?.id === r.id, () => { setCategory(category?.id === r.id ? null : r); setSection(null); setUnit(null); setLesson(null); }, t('is.academy.sections'), FolderTree)}
+      />
+      {category && (
+        <IsListEditor
+          key={`sections-${String(category.id)}`}
+          table="is_learn_sections"
+          title="is.academy.sections"
+          subtitle="is.academy.sectionsSubtitle"
+          scope={{ category_id: String(category.id) }}
+          fields={SECTION_FIELDS}
+          renderRow={r => <IsRowText primary={isText(r.title, language)} secondary={isText(r.description, language)} />}
+          rowActions={r => toggle(section?.id === r.id, () => { setSection(section?.id === r.id ? null : r); setUnit(null); setLesson(null); }, t('is.academy.units'), Route)}
+        />
+      )}
+      {category && section && <IsListEditor
+        key={`units-${String(section.id)}`}
         table="is_learn_units"
         title="is.academy.units"
         subtitle="is.academy.unitsSubtitle"
+        scope={{ section_id: String(section.id) }}
         fields={UNIT_FIELDS}
         reviewed
         audited="both"
@@ -141,8 +185,8 @@ export const IsAcademy = () => {
           </div>
         )}
         rowActions={r => toggle(unit?.id === r.id, () => { setUnit(unit?.id === r.id ? null : r); setLesson(null); }, t('is.academy.lessons'), Layers)}
-      />
-      {unit && (
+      />}
+      {section && unit && (
         <IsListEditor
           key={`lessons-${String(unit.id)}`}
           table="is_learn_lessons"
@@ -158,7 +202,7 @@ export const IsAcademy = () => {
           rowActions={r => toggle(lesson?.id === r.id, () => setLesson(lesson?.id === r.id ? null : r), t('is.academy.items'), ListChecks)}
         />
       )}
-      {unit && lesson && (
+      {section && unit && lesson && (
         <IsListEditor
           key={`items-${String(lesson.id)}`}
           table="is_learn_items"
