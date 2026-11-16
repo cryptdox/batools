@@ -241,12 +241,18 @@ export const IsFieldInput = ({ field: f, values, onChange, folder }: Props) => {
           })}
         </div>
       ) : f.type === 'upload' ? (
-        <div className="flex items-center gap-2">
-          {f.accept?.startsWith('image') && text(f.name) && (
-            <img src={text(f.name)} alt="" className="h-10 w-10 rounded object-cover border border-gray-200 dark:border-gray-700 shrink-0" />
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            {f.accept?.startsWith('image') && text(f.name) && (
+              <img src={text(f.name)} alt="" className="h-10 w-10 rounded object-cover border border-gray-200 dark:border-gray-700 shrink-0" />
+            )}
+            <input value={text(f.name)} onChange={e => onChange(f.name, e.target.value)} placeholder="https://" className={`${pfInputClass} h-10`} />
+            <UploadButton accept={f.accept ?? '*/*'} folder={folder} onUploaded={url => onChange(f.name, url)} />
+          </div>
+          {/* Audio: listen before saving (an uploaded file or a pasted link). */}
+          {f.accept?.startsWith('audio') && /^https:\/\//.test(text(f.name)) && (
+            <audio key={text(f.name)} controls preload="none" src={text(f.name)} className="h-10 w-full" />
           )}
-          <input value={text(f.name)} onChange={e => onChange(f.name, e.target.value)} placeholder="https://" className={`${pfInputClass} h-10`} />
-          <UploadButton accept={f.accept ?? '*/*'} folder={folder} onUploaded={url => onChange(f.name, url)} />
         </div>
       ) : (
         <input
