@@ -17,6 +17,8 @@ const APP_FIELDS: IsField[] = [
   { name: 'support_email', label: 'is.settings.supportEmail', type: 'text' },
   { name: 'privacy_url', label: 'is.settings.privacyUrl', type: 'text' },
   { name: 'share_text', label: 'is.settings.shareText', type: 'i18nArea' },
+  { name: 'azan_url', label: 'is.settings.azanUrl', type: 'upload', accept: 'audio/mpeg,audio/ogg,audio/mp4,audio/aac,.mp3,.ogg,.m4a,.aac', hint: 'is.settings.azanUrlHint' },
+  { name: 'azan_credit', label: 'is.settings.azanCredit', type: 'text', hint: 'is.settings.azanCreditHint' },
 ];
 
 const LANGUAGE_FIELDS: IsField[] = [
