@@ -349,6 +349,15 @@ const en = {
     off: 'off',
     defaultPrompt: { choice: '', true_false: '', fill: '', match: 'Match the pairs', order: 'Put in order', listen: '' },
   },
+  study: {
+    title: 'Study resources',
+    subtitle: 'Blog posts, books, audio talks and videos to study with this. The app lists them; hidden or unapproved ones are left out.',
+    resource: 'Resource',
+    note: 'Note',
+    noteHint: 'Optional, e.g. “Read before Unit 2”.',
+    missing: '(not found — deleted?)',
+    kinds: { blog: 'Blog', book: 'Book', video: 'Video', audio: 'Audio', media: 'Media' },
+  },
   zakat: {
     pageTitle: 'Zakat',
     pageSubtitle: 'Nisab, rate and guidance for the calculator, and daily metal prices.',
@@ -881,6 +890,15 @@ const bn: Dict = {
     badItem: 'আইটেমটি অসম্পূর্ণ: অন্তত দুটি উত্তর, জোড়া বা অংশ দিন, আর সঠিক উত্তর বাছুন।',
     off: 'বন্ধ',
     defaultPrompt: { choice: '', true_false: '', fill: '', match: 'জোড়া মেলান', order: 'ক্রমানুসারে সাজান', listen: '' },
+  },
+  study: {
+    title: 'পড়ার উপকরণ',
+    subtitle: 'এর সঙ্গে পড়ার জন্য ব্লগ, বই, অডিও আলোচনা ও ভিডিও। অ্যাপ এগুলো দেখায়; লুকানো বা অনুমোদনহীনগুলো বাদ যায়।',
+    resource: 'উপকরণ',
+    note: 'নোট',
+    noteHint: 'ঐচ্ছিক, যেমন “ইউনিট ২-এর আগে পড়ুন”।',
+    missing: '(পাওয়া যায়নি — মুছে ফেলা?)',
+    kinds: { blog: 'ব্লগ', book: 'বই', video: 'ভিডিও', audio: 'অডিও', media: 'মিডিয়া' },
   },
   zakat: {
     pageTitle: 'যাকাত',

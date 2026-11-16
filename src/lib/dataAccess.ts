@@ -162,6 +162,7 @@ const TABLE_RESOURCES: Record<string, string[]> = {
   is_quiz_options: ['ISLAMIC_STUDIO_QUIZ'],
   is_challenges: ['ISLAMIC_STUDIO_QUIZ'],
   is_learn_categories: ['ISLAMIC_STUDIO_ACADEMY'],
+  is_study_links: ['ISLAMIC_STUDIO_ACADEMY', 'ISLAMIC_STUDIO_QUIZ'],
   is_learn_sections: ['ISLAMIC_STUDIO_ACADEMY'],
   is_learn_units: ['ISLAMIC_STUDIO_ACADEMY', 'ISLAMIC_STUDIO_REVIEW'],
   is_learn_lessons: ['ISLAMIC_STUDIO_ACADEMY', 'ISLAMIC_STUDIO_REVIEW'],

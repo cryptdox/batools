@@ -7,6 +7,7 @@ import { useLanguage } from '../../lib/LanguageContext';
 import { supabase } from '../../lib/supabase';
 import { isText, type IsRow } from '../../lib/islamicStudio';
 import { PfPageHeader, PfTabs } from '../Portfolio/PfPageHeader';
+import { IsStudyLinks } from '../../components/islamicStudio/IsStudyLinks';
 
 const TOPICS = ['quran', 'prophets', 'pillars', 'seerah', 'history', 'fiqh', 'ramadan', 'general'];
 const OPTION_COUNT = 4;
@@ -104,6 +105,7 @@ export const IsQuiz = () => {
               </button>
             )}
           />
+          {quiz && <IsStudyLinks targetType="quiz" targetId={String(quiz.id)} />}
           {quiz && (
             <IsListEditor
               key={String(quiz.id)}

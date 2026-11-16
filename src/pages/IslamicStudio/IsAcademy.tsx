@@ -7,6 +7,7 @@ import { useLanguage } from '../../lib/LanguageContext';
 import { supabase } from '../../lib/supabase';
 import { isText, useIsReviewer, useIsUserId, type IsI18n, type IsRow } from '../../lib/islamicStudio';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
+import { IsStudyLinks } from '../../components/islamicStudio/IsStudyLinks';
 
 const MAX_OPTIONS = 4;
 const MAX_PAIRS = 6;
@@ -168,6 +169,7 @@ export const IsAcademy = () => {
           rowActions={r => toggle(section?.id === r.id, () => { setSection(section?.id === r.id ? null : r); setUnit(null); setLesson(null); }, t('is.academy.units'), Route)}
         />
       )}
+      {category && section && <IsStudyLinks targetType="section" targetId={String(section.id)} />}
       {category && section && <IsListEditor
         key={`units-${String(section.id)}`}
         table="is_learn_units"
