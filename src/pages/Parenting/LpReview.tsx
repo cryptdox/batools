@@ -32,13 +32,20 @@ const Details = ({ item }: { item: Item }) => {
       return (
         <div className="space-y-2">
           {text(r.summary) && <p className={line}>{text(r.summary)}</p>}
-          {text(r.body) && <p className={`${line} whitespace-pre-line`}>{text(r.body)}</p>}
-          {Object.entries(sections).map(([name, value]) => (
-            <div key={name} className={line}>
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">{t(`lp.review.sections.${name}`)}</p>
-              <SectionValue value={value} language={language} />
-            </div>
-          ))}
+          {(text(r.body) || Object.keys(sections).length > 0) && (
+            <details className="rounded-lg border border-gray-100 dark:border-gray-700 px-3 py-2">
+              <summary className="cursor-pointer text-sm font-medium text-primary">{t('lp.review.readAll')}</summary>
+              <div className="space-y-2 pt-2">
+                {text(r.body) && <p className={`${line} whitespace-pre-line`}>{text(r.body)}</p>}
+                {Object.entries(sections).map(([name, value]) => (
+                  <div key={name} className={line}>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">{t(`lp.review.sections.${name}`)}</p>
+                    <SectionValue value={value} language={language} />
+                  </div>
+                ))}
+              </div>
+            </details>
+          )}
         </div>
       );
     }
@@ -88,6 +95,7 @@ const ReviewQueue = ({ t, language, userId }: { t: (k: string) => string; langua
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState<string | null>(null);
   const [only, setOnly] = useState('');
+  const [query, setQuery] = useState('');
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -127,7 +135,35 @@ const ReviewQueue = ({ t, language, userId }: { t: (k: string) => string; langua
     }
   };
 
-  const shown = only ? items.filter(i => i.spec.table === only) : items;
+  const decideAll = async (list: Item[]) => {
+    if (!list.length || !window.confirm(t('lp.review.approveAllConfirm').replace('{n}', String(list.length)))) return;
+    setBusy('all');
+    try {
+      for (const spec of LP_REVIEWED_TABLES) {
+        const keys = list.filter(i => i.spec.table === spec.table).map(i => i.row[spec.key]);
+        // Small chunks keep each request's URL short.
+        for (let i = 0; i < keys.length; i += 100) {
+          const { error } = await supabase.from(spec.table)
+            .update({ review_status: 'approved', reviewed_by: userId, reviewed_at: new Date().toISOString(), updated_by: userId })
+            .in(spec.key, keys.slice(i, i + 100));
+          if (error) throw error;
+        }
+      }
+      setItems(prev => prev.filter(i => !list.includes(i)));
+      toast.success(t('lp.review.approvedAll').replace('{n}', String(list.length)));
+    } catch (e) {
+      console.error(e);
+      toast.error(errorMessage(e, t('pf.common.saveError')));
+      void load();
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const needle = query.trim().toLowerCase();
+  const matches = (i: Item) => !needle || [i.row[i.spec.key], i.row.slug, ...Object.values((i.row.title ?? i.row.name ?? {}) as Record<string, unknown>)]
+    .some(v => String(v ?? '').toLowerCase().includes(needle));
+  const shown = items.filter(i => (!only || i.spec.table === only) && matches(i));
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
@@ -138,12 +174,20 @@ const ReviewQueue = ({ t, language, userId }: { t: (k: string) => string; langua
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
         <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-gray-100 dark:border-gray-700">
           <span className="text-sm text-gray-500">{t('lp.review.waiting').replace('{n}', String(shown.length))}</span>
-          <select value={only} onChange={e => setOnly(e.target.value)} className={`${pfInputClass} h-9 w-auto`}>
-            <option value="">{t('lp.review.allKinds')}</option>
-            {LP_REVIEWED_TABLES.map(s => (
-              <option key={s.table} value={s.table}>{t(`lp.review.tables.${s.table}`)} ({items.filter(i => i.spec.table === s.table).length})</option>
-            ))}
-          </select>
+          <div className="flex flex-wrap items-center gap-2">
+            <input value={query} onChange={e => setQuery(e.target.value)} placeholder={t('lp.review.search')} className={`${pfInputClass} h-9 w-56`} />
+            <select value={only} onChange={e => setOnly(e.target.value)} className={`${pfInputClass} h-9 w-auto`}>
+              <option value="">{t('lp.review.allKinds')}</option>
+              {LP_REVIEWED_TABLES.map(s => (
+                <option key={s.table} value={s.table}>{t(`lp.review.tables.${s.table}`)} ({items.filter(i => i.spec.table === s.table).length})</option>
+              ))}
+            </select>
+            {isReviewer && shown.length > 0 && (
+              <Button size="sm" variant="outline" onClick={() => void decideAll(shown)} disabled={busy !== null}>
+                <Check size={14} className="mr-1" /> {t('lp.review.approveAll').replace('{n}', String(shown.length))}
+              </Button>
+            )}
+          </div>
         </div>
         {loading ? (
           <div className="p-8 text-center text-gray-500">{t('pf.common.loading')}</div>
@@ -163,6 +207,7 @@ const ReviewQueue = ({ t, language, userId }: { t: (k: string) => string; langua
                     <Badge variant="warning">{t(`is.review.${r.review_status}`)}</Badge>
                     {r.perspective ? <Badge variant="muted">{t(`lp.common.perspectives.${r.perspective}`)}</Badge> : null}
                     {r.urgency === 'emergency' && <Badge variant="danger">{t('lp.library.urgencies.emergency')}</Badge>}
+                    <code className="text-xs text-gray-400">{String(r.slug ?? r[item.spec.key])}</code>
                     <span className="font-medium text-gray-900 dark:text-gray-100">{r.emoji ? `${r.emoji} ` : ''}{isText(r.title ?? r.name, language)}</span>
                   </div>
                   {'min_day' in r && <p className="text-xs text-gray-500">{lpRangeLabel(r, t)}</p>}

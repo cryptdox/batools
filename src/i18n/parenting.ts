@@ -274,6 +274,11 @@ const en = {
     empty: 'Nothing waits for review.',
     waiting: '{n} waiting',
     allKinds: 'Everything',
+    search: 'Search title or key…',
+    readAll: 'Read it all',
+    approveAll: 'Approve all shown ({n})',
+    approveAllConfirm: 'Approve all {n} items shown? Only do this after you have read them — the app will show them at once.',
+    approvedAll: '{n} approved',
     tables: { lp_resources: 'Guide / page', lp_task_templates: 'Task', lp_milestones: 'Milestone', lp_vaccine_schedules: 'Vaccine schedule', lp_counter_templates: 'Counter' },
     sections: {
       understand: 'Understand', why: 'Why it happens', normal: 'What is normal', do_now: 'Do now', steps: 'Steps', avoid: 'Avoid',
@@ -562,6 +567,11 @@ const bn: typeof en = {
     empty: 'রিভিউয়ের অপেক্ষায় কিছু নেই।',
     waiting: '{n}টি অপেক্ষায়',
     allKinds: 'সবকিছু',
+    search: 'শিরোনাম বা কী খুঁজুন…',
+    readAll: 'পুরোটা পড়ুন',
+    approveAll: 'দেখানো সবগুলো অনুমোদন ({n})',
+    approveAllConfirm: 'দেখানো {n}টি আইটেম একসাথে অনুমোদন করবেন? পড়ে দেখার পরই এটি করুন — অ্যাপ সাথে সাথে এগুলো দেখাবে।',
+    approvedAll: '{n}টি অনুমোদিত',
     tables: { lp_resources: 'গাইড / পাতা', lp_task_templates: 'কাজ', lp_milestones: 'মাইলফলক', lp_vaccine_schedules: 'টিকার সূচি', lp_counter_templates: 'গণনা' },
     sections: {
       understand: 'বুঝুন', why: 'কেন হয়', normal: 'কোনটা স্বাভাবিক', do_now: 'এখনই করুন', steps: 'ধাপ', avoid: 'যা করবেন না',
