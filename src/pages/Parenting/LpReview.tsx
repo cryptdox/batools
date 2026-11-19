@@ -51,6 +51,14 @@ const Details = ({ item }: { item: Item }) => {
           {text(r.safety_note) && <p className="text-danger"><b>{t('lp.tasks.safetyNote')}:</b> {text(r.safety_note)}</p>}
         </div>
       );
+    case 'lp_counter_templates':
+      return (
+        <div className={`${line} space-y-1`}>
+          <p><b>{t('lp.counters.target')}:</b> {t(`lp.counters.kinds.${r.target_kind}`)} {String(r.target ?? '—')} {t(`lp.counters.units.${r.unit}`)} / {t(`lp.counters.periods.${r.period}`)}</p>
+          <p><b>{t('lp.tasks.why')}:</b> {text(r.why)}</p>
+          {text(r.safety_note) && <p className="text-danger"><b>{t('lp.tasks.safetyNote')}:</b> {text(r.safety_note)}</p>}
+        </div>
+      );
     case 'lp_milestones':
       return <p className={line}>{[lpDayLabel(r.typical_day, t), t(`lp.milestones.areas.${r.area}`), text(r.description)].filter(Boolean).join(' · ')}</p>;
     default:

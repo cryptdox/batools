@@ -28,6 +28,7 @@ export const LP_REVIEWED_TABLES = [
   { table: 'lp_task_templates', key: 'key' },
   { table: 'lp_milestones', key: 'key' },
   { table: 'lp_vaccine_schedules', key: 'key' },
+  { table: 'lp_counter_templates', key: 'key' },
 ] as const;
 
 export const LP_FEATURE_TABS = ['home', 'journey', 'learn', 'health', 'tasks', 'family'] as const;
