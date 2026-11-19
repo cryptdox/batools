@@ -4,7 +4,7 @@ import { Upload } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useLanguage } from '../../lib/LanguageContext';
 import { errorMessage, uploadFileName } from '../../lib/portfolio';
-import { IS_BUCKET, useIsLanguages, type IsI18n, type IsRow } from '../../lib/islamicStudio';
+import { useIsBucket, useIsLanguages, type IsI18n, type IsRow } from '../../lib/islamicStudio';
 import { Button } from '../ui/Button';
 import { pfInputClass } from '../portfolio/PfFieldInput';
 
@@ -109,18 +109,19 @@ const LangTag = ({ code }: { code: string }) => (
   </span>
 );
 
-/** Uploads into the islamic-studio bucket under `folder` and hands back the public URL. */
+/** Uploads into the editor's bucket (islamic-studio unless scoped) under `folder` and hands back the public URL. */
 const UploadButton = ({ accept, folder, onUploaded }: { accept: string; folder: string; onUploaded: (url: string) => void }) => {
   const { t } = useLanguage();
   const input = useRef<HTMLInputElement>(null);
+  const bucket = useIsBucket();
   const [busy, setBusy] = useState(false);
   const upload = async (file: File) => {
     setBusy(true);
     try {
       const path = `${folder}/${uploadFileName(file)}`;
-      const { error } = await supabase.storage.from(IS_BUCKET).upload(path, file, { contentType: file.type, upsert: false });
+      const { error } = await supabase.storage.from(bucket).upload(path, file, { contentType: file.type, upsert: false });
       if (error) throw error;
-      onUploaded(supabase.storage.from(IS_BUCKET).getPublicUrl(path).data.publicUrl);
+      onUploaded(supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl);
       toast.success(t('pf.upload.uploaded'));
     } catch (e) {
       console.error(e);

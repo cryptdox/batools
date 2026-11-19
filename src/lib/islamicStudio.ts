@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from './supabase';
 import { useAuth } from './AuthContext';
 import { useAccess } from './permissions';
@@ -40,10 +40,24 @@ export function loadIsLanguages(force = false): Promise<IsLanguage[]> {
   return languagesPromise;
 }
 
+/**
+ * Another app's menu (Life-Stage Parenting) reuses these editors inside an
+ * IsEditorScope: its own storage bucket, its own languages and the IAM page
+ * whose UPDATE makes someone a reviewer. Outside one, Islamic Studio's.
+ */
+export type IsEditorScope = { bucket: string; languages: IsLanguage[]; reviewResource: string };
+export const IsEditorScopeContext = createContext<IsEditorScope | null>(null);
+
 export function useIsLanguages(): IsLanguage[] {
+  const scope = useContext(IsEditorScopeContext);
   const [languages, setLanguages] = useState<IsLanguage[]>(FALLBACK_LANGUAGES);
-  useEffect(() => { void loadIsLanguages().then(setLanguages); }, []);
-  return languages;
+  useEffect(() => { if (!scope) void loadIsLanguages().then(setLanguages); }, [scope]);
+  return scope?.languages ?? languages;
+}
+
+/** Where uploads go. */
+export function useIsBucket(): string {
+  return useContext(IsEditorScopeContext)?.bucket ?? IS_BUCKET;
 }
 
 /** The value in `lang`, else English, else Bangla, else any. */
@@ -61,7 +75,8 @@ export type IsReviewStatus = 'draft' | 'in_review' | 'approved' | 'rejected';
 /** Who may approve religious content: UPDATE on the Review page in IAM. */
 export function useIsReviewer(): boolean {
   const { has } = useAccess();
-  return has('ISLAMIC_STUDIO_REVIEW', 'UPDATE') || has('ISLAMIC_STUDIO_REVIEW', 'UPDATE_ALL');
+  const resource = useContext(IsEditorScopeContext)?.reviewResource ?? 'ISLAMIC_STUDIO_REVIEW';
+  return has(resource, 'UPDATE') || has(resource, 'UPDATE_ALL');
 }
 
 export function useIsUserId(): string | null {

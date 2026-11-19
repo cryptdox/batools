@@ -11,6 +11,7 @@ import {
   ScrollText, Files,
   MoonStar, ToggleRight, Megaphone, Clock4, CalendarDays, HandHeart, BookOpenText, ShieldCheck, MessageSquareText,
   Trophy, Calculator, ListChecks, BarChart3,
+  Baby, Route, Syringe, Sprout, Trees,
   type LucideIcon,
 
 } from 'lucide-react';
@@ -142,6 +143,26 @@ const NAV_TREE: NavGroup[] = [
       { to: '/is/review', label: 'Content Review', icon: ShieldCheck },
       { to: '/is/feedback', label: 'App Feedback', icon: MessageSquareText },
       { to: '/is/scores', label: 'Device Scores', icon: BarChart3 },
+    ],
+  },
+  {
+    key: 'parenting',
+    label: 'Parenting',
+    icon: Baby,
+    children: [
+      { to: '/lp', label: 'Dashboard', icon: Gauge },
+      { to: '/lp/features', label: 'App Features', icon: ToggleRight },
+      { to: '/lp/settings', label: 'App Settings', icon: Settings },
+      { to: '/lp/announcements', label: 'Announcements', icon: Megaphone },
+      { to: '/lp/journey', label: 'Journey & Categories', icon: Route },
+      { to: '/lp/library', label: 'Library', icon: Library },
+      { to: '/lp/tasks', label: 'Tasks', icon: ListChecks },
+      { to: '/lp/milestones', label: 'Milestones', icon: Sprout },
+      { to: '/lp/vaccines', label: 'Vaccines', icon: Syringe },
+      { to: '/lp/family', label: 'Family Relations', icon: Users2 },
+      { to: '/lp/garden', label: 'Family Garden', icon: Trees },
+      { to: '/lp/review', label: 'Content Review', icon: ShieldCheck },
+      { to: '/lp/feedback', label: 'App Feedback', icon: MessageSquareText },
     ],
   },
   {

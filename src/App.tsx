@@ -76,6 +76,19 @@ import { IsBooks } from './pages/IslamicStudio/IsBooks';
 import { IsBlog } from './pages/IslamicStudio/IsBlog';
 import { IsTracker, IsZakat } from './pages/IslamicStudio/IsZakatTracker';
 import { IsScores } from './pages/IslamicStudio/IsScores';
+import { LpDashboard } from './pages/Parenting/LpDashboard';
+import { LpFeatures } from './pages/Parenting/LpFeatures';
+import { LpSettings } from './pages/Parenting/LpSettings';
+import { LpAnnouncements } from './pages/Parenting/LpAnnouncements';
+import { LpJourney } from './pages/Parenting/LpJourney';
+import { LpLibrary } from './pages/Parenting/LpLibrary';
+import { LpTasks } from './pages/Parenting/LpTasks';
+import { LpMilestones } from './pages/Parenting/LpMilestones';
+import { LpVaccines } from './pages/Parenting/LpVaccines';
+import { LpFamily } from './pages/Parenting/LpFamily';
+import { LpGarden } from './pages/Parenting/LpGarden';
+import { LpReview } from './pages/Parenting/LpReview';
+import { LpFeedback } from './pages/Parenting/LpFeedback';
 import { MusicPlayerProvider, usePlayer } from './lib/MusicPlayerContext';
 import { MpFloatingControls, MpMiniPlayer } from './components/music/MpControls';
 
@@ -254,6 +267,19 @@ function AuthGate() {
         <Route path="/is/zakat" element={<IsZakat />} />
         <Route path="/is/tracker" element={<IsTracker />} />
         <Route path="/is/scores" element={<IsScores />} />
+        <Route path="/lp" element={<LpDashboard />} />
+        <Route path="/lp/features" element={<LpFeatures />} />
+        <Route path="/lp/settings" element={<LpSettings />} />
+        <Route path="/lp/announcements" element={<LpAnnouncements />} />
+        <Route path="/lp/journey" element={<LpJourney />} />
+        <Route path="/lp/library" element={<LpLibrary />} />
+        <Route path="/lp/tasks" element={<LpTasks />} />
+        <Route path="/lp/milestones" element={<LpMilestones />} />
+        <Route path="/lp/vaccines" element={<LpVaccines />} />
+        <Route path="/lp/family" element={<LpFamily />} />
+        <Route path="/lp/garden" element={<LpGarden />} />
+        <Route path="/lp/review" element={<LpReview />} />
+        <Route path="/lp/feedback" element={<LpFeedback />} />
         {/* Renamed from Learning Cycle (/lc); keep old links working. */}
         {['', '/board', '/topics', '/explore', '/milestones'].map(sub => (
           <Route key={sub} path={`/lc${sub}`} element={<Navigate to={`/ac${sub}`} replace />} />

@@ -86,6 +86,19 @@ export const PAGE_RESOURCES: Record<string, string> = {
   '/is/zakat': 'ISLAMIC_STUDIO_ZAKAT',
   '/is/tracker': 'ISLAMIC_STUDIO_TRACKER',
   '/is/scores': 'ISLAMIC_STUDIO_SCORES',
+  '/lp': 'PARENTING_DASHBOARD',
+  '/lp/features': 'PARENTING_FEATURES',
+  '/lp/settings': 'PARENTING_SETTINGS',
+  '/lp/announcements': 'PARENTING_ANNOUNCEMENTS',
+  '/lp/journey': 'PARENTING_JOURNEY',
+  '/lp/library': 'PARENTING_LIBRARY',
+  '/lp/tasks': 'PARENTING_TASKS',
+  '/lp/milestones': 'PARENTING_MILESTONES',
+  '/lp/vaccines': 'PARENTING_VACCINES',
+  '/lp/family': 'PARENTING_FAMILY',
+  '/lp/garden': 'PARENTING_GARDEN',
+  '/lp/review': 'PARENTING_REVIEW',
+  '/lp/feedback': 'PARENTING_FEEDBACK',
 };
 
 /** Pages under a path (e.g. one album) use that path's resource. */
