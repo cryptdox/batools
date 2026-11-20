@@ -41,6 +41,9 @@ const en = {
   },
   dashboard: {
     pageTitle: 'Parenting',
+    signInOk: 'App sign-in is set up (the realm secret is in Vault).',
+    signInOff: 'App sign-in is not working',
+    signInOffText: 'Vault has no signing secret for the Life-Stage Parenting realm, so people who sign in in the app stay "on this device only". Run this in batools, then run the SQL block it prints in the Supabase SQL editor:',
     pageSubtitle: 'The Life-Stage Parenting app (web and Android) at a glance.',
     usage: 'Usage',
     users: 'App users',
@@ -334,6 +337,9 @@ const bn: typeof en = {
   },
   dashboard: {
     pageTitle: 'প্যারেন্টিং',
+    signInOk: 'অ্যাপের সাইন-ইন ঠিক আছে (রিয়েলমের সিক্রেট Vault-এ আছে)।',
+    signInOff: 'অ্যাপের সাইন-ইন কাজ করছে না',
+    signInOffText: 'Vault-এ লাইফ-স্টেজ প্যারেন্টিং রিয়েলমের সাইনিং সিক্রেট নেই, তাই অ্যাপে সাইন ইন করলেও সবাই "শুধু এই ডিভাইসে" থেকে যাচ্ছেন। batools-এ এটি চালান, তারপর যে SQL ব্লক দেখাবে তা Supabase SQL editor-এ চালান:',
     pageSubtitle: 'লাইফ-স্টেজ প্যারেন্টিং অ্যাপ (ওয়েব ও অ্যান্ড্রয়েড) এক নজরে।',
     usage: 'ব্যবহার',
     users: 'অ্যাপ ব্যবহারকারী',

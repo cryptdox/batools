@@ -211,6 +211,9 @@ async function setUpApp() {
   const pkg = await call(token, "GET", `/api/realm/${realmId}/package`).catch(() => null);
   const expires = pkg?.packageExpiresAt ?? pkg?.expiresAt ?? realm.packageExpiresAt;
 
+  // Without the real secret the SQL below would store a placeholder and every
+  // app sign-in would be ignored (lp_token_status() → bad_signature).
+  if (!settings.SECRET) die("IAM did not return the realm's SECRET setting — copy it from IAM → realm settings and run the Vault SQL by hand (see docs/DATABASE.md in life-stage-parenting).");
   console.log(`
 ── life-stage-parenting/.env
 VITE_IAM_API_BASE_URL=${IAM_URL}/api
@@ -218,9 +221,10 @@ VITE_IAM_CLIENT_ID=${LP_CLIENT_ID}
 VITE_IAM_CR_ACCESS_CODE=${client.crAccessCode}
 
 ── Supabase SQL editor (batools project) — stores the realm's signing secret for migration 090.
-   Paste it there only; don't save it in a file or commit it.
+   Paste it there only; don't save it in a file or commit it. Without it, app
+   sign-in does nothing: batools → Parenting shows a red "sign-in is not working".
 DO $$
-DECLARE s TEXT := ${sqlLiteral(settings.SECRET ?? "<SECRET not readable — copy it from IAM → realm settings>")}; r TEXT := ${sqlLiteral(realmId)};
+DECLARE s TEXT := ${sqlLiteral(settings.SECRET)}; r TEXT := ${sqlLiteral(realmId)};
 BEGIN
   IF EXISTS (SELECT 1 FROM vault.secrets WHERE name = 'lp_iam_jwt_secret') THEN
     PERFORM vault.update_secret(id, s) FROM vault.secrets WHERE name = 'lp_iam_jwt_secret';

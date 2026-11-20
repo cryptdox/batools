@@ -10,7 +10,8 @@ import { LP_REVIEWED_TABLES } from '../../lib/parenting';
 import { PfPageHeader } from '../Portfolio/PfPageHeader';
 
 type Usage = { users: number; accounts?: number; device_only?: number; active_users_7d: number; families: number; children: number; active_pregnancies: number; planning_families: number; tasks_done_7d: number };
-type Stats = { features: IsRow[]; toReview: number; newFeedback: number; settings: IsRow | null; usage: Usage | null };
+type SignIn = { secret: boolean; realm: boolean };
+type Stats = { features: IsRow[]; toReview: number; newFeedback: number; settings: IsRow | null; usage: Usage | null; signIn: SignIn | null };
 
 const head = (table: string) => supabase.from(table).select('*', { count: 'exact', head: true });
 
@@ -34,11 +35,12 @@ export const LpDashboard = () => {
 
   useEffect(() => {
     void (async () => {
-      const [features, settings, feedback, usage, ...review] = await Promise.all([
+      const [features, settings, feedback, usage, signIn, ...review] = await Promise.all([
         supabase.from('lp_features').select('key, name, status, phase, min_version_code').order('sort_order'),
         supabase.from('lp_app_settings').select('*').maybeSingle(),
         canOpen('/lp/feedback') ? head('lp_feedback').eq('status', 'new') : Promise.resolve({ count: 0 }),
         supabase.rpc('lp_admin_stats'),
+        supabase.rpc('lp_sign_in_setup'),
         ...LP_REVIEWED_TABLES.map(s => head(s.table).in('review_status', ['draft', 'in_review'])),
       ]);
       setStats({
@@ -46,6 +48,7 @@ export const LpDashboard = () => {
         settings: (settings.data ?? null) as IsRow | null,
         newFeedback: feedback.count ?? 0,
         usage: usage.error ? null : (usage.data as Usage),
+        signIn: signIn.error ? null : (signIn.data as SignIn),
         toReview: review.reduce((sum, r) => sum + (r.count ?? 0), 0),
       });
     })();
@@ -63,6 +66,16 @@ export const LpDashboard = () => {
         <div className="p-8 text-center text-gray-500">{t('pf.common.loading')}</div>
       ) : (
         <>
+          {/* App sign-in needs the realm's signing secret in Vault (migrations 095–096). */}
+          {stats.signIn && (stats.signIn.secret ? (
+            <p className="text-sm text-success">✓ {t('lp.dashboard.signInOk')}</p>
+          ) : (
+            <div className="rounded-xl border border-danger/30 bg-danger/10 p-4 text-sm text-gray-800 dark:text-gray-200 space-y-1">
+              <p className="font-semibold text-danger">{t('lp.dashboard.signInOff')}</p>
+              <p>{t('lp.dashboard.signInOffText')}</p>
+              <code className="block text-xs">node --env-file=.env scripts/iam-life-stage-parenting.mjs --only=app</code>
+            </div>
+          ))}
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Tile to="/lp/features" icon={ToggleRight} label={t('is.dashboard.activeFeatures')} value={`${active.length} / ${stats.features.length}`} />
             <Tile to="/lp/review" icon={ShieldCheck} label={t('is.dashboard.toReview')} value={stats.toReview} />
