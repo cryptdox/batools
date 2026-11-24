@@ -1,0 +1,569 @@
+{
+  "topic": "kalima",
+  "guides": [
+    {
+      "slug": "six-kalimas",
+      "title": {
+        "bn": "ছয় কালিমা",
+        "en": "The Six Kalimas"
+      },
+      "summary": {
+        "bn": "বাংলাদেশে প্রচলিতভাবে শেখানো ছয় কালিমা: আরবি, উচ্চারণ ও অর্থ, এবং প্রতিটির উৎস সম্পর্কে সংক্ষিপ্ত তথ্য।",
+        "en": "The six kalimas as commonly taught in Bangladesh: Arabic, pronunciation and meaning, with a note on each one's source."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "‘ছয় কালিমা’ নামে এই তালিকা উপমহাদেশে শিশুদের ঈমানের মৌলিক কথা শেখানোর একটি প্রচলিত পদ্ধতি; কুরআন বা হাদিসে এই ছয়টিকে একসাথে ‘ছয় কালিমা’ বলা হয়নি। প্রথম দুটির শব্দ কুরআন-হাদিসে সরাসরি আছে; বাকিগুলোর কিছু অংশ হাদিস বা কুরআন থেকে নেওয়া, আর কিছু অংশ শিক্ষার উদ্দেশ্যে সাজানো, যার অর্থ ইসলামি আকিদার সাথে সামঞ্জস্যপূর্ণ। অঞ্চলভেদে ক্রম ও শব্দেও ভিন্নতা আছে (যেমন পাকিস্তান-ভারতে ‘তামজীদ’ হিসেবে ‘সুবহানাল্লাহি ওয়াল হামদু লিল্লাহ...’ পড়ানো হয়)।",
+            "en": "The 'six kalimas' list is a teaching tradition in the subcontinent for teaching children the basics of faith; the Quran and hadith do not group these six together. The first two are found directly in the Quran and hadith; the others combine phrases from the Quran or hadith with wording arranged for teaching, whose meanings agree with Islamic belief. The order and wording vary by region (e.g. in Pakistan and India 'Tamjid' is 'Subhanallahi wal-hamdu lillah...')."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "১. কালিমা তাইয়্যেবা",
+            "en": "1. Kalima Tayyibah (the pure word)"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "কালিমা তাইয়্যেবা",
+            "en": "Kalima Tayyibah"
+          },
+          "ar": "لَا إِلٰهَ إِلَّا اللّٰهُ مُحَمَّدٌ رَسُولُ اللّٰهِ",
+          "pron": {
+            "bn": "লা ইলাহা ইল্লাল্লাহু মুহাম্মাদুর রাসূলুল্লাহ।",
+            "en": "La ilaha illallahu Muhammadur Rasulullah."
+          },
+          "meaning": {
+            "bn": "আল্লাহ ছাড়া কোনো ইলাহ (সত্য উপাস্য) নেই, মুহাম্মাদ (সা.) আল্লাহর রাসুল।",
+            "en": "There is no god (worthy of worship) but Allah; Muhammad is the Messenger of Allah."
+          },
+          "ref": {
+            "bn": "দুই অংশ কুরআনে: সূরা মুহাম্মাদ ৪৭:১৯ ও সূরা ফাতহ ৪৮:২৯",
+            "en": "Both parts in the Quran: Muhammad 47:19 and Al-Fath 48:29"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "২. কালিমা শাহাদাত",
+            "en": "2. Kalima Shahadah (testimony)"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "কালিমা শাহাদাত",
+            "en": "Kalima Shahadah"
+          },
+          "ar": "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+          "pron": {
+            "bn": "আশহাদু আল লা ইলাহা ইল্লাল্লাহু ওয়াহদাহূ লা শারীকা লাহূ, ওয়া আশহাদু আন্না মুহাম্মাদান আবদুহূ ওয়া রাসূলুহ।",
+            "en": "Ashhadu al la ilaha illallahu wahdahu la sharika lah, wa ashhadu anna Muhammadan 'abduhu wa rasuluh."
+          },
+          "meaning": {
+            "bn": "আমি সাক্ষ্য দিচ্ছি যে আল্লাহ ছাড়া কোনো ইলাহ নেই, তিনি এক, তাঁর কোনো শরিক নেই; এবং আমি সাক্ষ্য দিচ্ছি যে মুহাম্মাদ (সা.) তাঁর বান্দা ও রাসুল।",
+            "en": "I bear witness that there is no god but Allah, alone, without partner, and I bear witness that Muhammad is His servant and Messenger."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ২৩৪ (ওযুর পর এই শাহাদাত পড়ার ফজিলত)",
+            "en": "Sahih Muslim 234 (virtue of saying it after wudu)"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "৩. কালিমা তাওহীদ",
+            "en": "3. Kalima Tawhid (oneness)"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "কালিমা তাওহীদ (বাংলাদেশে প্রচলিত পাঠ)",
+            "en": "Kalima Tawhid (as taught in Bangladesh)"
+          },
+          "ar": "لَا إِلٰهَ إِلَّا أَنْتَ وَاحِدًا لَا ثَانِيَ لَكَ، مُحَمَّدٌ رَسُولُ اللّٰهِ إِمَامُ الْمُتَّقِينَ رَسُولُ رَبِّ الْعَالَمِينَ",
+          "pron": {
+            "bn": "লা ইলাহা ইল্লা আনতা ওয়াহিদাল লা সানিয়া লাকা, মুহাম্মাদুর রাসূলুল্লাহি ইমামুল মুত্তাকীনা রাসূলু রাব্বিল আলামীন।",
+            "en": "La ilaha illa anta wahidan la thaniya lak, Muhammadur Rasulullahi imamul-muttaqina rasulu Rabbil-'alamin."
+          },
+          "meaning": {
+            "bn": "(হে আল্লাহ,) তুমি ছাড়া কোনো ইলাহ নেই, তুমি এক, তোমার কোনো দ্বিতীয় নেই। মুহাম্মাদ (সা.) আল্লাহর রাসুল, মুত্তাকিদের ইমাম, জগতসমূহের রবের রাসুল।",
+            "en": "There is no god but You, One, with no second to You. Muhammad is the Messenger of Allah, leader of the God-fearing, messenger of the Lord of the worlds."
+          },
+          "ref": {
+            "bn": "শিক্ষার উদ্দেশ্যে সাজানো পাঠ; হুবহু এই শব্দে কোনো হাদিস জানা নেই",
+            "en": "A teaching text; no hadith with this exact wording is known"
+          },
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "৪. কালিমা তামজীদ",
+            "en": "4. Kalima Tamjid (glorification)"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "কালিমা তামজীদ (বাংলাদেশে প্রচলিত পাঠ)",
+            "en": "Kalima Tamjid (as taught in Bangladesh)"
+          },
+          "ar": "لَا إِلٰهَ إِلَّا أَنْتَ نُورًا يَهْدِي اللّٰهُ لِنُورِهِ مَنْ يَشَاءُ، مُحَمَّدٌ رَسُولُ اللّٰهِ إِمَامُ الْمُرْسَلِينَ خَاتَمُ النَّبِيِّينَ",
+          "pron": {
+            "bn": "লা ইলাহা ইল্লা আনতা নূরাই ইয়াহদিয়াল্লাহু লিনূরিহী মাই ইয়াশাউ, মুহাম্মাদুর রাসূলুল্লাহি ইমামুল মুরসালীনা খাতামুন নাবিয়্যীন।",
+            "en": "La ilaha illa anta nuran yahdillahu linurihi man yasha', Muhammadur Rasulullahi imamul-mursalina khatamun-nabiyyin."
+          },
+          "meaning": {
+            "bn": "(হে আল্লাহ,) তুমি ছাড়া কোনো ইলাহ নেই, তুমি নূর (আলো); আল্লাহ যাকে চান তাঁর নূরের দিকে পথ দেখান। মুহাম্মাদ (সা.) আল্লাহর রাসুল, রাসুলদের ইমাম, সর্বশেষ নবী।",
+            "en": "There is no god but You, the Light; Allah guides to His light whom He wills. Muhammad is the Messenger of Allah, leader of the messengers, the last of the prophets."
+          },
+          "ref": {
+            "bn": "শিক্ষার উদ্দেশ্যে সাজানো পাঠ; ‘ইয়াহদিল্লাহু লিনূরিহী মাই ইয়াশা’ অংশ সূরা নূর ২৪:৩৫ থেকে, ‘খাতামুন নাবিয়্যীন’ সূরা আহযাব ৩৩:৪০ থেকে",
+            "en": "A teaching text; 'Allah guides to His light whom He wills' is from An-Nur 24:35 and 'last of the prophets' from Al-Ahzab 33:40"
+          },
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "৫. কালিমা রদ্দে কুফর",
+            "en": "5. Kalima Radd al-Kufr (rejecting disbelief)"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "কালিমা রদ্দে কুফর",
+            "en": "Kalima Radd al-Kufr"
+          },
+          "ar": "اللّٰهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ أَنْ أُشْرِكَ بِكَ شَيْئًا وَأَنَا أَعْلَمُ بِهِ، وَأَسْتَغْفِرُكَ لِمَا لَا أَعْلَمُ بِهِ، تُبْتُ عَنْهُ، وَتَبَرَّأْتُ مِنَ الْكُفْرِ وَالشِّرْكِ وَالْمَعَاصِي كُلِّهَا، وَأَسْلَمْتُ وَآمَنْتُ، وَأَقُولُ: لَا إِلٰهَ إِلَّا اللّٰهُ مُحَمَّدٌ رَسُولُ اللّٰهِ",
+          "pron": {
+            "bn": "আল্লাহুম্মা ইন্নী আঊযুবিকা মিন আন উশরিকা বিকা শাইআও ওয়া আনা আ'লামু বিহী, ওয়া আসতাগফিরুকা লিমা লা আ'লামু বিহী, তুবতু আনহু, ওয়া তাবাররা'তু মিনাল কুফরি ওয়াশ শিরকি ওয়াল মাআসী কুল্লিহা, ওয়া আসলামতু ওয়া আমানতু, ওয়া আকূলু লা ইলাহা ইল্লাল্লাহু মুহাম্মাদুর রাসূলুল্লাহ।",
+            "en": "Allahumma inni a'udhu bika min an ushrika bika shay'an wa ana a'lamu bih, wa astaghfiruka lima la a'lamu bih, tubtu 'anhu, wa tabarra'tu minal-kufri wash-shirki wal-ma'asi kulliha, wa aslamtu wa amantu, wa aqulu la ilaha illallahu Muhammadur Rasulullah."
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ, জেনে-বুঝে তোমার সাথে কিছু শরিক করা থেকে আমি তোমার আশ্রয় চাই, আর না জেনে যা করে ফেলি তার জন্য তোমার কাছে ক্ষমা চাই; আমি তা থেকে তওবা করলাম। আমি কুফর, শিরক ও সকল গুনাহ থেকে সম্পর্কমুক্ত হলাম। আমি ইসলাম গ্রহণ করলাম ও ঈমান আনলাম, এবং বলছি: আল্লাহ ছাড়া কোনো ইলাহ নেই, মুহাম্মাদ (সা.) আল্লাহর রাসুল।",
+            "en": "O Allah, I seek refuge in You from knowingly associating anything with You, and I seek Your forgiveness for what I do unknowingly; I repent from it. I disown disbelief, shirk and all sins. I submit and I believe, and I say: there is no god but Allah, Muhammad is the Messenger of Allah."
+          },
+          "ref": {
+            "bn": "প্রথম অংশের কাছাকাছি দোয়া (শিরক থেকে আশ্রয়) ইমাম বুখারির আল-আদাবুল মুফরাদে বর্ণিত; বাকি অংশ শিক্ষার উদ্দেশ্যে সাজানো",
+            "en": "A du'a close to the first part (refuge from shirk) is in al-Bukhari's al-Adab al-Mufrad; the rest is arranged for teaching"
+          },
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "৬. কালিমা ইস্তেগফার",
+            "en": "6. Kalima Istighfar (seeking forgiveness)"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "কালিমা ইস্তেগফার",
+            "en": "Kalima Istighfar"
+          },
+          "ar": "أَسْتَغْفِرُ اللّٰهَ رَبِّي مِنْ كُلِّ ذَنْبٍ أَذْنَبْتُهُ عَمْدًا أَوْ خَطَأً، سِرًّا أَوْ عَلَانِيَةً، وَأَتُوبُ إِلَيْهِ مِنَ الذَّنْبِ الَّذِي أَعْلَمُ، وَمِنَ الذَّنْبِ الَّذِي لَا أَعْلَمُ، إِنَّكَ أَنْتَ عَلَّامُ الْغُيُوبِ، وَسَتَّارُ الْعُيُوبِ، وَغَفَّارُ الذُّنُوبِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللّٰهِ الْعَلِيِّ الْعَظِيمِ",
+          "pron": {
+            "bn": "আসতাগফিরুল্লাহা রাব্বী মিন কুল্লি যামবিন আযনাবতুহূ আমদান আও খাতাআন, সিররান আও আলানিয়াতান, ওয়া আতূবু ইলাইহি মিনায যামবিল্লাযী আ'লামু, ওয়া মিনায যামবিল্লাযী লা আ'লামু, ইন্নাকা আনতা আল্লামুল গুয়ূবি, ওয়া সাত্তারুল উয়ূবি, ওয়া গাফফারুয যুনূবি, ওয়া লা হাওলা ওয়া লা কুওয়াতা ইল্লা বিল্লাহিল আলিয়্যিল আযীম।",
+            "en": "Astaghfirullaha Rabbi min kulli dhanbin adhnabtuhu 'amdan aw khata'an, sirran aw 'alaniyah, wa atubu ilayhi minadh-dhanbil-ladhi a'lamu, wa minadh-dhanbil-ladhi la a'lamu, innaka anta 'allamul-ghuyubi, wa sattarul-'uyubi, wa ghaffarudh-dhunubi, wa la hawla wa la quwwata illa billahil-'aliyyil-'azim."
+          },
+          "meaning": {
+            "bn": "আমি আমার রব আল্লাহর কাছে ক্ষমা চাই সেই সব গুনাহের জন্য, যা আমি ইচ্ছায় বা ভুলে, গোপনে বা প্রকাশ্যে করেছি; আর তাঁর কাছে তওবা করি সেই গুনাহ থেকে যা আমি জানি এবং যা আমি জানি না। নিশ্চয়ই তুমি অদৃশ্য বিষয়ে সর্বজ্ঞ, দোষ গোপনকারী ও গুনাহ ক্ষমাকারী। মহান ও সুউচ্চ আল্লাহর সাহায্য ছাড়া গুনাহ থেকে বাঁচার ও নেক কাজ করার কোনো শক্তি নেই।",
+            "en": "I seek forgiveness from Allah, my Lord, for every sin I committed, deliberately or by mistake, secretly or openly, and I turn to Him in repentance from the sin I know and the sin I do not know. You are the Knower of the unseen, the Concealer of faults, the Forgiver of sins. There is no power or strength except with Allah, the Most High, the Most Great."
+          },
+          "ref": {
+            "bn": "শিক্ষার উদ্দেশ্যে সাজানো পাঠ; ‘লা হাওলা ওয়া লা কুওয়াতা ইল্লা বিল্লাহ’ সহিহ হাদিসে প্রমাণিত",
+            "en": "A teaching text; 'la hawla wa la quwwata illa billah' is established in sahih hadith"
+          },
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "ইস্তিগফারের জন্য সহিহ হাদিসে সবচেয়ে শ্রেষ্ঠ দোয়া হলো ‘সাইয়্যিদুল ইস্তিগফার’ (সহিহ বুখারি ৬৩০৬)। কালিমাগুলো মুখস্থ করার পাশাপাশি অর্থ বোঝা এবং জীবনে তাওহীদ মেনে চলাই আসল উদ্দেশ্য।",
+            "en": "The best istighfar in sahih hadith is 'Sayyid al-Istighfar' (Sahih al-Bukhari 6306). Beyond memorising, the real aim is to understand the meaning and live by tawhid."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "iman-mujmal-mufassal",
+      "title": {
+        "bn": "ঈমানে মুজমাল ও ঈমানে মুফাসসাল",
+        "en": "Iman Mujmal and Iman Mufassal"
+      },
+      "summary": {
+        "bn": "ঈমানের সংক্ষিপ্ত (মুজমাল) ও বিস্তারিত (মুফাসসাল) ঘোষণা: আরবি, উচ্চারণ, অর্থ ও কুরআন-হাদিসে এর ভিত্তি।",
+        "en": "The brief (mujmal) and detailed (mufassal) declarations of faith: Arabic, pronunciation, meaning and their basis in the Quran and hadith."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "ঈমানে মুজমাল ও ঈমানে মুফাসসাল ঈমানের মূল বিষয়গুলো সংক্ষেপে মনে রাখার জন্য সাজানো দুটি ঘোষণা। হুবহু এই শব্দে কোনো হাদিস নেই, তবে এর প্রতিটি বিষয় কুরআন ও হাদিসে জিবরিলে (সহিহ মুসলিম ৮) প্রমাণিত।",
+            "en": "Iman mujmal and iman mufassal are two declarations arranged to help remember the essentials of faith. No hadith has this exact wording, but every item is established in the Quran and the Hadith of Jibril (Sahih Muslim 8)."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ঈমানে মুজমাল (সংক্ষিপ্ত ঈমান)",
+            "en": "Iman Mujmal (faith in brief)"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "ঈমানে মুজমাল",
+            "en": "Iman Mujmal"
+          },
+          "ar": "آمَنْتُ بِاللّٰهِ كَمَا هُوَ بِأَسْمَائِهِ وَصِفَاتِهِ، وَقَبِلْتُ جَمِيعَ أَحْكَامِهِ وَأَرْكَانِهِ",
+          "pron": {
+            "bn": "আমানতু বিল্লাহি কামা হুয়া বিআসমায়িহী ওয়া সিফাতিহী, ওয়া কাবিলতু জামীআ আহকামিহী ওয়া আরকানিহ।",
+            "en": "Amantu billahi kama huwa bi-asma'ihi wa sifatihi, wa qabiltu jami'a ahkamihi wa arkanih."
+          },
+          "meaning": {
+            "bn": "আমি আল্লাহর প্রতি ঈমান আনলাম, তিনি যেমন আছেন তাঁর সব নাম ও গুণাবলিসহ; এবং আমি তাঁর সকল বিধান ও রুকন (মৌলিক বিষয়) মেনে নিলাম।",
+            "en": "I believe in Allah as He is, with His names and attributes, and I accept all His commands and pillars."
+          },
+          "ref": {
+            "bn": "শিক্ষার উদ্দেশ্যে সাজানো ঘোষণা",
+            "en": "A declaration arranged for teaching"
+          },
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ঈমানে মুফাসসাল (বিস্তারিত ঈমান)",
+            "en": "Iman Mufassal (faith in detail)"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "ঈমানে মুফাসসাল",
+            "en": "Iman Mufassal"
+          },
+          "ar": "آمَنْتُ بِاللّٰهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ وَالْيَوْمِ الْآخِرِ وَالْقَدْرِ خَيْرِهِ وَشَرِّهِ مِنَ اللّٰهِ تَعَالَىٰ وَالْبَعْثِ بَعْدَ الْمَوْتِ",
+          "pron": {
+            "bn": "আমানতু বিল্লাহি ওয়া মালাইকাতিহী ওয়া কুতুবিহী ওয়া রুসুলিহী ওয়াল ইয়াওমিল আখিরি ওয়াল কাদরি খাইরিহী ওয়া শাররিহী মিনাল্লাহি তাআলা ওয়াল বা'সি বা'দাল মাওত।",
+            "en": "Amantu billahi wa mala'ikatihi wa kutubihi wa rusulihi wal-yawmil-akhiri wal-qadri khayrihi wa sharrihi minallahi ta'ala wal-ba'thi ba'dal-mawt."
+          },
+          "meaning": {
+            "bn": "আমি ঈমান আনলাম আল্লাহর প্রতি, তাঁর ফেরেশতাদের প্রতি, তাঁর কিতাবসমূহের প্রতি, তাঁর রাসুলদের প্রতি, আখেরাতের দিনের প্রতি, তাকদিরের প্রতি যে ভালো-মন্দ সবই আল্লাহর পক্ষ থেকে, এবং মৃত্যুর পর পুনরুত্থানের প্রতি।",
+            "en": "I believe in Allah, His angels, His books, His messengers, the Last Day, the decree, its good and its bad being from Allah the Exalted, and resurrection after death."
+          },
+          "ref": {
+            "bn": "মূল বিষয়গুলো: সূরা বাকারা ২:২৮৫; সূরা নিসা ৪:১৩৬; সহিহ মুসলিম ৮ (হাদিসে জিবরিল)",
+            "en": "Its contents: Al-Baqarah 2:285; An-Nisa 4:136; Sahih Muslim 8 (Hadith of Jibril)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "ঈমানে মুফাসসালে সাতটি বিষয় বলা হয়। হাদিসে জিবরিলে ছয়টি বিষয় এসেছে; ‘মৃত্যুর পর পুনরুত্থান’ মূলত আখেরাতের প্রতি ঈমানেরই অংশ, স্পষ্ট করার জন্য আলাদা বলা হয়েছে।",
+            "en": "Iman mufassal names seven items. The Hadith of Jibril names six; 'resurrection after death' is part of belief in the Last Day, stated separately for emphasis."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "কুরআনের ঘোষণা",
+            "en": "The Quranic declaration"
+          },
+          "ar": "آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِنْ رُسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ",
+          "pron": {
+            "bn": "আমানার রাসূলু বিমা উনযিলা ইলাইহি মির রাব্বিহী ওয়াল মু'মিনূন, কুল্লুন আমানা বিল্লাহি ওয়া মালাইকাতিহী ওয়া কুতুবিহী ওয়া রুসুলিহ, লা নুফাররিকু বাইনা আহাদিম মির রুসুলিহ, ওয়া কালূ সামি'না ওয়া আতা'না, গুফরানাকা রাব্বানা ওয়া ইলাইকাল মাসীর।",
+            "en": "Amanar-rasulu bima unzila ilayhi mir-Rabbihi wal-mu'minun, kullun amana billahi wa mala'ikatihi wa kutubihi wa rusulih, la nufarriqu bayna ahadim mir-rusulih, wa qalu sami'na wa ata'na, ghufranaka Rabbana wa ilaykal-masir."
+          },
+          "meaning": {
+            "bn": "রাসুল ঈমান এনেছেন তাঁর রবের পক্ষ থেকে তাঁর প্রতি যা নাজিল হয়েছে তার প্রতি, এবং মুমিনরাও। সবাই ঈমান এনেছে আল্লাহ, তাঁর ফেরেশতা, তাঁর কিতাব ও তাঁর রাসুলদের প্রতি। (তারা বলে,) আমরা তাঁর রাসুলদের কারও মধ্যে পার্থক্য করি না। আর তারা বলে, আমরা শুনলাম ও মানলাম; হে আমাদের রব, আমরা তোমার ক্ষমা চাই, আর তোমার দিকেই প্রত্যাবর্তন।",
+            "en": "The Messenger believes in what was sent down to him from his Lord, and so do the believers. Each believes in Allah, His angels, His books and His messengers: 'We make no distinction between any of His messengers.' And they say: 'We hear and obey. Your forgiveness, our Lord; to You is the return.'"
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:২৮৫",
+            "en": "Al-Baqarah 2:285"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "six-articles-of-faith",
+      "title": {
+        "bn": "ঈমানের ছয়টি রুকন",
+        "en": "The Six Articles of Faith"
+      },
+      "summary": {
+        "bn": "হাদিসে জিবরিলের আলোকে ঈমানের ছয়টি মূল বিষয় সহজভাবে, কুরআন-হাদিসের রেফারেন্সসহ।",
+        "en": "The six articles of faith from the Hadith of Jibril, explained simply with Quran and hadith references."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "একদিন সাদা পোশাক ও কালো চুলের এক ব্যক্তি নবীজি (সা.)-এর কাছে এসে ইসলাম, ঈমান, ইহসান ও কিয়ামত সম্পর্কে প্রশ্ন করেন। পরে নবীজি (সা.) জানান, তিনি ছিলেন জিবরিল (আ.), মানুষকে দ্বীন শেখাতে এসেছিলেন। এই হাদিসকে ‘হাদিসে জিবরিল’ বলা হয়।",
+            "en": "One day a man in white clothes with black hair came to the Prophet and asked about Islam, iman, ihsan and the Hour. The Prophet later said it was Jibril, who came to teach people their religion. This is the 'Hadith of Jibril'."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "ঈমানের সংজ্ঞা (হাদিসে জিবরিল)",
+            "en": "Definition of iman (Hadith of Jibril)"
+          },
+          "ar": "أَنْ تُؤْمِنَ بِاللّٰهِ، وَمَلَائِكَتِهِ، وَكُتُبِهِ، وَرُسُلِهِ، وَالْيَوْمِ الْآخِرِ، وَتُؤْمِنَ بِالْقَدَرِ خَيْرِهِ وَشَرِّهِ",
+          "pron": {
+            "bn": "আন তু'মিনা বিল্লাহি, ওয়া মালাইকাতিহী, ওয়া কুতুবিহী, ওয়া রুসুলিহী, ওয়াল ইয়াওমিল আখিরি, ওয়া তু'মিনা বিলকাদারি খাইরিহী ওয়া শাররিহ।",
+            "en": "An tu'mina billahi, wa mala'ikatihi, wa kutubihi, wa rusulihi, wal-yawmil-akhiri, wa tu'mina bil-qadari khayrihi wa sharrih."
+          },
+          "meaning": {
+            "bn": "(ঈমান হলো) তুমি ঈমান আনবে আল্লাহর প্রতি, তাঁর ফেরেশতাদের প্রতি, তাঁর কিতাবসমূহের প্রতি, তাঁর রাসুলদের প্রতি, আখেরাতের দিনের প্রতি, এবং ঈমান আনবে তাকদিরের ভালো-মন্দের প্রতি।",
+            "en": "(Iman is) that you believe in Allah, His angels, His books, His messengers and the Last Day, and that you believe in the decree, its good and its bad."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ৮; সহিহ বুখারি ৫০",
+            "en": "Sahih Muslim 8; Sahih al-Bukhari 50"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "আল্লাহর প্রতি ঈমান",
+            "en": "Belief in Allah"
+          },
+          "text": {
+            "bn": "আল্লাহ এক, তাঁর কোনো শরিক নেই; তিনিই সৃষ্টিকর্তা, প্রতিপালক ও একমাত্র উপাস্য। তাঁর সুন্দর নাম ও গুণাবলি আছে, কোনো কিছুই তাঁর মতো নয়। ইবাদত কেবল তাঁরই জন্য। (সূরা ইখলাস ১১২:১–৪; সূরা শূরা ৪২:১১)",
+            "en": "Allah is One, without partner; He alone creates, sustains and deserves worship. He has beautiful names and attributes, and nothing is like Him. Worship is for Him alone. (Al-Ikhlas 112:1–4; Ash-Shura 42:11)"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "ফেরেশতাদের প্রতি ঈমান",
+            "en": "Belief in the angels"
+          },
+          "text": {
+            "bn": "ফেরেশতারা নূরের তৈরি আল্লাহর সম্মানিত সৃষ্টি; তারা আল্লাহর অবাধ্য হয় না, যা আদেশ করা হয় তা-ই করে (সূরা তাহরিম ৬৬:৬)। যেমন জিবরিল (আ.) ওহি নিয়ে আসেন (সূরা বাকারা ২:৯৭), আর দুই ফেরেশতা আমাদের কথা ও কাজ লিখে রাখেন (সূরা কাফ ৫০:১৭–১৮)।",
+            "en": "Angels are honoured creations of Allah; they never disobey Him and do as they are commanded (At-Tahrim 66:6). Jibril brings revelation (Al-Baqarah 2:97), and two angels record our words and deeds (Qaf 50:17–18)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "কিতাবসমূহের প্রতি ঈমান",
+            "en": "Belief in the books"
+          },
+          "text": {
+            "bn": "আল্লাহ নবীদের ওপর কিতাব নাজিল করেছেন: মুসা (আ.)-এর ওপর তাওরাত, দাউদ (আ.)-এর ওপর যাবুর (সূরা নিসা ৪:১৬৩), ঈসা (আ.)-এর ওপর ইনজিল (সূরা মায়িদা ৫:৪৬), আর মুহাম্মাদ (সা.)-এর ওপর কুরআন। ইবরাহিম ও মুসা (আ.)-কে সহিফাও দেওয়া হয়েছিল (সূরা আ'লা ৮৭:১৮–১৯)। কুরআন সর্বশেষ কিতাব, আল্লাহ নিজেই এর হেফাজতকারী (সূরা হিজর ১৫:৯)।",
+            "en": "Allah revealed books to prophets: the Torah to Musa, the Zabur to Dawud (An-Nisa 4:163), the Injil to 'Isa (Al-Ma'idah 5:46), and the Quran to Muhammad. Ibrahim and Musa were also given scriptures (Al-A'la 87:18–19). The Quran is the final book, preserved by Allah (Al-Hijr 15:9)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "রাসুলদের প্রতি ঈমান",
+            "en": "Belief in the messengers"
+          },
+          "text": {
+            "bn": "আল্লাহ প্রত্যেক জাতির কাছে রাসুল পাঠিয়েছেন, যারা এক আল্লাহর ইবাদতের দিকে ডেকেছেন (সূরা নাহল ১৬:৩৬)। কারও কথা আমাদের জানানো হয়েছে, কারও কথা জানানো হয়নি (সূরা নিসা ৪:১৬৪)। আমরা সবার প্রতি ঈমান রাখি, কারও মধ্যে পার্থক্য করি না (সূরা বাকারা ২:২৮৫)। মুহাম্মাদ (সা.) সর্বশেষ নবী, তাঁর পরে আর কোনো নবী নেই (সূরা আহযাব ৩৩:৪০)।",
+            "en": "Allah sent a messenger to every nation calling to worship Him alone (An-Nahl 16:36). Some are told to us, some not (An-Nisa 4:164). We believe in all of them without distinction (Al-Baqarah 2:285). Muhammad is the last prophet; there is none after him (Al-Ahzab 33:40)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "আখেরাতের প্রতি ঈমান",
+            "en": "Belief in the Last Day"
+          },
+          "text": {
+            "bn": "মৃত্যুর পর কবরের জীবন, কিয়ামত, পুনরুত্থান, হিসাব, মিজান (পাল্লা), জান্নাত ও জাহান্নাম সত্য। প্রত্যেকে তার অণু পরিমাণ ভালো ও মন্দ কাজও দেখতে পাবে (সূরা যিলযাল ৯৯:৭–৮)। প্রত্যেক প্রাণ মৃত্যুর স্বাদ গ্রহণ করবে, আর কিয়ামতের দিন পূর্ণ প্রতিদান দেওয়া হবে (সূরা আলে ইমরান ৩:১৮৫)।",
+            "en": "Life in the grave, the Hour, resurrection, reckoning, the scale, Paradise and Hell are true. Everyone will see even an atom's weight of good or evil (Az-Zalzalah 99:7–8). Every soul will taste death and be paid in full on the Day of Resurrection (Al 'Imran 3:185)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তাকদিরের প্রতি ঈমান",
+            "en": "Belief in the decree (qadr)"
+          },
+          "text": {
+            "bn": "যা কিছু ঘটে, সবই আল্লাহর জ্ঞান, লিখন, ইচ্ছা ও সৃষ্টির অধীন: ‘আমি সবকিছু সৃষ্টি করেছি নির্ধারিত পরিমাপে’ (সূরা কামার ৫৪:৪৯)। আসমান-জমিন সৃষ্টির পঞ্চাশ হাজার বছর আগে আল্লাহ সৃষ্টির তাকদির লিখে রেখেছেন (সহিহ মুসলিম ২৬৫৩)। তাকদিরে বিশ্বাস চেষ্টা ছেড়ে দেওয়া নয়; মানুষ নিজের পছন্দে কাজ করে এবং সে অনুযায়ী প্রতিদান পায় (সূরা লাইল ৯২:৫–১০)।",
+            "en": "Everything happens within Allah's knowledge, writing, will and creation: 'We created everything according to a measure' (Al-Qamar 54:49). Allah wrote the decrees fifty thousand years before creating the heavens and earth (Sahih Muslim 2653). Belief in qadr does not mean giving up effort; people act by choice and are rewarded accordingly (Al-Layl 92:5–10)."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "ছয়টি রুকন একসাথে কুরআনে: সূরা বাকারা ২:১৭৭, ২:২৮৫; সূরা নিসা ৪:১৩৬; তাকদির: সূরা কামার ৫৪:৪৯",
+            "en": "The articles together in the Quran: Al-Baqarah 2:177, 2:285; An-Nisa 4:136; decree: Al-Qamar 54:49"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "five-pillars-of-islam",
+      "title": {
+        "bn": "ইসলামের পাঁচটি স্তম্ভ",
+        "en": "The Five Pillars of Islam"
+      },
+      "summary": {
+        "bn": "যে পাঁচটি ভিত্তির ওপর ইসলাম দাঁড়িয়ে আছে: শাহাদাত, নামাজ, যাকাত, রোজা ও হজ; সাথে ইসলাম, ঈমান ও ইহসানের সম্পর্ক।",
+        "en": "The five foundations of Islam: shahadah, prayer, zakat, fasting and Hajj, and how Islam, iman and ihsan relate."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "ইসলামের পাঁচ ভিত্তি",
+            "en": "The five foundations"
+          },
+          "ar": "بُنِيَ الْإِسْلَامُ عَلَىٰ خَمْسٍ: شَهَادَةِ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللّٰهِ، وَإِقَامِ الصَّلَاةِ، وَإِيتَاءِ الزَّكَاةِ، وَالْحَجِّ، وَصَوْمِ رَمَضَانَ",
+          "pron": {
+            "bn": "বুনিয়াল ইসলামু আলা খামস: শাহাদাতি আল লা ইলাহা ইল্লাল্লাহু ওয়া আন্না মুহাম্মাদার রাসূলুল্লাহ, ওয়া ইকামিস সালাহ, ওয়া ঈতায়িয যাকাহ, ওয়াল হাজ্জ, ওয়া সাওমি রামাদান।",
+            "en": "Buniyal-Islamu 'ala khams: shahadati al la ilaha illallahu wa anna Muhammadar Rasulullah, wa iqamis-salah, wa ita'iz-zakah, wal-hajj, wa sawmi Ramadan."
+          },
+          "meaning": {
+            "bn": "ইসলাম পাঁচটি ভিত্তির ওপর প্রতিষ্ঠিত: এই সাক্ষ্য দেওয়া যে আল্লাহ ছাড়া কোনো ইলাহ নেই এবং মুহাম্মাদ (সা.) আল্লাহর রাসুল; নামাজ কায়েম করা; যাকাত দেওয়া; হজ করা; এবং রমজানের রোজা রাখা।",
+            "en": "Islam is built on five: testifying that there is no god but Allah and that Muhammad is the Messenger of Allah, establishing prayer, giving zakat, Hajj, and fasting Ramadan."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি ৮; সহিহ মুসলিম ১৬",
+            "en": "Sahih al-Bukhari 8; Sahih Muslim 16"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "শাহাদাত (কালিমার সাক্ষ্য)",
+            "en": "Shahadah (testimony of faith)"
+          },
+          "text": {
+            "bn": "অন্তরে বিশ্বাস করে মুখে সাক্ষ্য দেওয়া যে আল্লাহ ছাড়া কোনো সত্য ইলাহ নেই এবং মুহাম্মাদ (সা.) আল্লাহর রাসুল; আর সেই অনুযায়ী জীবন চালানো। এটিই ইসলামের প্রবেশদ্বার (সূরা মুহাম্মাদ ৪৭:১৯)।",
+            "en": "To believe in the heart and declare that there is no true god but Allah and that Muhammad is His Messenger, and to live by it. It is the door of Islam (Muhammad 47:19)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "নামাজ",
+            "en": "Salah (prayer)"
+          },
+          "text": {
+            "bn": "প্রতিদিন পাঁচ ওয়াক্ত ফরজ নামাজ নির্দিষ্ট সময়ে আদায় করা (সূরা নিসা ৪:১০৩)। ঈমানের পর সবচেয়ে গুরুত্বপূর্ণ আমল; প্রাপ্তবয়স্ক ও সুস্থ মস্তিষ্কের প্রত্যেক মুসলিমের ওপর ফরজ।",
+            "en": "Five obligatory prayers each day at their fixed times (An-Nisa 4:103). The most important deed after faith, obligatory on every adult sane Muslim."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "যাকাত",
+            "en": "Zakat"
+          },
+          "text": {
+            "bn": "নিসাব পরিমাণ সম্পদ এক বছর থাকলে নির্দিষ্ট অংশ (সাধারণত আড়াই শতাংশ) নির্ধারিত হকদারদের দেওয়া (সূরা বাকারা ২:৪৩; হকদারদের তালিকা: সূরা তাওবা ৯:৬০)। এটি সম্পদকে পবিত্র করে।",
+            "en": "Giving a set share (usually 2.5%) of wealth above the nisab held for a year to the eligible recipients (Al-Baqarah 2:43; recipients: At-Tawbah 9:60). It purifies wealth."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "রোজা",
+            "en": "Sawm (fasting)"
+          },
+          "text": {
+            "bn": "রমজান মাসে সুবহে সাদিক থেকে সূর্যাস্ত পর্যন্ত পানাহার ও স্ত্রী-সহবাস থেকে বিরত থাকা, তাকওয়া অর্জনের জন্য (সূরা বাকারা ২:১৮৩)।",
+            "en": "Abstaining from food, drink and marital relations from dawn to sunset during Ramadan, to attain taqwa (Al-Baqarah 2:183)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "হজ",
+            "en": "Hajj"
+          },
+          "text": {
+            "bn": "শারীরিক ও আর্থিকভাবে সামর্থ্যবান মুসলিমের ওপর জীবনে একবার কাবা ঘরের হজ করা ফরজ (সূরা আলে ইমরান ৩:৯৭)।",
+            "en": "Pilgrimage to the Ka'bah once in a lifetime for every Muslim who is physically and financially able (Al 'Imran 3:97)."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ইসলাম, ঈমান ও ইহসান",
+            "en": "Islam, iman and ihsan"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "হাদিসে জিবরিলে দ্বীনের তিনটি স্তর বলা হয়েছে: ইসলাম (বাহ্যিক আমল, যেমন এই পাঁচ স্তম্ভ), ঈমান (অন্তরের বিশ্বাস, ছয় রুকন), এবং ইহসান (সর্বোচ্চ স্তর)।",
+            "en": "The Hadith of Jibril describes three levels of the religion: Islam (outward deeds, such as these five pillars), iman (belief in the heart, the six articles), and ihsan (the highest level)."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "ইসলামের সংজ্ঞা",
+            "en": "Definition of Islam"
+          },
+          "ar": "الْإِسْلَامُ أَنْ تَشْهَدَ أَنْ لَا إِلٰهَ إِلَّا اللّٰهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللّٰهِ، وَتُقِيمَ الصَّلَاةَ، وَتُؤْتِيَ الزَّكَاةَ، وَتَصُومَ رَمَضَانَ، وَتَحُجَّ الْبَيْتَ إِنِ اسْتَطَعْتَ إِلَيْهِ سَبِيلًا",
+          "pron": {
+            "bn": "আল ইসলামু আন তাশহাদা আল লা ইলাহা ইল্লাল্লাহু ওয়া আন্না মুহাম্মাদার রাসূলুল্লাহ, ওয়া তুকীমাস সালাতা, ওয়া তু'তিয়ায যাকাতা, ওয়া তাসূমা রামাদানা, ওয়া তাহুজ্জাল বাইতা ইনিসতাতা'তা ইলাইহি সাবীলা।",
+            "en": "Al-Islamu an tashhada al la ilaha illallahu wa anna Muhammadar Rasulullah, wa tuqimas-salata, wa tu'tiyaz-zakata, wa tasuma Ramadana, wa tahujjal-bayta inistata'ta ilayhi sabila."
+          },
+          "meaning": {
+            "bn": "ইসলাম হলো: তুমি সাক্ষ্য দেবে যে আল্লাহ ছাড়া কোনো ইলাহ নেই ও মুহাম্মাদ (সা.) আল্লাহর রাসুল, নামাজ কায়েম করবে, যাকাত দেবে, রমজানের রোজা রাখবে, এবং সামর্থ্য থাকলে কাবা ঘরের হজ করবে।",
+            "en": "Islam is that you testify there is no god but Allah and Muhammad is the Messenger of Allah, establish prayer, give zakat, fast Ramadan, and make Hajj to the House if you are able."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ৮",
+            "en": "Sahih Muslim 8"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "ইহসানের সংজ্ঞা",
+            "en": "Definition of ihsan"
+          },
+          "ar": "أَنْ تَعْبُدَ اللّٰهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ",
+          "pron": {
+            "bn": "আন তা'বুদাল্লাহা কাআন্নাকা তারাহ, ফাইল লাম তাকুন তারাহু ফাইন্নাহূ ইয়ারাক।",
+            "en": "An ta'budallaha ka-annaka tarah, fa il lam takun tarahu fa innahu yarak."
+          },
+          "meaning": {
+            "bn": "(ইহসান হলো) তুমি আল্লাহর ইবাদত এমনভাবে করবে যেন তুমি তাঁকে দেখছ; আর যদি তুমি তাঁকে না দেখো, তবে (জেনে রাখো) তিনি তোমাকে দেখছেন।",
+            "en": "(Ihsan is) that you worship Allah as though you see Him; and if you do not see Him, He surely sees you."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ৮; সহিহ বুখারি ৫০",
+            "en": "Sahih Muslim 8; Sahih al-Bukhari 50"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "পাঁচ স্তম্ভের প্রতিটির বিস্তারিত নিয়ম এই অ্যাপের নামাজ, রোজা, যাকাত ও হজ অংশে দেখুন।",
+            "en": "See the prayer, fasting, zakat and Hajj sections of this app for the details of each pillar."
+          }
+        }
+      ]
+    }
+  ]
+}

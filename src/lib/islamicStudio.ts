@@ -68,7 +68,7 @@ export function isText(value: unknown, lang: string): string {
 }
 
 /** Tables whose rows need a reviewer's approval before the app shows them. */
-export const IS_REVIEWED_TABLES = ['is_duas', 'is_dhikr_presets', 'is_content_packs', 'is_quizzes', 'is_zakat_settings', 'is_learn_units', 'is_media_items', 'is_books'] as const;
+export const IS_REVIEWED_TABLES = ['is_duas', 'is_dhikr_presets', 'is_content_packs', 'is_quizzes', 'is_zakat_settings', 'is_learn_units', 'is_media_items', 'is_books', 'is_guides'] as const;
 
 export type IsReviewStatus = 'draft' | 'in_review' | 'approved' | 'rejected';
 

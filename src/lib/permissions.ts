@@ -80,6 +80,8 @@ export const PAGE_RESOURCES: Record<string, string> = {
   '/is/feedback': 'ISLAMIC_STUDIO_FEEDBACK',
   '/is/quiz': 'ISLAMIC_STUDIO_QUIZ',
   '/is/academy': 'ISLAMIC_STUDIO_ACADEMY',
+  // Guide, 99 Names and Islamic names: learning content, edited by the Academy team.
+  '/is/guides': 'ISLAMIC_STUDIO_ACADEMY',
   '/is/media': 'ISLAMIC_STUDIO_MEDIA',
   '/is/books': 'ISLAMIC_STUDIO_BOOKS',
   '/is/blog': 'ISLAMIC_STUDIO_BLOG',

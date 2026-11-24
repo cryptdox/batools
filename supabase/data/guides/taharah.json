@@ -1,0 +1,1763 @@
+{
+ "topic": "taharah",
+ "guides": [
+  {
+   "slug": "wudu-step-by-step",
+   "title": {
+    "bn": "ওযু করার নিয়ম: ধাপে ধাপে",
+    "en": "How to Perform Wudu: Step by Step"
+   },
+   "summary": {
+    "bn": "নামাজের আগে ওযু ফরজ। রাসুলুল্লাহ ﷺ যেভাবে ওযু করতেন, সেভাবে শুরু থেকে শেষ পর্যন্ত — দোয়াসহ।",
+    "en": "Wudu is required before salah. Here is wudu as the Prophet ﷺ performed it, from start to finish, with the duas."
+   },
+   "level": "basic",
+   "blocks": [
+    {
+     "type": "text",
+     "text": {
+      "bn": "ওযু ছাড়া নামাজ হয় না। আল্লাহ তাআলা কুরআনে ওযুর মূল অঙ্গগুলো নিজেই বলে দিয়েছেন। রাসুলুল্লাহ ﷺ বলেছেন, যার ওযু ভেঙে গেছে, সে ওযু না করা পর্যন্ত আল্লাহ তার নামাজ কবুল করেন না।",
+      "en": "Salah is not valid without wudu. Allah Himself names the main parts of wudu in the Quran, and the Prophet ﷺ said that Allah does not accept the prayer of someone whose wudu has broken until he performs wudu."
+     }
+    },
+    {
+     "type": "arabic",
+     "label": {
+      "bn": "ওযুর আয়াত",
+      "en": "The ayah of wudu"
+     },
+     "ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قُمْتُمْ إِلَى الصَّلَاةِ فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ وَامْسَحُوا بِرُءُوسِكُمْ وَأَرْجُلَكُمْ إِلَى الْكَعْبَيْنِ",
+     "pron": {
+      "bn": "ইয়া আইয়্যুহাল্লাযিনা আমানু ইযা কুমতুম ইলাস সালাতি ফাগসিলু উজুহাকুম ওয়া আইদিয়াকুম ইলাল মারাফিকি ওয়ামসাহু বিরুউসিকুম ওয়া আরজুলাকুম ইলাল কা'বাইন।",
+      "en": "Ya ayyuhal-ladhina amanu idha qumtum ilas-salati faghsilu wujuhakum wa aydiyakum ilal-marafiqi wamsahu bi-ru'usikum wa arjulakum ilal-ka'bayn."
+     },
+     "meaning": {
+      "bn": "হে ঈমানদারগণ! যখন তোমরা নামাজের জন্য দাঁড়াতে চাও, তখন তোমাদের মুখমণ্ডল ও কনুই পর্যন্ত হাত ধুয়ে নাও, মাথা মাসেহ করো এবং টাখনু পর্যন্ত পা ধুয়ে নাও।",
+      "en": "O you who believe, when you rise for prayer, wash your faces and your arms up to the elbows, wipe your heads, and wash your feet up to the ankles."
+     },
+     "ref": {
+      "bn": "সূরা মায়েদা ৫:৬ (আংশিক)",
+      "en": "Al-Ma'idah 5:6 (part)"
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ১৩৫; সহিহ মুসলিম ২২৫ — ওযু ছাড়া নামাজ কবুল হয় না",
+      "en": "Sahih al-Bukhari 135; Sahih Muslim 225: prayer is not accepted without wudu"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "ওযুর ধাপগুলো",
+      "en": "The steps of wudu"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "নিয়ত",
+      "en": "Intention (niyyah)"
+     },
+     "text": {
+      "bn": "মনে মনে ঠিক করুন যে আপনি আল্লাহর জন্য পবিত্রতা অর্জন করছেন। নিয়ত অন্তরের কাজ; মুখে বলা জরুরি নয়।",
+      "en": "Intend in your heart that you are purifying yourself for Allah. Niyyah is in the heart; saying it aloud is not required."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "বিসমিল্লাহ বলা",
+      "en": "Say Bismillah"
+     },
+     "text": {
+      "bn": "ওযুর শুরুতে \"বিসমিল্লাহ\" বলুন। অধিকাংশ আলেমের মতে এটি সুন্নত; হাম্বলি মাযহাবের একটি মতে ওয়াজিব।",
+      "en": "Say \"Bismillah\" at the start. Most scholars hold it is sunnah; one Hanbali view holds it obligatory."
+     }
+    },
+    {
+     "type": "arabic",
+     "label": {
+      "bn": "ওযুর শুরুতে",
+      "en": "At the start of wudu"
+     },
+     "ar": "بِسْمِ اللَّهِ",
+     "pron": {
+      "bn": "বিসমিল্লাহ",
+      "en": "Bismillah"
+     },
+     "meaning": {
+      "bn": "আল্লাহর নামে (শুরু করছি)।",
+      "en": "In the name of Allah."
+     },
+     "ref": {
+      "bn": "সুনান আবু দাউদ ১০১",
+      "en": "Sunan Abi Dawud 101"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "দুই হাত কবজি পর্যন্ত ধোয়া",
+      "en": "Wash both hands to the wrists"
+     },
+     "text": {
+      "bn": "প্রথমে ডান হাত, তারপর বাম হাত কবজি পর্যন্ত তিনবার ধুয়ে নিন। আঙুলের ফাঁকে পানি পৌঁছান।",
+      "en": "Wash the hands up to the wrists three times, right first, letting water reach between the fingers."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "মিসওয়াক করা",
+      "en": "Use a miswak"
+     },
+     "text": {
+      "bn": "সম্ভব হলে মিসওয়াক বা ব্রাশ দিয়ে দাঁত পরিষ্কার করুন; না থাকলে আঙুল দিয়ে ঘষে নিন। এটি গুরুত্বপূর্ণ সুন্নত।",
+      "en": "If possible, clean the teeth with a miswak (or brush); otherwise rub with a finger. It is an emphasised sunnah."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "কুলি করা",
+      "en": "Rinse the mouth"
+     },
+     "text": {
+      "bn": "ডান হাতে পানি নিয়ে তিনবার কুলি করুন। রোজা না থাকলে গড়গড়া করুন।",
+      "en": "Take water with the right hand and rinse the mouth three times; gargle if you are not fasting."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "নাকে পানি দেওয়া",
+      "en": "Rinse the nose"
+     },
+     "text": {
+      "bn": "ডান হাতে নাকে পানি দিন এবং বাম হাতে নাক ঝেড়ে পরিষ্কার করুন — তিনবার। রোজা থাকলে বেশি ভেতরে টানবেন না।",
+      "en": "Draw water into the nose with the right hand and blow it out with the left, three times. Do not sniff deeply when fasting."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "মুখমণ্ডল ধোয়া (ফরজ)",
+      "en": "Wash the face (fard)"
+     },
+     "text": {
+      "bn": "কপালের চুলের গোড়া থেকে থুতনির নিচ পর্যন্ত এবং এক কানের লতি থেকে অন্য কানের লতি পর্যন্ত পুরো মুখ তিনবার ধুয়ে নিন। ঘন দাড়ি থাকলে আঙুল দিয়ে খিলাল করুন।",
+      "en": "Wash the whole face three times: from the hairline to below the chin and from ear to ear. Run wet fingers through a thick beard."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "দুই হাত কনুইসহ ধোয়া (ফরজ)",
+      "en": "Wash the arms including the elbows (fard)"
+     },
+     "text": {
+      "bn": "প্রথমে ডান হাত আঙুলের মাথা থেকে কনুইসহ তিনবার, তারপর বাম হাত একইভাবে তিনবার ধুয়ে নিন। আংটি বা চুড়ি থাকলে নাড়িয়ে নিচে পানি পৌঁছান।",
+      "en": "Wash the right arm from the fingertips up to and including the elbow three times, then the left. Move any ring or bangle so water reaches beneath."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "মাথা মাসেহ করা (ফরজ)",
+      "en": "Wipe the head (fard)"
+     },
+     "text": {
+      "bn": "দুই হাত ভিজিয়ে কপালের দিক থেকে মাথার পেছন পর্যন্ত নিয়ে যান, তারপর আবার সামনে ফিরিয়ে আনুন — একবার। পুরো মাথা মাসেহ করা সুন্নত।",
+      "en": "Wet both hands and pass them from the front of the head to the back and return them to the front, once. Wiping the whole head is sunnah."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ১৮৫ — মাথা মাসেহের পদ্ধতি",
+      "en": "Sahih al-Bukhari 185: how the head is wiped"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "কান মাসেহ করা",
+      "en": "Wipe the ears"
+     },
+     "text": {
+      "bn": "একই ভেজা হাতে শাহাদাত আঙুল দিয়ে কানের ভেতরের অংশ এবং বুড়ো আঙুল দিয়ে কানের পেছনের অংশ মাসেহ করুন।",
+      "en": "With the same wet hands, wipe the inside of the ears with the index fingers and the back of the ears with the thumbs."
+     }
+    },
+    {
+     "type": "note",
+     "tone": "info",
+     "text": {
+      "bn": "ঘাড় মাসেহ নিয়ে যেসব বর্ণনা আছে সেগুলো দুর্বল। কিছু হানাফি ফকিহ একে মুস্তাহাব বলেছেন, আবার অনেক আলেম বলেন এটি সুন্নত হিসেবে প্রমাণিত নয়। এটি না করলে ওযুর কোনো ক্ষতি হয় না।",
+      "en": "Reports about wiping the neck are weak. Some Hanafi jurists called it recommended, while many scholars say it is not established as sunnah. Leaving it does not affect wudu."
+     },
+     "check": true
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "দুই পা টাখনুসহ ধোয়া (ফরজ)",
+      "en": "Wash the feet including the ankles (fard)"
+     },
+     "text": {
+      "bn": "প্রথমে ডান পা টাখনুসহ তিনবার, তারপর বাম পা তিনবার ধুয়ে নিন। বাম হাতের কনিষ্ঠা আঙুল দিয়ে পায়ের আঙুলের ফাঁকে খিলাল করুন। গোড়ালি যেন শুকনো না থাকে।",
+      "en": "Wash the right foot including the ankle three times, then the left. Pass the little finger between the toes. Make sure the heels are not left dry."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ১৬৫; সহিহ মুসলিম ২৪১ — শুকনো গোড়ালির জন্য সতর্কবাণী",
+      "en": "Sahih al-Bukhari 165; Sahih Muslim 241: the warning about dry heels"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "ওযুর পরের দোয়া পড়া",
+      "en": "Recite the dua after wudu"
+     },
+     "text": {
+      "bn": "ওযু শেষ করে নিচের দোয়াটি পড়ুন। রাসুলুল্লাহ ﷺ বলেছেন, যে ভালোভাবে ওযু করে এই সাক্ষ্য দেয়, তার জন্য জান্নাতের আটটি দরজা খুলে দেওয়া হয়।",
+      "en": "After finishing, recite the dua below. The Prophet ﷺ said that whoever performs wudu well and then says this testimony, the eight gates of Paradise are opened for him."
+     }
+    },
+    {
+     "type": "arabic",
+     "label": {
+      "bn": "ওযুর পরের দোয়া",
+      "en": "Dua after wudu"
+     },
+     "ar": "أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+     "pron": {
+      "bn": "আশহাদু আল লা ইলাহা ইল্লাল্লাহু ওয়াহদাহু লা শারিকা লাহু, ওয়া আশহাদু আন্না মুহাম্মাদান আবদুহু ওয়া রাসুলুহ।",
+      "en": "Ashhadu an la ilaha illallahu wahdahu la sharika lah, wa ashhadu anna Muhammadan 'abduhu wa rasuluh."
+     },
+     "meaning": {
+      "bn": "আমি সাক্ষ্য দিচ্ছি, আল্লাহ ছাড়া কোনো ইলাহ নেই, তিনি এক, তাঁর কোনো শরিক নেই; এবং আমি সাক্ষ্য দিচ্ছি, মুহাম্মাদ ﷺ তাঁর বান্দা ও রাসুল।",
+      "en": "I bear witness that there is no god but Allah alone, with no partner, and I bear witness that Muhammad is His servant and Messenger."
+     },
+     "ref": {
+      "bn": "সহিহ মুসলিম ২৩৪",
+      "en": "Sahih Muslim 234"
+     }
+    },
+    {
+     "type": "arabic",
+     "label": {
+      "bn": "সাথে যোগ করা যায়",
+      "en": "Can be added"
+     },
+     "ar": "اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ، وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ",
+     "pron": {
+      "bn": "আল্লাহুম্মাজ আলনি মিনাত তাওয়াবিনা, ওয়াজ আলনি মিনাল মুতাতাহহিরিন।",
+      "en": "Allahummaj'alni minat-tawwabina waj'alni minal-mutatahhirin."
+     },
+     "meaning": {
+      "bn": "হে আল্লাহ! আমাকে তওবাকারীদের অন্তর্ভুক্ত করুন এবং পবিত্রতা অর্জনকারীদের অন্তর্ভুক্ত করুন।",
+      "en": "O Allah, make me among those who repent often and among those who purify themselves."
+     },
+     "ref": {
+      "bn": "সুনান তিরমিযি ৫৫",
+      "en": "Jami' at-Tirmidhi 55"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "দুই রাকাত তাহিয়্যাতুল ওযু (ঐচ্ছিক)",
+      "en": "Two rakats after wudu (optional)"
+     },
+     "text": {
+      "bn": "ওযুর পর মনোযোগ দিয়ে দুই রাকাত নফল নামাজ পড়া ফজিলতপূর্ণ, যদি তা নিষিদ্ধ সময় না হয় (বিস্তারিত \"বিশেষ নামাজ\" বিভাগে)।",
+      "en": "Praying two voluntary rakats with focus after wudu is virtuous, if it is not a forbidden time (details in the Special Prayers section)."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ১৫৯; সহিহ মুসলিম ২২৬ — উসমান (রা.) বর্ণিত রাসুলুল্লাহ ﷺ-এর ওযু",
+      "en": "Sahih al-Bukhari 159; Sahih Muslim 226: the Prophet's wudu as narrated by Uthman (RA)"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "text": {
+      "bn": "প্রত্যেক অঙ্গ ধোয়ার সময় আলাদা আলাদা দোয়া (যেমন মুখ ধোয়ার দোয়া, হাত ধোয়ার দোয়া) প্রচলিত আছে, কিন্তু এগুলো রাসুলুল্লাহ ﷺ থেকে নির্ভরযোগ্য সূত্রে প্রমাণিত নয়। শুরুতে বিসমিল্লাহ আর শেষে উপরের দোয়াই যথেষ্ট।",
+      "en": "Separate duas for washing each limb are widespread, but they are not reliably established from the Prophet ﷺ. Bismillah at the start and the dua above at the end are enough."
+     }
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "text": {
+      "bn": "পানি অপচয় করবেন না, প্রতিটি অঙ্গ তিনবারের বেশি ধোবেন না, আর অঙ্গগুলো পরপর ধোবেন — যেন আগের অঙ্গ শুকিয়ে না যায়।",
+      "en": "Do not waste water, do not wash any part more than three times, and wash the parts one after another without long gaps."
+     }
+    }
+   ]
+  },
+  {
+   "slug": "wudu-fard-sunnah",
+   "title": {
+    "bn": "ওযুর ফরজ, সুন্নত ও মাকরুহ",
+    "en": "Wudu: Fard, Sunnah and Makruh"
+   },
+   "summary": {
+    "bn": "ওযুর কোন কাজ বাদ পড়লে ওযু হয় না, কোনগুলো সুন্নত, আর কোনগুলো করা অপছন্দনীয় — মাযহাবগুলোর মতপার্থক্যসহ।",
+    "en": "Which acts of wudu are essential, which are sunnah, and which are disliked, with the differences between the madhhabs."
+   },
+   "level": "detail",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": {
+      "bn": "ওযুর ফরজ (হানাফি মাযহাব অনুযায়ী ৪টি)",
+      "en": "Fard of wudu (four, in the Hanafi madhhab)"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "পুরো মুখমণ্ডল একবার ধোয়া",
+       "en": "Washing the whole face once"
+      },
+      {
+       "bn": "দুই হাত কনুইসহ একবার ধোয়া",
+       "en": "Washing both arms including the elbows once"
+      },
+      {
+       "bn": "মাথার এক-চতুর্থাংশ মাসেহ করা",
+       "en": "Wiping a quarter of the head"
+      },
+      {
+       "bn": "দুই পা টাখনুসহ একবার ধোয়া",
+       "en": "Washing both feet including the ankles once"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": {
+      "bn": "এর যেকোনো একটি বাদ পড়লে, বা কোনো অংশ চুল পরিমাণ শুকনো থাকলে ওযু হবে না। এই চারটি সরাসরি সূরা মায়েদার ৬ নম্বর আয়াতে আছে।",
+      "en": "If any of these is missed, or even a hair's breadth of the area stays dry, wudu is not valid. All four are named directly in Al-Ma'idah 5:6."
+     }
+    },
+    {
+     "type": "differ",
+     "title": {
+      "bn": "ওযুর ফরজ কয়টি? — মাযহাবগুলোর মত",
+      "en": "How many fard acts does wudu have?"
+     },
+     "views": [
+      {
+       "label": {
+        "bn": "হানাফি",
+        "en": "Hanafi"
+       },
+       "text": {
+        "bn": "ফরজ ৪টি — আয়াতে উল্লিখিত চার অঙ্গ। নিয়ত, ধারাবাহিকতা (তারতিব) ও পরপর করা (মুওয়ালাত) সুন্নত। মাথার এক-চতুর্থাংশ মাসেহ ফরজ।",
+        "en": "Four: the four parts named in the ayah. Intention, order and continuity are sunnah. Wiping a quarter of the head is the obligatory amount."
+       },
+       "evidence": {
+        "bn": "সূরা মায়েদা ৫:৬ শুধু এই চারটির আদেশ দেয়। রাসুলুল্লাহ ﷺ মাথার সামনের অংশ (নাসিয়া) মাসেহ করেছেন — সহিহ মুসলিম ২৭৪।",
+        "en": "Al-Ma'idah 5:6 commands only these four. The Prophet ﷺ wiped the front part of his head (Sahih Muslim 274)."
+       }
+      },
+      {
+       "label": {
+        "bn": "শাফেয়ি",
+        "en": "Shafi'i"
+       },
+       "text": {
+        "bn": "ফরজ ৬টি — নিয়ত, মুখ, হাত, মাথার সামান্য অংশ মাসেহ, পা এবং ধারাবাহিকতা (তারতিব)।",
+        "en": "Six: intention, face, arms, wiping any part of the head, feet, and doing them in order."
+       },
+       "evidence": {
+        "bn": "\"সকল কাজ নিয়তের উপর নির্ভরশীল\" — সহিহ বুখারি ১; আয়াতে অঙ্গগুলোর ক্রম এবং রাসুলুল্লাহ ﷺ সবসময় এই ক্রমেই ওযু করেছেন।",
+        "en": "\"Actions are by intentions\" (Sahih al-Bukhari 1); the order in the ayah, and the Prophet ﷺ always kept that order."
+       }
+      },
+      {
+       "label": {
+        "bn": "মালেকি",
+        "en": "Maliki"
+       },
+       "text": {
+        "bn": "ফরজ ৭টি — নিয়ত, চার অঙ্গ (পুরো মাথা মাসেহ), অঙ্গ ঘষা (দালক) এবং পরপর করা (মুওয়ালাত)।",
+        "en": "Seven: intention, the four parts (wiping the whole head), rubbing the limbs, and continuity."
+       },
+       "evidence": {
+        "bn": "আয়াতের \"বিরুউসিকুম\" দ্বারা পুরো মাথা বোঝায়; রাসুলুল্লাহ ﷺ-এর ওযুতে পুরো মাথা মাসেহ — সহিহ বুখারি ১৮৫।",
+        "en": "They read \"your heads\" in the ayah as the whole head; the Prophet ﷺ wiped his whole head (Sahih al-Bukhari 185)."
+       }
+      },
+      {
+       "label": {
+        "bn": "হাম্বলি",
+        "en": "Hanbali"
+       },
+       "text": {
+        "bn": "ফরজ ৬টি — চার অঙ্গ (কুলি ও নাকে পানি মুখ ধোয়ার অংশ, পুরো মাথা ও কান মাসেহ), তারতিব ও মুওয়ালাত; নিয়ত শর্ত।",
+        "en": "Six: the four parts (rinsing mouth and nose count as part of the face; the whole head with the ears), order and continuity; intention is a condition."
+       },
+       "evidence": {
+        "bn": "রাসুলুল্লাহ ﷺ কখনো কুলি ও নাকে পানি দেওয়া ছাড়েননি বলে বর্ণিত; আয়াতের ক্রম ও সুন্নাহর ধারাবাহিক আমল।",
+        "en": "The Prophet ﷺ is not reported to have ever left rinsing the mouth and nose; the order in the ayah and his consistent practice."
+       }
+      }
+     ]
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "ওযুর সুন্নতসমূহ",
+      "en": "Sunnah acts of wudu"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "নিয়ত করা (হানাফি মতে সুন্নত)",
+       "en": "Making the intention (sunnah in the Hanafi view)"
+      },
+      {
+       "bn": "বিসমিল্লাহ বলে শুরু করা",
+       "en": "Starting with Bismillah"
+      },
+      {
+       "bn": "দুই হাত কবজি পর্যন্ত তিনবার ধোয়া",
+       "en": "Washing the hands to the wrists three times"
+      },
+      {
+       "bn": "মিসওয়াক করা",
+       "en": "Using a miswak"
+      },
+      {
+       "bn": "তিনবার কুলি করা ও তিনবার নাকে পানি দেওয়া",
+       "en": "Rinsing the mouth and nose three times each"
+      },
+      {
+       "bn": "প্রতিটি অঙ্গ তিনবার করে ধোয়া",
+       "en": "Washing each part three times"
+      },
+      {
+       "bn": "ঘন দাড়ি এবং হাত-পায়ের আঙুল খিলাল করা",
+       "en": "Running fingers through a thick beard and between fingers and toes"
+      },
+      {
+       "bn": "পুরো মাথা একবার মাসেহ করা এবং কান মাসেহ করা",
+       "en": "Wiping the whole head once and wiping the ears"
+      },
+      {
+       "bn": "ডান দিক থেকে শুরু করা",
+       "en": "Starting with the right side"
+      },
+      {
+       "bn": "কুরআনের ক্রম অনুযায়ী ধারাবাহিকভাবে ধোয়া",
+       "en": "Following the order given in the Quran"
+      },
+      {
+       "bn": "এক অঙ্গ শুকানোর আগেই পরের অঙ্গ ধোয়া",
+       "en": "Washing each part before the previous one dries"
+      }
+     ]
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ১৫৯ (উসমান রা.) ও ১৮৫ (আবদুল্লাহ ইবনে যায়েদ রা.) — রাসুলুল্লাহ ﷺ-এর ওযুর বিবরণ",
+      "en": "Sahih al-Bukhari 159 (Uthman RA) and 185 (Abdullah ibn Zayd RA): descriptions of the Prophet's wudu"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "ওযুতে যা মাকরুহ (অপছন্দনীয়)",
+      "en": "What is disliked (makruh) in wudu"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "প্রয়োজনের চেয়ে বেশি পানি খরচ করা, এমনকি নদীর পাশে থাকলেও",
+       "en": "Using more water than needed, even beside a river"
+      },
+      {
+       "bn": "কোনো অঙ্গ তিনবারের বেশি ধোয়া",
+       "en": "Washing any part more than three times"
+      },
+      {
+       "bn": "মুখে জোরে পানি ছিটিয়ে মারা",
+       "en": "Splashing water forcefully on the face"
+      },
+      {
+       "bn": "ওযুর মধ্যে অপ্রয়োজনীয় দুনিয়াবি কথা বলা",
+       "en": "Unnecessary worldly talk during wudu"
+      },
+      {
+       "bn": "কোনো সুন্নত ইচ্ছাকৃতভাবে ছেড়ে দেওয়া",
+       "en": "Deliberately leaving out a sunnah"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slug": "wudu-breakers",
+   "title": {
+    "bn": "যেসব কারণে ওযু ভেঙে যায়",
+    "en": "What Breaks Wudu"
+   },
+   "summary": {
+    "bn": "যেসব কারণে ওযু ভাঙে তাতে সব আলেম একমত, আর কিছু বিষয়ে মতপার্থক্য আছে — দুটোই এখানে।",
+    "en": "Some things break wudu by agreement of all scholars; on others they differ. Both are covered here."
+   },
+   "level": "basic",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": {
+      "bn": "যেসব কারণে ওযু ভাঙে — সবাই একমত",
+      "en": "What breaks wudu: agreed by all"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "পেশাব-পায়খানার রাস্তা দিয়ে কিছু বের হওয়া: পেশাব, পায়খানা, বায়ু, মজি (কামরস), ওদি ইত্যাদি",
+       "en": "Anything leaving the front or back passage: urine, stool, wind, pre-seminal fluid (madhy), wadi and the like"
+      },
+      {
+       "bn": "গভীর ঘুম — বিশেষ করে শুয়ে বা হেলান দিয়ে এমনভাবে ঘুমানো যাতে শরীর ঢিলে হয়ে যায়",
+       "en": "Deep sleep, especially lying down or leaning so the body relaxes"
+      },
+      {
+       "bn": "জ্ঞান হারানো: বেহুঁশ হওয়া, পাগলামি, নেশাগ্রস্ত হওয়া",
+       "en": "Losing consciousness: fainting, insanity, intoxication"
+      },
+      {
+       "bn": "যেসব কারণে গোসল ফরজ হয় (সহবাস, বীর্যপাত, হায়েজ-নিফাস শেষ হওয়া) — সেগুলো ওযুও ভেঙে দেয়",
+       "en": "Whatever makes ghusl obligatory (intercourse, ejaculation, end of menses or post-natal bleeding) also breaks wudu"
+      }
+     ]
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ১৩৫ — \"হাদাস\" অর্থ বায়ু বের হওয়া ইত্যাদি",
+      "en": "Sahih al-Bukhari 135: \"hadath\" explained as passing wind and the like"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "মতপার্থক্যপূর্ণ বিষয়",
+      "en": "Points where scholars differ"
+     }
+    },
+    {
+     "type": "differ",
+     "title": {
+      "bn": "রক্ত, পুঁজ বা বমি বের হলে কি ওযু ভাঙে?",
+      "en": "Does flowing blood, pus or vomit break wudu?"
+     },
+     "views": [
+      {
+       "label": {
+        "bn": "হানাফি (এবং হাম্বলি — বেশি পরিমাণে হলে)",
+        "en": "Hanafi (and Hanbali, if the amount is large)"
+       },
+       "text": {
+        "bn": "শরীরের কোথাও থেকে রক্ত বা পুঁজ বের হয়ে গড়িয়ে পড়লে, অথবা মুখ ভরে বমি হলে ওযু ভেঙে যায়। সামান্য রক্ত যা জায়গা থেকে গড়ায় না, তাতে ভাঙে না।",
+        "en": "Blood or pus that flows from any part of the body, or a mouthful of vomit, breaks wudu. A little blood that does not flow does not."
+       },
+       "evidence": {
+        "bn": "রাসুলুল্লাহ ﷺ বমি করার পর ওযু করেছেন বলে বর্ণিত (সুনান তিরমিযি); কিছু সাহাবির আমল।",
+        "en": "It is reported that the Prophet ﷺ vomited and then made wudu (Jami at-Tirmidhi); practice of some Companions."
+       }
+      },
+      {
+       "label": {
+        "bn": "শাফেয়ি ও মালেকি",
+        "en": "Shafi'i and Maliki"
+       },
+       "text": {
+        "bn": "পেশাব-পায়খানার রাস্তা ছাড়া অন্য কোথাও থেকে রক্ত, পুঁজ বা বমি বের হলে ওযু ভাঙে না।",
+        "en": "Blood, pus or vomit from anywhere other than the two passages does not break wudu."
+       },
+       "evidence": {
+        "bn": "এক আনসারি সাহাবি তির বিদ্ধ হয়ে রক্তাক্ত অবস্থায় নামাজ চালিয়ে গেছেন (সুনান আবু দাউদ); ওযু ভাঙার স্পষ্ট দলিল নেই বলে মূল অবস্থা বহাল।",
+        "en": "A Companion kept praying while bleeding from arrow wounds (Sunan Abi Dawud); with no clear proof, the default (wudu remains) stands."
+       }
+      }
+     ],
+     "check": true
+    },
+    {
+     "type": "differ",
+     "title": {
+      "bn": "লজ্জাস্থান বা বিপরীত লিঙ্গের শরীর স্পর্শ করলে",
+      "en": "Touching the private part, or touching the opposite sex"
+     },
+     "views": [
+      {
+       "label": {
+        "bn": "হানাফি",
+        "en": "Hanafi"
+       },
+       "text": {
+        "bn": "নিজের লজ্জাস্থান স্পর্শ করলে বা স্ত্রী/নারীকে স্পর্শ করলে ওযু ভাঙে না (যদি কিছু বের না হয়)।",
+        "en": "Touching one's private part, or touching a woman, does not break wudu (if nothing is discharged)."
+       },
+       "evidence": {
+        "bn": "\"এটা তো তোমার শরীরেরই একটা অংশ\" — সুনান আবু দাউদ ১৮২ (তালক রা.); রাসুলুল্লাহ ﷺ নামাজে আয়েশা (রা.)-এর পা স্পর্শ করতেন — সহিহ বুখারি ৩৮২। সূরা নিসা ৪:৪৩-এর \"লামাসতুম\" দ্বারা ইবনে আব্বাস (রা.) সহবাস বুঝিয়েছেন।",
+        "en": "\"It is only a part of you\" (Sunan Abi Dawud 182, Talq RA); the Prophet ﷺ touched Aisha's feet while praying (Sahih al-Bukhari 382). Ibn Abbas understood \"lamastum\" in An-Nisa 4:43 as intercourse."
+       }
+      },
+      {
+       "label": {
+        "bn": "শাফেয়ি ও হাম্বলি (মালেকি — শর্তসাপেক্ষে)",
+        "en": "Shafi'i and Hanbali (Maliki with conditions)"
+       },
+       "text": {
+        "bn": "হাতের তালু দিয়ে সরাসরি লজ্জাস্থান স্পর্শ করলে ওযু ভাঙে। শাফেয়ি মতে গায়রে মাহরাম নারী-পুরুষের ত্বক স্পর্শে ওযু ভাঙে; মালেকি ও হাম্বলি মতে কামভাবসহ স্পর্শ করলে ভাঙে।",
+        "en": "Touching the private part directly with the hand breaks wudu. For Shafi'is, skin contact between a non-mahram man and woman breaks it; for Malikis and Hanbalis, only touch with desire."
+       },
+       "evidence": {
+        "bn": "\"যে নিজের লজ্জাস্থান স্পর্শ করে, সে যেন ওযু করে\" — সুনান আবু দাউদ ১৮১ (বুসরা রা.); সূরা নিসা ৪:৪৩ \"অথবা তোমরা নারীদের স্পর্শ করো\" আয়াতের বাহ্যিক অর্থ।",
+        "en": "\"Whoever touches his private part, let him make wudu\" (Sunan Abi Dawud 181, Busrah RA); the apparent meaning of \"or you have touched women\" in An-Nisa 4:43."
+       }
+      }
+     ]
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "উটের গোশত খাওয়া: হাম্বলি মতে ওযু ভাঙে (সহিহ মুসলিম ৩৬০), অধিকাংশ আলেমের মতে ভাঙে না।",
+       "en": "Eating camel meat: breaks wudu in the Hanbali view (Sahih Muslim 360); most scholars say it does not."
+      },
+      {
+       "bn": "নামাজের মধ্যে অট্টহাসি: হানাফি মতে নামাজ ও ওযু দুটোই ভাঙে; অন্যদের মতে শুধু নামাজ ভাঙে।",
+       "en": "Laughing out loud in salah: in the Hanafi view it breaks both salah and wudu; others say only the salah."
+      }
+     ]
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "যেসব কারণে ওযু ভাঙে না",
+      "en": "What does not break wudu"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "ওযু ভেঙেছে কি না — শুধু সন্দেহ হলে। নিশ্চিত না হওয়া পর্যন্ত ওযু আছে ধরে নিতে হবে।",
+       "en": "Mere doubt about whether wudu broke. Wudu remains until you are certain."
+      },
+      {
+       "bn": "বসে বসে হালকা ঝিমুনি বা তন্দ্রা, যাতে শরীর ঢিলে হয় না",
+       "en": "Light dozing while sitting firmly"
+      },
+      {
+       "bn": "নখ বা চুল কাটা",
+       "en": "Cutting nails or hair"
+      },
+      {
+       "bn": "নিজের বা অন্যের সতর দেখে ফেলা",
+       "en": "Seeing someone's awrah, or one's own"
+      },
+      {
+       "bn": "সামান্য রক্ত যা গড়িয়ে পড়ে না",
+       "en": "A little blood that does not flow"
+      }
+     ]
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ১৩৭; সহিহ মুসলিম ৩৬২ — \"শব্দ না শোনা বা গন্ধ না পাওয়া পর্যন্ত নামাজ ছাড়বে না\"",
+      "en": "Sahih al-Bukhari 137; Sahih Muslim 362: \"Do not leave (the prayer) until you hear a sound or smell something\""
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ মুসলিম ৩৭৬ — সাহাবিরা বসে ঝিমিয়ে নতুন ওযু ছাড়াই নামাজ পড়তেন",
+      "en": "Sahih Muslim 376: Companions dozed while sitting and prayed without renewing wudu"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "text": {
+      "bn": "যার সবসময় ফোঁটা ফোঁটা পেশাব, বায়ু বা রক্ত বের হতে থাকে (মাজুর), সে প্রতি ওয়াক্তে নতুন ওযু করে সেই ওয়াক্তের সব নামাজ পড়বে।",
+      "en": "Someone with a constant flow of urine drops, wind or blood (ma'dhur) makes a fresh wudu for each prayer time and prays all that time's prayers with it."
+     }
+    }
+   ]
+  },
+  {
+   "slug": "ghusl-fard",
+   "title": {
+    "bn": "ফরজ গোসল: কখন ও কীভাবে",
+    "en": "Fard Ghusl: When and How"
+   },
+   "summary": {
+    "bn": "কোন অবস্থায় গোসল ফরজ হয় এবং সুন্নত পদ্ধতিতে কীভাবে গোসল করতে হয় — ধাপে ধাপে।",
+    "en": "When ghusl becomes obligatory and how to do it the sunnah way, step by step."
+   },
+   "level": "basic",
+   "blocks": [
+    {
+     "type": "text",
+     "text": {
+      "bn": "বড় নাপাকি (জানাবাত, হায়েজ বা নিফাস) থেকে পবিত্র হওয়ার জন্য পুরো শরীর ধোয়াকে গোসল বলে। গোসল ফরজ থাকা অবস্থায় নামাজ, কাবার তাওয়াফ, কুরআন শরিফ স্পর্শ করা এবং (অধিকাংশ আলেমের মতে) কুরআন তিলাওয়াত করা যায় না।",
+      "en": "Ghusl is washing the whole body to remove major impurity (janabah, menses or post-natal bleeding). Until ghusl is done one may not pray, do tawaf, touch the Mushaf, or (in the view of most scholars) recite the Quran."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সূরা মায়েদা ৫:৬ — \"আর যদি তোমরা জুনুবি (অপবিত্র) হও, তবে ভালোভাবে পবিত্র হও\"",
+      "en": "Al-Ma'idah 5:6: \"And if you are in a state of janabah, then purify yourselves\""
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "যেসব কারণে গোসল ফরজ হয়",
+      "en": "When ghusl becomes obligatory"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "স্বামী-স্ত্রীর সহবাস — বীর্যপাত না হলেও",
+       "en": "Sexual intercourse, even without ejaculation"
+      },
+      {
+       "bn": "জাগ্রত অবস্থায় উত্তেজনার সাথে বীর্যপাত",
+       "en": "Ejaculation with desire while awake"
+      },
+      {
+       "bn": "স্বপ্নদোষ — ঘুম থেকে উঠে ভেজা চিহ্ন দেখলে",
+       "en": "A wet dream, if one wakes and finds wetness"
+      },
+      {
+       "bn": "হায়েজ (মাসিক) শেষ হলে",
+       "en": "When menstruation ends"
+      },
+      {
+       "bn": "নিফাস (সন্তান প্রসবের পরের রক্তস্রাব) শেষ হলে",
+       "en": "When post-natal bleeding ends"
+      }
+     ]
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ মুসলিম ৩৪৮ — সহবাসে গোসল ফরজ, বীর্যপাত না হলেও; সহিহ বুখারি ২৮২ — স্বপ্নে ভেজা দেখলে গোসল",
+      "en": "Sahih Muslim 348: ghusl after intercourse even without ejaculation; Sahih al-Bukhari 282: ghusl when wetness is seen after a dream"
+     }
+    },
+    {
+     "type": "differ",
+     "title": {
+      "bn": "গোসলের ফরজ কী কী?",
+      "en": "What is obligatory in ghusl?"
+     },
+     "views": [
+      {
+       "label": {
+        "bn": "হানাফি",
+        "en": "Hanafi"
+       },
+       "text": {
+        "bn": "ফরজ ৩টি — ভালোভাবে কুলি করা (গড়গড়াসহ, রোজা না থাকলে), নাকের নরম অংশ পর্যন্ত পানি পৌঁছানো, এবং পুরো শরীর এমনভাবে ধোয়া যাতে একটি চুল পরিমাণ জায়গাও শুকনো না থাকে।",
+        "en": "Three: rinsing the whole mouth, rinsing the nose up to the soft bone, and washing the entire body so that not a hair's breadth stays dry."
+       },
+       "evidence": {
+        "bn": "সূরা মায়েদা ৫:৬-এর \"ফাত্তাহহারু\" (ভালোভাবে পবিত্র হও) শব্দ পুরো শরীর, এমনকি মুখ ও নাকের ভেতরের যতটুকু ধোয়া সম্ভব তা-ও অন্তর্ভুক্ত করে।",
+        "en": "The intensive word \"fattahharu\" (purify yourselves thoroughly) in Al-Ma'idah 5:6 includes all of the body, including the inside of mouth and nose as far as can be washed."
+       }
+      },
+      {
+       "label": {
+        "bn": "হাম্বলি",
+        "en": "Hanbali"
+       },
+       "text": {
+        "bn": "নিয়তসহ পুরো শরীর ধোয়া ফরজ; কুলি ও নাকে পানি দেওয়াও ওয়াজিব।",
+        "en": "Washing the whole body with intention; rinsing the mouth and nose is also obligatory."
+       },
+       "evidence": {
+        "bn": "রাসুলুল্লাহ ﷺ গোসলে সবসময় কুলি ও নাকে পানি দিয়েছেন।",
+        "en": "The Prophet ﷺ always rinsed his mouth and nose in ghusl."
+       }
+      },
+      {
+       "label": {
+        "bn": "শাফেয়ি ও মালেকি",
+        "en": "Shafi'i and Maliki"
+       },
+       "text": {
+        "bn": "নিয়ত এবং পুরো শরীরে পানি পৌঁছানো ফরজ; কুলি ও নাকে পানি সুন্নত। মালেকি মতে শরীর ঘষা ও পরপর ধোয়াও জরুরি।",
+        "en": "Intention and water reaching the whole body; rinsing the mouth and nose is sunnah. Malikis also require rubbing and continuity."
+       },
+       "evidence": {
+        "bn": "\"তোমার মাথায় তিন আঁজলা পানি ঢেলে তারপর পুরো শরীরে পানি ঢাললেই তুমি পবিত্র হয়ে যাবে\" — সহিহ মুসলিম ৩৩০।",
+        "en": "\"It is enough for you to pour three handfuls on your head, then pour water over yourself, and you are purified\" (Sahih Muslim 330)."
+       }
+      }
+     ]
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "সুন্নত পদ্ধতিতে গোসল",
+      "en": "Ghusl the sunnah way"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "নিয়ত ও বিসমিল্লাহ",
+      "en": "Intention and Bismillah"
+     },
+     "text": {
+      "bn": "মনে মনে নাপাকি দূর করার নিয়ত করুন এবং বিসমিল্লাহ বলুন (বাথরুমের ভেতরে হলে মনে মনে)।",
+      "en": "Intend in your heart to remove the impurity and say Bismillah (silently if inside the bathroom)."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "দুই হাত ধোয়া",
+      "en": "Wash the hands"
+     },
+     "text": {
+      "bn": "দুই হাত কবজি পর্যন্ত তিনবার ধুয়ে নিন।",
+      "en": "Wash both hands up to the wrists three times."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "লজ্জাস্থান ধোয়া ও নাপাকি দূর করা",
+      "en": "Wash the private parts and remove any impurity"
+     },
+     "text": {
+      "bn": "বাম হাত দিয়ে লজ্জাস্থান এবং শরীরের যেখানে নাপাকি লেগে আছে তা ধুয়ে ফেলুন, তারপর হাত ভালো করে পরিষ্কার করুন।",
+      "en": "With the left hand wash the private parts and any place with impurity, then clean the hand well."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "পূর্ণ ওযু করা",
+      "en": "Make a complete wudu"
+     },
+     "text": {
+      "bn": "নামাজের ওযুর মতো পুরো ওযু করুন। দাঁড়ানোর জায়গায় পানি জমলে পা দুটো সবশেষে ধোয়া যায়।",
+      "en": "Perform a full wudu as for prayer. If water collects where you stand, you may wash the feet at the very end."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "মাথায় তিনবার পানি ঢালা",
+      "en": "Pour water over the head three times"
+     },
+     "text": {
+      "bn": "মাথায় তিনবার পানি ঢালুন এবং আঙুল দিয়ে চুলের গোড়া পর্যন্ত পানি পৌঁছান।",
+      "en": "Pour water on the head three times, working it into the roots of the hair with the fingers."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "পুরো শরীরে পানি ঢালা",
+      "en": "Pour water over the whole body"
+     },
+     "text": {
+      "bn": "প্রথমে ডান কাঁধে, তারপর বাম কাঁধে, তারপর পুরো শরীরে পানি ঢালুন। নাভি, বগল, কানের ভাঁজ, আঙুলের ফাঁক — কোথাও যেন শুকনো না থাকে।",
+      "en": "Pour water over the right shoulder, then the left, then the whole body. Make sure the navel, armpits, folds of the ears and between the fingers and toes are not left dry."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "পা ধোয়া",
+      "en": "Wash the feet"
+     },
+     "text": {
+      "bn": "আগে পা না ধুয়ে থাকলে এখন সরে গিয়ে দুই পা ধুয়ে নিন।",
+      "en": "If you left the feet earlier, move aside and wash them now."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ২৪৮ (আয়েশা রা.) ও ২৪৯ (মাইমুনা রা.); সহিহ মুসলিম ৩১৬, ৩১৭ — রাসুলুল্লাহ ﷺ-এর গোসলের বিবরণ",
+      "en": "Sahih al-Bukhari 248 (Aisha RA) and 249 (Maymunah RA); Sahih Muslim 316, 317: how the Prophet ﷺ performed ghusl"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "info",
+     "text": {
+      "bn": "নারীদের চুল বেণি বা খোঁপা করা থাকলে, পানি চুলের গোড়ায় পৌঁছালে বেণি খোলা জরুরি নয় (সহিহ মুসলিম ৩৩০)।",
+      "en": "A woman with braided hair need not undo the braids if water reaches the roots (Sahih Muslim 330)."
+     }
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "text": {
+      "bn": "গোসলের আগে নখপালিশ বা পানি আটকায় এমন কিছু থাকলে তুলে ফেলুন; নইলে গোসল হবে না। গোসলের ভেতরে ওযু হয়ে যায় — গোসলের পর ওযু না ভাঙলে নতুন ওযু লাগবে না।",
+      "en": "Remove nail polish or anything that blocks water first, or the ghusl is not valid. Wudu is included in the ghusl: if it is not broken afterwards, no new wudu is needed."
+     }
+    },
+    {
+     "type": "note",
+     "tone": "info",
+     "text": {
+      "bn": "জুমার দিন, দুই ঈদের দিন এবং ইহরাম বাঁধার আগে গোসল করা সুন্নত (ফরজ নয়)।",
+      "en": "Ghusl on Friday, on the two Eids, and before entering ihram is sunnah, not fard."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ৮৭৭ — জুমার জন্য গোসল",
+      "en": "Sahih al-Bukhari 877: ghusl for Jumu'ah"
+     }
+    }
+   ]
+  },
+  {
+   "slug": "tayammum",
+   "title": {
+    "bn": "তায়াম্মুম: কখন ও কীভাবে",
+    "en": "Tayammum: When and How"
+   },
+   "summary": {
+    "bn": "পানি না পেলে বা পানি ব্যবহারে ক্ষতি হলে মাটি দিয়ে পবিত্রতা অর্জন — শর্ত ও পদ্ধতি।",
+    "en": "Purifying with clean earth when water is not available or would cause harm: conditions and method."
+   },
+   "level": "basic",
+   "blocks": [
+    {
+     "type": "text",
+     "text": {
+      "bn": "তায়াম্মুম আল্লাহর দেওয়া একটি সহজতা। পানি না পাওয়া গেলে বা পানি ব্যবহারে ক্ষতির আশঙ্কা থাকলে ওযু ও গোসল — দুটোর পরিবর্তেই পবিত্র মাটি দিয়ে তায়াম্মুম করা যায়।",
+      "en": "Tayammum is an ease granted by Allah. When water cannot be found or using it would cause harm, tayammum with clean earth replaces both wudu and ghusl."
+     }
+    },
+    {
+     "type": "arabic",
+     "label": {
+      "bn": "তায়াম্মুমের আয়াত (অংশ)",
+      "en": "The ayah of tayammum (part)"
+     },
+     "ar": "فَلَمْ تَجِدُوا مَاءً فَتَيَمَّمُوا صَعِيدًا طَيِّبًا فَامْسَحُوا بِوُجُوهِكُمْ وَأَيْدِيكُمْ",
+     "pron": {
+      "bn": "ফালাম তাজিদু মাআন ফাতাইয়াম্মামু সাঈদান তাইয়িবান ফামসাহু বিউজুহিকুম ওয়া আইদিকুম।",
+      "en": "Falam tajidu ma'an fatayammamu sa'idan tayyiban famsahu biwujuhikum wa aydikum."
+     },
+     "meaning": {
+      "bn": "অতঃপর যদি পানি না পাও, তবে পবিত্র মাটি দিয়ে তায়াম্মুম করো — তা দিয়ে তোমাদের মুখমণ্ডল ও হাত মাসেহ করো।",
+      "en": "And if you find no water, then seek clean earth and wipe your faces and hands with it."
+     },
+     "ref": {
+      "bn": "সূরা নিসা ৪:৪৩; সূরা মায়েদা ৫:৬",
+      "en": "An-Nisa 4:43; Al-Ma'idah 5:6"
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ৩৩৫ — \"সমস্ত জমিন আমার জন্য মসজিদ ও পবিত্রতার উপকরণ করা হয়েছে\"",
+      "en": "Sahih al-Bukhari 335: \"The earth has been made for me a place of prayer and a means of purification\""
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "কখন তায়াম্মুম করা যায়",
+      "en": "When tayammum is allowed"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "আশেপাশে পানি পাওয়া যায় না (হানাফি মতে প্রায় এক মাইল বা তার বেশি দূরে)",
+       "en": "No water nearby (in the Hanafi view, about a mile away or more)"
+      },
+      {
+       "bn": "অসুস্থতা বা ক্ষত, যেখানে পানি ব্যবহারে রোগ বাড়া বা দেরিতে সারার আশঙ্কা আছে",
+       "en": "Illness or wounds where water would worsen or delay healing"
+      },
+      {
+       "bn": "প্রচণ্ড ঠান্ডা, পানি গরম করার ব্যবস্থা নেই এবং ঠান্ডা পানিতে গুরুতর ক্ষতির আশঙ্কা",
+       "en": "Severe cold with no way to heat water and real risk of harm"
+      },
+      {
+       "bn": "যে পানি আছে তা খাওয়ার জন্য প্রয়োজন",
+       "en": "The only water available is needed for drinking"
+      },
+      {
+       "bn": "পানির কাছে যেতে শত্রু, হিংস্র প্রাণী বা অন্য কোনো বিপদের ভয়",
+       "en": "Fear of an enemy, animal or other danger on the way to water"
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "text": {
+      "bn": "শুধু অলসতা বা পানি একটু দূরে বলে তায়াম্মুম জায়েজ নয়। পানি ব্যবহারের সামর্থ্য থাকলে তায়াম্মুম দিয়ে নামাজ হবে না।",
+      "en": "Laziness, or water being slightly far, is not a valid reason. If you are able to use water, salah with tayammum is not valid."
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "তায়াম্মুমের পদ্ধতি (হানাফি ও শাফেয়ি মত অনুযায়ী)",
+      "en": "How to do tayammum (Hanafi and Shafi'i method)"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "নিয়ত",
+      "en": "Intention"
+     },
+     "text": {
+      "bn": "মনে মনে পবিত্রতা অর্জনের নিয়ত করুন। তায়াম্মুমে নিয়ত সব মাযহাবেই জরুরি।",
+      "en": "Intend in your heart to purify yourself. Intention is required for tayammum in all the madhhabs."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "বিসমিল্লাহ",
+      "en": "Bismillah"
+     },
+     "text": {
+      "bn": "বিসমিল্লাহ বলুন।",
+      "en": "Say Bismillah."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "প্রথম বার মাটিতে হাত মারা ও মুখ মাসেহ",
+      "en": "First strike: wipe the face"
+     },
+     "text": {
+      "bn": "দুই হাতের তালু পবিত্র মাটি, বালু বা পাথরে আলতো করে মারুন, অতিরিক্ত ধুলা ঝেড়ে নিন বা ফুঁ দিন, তারপর পুরো মুখমণ্ডল একবার মাসেহ করুন।",
+      "en": "Strike both palms lightly on clean earth, sand or stone, shake or blow off the excess, then wipe the whole face once."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "দ্বিতীয় বার হাত মারা ও দুই হাত মাসেহ",
+      "en": "Second strike: wipe the arms"
+     },
+     "text": {
+      "bn": "আবার মাটিতে হাত মারুন। বাম হাত দিয়ে ডান হাত আঙুল থেকে কনুইসহ মাসেহ করুন, তারপর ডান হাত দিয়ে বাম হাত একইভাবে। আংটি থাকলে নাড়িয়ে নিন।",
+      "en": "Strike again. Wipe the right arm from the fingers to and including the elbow with the left hand, then the left arm with the right hand. Move any ring."
+     }
+    },
+    {
+     "type": "differ",
+     "title": {
+      "bn": "তায়াম্মুমে কয়বার মাটিতে হাত মারতে হবে, হাত কতটুকু মাসেহ করতে হবে?",
+      "en": "How many strikes, and how much of the arms is wiped?"
+     },
+     "views": [
+      {
+       "label": {
+        "bn": "হানাফি ও শাফেয়ি",
+        "en": "Hanafi and Shafi'i"
+       },
+       "text": {
+        "bn": "দুই বার মারা — একবার মুখের জন্য, একবার কনুইসহ দুই হাতের জন্য।",
+        "en": "Two strikes: one for the face and one for the arms up to and including the elbows."
+       },
+       "evidence": {
+        "bn": "ইবনে উমর (রা.) সহ কয়েকজন সাহাবি থেকে এভাবে বর্ণিত (সুনান দারাকুতনি, মুয়াত্তা মালিক); ওযুতে হাত কনুই পর্যন্ত ধোয়ার সাথে মিল।",
+        "en": "Reported from Ibn Umar (RA) and others (Sunan ad-Daraqutni, Muwatta Malik); it matches washing the arms to the elbows in wudu."
+       }
+      },
+      {
+       "label": {
+        "bn": "হাম্বলি ও অনেক মুহাদ্দিস (মালেকি মতে এটুকুই ফরজ)",
+        "en": "Hanbali and many hadith scholars (for Malikis this is the obligatory minimum)"
+       },
+       "text": {
+        "bn": "একবার মাটিতে হাত মেরে মুখ এবং কবজি পর্যন্ত দুই হাত মাসেহ করাই যথেষ্ট।",
+        "en": "One strike, wiping the face and the hands up to the wrists, is enough."
+       },
+       "evidence": {
+        "bn": "আম্মার (রা.)-কে রাসুলুল্লাহ ﷺ একবার মাটিতে হাত মেরে মুখ ও দুই হাত মাসেহ করে দেখিয়েছেন — সহিহ বুখারি ৩৩৮; সহিহ মুসলিম ৩৬৮।",
+        "en": "The Prophet ﷺ showed Ammar (RA) one strike, then wiped his face and hands (Sahih al-Bukhari 338; Sahih Muslim 368)."
+       }
+      }
+     ],
+     "check": true
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "তায়াম্মুম কী দিয়ে এবং কখন ভাঙে",
+      "en": "What to use, and what ends tayammum"
+     }
+    },
+    {
+     "type": "text",
+     "text": {
+      "bn": "মাটি, বালু, পাথর, ইট বা মাটিজাতীয় পবিত্র জিনিস দিয়ে তায়াম্মুম করা যায় (হানাফি মত)। শাফেয়ি মতে ধুলাযুক্ত মাটি জরুরি। যেসব কারণে ওযু বা গোসল ভাঙে, সেগুলোতে তায়াম্মুমও ভাঙে; আর পানি পাওয়া গেলে বা পানি ব্যবহারের সামর্থ্য ফিরে এলে তায়াম্মুম শেষ হয়ে যায়।",
+      "en": "Earth, sand, stone, brick or anything of the earth's kind may be used (Hanafi view); Shafi'is require earth with dust. Tayammum is broken by whatever breaks wudu or ghusl, and it ends once water is found or one becomes able to use it."
+     }
+    },
+    {
+     "type": "note",
+     "tone": "info",
+     "text": {
+      "bn": "এক তায়াম্মুমে ওযু ও গোসল দুটোর কাজই হয়, নিয়ত অনুযায়ী। আমর ইবনুল আস (রা.) প্রচণ্ড ঠান্ডায় গোসলের বদলে তায়াম্মুম করেছিলেন এবং রাসুলুল্লাহ ﷺ তা মেনে নিয়েছিলেন (সুনান আবু দাউদ ৩৩৪)।",
+      "en": "The same tayammum serves for wudu or ghusl, according to the intention. Amr ibn al-As (RA) did tayammum instead of ghusl in severe cold and the Prophet ﷺ approved (Sunan Abi Dawud 334)."
+     },
+     "check": true
+    }
+   ]
+  },
+  {
+   "slug": "masah-on-khuff",
+   "title": {
+    "bn": "মোজার উপর মাসেহ",
+    "en": "Wiping over Khuffs (Leather Socks)"
+   },
+   "summary": {
+    "bn": "ওযুতে পা না ধুয়ে মোজার উপর মাসেহ করার শর্ত, সময়সীমা ও পদ্ধতি।",
+    "en": "Conditions, time limits and method for wiping over khuffs in wudu instead of washing the feet."
+   },
+   "level": "detail",
+   "blocks": [
+    {
+     "type": "text",
+     "text": {
+      "bn": "মোজার উপর মাসেহ রাসুলুল্লাহ ﷺ থেকে বহু সাহাবির সূত্রে প্রমাণিত একটি সহজতা। পূর্ণ ওযু করে মোজা পরলে, পরবর্তী ওযুতে পা ধোয়ার বদলে মোজার উপরে ভেজা হাত বুলিয়ে নেওয়া যায়।",
+      "en": "Wiping over khuffs is an ease established from the Prophet ﷺ through many Companions. If you put them on after a complete wudu, in later wudus you may wipe over them with wet hands instead of washing the feet."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ২০৬; সহিহ মুসলিম ২৭৪ — \"এগুলো থাক, আমি পবিত্র অবস্থায় পরেছি\" (মুগিরা রা.)",
+      "en": "Sahih al-Bukhari 206; Sahih Muslim 274: \"Leave them, I put them on in a state of purity\" (al-Mughirah RA)"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "শর্তসমূহ",
+      "en": "Conditions"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "পূর্ণ ওযু করার পর মোজা পরতে হবে",
+       "en": "The khuffs must be put on after a complete wudu"
+      },
+      {
+       "bn": "মোজা টাখনুসহ পুরো পা ঢেকে রাখবে",
+       "en": "They must cover the whole foot including the ankles"
+      },
+      {
+       "bn": "এত মজবুত হবে যে তা পরে স্বাভাবিকভাবে হাঁটা যায়",
+       "en": "They must be strong enough to walk in normally"
+      },
+      {
+       "bn": "বড় ছেঁড়া থাকবে না (হানাফি মতে পায়ের ছোট তিন আঙুল পরিমাণ ছেঁড়া হলে মাসেহ হবে না)",
+       "en": "No large tear (Hanafi: a tear the size of three small toes prevents wiping)"
+      },
+      {
+       "bn": "গোসল ফরজ হলে মোজা খুলে গোসল করতে হবে — মাসেহ শুধু ওযুর জন্য",
+       "en": "If ghusl becomes due, the khuffs must be removed; wiping is only for wudu"
+      }
+     ]
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "সময়সীমা",
+      "en": "Time limit"
+     }
+    },
+    {
+     "type": "table",
+     "head": [
+      {
+       "bn": "অবস্থা",
+       "en": "Situation"
+      },
+      {
+       "bn": "মাসেহের মেয়াদ",
+       "en": "Duration of wiping"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "bn": "নিজ এলাকায় অবস্থানকারী (মুকিম)",
+        "en": "Resident"
+       },
+       {
+        "bn": "এক দিন এক রাত (২৪ ঘণ্টা)",
+        "en": "One day and night (24 hours)"
+       }
+      ],
+      [
+       {
+        "bn": "মুসাফির (শরিয়তসম্মত সফরে)",
+        "en": "Traveller (on a journey)"
+       },
+       {
+        "bn": "তিন দিন তিন রাত (৭২ ঘণ্টা)",
+        "en": "Three days and nights (72 hours)"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ মুসলিম ২৭৬ (আলি রা.)",
+      "en": "Sahih Muslim 276 (Ali RA)"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "info",
+     "text": {
+      "bn": "হানাফি ও শাফেয়ি মতে মেয়াদ গণনা শুরু হয় মোজা পরার পর প্রথম যখন ওযু ভাঙে তখন থেকে।",
+      "en": "In the Hanafi and Shafi'i views, the period is counted from the first time wudu breaks after putting the khuffs on."
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "মাসেহের পদ্ধতি",
+      "en": "How to wipe"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "হাত ভেজানো",
+      "en": "Wet the hands"
+     },
+     "text": {
+      "bn": "ওযুর বাকি সব অঙ্গ ধোয়ার পর দুই হাত পানিতে ভিজিয়ে নিন।",
+      "en": "After washing the other parts of wudu, wet both hands."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "মোজার উপরিভাগ মাসেহ",
+      "en": "Wipe the top of the khuffs"
+     },
+     "text": {
+      "bn": "ডান হাতের আঙুলগুলো ডান পায়ের মোজার উপরে আঙুলের মাথা থেকে টেনে পায়ের গোছার দিকে নিয়ে যান; বাম হাত দিয়ে বাম পায়ে একইভাবে — একবার। হানাফি মতে কমপক্ষে হাতের ছোট তিন আঙুল পরিমাণ জায়গা মাসেহ করা ফরজ।",
+      "en": "Draw the wet fingers of the right hand over the top of the right khuff from the toes towards the shin, and the left hand over the left, once. In the Hanafi view at least the width of three fingers must be wiped."
+     }
+    },
+    {
+     "type": "note",
+     "tone": "info",
+     "text": {
+      "bn": "মোজার নিচের দিকে বা গোড়ালিতে মাসেহ নেই। আলি (রা.) বলেছেন, দ্বীন যদি নিছক যুক্তি দিয়ে চলত, তবে মোজার উপরের চেয়ে নিচের দিক মাসেহ করাই বেশি যুক্তিযুক্ত হতো (সুনান আবু দাউদ ১৬২)।",
+      "en": "The underside and heel are not wiped. Ali (RA) said that if religion were based on opinion, wiping the underside would seem more fitting than the top (Sunan Abi Dawud 162)."
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "মাসেহ যেভাবে ভাঙে",
+      "en": "What ends the wiping"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "যেসব কারণে ওযু ভাঙে",
+       "en": "Anything that breaks wudu (then wipe again in the new wudu)"
+      },
+      {
+       "bn": "এক বা দুই পায়ের মোজা খুলে ফেলা বা পায়ের বেশির ভাগ বের হয়ে যাওয়া",
+       "en": "Removing one or both khuffs, or most of the foot coming out"
+      },
+      {
+       "bn": "মেয়াদ শেষ হয়ে যাওয়া",
+       "en": "The time limit running out"
+      },
+      {
+       "bn": "গোসল ফরজ হওয়া",
+       "en": "Ghusl becoming obligatory"
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "text": {
+      "bn": "ওযু থাকা অবস্থায় মোজা খুললে বা মেয়াদ শেষ হলে হানাফি মতে শুধু দুই পা ধুয়ে নিলেই চলে; পুরো ওযু নতুন করে করা উত্তম।",
+      "en": "If you remove the khuffs or the time ends while you still have wudu, the Hanafi view is that washing the feet is enough; repeating the whole wudu is better."
+     }
+    },
+    {
+     "type": "differ",
+     "title": {
+      "bn": "সাধারণ কাপড়ের বা নাইলনের পাতলা মোজায় মাসেহ করা যাবে কি?",
+      "en": "Can one wipe over ordinary thin cloth or nylon socks?"
+     },
+     "views": [
+      {
+       "label": {
+        "bn": "হানাফি, শাফেয়ি ও মালেকি",
+        "en": "Hanafi, Shafi'i and Maliki"
+       },
+       "text": {
+        "bn": "চামড়ার মোজা (খুফ) বা এমন মোটা মোজায় মাসেহ জায়েজ যা খুফের মতো — বাঁধা ছাড়াই পায়ে থাকে, পানি সহজে ভেতরে যায় না এবং পরে অনেক পথ হাঁটা যায়। সাধারণ পাতলা সুতি বা নাইলনের মোজায় মাসেহ জায়েজ নয়।",
+        "en": "Wiping is allowed over leather khuffs, or thick socks that act like khuffs: they stay up without tying, do not let water through easily, and can be walked in for a long distance. Ordinary thin cotton or nylon socks do not qualify."
+       },
+       "evidence": {
+        "bn": "মাসেহের মূল দলিল খুফ নিয়ে, যা মুতাওয়াতির; অন্য মোজাকে শুধু তখনই খুফের হুকুমে আনা যায় যখন তা খুফের মতো হয়। জাওরাবের হাদিসের সনদ নিয়ে অনেক মুহাদ্দিস আপত্তি করেছেন।",
+        "en": "The mass-transmitted evidence is about khuffs; other socks take the same ruling only if they are like khuffs. Many hadith scholars criticised the chain of the narration about socks (jawrab)."
+       }
+      },
+      {
+       "label": {
+        "bn": "হাম্বলি ও কিছু আলেম",
+        "en": "Hanbali and some scholars"
+       },
+       "text": {
+        "bn": "পা ঢেকে রাখে এমন সাধারণ মোজাতেও মাসেহ জায়েজ, যদিও শর্তের বিস্তারিত নিয়ে তাদের মধ্যেও পার্থক্য আছে।",
+        "en": "Wiping over ordinary socks that cover the foot is permitted, though they also differ on the exact conditions."
+       },
+       "evidence": {
+        "bn": "মুগিরা (রা.) বর্ণনা করেছেন, রাসুলুল্লাহ ﷺ জাওরাব (মোজা) ও জুতার উপর মাসেহ করেছেন — সুনান আবু দাউদ ১৫৯; সুনান তিরমিযি ৯৯; কয়েকজন সাহাবির আমল।",
+        "en": "Al-Mughirah (RA) reported that the Prophet ﷺ wiped over socks and sandals (Sunan Abi Dawud 159; Jami at-Tirmidhi 99); practice of several Companions."
+       }
+      }
+     ],
+     "check": true
+    },
+    {
+     "type": "note",
+     "tone": "info",
+     "text": {
+      "bn": "ক্ষতস্থানে ব্যান্ডেজ বা প্লাস্টার থাকলে এবং তা খুলে পানি দেওয়া ক্ষতিকর হলে, ব্যান্ডেজের উপর ভেজা হাত বুলিয়ে মাসেহ করা যায় — এর কোনো সময়সীমা নেই।",
+      "en": "If there is a bandage or cast on a wound and removing it or washing would cause harm, wipe over it with a wet hand. There is no time limit for this."
+     }
+    }
+   ]
+  },
+  {
+   "slug": "istinja",
+   "title": {
+    "bn": "ইস্তিঞ্জা ও টয়লেটের আদব",
+    "en": "Istinja and Toilet Etiquette"
+   },
+   "summary": {
+    "bn": "পেশাব-পায়খানার পর পবিত্র হওয়ার নিয়ম, টয়লেটে ঢোকা-বের হওয়ার দোয়া এবং জরুরি আদব।",
+    "en": "How to clean oneself after relieving oneself, the duas for entering and leaving, and key etiquette."
+   },
+   "level": "basic",
+   "blocks": [
+    {
+     "type": "text",
+     "text": {
+      "bn": "পেশাব-পায়খানার পর পানি, টিস্যু বা ঢিলা দিয়ে নাপাকি পরিষ্কার করাকে ইস্তিঞ্জা বলে। পেশাবের ছিটা থেকে সাবধান না থাকা কবরের আজাবের একটি কারণ বলে রাসুলুল্লাহ ﷺ সতর্ক করেছেন।",
+      "en": "Istinja is cleaning away impurity with water, tissue or stones after relieving oneself. The Prophet ﷺ warned that carelessness about urine splashes is a cause of punishment in the grave."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ২১৮; সহিহ মুসলিম ২৯২ — দুই কবরের ঘটনা",
+      "en": "Sahih al-Bukhari 218; Sahih Muslim 292: the two graves"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "টয়লেটে ঢোকার সময়",
+      "en": "When entering the toilet"
+     }
+    },
+    {
+     "type": "arabic",
+     "label": {
+      "bn": "প্রবেশের দোয়া (বাম পা দিয়ে, ভেতরে যাওয়ার আগে)",
+      "en": "Dua for entering (step in with the left foot, said before entering)"
+     },
+     "ar": "بِسْمِ اللَّهِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+     "pron": {
+      "bn": "বিসমিল্লাহ, আল্লাহুম্মা ইন্নি আউযু বিকা মিনাল খুবুসি ওয়াল খাবায়িস।",
+      "en": "Bismillah. Allahumma inni a'udhu bika minal-khubuthi wal-khaba'ith."
+     },
+     "meaning": {
+      "bn": "আল্লাহর নামে। হে আল্লাহ! আমি আপনার কাছে পুরুষ ও নারী শয়তান (সব ধরনের অনিষ্ট) থেকে আশ্রয় চাই।",
+      "en": "In the name of Allah. O Allah, I seek refuge with You from the male and female devils (from all filth and evil)."
+     },
+     "ref": {
+      "bn": "সহিহ বুখারি ১৪২; সহিহ মুসলিম ৩৭৫ (শুরুতে বিসমিল্লাহ: সুনান তিরমিযি)",
+      "en": "Sahih al-Bukhari 142; Sahih Muslim 375 (Bismillah at the start: Jami at-Tirmidhi)"
+     },
+     "check": true
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "বের হওয়ার সময়",
+      "en": "When leaving"
+     }
+    },
+    {
+     "type": "arabic",
+     "label": {
+      "bn": "বের হওয়ার দোয়া (ডান পা দিয়ে বের হয়ে)",
+      "en": "Dua for leaving (step out with the right foot)"
+     },
+     "ar": "غُفْرَانَكَ",
+     "pron": {
+      "bn": "গুফরানাকা",
+      "en": "Ghufranaka"
+     },
+     "meaning": {
+      "bn": "হে আল্লাহ! আমি আপনার ক্ষমা চাই।",
+      "en": "O Allah, I ask Your forgiveness."
+     },
+     "ref": {
+      "bn": "সুনান আবু দাউদ ৩০; সুনান তিরমিযি ৭",
+      "en": "Sunan Abi Dawud 30; Jami' at-Tirmidhi 7"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "ইস্তিঞ্জার নিয়ম",
+      "en": "How to do istinja"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "বাম হাত ব্যবহার করা",
+      "en": "Use the left hand"
+     },
+     "text": {
+      "bn": "পরিষ্কারের কাজ বাম হাতে করুন; ডান হাতে লজ্জাস্থান ধরবেন না।",
+      "en": "Clean with the left hand; do not hold the private part with the right hand."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "টিস্যু বা ঢিলা",
+      "en": "Tissue or stones"
+     },
+     "text": {
+      "bn": "প্রথমে টিস্যু, ঢিলা বা পবিত্র কিছু দিয়ে নাপাকি মুছে নিন — বেজোড় সংখ্যায়, কমপক্ষে তিনবার। হাড় বা গোবর দিয়ে নয়।",
+      "en": "First wipe the impurity with tissue, stones or other clean material, an odd number of times and at least three. Not with bone or dung."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "পানি দিয়ে ধোয়া",
+      "en": "Wash with water"
+     },
+     "text": {
+      "bn": "তারপর পানি দিয়ে ভালো করে ধুয়ে নিন। টিস্যু ও পানি দুটো একসাথে ব্যবহার করা সবচেয়ে উত্তম; শুধু পানিও যথেষ্ট।",
+      "en": "Then wash well with water. Using both tissue and water is best; water alone is enough."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "হাত পরিষ্কার করা",
+      "en": "Clean the hands"
+     },
+     "text": {
+      "bn": "শেষে সাবান বা মাটি দিয়ে হাত ভালোভাবে ধুয়ে নিন।",
+      "en": "Finally wash the hands well with soap or earth."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ মুসলিম ২৬২ (সালমান রা.) — কিবলামুখী না হওয়া, ডান হাতে ইস্তিঞ্জা না করা, তিনটির কম ঢিলা না নেওয়া, হাড় ও গোবর ব্যবহার না করা",
+      "en": "Sahih Muslim 262 (Salman RA): not facing the qiblah, not cleaning with the right hand, not fewer than three stones, not using bone or dung"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "জরুরি আদব",
+      "en": "Key etiquette"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "পেশাব-পায়খানার সময় কিবলার দিকে মুখ বা পিঠ করে বসবেন না — খোলা জায়গায় এটা নিষিদ্ধ; ঘরের ভেতরেও এড়িয়ে চলা নিরাপদ (হানাফি মতে ঘরের ভেতরেও মাকরুহ)।",
+       "en": "Do not face or turn your back to the qiblah while relieving yourself. It is forbidden in the open; avoiding it indoors is safer (Hanafis hold it disliked indoors too)."
+      },
+      {
+       "bn": "পেশাবের ছিটা যেন শরীর বা কাপড়ে না লাগে; সম্ভব হলে বসে পেশাব করুন।",
+       "en": "Avoid splashes on the body and clothes; sit to urinate where possible."
+      },
+      {
+       "bn": "আল্লাহর নাম লেখা কিছু (যেমন আংটি বা কাগজ) টয়লেটে না নেওয়া উত্তম।",
+       "en": "It is better not to take anything with Allah's name written on it into the toilet."
+      },
+      {
+       "bn": "ভেতরে কথা বলা, জিকির বা সালামের জবাব দেওয়া থেকে বিরত থাকুন।",
+       "en": "Avoid talking, dhikr or returning greetings inside."
+      },
+      {
+       "bn": "মানুষের চলাচলের পথ, ছায়া ও পানির উৎসে পেশাব-পায়খানা করবেন না।",
+       "en": "Do not relieve yourself on paths, in shade people use, or in water sources."
+      }
+     ]
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ১৪৪; সহিহ মুসলিম ২৬৪ — কিবলার দিকে মুখ বা পিঠ না করা (আবু আইয়ুব রা.)",
+      "en": "Sahih al-Bukhari 144; Sahih Muslim 264: not facing or turning one's back to the qiblah (Abu Ayyub RA)"
+     }
+    }
+   ]
+  },
+  {
+   "slug": "hayd-nifas-salah",
+   "title": {
+    "bn": "হায়েজ ও নিফাস: নামাজের বিধান",
+    "en": "Menstruation and Post-natal Bleeding: Rulings for Salah"
+   },
+   "summary": {
+    "bn": "মাসিক ও প্রসব-পরবর্তী রক্তস্রাবের সময় নামাজ, রোজা ও অন্যান্য ইবাদতের বিধান — সংক্ষেপে।",
+    "en": "A short guide to salah, fasting and other worship during menstruation and post-natal bleeding."
+   },
+   "level": "detail",
+   "blocks": [
+    {
+     "type": "text",
+     "text": {
+      "bn": "হায়েজ (মাসিক) ও নিফাস (সন্তান প্রসবের পরের রক্তস্রাব) আল্লাহর সৃষ্টিগত স্বাভাবিক বিষয়। এ সময় নারীদের জন্য নামাজ মাফ — এটা আল্লাহর দেওয়া সহজতা, এতে কোনো গুনাহ নেই।",
+      "en": "Menstruation (hayd) and post-natal bleeding (nifas) are natural matters created by Allah. During them women are excused from salah. It is an ease from Allah, and there is no sin in it."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সূরা বাকারা ২:২২২",
+      "en": "Al-Baqarah 2:222"
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "এ সময় যা নিষিদ্ধ",
+      "en": "What is not allowed during this time"
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "bn": "নামাজ পড়া — এবং পরে এই নামাজগুলো কাজা করতে হয় না",
+       "en": "Praying salah, and these prayers are not made up later"
+      },
+      {
+       "bn": "রোজা রাখা — তবে রমজানের ছুটে যাওয়া রোজা পরে কাজা করতে হবে",
+       "en": "Fasting, but missed Ramadan fasts must be made up later"
+      },
+      {
+       "bn": "কাবার তাওয়াফ",
+       "en": "Tawaf of the Ka'bah"
+      },
+      {
+       "bn": "কুরআন শরিফ (মুসহাফ) সরাসরি স্পর্শ করা",
+       "en": "Touching the Mushaf directly"
+      },
+      {
+       "bn": "মসজিদে অবস্থান করা",
+       "en": "Staying in the mosque"
+      },
+      {
+       "bn": "স্বামী-স্ত্রীর মিলন",
+       "en": "Marital intercourse"
+      }
+     ]
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ মুসলিম ৩৩৫; সহিহ বুখারি ৩২১ — \"আমাদের রোজা কাজা করার আদেশ দেওয়া হতো, নামাজ কাজার আদেশ দেওয়া হতো না\" (আয়েশা রা.)",
+      "en": "Sahih Muslim 335; Sahih al-Bukhari 321: \"We were ordered to make up the fasts but not the prayers\" (Aisha RA)"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "info",
+     "text": {
+      "bn": "অধিকাংশ আলেমের (হানাফি, শাফেয়ি, হাম্বলি) মতে এ সময় কুরআন তিলাওয়াত করা যায় না; মালেকি মাযহাব ও কিছু আলেম অনুমতি দিয়েছেন, কারণ নিষেধের হাদিসটির সনদ দুর্বল। জিকির, দোয়া, দরুদ, ইস্তিগফার এবং কুরআন শোনা সবার মতেই জায়েজ।",
+      "en": "Most scholars (Hanafi, Shafi'i, Hanbali) hold that she does not recite the Quran in this state; the Maliki school and some others allow it, as the hadith forbidding it has a weak chain. Dhikr, dua, durood, istighfar and listening to the Quran are allowed by all."
+     },
+     "check": true
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "সময়সীমা",
+      "en": "Durations"
+     }
+    },
+    {
+     "type": "differ",
+     "title": {
+      "bn": "হায়েজ ও নিফাসের সর্বনিম্ন ও সর্বোচ্চ সময়",
+      "en": "Minimum and maximum duration of hayd and nifas"
+     },
+     "views": [
+      {
+       "label": {
+        "bn": "হানাফি",
+        "en": "Hanafi"
+       },
+       "text": {
+        "bn": "হায়েজ: সর্বনিম্ন ৩ দিন, সর্বোচ্চ ১০ দিন। নিফাস: সর্বোচ্চ ৪০ দিন, সর্বনিম্ন কোনো সীমা নেই। এর বাইরের রক্ত ইস্তিহাযা (রোগজনিত)।",
+        "en": "Hayd: minimum 3 days, maximum 10. Nifas: maximum 40 days, no minimum. Bleeding outside these limits is istihadah (irregular bleeding)."
+       },
+       "evidence": {
+        "bn": "কিছু সাহাবি থেকে বর্ণিত বক্তব্য (যার সনদ নিয়ে আলোচনা আছে); নিফাসে নারীরা ৪০ দিন বসে থাকতেন — সুনান আবু দাউদ ৩১১।",
+        "en": "Statements reported from some Companions (whose chains are discussed); women used to wait 40 days after childbirth (Sunan Abi Dawud 311)."
+       }
+      },
+      {
+       "label": {
+        "bn": "শাফেয়ি ও হাম্বলি (মালেকি ভিন্ন হিসাবে)",
+        "en": "Shafi'i and Hanbali (Maliki counts differently)"
+       },
+       "text": {
+        "bn": "হায়েজ: সর্বনিম্ন এক দিন এক রাত, সর্বোচ্চ ১৫ দিন। নিফাস: সর্বোচ্চ ৬০ দিন (শাফেয়ি, মালেকি) বা ৪০ দিন (হাম্বলি)।",
+        "en": "Hayd: minimum one day and night, maximum 15 days. Nifas: maximum 60 days (Shafi'i, Maliki) or 40 (Hanbali)."
+       },
+       "evidence": {
+        "bn": "কুরআন-হাদিসে নির্দিষ্ট সীমা স্পষ্টভাবে নেই বলে তারা নারীদের বাস্তব অভিজ্ঞতা ও প্রচলিত অভ্যাসকে ভিত্তি ধরেছেন।",
+        "en": "As the texts give no explicit limit, they based it on women's actual, observed patterns."
+       }
+      }
+     ],
+     "check": true
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "পবিত্র হলে নামাজ",
+      "en": "Resuming salah"
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "রক্ত বন্ধ হলে গোসল",
+      "en": "Ghusl when the bleeding stops"
+     },
+     "text": {
+      "bn": "রক্ত পুরোপুরি বন্ধ হলে (সাদা স্রাব দেখা গেলে বা পুরো শুকনো থাকলে) ফরজ গোসল করে নামাজ শুরু করুন। নিফাসে ৪০ দিনের আগে রক্ত বন্ধ হলেও গোসল করে নামাজ পড়তে হবে।",
+      "en": "When the bleeding fully stops (clear discharge or complete dryness), do the obligatory ghusl and start praying. If post-natal bleeding stops before 40 days, she still does ghusl and prays."
+     }
+    },
+    {
+     "type": "step",
+     "title": {
+      "bn": "ওয়াক্তের ভেতরে পবিত্র হলে",
+      "en": "Becoming pure within a prayer time"
+     },
+     "text": {
+      "bn": "কোনো নামাজের ওয়াক্ত থাকতেই রক্ত বন্ধ হলে, গোসল করে সেই ওয়াক্তের নামাজ আদায় করা জরুরি। কতটুকু সময় বাকি থাকলে নামাজ জরুরি হয় — এর বিস্তারিত নিয়ে মাযহাবগুলোতে পার্থক্য আছে; স্থানীয় আলেমের কাছে জেনে নিন।",
+      "en": "If the bleeding stops while a prayer's time remains, she does ghusl and prays that prayer. How much time must remain for this differs between the madhhabs; ask a local scholar for the details."
+     }
+    },
+    {
+     "type": "note",
+     "tone": "info",
+     "text": {
+      "bn": "পবিত্র হওয়ার পর হলুদ বা বাদামি স্রাব দেখা দিলে তা হায়েজ হিসেবে গণ্য হয় না (সহিহ বুখারি ৩২৬)।",
+      "en": "Yellowish or brownish discharge after purity is not counted as menstruation (Sahih al-Bukhari 326)."
+     }
+    },
+    {
+     "type": "heading",
+     "text": {
+      "bn": "ইস্তিহাযা (অনিয়মিত রক্তস্রাব)",
+      "en": "Istihadah (irregular bleeding)"
+     }
+    },
+    {
+     "type": "text",
+     "text": {
+      "bn": "স্বাভাবিক সময়ের বাইরে যে রক্ত আসে তা ইস্তিহাযা — এটা রোগজনিত, হায়েজ নয়। এ অবস্থায় নামাজ-রোজা মাফ নয়। প্রতি ওয়াক্তে নতুন ওযু করে নামাজ পড়বেন এবং প্যাড ব্যবহার করবেন।",
+      "en": "Bleeding outside the normal pattern is istihadah: an illness, not menstruation. Salah and fasting are not excused. She makes a fresh wudu for each prayer time, uses a pad, and prays."
+     }
+    },
+    {
+     "type": "ref",
+     "text": {
+      "bn": "সহিহ বুখারি ২২৮ — \"এটা একটা শিরার রক্ত, হায়েজ নয়… প্রত্যেক নামাজের জন্য ওযু করো\" (ফাতিমা বিনতে আবি হুবাইশ রা.)",
+      "en": "Sahih al-Bukhari 228: \"That is from a blood vessel, not menstruation… make wudu for every prayer\" (Fatimah bint Abi Hubaysh RA)"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "text": {
+      "bn": "নিজের মাসিকের নিয়ম (কত দিন, কবে শুরু) লিখে রাখলে ইস্তিহাযা আর হায়েজ আলাদা করা সহজ হয়। জটিল অবস্থায় একজন নির্ভরযোগ্য আলেম ও ডাক্তারের পরামর্শ নিন।",
+      "en": "Keeping a record of your usual cycle (how many days, when it starts) makes it easier to tell istihadah from menstruation. In complicated cases, consult a trusted scholar and a doctor."
+     }
+    }
+   ]
+  }
+ ]
+}

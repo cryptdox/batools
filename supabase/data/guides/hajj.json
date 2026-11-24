@@ -1,0 +1,1915 @@
+{
+  "topic": "hajj",
+  "guides": [
+    {
+      "slug": "hajj-basics",
+      "title": {
+        "bn": "হজ: কার ওপর ফরজ",
+        "en": "Hajj: who must perform it"
+      },
+      "summary": {
+        "bn": "হজ জীবনে একবার ফরজ, যদি সামর্থ্য থাকে। হজ ফরজ হওয়ার শর্ত, ফজিলত ও হজের মাসগুলো।",
+        "en": "Hajj is obligatory once in a lifetime for those able. Its conditions, virtues and months."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "وَلِلَّهِ عَلَى النَّاسِ حِجُّ الْبَيْتِ مَنِ اسْتَطَاعَ إِلَيْهِ سَبِيلًا",
+          "pron": {
+            "bn": "ওয়া লিল্লাহি আলান নাসি হিজ্জুল বাইতি মানিসতাতাআ ইলাইহি সাবীলা",
+            "en": "Wa lillahi 'alan-nasi hijjul-bayti manistata'a ilayhi sabila"
+          },
+          "meaning": {
+            "bn": "আর আল্লাহর জন্য মানুষের ওপর এই ঘরের হজ করা ফরজ, যে সেখানে যাওয়ার সামর্থ্য রাখে।",
+            "en": "Pilgrimage to the House is a duty owed to Allah by people who are able to make their way there."
+          },
+          "ref": {
+            "bn": "সূরা আলে ইমরান ৩:৯৭",
+            "en": "Aal-Imran 3:97"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "হজ ইসলামের পঞ্চম স্তম্ভ। সামর্থ্যবান মুসলিমের ওপর জীবনে একবার হজ করা ফরজ; এর বেশি করলে তা নফল।",
+            "en": "Hajj is the fifth pillar of Islam. It is obligatory once in a lifetime on a Muslim who is able; more than that is voluntary."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১৩৩৭",
+            "en": "Sahih Muslim 1337"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "হজ ফরজ হওয়ার শর্ত",
+            "en": "Conditions that make hajj obligatory"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "মুসলিম হওয়া",
+              "en": "Being Muslim"
+            },
+            {
+              "bn": "প্রাপ্তবয়স্ক ও সুস্থ মস্তিষ্কের হওয়া",
+              "en": "Being adult and of sound mind"
+            },
+            {
+              "bn": "স্বাধীন হওয়া",
+              "en": "Being free"
+            },
+            {
+              "bn": "আর্থিক সামর্থ্য: যাতায়াত, থাকা-খাওয়ার খরচ এবং ফেরা পর্যন্ত পরিবারের ভরণপোষণের খরচের অতিরিক্ত অর্থ থাকা",
+              "en": "Financial ability: money for travel, lodging and food, beyond what the family needs until return"
+            },
+            {
+              "bn": "শারীরিক সামর্থ্য ও পথের নিরাপত্তা",
+              "en": "Physical ability and a safe route"
+            },
+            {
+              "bn": "নারীর জন্য মাহরাম বা স্বামী সঙ্গে থাকা (মতভেদ আছে; নারীদের গাইডে বিস্তারিত)",
+              "en": "For a woman, a mahram or husband accompanying her (differed on; see the women's guide)"
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "সামর্থ্য হওয়ার পর বিনা কারণে দেরি না করে হজ করা উচিত। হানাফি মাজহাবে (ইমাম আবু ইউসুফের মত অনুযায়ী) সামর্থ্য হলে প্রথম সুযোগেই হজ করা ওয়াজিব; দেরি করলে গুনাহ হয়, যদিও পরে করলে হজ আদায় হয়ে যায়।",
+            "en": "Once able, one should not delay hajj without reason. In the Hanafi school (per Imam Abu Yusuf) it must be done at the first opportunity; delaying is sinful, though hajj done later is still valid."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ফজিলত",
+            "en": "Virtues"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "যে আল্লাহর জন্য হজ করে, অশ্লীল কথা ও গুনাহ থেকে বেঁচে থাকে, সে সদ্য জন্ম নেওয়া শিশুর মতো নিষ্পাপ হয়ে ফেরে।",
+              "en": "Whoever performs hajj for Allah, avoiding obscenity and sin, returns as sinless as the day his mother bore him."
+            },
+            {
+              "bn": "কবুল হজের (হজে মাবরুর) প্রতিদান জান্নাত ছাড়া কিছু নয়।",
+              "en": "The reward of an accepted hajj (hajj mabrur) is nothing less than Paradise."
+            },
+            {
+              "bn": "আরাফার দিনের চেয়ে বেশি মানুষকে আল্লাহ অন্য কোনো দিন জাহান্নাম থেকে মুক্তি দেন না।",
+              "en": "There is no day on which Allah frees more people from the Fire than the day of Arafah."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৫২১; সহিহ বুখারি ১৭৭৩; সহিহ মুসলিম ১৩৪৮",
+            "en": "Sahih al-Bukhari 1521; Sahih al-Bukhari 1773; Sahih Muslim 1348"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "হজের মাস ও আদব",
+            "en": "The months and manners of hajj"
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "الْحَجُّ أَشْهُرٌ مَعْلُومَاتٌ ۚ فَمَنْ فَرَضَ فِيهِنَّ الْحَجَّ فَلَا رَفَثَ وَلَا فُسُوقَ وَلَا جِدَالَ فِي الْحَجِّ",
+          "pron": {
+            "bn": "আল হাজ্জু আশহুরুম মা'লূমাত, ফামান ফারাদা ফীহিন্নাল হাজ্জা ফালা রাফাসা ওয়ালা ফুসূকা ওয়ালা জিদালা ফিল হাজ্জ",
+            "en": "Al-hajju ashhurum ma'lumat, faman farada fihinnal-hajja fala rafatha wa la fusuqa wa la jidala fil-hajj"
+          },
+          "meaning": {
+            "bn": "হজের মাসগুলো সুবিদিত। যে এসব মাসে হজ নিজের ওপর অপরিহার্য করে নেয়, তার জন্য হজে অশ্লীলতা, পাপাচার ও ঝগড়া-বিবাদ নেই।",
+            "en": "Hajj is in well-known months. Whoever undertakes hajj in them, there is to be no obscenity, no wrongdoing and no quarrelling during hajj."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৯৭",
+            "en": "Al-Baqarah 2:197"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "হজের মাস: শাওয়াল, জিলকদ ও জিলহজের প্রথম দশ দিন। এর আগে হজের ইহরাম বাঁধা হানাফি মতে মাকরুহ এবং শাফেয়ি মতে তা উমরাহ হয়ে যায়। মূল হজের কাজগুলো হয় ৮ থেকে ১৩ জিলহজ।",
+            "en": "The months of hajj are Shawwal, Dhul Qa'dah and the first ten days of Dhul Hijjah. Entering ihram for hajj before them is disliked for Hanafis, and for Shafi'is it becomes an umrah. The main rites take place from 8 to 13 Dhul Hijjah."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "হজের আগে টাকা হালাল কি না নিশ্চিত হোন, কারও কাছে ঋণ বা হক থাকলে মিটিয়ে নিন, খাঁটি তওবা করুন এবং হজের নিয়মগুলো আগে থেকে ভালোভাবে শিখে নিন।",
+            "en": "Before hajj, make sure your money is lawful, settle debts and rights owed to others, repent sincerely, and learn the rites well in advance."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "hajj-types-miqat",
+      "title": {
+        "bn": "হজের প্রকার ও মিকাত",
+        "en": "Types of hajj and the miqat"
+      },
+      "summary": {
+        "bn": "ইফরাদ, কিরান ও তামাত্তু হজের পার্থক্য এবং কোথা থেকে ইহরাম বাঁধতে হয়।",
+        "en": "The difference between ifrad, qiran and tamattu', and where ihram must be entered."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "হজের তিন প্রকার",
+            "en": "The three types of hajj"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "প্রকার",
+              "en": "Type"
+            },
+            {
+              "bn": "কীভাবে",
+              "en": "How"
+            },
+            {
+              "bn": "কুরবানি (হাদি)",
+              "en": "Sacrifice (hady)"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "ইফরাদ",
+                "en": "Ifrad"
+              },
+              {
+                "bn": "শুধু হজের ইহরাম; উমরাহ ছাড়া কেবল হজ",
+                "en": "Ihram for hajj alone, without umrah"
+              },
+              {
+                "bn": "ওয়াজিব নয় (চাইলে নফল)",
+                "en": "Not required (optional)"
+              }
+            ],
+            [
+              {
+                "bn": "কিরান",
+                "en": "Qiran"
+              },
+              {
+                "bn": "উমরাহ ও হজ একই ইহরামে; উমরাহর পর ইহরাম খোলা যায় না, হজ শেষে খোলা হয়",
+                "en": "Umrah and hajj in one ihram; ihram is not removed after umrah, only after hajj"
+              },
+              {
+                "bn": "ওয়াজিব",
+                "en": "Required"
+              }
+            ],
+            [
+              {
+                "bn": "তামাত্তু",
+                "en": "Tamattu'"
+              },
+              {
+                "bn": "হজের মাসে প্রথমে উমরাহ করে ইহরাম খুলে ফেলা, তারপর ৮ জিলহজ মক্কা থেকে নতুন করে হজের ইহরাম",
+                "en": "Umrah in the hajj months, leave ihram, then a new ihram for hajj from Makkah on 8 Dhul Hijjah"
+              },
+              {
+                "bn": "ওয়াজিব",
+                "en": "Required"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "arabic",
+          "ar": "فَمَنْ تَمَتَّعَ بِالْعُمْرَةِ إِلَى الْحَجِّ فَمَا اسْتَيْسَرَ مِنَ الْهَدْيِ",
+          "pron": {
+            "bn": "ফামান তামাত্তাআ বিল উমরাতি ইলাল হাজ্জি ফামাসতাইসারা মিনাল হাদই",
+            "en": "Faman tamatta'a bil-'umrati ilal-hajji famastaysara minal-hady"
+          },
+          "meaning": {
+            "bn": "যে ব্যক্তি উমরাহকে হজের সাথে মিলিয়ে উপকৃত হয়, সে যা সহজলভ্য তা কুরবানি করবে।",
+            "en": "Whoever benefits by combining umrah with hajj must offer whatever sacrifice is easily obtainable."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৯৬",
+            "en": "Al-Baqarah 2:196"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "বাংলাদেশ থেকে যাওয়া হাজিদের বেশির ভাগ তামাত্তু হজ করেন, কারণ তারা কয়েক সপ্তাহ আগে পৌঁছান এবং দীর্ঘ সময় ইহরামে থাকা কঠিন। মক্কার স্থায়ী বাসিন্দাদের জন্য তামাত্তু ও কিরান নেই (হানাফি মত)।",
+            "en": "Most pilgrims from Bangladesh perform tamattu', since they arrive weeks early and staying long in ihram is hard. Residents of Makkah do not perform tamattu' or qiran (Hanafi view)."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "কোন হজ উত্তম",
+            "en": "Which type is best"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "কিরান সর্বোত্তম, তারপর তামাত্তু, তারপর ইফরাদ।",
+                "en": "Qiran is best, then tamattu', then ifrad."
+              },
+              "evidence": {
+                "bn": "নবী (সা.) কিরান হজ করেছিলেন বলে আনাস (রা.)-এর বর্ণনা; এতে কষ্ট ও ইবাদত বেশি।",
+                "en": "Anas's report that the Prophet performed qiran; it involves more effort and worship."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও মালেকি",
+                "en": "Shafi'i and Maliki"
+              },
+              "text": {
+                "bn": "ইফরাদ উত্তম (সেই বছরই উমরাহ করলে)।",
+                "en": "Ifrad is best (if umrah is done the same year)."
+              },
+              "evidence": {
+                "bn": "জাবির (রা.) ও আয়েশা (রা.)-এর কিছু বর্ণনায় নবী (সা.) ইফরাদ করেছিলেন বলে এসেছে; খুলাফায়ে রাশেদিনের আমল।",
+                "en": "Some reports from Jabir and Aishah say the Prophet performed ifrad; practice of the rightly-guided caliphs."
+              }
+            },
+            {
+              "label": {
+                "bn": "হাম্বলি",
+                "en": "Hanbali"
+              },
+              "text": {
+                "bn": "তামাত্তু উত্তম।",
+                "en": "Tamattu' is best."
+              },
+              "evidence": {
+                "bn": "নবী (সা.) কুরবানির পশু সঙ্গে না থাকা সাহাবিদের তামাত্তু করতে বলেন এবং বলেন, আগে জানলে তিনি নিজেও পশু সঙ্গে আনতেন না।",
+                "en": "The Prophet told Companions without sacrificial animals to make it tamattu', saying that had he known beforehand he would not have brought his animal."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "মিকাত",
+            "en": "The miqat"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "মিকাত হলো সেই নির্ধারিত সীমা, যেখান থেকে হজ বা উমরাহর নিয়তে আসা ব্যক্তিকে ইহরাম বাঁধতে হয়। ইহরাম ছাড়া মিকাত পার হলে ফিরে এসে ইহরাম বাঁধতে হবে, নয়তো দম (একটি পশু কুরবানি) দিতে হবে।",
+            "en": "The miqat is the fixed boundary at which anyone intending hajj or umrah must enter ihram. Crossing it without ihram means returning to enter ihram there, or else a dam (one animal sacrifice) is due."
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "মিকাত",
+              "en": "Miqat"
+            },
+            {
+              "bn": "কাদের জন্য",
+              "en": "For whom"
+            },
+            {
+              "bn": "বর্তমান নাম/অবস্থান",
+              "en": "Today"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "যুল হুলাইফা",
+                "en": "Dhul Hulayfah"
+              },
+              {
+                "bn": "মদিনা থেকে আসা ব্যক্তি",
+                "en": "Those coming from Madinah"
+              },
+              {
+                "bn": "আবইয়ার আলী (মদিনার কাছে)",
+                "en": "Abyar Ali (near Madinah)"
+              }
+            ],
+            [
+              {
+                "bn": "জুহফা",
+                "en": "Al-Juhfah"
+              },
+              {
+                "bn": "সিরিয়া, মিসর ও পশ্চিম দিক থেকে",
+                "en": "From Syria, Egypt and the west"
+              },
+              {
+                "bn": "রাবিগের কাছে",
+                "en": "Near Rabigh"
+              }
+            ],
+            [
+              {
+                "bn": "কারনুল মানাযিল",
+                "en": "Qarn al-Manazil"
+              },
+              {
+                "bn": "নজদ ও পূর্ব দিক থেকে",
+                "en": "From Najd and the east"
+              },
+              {
+                "bn": "আস-সাইল আল-কাবির",
+                "en": "As-Sayl al-Kabir"
+              }
+            ],
+            [
+              {
+                "bn": "ইয়ালামলাম",
+                "en": "Yalamlam"
+              },
+              {
+                "bn": "ইয়েমেন ও দক্ষিণ দিক থেকে; উপমহাদেশ থেকে সমুদ্রপথে আসা যাত্রী",
+                "en": "From Yemen and the south; travellers by sea from the subcontinent"
+              },
+              {
+                "bn": "আস-সাদিয়া",
+                "en": "As-Sa'diyyah"
+              }
+            ],
+            [
+              {
+                "bn": "যাতু ইরক",
+                "en": "Dhat 'Irq"
+              },
+              {
+                "bn": "ইরাক থেকে",
+                "en": "From Iraq"
+              },
+              {
+                "bn": "বর্তমানে সড়কপথে খুব কম ব্যবহৃত",
+                "en": "Rarely used by road today"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৫২৪; সহিহ মুসলিম ১১৮১",
+            "en": "Sahih al-Bukhari 1524; Sahih Muslim 1181"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "বাংলাদেশ থেকে সরাসরি জেদ্দাগামী বিমানের যাত্রীদের বিমান মিকাতের সীমা পার হয় জেদ্দায় নামার আগেই। তাই ঢাকা থেকেই ইহরামের কাপড় পরে নিন (বা বিমানে পরুন) এবং মিকাত কাছে আসার ঘোষণা হলে নিয়ত করে তালবিয়া পড়ুন। জেদ্দায় নেমে ইহরাম বাঁধার অপেক্ষা করবেন না।",
+            "en": "On direct flights from Bangladesh to Jeddah, the plane crosses the miqat line before landing. So put on the ihram clothes in Dhaka (or on the plane) and make the intention and talbiyah when the miqat is announced. Do not wait to enter ihram in Jeddah."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "যারা প্রথমে মদিনা যাবেন, তারা বিমানে ইহরাম বাঁধবেন না; পরে মদিনা থেকে মক্কা যাওয়ার পথে যুল হুলাইফায় ইহরাম বাঁধবেন। মিকাতের ভেতরে বসবাসকারীরা নিজের অবস্থান থেকেই ইহরাম বাঁধেন; আর মক্কায় অবস্থানকারী হজের ইহরাম মক্কা থেকে এবং উমরাহর ইহরাম হারামের সীমার বাইরে (যেমন তানঈম) থেকে বাঁধেন।",
+            "en": "Those going to Madinah first do not enter ihram on the plane; they enter it at Dhul Hulayfah on the way from Madinah to Makkah. People living inside the miqat enter ihram from where they are; someone in Makkah enters hajj ihram in Makkah and umrah ihram outside the Haram boundary (e.g. at Tan'im)."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "hajj-ihram",
+      "title": {
+        "bn": "ইহরাম: নিয়ম ও নিষেধ",
+        "en": "Ihram: rules and prohibitions"
+      },
+      "summary": {
+        "bn": "ইহরামের প্রস্তুতি, পোশাক, নিয়ত, তালবিয়া এবং ইহরাম অবস্থায় যা নিষেধ।",
+        "en": "Preparing for ihram, the clothing, the intention, the talbiyah and what is forbidden in ihram."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "ইহরাম মানে হজ বা উমরাহর নিয়ত করে তালবিয়া পড়ার মাধ্যমে এমন অবস্থায় প্রবেশ করা, যেখানে কিছু হালাল কাজও সাময়িকভাবে নিষিদ্ধ হয়ে যায়। শুধু সাদা কাপড় পরলেই ইহরাম হয় না; নিয়ত ও তালবিয়াই মূল।",
+            "en": "Ihram is entering, by intention and the talbiyah, a sacred state in which some normally lawful things become temporarily forbidden. Wearing white sheets alone is not ihram; the intention and talbiyah are what count."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "পরিচ্ছন্নতা",
+            "en": "Cleanliness"
+          },
+          "text": {
+            "bn": "নখ কাটা, অবাঞ্ছিত লোম পরিষ্কার করা, তারপর গোসল করা (সুন্নত; গোসল সম্ভব না হলে ওজু)। হায়েজ-নিফাস অবস্থায় নারীরাও গোসল করবেন।",
+            "en": "Trim nails, remove unwanted hair, then take a ghusl (sunnah; wudu if ghusl is not possible). Women in menstruation or post-natal bleeding also take this ghusl."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "সুগন্ধি",
+            "en": "Perfume"
+          },
+          "text": {
+            "bn": "পুরুষ ইহরামের আগে শরীরে (কাপড়ে নয়) সুগন্ধি লাগাতে পারেন; ইহরামের পরে তার ঘ্রাণ থেকে গেলে সমস্যা নেই।",
+            "en": "Men may apply perfume to the body (not the ihram cloth) before ihram; its lingering scent afterwards is fine."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "পোশাক",
+            "en": "Clothing"
+          },
+          "text": {
+            "bn": "পুরুষ: সেলাইবিহীন দুটি চাদর, একটি লুঙ্গির মতো (ইজার), একটি গায়ে (রিদা); সাদা হওয়া উত্তম। মাথা খোলা, আর এমন জুতা/স্যান্ডেল যাতে পায়ের পাতার মাঝখানের উঁচু হাড় খোলা থাকে। নারী: সাধারণ শালীন পোশাক, যেকোনো রঙের; শুধু মুখে নিকাব ও হাতে মোজা পরবেন না।",
+            "en": "Men: two unstitched sheets, one wrapped round the waist (izar) and one over the shoulders (rida), preferably white; head uncovered; sandals that leave the raised middle of the foot exposed. Women: ordinary modest clothes of any colour; only no face veil (niqab) and no gloves."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দুই রাকাত নামাজ",
+            "en": "Two rakats"
+          },
+          "text": {
+            "bn": "মাকরুহ সময় না হলে ইহরামের নিয়তে দুই রাকাত নামাজ পড়া সুন্নত (হানাফি মত); অন্যদের মতে কোনো ফরজ নামাজের পরে ইহরাম বাঁধা উত্তম।",
+            "en": "If it is not a disliked time, pray two rakats for ihram (Hanafi view); others say it is best to enter ihram after an obligatory prayer."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "নিয়ত ও তালবিয়া",
+            "en": "Intention and talbiyah"
+          },
+          "text": {
+            "bn": "মিকাতে বা তার আগে মনে মনে হজ/উমরাহর নিয়ত করুন এবং তালবিয়া পড়ুন। তালবিয়া পড়ার সঙ্গে সঙ্গে ইহরাম শুরু।",
+            "en": "At or before the miqat, make the intention for hajj/umrah in your heart and say the talbiyah. Ihram begins with it."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নিয়ত মনের বিষয়। প্রচলিত মৌখিক উদাহরণ: ইফরাদে 'লাব্বাইকা হাজ্জান', তামাত্তুতে প্রথমে 'লাব্বাইকা উমরাতান', কিরানে 'লাব্বাইকা উমরাতান ওয়া হাজ্জান'। মুখে বলা শর্ত নয়, তবে এভাবে বলা সাহাবিদের থেকে বর্ণিত।",
+            "en": "The intention is in the heart. Common spoken examples: for ifrad 'Labbayka hajjan', for tamattu' first 'Labbayka 'umratan', for qiran 'Labbayka 'umratan wa hajjan'. Saying it is not a condition, though Companions are reported to have said it."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম (আনাস রা.: 'লাব্বাইকা উমরাতান ওয়া হাজ্জান')",
+            "en": "Sahih Muslim (Anas: 'Labbayka 'umratan wa hajjan')"
+          },
+          "check": true
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "তালবিয়া",
+            "en": "Talbiyah"
+          },
+          "ar": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ",
+          "pron": {
+            "bn": "লাব্বাইকা আল্লাহুম্মা লাব্বাইক, লাব্বাইকা লা শারীকা লাকা লাব্বাইক, ইন্নাল হামদা ওয়ান নি'মাতা লাকা ওয়াল মুলক, লা শারীকা লাক",
+            "en": "Labbayka Allahumma labbayk, labbayka la sharika laka labbayk, innal-hamda wan-ni'mata laka wal-mulk, la sharika lak"
+          },
+          "meaning": {
+            "bn": "আমি হাজির, হে আল্লাহ! আমি হাজির। আমি হাজির, তোমার কোনো শরিক নেই, আমি হাজির। নিশ্চয়ই সব প্রশংসা, সব নিয়ামত তোমারই, আর রাজত্বও তোমার; তোমার কোনো শরিক নেই।",
+            "en": "Here I am, O Allah, here I am. Here I am, You have no partner, here I am. Surely all praise and blessings are Yours, and the dominion; You have no partner."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি ১৫৪৯; সহিহ মুসলিম ১১৮৪",
+            "en": "Sahih al-Bukhari 1549; Sahih Muslim 1184"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "পুরুষরা উচ্চস্বরে, নারীরা নিচু স্বরে তালবিয়া পড়বেন। ইহরাম থেকে শুরু করে উমরাহয় তাওয়াফ শুরু পর্যন্ত, আর হজে ১০ জিলহজ জামরাতুল আকাবায় প্রথম কংকর মারা পর্যন্ত বেশি বেশি তালবিয়া পড়ুন।",
+            "en": "Men say the talbiyah aloud, women quietly. Say it often from ihram until starting tawaf in umrah, and in hajj until the first pebble at Jamrat al-Aqabah on 10 Dhul Hijjah."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ইহরাম অবস্থায় যা নিষেধ",
+            "en": "What is forbidden in ihram"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "চুল, দাড়ি বা শরীরের কোনো লোম কাটা বা ওঠানো; নখ কাটা",
+              "en": "Cutting or removing hair from the head, beard or body; cutting nails"
+            },
+            {
+              "bn": "শরীর, কাপড় বা খাবারে সুগন্ধি ব্যবহার; সুগন্ধিযুক্ত সাবান",
+              "en": "Using perfume on the body, clothes or food; scented soap"
+            },
+            {
+              "bn": "পুরুষের জন্য সেলাই করা পোশাক (জামা, প্যান্ট, গেঞ্জি, মোজা) পরা এবং মাথা ঢাকা",
+              "en": "For men: wearing sewn, body-shaped garments (shirts, trousers, vests, socks) and covering the head"
+            },
+            {
+              "bn": "মুখ ঢাকা (পুরুষের জন্য সব মাজহাবে; নারীর জন্য মুখের সঙ্গে লেগে থাকা নিকাব)",
+              "en": "Covering the face (for men in all schools; for women, a niqab fitted to the face)"
+            },
+            {
+              "bn": "স্থলের প্রাণী শিকার করা বা শিকারে সাহায্য করা",
+              "en": "Hunting land animals or helping to hunt"
+            },
+            {
+              "bn": "বিয়ে করা বা বিয়ের প্রস্তাব দেওয়া",
+              "en": "Marrying or proposing marriage"
+            },
+            {
+              "bn": "স্ত্রী-সহবাস, কামভাবের সাথে স্পর্শ বা অশ্লীল কথা",
+              "en": "Marital relations, touching with desire, or obscene talk"
+            },
+            {
+              "bn": "ঝগড়া-বিবাদ ও সব ধরনের গুনাহ (এগুলো সবসময় নিষেধ, ইহরামে আরও কঠোরভাবে)",
+              "en": "Quarrelling and all sins (always forbidden, more so in ihram)"
+            },
+            {
+              "bn": "হারামের সীমার ভেতরের গাছ কাটা বা ঘাস ওপড়ানো (ইহরাম ছাড়াও হারামে নিষেধ)",
+              "en": "Cutting trees or uprooting plants within the Haram (forbidden there even without ihram)"
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৫৪২; সহিহ বুখারি ১৮৩৮",
+            "en": "Sahih al-Bukhari 1542; Sahih al-Bukhari 1838"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যা করা যায়",
+            "en": "What is allowed"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "গোসল করা, সুগন্ধিহীন সাবান ব্যবহার",
+              "en": "Bathing and using unscented soap"
+            },
+            {
+              "bn": "ঘড়ি, চশমা, বেল্ট বা টাকার থলে ব্যবহার",
+              "en": "Wearing a watch, glasses, a belt or money pouch"
+            },
+            {
+              "bn": "ছাতা বা তাঁবুর ছায়া নেওয়া",
+              "en": "Shade of an umbrella or tent"
+            },
+            {
+              "bn": "ইহরামের কাপড় বদলানো বা ধোয়া",
+              "en": "Changing or washing the ihram sheets"
+            },
+            {
+              "bn": "প্রয়োজনে ওষুধ খাওয়া, ইনজেকশন নেওয়া",
+              "en": "Taking medicine or injections when needed"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "নিষিদ্ধ কাজ হয়ে গেলে",
+            "en": "If a prohibition is broken"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "ভুলে বা অজ্ঞতায় কিংবা জেনেশুনে নিষিদ্ধ কাজ হয়ে গেলে কাজের ধরন অনুযায়ী দম (মক্কার হারামে একটি ছাগল/ভেড়া বা গরু-উটের সাত ভাগের এক ভাগ কুরবানি) বা সদকা দিতে হয়। আরাফায় অবস্থানের আগে সহবাস করলে হজ নষ্ট হয়ে যায়। নির্দিষ্ট ক্ষেত্রে কী দিতে হবে, কাফেলার আলেম বা মুয়াল্লিমের কাছে জেনে নিন।",
+            "en": "If a prohibition is broken, by mistake, ignorance or deliberately, a dam (sacrificing a sheep/goat or a seventh of a cow/camel in the Haram) or a charity is due depending on the act. Intercourse before standing at Arafah invalidates the hajj. Ask your group's scholar what is due in a specific case."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সূরা বাকারা ২:১৯৬",
+            "en": "Al-Baqarah 2:196"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "hajj-days-8-9",
+      "title": {
+        "bn": "হজের দিন: ৮ ও ৯ জিলহজ (মিনা, আরাফা, মুজদালিফা)",
+        "en": "Hajj days 8–9: Mina, Arafah, Muzdalifah"
+      },
+      "summary": {
+        "bn": "তারবিয়ার দিন মিনায় যাওয়া, আরাফার দিনের অবস্থান ও দোয়া, তারপর মুজদালিফায় রাত যাপন।",
+        "en": "Going to Mina on the day of Tarwiyah, standing at Arafah with its dua, then the night at Muzdalifah."
+      },
+      "level": "detail",
+      "blocks": [
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "তারিখ",
+              "en": "Date"
+            },
+            {
+              "bn": "স্থান",
+              "en": "Place"
+            },
+            {
+              "bn": "প্রধান কাজ",
+              "en": "Main acts"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "৮ জিলহজ",
+                "en": "8 Dhul Hijjah"
+              },
+              {
+                "bn": "মিনা",
+                "en": "Mina"
+              },
+              {
+                "bn": "ইহরাম (তামাত্তু হলে), মিনায় পাঁচ ওয়াক্ত নামাজ",
+                "en": "Ihram (for tamattu'), five prayers in Mina"
+              }
+            ],
+            [
+              {
+                "bn": "৯ জিলহজ",
+                "en": "9 Dhul Hijjah"
+              },
+              {
+                "bn": "আরাফা → মুজদালিফা",
+                "en": "Arafah → Muzdalifah"
+              },
+              {
+                "bn": "আরাফায় অবস্থান (হজের প্রধান রুকন), রাতে মুজদালিফা",
+                "en": "Standing at Arafah (the main pillar), night at Muzdalifah"
+              }
+            ],
+            [
+              {
+                "bn": "১০ জিলহজ",
+                "en": "10 Dhul Hijjah"
+              },
+              {
+                "bn": "মুজদালিফা → মিনা → মক্কা",
+                "en": "Muzdalifah → Mina → Makkah"
+              },
+              {
+                "bn": "বড় জামরায় কংকর, কুরবানি, মাথা মুণ্ডন, তাওয়াফে জিয়ারত",
+                "en": "Stoning the big jamrah, sacrifice, shaving, tawaf al-ifadah"
+              }
+            ],
+            [
+              {
+                "bn": "১১–১২ জিলহজ",
+                "en": "11–12 Dhul Hijjah"
+              },
+              {
+                "bn": "মিনা",
+                "en": "Mina"
+              },
+              {
+                "bn": "তিন জামরায় কংকর",
+                "en": "Stoning the three jamarat"
+              }
+            ],
+            [
+              {
+                "bn": "১৩ জিলহজ (ঐচ্ছিক)",
+                "en": "13 Dhul Hijjah (optional)"
+              },
+              {
+                "bn": "মিনা",
+                "en": "Mina"
+              },
+              {
+                "bn": "তিন জামরায় কংকর, তারপর বিদায়",
+                "en": "Stoning the three jamarat, then departure"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "৮ জিলহজ: ইয়াওমুত তারবিয়া",
+            "en": "8 Dhul Hijjah: the day of Tarwiyah"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "ইহরাম",
+            "en": "Ihram"
+          },
+          "text": {
+            "bn": "তামাত্তু হাজিরা মক্কায় নিজের অবস্থানস্থল থেকে গোসল করে হজের ইহরাম বাঁধবেন ও তালবিয়া পড়বেন। কিরান ও ইফরাদ হাজিরা আগে থেকেই ইহরামে আছেন।",
+            "en": "Tamattu' pilgrims take a ghusl and enter hajj ihram from their lodging in Makkah and say the talbiyah. Qiran and ifrad pilgrims are already in ihram."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মিনায় যাওয়া",
+            "en": "Go to Mina"
+          },
+          "text": {
+            "bn": "সকালে মিনায় গিয়ে জোহর, আসর, মাগরিব, এশা এবং ৯ তারিখের ফজর মিনায় আদায় করা ও রাত যাপন সুন্নত। নামাজ নিজ নিজ ওয়াক্তে পড়বেন।",
+            "en": "Go to Mina in the morning; praying Zuhr, Asr, Maghrib, Isha and the Fajr of the 9th there and spending the night is sunnah. Pray each prayer in its own time."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "মিনায় চার রাকাতের নামাজ কসর হবে কি না, তা নিয়ে মতভেদ আছে: হানাফি মতে মক্কায় ১৫ দিন বা তার বেশি অবস্থানের নিয়ত করে থাকা হাজিরা পুরো নামাজ পড়বেন; অন্য অনেক আলেমের মতে সব হাজি মিনা-আরাফা-মুজদালিফায় কসর করবেন। নিজের কাফেলার আলেমের নির্দেশনা মানুন।",
+            "en": "Scholars differ on shortening four-rakat prayers in Mina: in the Hanafi view pilgrims who intended to stay 15 days or more in Makkah pray in full; many others say all pilgrims shorten in Mina, Arafah and Muzdalifah. Follow your group's scholar."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "৯ জিলহজ: আরাফার দিন",
+            "en": "9 Dhul Hijjah: the day of Arafah"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "আরাফায় যাওয়া",
+            "en": "Go to Arafah"
+          },
+          "text": {
+            "bn": "সূর্যোদয়ের পর তালবিয়া পড়তে পড়তে আরাফার দিকে রওনা হোন। আরাফার সীমানা নির্দেশক বোর্ড দেখে নিশ্চিত হোন যে আপনি সীমার ভেতরে আছেন; উরানা উপত্যকা আরাফার অংশ নয়।",
+            "en": "After sunrise set off for Arafah saying the talbiyah. Check the boundary signs to be sure you are inside Arafah; the valley of 'Uranah is not part of it."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "অবস্থান (উকুফ)",
+            "en": "The standing (wuquf)"
+          },
+          "text": {
+            "bn": "জাওয়াল (দুপুরে সূর্য হেলে পড়া) থেকে সূর্যাস্ত পর্যন্ত আরাফায় অবস্থান করুন। দাঁড়িয়ে, বসে, শুয়ে যেকোনোভাবে থাকা যায়; সময়টা কাটান দোয়া, জিকির, ইস্তিগফার, তালবিয়া ও কুরআন তিলাওয়াতে, কিবলামুখী হয়ে হাত তুলে দোয়া করুন।",
+            "en": "Stay at Arafah from zawal (just after midday) until sunset. You may stand, sit or lie down; spend the time in dua, dhikr, seeking forgiveness, talbiyah and Quran, facing the qiblah with hands raised in dua."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "জোহর ও আসর",
+            "en": "Zuhr and Asr"
+          },
+          "text": {
+            "bn": "মসজিদে নামিরায় ইমামের সঙ্গে জোহর ও আসর জোহরের ওয়াক্তে একসাথে পড়া হয়।",
+            "en": "At Masjid Namirah, Zuhr and Asr are prayed together in Zuhr time with the imam."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "তাঁবুতে আলাদা জামাতে জোহর-আসর একসাথে পড়া যাবে কি না, তা নিয়ে মতভেদ আছে: ইমাম আবু হানিফার মতে একসাথে পড়ার শর্ত হজের ইমামের সঙ্গে পড়া, নইলে প্রতিটি নিজ ওয়াক্তে; অন্য মাজহাব ও হানাফি সাহিবাইনের মতে তাঁবুতেও একসাথে পড়া যায়।",
+            "en": "Scholars differ on combining Zuhr and Asr in separate congregations in the tents: for Imam Abu Hanifa combining requires praying with the hajj imam, otherwise each is prayed in its time; the other schools and Abu Hanifa's two students allow combining in the tents."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "আরাফার দিনের শ্রেষ্ঠ দোয়া",
+            "en": "The best dua on the day of Arafah"
+          },
+          "ar": "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+          "pron": {
+            "bn": "লা ইলাহা ইল্লাল্লাহু ওয়াহদাহু লা শারীকা লাহু, লাহুল মুলকু ওয়া লাহুল হামদু, ওয়া হুয়া আলা কুল্লি শাইয়িন কাদীর",
+            "en": "La ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamd, wa huwa 'ala kulli shay'in qadir"
+          },
+          "meaning": {
+            "bn": "আল্লাহ ছাড়া কোনো ইলাহ নেই, তিনি এক, তাঁর কোনো শরিক নেই। রাজত্ব তাঁরই, প্রশংসাও তাঁর, তিনি সবকিছুর ওপর ক্ষমতাবান।",
+            "en": "There is no god but Allah alone, without partner. His is the dominion and His is the praise, and He has power over all things."
+          },
+          "ref": {
+            "bn": "জামে তিরমিজি ৩৫৮৫",
+            "en": "Jami' at-Tirmidhi 3585"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নবী (সা.) বলেছেন, সর্বোত্তম দোয়া আরাফার দিনের দোয়া, আর তিনি ও পূর্ববর্তী নবীগণ যা বলেছেন তার মধ্যে শ্রেষ্ঠ এই বাক্য। নিজের ভাষায় নিজের, পরিবারের ও উম্মাহর জন্য মন খুলে দোয়া করুন। জাবালে রহমত পাহাড়ে ওঠা জরুরি নয়; আরাফার যেকোনো স্থানে অবস্থানই যথেষ্ট।",
+            "en": "The Prophet said the best dua is the dua of the day of Arafah, and the best words he and the prophets before him said are these. Pray from the heart in your own language for yourself, your family and the ummah. Climbing Jabal ar-Rahmah is not required; anywhere within Arafah is enough."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "জামে তিরমিজি ৮৮৯; সহিহ মুসলিম ১২১৮",
+            "en": "Jami' at-Tirmidhi 889; Sahih Muslim 1218"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "সূর্যাস্তের আগে আরাফার সীমা থেকে বের হবেন না। হানাফি মতে দিনে আরাফায় পৌঁছালে সূর্যাস্ত পর্যন্ত থাকা ওয়াজিব; আগে বের হয়ে গেলে দম দিতে হয়।",
+            "en": "Do not leave Arafah before sunset. For Hanafis, someone who reaches Arafah in the day must stay until sunset; leaving earlier requires a dam."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "৯ জিলহজের রাত: মুজদালিফা",
+            "en": "The night of the 9th: Muzdalifah"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মুজদালিফায় যাওয়া",
+            "en": "Go to Muzdalifah"
+          },
+          "text": {
+            "bn": "সূর্যাস্তের পর মাগরিব না পড়ে শান্তভাবে তালবিয়া ও জিকির করতে করতে মুজদালিফায় যান।",
+            "en": "After sunset, go calmly to Muzdalifah saying the talbiyah and dhikr, without praying Maghrib at Arafah."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মাগরিব ও এশা",
+            "en": "Maghrib and Isha"
+          },
+          "text": {
+            "bn": "মুজদালিফায় পৌঁছে এশার ওয়াক্তে মাগরিব ও এশা একসাথে আদায় করুন (মাগরিব তিন রাকাত, এশা দুই বা চার রাকাত, কসরের বিধান অনুযায়ী)।",
+            "en": "At Muzdalifah pray Maghrib and Isha together in Isha time (Maghrib three rakats, Isha two or four depending on the rule of shortening)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "রাত যাপন ও কংকর",
+            "en": "Night and pebbles"
+          },
+          "text": {
+            "bn": "এখানে খোলা আকাশের নিচে রাত কাটানো সুন্নত। ১০ তারিখের জন্য ৭টি (বা সব দিনের জন্য ৪৯/৭০টি) ছোলার দানার মতো ছোট কংকর এখান থেকে বা মিনা থেকে সংগ্রহ করা যায়।",
+            "en": "Spending the night here in the open is sunnah. Pebbles the size of a chickpea, 7 for the 10th (or 49/70 for all days), may be collected here or in Mina."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "ফজর ও উকুফ",
+            "en": "Fajr and the standing"
+          },
+          "text": {
+            "bn": "ফজরের ওয়াক্ত শুরু হলেই ফজর পড়ে মাশআরুল হারামের কাছে বা মুজদালিফার যেকোনো স্থানে কিবলামুখী হয়ে আকাশ বেশ ফরসা হওয়া পর্যন্ত দোয়া-জিকির করুন, তারপর সূর্যোদয়ের আগে মিনার দিকে রওনা দিন।",
+            "en": "Pray Fajr as soon as its time begins, then at Al-Mash'ar al-Haram or anywhere in Muzdalifah face the qiblah and make dua and dhikr until it is quite light, then set off for Mina before sunrise."
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "فَإِذَا أَفَضْتُمْ مِنْ عَرَفَاتٍ فَاذْكُرُوا اللَّهَ عِنْدَ الْمَشْعَرِ الْحَرَامِ",
+          "pron": {
+            "bn": "ফাইযা আফাদতুম মিন আরাফাতিন ফাযকুরুল্লাহা ইনদাল মাশআরিল হারাম",
+            "en": "Fa idha afadtum min 'arafatin fadhkurullaha 'indal-mash'aril-haram"
+          },
+          "meaning": {
+            "bn": "যখন তোমরা আরাফা থেকে ফিরে আসবে, তখন মাশআরুল হারামের কাছে আল্লাহকে স্মরণ করো।",
+            "en": "When you pour down from Arafat, remember Allah at Al-Mash'ar al-Haram."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৯৮",
+            "en": "Al-Baqarah 2:198"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "মুজদালিফায় অবস্থানের ওয়াজিব অংশ",
+            "en": "The obligatory part of Muzdalifah"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "সুবহে সাদিক থেকে সূর্যোদয়ের মধ্যে অল্প সময় হলেও মুজদালিফায় থাকা ওয়াজিব; রাত যাপন সুন্নত। দুর্বল, অসুস্থ ও নারীরা ভিড়ের ভয়ে আগে চলে গেলে দম লাগে না।",
+                "en": "Being in Muzdalifah for any time between true dawn and sunrise is obligatory; spending the night is sunnah. The weak, sick and women who leave early for fear of crowds owe no dam."
+              },
+              "evidence": {
+                "bn": "নবী (সা.) ফজরের পর মাশআরুল হারামে অবস্থান করেছেন; দুর্বলদের রাতেই পাঠিয়ে দিয়েছেন।",
+                "en": "The Prophet stood at Al-Mash'ar al-Haram after Fajr and sent the weak ahead at night."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও হাম্বলি",
+                "en": "Shafi'i and Hanbali"
+              },
+              "text": {
+                "bn": "মধ্যরাতের পর কিছু সময় মুজদালিফায় থাকা ওয়াজিব; মধ্যরাতের পর চলে যাওয়া জায়েজ, বিশেষ করে দুর্বলদের জন্য।",
+                "en": "Being in Muzdalifah for some time after midnight is obligatory; leaving after midnight is allowed, especially for the weak."
+              },
+              "evidence": {
+                "bn": "সাওদা (রা.) ও আসমা (রা.)-কে রাতেই মুজদালিফা ছাড়ার অনুমতি দেওয়ার বর্ণনা।",
+                "en": "Reports that Sawdah and Asma' were allowed to leave Muzdalifah during the night."
+              }
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি; সহিহ মুসলিম (সাওদা রা.-কে রাতেই মুজদালিফা ছাড়ার অনুমতি)",
+            "en": "Sahih al-Bukhari; Sahih Muslim (Sawdah allowed to leave Muzdalifah at night)"
+          },
+          "check": true
+        }
+      ]
+    },
+    {
+      "slug": "hajj-days-10-13",
+      "title": {
+        "bn": "হজের দিন: ১০ থেকে ১৩ জিলহজ",
+        "en": "Hajj days 10–13 Dhul Hijjah"
+      },
+      "summary": {
+        "bn": "ঈদের দিনের চার কাজ (কংকর, কুরবানি, মুণ্ডন, তাওয়াফ), মিনার দিনগুলো এবং বিদায়ী তাওয়াফ।",
+        "en": "The four acts of Eid day (stoning, sacrifice, shaving, tawaf), the days in Mina and the farewell tawaf."
+      },
+      "level": "detail",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "১০ জিলহজ: ইয়াওমুন নাহর (কুরবানির দিন)",
+            "en": "10 Dhul Hijjah: Yawm an-Nahr (day of sacrifice)"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "জামরাতুল আকাবায় কংকর",
+            "en": "Stone Jamrat al-Aqabah"
+          },
+          "text": {
+            "bn": "মিনায় পৌঁছে শুধু বড় জামরায় (জামরাতুল আকাবা) একে একে সাতটি কংকর মারুন; প্রতিটির সাথে 'আল্লাহু আকবার' বলুন। প্রথম কংকর মারার সঙ্গে সঙ্গে তালবিয়া বন্ধ। এদিনের কংকর মারার সুন্নত সময় সূর্যোদয় থেকে জাওয়াল পর্যন্ত, তবে পরেও জায়েজ।",
+            "en": "In Mina stone only the big jamrah (Jamrat al-Aqabah) with seven pebbles one by one, saying 'Allahu akbar' with each. Talbiyah stops with the first pebble. The sunnah time for this day is from sunrise to zawal, though later is permitted."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "প্রতিটি কংকর মারার সময়",
+            "en": "With each pebble"
+          },
+          "ar": "اللَّهُ أَكْبَرُ",
+          "pron": {
+            "bn": "আল্লাহু আকবার",
+            "en": "Allahu akbar"
+          },
+          "meaning": {
+            "bn": "আল্লাহ সবচেয়ে মহান।",
+            "en": "Allah is the Greatest."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি (ইবনে উমর রা.-এর বর্ণনা)",
+            "en": "Sahih al-Bukhari (narration of Ibn Umar)"
+          },
+          "check": true
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "কুরবানি (হাদি)",
+            "en": "Sacrifice (hady)"
+          },
+          "text": {
+            "bn": "তামাত্তু ও কিরান হাজির জন্য কুরবানি ওয়াজিব; ইফরাদ হাজির জন্য ঐচ্ছিক। সাধারণত ব্যাংক বা অনুমোদিত সংস্থার মাধ্যমে কুপন কেনা হয়; কুরবানি কখন হলো, তা নিশ্চিত হয়ে নিন, কারণ এরপরই মাথা মুণ্ডন করবেন।",
+            "en": "The sacrifice is required for tamattu' and qiran pilgrims and optional for ifrad. It is usually arranged by buying a voucher through a bank or approved body; confirm when it is done, since you shave after it."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মাথা মুণ্ডন বা চুল ছোট করা",
+            "en": "Shave or shorten the hair"
+          },
+          "text": {
+            "bn": "পুরুষের জন্য পুরো মাথা মুণ্ডন (হলক) উত্তম, অথবা চুল ছোট করা (কসর)। নারীরা চুলের আগা থেকে আঙুলের এক কর পরিমাণ কাটবেন। এরপর স্ত্রী-সংক্রান্ত বিষয় ছাড়া ইহরামের সব নিষেধ উঠে যায় (প্রথম হালাল)।",
+            "en": "For men, shaving the whole head (halq) is better, or shortening (qasr). Women cut a fingertip's length from the ends. After this everything forbidden by ihram becomes lawful except marital matters (first release)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তাওয়াফে জিয়ারত (ইফাদা)",
+            "en": "Tawaf al-Ifadah (ziyarah)"
+          },
+          "text": {
+            "bn": "মক্কায় গিয়ে হজের ফরজ তাওয়াফ করুন। ১০ তারিখে করা উত্তম; হানাফি মতে ১২ জিলহজের সূর্যাস্তের আগে করতে হবে, বিনা ওজরে দেরি করলে দম। তামাত্তু হাজিরা এরপর সাফা-মারওয়ায় সাঈ করবেন; কিরান/ইফরাদ হাজি আগে তাওয়াফে কুদুমের পর সাঈ করে থাকলে আবার লাগবে না।",
+            "en": "Go to Makkah and perform the obligatory tawaf of hajj. The 10th is best; for Hanafis it must be done before sunset on the 12th, otherwise a dam is due without excuse. Tamattu' pilgrims then do sa'i; qiran/ifrad pilgrims who did sa'i after tawaf al-qudum need not repeat it."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "তাওয়াফে জিয়ারতের পর স্বামী-স্ত্রীর সম্পর্কসহ ইহরামের সব নিষেধ উঠে যায় (দ্বিতীয় হালাল)। তারপর মিনায় ফিরে রাত কাটাবেন।",
+            "en": "After tawaf al-ifadah all ihram restrictions, including marital relations, are lifted (second release). Then return to Mina for the night."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "১০ তারিখের কাজগুলোর ধারাবাহিকতা",
+            "en": "The order of the acts of the 10th"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "তামাত্তু ও কিরান হাজির জন্য কংকর → কুরবানি → মুণ্ডন এই ধারাবাহিকতা ওয়াজিব; উল্টাপাল্টা হলে ইমাম আবু হানিফার মতে দম দিতে হবে। (ইফরাদ হাজির কুরবানি নেই; তার জন্য কংকরের পর মুণ্ডন।)",
+                "en": "For tamattu' and qiran pilgrims the order stoning → sacrifice → shaving is obligatory; breaking it requires a dam per Imam Abu Hanifa. (Ifrad has no sacrifice; stoning then shaving.)"
+              },
+              "evidence": {
+                "bn": "নবী (সা.) এই ক্রমে করেছেন এবং বলেছেন, 'তোমাদের হজের নিয়ম আমার কাছ থেকে শিখে নাও।'",
+                "en": "The Prophet did them in this order and said, 'Take your rites from me.'"
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, হাম্বলি, হানাফি সাহিবাইন",
+                "en": "Shafi'i, Hanbali, Abu Hanifa's two students"
+              },
+              "text": {
+                "bn": "ক্রম মানা সুন্নত; আগে-পরে হয়ে গেলে কোনো দম নেই।",
+                "en": "Keeping the order is sunnah; doing them out of order requires no dam."
+              },
+              "evidence": {
+                "bn": "১০ তারিখে আগে-পরে করার প্রশ্ন এলে নবী (সা.) বলতেন, 'করে ফেলো, কোনো সমস্যা নেই।'",
+                "en": "On the 10th, when asked about doing things out of order, the Prophet said, 'Do it, there is no harm.'"
+              }
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৭৩৬; সহিহ মুসলিম ১৩০৬; সহিহ মুসলিম ১২৯৭",
+            "en": "Sahih al-Bukhari 1736; Sahih Muslim 1306; Sahih Muslim 1297"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "১১ ও ১২ জিলহজ: আইয়ামে তাশরিক",
+            "en": "11 and 12 Dhul Hijjah: days of Tashriq"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মিনায় রাত যাপন",
+            "en": "Nights in Mina"
+          },
+          "text": {
+            "bn": "১১ ও ১২ তারিখের রাত (অধিকাংশ সময়) মিনায় কাটাবেন।",
+            "en": "Spend (most of) the nights of the 11th and 12th in Mina."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তিন জামরায় কংকর",
+            "en": "Stone the three jamarat"
+          },
+          "text": {
+            "bn": "জাওয়ালের (দুপুরের) পর প্রথমে ছোট জামরা (জামরাতুল উলা), তারপর মধ্যম (উসতা), তারপর বড় (আকাবা) — প্রতিটিতে সাতটি করে কংকর, প্রতিবার 'আল্লাহু আকবার'।",
+            "en": "After zawal (midday), stone first the small jamrah (Ula), then the middle (Wusta), then the big (Aqabah), seven pebbles each, saying 'Allahu akbar' each time."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দোয়া",
+            "en": "Dua"
+          },
+          "text": {
+            "bn": "ছোট ও মধ্যম জামরায় কংকর মারার পর একটু সরে কিবলামুখী হয়ে হাত তুলে দীর্ঘ সময় দোয়া করুন। বড় জামরার পর দোয়ার জন্য না দাঁড়িয়ে চলে যান।",
+            "en": "After the small and middle jamrah, step aside, face the qiblah, raise your hands and make a long dua. After the big jamrah, leave without stopping for dua."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি (ইবনে উমর রা.-এর বর্ণনা: প্রতি কংকরে তাকবির ও প্রথম দুই জামরার পর দোয়া)",
+            "en": "Sahih al-Bukhari (Ibn Umar: takbir with each pebble and dua after the first two jamarat)"
+          },
+          "check": true
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "মিনায় রাত যাপনের হুকুম",
+            "en": "Ruling on staying the nights in Mina"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "সুন্নত; ছেড়ে দিলে দম নেই, তবে বিনা কারণে ছাড়া মাকরুহ।",
+                "en": "Sunnah; no dam if missed, but missing it without reason is disliked."
+              },
+              "evidence": {
+                "bn": "নবী (সা.) আব্বাস (রা.)-কে হাজিদের পানি পান করানোর জন্য মক্কায় রাত কাটানোর অনুমতি দিয়েছিলেন।",
+                "en": "The Prophet allowed Abbas to spend the nights in Makkah to provide water for the pilgrims."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "ওয়াজিব; বিনা ওজরে ছাড়লে দম বা সদকা।",
+                "en": "Obligatory; missing it without excuse requires a dam or charity."
+              },
+              "evidence": {
+                "bn": "আব্বাস (রা.)-কে আলাদাভাবে অনুমতি দেওয়াই প্রমাণ করে যে অন্যদের জন্য এটি জরুরি।",
+                "en": "Giving Abbas a special permission shows it is required of others."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "১২ বা ১৩ তারিখে মিনা ত্যাগ",
+            "en": "Leaving Mina on the 12th or 13th"
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "فَمَنْ تَعَجَّلَ فِي يَوْمَيْنِ فَلَا إِثْمَ عَلَيْهِ وَمَنْ تَأَخَّرَ فَلَا إِثْمَ عَلَيْهِ لِمَنِ اتَّقَىٰ",
+          "pron": {
+            "bn": "ফামান তাআজ্জালা ফী ইয়াওমাইনি ফালা ইসমা আলাইহি, ওয়া মান তাআখখারা ফালা ইসমা আলাইহি লিমানিত্তাকা",
+            "en": "Faman ta'ajjala fi yawmayni fala ithma 'alayh, wa man ta'akhkhara fala ithma 'alayh, limanittaqa"
+          },
+          "meaning": {
+            "bn": "যে দুই দিনে তাড়াতাড়ি চলে যায়, তার কোনো গুনাহ নেই; আর যে দেরি করে, তারও কোনো গুনাহ নেই — যে তাকওয়া অবলম্বন করে তার জন্য।",
+            "en": "Whoever hastens in two days, there is no sin on him; and whoever delays, there is no sin on him — for one who is mindful of Allah."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:২০৩",
+            "en": "Al-Baqarah 2:203"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "১২ তারিখে কংকর মারার পর সূর্যাস্তের আগে মিনা ছেড়ে যেতে পারেন। মিনায় থাকা অবস্থায় সূর্য ডুবে গেলে ১৩ তারিখও থেকে তিন জামরায় কংকর মারা উত্তম (হানাফি মতে ১৩ তারিখের সুবহে সাদিকের আগে চলে যাওয়া জায়েজ, তবে মাকরুহ; অন্য মাজহাবে সূর্যাস্তের পর থেকে যাওয়া আবশ্যক)।",
+            "en": "After stoning on the 12th you may leave Mina before sunset. If the sun sets while you are still in Mina, it is better to stay the 13th and stone the three jamarat (Hanafis allow leaving before dawn of the 13th, though disliked; the other schools require staying once the sun has set)."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "কংকর মারা নিজেকেই করতে হবে। অসুস্থ, অতি বৃদ্ধ বা প্রকৃত অক্ষম হলে অন্য কাউকে প্রতিনিধি বানানো যায়, যিনি আগে নিজের কংকর মেরে তারপর তার পক্ষ থেকে মারবেন। শুধু ভিড় এড়াতে সুস্থ ব্যক্তির প্রতিনিধি দেওয়া জায়েজ নয়।",
+            "en": "You must do the stoning yourself. The sick, very elderly or truly unable may appoint someone, who first stones for himself and then for them. A healthy person may not delegate just to avoid the crowd."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "বিদায়ী তাওয়াফ (তাওয়াফুল বিদা)",
+            "en": "The farewell tawaf (tawaf al-wada')"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "মক্কা ছেড়ে নিজ দেশে ফেরার আগে বাইরের হাজিদের শেষ কাজ হবে বায়তুল্লাহর তাওয়াফ। এটি হানাফি, শাফেয়ি ও হাম্বলি মতে ওয়াজিব (মালেকি মতে সুন্নত)। হায়েজ-নিফাস অবস্থায় থাকা নারীদের জন্য এটি মাফ।",
+            "en": "Before leaving Makkah for home, the last act of pilgrims from outside is a tawaf of the House. It is obligatory for Hanafis, Shafi'is and Hanbalis (sunnah for Malikis). Women in menstruation or post-natal bleeding are excused from it."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৭৫৫; সহিহ মুসলিম ১৩২৮",
+            "en": "Sahih al-Bukhari 1755; Sahih Muslim 1328"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "hajj-farz-wajib-sunnah",
+      "title": {
+        "bn": "হজের ফরজ, ওয়াজিব ও সুন্নত",
+        "en": "Farz, wajib and sunnah acts of hajj"
+      },
+      "summary": {
+        "bn": "কোন কাজ ছুটলে হজ হবে না, কোনটায় দম লাগবে, আর কোনটা সুন্নত; মাজহাবগুলোর পার্থক্যসহ।",
+        "en": "Which omissions invalidate hajj, which need a dam, and which are sunnah; with the differences between schools."
+      },
+      "level": "detail",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "হজের কাজগুলো তিন স্তরের। ফরজ বা রুকন ছুটে গেলে হজ হবে না। ওয়াজিব ছুটে গেলে হজ হবে, তবে দম (একটি পশু কুরবানি) দিতে হবে। সুন্নত ছুটলে দম নেই, তবে সওয়াব কমে।",
+            "en": "The acts of hajj have three levels. If a farz (pillar) is missed, the hajj is not valid. If a wajib is missed, the hajj is valid but a dam (animal sacrifice) is due. If a sunnah is missed, there is no penalty but reward is lost."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "হানাফি মাজহাব অনুযায়ী",
+            "en": "According to the Hanafi school"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "স্তর",
+              "en": "Level"
+            },
+            {
+              "bn": "কাজ",
+              "en": "Acts"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "ফরজ",
+                "en": "Farz"
+              },
+              {
+                "bn": "১. ইহরাম (শর্ত) ২. ৯ জিলহজ জাওয়াল থেকে ১০ তারিখের সুবহে সাদিকের মধ্যে আরাফায় অবস্থান ৩. তাওয়াফে জিয়ারত",
+                "en": "1. Ihram (a condition) 2. Being at Arafah between zawal on the 9th and dawn on the 10th 3. Tawaf al-ziyarah"
+              }
+            ],
+            [
+              {
+                "bn": "ওয়াজিব",
+                "en": "Wajib"
+              },
+              {
+                "bn": "মিকাত থেকে ইহরাম; দিনে পৌঁছালে সূর্যাস্ত পর্যন্ত আরাফায় থাকা; মুজদালিফায় অবস্থান; সাফা-মারওয়ার সাঈ; কংকর মারা; মুণ্ডন বা চুল ছোট করা; তামাত্তু-কিরানে কুরবানি ও ১০ তারিখের ক্রম; নির্দিষ্ট সময়ে তাওয়াফে জিয়ারত; বাইরের হাজির জন্য বিদায়ী তাওয়াফ",
+                "en": "Ihram from the miqat; staying at Arafah till sunset if arrived by day; Muzdalifah; sa'i between Safa and Marwah; stoning; shaving or shortening; sacrifice and the order of the 10th for tamattu'/qiran; tawaf al-ziyarah in its time; farewell tawaf for those from outside"
+              }
+            ],
+            [
+              {
+                "bn": "সুন্নত (কয়েকটি)",
+                "en": "Sunnah (some)"
+              },
+              {
+                "bn": "ইহরামের গোসল; ইফরাদ ও কিরানে তাওয়াফে কুদুম; ৮ তারিখ মিনায় রাত যাপন; মুজদালিফায় রাত যাপন; মিনায় তাশরিকের রাতগুলো কাটানো; প্রথম তিন চক্করে রমল ও ইজতিবা (পুরুষ)",
+                "en": "Ghusl for ihram; tawaf al-qudum in ifrad and qiran; the night of the 8th in Mina; the night in Muzdalifah; the nights of Tashriq in Mina; ramal and idtiba' in the first three rounds (men)"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "হজের রুকন কয়টি",
+            "en": "How many pillars does hajj have"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "রুকন দুটি: আরাফায় অবস্থান ও তাওয়াফে জিয়ারত; ইহরাম শর্ত। সাঈ ওয়াজিব।",
+                "en": "Two pillars: standing at Arafah and tawaf al-ziyarah; ihram is a condition. Sa'i is wajib."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'হজ হলো আরাফা'; আয়াত: 'তারা যেন প্রাচীন ঘরের তাওয়াফ করে' (২২:২৯)। সাঈর আয়াতে 'কোনো দোষ নেই' বলা হয়েছে, যা রুকন হওয়ার ইঙ্গিত দেয় না।",
+                "en": "Hadith: 'Hajj is Arafah'; verse: 'let them circle the Ancient House' (22:29). The sa'i verse says 'there is no blame', which does not indicate a pillar."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি",
+                "en": "Shafi'i"
+              },
+              "text": {
+                "bn": "রুকন ছয়টি: ইহরাম, আরাফায় অবস্থান, তাওয়াফে ইফাদা, সাঈ, মুণ্ডন/চুল ছোট করা, এবং বেশির ভাগ রুকনে ক্রম।",
+                "en": "Six pillars: ihram, Arafah, tawaf al-ifadah, sa'i, shaving/shortening, and order among most of them."
+              },
+              "evidence": {
+                "bn": "নবী (সা.)-এর আমল ও নির্দেশ, এবং মুসনাদে আহমাদের হাদিস: 'আল্লাহ তোমাদের ওপর সাঈ নির্ধারণ করেছেন, তাই সাঈ করো।'",
+                "en": "The Prophet's practice and command, and the hadith in Musnad Ahmad: 'Allah has prescribed sa'i for you, so do sa'i.'"
+              }
+            },
+            {
+              "label": {
+                "bn": "মালেকি ও হাম্বলি",
+                "en": "Maliki and Hanbali"
+              },
+              "text": {
+                "bn": "রুকন চারটি: ইহরাম, আরাফায় অবস্থান, তাওয়াফে ইফাদা ও সাঈ।",
+                "en": "Four pillars: ihram, Arafah, tawaf al-ifadah and sa'i."
+              },
+              "evidence": {
+                "bn": "একই দলিল; মুণ্ডনকে তারা ওয়াজিব গণ্য করেন, রুকন নয়।",
+                "en": "The same evidence; they count shaving as wajib, not a pillar."
+              }
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "জামে তিরমিজি ৮৮৯; সূরা হজ ২২:২৯; সূরা বাকারা ২:১৫৮",
+            "en": "Jami' at-Tirmidhi 889; Al-Hajj 22:29; Al-Baqarah 2:158"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "কোনো কাজ ছুটে গেছে বা ভুল হয়েছে মনে হলে অনুমান করবেন না; সঙ্গে সঙ্গে কাফেলার আলেমকে জিজ্ঞেস করুন। দম অবশ্যই হারামের সীমার ভেতরে দিতে হয়।",
+            "en": "If you think you missed or got something wrong, do not guess; ask your group's scholar at once. A dam must be slaughtered within the Haram."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "hajj-women",
+      "title": {
+        "bn": "নারীদের হজ: বিশেষ বিধান",
+        "en": "Women's hajj: special rulings"
+      },
+      "summary": {
+        "bn": "মাহরাম, ইহরামের পোশাক, হায়েজ অবস্থায় হজ এবং নারীদের জন্য আলাদা নিয়মগুলো।",
+        "en": "Mahram, ihram clothing, hajj during menstruation and the rules that differ for women."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "মাহরাম",
+            "en": "Mahram"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "মাহরাম ছাড়া নারীর ফরজ হজ",
+            "en": "A woman's obligatory hajj without a mahram"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি ও হাম্বলি",
+                "en": "Hanafi and Hanbali"
+              },
+              "text": {
+                "bn": "সফরের দূরত্বে স্বামী বা মাহরাম সঙ্গে থাকা হজ ফরজ হওয়ার (বা আদায়ের) শর্ত; মাহরাম না পেলে তার ওপর নিজে যাওয়া আবশ্যক নয়।",
+                "en": "A husband or mahram accompanying her over the travel distance is a condition for hajj; if she finds none she is not required to go herself."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'কোনো নারী মাহরাম ছাড়া সফর করবে না।' এক সাহাবি বললেন, আমার স্ত্রী হজে যাচ্ছে; নবী (সা.) বললেন, 'যাও, তোমার স্ত্রীর সাথে হজ করো।'",
+                "en": "Hadith: 'A woman must not travel except with a mahram.' A man said his wife was going for hajj; the Prophet said, 'Go and perform hajj with your wife.'"
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও মালেকি",
+                "en": "Shafi'i and Maliki"
+              },
+              "text": {
+                "bn": "ফরজ হজের জন্য নির্ভরযোগ্য নারীদের দল বা নিরাপদ কাফেলা থাকলে মাহরাম ছাড়াও যাওয়া জায়েজ।",
+                "en": "For the obligatory hajj, she may go without a mahram in a trustworthy group of women or a safe caravan."
+              },
+              "evidence": {
+                "bn": "উমর (রা.) নবীপত্নীদের উসমান (রা.) ও আবদুর রহমান ইবনে আওফ (রা.)-এর তত্ত্বাবধানে হজে পাঠিয়েছিলেন; এবং নিরাপত্তা প্রতিষ্ঠিত হলে নারী একা হিরা থেকে কাবা পর্যন্ত সফর করবে — এ ভবিষ্যদ্বাণীর হাদিস (সহিহ বুখারি)।",
+                "en": "Umar sent the Prophet's wives for hajj under the care of Uthman and Abd al-Rahman ibn Awf; and the hadith foretelling that a woman would travel safely alone from Hira to the Ka'bah (Sahih al-Bukhari)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৮৬২; সহিহ মুসলিম ১৩৪১",
+            "en": "Sahih al-Bukhari 1862; Sahih Muslim 1341"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ইহরামের পোশাক",
+            "en": "Clothing in ihram"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "যেকোনো রঙের শালীন, ঢিলেঢালা সাধারণ পোশাক পরবেন; সাদা হওয়া জরুরি নয়।",
+              "en": "Wear ordinary modest, loose clothes of any colour; white is not required."
+            },
+            {
+              "bn": "মুখে নিকাব (মুখের সাথে লাগানো নেকাব) ও হাতে মোজা পরবেন না; পায়ে মোজা ও জুতা পরা যায়।",
+              "en": "Do not wear a niqab fitted to the face or gloves; socks and shoes are allowed."
+            },
+            {
+              "bn": "পরপুরুষ কাছে এলে মাথার ওপর থেকে কাপড় ঝুলিয়ে মুখ আড়াল করতে পারেন, যেমন সাহাবি নারীরা করতেন; কাপড় মুখে লেগে থাকা থেকে যথাসম্ভব বাঁচবেন।",
+              "en": "When unrelated men come near, you may let cloth hang from the head to screen the face, as the women Companions did; try to keep it from clinging to the face."
+            },
+            {
+              "bn": "মাথার চুল সবসময় ঢাকা থাকবে; ইহরামে নারীর মাথা খোলা রাখার কোনো বিধান নেই।",
+              "en": "The hair stays covered at all times; there is no rule for a woman to uncover her head in ihram."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৮৩৮",
+            "en": "Sahih al-Bukhari 1838"
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ (আয়েশা রা.-এর বর্ণনা: কাফেলা কাছে এলে মুখের ওপর কাপড় ঝুলিয়ে দেওয়া)",
+            "en": "Sunan Abi Dawud (Aishah: lowering cloth over the face when riders passed)"
+          },
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "হায়েজ বা নিফাস অবস্থায়",
+            "en": "During menstruation or post-natal bleeding"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "ইহরাম বাঁধা যায় (গোসল করে নিয়ত ও তালবিয়া), শুধু ইহরামের নামাজ পড়বেন না।",
+              "en": "She may enter ihram (ghusl, intention and talbiyah), only without the ihram prayer."
+            },
+            {
+              "bn": "আরাফা, মুজদালিফা, মিনা, কংকর মারা, দোয়া-জিকির সবই করবেন; শুধু পবিত্র না হওয়া পর্যন্ত তাওয়াফ করবেন না এবং মসজিদে প্রবেশ করবেন না।",
+              "en": "She does everything — Arafah, Muzdalifah, Mina, stoning, dua and dhikr — except tawaf and entering the masjid until she is pure."
+            },
+            {
+              "bn": "তাওয়াফে জিয়ারত পবিত্র হওয়ার পর করবেন; এর জন্য দেরি হলে কোনো দম নেই।",
+              "en": "She performs tawaf al-ifadah after becoming pure; there is no penalty for the delay."
+            },
+            {
+              "bn": "দেশে ফেরার আগে পবিত্র না হলে বিদায়ী তাওয়াফ তার জন্য মাফ।",
+              "en": "If she is not pure before leaving for home, the farewell tawaf is waived for her."
+            },
+            {
+              "bn": "তামাত্তুর উমরাহ শেষ করার আগে হায়েজ শুরু হলে এবং ৮ তারিখের আগে পবিত্র না হলে আলেমের পরামর্শে হজের নিয়ত যোগ করবেন (কিরানে রূপান্তর বা অন্য বিধান মাজহাব অনুযায়ী ভিন্ন)।",
+              "en": "If her period starts before finishing the tamattu' umrah and she is not pure by the 8th, she adds the hajj intention on a scholar's advice (converting to qiran or another ruling, depending on the school)."
+            },
+            {
+              "bn": "তাওয়াফে জিয়ারত না করে দেশে ফিরে যাওয়ার পরিস্থিতি হলে অবশ্যই আলেমের সাথে পরামর্শ করবেন; এটি হজের রুকন।",
+              "en": "If she faces having to leave without tawaf al-ifadah, she must consult a scholar; it is a pillar of hajj."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ৩০৫; সহিহ বুখারি ১৭৫৫",
+            "en": "Sahih al-Bukhari 305; Sahih al-Bukhari 1755"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "স্বাস্থ্যের ক্ষতি না হলে চিকিৎসকের পরামর্শে ওষুধ খেয়ে হজের সময় মাসিক পিছিয়ে রাখা অনেক আলেমের মতে জায়েজ।",
+            "en": "Many scholars allow delaying the period during hajj with medicine on a doctor's advice, if it causes no harm."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "অন্যান্য পার্থক্য",
+            "en": "Other differences"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "তালবিয়া নিচু স্বরে পড়বেন, যাতে শুধু নিজে বা পাশের জন শোনে।",
+              "en": "Say the talbiyah quietly, so only you or the person beside you hears."
+            },
+            {
+              "bn": "তাওয়াফে রমল (দ্রুত হাঁটা) ও ইজতিবা নেই; সাঈতে সবুজ বাতির মাঝে দৌড়াবেন না।",
+              "en": "No ramal or idtiba' in tawaf; do not jog between the green lights in sa'i."
+            },
+            {
+              "bn": "মাথা মুণ্ডন করবেন না; সব চুলের আগা থেকে আঙুলের এক কর (প্রায় এক ইঞ্চি) পরিমাণ কাটবেন।",
+              "en": "Do not shave the head; cut about a fingertip's length (about an inch) from the ends of the hair."
+            },
+            {
+              "bn": "ভিড়ের মধ্যে হাজরে আসওয়াদ চুম্বন করতে যাবেন না; দূর থেকে ইশারা করাই যথেষ্ট।",
+              "en": "Do not push into crowds to kiss the Black Stone; pointing from a distance is enough."
+            },
+            {
+              "bn": "ইদ্দত পালনরত নারী সেই সময়ে হজে যাবেন না।",
+              "en": "A woman in her 'iddah does not set out for hajj during it."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ (নারীদের জন্য মুণ্ডন নয়, চুল ছোট করা)",
+            "en": "Sunan Abi Dawud (women shorten the hair rather than shave)"
+          },
+          "check": true
+        }
+      ]
+    },
+    {
+      "slug": "hajj-mistakes",
+      "title": {
+        "bn": "হজে যে ভুলগুলো এড়িয়ে চলবেন",
+        "en": "Mistakes to avoid in hajj"
+      },
+      "summary": {
+        "bn": "হাজিদের মধ্যে প্রচলিত কিছু ভুল, যা হজের ক্ষতি করে বা অন্যকে কষ্ট দেয়।",
+        "en": "Common mistakes among pilgrims that harm the hajj or hurt others."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "ইহরাম ছাড়া মিকাত পার হওয়া, যেমন জেদ্দায় পৌঁছে ইহরাম বাঁধা।",
+              "en": "Crossing the miqat without ihram, e.g. entering ihram only on landing in Jeddah."
+            },
+            {
+              "bn": "পুরো ইহরামের সময় ডান কাঁধ খোলা রাখা। ইজতিবা শুধু সাঈযুক্ত তাওয়াফের সময়; নামাজে কাঁধ ঢেকে রাখবেন।",
+              "en": "Keeping the right shoulder bare throughout ihram. Idtiba' is only during a tawaf followed by sa'i; cover the shoulder in prayer."
+            },
+            {
+              "bn": "তাওয়াফের প্রতিটি চক্করের জন্য বই থেকে নির্দিষ্ট দোয়া পড়া জরুরি মনে করা; এমন নির্দিষ্ট দোয়া হাদিসে নেই। নিজের ভাষায় দোয়া করুন।",
+              "en": "Believing a set dua from a booklet is required for each round of tawaf; no such set duas exist in the hadith. Pray in your own words."
+            },
+            {
+              "bn": "দলবদ্ধভাবে চিৎকার করে দোয়া পড়ে অন্যের মনোযোগ নষ্ট করা।",
+              "en": "Reciting duas loudly in groups and disturbing others."
+            },
+            {
+              "bn": "হাজরে আসওয়াদ চুম্বনের জন্য ধাক্কাধাক্কি করা; এটি সুন্নত, কিন্তু মানুষকে কষ্ট দেওয়া হারাম।",
+              "en": "Pushing to kiss the Black Stone; kissing it is sunnah, but hurting people is haram."
+            },
+            {
+              "bn": "হাতিম (হিজরে ইসমাইল)-এর ভেতর দিয়ে তাওয়াফ করা; এটি কাবার অংশ, তাই এর বাইরে দিয়ে ঘুরতে হবে।",
+              "en": "Doing tawaf through the Hatim (Hijr Isma'il); it is part of the Ka'bah, so go around outside it."
+            },
+            {
+              "bn": "সূর্যাস্তের আগে আরাফা ত্যাগ করা বা আরাফার সীমার বাইরে অবস্থান করা।",
+              "en": "Leaving Arafah before sunset or staying outside its boundary."
+            },
+            {
+              "bn": "জাবালে রহমতে ওঠা, পাথর স্পর্শ বা সেখানে নামাজ পড়াকে জরুরি মনে করা।",
+              "en": "Thinking it necessary to climb Jabal ar-Rahmah, touch its rocks or pray there."
+            },
+            {
+              "bn": "বড় পাথর, জুতা বা স্যান্ডেল দিয়ে জামরায় মারা, বা জামরাকে শয়তান ভেবে গালি দেওয়া। ছোট কংকরই সুন্নত; উদ্দেশ্য আল্লাহর জিকির।",
+              "en": "Throwing large stones, shoes or sandals at the jamarat, or cursing them as if they were Satan. Small pebbles are the sunnah; the purpose is remembrance of Allah."
+            },
+            {
+              "bn": "সুস্থ থাকা সত্ত্বেও কংকর মারার জন্য অন্যকে প্রতিনিধি বানানো।",
+              "en": "Appointing someone else to stone while healthy."
+            },
+            {
+              "bn": "মাথার কয়েকটি চুল কেটে ইহরাম খুলে ফেলা। হানাফি মতে মাথার অন্তত এক-চতুর্থাংশের চুল ছোট করতে হয়, অন্যদের মতে পুরো বা বেশির ভাগ মাথার; পুরো মাথা মুণ্ডন বা পুরো মাথা থেকে ছোট করাই নিরাপদ।",
+              "en": "Cutting a few hairs and leaving ihram. Hanafis require at least a quarter of the head, others the whole or most of it; shaving or shortening the whole head is safest."
+            },
+            {
+              "bn": "নামাজের সময় ছবি তোলা, ভিডিও করা ও সেলফিতে ব্যস্ত থাকা; এতে ইবাদতের একাগ্রতা নষ্ট হয়।",
+              "en": "Being busy with photos, videos and selfies in worship; it destroys focus."
+            },
+            {
+              "bn": "ঝগড়া, গিবত ও অন্য হাজির সাথে খারাপ আচরণ; এগুলো হজের সওয়াব নষ্ট করে।",
+              "en": "Quarrelling, backbiting and mistreating fellow pilgrims; these spoil the reward of hajj."
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "সন্দেহ হলে অনুমান না করে নির্ভরযোগ্য আলেমকে জিজ্ঞেস করুন। ধৈর্য ও নম্রতা হজের বড় শিক্ষা।",
+            "en": "When in doubt, ask a reliable scholar instead of guessing. Patience and gentleness are among the great lessons of hajj."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "hajj-madinah-visit",
+      "title": {
+        "bn": "মদিনা জিয়ারত ও তার আদব",
+        "en": "Visiting Madinah and its etiquette"
+      },
+      "summary": {
+        "bn": "মসজিদে নববী, রওজা মুবারকে সালাম, রিয়াজুল জান্নাহ, কুবা ও বাকি কবরস্থান জিয়ারতের নিয়ম।",
+        "en": "Masjid an-Nabawi, greeting the Prophet at his grave, the Rawdah, Quba and the Baqi' cemetery."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "মদিনা জিয়ারত হজের অংশ নয়, হজের আগে বা পরে করা একটি বরকতময় সুন্নত আমল। সফরের নিয়ত হবে মসজিদে নববীতে নামাজ পড়া; সেখানে পৌঁছে নবী (সা.)-এর রওজায় সালাম দেবেন।",
+            "en": "Visiting Madinah is not part of hajj; it is a blessed sunnah done before or after hajj. The intention of travel is to pray in the Prophet's Masjid; once there, you greet the Prophet at his grave."
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "তিনটি মসজিদ ছাড়া অন্য কোনো স্থানের উদ্দেশ্যে (ইবাদতের নিয়তে) বিশেষ সফর করা যায় না: মসজিদুল হারাম, মসজিদে নববী ও মসজিদুল আকসা।",
+              "en": "Special journeys for worship are made only to three masjids: Al-Masjid al-Haram, the Prophet's Masjid and Al-Masjid al-Aqsa."
+            },
+            {
+              "bn": "মসজিদে নববীতে এক নামাজ মসজিদুল হারাম ছাড়া অন্য মসজিদের এক হাজার নামাজের চেয়ে উত্তম।",
+              "en": "One prayer in the Prophet's Masjid is better than a thousand elsewhere, except Al-Masjid al-Haram."
+            },
+            {
+              "bn": "নবী (সা.)-এর ঘর ও মিম্বারের মাঝের অংশ জান্নাতের বাগানগুলোর একটি (রিয়াজুল জান্নাহ)।",
+              "en": "The area between the Prophet's house and his pulpit is one of the gardens of Paradise (the Rawdah)."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১১৮৯; সহিহ বুখারি ১১৯০; সহিহ বুখারি ১১৯৬",
+            "en": "Sahih al-Bukhari 1189; Sahih al-Bukhari 1190; Sahih al-Bukhari 1196"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "'মসজিদে নববীতে একটানা চল্লিশ ওয়াক্ত নামাজ' সম্পর্কিত হাদিসটির সনদ দুর্বল; এটি জরুরি মনে করে সফরসূচি বানানোর দরকার নেই, তবে যত বেশি জামাতে নামাজ পড়তে পারেন ততই ভালো।",
+            "en": "The hadith about praying forty consecutive prayers in the Prophet's Masjid has a weak chain; there is no need to plan the trip around it, though praying as many congregational prayers there as you can is good."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মসজিদে প্রবেশ",
+            "en": "Entering the masjid"
+          },
+          "text": {
+            "bn": "ডান পা দিয়ে প্রবেশ করে দোয়া পড়ুন, তারপর সম্ভব হলে রিয়াজুল জান্নাহয়, নইলে যেকোনো স্থানে দুই রাকাত তাহিয়্যাতুল মসজিদ পড়ুন।",
+            "en": "Enter with the right foot and say the dua, then pray two rakats of greeting in the Rawdah if possible, otherwise anywhere."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "মসজিদে প্রবেশের দোয়া",
+            "en": "Dua on entering the masjid"
+          },
+          "ar": "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+          "pron": {
+            "bn": "আল্লাহুম্মাফতাহ লী আবওয়াবা রাহমাতিক",
+            "en": "Allahummaftah li abwaba rahmatik"
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ! আমার জন্য তোমার রহমতের দরজাগুলো খুলে দাও।",
+            "en": "O Allah, open for me the doors of Your mercy."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ৭১৩",
+            "en": "Sahih Muslim 713"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "রওজায় সালাম",
+            "en": "Greeting at the grave"
+          },
+          "text": {
+            "bn": "ধীরে, আদবের সাথে রওজার সামনে গিয়ে নিচু স্বরে নবী (সা.)-কে সালাম দিন, তারপর একটু ডানে সরে আবু বকর (রা.)-কে এবং আরেকটু ডানে উমর (রা.)-কে সালাম দিন।",
+            "en": "Approach the grave slowly and respectfully and greet the Prophet in a low voice, then move a little to the right to greet Abu Bakr, and a little further to greet Umar."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "রওজায় সালাম (ইবনে উমর রা.-এর আমল থেকে)",
+            "en": "Greeting at the grave (from Ibn Umar's practice)"
+          },
+          "ar": "السَّلَامُ عَلَيْكَ يَا رَسُولَ اللَّهِ، السَّلَامُ عَلَيْكَ يَا أَبَا بَكْرٍ، السَّلَامُ عَلَيْكَ يَا عُمَرُ",
+          "pron": {
+            "bn": "আসসালামু আলাইকা ইয়া রাসূলাল্লাহ, আসসালামু আলাইকা ইয়া আবা বাকর, আসসালামু আলাইকা ইয়া উমার",
+            "en": "As-salamu 'alayka ya rasulallah, as-salamu 'alayka ya aba bakr, as-salamu 'alayka ya 'umar"
+          },
+          "meaning": {
+            "bn": "হে আল্লাহর রাসুল, আপনার ওপর শান্তি বর্ষিত হোক। হে আবু বকর, আপনার ওপর শান্তি। হে উমর, আপনার ওপর শান্তি।",
+            "en": "Peace be upon you, O Messenger of Allah. Peace be upon you, O Abu Bakr. Peace be upon you, O Umar."
+          },
+          "ref": {
+            "bn": "মুয়াত্তা মালিক (ইবনে উমর রা.-এর আমল)",
+            "en": "Muwatta Malik (practice of Ibn Umar)"
+          },
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "আদব: কণ্ঠস্বর নিচু রাখুন (সূরা হুজুরাত ৪৯:২)। নিজের জন্য দোয়া করার সময় কবরের দিকে নয়, কিবলামুখী হোন। জালি বা দেয়াল স্পর্শ, চুম্বন, কবরের দিকে সিজদা বা তাওয়াফ করবেন না; নবী (সা.)-এর কাছে নয়, আল্লাহর কাছে চাইবেন। ভিড়ে ধাক্কাধাক্কি করবেন না।",
+            "en": "Etiquette: keep your voice low (Al-Hujurat 49:2). When making dua for yourself, face the qiblah, not the grave. Do not touch or kiss the grille or walls, prostrate or circle towards the grave; ask Allah, not the Prophet. Do not push in the crowd."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দরুদ",
+            "en": "Salawat"
+          },
+          "text": {
+            "bn": "মদিনায় অবস্থানকালে বেশি বেশি দরুদ পড়ুন; নামাজের দরুদে ইবরাহিম সর্বোত্তম।",
+            "en": "While in Madinah send abundant blessings on the Prophet; the Ibrahimi salawat of the prayer is best."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মসজিদে কুবা",
+            "en": "Masjid Quba"
+          },
+          "text": {
+            "bn": "ঘর থেকে ওজু করে মসজিদে কুবায় গিয়ে দুই রাকাত নামাজ পড়া সুন্নত; নবী (সা.) প্রতি শনিবার কুবায় যেতেন। কুবায় নামাজ একটি উমরাহর সমান সওয়াবের কথা হাদিসে এসেছে।",
+            "en": "It is sunnah to make wudu at home, go to Masjid Quba and pray two rakats; the Prophet went to Quba every Saturday. A hadith says a prayer in Quba is like the reward of an umrah."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১১৯৩",
+            "en": "Sahih al-Bukhari 1193"
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান ইবনে মাজাহ; জামে তিরমিজি (কুবায় নামাজ উমরাহর সমতুল্য)",
+            "en": "Sunan Ibn Majah; Jami' at-Tirmidhi (prayer in Quba equal to an umrah)"
+          },
+          "check": true
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "জান্নাতুল বাকি ও উহুদ",
+            "en": "Al-Baqi' and Uhud"
+          },
+          "text": {
+            "bn": "জান্নাতুল বাকি কবরস্থান এবং উহুদের শহীদদের কবর জিয়ারত করে সালাম দিন ও তাদের জন্য দোয়া করুন। পুরুষরা কবর জিয়ারত করবেন; নারীদের কবর জিয়ারত নিয়ে মতভেদ আছে।",
+            "en": "Visit the Baqi' cemetery and the martyrs of Uhud, greet them and pray for them. Men visit graves; scholars differ on women visiting graves."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "কবর জিয়ারতের দোয়া",
+            "en": "Dua when visiting graves"
+          },
+          "ar": "السَّلَامُ عَلَيْكُمْ أَهْلَ الدِّيَارِ مِنَ الْمُؤْمِنِينَ وَالْمُسْلِمِينَ، وَإِنَّا إِنْ شَاءَ اللَّهُ لَلَاحِقُونَ، أَسْأَلُ اللَّهَ لَنَا وَلَكُمُ الْعَافِيَةَ",
+          "pron": {
+            "bn": "আসসালামু আলাইকুম আহলাদ দিয়ারি মিনাল মু'মিনীনা ওয়াল মুসলিমীন, ওয়া ইন্না ইনশাআল্লাহু লালাহিকূন, আসআলুল্লাহা লানা ওয়া লাকুমুল আফিয়াহ",
+            "en": "As-salamu 'alaykum ahlad-diyari minal-mu'minina wal-muslimin, wa inna in sha Allahu lalahiqun, as'alullaha lana wa lakumul-'afiyah"
+          },
+          "meaning": {
+            "bn": "হে এই ঘরের অধিবাসী মুমিন ও মুসলিমগণ, তোমাদের ওপর শান্তি বর্ষিত হোক। আল্লাহ চাইলে আমরাও তোমাদের সাথে মিলিত হব। আমি আল্লাহর কাছে আমাদের ও তোমাদের জন্য নিরাপত্তা চাই।",
+            "en": "Peace be upon you, people of these dwellings, of the believers and the Muslims. We will, if Allah wills, join you. I ask Allah for well-being for us and for you."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ৯৭৫",
+            "en": "Sahih Muslim 975"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "মদিনার বাসিন্দাদের সাথে নম্র আচরণ করুন, শহরের পবিত্রতা রক্ষা করুন এবং বেশি বেশি নফল নামাজ, কুরআন তিলাওয়াত ও দোয়ায় সময় কাটান।",
+            "en": "Be gentle with the people of Madinah, respect the sanctity of the city, and spend your time in voluntary prayer, Quran and dua."
+          }
+        }
+      ]
+    }
+  ]
+}

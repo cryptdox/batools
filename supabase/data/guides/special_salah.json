@@ -1,0 +1,3409 @@
+{
+  "topic": "special_salah",
+  "guides": [
+    {
+      "slug": "jumuah-prayer",
+      "title": {
+        "bn": "জুমার নামাজ",
+        "en": "Jumu'ah (Friday) Prayer"
+      },
+      "summary": {
+        "bn": "জুমার নামাজ কার ওপর ফরজ, কত রাকাত, খুতবার আদব আর জুমার দিনের সুন্নতগুলো এক জায়গায়।",
+        "en": "Who must pray Jumu'ah, its rak'ahs, the khutbah, and the sunnahs of Friday."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "জুমার দিন সপ্তাহের শ্রেষ্ঠ দিন। জুমার নামাজ সেদিনের জোহরের জায়গায় পড়া হয়: আগে খুতবা, তারপর জামাতের সাথে দুই রাকাত ফরজ। যার ওপর জুমা ফরজ, জুমা পড়লে তাকে আর জোহর পড়তে হয় না।",
+            "en": "Friday is the best day of the week. Jumu'ah replaces Dhuhr on Friday: a khutbah, then two fard rak'ahs in congregation. Whoever prays Jumu'ah does not also pray Dhuhr."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "কুরআনের নির্দেশ",
+            "en": "The Quranic command"
+          },
+          "ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِنْ يَوْمِ الْجُمُعَةِ فَاسْعَوْا إِلَىٰ ذِكْرِ اللَّهِ وَذَرُوا الْبَيْعَ ۚ ذَٰلِكُمْ خَيْرٌ لَكُمْ إِنْ كُنْتُمْ تَعْلَمُونَ",
+          "pron": {
+            "bn": "ইয়া আইয়ুহাল্লাযীনা আমানূ ইযা নূদিয়া লিসসালাতি মিই ইয়াওমিল জুমু'আতি ফাসআও ইলা যিকরিল্লাহি ওয়া যারুল বাই'। যালিকুম খাইরুল লাকুম ইন কুনতুম তা'লামূন।",
+            "en": "Ya ayyuhalladhina amanu idha nudiya lis-salati min yawmil-jumu'ati fas'aw ila dhikrillahi wa dharul-bay'. Dhalikum khayrul lakum in kuntum ta'lamun."
+          },
+          "meaning": {
+            "bn": "হে মুমিনগণ, জুমার দিন যখন নামাজের জন্য আহ্বান করা হয়, তখন তোমরা আল্লাহর স্মরণের দিকে ধাবিত হও এবং বেচাকেনা ছেড়ে দাও। এটাই তোমাদের জন্য উত্তম, যদি তোমরা জানতে।",
+            "en": "O you who believe, when the call is made for prayer on Friday, hasten to the remembrance of Allah and leave off trade. That is better for you, if you only knew."
+          },
+          "ref": {
+            "bn": "সূরা জুমু'আ ৬২:৯",
+            "en": "Al-Jumu'ah 62:9"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কার ওপর জুমা ফরজ",
+            "en": "Who must attend"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "প্রাপ্তবয়স্ক ও সুস্থ মস্তিষ্কের মুসলিম পুরুষ",
+              "en": "An adult, sane Muslim man"
+            },
+            {
+              "bn": "মুকিম, অর্থাৎ যিনি সফরে নেই",
+              "en": "Resident (not travelling)"
+            },
+            {
+              "bn": "সুস্থ, যার মসজিদে যেতে বাধা নেই",
+              "en": "Healthy, with nothing preventing him from going"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নারী, শিশু, অসুস্থ ব্যক্তি ও মুসাফিরের ওপর জুমা ফরজ নয়; তারা ঘরে চার রাকাত জোহর পড়বেন। তবে তারা মসজিদে গিয়ে জুমা পড়লে সেটাই যথেষ্ট, আলাদা জোহর লাগবে না।",
+            "en": "Women, children, the sick and travellers are exempt; they pray four rak'ahs of Dhuhr. If they do attend Jumu'ah, it counts and no Dhuhr is needed."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ ১০৬৭ (তারিক ইবনে শিহাব রা.: চার শ্রেণি ছাড়া প্রত্যেক মুসলিমের ওপর জামাতে জুমা ফরজ)",
+            "en": "Sunan Abi Dawud 1067 (Jumu'ah is a duty on every Muslim in congregation except four)"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "অবহেলা করে পরপর তিন জুমা ছেড়ে দিলে আল্লাহ তার অন্তরে মোহর মেরে দেন। (সুনান আবু দাউদ ১০৫২)",
+            "en": "Whoever leaves three Jumu'ahs out of negligence, Allah seals his heart. (Sunan Abi Dawud 1052)"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "জুমার দিনের নামাজের ক্রম",
+            "en": "Order of prayers on Friday"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "নামাজ",
+              "en": "Prayer"
+            },
+            {
+              "bn": "রাকাত",
+              "en": "Rak'ahs"
+            },
+            {
+              "bn": "হুকুম",
+              "en": "Ruling"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "জুমার আগের সুন্নত",
+                "en": "Sunnah before Jumu'ah"
+              },
+              {
+                "bn": "৪",
+                "en": "4"
+              },
+              {
+                "bn": "হানাফি মতে সুন্নতে মুয়াক্কাদা (নিচে মতভেদ দেখুন)",
+                "en": "Sunnah mu'akkadah in the Hanafi school (see the difference below)"
+              }
+            ],
+            [
+              {
+                "bn": "খুতবা (দুইটি)",
+                "en": "Khutbah (two parts)"
+              },
+              {
+                "bn": "—",
+                "en": "—"
+              },
+              {
+                "bn": "জুমা সহিহ হওয়ার শর্ত",
+                "en": "A condition for Jumu'ah to be valid"
+              }
+            ],
+            [
+              {
+                "bn": "জুমার ফরজ",
+                "en": "Jumu'ah fard"
+              },
+              {
+                "bn": "২",
+                "en": "2"
+              },
+              {
+                "bn": "ফরজ, জামাতের সাথে; ইমাম জোরে কিরাত পড়েন",
+                "en": "Fard, in congregation; the imam recites aloud"
+              }
+            ],
+            [
+              {
+                "bn": "জুমার পরের সুন্নত",
+                "en": "Sunnah after Jumu'ah"
+              },
+              {
+                "bn": "৪ (কেউ কেউ এরপর আরও ২)",
+                "en": "4 (some add 2 more)"
+              },
+              {
+                "bn": "সুন্নত",
+                "en": "Sunnah"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "জুমার আগে ও পরে সুন্নত কত রাকাত",
+            "en": "Sunnah prayers before and after Jumu'ah"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "জুমার আগে চার রাকাত ও পরে চার রাকাত সুন্নতে মুয়াক্কাদা। ইমাম আবু ইউসুফ (রহ.)-এর মতে পরে মোট ছয় রাকাত (চার, তারপর দুই)।",
+                "en": "Four rak'ahs before and four after, both sunnah mu'akkadah. Imam Abu Yusuf held six after (four, then two)."
+              },
+              "evidence": {
+                "bn": "পরের চার রাকাত: সহিহ মুসলিম ৮৮১ (জুমার পরে চার রাকাত পড়ার নির্দেশ)। আগের চার রাকাত: ইবনে মাসউদ (রা.) জুমার আগে চার ও পরে চার রাকাত পড়তেন, ইমাম তিরমিজি তা উল্লেখ করেছেন (জামে তিরমিজি ৫২৩-এর আলোচনা); আলী (রা.) পরে দুই তারপর চার পড়তে বলেছেন।",
+                "en": "After: Sahih Muslim 881 (pray four after Jumu'ah). Before: Ibn Mas'ud prayed four before and four after, as al-Tirmidhi notes (discussion under Jami' al-Tirmidhi 523); 'Ali instructed two then four after."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, হাম্বলি ও অন্যান্য অনেকে",
+                "en": "Shafi'i, Hanbali and many others"
+              },
+              "text": {
+                "bn": "জুমার আগে নির্দিষ্ট সংখ্যার সুন্নত নেই; ইমাম খুতবার জন্য বের হওয়া পর্যন্ত যত রাকাত ইচ্ছা নফল পড়া যায়। পরে মসজিদে চার রাকাত, অথবা ঘরে গিয়ে দুই রাকাত।",
+                "en": "No fixed sunnah before Jumu'ah; pray as many voluntary rak'ahs as one likes until the imam comes out. After: four in the mosque or two at home."
+              },
+              "evidence": {
+                "bn": "সহিহ বুখারি ৮৮৩ (‘তারপর তার জন্য যা লেখা আছে তা পড়ে’); সহিহ মুসলিম ৮৮১ (পরে চার); সহিহ বুখারি ৯৩৭ (নবীজি সা. জুমার পরে ঘরে দুই রাকাত পড়তেন)।",
+                "en": "Sahih al-Bukhari 883 ('then prays what was written for him'); Sahih Muslim 881 (four after); Sahih al-Bukhari 937 (the Prophet prayed two at home after Jumu'ah)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "খুতবা ও তার আদব",
+            "en": "The khutbah and its etiquette"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "ইমাম দুইটি খুতবা দেন, মাঝে অল্প সময় বসেন; খুতবায় কুরআন পড়া হয় ও উপদেশ দেওয়া হয় (সহিহ মুসলিম ৮৬২)।",
+              "en": "The imam gives two khutbahs with a short sitting between them, reciting Quran and admonishing (Sahih Muslim 862)."
+            },
+            {
+              "bn": "খুতবা চুপ করে মনোযোগ দিয়ে শুনতে হয়। খুতবার সময় পাশের জনকে ‘চুপ করো’ বলাও অনর্থক কাজ (লাগব) বলে গণ্য (সহিহ বুখারি ৯৩৪)।",
+              "en": "Listen silently. Even telling a neighbour 'be quiet' during the khutbah is idle talk (Sahih al-Bukhari 934)."
+            },
+            {
+              "bn": "খুতবার সময় কথা বলা, মোবাইল দেখা, খাওয়া-দাওয়া ইত্যাদি থেকে বিরত থাকুন।",
+              "en": "Do not talk, use the phone or eat during the khutbah."
+            },
+            {
+              "bn": "দেরিতে এলে মানুষের ঘাড় ডিঙিয়ে সামনে যাবেন না; নবীজি (সা.) এমন একজনকে বলেছিলেন, ‘বসে পড়ো, তুমি কষ্ট দিয়েছ’ (সুনান আবু দাউদ ১১১৮)।",
+              "en": "If late, do not step over people's necks; the Prophet told such a man, 'Sit down, you have caused harm' (Sunan Abi Dawud 1118)."
+            }
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "খুতবা চলাকালে মসজিদে ঢুকলে দুই রাকাত পড়বে কি",
+            "en": "Praying two rak'ahs on entering during the khutbah"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি ও মালেকি",
+                "en": "Hanafi and Maliki"
+              },
+              "text": {
+                "bn": "ইমাম খুতবার জন্য বের হয়ে গেলে আর নামাজ শুরু করবে না; বসে খুতবা শুনবে।",
+                "en": "Once the imam has come out for the khutbah, do not start a prayer; sit and listen."
+              },
+              "evidence": {
+                "bn": "খুতবা শোনার নির্দেশ ও খুতবার সময় সামান্য কথাও নিষেধ হওয়া (সহিহ বুখারি ৯৩৪); ঘাড় ডিঙানো ব্যক্তিকে নবীজি (সা.) বসে যেতে বলেছিলেন (সুনান আবু দাউদ ১১১৮)।",
+                "en": "The command to listen and the ban on even small talk (Sahih al-Bukhari 934); the Prophet told the man who stepped over people to sit (Sunan Abi Dawud 1118)."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও হাম্বলি",
+                "en": "Shafi'i and Hanbali"
+              },
+              "text": {
+                "bn": "সংক্ষেপে দুই রাকাত তাহিয়্যাতুল মসজিদ পড়ে বসবে।",
+                "en": "Pray two short rak'ahs of tahiyyat al-masjid, then sit."
+              },
+              "evidence": {
+                "bn": "খুতবার সময় এক সাহাবি এসে বসে পড়লে নবীজি (সা.) তাকে দুই রাকাত সংক্ষেপে পড়তে বলেন (সহিহ বুখারি ৯৩০; সহিহ মুসলিম ৮৭৫)।",
+                "en": "A man came during the khutbah and sat; the Prophet told him to pray two short rak'ahs (Sahih al-Bukhari 930; Sahih Muslim 875)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "খুতবার ভাষা",
+            "en": "Language of the khutbah"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "আরবিতে খুতবা (বাংলাদেশে প্রচলিত হানাফি আমল)",
+                "en": "Khutbah in Arabic (common Hanafi practice in Bangladesh)"
+              },
+              "text": {
+                "bn": "মূল দুই খুতবা আরবিতেই দিতে হবে। মানুষকে বোঝানোর জন্য আজানের আগে বা খুতবার আগে মাতৃভাষায় আলাদা বয়ান করা হয়।",
+                "en": "The two khutbahs themselves are given in Arabic; a talk in the local language is given separately before the adhan/khutbah."
+              },
+              "evidence": {
+                "bn": "নবীজি (সা.) ও সাহাবিরা সবসময় আরবিতে খুতবা দিয়েছেন, অনারব দেশে গিয়েও; খুতবা একটি ইবাদত, যা সুন্নাহর পদ্ধতিতে আদায় করা হয়।",
+                "en": "The Prophet and the Companions always gave the khutbah in Arabic, even in non-Arab lands; the khutbah is an act of worship done in the sunnah way."
+              }
+            },
+            {
+              "label": {
+                "bn": "স্থানীয় ভাষায় খুতবা জায়েজ (কিছু আলেমের মত)",
+                "en": "Local language allowed (view of some scholars)"
+              },
+              "text": {
+                "bn": "আরবিতে হামদ, দরুদ ও কুরআনের আয়াত পড়ে বাকি উপদেশ শ্রোতাদের ভাষায় দেওয়া যায়।",
+                "en": "After praise, durood and Quran in Arabic, the admonition may be in the listeners' language."
+              },
+              "evidence": {
+                "bn": "খুতবার উদ্দেশ্য উপদেশ দেওয়া (সহিহ মুসলিম ৮৬২); আল্লাহ প্রত্যেক রাসুলকে তার জাতির ভাষায় পাঠিয়েছেন (সূরা ইবরাহিম ১৪:৪)।",
+                "en": "The khutbah's purpose is admonition (Sahih Muslim 862); Allah sent every messenger in his people's language (Ibrahim 14:4)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "জুমা ছুটে গেলে বা দেরিতে পেলে",
+            "en": "If you miss or join late"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "জুমার জামাত পুরো ছুটে গেলে জুমা একা পড়া যায় না; চার রাকাত জোহর পড়তে হবে।",
+            "en": "If you miss the Jumu'ah congregation entirely, you cannot pray Jumu'ah alone; pray four rak'ahs of Dhuhr."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "কতটুকু পেলে জুমা পাওয়া গণ্য হবে",
+            "en": "How much must be caught to count as Jumu'ah"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "ইমাম আবু হানিফা ও আবু ইউসুফ (রহ.)",
+                "en": "Imam Abu Hanifah and Abu Yusuf"
+              },
+              "text": {
+                "bn": "ইমামকে সালামের আগে যেকোনো অবস্থায়, এমনকি শেষ বৈঠকে পেলেও, দুই রাকাত জুমাই পূর্ণ করবে।",
+                "en": "Joining the imam at any point before the salam, even in the last sitting, you complete two rak'ahs of Jumu'ah."
+              },
+              "evidence": {
+                "bn": "‘যতটুকু পাও পড়ো, আর যা ছুটে গেছে তা পূর্ণ করো’ (সহিহ বুখারি ৬৩৬)।",
+                "en": "'Pray what you catch and complete what you missed' (Sahih al-Bukhari 636)."
+              }
+            },
+            {
+              "label": {
+                "bn": "ইমাম মুহাম্মাদ (রহ.) ও শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Imam Muhammad, and the Shafi'i, Maliki, Hanbali schools"
+              },
+              "text": {
+                "bn": "দ্বিতীয় রাকাতের রুকু পেলে জুমা পেয়েছে, আরেক রাকাত মিলিয়ে নেবে; রুকুর পরে যোগ দিলে চার রাকাত জোহর পড়বে।",
+                "en": "If you catch the ruku' of the second rak'ah, add one rak'ah for Jumu'ah; if you join after it, pray four of Dhuhr."
+              },
+              "evidence": {
+                "bn": "‘যে জুমার এক রাকাত পেল, সে যেন তার সাথে আরেক রাকাত মিলায়’ (সুনান ইবনে মাজাহ ১১২১; সুনান নাসায়ি ৫৫৭)।",
+                "en": "'Whoever catches one rak'ah of Jumu'ah, let him add another to it' (Sunan Ibn Majah 1121; Sunan al-Nasa'i 557)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "জুমার দিনের সুন্নত ও আমল",
+            "en": "Sunnahs and good deeds of Friday"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "গোসল করা (সহিহ বুখারি ৮৭৭, ৮৭৯)",
+              "en": "Take a bath (ghusl) (Sahih al-Bukhari 877, 879)"
+            },
+            {
+              "bn": "পরিচ্ছন্ন ও ভালো কাপড় পরা, তেল বা সুগন্ধি লাগানো, যথাসাধ্য পবিত্রতা অর্জন (সহিহ বুখারি ৮৮৩)",
+              "en": "Wear clean, good clothes, use oil or perfume, purify yourself as you can (Sahih al-Bukhari 883)"
+            },
+            {
+              "bn": "আগে আগে মসজিদে যাওয়া এবং ইমামের কাছাকাছি বসা",
+              "en": "Go to the mosque early and sit near the imam"
+            },
+            {
+              "bn": "দুজনের মাঝে ফাঁক করে না বসা, চুপ করে খুতবা শোনা (সহিহ বুখারি ৮৮৩)",
+              "en": "Do not squeeze between two people; listen quietly (Sahih al-Bukhari 883)"
+            },
+            {
+              "bn": "বেশি বেশি দরুদ পড়া (সুনান আবু দাউদ ১০৪৭)",
+              "en": "Send abundant durood on the Prophet (Sunan Abi Dawud 1047)"
+            },
+            {
+              "bn": "দোয়া করা: জুমার দিনে একটি সময় আছে, তখন মুমিন যা চায় আল্লাহ দেন (সহিহ বুখারি ৯৩৫)",
+              "en": "Make dua: there is an hour on Friday when Allah grants what a believer asks (Sahih al-Bukhari 935)"
+            },
+            {
+              "bn": "সূরা কাহফ তিলাওয়াত করা",
+              "en": "Recite Surah al-Kahf"
+            },
+            {
+              "bn": "আজান হলে বেচাকেনা ও কাজ বন্ধ করে মসজিদে যাওয়া (সূরা জুমু'আ ৬২:৯)",
+              "en": "Stop trade and work at the adhan and go to the mosque (Al-Jumu'ah 62:9)"
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "জুমার দিনে সূরা কাহফ পড়ার ফজিলতের হাদিস (আবু সাইদ খুদরি রা. থেকে) মুস্তাদরাকে হাকিম ও বায়হাকিতে আছে; অনেক মুহাদ্দিস একে সহিহ বলেছেন, কেউ কেউ মারফু হওয়া নিয়ে আপত্তি করেছেন।",
+            "en": "The hadith on reading al-Kahf on Friday (from Abu Sa'id al-Khudri) is in al-Hakim's Mustadrak and al-Bayhaqi; many scholars graded it sahih, some questioned whether it is the Prophet's own words."
+          },
+          "check": true
+        }
+      ]
+    },
+    {
+      "slug": "eid-prayer",
+      "title": {
+        "bn": "ঈদের নামাজ",
+        "en": "Eid Prayer"
+      },
+      "summary": {
+        "bn": "ঈদুল ফিতর ও ঈদুল আজহার নামাজ দুই রাকাত, অতিরিক্ত তাকবিরসহ। নিয়ম, তাকবিরের সংখ্যা নিয়ে মতভেদ ও ঈদের সুন্নত।",
+        "en": "Eid al-Fitr and Eid al-Adha prayer: two rak'ahs with extra takbirs, the views on their number, and the sunnahs of Eid."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "ঈদের নামাজ দুই রাকাত, জামাতের সাথে, আজান ও ইকামত ছাড়া (সহিহ মুসলিম ৮৮৭)। নামাজ আগে, খুতবা পরে (সহিহ বুখারি ৯৬৩)। সময়: সূর্য উঠে কিছুটা ওপরে ওঠার পর থেকে দুপুরের (জাওয়াল) আগ পর্যন্ত।",
+            "en": "Eid prayer is two rak'ahs in congregation, without adhan or iqamah (Sahih Muslim 887). The prayer comes first, then the khutbah (Sahih al-Bukhari 963). Time: from when the sun has risen a little until just before noon (zawal)."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "ঈদের নামাজের হুকুম",
+            "en": "Ruling of the Eid prayer"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "যাদের ওপর জুমা ফরজ, তাদের ওপর ঈদের নামাজ ওয়াজিব।",
+                "en": "Wajib on those for whom Jumu'ah is obligatory."
+              },
+              "evidence": {
+                "bn": "নবীজি (সা.) কখনো ঈদের নামাজ ছাড়েননি; নারীদেরও ঈদগাহে যেতে বলেছেন (সহিহ বুখারি ৯৭৪; সহিহ মুসলিম ৮৯০)।",
+                "en": "The Prophet never left it and told even women to come out (Sahih al-Bukhari 974; Sahih Muslim 890)."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও মালেকি",
+                "en": "Shafi'i and Maliki"
+              },
+              "text": {
+                "bn": "সুন্নতে মুয়াক্কাদা।",
+                "en": "A confirmed sunnah."
+              },
+              "evidence": {
+                "bn": "দিনে-রাতে পাঁচ ওয়াক্ত ছাড়া আর কোনো নামাজ ফরজ নয় (সহিহ বুখারি ৪৬)।",
+                "en": "No prayer is obligatory beyond the five daily prayers (Sahih al-Bukhari 46)."
+              }
+            },
+            {
+              "label": {
+                "bn": "হাম্বলি",
+                "en": "Hanbali"
+              },
+              "text": {
+                "bn": "ফরজে কিফায়া (সমাজের কিছু লোক আদায় করলে সবার পক্ষ থেকে আদায় হয়)।",
+                "en": "A communal obligation (fard kifayah)."
+              },
+              "evidence": {
+                "bn": "নবীজি (সা.)-এর নিয়মিত আমল এবং এটি ইসলামের প্রকাশ্য নিদর্শন।",
+                "en": "The Prophet's constant practice, and it is a public symbol of Islam."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নিয়ত মনে মনে করাই যথেষ্ট, মুখে বলা জরুরি নয়। উদাহরণ (প্রচলিত বাংলা): ‘আমি ঈদুল ফিতরের দুই রাকাত ওয়াজিব নামাজ, অতিরিক্ত ছয় তাকবিরসহ, এই ইমামের পেছনে আদায় করছি।’",
+            "en": "Niyyah is the intention in the heart; saying it aloud is not required. Example (common Bangla phrasing): 'I am praying the two wajib rak'ahs of Eid al-Fitr with six extra takbirs behind this imam.'"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "হানাফি পদ্ধতি (বাংলাদেশে প্রচলিত)",
+            "en": "Hanafi method (common in Bangladesh)"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তাকবিরে তাহরিমা",
+            "en": "Opening takbir"
+          },
+          "text": {
+            "bn": "নিয়ত করে ‘আল্লাহু আকবার’ বলে হাত বাঁধুন এবং সানা পড়ুন।",
+            "en": "Make the intention, say 'Allahu Akbar', fold your hands and recite the thana."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "প্রথম রাকাতে তিন অতিরিক্ত তাকবির",
+            "en": "Three extra takbirs in the first rak'ah"
+          },
+          "text": {
+            "bn": "ইমামের সাথে তিনবার ‘আল্লাহু আকবার’ বলুন। প্রথম ও দ্বিতীয় তাকবিরে কান পর্যন্ত হাত তুলে ছেড়ে দিন; তৃতীয় তাকবিরে হাত তুলে বেঁধে নিন। প্রতি দুই তাকবিরের মাঝে প্রায় তিন তাসবিহ পরিমাণ থামুন।",
+            "en": "Say 'Allahu Akbar' three times with the imam. On the first and second, raise your hands to the ears and let them hang; on the third, raise them and fold them. Pause about three tasbihs between takbirs."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "কিরাত",
+            "en": "Recitation"
+          },
+          "text": {
+            "bn": "ইমাম সূরা ফাতিহা ও আরেকটি সূরা জোরে পড়বেন; মুক্তাদি চুপ করে শুনবেন। তারপর স্বাভাবিকভাবে রুকু ও দুই সিজদা।",
+            "en": "The imam recites al-Fatihah and a surah aloud; followers listen silently. Then ruku' and two sajdahs as usual."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দ্বিতীয় রাকাতে কিরাতের পর তিন তাকবির",
+            "en": "Second rak'ah: three takbirs after recitation"
+          },
+          "text": {
+            "bn": "দ্বিতীয় রাকাতে ইমাম আগে কিরাত পড়বেন। তারপর তিনবার তাকবির, প্রতিবার কান পর্যন্ত হাত তুলে ছেড়ে দেবেন।",
+            "en": "In the second rak'ah the imam recites first. Then three takbirs, each time raising the hands and letting them hang."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "চতুর্থ তাকবিরে রুকু",
+            "en": "Fourth takbir into ruku'"
+          },
+          "text": {
+            "bn": "চতুর্থবার হাত না তুলে ‘আল্লাহু আকবার’ বলে রুকুতে যান; তারপর সিজদা, বৈঠক ও সালাম দিয়ে নামাজ শেষ করুন।",
+            "en": "On the fourth takbir go into ruku' without raising the hands; then complete the sajdahs, sitting and salam."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "খুতবা শোনা",
+            "en": "Listen to the khutbah"
+          },
+          "text": {
+            "bn": "নামাজের পর ইমাম খুতবা দেবেন; চুপ করে শুনুন। ঈদের খুতবা শোনা সুন্নত।",
+            "en": "After the prayer the imam gives the khutbah; listen quietly."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "সুন্নত হলো প্রথম রাকাতে সূরা আ'লা ও দ্বিতীয় রাকাতে সূরা গাশিয়া (সহিহ মুসলিম ৮৭৮), অথবা সূরা কাফ ও সূরা কামার (সহিহ মুসলিম ৮৯১) পড়া।",
+            "en": "It is sunnah to recite al-A'la and al-Ghashiyah (Sahih Muslim 878), or Qaf and al-Qamar (Sahih Muslim 891)."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "অতিরিক্ত তাকবিরের সংখ্যা",
+            "en": "Number of extra takbirs"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি: মোট ছয়",
+                "en": "Hanafi: six in total"
+              },
+              "text": {
+                "bn": "প্রথম রাকাতে সানার পর কিরাতের আগে তিন; দ্বিতীয় রাকাতে কিরাতের পর রুকুর আগে তিন।",
+                "en": "Three in the first rak'ah after the thana and before recitation; three in the second after recitation and before ruku'."
+              },
+              "evidence": {
+                "bn": "আবু মুসা আশআরি ও হুযাইফা (রা.) বলেন, নবীজি (সা.) ঈদে জানাযার তাকবিরের মতো চার তাকবির দিতেন (তাকবিরে তাহরিমা/রুকুর তাকবিরসহ) (সুনান আবু দাউদ ১১৫৩); ইবনে মাসউদ (রা.)-এর আমলও এমন বর্ণিত।",
+                "en": "Abu Musa and Hudhayfah said the Prophet made four takbirs on Eid like the funeral takbirs (counting the opening/ruku' takbir) (Sunan Abi Dawud 1153); the same is reported from Ibn Mas'ud."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি ও হাম্বলি: মোট বারো",
+                "en": "Shafi'i, Maliki, Hanbali: twelve"
+              },
+              "text": {
+                "bn": "প্রথম রাকাতে কিরাতের আগে সাত (মালেকি ও হাম্বলিদের হিসাবে তাকবিরে তাহরিমাসহ, শাফেয়িদের হিসাবে তা বাদে), দ্বিতীয় রাকাতে কিরাতের আগে পাঁচ।",
+                "en": "Seven before recitation in the first rak'ah (including the opening takbir for Maliki/Hanbali, excluding it for Shafi'i) and five before recitation in the second."
+              },
+              "evidence": {
+                "bn": "সুনান আবু দাউদ ১১৪৯ (আয়েশা রা.), ১১৫১ (আবদুল্লাহ ইবনে আমর রা.); জামে তিরমিজি ৫৩৬; সুনান ইবনে মাজাহ ১২৭৯।",
+                "en": "Sunan Abi Dawud 1149 ('A'ishah), 1151 ('Abdullah ibn 'Amr); Jami' al-Tirmidhi 536; Sunan Ibn Majah 1279."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "যে ইমামের পেছনে পড়ছেন, তাকবিরের সংখ্যায় তাকে অনুসরণ করুন। দুটি পদ্ধতিই সাহাবিদের থেকে বর্ণিত।",
+            "en": "Follow your imam in the number of takbirs; both ways are reported from the Companions."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ঈদের দিনের সুন্নত",
+            "en": "Sunnahs of Eid day"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "গোসল করা, সবচেয়ে ভালো কাপড় পরা, সুগন্ধি লাগানো",
+              "en": "Bathe, wear your best clothes, use perfume"
+            },
+            {
+              "bn": "ঈদুল ফিতরে নামাজে যাওয়ার আগে বেজোড় সংখ্যক খেজুর বা কিছু খাওয়া (সহিহ বুখারি ৯৫৩)",
+              "en": "On Eid al-Fitr, eat an odd number of dates before going (Sahih al-Bukhari 953)"
+            },
+            {
+              "bn": "ঈদুল আজহায় নামাজের আগে না খেয়ে নামাজের পর খাওয়া (জামে তিরমিজি ৫৪২)",
+              "en": "On Eid al-Adha, eat after the prayer (Jami' al-Tirmidhi 542)"
+            },
+            {
+              "bn": "ঈদুল ফিতরের নামাজের আগে সদকাতুল ফিতর আদায় করা",
+              "en": "Pay zakat al-fitr before the Eid al-Fitr prayer"
+            },
+            {
+              "bn": "এক পথে যাওয়া, অন্য পথে ফেরা (সহিহ বুখারি ৯৮৬)",
+              "en": "Go by one route and return by another (Sahih al-Bukhari 986)"
+            },
+            {
+              "bn": "ঈদগাহে যাওয়ার পথে তাকবির বলা; ইমাম আবু হানিফা (রহ.)-এর মতে ঈদুল ফিতরে নিচু স্বরে ও ঈদুল আজহায় উঁচু স্বরে, অন্য অনেক আলেমের মতে দুই ঈদেই উঁচু স্বরে",
+              "en": "Say takbir on the way: per Imam Abu Hanifah quietly on Eid al-Fitr and aloud on Eid al-Adha; many other scholars say aloud on both"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "তাকবিরে তাশরিক",
+            "en": "Takbir al-tashriq"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "তাকবিরে তাশরিক",
+            "en": "Takbir al-tashriq"
+          },
+          "ar": "اللّٰهُ أَكْبَرُ اللّٰهُ أَكْبَرُ، لَا إِلٰهَ إِلَّا اللّٰهُ، وَاللّٰهُ أَكْبَرُ اللّٰهُ أَكْبَرُ، وَلِلّٰهِ الْحَمْدُ",
+          "pron": {
+            "bn": "আল্লাহু আকবার আল্লাহু আকবার, লা ইলাহা ইল্লাল্লাহু, ওয়াল্লাহু আকবার আল্লাহু আকবার, ওয়া লিল্লাহিল হামদ।",
+            "en": "Allahu akbar, Allahu akbar, la ilaha illallah, wallahu akbar, Allahu akbar, wa lillahil-hamd."
+          },
+          "meaning": {
+            "bn": "আল্লাহ সবচেয়ে বড়, আল্লাহ সবচেয়ে বড়; আল্লাহ ছাড়া কোনো ইলাহ নেই; আল্লাহ সবচেয়ে বড়, আল্লাহ সবচেয়ে বড়; আর সকল প্রশংসা আল্লাহরই।",
+            "en": "Allah is the Greatest, Allah is the Greatest; there is no god but Allah; Allah is the Greatest, Allah is the Greatest, and all praise is for Allah."
+          },
+          "ref": {
+            "bn": "ইবনে মাসউদ (রা.) থেকে বর্ণিত, মুসান্নাফ ইবনে আবি শাইবা",
+            "en": "Reported from Ibn Mas'ud, Musannaf Ibn Abi Shaybah"
+          },
+          "check": true
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "হানাফি মতে ৯ জিলহজের ফজর থেকে ১৩ জিলহজের আসর পর্যন্ত প্রত্যেক ফরজ নামাজের পর একবার এই তাকবির বলা ওয়াজিব; পুরুষেরা জোরে, নারীরা নিচু স্বরে বলবেন। অন্য মাজহাবে এটি সুন্নত, এবং সময়সীমা নিয়েও কিছু ভিন্নতা আছে।",
+            "en": "In the Hanafi school it is wajib to say it once after every fard prayer from Fajr of 9 Dhul-Hijjah to 'Asr of the 13th; men aloud, women quietly. Other schools hold it sunnah, with some differences in the period."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সূরা বাকারা ২:১৮৫, ২:২০৩ (নির্দিষ্ট দিনগুলোতে আল্লাহর জিকির)",
+            "en": "Al-Baqarah 2:185, 2:203 (remember Allah on the appointed days)"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "witr-prayer",
+      "title": {
+        "bn": "বিতরের নামাজ ও দোয়া কুনুত",
+        "en": "Witr Prayer and Du'a Qunut"
+      },
+      "summary": {
+        "bn": "ইশার পর থেকে ফজর পর্যন্ত সময়ের বিতর নামাজ: হুকুম, পড়ার পদ্ধতি নিয়ে মতভেদ, আর দুই রকম দোয়া কুনুত।",
+        "en": "Witr, prayed between 'Isha and Fajr: its ruling, the different methods, and the two forms of du'a qunut."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "বিতর মানে বেজোড়। রাতের নামাজ বিতর দিয়ে শেষ করতে নবীজি (সা.) বলেছেন: ‘রাতে তোমাদের শেষ নামাজ বিতর বানাও’ (সহিহ বুখারি ৯৯৮)। সময়: ইশার নামাজের পর থেকে সুবহে সাদিক পর্যন্ত।",
+            "en": "Witr means 'odd'. The Prophet said: 'Make witr your last prayer at night' (Sahih al-Bukhari 998). Time: after 'Isha until dawn."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "বিতরের হুকুম",
+            "en": "Ruling of witr"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "বিতর ওয়াজিব; ছুটে গেলে কাজা করতে হয়।",
+                "en": "Witr is wajib; if missed it must be made up."
+              },
+              "evidence": {
+                "bn": "‘বিতর প্রত্যেক মুসলিমের ওপর হক’ (সুনান আবু দাউদ ১৪২২); নবীজি (সা.) সফরেও বিতর ছাড়তেন না।",
+                "en": "'Witr is a duty (haqq) on every Muslim' (Sunan Abi Dawud 1422); the Prophet kept it even when travelling."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি ও হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "বিতর সুন্নতে মুয়াক্কাদা, খুব গুরুত্বপূর্ণ সুন্নত।",
+                "en": "A strongly emphasised sunnah."
+              },
+              "evidence": {
+                "bn": "পাঁচ ওয়াক্তের বাইরে আর কিছু ফরজ কি না জিজ্ঞেস করলে নবীজি (সা.) বললেন, ‘না, তবে নফল হিসেবে করতে পারো’ (সহিহ বুখারি ৪৬)।",
+                "en": "Asked if anything beyond the five prayers was obligatory, the Prophet said, 'No, unless you do it voluntarily' (Sahih al-Bukhari 46)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "হানাফি পদ্ধতি: তিন রাকাত, এক সালাম",
+            "en": "Hanafi method: three rak'ahs, one salam"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "প্রথম দুই রাকাত",
+            "en": "First two rak'ahs"
+          },
+          "text": {
+            "bn": "সাধারণ নামাজের মতো দুই রাকাত পড়ুন; প্রতি রাকাতে সূরা ফাতিহার সাথে আরেকটি সূরা। দ্বিতীয় রাকাতের পর বসে শুধু আত্তাহিয়্যাতু পড়ে দাঁড়িয়ে যান।",
+            "en": "Pray two rak'ahs like any prayer, with al-Fatihah and a surah in each. After the second, sit for tashahhud only and stand up."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তৃতীয় রাকাতে কিরাত",
+            "en": "Third rak'ah recitation"
+          },
+          "text": {
+            "bn": "তৃতীয় রাকাতেও সূরা ফাতিহা ও আরেকটি সূরা পড়ুন।",
+            "en": "Recite al-Fatihah and a surah in the third rak'ah too."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "কুনুতের তাকবির",
+            "en": "Takbir for qunut"
+          },
+          "text": {
+            "bn": "কিরাত শেষে রুকুতে না গিয়ে কান পর্যন্ত হাত তুলে ‘আল্লাহু আকবার’ বলুন, তারপর আবার হাত বাঁধুন।",
+            "en": "After the recitation, before ruku', raise your hands to the ears saying 'Allahu Akbar', then fold them again."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দোয়া কুনুত",
+            "en": "Du'a qunut"
+          },
+          "text": {
+            "bn": "নিচের দোয়া কুনুত চুপে চুপে পড়ুন। তারপর রুকু, সিজদা, শেষ বৈঠক ও সালাম দিয়ে শেষ করুন।",
+            "en": "Recite the du'a qunut below quietly, then ruku', sajdahs, the final sitting and salam."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "দোয়া কুনুত মুখস্থ না থাকলে শেখা পর্যন্ত ‘রাব্বানা আতিনা ফিদ্দুনইয়া হাসানাতাও ওয়া ফিল আখিরাতি হাসানাতাও ওয়া কিনা আযাবান নার’ বা ‘আল্লাহুম্মাগফির লী’ তিনবার পড়া যায়। হানাফি মতে কুনুত ভুলে রুকুতে চলে গেলে আর ফিরে আসবেন না; শেষে সাহু সিজদা দেবেন।",
+            "en": "Until you learn it, you may say 'Rabbana atina fid-dunya hasanah...' or 'Allahummaghfir li' three times. In the Hanafi school, if you forget qunut and go into ruku', do not return; make sajdah al-sahw at the end."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "দোয়া কুনুত (হানাফি আমলে প্রচলিত)",
+            "en": "Du'a qunut (used in Hanafi practice)"
+          },
+          "ar": "اللّٰهُمَّ إِنَّا نَسْتَعِينُكَ وَنَسْتَغْفِرُكَ، وَنُؤْمِنُ بِكَ وَنَتَوَكَّلُ عَلَيْكَ، وَنُثْنِي عَلَيْكَ الْخَيْرَ، وَنَشْكُرُكَ وَلَا نَكْفُرُكَ، وَنَخْلَعُ وَنَتْرُكُ مَنْ يَفْجُرُكَ. اللّٰهُمَّ إِيَّاكَ نَعْبُدُ، وَلَكَ نُصَلِّي وَنَسْجُدُ، وَإِلَيْكَ نَسْعَىٰ وَنَحْفِدُ، وَنَرْجُو رَحْمَتَكَ، وَنَخْشَىٰ عَذَابَكَ، إِنَّ عَذَابَكَ بِالْكُفَّارِ مُلْحِقٌ",
+          "pron": {
+            "bn": "আল্লাহুম্মা ইন্না নাসতাঈনুকা ওয়া নাসতাগফিরুকা, ওয়া নু'মিনু বিকা ওয়া নাতাওয়াক্কালু আলাইকা, ওয়া নুসনী আলাইকাল খাইর, ওয়া নাশকুরুকা ওয়া লা নাকফুরুকা, ওয়া নাখলাউ ওয়া নাতরুকু মাই ইয়াফজুরুক। আল্লাহুম্মা ইয়্যাকা না'বুদু, ওয়া লাকা নুসাল্লী ওয়া নাসজুদু, ওয়া ইলাইকা নাস'আ ওয়া নাহফিদু, ওয়া নারজূ রাহমাতাকা, ওয়া নাখশা আযাবাকা, ইন্না আযাবাকা বিলকুফফারি মুলহিক।",
+            "en": "Allahumma inna nasta'inuka wa nastaghfiruka, wa nu'minu bika wa natawakkalu 'alayka, wa nuthni 'alaykal-khayr, wa nashkuruka wa la nakfuruka, wa nakhla'u wa natruku man yafjuruk. Allahumma iyyaka na'budu, wa laka nusalli wa nasjudu, wa ilayka nas'a wa nahfidu, wa narju rahmataka, wa nakhsha 'adhabaka, inna 'adhabaka bil-kuffari mulhiq."
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ, আমরা তোমার কাছে সাহায্য চাই ও ক্ষমা চাই, তোমার প্রতি ঈমান আনি ও তোমার ওপর ভরসা করি, তোমার উত্তম প্রশংসা করি, তোমার শোকর করি, অকৃতজ্ঞ হই না; যে তোমার অবাধ্যতা করে, তার থেকে আমরা সম্পর্ক ছিন্ন করি ও তাকে ছেড়ে দিই। হে আল্লাহ, আমরা কেবল তোমারই ইবাদত করি, তোমারই জন্য নামাজ পড়ি ও সিজদা করি, তোমারই দিকে ছুটে যাই ও তৎপর থাকি; তোমার রহমতের আশা করি ও তোমার শাস্তিকে ভয় করি। নিশ্চয়ই তোমার শাস্তি কাফেরদের পেয়ে বসবে।",
+            "en": "O Allah, we seek Your help and Your forgiveness, we believe in You and rely on You, we praise You with all good, we thank You and are not ungrateful, and we cast off and leave whoever disobeys You. O Allah, You alone we worship, to You we pray and prostrate, to You we hasten and strive; we hope for Your mercy and fear Your punishment. Surely Your punishment will overtake the disbelievers."
+          },
+          "ref": {
+            "bn": "উমর (রা.) থেকে বর্ণিত: মুসান্নাফ ইবনে আবি শাইবা; আস-সুনানুল কুবরা, বায়হাকি",
+            "en": "Reported from 'Umar: Musannaf Ibn Abi Shaybah; al-Sunan al-Kubra of al-Bayhaqi"
+          },
+          "check": true
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "দোয়া কুনুত (হাসান ইবনে আলী রা.-কে শেখানো)",
+            "en": "Du'a qunut (taught to al-Hasan ibn 'Ali)"
+          },
+          "ar": "اللّٰهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ، وَبَارِكْ لِي فِيمَا أَعْطَيْتَ، وَقِنِي شَرَّ مَا قَضَيْتَ، إِنَّكَ تَقْضِي وَلَا يُقْضَىٰ عَلَيْكَ، وَإِنَّهُ لَا يَذِلُّ مَنْ وَالَيْتَ، وَلَا يَعِزُّ مَنْ عَادَيْتَ، تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ",
+          "pron": {
+            "bn": "আল্লাহুম্মাহদিনী ফীমান হাদাইতা, ওয়া আফিনী ফীমান আফাইতা, ওয়া তাওয়াল্লানী ফীমান তাওয়াল্লাইতা, ওয়া বারিক লী ফীমা আ'তাইতা, ওয়া কিনী শাররা মা কাদাইতা, ইন্নাকা তাকদী ওয়া লা ইউকদা আলাইকা, ওয়া ইন্নাহু লা ইয়াযিল্লু মাও ওয়ালাইতা, ওয়া লা ইয়াইযযু মান আদাইতা, তাবারাকতা রাব্বানা ওয়া তাআলাইতা।",
+            "en": "Allahummahdini fiman hadayta, wa 'afini fiman 'afayta, wa tawallani fiman tawallayta, wa barik li fima a'tayta, wa qini sharra ma qadayta, innaka taqdi wa la yuqda 'alayka, wa innahu la yadhillu man walayta, wa la ya'izzu man 'adayta, tabarakta Rabbana wa ta'alayta."
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ, যাদের তুমি হেদায়াত দিয়েছ, তাদের সাথে আমাকেও হেদায়াত দাও; যাদের নিরাপত্তা দিয়েছ, তাদের সাথে আমাকেও নিরাপত্তা দাও; যাদের অভিভাবকত্ব নিয়েছ, তাদের সাথে আমারও অভিভাবক হও; যা দিয়েছ তাতে বরকত দাও; আর তোমার ফয়সালার মন্দ থেকে আমাকে রক্ষা করো। তুমিই ফয়সালা করো, তোমার ওপর কেউ ফয়সালা করতে পারে না। তুমি যার বন্ধু হও সে অপমানিত হয় না, আর যার শত্রু হও সে সম্মানিত হয় না। হে আমাদের রব, তুমি বরকতময় ও সুউচ্চ।",
+            "en": "O Allah, guide me among those You have guided, grant me well-being among those You have granted well-being, take me into Your care among those You have taken into Your care, bless me in what You have given, and protect me from the evil of what You have decreed. You decree and none decrees over You. Whoever You befriend is never humbled, and whoever You oppose is never honoured. Blessed are You, our Lord, and Exalted."
+          },
+          "ref": {
+            "bn": "সুনান আবু দাউদ ১৪২৫; জামে তিরমিজি ৪৬৪; সুনান নাসায়ি ১৭৪৫",
+            "en": "Sunan Abi Dawud 1425; Jami' al-Tirmidhi 464; Sunan al-Nasa'i 1745"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "দুটি দোয়াই পড়া যায়। হানাফিরা সাধারণত প্রথমটি পড়েন; শাফেয়ি ও হাম্বলিরা সাধারণত দ্বিতীয়টি।",
+            "en": "Either may be recited. Hanafis usually recite the first; Shafi'is and Hanbalis usually the second."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "বিতরের রাকাত সংখ্যা ও পদ্ধতি",
+            "en": "Number of rak'ahs and method"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "বিতর তিন রাকাত, দ্বিতীয় রাকাতে বৈঠক, শেষে এক সালাম (মাগরিবের মতো, তবে তিন রাকাতেই সূরা মেলাতে হয়)। কুনুত তৃতীয় রাকাতে রুকুর আগে, সারা বছর।",
+                "en": "Three rak'ahs with a sitting after the second and one salam at the end (like Maghrib, but with a surah in all three). Qunut in the third rak'ah before ruku', all year."
+              },
+              "evidence": {
+                "bn": "উবাই ইবনে কা'ব (রা.): নবীজি (সা.) তিন রাকাত বিতর পড়তেন, রুকুর আগে কুনুত পড়তেন (সুনান নাসায়ি ১৬৯৯); আয়েশা (রা.)-এর বর্ণনায় ‘তারপর তিন রাকাত’ (সহিহ বুখারি ১১৪৭)।",
+                "en": "Ubayy ibn Ka'b: the Prophet prayed three rak'ahs of witr and made qunut before ruku' (Sunan al-Nasa'i 1699); 'A'ishah: 'then he prayed three' (Sahih al-Bukhari 1147)."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও হাম্বলি",
+                "en": "Shafi'i and Hanbali"
+              },
+              "text": {
+                "bn": "সর্বনিম্ন এক রাকাত; তিন, পাঁচ, সাত, নয় বা এগারোও পড়া যায়। তিন রাকাত পড়লে উত্তম হলো দুই রাকাত পড়ে সালাম ফিরিয়ে আলাদা এক রাকাত পড়া, অথবা তিন রাকাত একটানা শেষে এক বৈঠকে। শাফেয়ি মতে কুনুত রমজানের শেষ অর্ধেকে রুকুর পরে; হাম্বলি মতে সারা বছর রুকুর পরে।",
+                "en": "Minimum one rak'ah; also 3, 5, 7, 9 or 11. For three, preferably two then salam then one, or three together with one sitting at the end. Shafi'i: qunut after ruku' in the second half of Ramadan; Hanbali: after ruku' all year."
+              },
+              "evidence": {
+                "bn": "‘রাতের নামাজ দুই দুই রাকাত; ফজরের আশঙ্কা হলে এক রাকাত বিতর পড়ো’ (সহিহ বুখারি ৯৯০); ‘বিতর শেষ রাতে এক রাকাত’ (সহিহ মুসলিম ৭৫২); ‘কেউ চাইলে পাঁচ, তিন বা এক রাকাত বিতর পড়ুক’ (সুনান আবু দাউদ ১৪২২)।",
+                "en": "'Night prayer is two by two; if you fear dawn, pray one as witr' (Sahih al-Bukhari 990); 'Witr is one rak'ah at the end of the night' (Sahih Muslim 752); 'whoever wishes, five, three or one' (Sunan Abi Dawud 1422)."
+              }
+            },
+            {
+              "label": {
+                "bn": "মালেকি",
+                "en": "Maliki"
+              },
+              "text": {
+                "bn": "দুই রাকাত (শাফা') পড়ে সালাম ফিরিয়ে তারপর এক রাকাত বিতর।",
+                "en": "Two rak'ahs (shaf'), salam, then one rak'ah of witr."
+              },
+              "evidence": {
+                "bn": "সহিহ বুখারি ৯৯০; সহিহ মুসলিম ৭৫২।",
+                "en": "Sahih al-Bukhari 990; Sahih Muslim 752."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "বিতরের সুন্নত",
+            "en": "Sunnahs of witr"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "তিন রাকাতে পর্যায়ক্রমে সূরা আ'লা, সূরা কাফিরুন ও সূরা ইখলাস পড়া (জামে তিরমিজি ৪৬২; সুনান নাসায়ি ১৬৯৯)",
+              "en": "Recite al-A'la, al-Kafirun and al-Ikhlas in the three rak'ahs (Jami' al-Tirmidhi 462; Sunan al-Nasa'i 1699)"
+            },
+            {
+              "bn": "শেষ রাতে উঠতে পারার ভরসা থাকলে তাহাজ্জুদের পরে বিতর পড়া উত্তম; না থাকলে ঘুমানোর আগে পড়ে নেওয়া (সহিহ মুসলিম ৭৫৫)",
+              "en": "If you trust you will wake, pray witr at the end of the night after tahajjud; otherwise before sleeping (Sahih Muslim 755)"
+            },
+            {
+              "bn": "সালামের পর তিনবার ‘সুবহানাল মালিকিল কুদ্দুস’ বলা, তৃতীয়বার একটু টেনে (সুনান নাসায়ি ১৬৯৯)",
+              "en": "After salam say 'Subhanal-Malikil-Quddus' three times, lengthening the third (Sunan al-Nasa'i 1699)"
+            }
+          ]
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "বিতরের পর",
+            "en": "After witr"
+          },
+          "ar": "سُبْحَانَ الْمَلِكِ الْقُدُّوسِ",
+          "pron": {
+            "bn": "সুবহানাল মালিকিল কুদ্দুস (তিনবার)",
+            "en": "Subhanal-Malikil-Quddus (three times)"
+          },
+          "meaning": {
+            "bn": "পবিত্র মহান সেই অধিপতি, যিনি সব দোষ থেকে মুক্ত।",
+            "en": "Glory be to the King, the Most Holy."
+          },
+          "ref": {
+            "bn": "সুনান আবু দাউদ ১৪৩০; সুনান নাসায়ি ১৬৯৯",
+            "en": "Sunan Abi Dawud 1430; Sunan al-Nasa'i 1699"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tarawih-prayer",
+      "title": {
+        "bn": "তারাবির নামাজ",
+        "en": "Tarawih Prayer"
+      },
+      "summary": {
+        "bn": "রমজানের রাতের বিশেষ নামাজ তারাবি: ফজিলত, পড়ার নিয়ম এবং রাকাত সংখ্যা নিয়ে আলেমদের মত।",
+        "en": "The special night prayer of Ramadan: its virtue, how to pray it, and the scholarly views on its number of rak'ahs."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "তারাবি রমজানের রাতে ইশার ফরজ ও সুন্নতের পর এবং বিতরের আগে পড়া হয়। এটি সুন্নতে মুয়াক্কাদা; জামাতে পড়া উত্তম। দুই দুই রাকাত করে পড়া হয়, আর প্রতি চার রাকাত পর একটু বিশ্রাম (তারবিহা) নেওয়া হয়; এ থেকেই নাম ‘তারাবি’।",
+            "en": "Tarawih is prayed in Ramadan after 'Isha (fard and sunnah) and before witr. It is a confirmed sunnah, best in congregation, prayed two rak'ahs at a time with a short rest (tarwihah) after every four, hence the name."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "ফজিলত",
+            "en": "Virtue"
+          },
+          "ar": "مَنْ قَامَ رَمَضَانَ إِيمَانًا وَاحْتِسَابًا غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ",
+          "pron": {
+            "bn": "মান কামা রামাদানা ঈমানান ওয়াহতিসাবান গুফিরা লাহু মা তাকাদ্দামা মিন যামবিহ।",
+            "en": "Man qama Ramadana imanan wahtisaban ghufira lahu ma taqaddama min dhanbih."
+          },
+          "meaning": {
+            "bn": "যে ব্যক্তি ঈমানের সাথে ও সওয়াবের আশায় রমজানের রাতে নামাজে দাঁড়ায়, তার আগের গুনাহ ক্ষমা করে দেওয়া হয়।",
+            "en": "Whoever stands (in prayer) in Ramadan with faith and seeking reward, his previous sins are forgiven."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি ৩৭",
+            "en": "Sahih al-Bukhari 37"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ইতিহাস",
+            "en": "History"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নবীজি (সা.) কয়েক রাত মসজিদে জামাতে রাতের নামাজ পড়েছেন, তারপর ফরজ হয়ে যাওয়ার আশঙ্কায় আর বের হননি (সহিহ বুখারি ২০১২)। পরে উমর (রা.) সবাইকে উবাই ইবনে কা'ব (রা.)-এর পেছনে এক জামাতে একত্র করেন (সহিহ বুখারি ২০১০)।",
+            "en": "The Prophet led the night prayer in congregation for a few nights, then stopped, fearing it would be made obligatory (Sahih al-Bukhari 2012). Later 'Umar gathered the people behind Ubayy ibn Ka'b in one congregation (Sahih al-Bukhari 2010)."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "তারাবি কত রাকাত",
+            "en": "How many rak'ahs"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "২০ রাকাত (হানাফি, শাফেয়ি, হাম্বলি)",
+                "en": "20 rak'ahs (Hanafi, Shafi'i, Hanbali)"
+              },
+              "text": {
+                "bn": "বিতর ছাড়া ২০ রাকাত, দুই দুই করে দশ সালামে। বাংলাদেশের মসজিদগুলোতে এটিই প্রচলিত।",
+                "en": "Twenty rak'ahs besides witr, in ten pairs. This is the common practice in Bangladesh's mosques."
+              },
+              "evidence": {
+                "bn": "উমর (রা.)-এর যুগে মানুষ ২০ রাকাত পড়তেন বলে সাইব ইবনে ইয়াজিদ (রা.) থেকে বায়হাকি বর্ণনা করেছেন; মুয়াত্তা মালিকে ইয়াজিদ ইবনে রুমান থেকে ২৩ রাকাত (বিতরসহ) বর্ণিত। পরবর্তী উম্মাহর ব্যাপক আমল।",
+                "en": "Al-Bayhaqi reports from al-Sa'ib ibn Yazid that people prayed 20 in 'Umar's time; the Muwatta' reports 23 (with witr) from Yazid ibn Ruman. Widespread later practice of the ummah."
+              }
+            },
+            {
+              "label": {
+                "bn": "৮ রাকাত",
+                "en": "8 rak'ahs"
+              },
+              "text": {
+                "bn": "বিতর ছাড়া ৮ রাকাত (বিতরসহ ১১)।",
+                "en": "Eight rak'ahs plus witr (eleven in total)."
+              },
+              "evidence": {
+                "bn": "আয়েশা (রা.): নবীজি (সা.) রমজানে ও অন্য সময়ে রাতে এগারো রাকাতের বেশি পড়তেন না (সহিহ বুখারি ১১৪৭); মুয়াত্তা মালিকে উমর (রা.) উবাই ও তামিম দারি (রা.)-কে এগারো রাকাত পড়াতে বলেছিলেন।",
+                "en": "'A'ishah: the Prophet did not exceed eleven rak'ahs at night, in Ramadan or otherwise (Sahih al-Bukhari 1147); the Muwatta' reports 'Umar telling Ubayy and Tamim al-Dari to lead eleven."
+              }
+            },
+            {
+              "label": {
+                "bn": "নির্দিষ্ট সংখ্যা নেই",
+                "en": "No fixed number"
+              },
+              "text": {
+                "bn": "ইমাম মালিক (রহ.)-এর মতে মদিনাবাসীর আমলে ৩৬ রাকাত। অনেক আলেমের মতে রাতের নফল নামাজের নির্দিষ্ট সীমা নেই; কেউ কম রাকাত লম্বা করে, কেউ বেশি রাকাত ছোট করে পড়তে পারে।",
+                "en": "Imam Malik reported 36 as the practice of Madinah. Many scholars say night prayer has no fixed limit: fewer long rak'ahs or more short ones."
+              },
+              "evidence": {
+                "bn": "‘রাতের নামাজ দুই দুই রাকাত’ (সহিহ বুখারি ৯৯০), এখানে কোনো সংখ্যা বেঁধে দেওয়া হয়নি।",
+                "en": "'Night prayer is two by two' (Sahih al-Bukhari 990), with no number fixed."
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "যে মসজিদে যে নিয়ম, সেখানে ইমামের সাথে শেষ পর্যন্ত পড়াই উত্তম। নবীজি (সা.) বলেছেন, যে ইমামের সাথে তিনি শেষ করা পর্যন্ত দাঁড়ায়, তার জন্য পুরো রাত নামাজের সওয়াব লেখা হয় (জামে তিরমিজি ৮০৬)। তারাবির রাকাত নিয়ে বিবাদ করা উচিত নয়।",
+            "en": "Pray with your mosque's imam until he finishes. The Prophet said whoever stands with the imam until he finishes gets the reward of the whole night (Jami' al-Tirmidhi 806). Do not quarrel over the number."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "নিয়ম",
+            "en": "How to pray"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "নিয়ত",
+            "en": "Intention"
+          },
+          "text": {
+            "bn": "মনে মনে নিয়ত করুন যে তারাবির দুই রাকাত সুন্নত পড়ছি; মুখে বলা জরুরি নয়।",
+            "en": "Intend in your heart to pray two rak'ahs of tarawih; saying it aloud is not required."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দুই দুই রাকাত",
+            "en": "Two by two"
+          },
+          "text": {
+            "bn": "সাধারণ দুই রাকাত সুন্নতের মতো পড়ে সালাম ফেরান।",
+            "en": "Pray like any two-rak'ah sunnah and end with salam."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "প্রতি চার রাকাত পর বিশ্রাম",
+            "en": "Rest after every four"
+          },
+          "text": {
+            "bn": "চার রাকাত পরপর একটু বসে বিশ্রাম নিন; এ সময় তাসবিহ, দরুদ, ইস্তিগফার বা কুরআন পড়তে পারেন।",
+            "en": "Sit and rest after every four rak'ahs; you may make tasbih, durood, istighfar or recite Quran."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "শেষে বিতর",
+            "en": "Witr at the end"
+          },
+          "text": {
+            "bn": "রমজানে বিতর জামাতের সাথে পড়া যায়।",
+            "en": "In Ramadan, witr may be prayed in congregation."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "চার রাকাত পরপর পড়ার জন্য ‘সুবহানা যিল মুলকি ওয়াল মালাকুত...’ নামে যে দোয়া প্রচলিত, তা কোনো হাদিসে তারাবির জন্য নির্দিষ্ট করে বর্ণিত হয়নি। এই বিরতিতে যেকোনো জিকির করা যায়; নির্দিষ্ট দোয়াকে জরুরি মনে করবেন না।",
+            "en": "The popular 'Subhana dhil-mulki wal-malakut...' recited between sets is not narrated specifically for tarawih in any hadith. Any dhikr is fine in the pause; do not treat a particular one as required."
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "হানাফি মতে রমজানে তারাবিতে অন্তত একবার পুরো কুরআন খতম করা সুন্নত। জামাতে না পারলে ঘরে একা বা পরিবারের সাথে তারাবি পড়া যায়।",
+            "en": "In the Hanafi school, completing the whole Quran once in tarawih during Ramadan is sunnah. If you cannot attend the mosque, pray it at home alone or with family."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tahajjud-prayer",
+      "title": {
+        "bn": "তাহাজ্জুদের নামাজ",
+        "en": "Tahajjud (Night) Prayer"
+      },
+      "summary": {
+        "bn": "ফরজের পর সবচেয়ে মর্যাদাপূর্ণ নামাজ তাহাজ্জুদ: সময়, রাকাত, নিয়ম ও শেষ রাতের দোয়া।",
+        "en": "The most virtuous prayer after the obligatory ones: its time, rak'ahs, method and the value of the last third of the night."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "وَمِنَ اللَّيْلِ فَتَهَجَّدْ بِهِ نَافِلَةً لَكَ عَسَىٰ أَنْ يَبْعَثَكَ رَبُّكَ مَقَامًا مَحْمُودًا",
+          "pron": {
+            "bn": "ওয়া মিনাল লাইলি ফাতাহাজ্জাদ বিহী নাফিলাতাল লাক, আসা আই ইয়াবআসাকা রাব্বুকা মাকামাম মাহমূদা।",
+            "en": "Wa minal-layli fatahajjad bihi nafilatal lak, 'asa ay yab'athaka Rabbuka maqamam mahmuda."
+          },
+          "meaning": {
+            "bn": "আর রাতের কিছু অংশে তাহাজ্জুদ পড়ো; এটি তোমার জন্য অতিরিক্ত। আশা করা যায়, তোমার রব তোমাকে প্রশংসিত স্থানে পৌঁছাবেন।",
+            "en": "And in part of the night, pray tahajjud as an extra for you; perhaps your Lord will raise you to a praised station."
+          },
+          "ref": {
+            "bn": "সূরা ইসরা ১৭:৭৯",
+            "en": "Al-Isra 17:79"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "‘রমজানের পর সর্বোত্তম রোজা মুহাররমের রোজা, আর ফরজের পর সর্বোত্তম নামাজ রাতের নামাজ’ (সহিহ মুসলিম ১১৬৩)।",
+              "en": "'The best prayer after the obligatory is the night prayer' (Sahih Muslim 1163)."
+            },
+            {
+              "bn": "প্রতি রাতের শেষ তৃতীয়াংশে আল্লাহ নিকটতম আসমানে নেমে বলেন: কে আমাকে ডাকবে, আমি সাড়া দেব; কে চাইবে, আমি দেব; কে ক্ষমা চাইবে, আমি ক্ষমা করব (সহিহ বুখারি ১১৪৫)।",
+              "en": "In the last third of every night Allah descends to the lowest heaven and says: who calls Me that I may answer, who asks Me that I may give, who seeks forgiveness that I may forgive (Sahih al-Bukhari 1145)."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "সময়",
+            "en": "Time"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "ইশার পর থেকে সুবহে সাদিক পর্যন্ত যেকোনো সময় পড়া যায়। ঘুম থেকে উঠে পড়া এবং রাতের শেষ তৃতীয়াংশে পড়া সবচেয়ে উত্তম। উঠতে না পারার আশঙ্কা থাকলে ঘুমানোর আগে কিছু নফল পড়ে বিতর পড়ে নিন।",
+            "en": "Any time after 'Isha until dawn. Best after sleeping and in the last third of the night. If you fear not waking, pray some nafl and witr before sleeping."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "রাকাত সংখ্যা",
+            "en": "Number of rak'ahs"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "সর্বনিম্ন দুই রাকাত। নবীজি (সা.) সাধারণত বিতরসহ এগারো রাকাত (সহিহ বুখারি ১১৪৭), কখনো তেরো রাকাত (সহিহ বুখারি ১১৩৮) পড়তেন। নির্দিষ্ট কোনো সীমা নেই; সামর্থ্য অনুযায়ী পড়ুন।",
+            "en": "Minimum two rak'ahs. The Prophet usually prayed eleven including witr (Sahih al-Bukhari 1147), sometimes thirteen (Sahih al-Bukhari 1138). There is no fixed limit; pray as you are able."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "নিয়ম",
+            "en": "Method"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "ওযু ও নিয়ত",
+            "en": "Wudu and intention"
+          },
+          "text": {
+            "bn": "ওযু করে মনে মনে তাহাজ্জুদের নিয়ত করুন।",
+            "en": "Make wudu and intend tahajjud in your heart."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "হালকা দুই রাকাত দিয়ে শুরু",
+            "en": "Begin with two light rak'ahs"
+          },
+          "text": {
+            "bn": "নবীজি (সা.) রাতের নামাজ দুই হালকা রাকাত দিয়ে শুরু করতে বলেছেন (সহিহ মুসলিম ৭৬৮)।",
+            "en": "The Prophet advised starting the night prayer with two light rak'ahs (Sahih Muslim 768)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দুই দুই রাকাত করে",
+            "en": "Two at a time"
+          },
+          "text": {
+            "bn": "সাধারণ নফল নামাজের মতো দুই দুই রাকাত করে পড়ুন; যেকোনো সূরা পড়া যায়, লম্বা কিরাত ও লম্বা সিজদা উত্তম (সহিহ বুখারি ৯৯০)।",
+            "en": "Pray two rak'ahs at a time like any nafl; any surah is fine; long recitation and sajdah are better (Sahih al-Bukhari 990)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "বিতর দিয়ে শেষ",
+            "en": "End with witr"
+          },
+          "text": {
+            "bn": "আগে বিতর না পড়ে থাকলে শেষে বিতর পড়ুন (সহিহ বুখারি ৯৯৮)।",
+            "en": "If you have not yet prayed witr, end with it (Sahih al-Bukhari 998)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দোয়া ও ইস্তিগফার",
+            "en": "Dua and istighfar"
+          },
+          "text": {
+            "bn": "এ সময় দোয়া কবুলের আশা বেশি; নিজের ভাষায় মন খুলে দোয়া ও ক্ষমা চান।",
+            "en": "This is a time of hope for acceptance; ask and seek forgiveness in your own words."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "মুখে নিয়ত বলা জরুরি নয়। উদাহরণ (প্রচলিত বাংলা): ‘আমি আল্লাহর জন্য দুই রাকাত তাহাজ্জুদ নামাজ পড়ছি।’ নিয়মিত অল্প পড়া, মাঝে মাঝে বেশি পড়ার চেয়ে ভালো।",
+            "en": "Saying the niyyah aloud is not required. Example (common Bangla phrasing): 'I am praying two rak'ahs of tahajjud for Allah.' A little done regularly is better than a lot occasionally."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "আরও দেখুন: সূরা মুজ্জাম্মিল ৭৩:১–৬; সূরা সাজদা ৩২:১৬; সূরা যারিয়াত ৫১:১৭–১৮",
+            "en": "See also: Al-Muzzammil 73:1–6; As-Sajdah 32:16; Adh-Dhariyat 51:17–18"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "ishraq-duha-prayer",
+      "title": {
+        "bn": "ইশরাক ও চাশতের নামাজ",
+        "en": "Ishraq and Duha Prayer"
+      },
+      "summary": {
+        "bn": "সূর্য ওঠার পর থেকে দুপুরের আগ পর্যন্ত পড়া নফল নামাজ: ইশরাক, চাশত (দুহা) ও আওয়াবিন।",
+        "en": "Voluntary prayer between sunrise and noon: ishraq, duha and salat al-awwabin."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "সালাতুদ দুহা (চাশতের নামাজ) সূর্য ওঠার পর থেকে দুপুরে সূর্য মাথার ওপর আসার (জাওয়াল) একটু আগ পর্যন্ত পড়া যায়। অনেক আলেমের মতে এই সময়ের শুরুর দিকে, সূর্য ওঠার প্রায় ১৫–২০ মিনিট পর পড়া নামাজকেই ‘ইশরাক’ বলা হয়।",
+            "en": "Salat al-duha is prayed from after sunrise until just before the sun reaches its zenith (zawal). Many scholars say the prayer at the start of this period, about 15–20 minutes after sunrise, is what is called 'ishraq'."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ফজিলত",
+            "en": "Virtue"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "মানুষের শরীরের প্রতিটি জোড়ার জন্য প্রতিদিন সদকা দেওয়া কর্তব্য; চাশতের দুই রাকাত নামাজ এর জন্য যথেষ্ট (সহিহ মুসলিম ৭২০)।",
+              "en": "Every joint owes a charity each day, and two rak'ahs of duha suffice for it (Sahih Muslim 720)."
+            },
+            {
+              "bn": "আবু হুরায়রা (রা.)-কে নবীজি (সা.) তিনটি বিষয়ের ওসিয়ত করেছেন: প্রতি মাসে তিন রোজা, চাশতের দুই রাকাত এবং ঘুমের আগে বিতর (সহিহ বুখারি ১১৭৮)।",
+              "en": "The Prophet advised Abu Hurayrah: three fasts a month, two rak'ahs of duha, and witr before sleeping (Sahih al-Bukhari 1178)."
+            },
+            {
+              "bn": "মক্কা বিজয়ের দিন নবীজি (সা.) চাশতের সময় আট রাকাত পড়েছেন (সহিহ বুখারি ১১৭৬; সহিহ মুসলিম ৩৩৬)।",
+              "en": "On the day of the conquest of Makkah the Prophet prayed eight rak'ahs at duha time (Sahih al-Bukhari 1176; Sahih Muslim 336)."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "রাকাত ও সময়",
+            "en": "Rak'ahs and time"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "বিষয়",
+              "en": "Item"
+            },
+            {
+              "bn": "বিবরণ",
+              "en": "Details"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "রাকাত",
+                "en": "Rak'ahs"
+              },
+              {
+                "bn": "সর্বনিম্ন ২; ৪, ৬ বা ৮ রাকাতও পড়া যায়, দুই দুই করে",
+                "en": "Minimum 2; 4, 6 or 8 also, two at a time"
+              }
+            ],
+            [
+              {
+                "bn": "শুরুর সময়",
+                "en": "Starts"
+              },
+              {
+                "bn": "সূর্য ওঠার প্রায় ১৫–২০ মিনিট পর (মাকরুহ সময় শেষ হলে)",
+                "en": "About 15–20 minutes after sunrise (when the disliked time ends)"
+              }
+            ],
+            [
+              {
+                "bn": "উত্তম সময়",
+                "en": "Best time"
+              },
+              {
+                "bn": "রোদ কিছুটা তেতে উঠলে, অর্থাৎ সকাল ও দুপুরের মাঝামাঝি",
+                "en": "When the sun has grown hot, around mid-morning"
+              }
+            ],
+            [
+              {
+                "bn": "শেষ সময়",
+                "en": "Ends"
+              },
+              {
+                "bn": "জাওয়ালের (ঠিক দুপুর) কিছুক্ষণ আগে",
+                "en": "A little before zawal (true noon)"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "‘আওয়াবিনের নামাজ হলো যখন উটের বাচ্চার পা গরম বালুতে পুড়তে থাকে’ (সহিহ মুসলিম ৭৪৮)। অর্থাৎ চাশতের সবচেয়ে উত্তম সময় হলো সকাল গড়িয়ে রোদ বেশ চড়া হলে।",
+            "en": "'The prayer of the awwabin is when the young camels feel the heat of the sand' (Sahih Muslim 748), i.e. the best duha time is mid-morning when the sun is hot."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "বাংলাদেশে অনেকে মাগরিবের পর ছয় রাকাত নফলকে ‘আওয়াবিন’ বলেন। মাগরিবের পর নফল পড়া ভালো কাজ, তবে এর বিশেষ ফজিলতের হাদিসগুলো দুর্বল; আর সহিহ হাদিসে ‘আওয়াবিনের নামাজ’ বলা হয়েছে চাশতের নামাজকে (সহিহ মুসলিম ৭৪৮)।",
+            "en": "In Bangladesh many call six nafl rak'ahs after Maghrib 'awwabin'. Nafl after Maghrib is good, but the hadiths on its special reward are weak, and the sahih hadith uses 'prayer of the awwabin' for duha (Sahih Muslim 748)."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ইশরাকের ফজিলতের হাদিস",
+            "en": "The hadith on ishraq"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "আনাস (রা.) থেকে বর্ণিত: যে ব্যক্তি জামাতে ফজর পড়ে সূর্য ওঠা পর্যন্ত বসে আল্লাহর জিকির করে, তারপর দুই রাকাত নামাজ পড়ে, সে পূর্ণ হজ ও উমরার সওয়াব পায় (জামে তিরমিজি ৫৮৬)।",
+            "en": "Anas reported: whoever prays Fajr in congregation, sits remembering Allah until sunrise, then prays two rak'ahs, has the reward of a complete Hajj and 'Umrah (Jami' al-Tirmidhi 586)."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "ইমাম তিরমিজি এই হাদিসকে ‘হাসান গরিব’ বলেছেন। শাইখ আলবানিসহ কেউ কেউ একে হাসান বলেছেন, আবার কিছু মুহাদ্দিস সনদকে দুর্বল বলেছেন। আমলটি নিজে ভালো; তবে ফজিলত বর্ণনায় এই মতভেদ মনে রাখুন।",
+            "en": "Al-Tirmidhi called it hasan gharib; al-Albani and others graded it hasan, while some scholars judged its chain weak. The practice itself is good; keep this grading difference in mind."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নিয়ত মনে মনে করাই যথেষ্ট। উদাহরণ (প্রচলিত বাংলা): ‘আমি আল্লাহর জন্য দুই রাকাত চাশতের নফল নামাজ পড়ছি।’",
+            "en": "The intention in the heart is enough. Example (common Bangla phrasing): 'I am praying two rak'ahs of duha for Allah.'"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "istikhara-prayer",
+      "title": {
+        "bn": "ইস্তিখারার নামাজ ও দোয়া",
+        "en": "Istikhara Prayer and Du'a"
+      },
+      "summary": {
+        "bn": "কোনো বৈধ কাজে সিদ্ধান্ত নিতে আল্লাহর কাছে কল্যাণ চাওয়ার সুন্নত পদ্ধতি: দুই রাকাত নামাজ ও পূর্ণ দোয়া।",
+        "en": "The sunnah way to ask Allah for what is best before a permissible decision: two rak'ahs and the full du'a."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "ইস্তিখারা মানে আল্লাহর কাছে কল্যাণ চাওয়া। বিয়ে, চাকরি, ব্যবসা, সফর ইত্যাদি যেকোনো বৈধ বিষয়ে কোনটি ভালো বুঝতে না পারলে ইস্তিখারা করা সুন্নত। জাবির (রা.) বলেন, নবীজি (সা.) আমাদের সব বিষয়ে ইস্তিখারা এমনভাবে শেখাতেন, যেমন কুরআনের সূরা শেখাতেন।",
+            "en": "Istikhara means asking Allah for good. It is sunnah for any permissible matter you are unsure about: marriage, a job, business, travel. Jabir said the Prophet taught it for all matters as he taught a surah of the Quran."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "পদ্ধতি",
+            "en": "Method"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "ওযু",
+            "en": "Wudu"
+          },
+          "text": {
+            "bn": "ভালোভাবে ওযু করুন।",
+            "en": "Make wudu properly."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দুই রাকাত নফল",
+            "en": "Two rak'ahs of nafl"
+          },
+          "text": {
+            "bn": "ফরজ ছাড়া দুই রাকাত নফল নামাজ পড়ুন। যেকোনো সূরা পড়া যায়; নির্দিষ্ট সূরা হাদিসে বর্ণিত নেই। মাকরুহ সময় এড়িয়ে চলুন।",
+            "en": "Pray two non-obligatory rak'ahs. Any surah may be recited; no specific surah is narrated. Avoid the disliked times."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দোয়া",
+            "en": "The du'a"
+          },
+          "text": {
+            "bn": "সালাম ফিরিয়ে আল্লাহর প্রশংসা ও দরুদ পড়ে নিচের দোয়াটি পড়ুন। ‘হাযাল আমরা’ (এই বিষয়টি) বলার সময় মনে মনে আপনার বিষয়টি স্মরণ করুন বা নাম উল্লেখ করুন।",
+            "en": "After salam, praise Allah, send durood, then recite the du'a below. At 'hadhal-amra' (this matter), name or bring to mind your matter."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "ইস্তিখারার দোয়া",
+            "en": "Du'a of istikhara"
+          },
+          "ar": "اللّٰهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ. اللّٰهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هٰذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي، ثُمَّ بَارِكْ لِي فِيهِ. وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هٰذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِيَ الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي بِهِ",
+          "pron": {
+            "bn": "আল্লাহুম্মা ইন্নী আসতাখীরুকা বিইলমিকা, ওয়া আসতাকদিরুকা বিকুদরাতিকা, ওয়া আসআলুকা মিন ফাদলিকাল আযীম। ফাইন্নাকা তাকদিরু ওয়া লা আকদিরু, ওয়া তা'লামু ওয়া লা আ'লামু, ওয়া আনতা আল্লামুল গুয়ূব। আল্লাহুম্মা ইন কুনতা তা'লামু আন্না হাযাল আমরা খাইরুল লী ফী দীনী ওয়া মাআশী ওয়া আকিবাতি আমরী, ফাকদুরহু লী ওয়া ইয়াসসিরহু লী, সুম্মা বারিক লী ফীহ। ওয়া ইন কুনতা তা'লামু আন্না হাযাল আমরা শাররুল লী ফী দীনী ওয়া মাআশী ওয়া আকিবাতি আমরী, ফাসরিফহু আন্নী ওয়াসরিফনী আনহু, ওয়াকদুর লিয়াল খাইরা হাইসু কানা, সুম্মা আরদিনী বিহ।",
+            "en": "Allahumma inni astakhiruka bi'ilmika, wa astaqdiruka biqudratika, wa as'aluka min fadlikal-'azim, fa innaka taqdiru wa la aqdiru, wa ta'lamu wa la a'lamu, wa anta 'allamul-ghuyub. Allahumma in kunta ta'lamu anna hadhal-amra khayrun li fi dini wa ma'ashi wa 'aqibati amri, faqdurhu li wa yassirhu li, thumma barik li fih. Wa in kunta ta'lamu anna hadhal-amra sharrun li fi dini wa ma'ashi wa 'aqibati amri, fasrifhu 'anni wasrifni 'anhu, waqdur liyal-khayra haythu kana, thumma ardini bih."
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ, আমি তোমার জ্ঞানের ওসিলায় তোমার কাছে কল্যাণ চাই, তোমার কুদরতের ওসিলায় তোমার কাছে শক্তি চাই এবং তোমার মহান অনুগ্রহ প্রার্থনা করি। কারণ তুমি ক্ষমতা রাখো, আমি রাখি না; তুমি জানো, আমি জানি না; আর তুমি সকল অদৃশ্য বিষয়ে সম্যক জ্ঞাত। হে আল্লাহ, যদি তুমি জানো যে এই কাজটি আমার দ্বীন, আমার জীবন-জীবিকা ও আমার পরিণামের জন্য কল্যাণকর, তবে এটি আমার জন্য নির্ধারণ করো, সহজ করে দাও, তারপর এতে বরকত দাও। আর যদি জানো যে এই কাজটি আমার দ্বীন, জীবন-জীবিকা ও পরিণামের জন্য অকল্যাণকর, তবে এটিকে আমার থেকে ফিরিয়ে দাও এবং আমাকেও এ থেকে ফিরিয়ে রাখো; আর যেখানেই কল্যাণ থাকুক, তা আমার জন্য নির্ধারণ করো, তারপর তাতে আমাকে সন্তুষ্ট রাখো।",
+            "en": "O Allah, I ask You for good through Your knowledge, and ask You for ability through Your power, and I ask You of Your great bounty; for You are able and I am not, You know and I do not, and You are the Knower of the unseen. O Allah, if You know this matter is good for me in my religion, my livelihood and the outcome of my affairs, then decree it for me, make it easy for me, and bless me in it. And if You know this matter is bad for me in my religion, my livelihood and the outcome of my affairs, then turn it away from me and turn me away from it, and decree for me the good wherever it may be, then make me content with it."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি ৬৩৮২ (জাবির রা.); একই হাদিস তাহাজ্জুদ অধ্যায়েও আছে",
+            "en": "Sahih al-Bukhari 6382 (Jabir); also in the chapter on tahajjud"
+          },
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "হাদিসে বর্ণনাকারী ‘ওয়া আকিবাতি আমরী’-এর জায়গায় ‘আজিলি আমরী ওয়া আজিলিহ’ (আমার কাজের নিকট ও দূর ভবিষ্যৎ) বলারও উল্লেখ করেছেন। কোনো কোনো আলেম দুটোই বলতে বলেন। বুখারির আরেক বর্ণনায় শেষে ‘সুম্মা রাদ্দিনী বিহ’ আছে; অর্থ একই।",
+            "en": "The narrator also mentions 'in the near and far future of my affairs' instead of 'the outcome of my affairs'; some scholars advise saying both. Another narration in al-Bukhari ends 'thumma raddini bih', with the same meaning."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "মনে রাখার বিষয়",
+            "en": "Points to remember"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "ইস্তিখারা কেবল বৈধ (হালাল) বিষয়ে; ফরজ পালন বা হারাম বর্জনের জন্য ইস্তিখারা নেই।",
+              "en": "Istikhara is only for permissible matters, not for doing a duty or avoiding a sin."
+            },
+            {
+              "bn": "হাদিসে ইস্তিখারার পর ঘুমানো বা স্বপ্ন দেখার কথা নেই। স্বপ্নের অপেক্ষা জরুরি নয়।",
+              "en": "The hadith says nothing about sleeping or seeing a dream afterwards; waiting for a dream is not required."
+            },
+            {
+              "bn": "দোয়ার পর বিষয়টি ভেবে দেখুন, অভিজ্ঞ ও বিশ্বস্ত মানুষের পরামর্শ নিন, তারপর যেদিকে মন স্থির হয় ও পথ সহজ হয়, আল্লাহর ওপর ভরসা করে এগিয়ে যান।",
+              "en": "After the du'a, think, consult experienced and trustworthy people, then proceed with what your heart settles on and what becomes easy, trusting Allah."
+            },
+            {
+              "bn": "বিষয়টি পরিষ্কার না হলে একাধিকবার ইস্তিখারা করা যায়।",
+              "en": "You may repeat istikhara if the matter is still unclear."
+            },
+            {
+              "bn": "নারীরা ঋতুস্রাবের সময় নামাজ ছাড়া শুধু দোয়াটি পড়তে পারেন।",
+              "en": "A woman in her period may recite the du'a without the prayer."
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নিয়ত মনে মনে করাই যথেষ্ট। উদাহরণ (প্রচলিত বাংলা): ‘আমি আল্লাহর জন্য দুই রাকাত ইস্তিখারার নামাজ পড়ছি।’",
+            "en": "The intention in the heart is enough. Example (common Bangla phrasing): 'I am praying two rak'ahs of istikhara for Allah.'"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "salatut-tasbih",
+      "title": {
+        "bn": "সালাতুত তাসবিহ",
+        "en": "Salat al-Tasbih"
+      },
+      "summary": {
+        "bn": "চার রাকাতে মোট ৩০০ বার তাসবিহ পড়ার বিশেষ নফল নামাজ: পদ্ধতি, গণনার ছক এবং হাদিসটির মান নিয়ে আলোচনা।",
+        "en": "A special voluntary prayer of four rak'ahs with 300 tasbihs: the method, a counting table, and the discussion on the hadith's grading."
+      },
+      "level": "detail",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "নবীজি (সা.) তাঁর চাচা আব্বাস (রা.)-কে এই নামাজ শিখিয়েছিলেন এবং বলেছিলেন, পারলে প্রতিদিন, না পারলে সপ্তাহে একবার, না পারলে মাসে একবার, না পারলে বছরে একবার, না পারলে জীবনে অন্তত একবার পড়তে।",
+            "en": "The Prophet taught this prayer to his uncle al-'Abbas and said to pray it daily if possible, otherwise weekly, monthly, yearly, or at least once in a lifetime."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ ১২৯৭; সুনান ইবনে মাজাহ ১৩৮৭ (ইবনে আব্বাস রা.); জামে তিরমিজি ৪৮২ (আবু রাফে রা.)",
+            "en": "Sunan Abi Dawud 1297; Sunan Ibn Majah 1387 (Ibn 'Abbas); Jami' al-Tirmidhi 482 (Abu Rafi')"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "হাদিসটির মান নিয়ে মুহাদ্দিসদের মতভেদ আছে। একাধিক সনদের কারণে ইমাম আবু দাউদ, ইবনে হাজার আসকালানি (তাঁর কিছু লেখায়) ও শাইখ আলবানিসহ অনেকে একে হাসান বা সহিহ বলেছেন; আবদুল্লাহ ইবনুল মুবারক (রহ.) এ নামাজ পড়তেন। অন্যদিকে ইবনুল জাওযি একে জাল হাদিসের তালিকায় রেখেছেন এবং আরও কিছু আলেম দুর্বল বলেছেন। তাই কেউ পড়লে তাকে বাধা দেওয়া বা কেউ না পড়লে তাকে দোষ দেওয়া উচিত নয়।",
+            "en": "Scholars differ on this hadith's grading. Because of its several chains, many (including Abu Dawud, Ibn Hajar in some works, and al-Albani) graded it hasan or sahih, and 'Abdullah ibn al-Mubarak practised it. Ibn al-Jawzi listed it among fabrications and some others called it weak. So neither criticise one who prays it nor blame one who does not."
+          },
+          "check": true
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "যে তাসবিহ পড়া হয়",
+            "en": "The tasbih"
+          },
+          "ar": "سُبْحَانَ اللّٰهِ وَالْحَمْدُ لِلّٰهِ وَلَا إِلٰهَ إِلَّا اللّٰهُ وَاللّٰهُ أَكْبَرُ",
+          "pron": {
+            "bn": "সুবহানাল্লাহি ওয়াল হামদু লিল্লাহি ওয়া লা ইলাহা ইল্লাল্লাহু ওয়াল্লাহু আকবার।",
+            "en": "Subhanallahi wal-hamdu lillahi wa la ilaha illallahu wallahu akbar."
+          },
+          "meaning": {
+            "bn": "আল্লাহ পবিত্র, সকল প্রশংসা আল্লাহর, আল্লাহ ছাড়া কোনো ইলাহ নেই, আল্লাহ সবচেয়ে বড়।",
+            "en": "Glory be to Allah, all praise is for Allah, there is no god but Allah, and Allah is the Greatest."
+          },
+          "ref": {
+            "bn": "সুনান আবু দাউদ ১২৯৭",
+            "en": "Sunan Abi Dawud 1297"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "চার রাকাত, প্রতি রাকাতে ৭৫ বার",
+            "en": "Four rak'ahs, 75 per rak'ah"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "চার রাকাত নফলের নিয়ত করুন (এক সালামে চার রাকাত, অথবা দুই দুই রাকাত করে)। প্রতি রাকাতে সূরা ফাতিহা ও আরেকটি সূরা পড়ুন। নিচের দুটি পদ্ধতির যেকোনোটিতে প্রতি রাকাতে ৭৫ বার, চার রাকাতে মোট ৩০০ বার তাসবিহ হয়। রুকু ও সিজদায় আগে স্বাভাবিক তাসবিহ (সুবহানা রাব্বিয়াল আযীম / আ'লা) পড়ে তারপর এই তাসবিহ পড়বেন।",
+            "en": "Intend four rak'ahs of nafl (all four with one salam, or two and two). Recite al-Fatihah and a surah in each. Either method below gives 75 per rak'ah and 300 in total. In ruku' and sajdah say the usual tasbih first, then this one."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "দুটি প্রচলিত পদ্ধতি",
+            "en": "The two known methods"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "পদ্ধতি ১: ইবনে আব্বাস (রা.)-এর হাদিস অনুযায়ী",
+                "en": "Method 1: per the hadith of Ibn 'Abbas"
+              },
+              "text": {
+                "bn": "কিরাতের পর দাঁড়িয়ে ১৫, রুকুতে ১০, রুকু থেকে উঠে ১০, প্রথম সিজদায় ১০, দুই সিজদার মাঝে বসে ১০, দ্বিতীয় সিজদায় ১০, দ্বিতীয় সিজদার পর দাঁড়ানোর আগে বসে ১০ = ৭৫।",
+                "en": "After recitation standing 15; ruku' 10; rising 10; first sajdah 10; sitting between 10; second sajdah 10; sitting after the second sajdah before standing 10 = 75."
+              },
+              "evidence": {
+                "bn": "সুনান আবু দাউদ ১২৯৭; জামে তিরমিজি ৪৮২।",
+                "en": "Sunan Abi Dawud 1297; Jami' al-Tirmidhi 482."
+              }
+            },
+            {
+              "label": {
+                "bn": "পদ্ধতি ২: আবদুল্লাহ ইবনুল মুবারক (রহ.)-এর পদ্ধতি (বাংলাদেশে বেশি প্রচলিত)",
+                "en": "Method 2: of 'Abdullah ibn al-Mubarak (more common in Bangladesh)"
+              },
+              "text": {
+                "bn": "সানার পর কিরাতের আগে ১৫, কিরাতের পর ১০, রুকুতে ১০, রুকু থেকে উঠে ১০, প্রথম সিজদায় ১০, দুই সিজদার মাঝে ১০, দ্বিতীয় সিজদায় ১০ = ৭৫। দ্বিতীয় সিজদার পর বসে কোনো তাসবিহ নেই।",
+                "en": "After thana before recitation 15; after recitation 10; ruku' 10; rising 10; first sajdah 10; between sajdahs 10; second sajdah 10 = 75. Nothing in the sitting after the second sajdah."
+              },
+              "evidence": {
+                "bn": "জামে তিরমিজি ৪৮১ (ইবনুল মুবারকের বর্ণনা)।",
+                "en": "Jami' al-Tirmidhi 481 (Ibn al-Mubarak's description)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "অবস্থান",
+              "en": "Position"
+            },
+            {
+              "bn": "পদ্ধতি ১",
+              "en": "Method 1"
+            },
+            {
+              "bn": "পদ্ধতি ২",
+              "en": "Method 2"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "সানার পর, কিরাতের আগে",
+                "en": "After thana, before recitation"
+              },
+              {
+                "bn": "—",
+                "en": "—"
+              },
+              {
+                "bn": "১৫",
+                "en": "15"
+              }
+            ],
+            [
+              {
+                "bn": "কিরাতের পর",
+                "en": "After recitation"
+              },
+              {
+                "bn": "১৫",
+                "en": "15"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              }
+            ],
+            [
+              {
+                "bn": "রুকু",
+                "en": "Ruku'"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              }
+            ],
+            [
+              {
+                "bn": "রুকু থেকে উঠে",
+                "en": "Standing after ruku'"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              }
+            ],
+            [
+              {
+                "bn": "প্রথম সিজদা",
+                "en": "First sajdah"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              }
+            ],
+            [
+              {
+                "bn": "দুই সিজদার মাঝে",
+                "en": "Between sajdahs"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              }
+            ],
+            [
+              {
+                "bn": "দ্বিতীয় সিজদা",
+                "en": "Second sajdah"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              }
+            ],
+            [
+              {
+                "bn": "দ্বিতীয় সিজদার পর বসে",
+                "en": "Sitting after second sajdah"
+              },
+              {
+                "bn": "১০",
+                "en": "10"
+              },
+              {
+                "bn": "—",
+                "en": "—"
+              }
+            ],
+            [
+              {
+                "bn": "প্রতি রাকাতে মোট",
+                "en": "Total per rak'ah"
+              },
+              {
+                "bn": "৭৫",
+                "en": "75"
+              },
+              {
+                "bn": "৭৫",
+                "en": "75"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "আঙুল চেপে মনে মনে গুনুন; মুখে গোনা বা তাসবিহদানা হাতে নেওয়া এড়িয়ে চলুন। কোনো জায়গায় কিছু তাসবিহ ছুটে গেলে পরের অবস্থানে তা যোগ করে নেওয়ার কথা আলেমরা বলেছেন; অনেকে বলেন, রুকু থেকে ওঠা ও দুই সিজদার মাঝের বৈঠক ছোট রাখতে সেখানে যোগ না করে পরের সিজদায় যোগ করবেন। ইবনুল মুবারক (রহ.) বলেছেন, সাহু সিজদায় এই তাসবিহ পড়তে হয় না।",
+            "en": "Count silently by pressing your fingers; avoid counting aloud or holding beads. If you miss some in one position, scholars say to add them in the next; many say not to add them while rising or in the short sitting, but in the next sajdah. Ibn al-Mubarak said these tasbihs are not said in sajdah al-sahw."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "qasr-travel-prayer",
+      "title": {
+        "bn": "কসর: মুসাফিরের নামাজ",
+        "en": "Qasr: The Traveller's Prayer"
+      },
+      "summary": {
+        "bn": "সফরে চার রাকাতের ফরজ নামাজ দুই রাকাত পড়ার বিধান: কত দূরত্বে, কত দিন, সুন্নত ও জামাতের মাসআলা, দুই ওয়াক্ত একসাথে পড়া।",
+        "en": "Shortening four-rak'ah prayers to two when travelling: distance, duration, sunnahs, praying behind an imam, and combining prayers."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "وَإِذَا ضَرَبْتُمْ فِي الْأَرْضِ فَلَيْسَ عَلَيْكُمْ جُنَاحٌ أَنْ تَقْصُرُوا مِنَ الصَّلَاةِ",
+          "pron": {
+            "bn": "ওয়া ইযা দারাবতুম ফিল আরদি ফালাইসা আলাইকুম জুনাহুন আন তাকসুরূ মিনাস সালাহ।",
+            "en": "Wa idha darabtum fil-ardi falaysa 'alaykum junahun an taqsuru minas-salah."
+          },
+          "meaning": {
+            "bn": "আর যখন তোমরা জমিনে সফর করো, তখন নামাজ সংক্ষিপ্ত করলে তোমাদের কোনো গুনাহ নেই।",
+            "en": "When you travel in the land, there is no blame on you for shortening the prayer."
+          },
+          "ref": {
+            "bn": "সূরা নিসা ৪:১০১ (আয়াতের অংশ)",
+            "en": "An-Nisa 4:101 (part of the verse)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "সফরে জোহর, আসর ও ইশার চার রাকাত ফরজ দুই রাকাত পড়তে হয়। ফজর (২) ও মাগরিব (৩) অপরিবর্তিত থাকে। বিতর পূর্ণ তিন রাকাতই পড়তে হয়।",
+            "en": "On a journey, the four-rak'ah fard of Dhuhr, 'Asr and 'Isha become two. Fajr (2) and Maghrib (3) stay the same. Witr stays three."
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "নামাজ",
+              "en": "Prayer"
+            },
+            {
+              "bn": "বাড়িতে ফরজ",
+              "en": "At home (fard)"
+            },
+            {
+              "bn": "সফরে ফরজ",
+              "en": "Travelling (fard)"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "ফজর",
+                "en": "Fajr"
+              },
+              {
+                "bn": "২",
+                "en": "2"
+              },
+              {
+                "bn": "২",
+                "en": "2"
+              }
+            ],
+            [
+              {
+                "bn": "জোহর",
+                "en": "Dhuhr"
+              },
+              {
+                "bn": "৪",
+                "en": "4"
+              },
+              {
+                "bn": "২",
+                "en": "2"
+              }
+            ],
+            [
+              {
+                "bn": "আসর",
+                "en": "'Asr"
+              },
+              {
+                "bn": "৪",
+                "en": "4"
+              },
+              {
+                "bn": "২",
+                "en": "2"
+              }
+            ],
+            [
+              {
+                "bn": "মাগরিব",
+                "en": "Maghrib"
+              },
+              {
+                "bn": "৩",
+                "en": "3"
+              },
+              {
+                "bn": "৩",
+                "en": "3"
+              }
+            ],
+            [
+              {
+                "bn": "ইশা",
+                "en": "'Isha"
+              },
+              {
+                "bn": "৪",
+                "en": "4"
+              },
+              {
+                "bn": "২",
+                "en": "2"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নিজের এলাকা (শহর বা গ্রামের বসতি) পার হওয়ার পর থেকে কসর শুরু হয়, আর ফিরে নিজের এলাকায় ঢুকলে শেষ হয়। আনাস (রা.) বলেন, আমরা নবীজি (সা.)-এর সাথে মদিনা থেকে মক্কা গিয়েছি; ফেরা পর্যন্ত তিনি দুই রাকাত করে পড়েছেন (সহিহ বুখারি ১০৮১)।",
+            "en": "Qasr begins once you leave the built-up area of your town and ends when you re-enter it. Anas said: we travelled with the Prophet from Madinah to Makkah and he prayed two rak'ahs until we returned (Sahih al-Bukhari 1081)."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "কতটুকু দূরত্বে মুসাফির হয়",
+            "en": "Distance that makes one a traveller"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "তিন দিনের পায়ে হাঁটা পথ; বাংলাদেশের আলেমরা সাধারণত ৪৮ মাইল, প্রায় ৭৭–৭৮ কিলোমিটার ধরেন। যানবাহনে অল্প সময়ে গেলেও একই হুকুম।",
+                "en": "Three days' walking; scholars in Bangladesh usually take this as 48 miles, about 77–78 km, regardless of how fast the vehicle is."
+              },
+              "evidence": {
+                "bn": "মুসাফিরকে তিন দিন-তিন রাত মোজার ওপর মাসেহ করার অনুমতি (সহিহ মুসলিম ২৭৬), অর্থাৎ সফরের সর্বনিম্ন সময় তিন দিন ধরা হয়েছে।",
+                "en": "Travellers may wipe over socks for three days and nights (Sahih Muslim 276), taken to indicate that travel is at least three days."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি ও হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "চার ‘বারিদ’ (১৬ ফারসাখ), আধুনিক হিসাবে প্রায় ৮০–৮৯ কিলোমিটার (হিসাবে কিছু ভিন্নতা আছে)।",
+                "en": "Four burud (16 farsakh), roughly 80–89 km by modern estimates (estimates vary)."
+              },
+              "evidence": {
+                "bn": "ইবনে উমর ও ইবনে আব্বাস (রা.) চার বারিদ দূরত্বে কসর করতেন (সহিহ বুখারিতে অধ্যায়ের শিরোনামে উল্লেখিত)।",
+                "en": "Ibn 'Umar and Ibn 'Abbas shortened at four burud (mentioned in a chapter heading of Sahih al-Bukhari)."
+              }
+            },
+            {
+              "label": {
+                "bn": "কিছু আলেম (যেমন ইবনে তাইমিয়া)",
+                "en": "Some scholars (e.g. Ibn Taymiyyah)"
+              },
+              "text": {
+                "bn": "নির্দিষ্ট দূরত্ব নেই; প্রচলিত অর্থে যাকে সফর বলা হয়, তাতেই কসর।",
+                "en": "No fixed distance; whatever is customarily called a journey."
+              },
+              "evidence": {
+                "bn": "কুরআন সফরের কোনো দূরত্ব নির্ধারণ করেনি (সূরা নিসা ৪:১০১)।",
+                "en": "The Quran sets no distance (An-Nisa 4:101)."
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "কত দিন থাকলে আর মুসাফির থাকে না",
+            "en": "How long a stay ends traveller status"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "কোনো এক জায়গায় ১৫ দিন বা তার বেশি থাকার নিয়ত করলে পূর্ণ নামাজ পড়বে; ১৫ দিনের কম হলে কসর। কবে ফিরবে ঠিক না থাকলে (আজ-কাল করে) যত দিনই থাকুক, কসর চলবে।",
+                "en": "Intending to stay 15 days or more in one place means full prayers; less than 15 means qasr. If the return date is uncertain, qasr continues however long it lasts."
+              },
+              "evidence": {
+                "bn": "ইবনে উমর ও ইবনে আব্বাস (রা.)-এর ফতোয়া (১৫ দিন); নবীজি (সা.) এক সফরে ১৯ দিন থেকে কসর করেছেন (সহিহ বুখারি ১০৮০)।",
+                "en": "Fatwa of Ibn 'Umar and Ibn 'Abbas (15 days); the Prophet stayed 19 days on a journey and shortened (Sahih al-Bukhari 1080)."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি ও হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "চার দিন বা তার বেশি থাকার নিয়ত করলে পূর্ণ নামাজ (আসা-যাওয়ার দিন বাদে হিসাব; হাম্বলি মতে ২০ ওয়াক্তের বেশি)।",
+                "en": "Intending to stay four days or more means full prayers (excluding arrival/departure days; Hanbali: more than 20 prayers)."
+              },
+              "evidence": {
+                "bn": "হজের পর মুহাজিরদের মক্কায় তিন দিন থাকার অনুমতি দেওয়া হয়েছিল (সহিহ মুসলিম ১৩৫২), অর্থাৎ তিন দিন পর্যন্ত সফরের হুকুম।",
+                "en": "Emigrants were allowed to stay three days in Makkah after Hajj (Sahih Muslim 1352), implying up to three days is still travel."
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "কসর বাধ্যতামূলক না ঐচ্ছিক",
+            "en": "Is shortening required or optional"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "কসর ওয়াজিব। মুসাফির ইচ্ছা করে চার রাকাত পড়লে গুনাহগার হবে; দ্বিতীয় রাকাতে বৈঠক করলে প্রথম দুই রাকাত ফরজ ও বাকি দুই নফল গণ্য হবে।",
+                "en": "Qasr is wajib. A traveller who deliberately prays four does wrong; if he sat after two, the first two count as fard and the rest as nafl."
+              },
+              "evidence": {
+                "bn": "আয়েশা (রা.): নামাজ প্রথমে দুই রাকাত করে ফরজ হয়েছিল; সফরের নামাজ সেভাবেই রাখা হয়েছে, আর মুকিমের নামাজ বাড়ানো হয়েছে (সহিহ বুখারি ৩৫০; সহিহ মুসলিম ৬৮৫)।",
+                "en": "'A'ishah: prayer was first prescribed as two rak'ahs; the travel prayer was kept so and the resident's prayer increased (Sahih al-Bukhari 350; Sahih Muslim 685)."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি ও হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "কসর একটি ছাড় (রুখসত) ও সুন্নত; পূর্ণ পড়লেও নামাজ হয়ে যায়, তবে কসর উত্তম।",
+                "en": "Qasr is a concession and sunnah; full prayer is valid, but shortening is better."
+              },
+              "evidence": {
+                "bn": "আয়াতে ‘কোনো গুনাহ নেই’ বলা হয়েছে, যা অনুমতি বোঝায় (সূরা নিসা ৪:১০১)।",
+                "en": "The verse says 'no blame on you', which indicates permission (An-Nisa 4:101)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "জামাত ও সুন্নতের মাসআলা",
+            "en": "Congregation and sunnah rulings"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "মুসাফির যদি মুকিম ইমামের পেছনে পড়ে, তবে ইমামের সাথে পূর্ণ চার রাকাত পড়বে।",
+              "en": "A traveller behind a resident imam prays the full four with him."
+            },
+            {
+              "bn": "মুকিম যদি মুসাফির ইমামের পেছনে পড়ে, ইমাম দুই রাকাতে সালাম ফেরাবেন; মুকিমরা দাঁড়িয়ে বাকি দুই রাকাত নিজে নিজে পূর্ণ করবেন (কিরাত ছাড়া, হানাফি মত)। ইমাম আগেই জানিয়ে দেবেন যে তিনি মুসাফির।",
+              "en": "Residents behind a travelling imam: he ends after two; they stand and complete the remaining two themselves (without recitation, Hanafi view). The imam should tell them he is travelling."
+            },
+            {
+              "bn": "সফরে সুন্নত নামাজ: তাড়াহুড়া থাকলে ছেড়ে দেওয়া যায়; স্থির ও নিরাপদ অবস্থায় পড়া ভালো। ফজরের সুন্নত ও বিতর নবীজি (সা.) সফরেও ছাড়তেন না। ইবনে উমর (রা.) বলেন, তিনি সফরে (ফরজের আগে-পরে) নফল পড়তে দেখেননি (সহিহ বুখারি ১১০১)।",
+              "en": "Sunnah prayers when travelling: may be left if in a hurry, better prayed when settled. The Prophet kept the Fajr sunnah and witr even when travelling. Ibn 'Umar said he did not see him pray the regular sunnahs on journeys (Sahih al-Bukhari 1101)."
+            },
+            {
+              "bn": "সফরে ছুটে যাওয়া নামাজ বাড়িতে কাজা করলেও দুই রাকাত; বাড়িতে ছুটে যাওয়া নামাজ সফরে কাজা করলে চার রাকাত।",
+              "en": "A prayer missed while travelling is made up as two even at home; one missed at home is made up as four even while travelling."
+            }
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "সফরে দুই ওয়াক্ত একসাথে পড়া (জমা)",
+            "en": "Combining two prayers when travelling"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "হজে আরাফা ও মুজদালিফা ছাড়া এক ওয়াক্তের নামাজ অন্য ওয়াক্তে পড়া যায় না। তবে জোহর তার শেষ ওয়াক্তে আর আসর তার প্রথম ওয়াক্তে পড়া যায়, যাতে দেখতে একসাথে মনে হয় (জমায়ে সুরি)।",
+                "en": "Apart from 'Arafah and Muzdalifah in Hajj, no prayer may be moved into another's time. But Dhuhr may be prayed at the end of its time and 'Asr at the start of its time, so they appear joined."
+              },
+              "evidence": {
+                "bn": "‘নিশ্চয়ই নামাজ মুমিনদের ওপর নির্দিষ্ট সময়ে ফরজ’ (সূরা নিসা ৪:১০৩); ইবনে মাসউদ (রা.): মুজদালিফা ছাড়া নবীজি (সা.)-কে কখনো নামাজ তার সময় ছাড়া পড়তে দেখিনি (সহিহ বুখারি ১৬৮২)।",
+                "en": "'Prayer is prescribed for the believers at fixed times' (An-Nisa 4:103); Ibn Mas'ud: I never saw the Prophet pray outside its time except at Muzdalifah (Sahih al-Bukhari 1682)."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, হাম্বলি ও মালেকি",
+                "en": "Shafi'i, Hanbali, Maliki"
+              },
+              "text": {
+                "bn": "সফরে জোহর-আসর এবং মাগরিব-ইশা একটির ওয়াক্তে একসাথে পড়া জায়েজ (আগে বা পরে নিয়ে)।",
+                "en": "When travelling, Dhuhr with 'Asr and Maghrib with 'Isha may be joined in the time of either."
+              },
+              "evidence": {
+                "bn": "তাড়া থাকলে নবীজি (সা.) সফরে মাগরিব ও ইশা একসাথে পড়তেন (সহিহ বুখারি ১১০৬); সহিহ মুসলিম ৭০৫।",
+                "en": "When in a hurry on a journey, the Prophet combined Maghrib and 'Isha (Sahih al-Bukhari 1106); Sahih Muslim 705."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "qada-prayer",
+      "title": {
+        "bn": "কাজা নামাজ",
+        "en": "Making Up Missed Prayers (Qada)"
+      },
+      "summary": {
+        "bn": "ঘুম, ভুল বা অন্য কারণে ছুটে যাওয়া নামাজ কীভাবে আদায় করবেন: ধারাবাহিকতা, অনেক দিনের কাজা ও কিছু মতভেদ।",
+        "en": "How to make up prayers missed through sleep, forgetfulness or otherwise: order, many years of missed prayers, and points of difference."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "مَنْ نَسِيَ صَلَاةً فَلْيُصَلِّ إِذَا ذَكَرَهَا، لَا كَفَّارَةَ لَهَا إِلَّا ذٰلِكَ",
+          "pron": {
+            "bn": "মান নাসিয়া সালাতান ফালইউসাল্লি ইযা যাকারাহা, লা কাফফারাতা লাহা ইল্লা যালিক।",
+            "en": "Man nasiya salatan falyusalli idha dhakaraha, la kaffarata laha illa dhalik."
+          },
+          "meaning": {
+            "bn": "যে কোনো নামাজ ভুলে যায়, সে যেন মনে পড়লেই তা পড়ে নেয়; এ ছাড়া এর আর কোনো কাফফারা নেই।",
+            "en": "Whoever forgets a prayer, let him pray it when he remembers; there is no expiation for it except that."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি ৫৯৭; সহিহ মুসলিম ৬৮৪",
+            "en": "Sahih al-Bukhari 597; Sahih Muslim 684"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "ফরজ নামাজ ছুটে গেলে কাজা করা ফরজ, আর বিতর ছুটে গেলে হানাফি মতে কাজা করা ওয়াজিব। ঘুম বা ভুলের কারণে ছুটে গেলে গুনাহ নেই, তবে মনে পড়ামাত্র পড়ে নিতে হবে। ঋতুস্রাব ও প্রসবোত্তর রক্তস্রাবের সময়ের নামাজের কাজা নেই (সহিহ মুসলিম ৩৩৫)।",
+            "en": "Making up a missed fard prayer is obligatory, and in the Hanafi school also witr. Missing through sleep or forgetfulness is not sinful, but pray as soon as you remember. Prayers during menstruation and post-natal bleeding are not made up (Sahih Muslim 335)."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কীভাবে কাজা পড়বেন",
+            "en": "How to make up"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "নিয়ত",
+            "en": "Intention"
+          },
+          "text": {
+            "bn": "যে নামাজ কাজা করছেন, মনে মনে সেটি নির্দিষ্ট করুন, যেমন ‘আজকের ছুটে যাওয়া ফজরের দুই রাকাত ফরজ’। মুখে বলা জরুরি নয়।",
+            "en": "Specify in your heart which prayer you are making up, e.g. 'today's missed two rak'ahs of Fajr fard'. Saying it aloud is not required."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "যেভাবে ছুটেছে সেভাবে",
+            "en": "As it was missed"
+          },
+          "text": {
+            "bn": "নামাজ যেমন ছিল তেমনই পড়ুন: ফজর দুই, মাগরিব তিন। সফরে ছুটে যাওয়া চার রাকাতের নামাজ দুই রাকাত।",
+            "en": "Pray it as it was: Fajr two, Maghrib three; a four-rak'ah prayer missed while travelling is two."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "সাধারণত শুধু ফরজ ও বিতর",
+            "en": "Usually only fard and witr"
+          },
+          "text": {
+            "bn": "কাজা হয় ফরজ ও বিতরের। হানাফি মতে ফজর ফরজসহ ছুটে গেলে সেদিন জাওয়ালের আগে কাজা করলে সুন্নতসহ পড়বে; অন্য সুন্নতের কাজা নেই।",
+            "en": "Qada is for fard and witr. In the Hanafi school, if Fajr is missed with its sunnah and made up before noon the same day, the sunnah is included; other sunnahs are not made up."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "সময়",
+            "en": "When"
+          },
+          "text": {
+            "bn": "যেকোনো সময় কাজা পড়া যায়, তবে সূর্যোদয়, ঠিক দুপুর ও সূর্যাস্তের সময় (হানাফি মতে) নয়। ফজরের পর ও আসরের পর কাজা পড়া যায়, যদিও তখন নফল পড়া যায় না।",
+            "en": "Any time, except (in the Hanafi school) at sunrise, true noon and sunset. Qada may be prayed after Fajr and after 'Asr, though nafl may not."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "কাজা ও ওয়াক্তিয়া নামাজের ধারাবাহিকতা (তারতিব)",
+            "en": "Keeping the order between missed and current prayers"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "যার জিম্মায় ছয় ওয়াক্তের কম কাজা আছে (সাহিবে তারতিব), তাকে আগে কাজা পরে ওয়াক্তিয়া পড়তে হবে; তবে ওয়াক্ত সংকীর্ণ হলে, ভুলে গেলে বা কাজা ছয় ওয়াক্ত বা বেশি হলে এই ধারাবাহিকতা বাধ্যতামূলক নয়।",
+                "en": "Someone with fewer than six missed prayers must pray them before the current one, unless time is short, he forgot, or the missed prayers are six or more."
+              },
+              "evidence": {
+                "bn": "খন্দকের যুদ্ধে ছুটে যাওয়া নামাজগুলো নবীজি (সা.) ক্রমানুসারে আদায় করেছেন (জামে তিরমিজি; সুনান নাসায়ি)।",
+                "en": "At the Battle of the Trench the Prophet made up the missed prayers in order (Jami' al-Tirmidhi; Sunan al-Nasa'i)."
+              }
+            },
+            {
+              "label": {
+                "bn": "হাম্বলি ও মালেকি",
+                "en": "Hanbali and Maliki"
+              },
+              "text": {
+                "bn": "ধারাবাহিকতা রক্ষা করা ওয়াজিব (বিস্তারিত শর্তে কিছু ভিন্নতা আছে)।",
+                "en": "Order is required (with some differences in the details)."
+              },
+              "evidence": {
+                "bn": "একই হাদিস।",
+                "en": "The same hadith."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি",
+                "en": "Shafi'i"
+              },
+              "text": {
+                "bn": "ধারাবাহিকতা রক্ষা করা সুন্নত, বাধ্যতামূলক নয়।",
+                "en": "Order is recommended, not required."
+              },
+              "evidence": {
+                "bn": "হাদিসে কেবল নবীজি (সা.)-এর আমল বর্ণিত, স্পষ্ট নির্দেশ নয়।",
+                "en": "The hadith reports the Prophet's practice, not an explicit command."
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "অনেক বছরের কাজা (উমরি কাজা)",
+            "en": "Many years of missed prayers"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "যদি দীর্ঘদিন নামাজ না পড়ে থাকেন, আন্তরিক তওবা করুন এবং আনুমানিক হিসাব করুন কত ওয়াক্ত ছুটেছে; সন্দেহ হলে বেশির দিকে ধরুন। তারপর প্রতিদিন সাধ্যমতো কাজা পড়তে থাকুন, যেমন প্রতি ওয়াক্তের সাথে এক ওয়াক্ত কাজা। নিয়তে বলবেন (মনে মনে), ‘আমার জিম্মায় থাকা প্রথম (বা শেষ) ফজরের কাজা’।",
+            "en": "If you did not pray for a long time, repent sincerely and estimate how many prayers were missed, erring on the higher side. Then make them up steadily, e.g. one with each daily prayer. Intend 'the first (or last) Fajr I owe'."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "ইচ্ছাকৃতভাবে ছেড়ে দেওয়া নামাজের কাজা",
+            "en": "Prayers left deliberately"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "চার মাজহাব (অধিকাংশ আলেম)",
+                "en": "The four schools (majority)"
+              },
+              "text": {
+                "bn": "ইচ্ছা করে ছেড়ে দিলেও কাজা করা ফরজ, সাথে তওবা করতে হবে।",
+                "en": "They must be made up, along with repentance."
+              },
+              "evidence": {
+                "bn": "ভুলে যাওয়া ব্যক্তিকেও কাজা করতে বলা হয়েছে (সহিহ বুখারি ৫৯৭); ইচ্ছাকৃত ত্যাগকারী আরও বেশি দায়বদ্ধ। ‘আল্লাহর ঋণ পরিশোধের বেশি উপযুক্ত’ (সহিহ বুখারি ১৯৫৩)।",
+                "en": "Even the forgetful must make up (Sahih al-Bukhari 597), so the deliberate omitter all the more. 'The debt of Allah is more deserving to be paid' (Sahih al-Bukhari 1953)."
+              }
+            },
+            {
+              "label": {
+                "bn": "কিছু আলেম (যেমন ইবনে হাযম, ইবনে তাইমিয়া)",
+                "en": "Some scholars (e.g. Ibn Hazm, Ibn Taymiyyah)"
+              },
+              "text": {
+                "bn": "ইচ্ছাকৃত ছেড়ে দেওয়া নামাজ কাজা করে আদায় হয় না; খাঁটি তওবা ও বেশি বেশি নফল পড়তে হবে।",
+                "en": "Deliberately abandoned prayers cannot be validly made up; sincere repentance and abundant nafl are required."
+              },
+              "evidence": {
+                "bn": "হাদিসে কাজার নির্দেশ এসেছে কেবল ঘুম ও ভুলের ক্ষেত্রে (সহিহ বুখারি ৫৯৭)।",
+                "en": "The hadith commands qada only for sleep and forgetfulness (Sahih al-Bukhari 597)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নিরাপদ পথ হলো অধিকাংশ আলেমের মত অনুযায়ী কাজা করে যাওয়া। কাজার বোঝা যেন নতুন নামাজ ছাড়ার কারণ না হয়; আজ থেকে প্রতিটি ওয়াক্ত সময়মতো পড়ুন।",
+            "en": "The safe course is to follow the majority and make them up. Do not let the backlog stop you praying today's prayers on time."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "salatul-hajah",
+      "title": {
+        "bn": "সালাতুল হাজত",
+        "en": "Salat al-Hajah (Prayer of Need)"
+      },
+      "summary": {
+        "bn": "বিপদে বা কোনো প্রয়োজনে আল্লাহর কাছে চাওয়ার জন্য দুই রাকাত নামাজ ও দোয়া, হাদিসের মানসহ।",
+        "en": "Two rak'ahs and a du'a when in need or distress, with an honest note on the narrations."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ",
+          "pron": {
+            "bn": "ওয়াসতাঈনূ বিসসাবরি ওয়াস সালাহ, ওয়া ইন্নাহা লাকাবীরাতুন ইল্লা আলাল খাশিঈন।",
+            "en": "Wasta'inu bis-sabri was-salah, wa innaha lakabiratun illa 'alal-khashi'in."
+          },
+          "meaning": {
+            "bn": "তোমরা ধৈর্য ও নামাজের মাধ্যমে সাহায্য চাও; আর নিশ্চয়ই তা কঠিন, তবে বিনয়ীদের জন্য নয়।",
+            "en": "Seek help through patience and prayer; it is hard except for the humble."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:৪৫",
+            "en": "Al-Baqarah 2:45"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "হুযাইফা (রা.) বলেন, কোনো বিষয় নবীজি (সা.)-কে চিন্তিত করলে তিনি নামাজে দাঁড়াতেন (সুনান আবু দাউদ ১৩১৯)। তাই প্রয়োজন বা বিপদে নামাজ পড়ে আল্লাহর কাছে চাওয়া সুন্নাহসম্মত।",
+            "en": "Hudhayfah said that when something worried the Prophet, he would pray (Sunan Abi Dawud 1319). So praying and then asking Allah in need is in line with the sunnah."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "পদ্ধতি",
+            "en": "Method"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "ওযু",
+            "en": "Wudu"
+          },
+          "text": {
+            "bn": "সুন্দরভাবে ওযু করুন।",
+            "en": "Make wudu well."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দুই রাকাত নফল",
+            "en": "Two rak'ahs of nafl"
+          },
+          "text": {
+            "bn": "মাকরুহ সময় ছাড়া দুই রাকাত নফল নামাজ পড়ুন; যেকোনো সূরা পড়া যায়।",
+            "en": "Pray two rak'ahs of nafl outside the disliked times; any surah may be recited."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "প্রশংসা ও দরুদ",
+            "en": "Praise and durood"
+          },
+          "text": {
+            "bn": "সালামের পর আল্লাহর প্রশংসা করুন ও নবীজি (সা.)-এর ওপর দরুদ পড়ুন।",
+            "en": "After salam, praise Allah and send durood on the Prophet."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দোয়া",
+            "en": "Ask"
+          },
+          "text": {
+            "bn": "নিচের দোয়া বা নিজের ভাষায় মন খুলে আপনার প্রয়োজন আল্লাহর কাছে চান।",
+            "en": "Recite the du'a below or ask for your need in your own words."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "সালাতুল হাজতের প্রচলিত দোয়া",
+            "en": "The commonly used du'a of need"
+          },
+          "ar": "لَا إِلٰهَ إِلَّا اللّٰهُ الْحَلِيمُ الْكَرِيمُ، سُبْحَانَ اللّٰهِ رَبِّ الْعَرْشِ الْعَظِيمِ، الْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ، أَسْأَلُكَ مُوجِبَاتِ رَحْمَتِكَ، وَعَزَائِمَ مَغْفِرَتِكَ، وَالْغَنِيمَةَ مِنْ كُلِّ بِرٍّ، وَالسَّلَامَةَ مِنْ كُلِّ إِثْمٍ، لَا تَدَعْ لِي ذَنْبًا إِلَّا غَفَرْتَهُ، وَلَا هَمًّا إِلَّا فَرَّجْتَهُ، وَلَا حَاجَةً هِيَ لَكَ رِضًا إِلَّا قَضَيْتَهَا، يَا أَرْحَمَ الرَّاحِمِينَ",
+          "pron": {
+            "bn": "লা ইলাহা ইল্লাল্লাহুল হালীমুল কারীম, সুবহানাল্লাহি রাব্বিল আরশিল আযীম, আলহামদু লিল্লাহি রাব্বিল আলামীন। আসআলুকা মূজিবাতি রাহমাতিকা, ওয়া আযাইমা মাগফিরাতিকা, ওয়াল গানীমাতা মিন কুল্লি বিররিন, ওয়াস সালামাতা মিন কুল্লি ইসমিন। লা তাদা' লী যামবান ইল্লা গাফারতাহু, ওয়া লা হাম্মান ইল্লা ফাররাজতাহু, ওয়া লা হাজাতান হিয়া লাকা রিদান ইল্লা কাদাইতাহা, ইয়া আরহামার রাহিমীন।",
+            "en": "La ilaha illallahul-Halimul-Karim, subhanallahi Rabbil-'arshil-'azim, al-hamdu lillahi Rabbil-'alamin. As'aluka mujibati rahmatika, wa 'aza'ima maghfiratika, wal-ghanimata min kulli birr, was-salamata min kulli ithm. La tada' li dhanban illa ghafartahu, wa la hamman illa farrajtahu, wa la hajatan hiya laka ridan illa qadaytaha, ya Arhamar-rahimin."
+          },
+          "meaning": {
+            "bn": "আল্লাহ ছাড়া কোনো ইলাহ নেই, যিনি সহনশীল ও মহানুভব। মহান আরশের রব আল্লাহ পবিত্র। সকল প্রশংসা জগতসমূহের রব আল্লাহর। (হে আল্লাহ,) আমি তোমার কাছে চাই সেসব কাজ যা তোমার রহমত নিশ্চিত করে, যা তোমার ক্ষমা অবধারিত করে, প্রতিটি নেক কাজের অংশ এবং প্রতিটি গুনাহ থেকে নিরাপত্তা। আমার কোনো গুনাহ ক্ষমা না করে রেখো না, কোনো দুশ্চিন্তা দূর না করে রেখো না, আর তোমার পছন্দনীয় কোনো প্রয়োজন পূরণ না করে রেখো না, হে সর্বশ্রেষ্ঠ দয়ালু।",
+            "en": "There is no god but Allah, the Forbearing, the Generous. Glory be to Allah, Lord of the Mighty Throne. Praise be to Allah, Lord of the worlds. I ask You for what makes Your mercy certain and Your forgiveness assured, a share of every good and safety from every sin. Leave me no sin unforgiven, no worry unrelieved, and no need that pleases You unfulfilled, O Most Merciful of the merciful."
+          },
+          "ref": {
+            "bn": "জামে তিরমিজি ৪৭৯ (আবদুল্লাহ ইবনে আবি আওফা রা.)",
+            "en": "Jami' al-Tirmidhi 479 ('Abdullah ibn Abi Awfa)"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "এই নির্দিষ্ট পদ্ধতি ও দোয়ার হাদিসটি দুর্বল। ইমাম তিরমিজি নিজেই বলেছেন, এর সনদে আপত্তি আছে; বর্ণনাকারী ফায়েদ ইবনে আবদুর রহমান দুর্বল। শাইখ আলবানি একে খুব দুর্বল বলেছেন। তাই দোয়াটি পড়া যায় (এর অর্থ ভালো), কিন্তু এটিকে নবীজি (সা.)-এর নিশ্চিত শিক্ষা বা নির্দিষ্ট ফজিলতের প্রমাণ মনে করবেন না। নিজের ভাষায় দোয়াও সম্পূর্ণ সঠিক।",
+            "en": "The hadith with this specific method and du'a is weak. Al-Tirmidhi himself noted a problem in its chain (the narrator Fa'id ibn 'Abd al-Rahman is weak); al-Albani graded it very weak. You may say the du'a (its meaning is good), but do not treat it as a confirmed teaching with a fixed reward. Asking in your own words is entirely valid."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নিয়ত মনে মনে করাই যথেষ্ট। উদাহরণ (প্রচলিত বাংলা): ‘আমি আল্লাহর জন্য দুই রাকাত সালাতুল হাজত পড়ছি।’",
+            "en": "The intention in the heart is enough. Example (common Bangla phrasing): 'I am praying two rak'ahs of salat al-hajah for Allah.'"
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "আরও দেখুন: সূরা বাকারা ২:১৮৬ (‘আমি নিকটে, ডাকলে সাড়া দিই’)",
+            "en": "See also: Al-Baqarah 2:186 ('I am near; I answer the caller')"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "eclipse-prayer",
+      "title": {
+        "bn": "সূর্যগ্রহণ ও চন্দ্রগ্রহণের নামাজ",
+        "en": "Eclipse Prayer (Kusuf and Khusuf)"
+      },
+      "summary": {
+        "bn": "সূর্যগ্রহণ (কুসুফ) ও চন্দ্রগ্রহণের (খুসুফ) সময় নামাজ, দোয়া ও সদকা; পদ্ধতি নিয়ে মাজহাবের মত।",
+        "en": "Prayer, du'a and charity during solar and lunar eclipses, and the schools' methods."
+      },
+      "level": "detail",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "নবীজি (সা.)-এর পুত্র ইবরাহিমের মৃত্যুর দিন সূর্যগ্রহণ হলে মানুষ বলাবলি করছিল যে তাঁর মৃত্যুর কারণে গ্রহণ হয়েছে। নবীজি (সা.) এই ধারণা নাকচ করে নামাজ পড়েন এবং বলেন:",
+            "en": "When the sun eclipsed on the day the Prophet's son Ibrahim died, people said it was because of his death. The Prophet rejected this, prayed, and said:"
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "إِنَّ الشَّمْسَ وَالْقَمَرَ آيَتَانِ مِنْ آيَاتِ اللّٰهِ، لَا يَنْخَسِفَانِ لِمَوْتِ أَحَدٍ وَلَا لِحَيَاتِهِ، فَإِذَا رَأَيْتُمْ ذٰلِكَ فَادْعُوا اللّٰهَ وَكَبِّرُوا، وَصَلُّوا وَتَصَدَّقُوا",
+          "pron": {
+            "bn": "ইন্নাশ শামসা ওয়াল কামারা আয়াতানি মিন আয়াতিল্লাহ, লা ইয়ানখাসিফানি লিমাওতি আহাদিন ওয়া লা লিহায়াতিহ; ফাইযা রাআইতুম যালিকা ফাদউল্লাহা ওয়া কাব্বিরূ, ওয়া সাল্লূ ওয়া তাসাদ্দাকূ।",
+            "en": "Innash-shamsa wal-qamara ayatani min ayatillah, la yankhasifani limawti ahadin wa la lihayatih; fa idha ra'aytum dhalika fad'ullaha wa kabbiru, wa sallu wa tasaddaqu."
+          },
+          "meaning": {
+            "bn": "সূর্য ও চাঁদ আল্লাহর নিদর্শনসমূহের দুটি নিদর্শন; কারও মৃত্যু বা জন্মের কারণে এদের গ্রহণ হয় না। যখন তোমরা তা দেখবে, তখন আল্লাহর কাছে দোয়া করো, তাকবির বলো, নামাজ পড়ো ও সদকা করো।",
+            "en": "The sun and moon are two of Allah's signs; they do not eclipse for anyone's death or life. When you see that, call upon Allah, say takbir, pray and give charity."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি ১০৪৪",
+            "en": "Sahih al-Bukhari 1044"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "গ্রহণের নামাজ সুন্নতে মুয়াক্কাদা। আজান বা ইকামত নেই; মানুষকে ডাকতে ‘আস-সালাতু জামি'আহ’ (নামাজ জামাতে হচ্ছে) বলা যায় (সহিহ বুখারি ১০৪৫)। গ্রহণ শুরু হলে থেকে শেষ হওয়া পর্যন্ত নামাজ, দোয়া ও জিকিরে থাকুন।",
+            "en": "The eclipse prayer is a confirmed sunnah. There is no adhan or iqamah; people may be called with 'as-salatu jami'ah' (Sahih al-Bukhari 1045). Stay in prayer, du'a and dhikr from the start of the eclipse until it clears."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "নামাজের পদ্ধতি",
+            "en": "Method of the prayer"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "সাধারণ নফলের মতো দুই রাকাত, প্রতি রাকাতে একটি রুকু, তবে কিরাত, রুকু ও সিজদা লম্বা। সূর্যগ্রহণে জামাতে (ইমাম আবু হানিফার মতে চুপে কিরাত), চন্দ্রগ্রহণে সাধারণত প্রত্যেকে আলাদাভাবে নিজ নিজ ঘরে। নামাজের পর গ্রহণ শেষ না হওয়া পর্যন্ত দোয়া; নির্ধারিত খুতবা নেই।",
+                "en": "Two rak'ahs like normal nafl with one ruku' each, but with long recitation, ruku' and sajdah. Solar eclipse in congregation (quiet recitation per Abu Hanifah); lunar eclipse usually individually at home. Du'a afterwards until it clears; no formal khutbah."
+              },
+              "evidence": {
+                "bn": "আবু বাকরা (রা.): নবীজি (সা.) আমাদের নিয়ে দুই রাকাত পড়লেন, এর মধ্যে সূর্য পরিষ্কার হয়ে গেল (সহিহ বুখারি ১০৪০); সাধারণ নামাজের মতো এক রুকুর বর্ণনাও কিছু সাহাবি থেকে এসেছে।",
+                "en": "Abu Bakrah: the Prophet prayed two rak'ahs with us until the sun cleared (Sahih al-Bukhari 1040); some Companions' reports describe one ruku' per rak'ah like a normal prayer."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি ও হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "দুই রাকাত, প্রতি রাকাতে দুইবার কিয়াম ও দুইবার রুকু: লম্বা কিরাত, লম্বা রুকু, উঠে আবার কিরাত (আগেরটির চেয়ে ছোট), আবার রুকু (আগেরটির চেয়ে ছোট), তারপর দুই সিজদা। সূর্য ও চন্দ্রগ্রহণ দুটিতেই জামাতে; শাফেয়ি মতে পরে খুতবা।",
+                "en": "Two rak'ahs, each with two standings and two ruku's: long recitation, long ruku', rise and recite again (shorter), ruku' again (shorter), then two sajdahs. Both eclipses in congregation; Shafi'is add a khutbah after."
+              },
+              "evidence": {
+                "bn": "আয়েশা (রা.)-এর বর্ণনা (সহিহ বুখারি ১০৪৪, ১০৪৬); সহিহ মুসলিম ৯০১। নবীজি (সা.) নামাজের পর খুতবা দিয়েছেন (সহিহ বুখারি ১০৪৪)।",
+                "en": "The report of 'A'ishah (Sahih al-Bukhari 1044, 1046); Sahih Muslim 901. The Prophet addressed the people after the prayer (Sahih al-Bukhari 1044)."
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "গ্রহণের সময় যা করবেন",
+            "en": "What to do during an eclipse"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "নামাজ পড়া, বেশি বেশি দোয়া, তাকবির ও ইস্তিগফার",
+              "en": "Pray, and make abundant du'a, takbir and istighfar"
+            },
+            {
+              "bn": "সদকা করা (সহিহ বুখারি ১০৪৪)",
+              "en": "Give charity (Sahih al-Bukhari 1044)"
+            },
+            {
+              "bn": "গ্রহণকে কারও জন্ম-মৃত্যু বা ভাগ্যের সাথে জড়িয়ে কুসংস্কার না করা",
+              "en": "Do not tie the eclipse to anyone's birth, death or fortune"
+            },
+            {
+              "bn": "মাকরুহ সময়ে গ্রহণ হলে হানাফি মতে নামাজ না পড়ে দোয়া ও জিকির করা",
+              "en": "If it falls in a disliked time, Hanafis make du'a and dhikr instead of praying"
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "গর্ভবতী নারীর খাওয়া-দাওয়া বা কাজকর্ম বন্ধ রাখার মতো প্রচলিত ধারণার কোনো ভিত্তি কুরআন-হাদিসে নেই।",
+            "en": "Popular beliefs such as pregnant women having to stop eating or working during an eclipse have no basis in the Quran or hadith."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "istisqa-prayer",
+      "title": {
+        "bn": "ইসতিসকা: বৃষ্টির জন্য নামাজ",
+        "en": "Istisqa: Prayer for Rain"
+      },
+      "summary": {
+        "bn": "খরা ও অনাবৃষ্টিতে আল্লাহর কাছে বৃষ্টি চাওয়ার পদ্ধতি: ইস্তিগফার, দোয়া, নামাজ ও খুতবা।",
+        "en": "Asking Allah for rain in drought: repentance, du'a, prayer and khutbah."
+      },
+      "level": "detail",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "فَقُلْتُ اسْتَغْفِرُوا رَبَّكُمْ إِنَّهُ كَانَ غَفَّارًا ۝ يُرْسِلِ السَّمَاءَ عَلَيْكُمْ مِدْرَارًا",
+          "pron": {
+            "bn": "ফাকুলতুস তাগফিরূ রাব্বাকুম ইন্নাহূ কানা গাফফারা, ইউরসিলিস সামাআ আলাইকুম মিদরারা।",
+            "en": "Faqultustaghfiru Rabbakum innahu kana ghaffara, yursilis-sama'a 'alaykum midrara."
+          },
+          "meaning": {
+            "bn": "আমি বললাম, তোমাদের রবের কাছে ক্ষমা চাও, নিশ্চয়ই তিনি অতি ক্ষমাশীল। তিনি তোমাদের ওপর প্রচুর বৃষ্টি বর্ষণ করবেন।",
+            "en": "I said: seek forgiveness of your Lord, He is ever Forgiving. He will send the sky upon you in abundant rain."
+          },
+          "ref": {
+            "bn": "সূরা নূহ ৭১:১০–১১",
+            "en": "Nuh 71:10–11"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নবীজি (সা.) খরার সময় ঈদগাহের মতো খোলা মাঠে বের হয়ে কিবলামুখী হয়ে দোয়া করেছেন, চাদর উল্টে নিয়েছেন এবং দুই রাকাত নামাজ পড়েছেন (সহিহ বুখারি ১০১২)। আবার জুমার খুতবায় হাত তুলে বৃষ্টির দোয়াও করেছেন (সহিহ বুখারি ১০১৩, ১০১৪)।",
+            "en": "In drought the Prophet went out to the open prayer ground, faced the qiblah, made du'a, turned his cloak inside out and prayed two rak'ahs (Sahih al-Bukhari 1012). He also raised his hands in the Friday khutbah asking for rain (Sahih al-Bukhari 1013, 1014)."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "ইসতিসকায় নামাজ আছে কি",
+            "en": "Is there a set prayer for istisqa"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "ইমাম আবু হানিফা (রহ.)",
+                "en": "Imam Abu Hanifah"
+              },
+              "text": {
+                "bn": "ইসতিসকার মূল হলো দোয়া ও ইস্তিগফার; নির্দিষ্ট জামাতের নামাজ সুন্নত নয়, তবে কেউ একা নামাজ পড়লে ভালো।",
+                "en": "Istisqa is essentially du'a and istighfar; a congregational prayer is not a set sunnah, though praying individually is good."
+              },
+              "evidence": {
+                "bn": "নবীজি (সা.) জুমার খুতবায় শুধু দোয়া করেছেন, তাতেই বৃষ্টি হয়েছে (সহিহ বুখারি ১০১৩); সূরা নূহ ৭১:১০–১১-এ ইস্তিগফারের কথা।",
+                "en": "The Prophet only made du'a in the Friday khutbah and rain came (Sahih al-Bukhari 1013); Nuh 71:10–11 mentions istighfar."
+              }
+            },
+            {
+              "label": {
+                "bn": "ইমাম আবু ইউসুফ ও মুহাম্মাদ (রহ.) এবং শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Abu Yusuf, Muhammad, and the Shafi'i, Maliki, Hanbali schools"
+              },
+              "text": {
+                "bn": "জামাতে দুই রাকাত নামাজ সুন্নত, জোরে কিরাত, সাথে খুতবা ও দোয়া। শাফেয়ি ও হাম্বলি মতে ঈদের মতো অতিরিক্ত তাকবিরসহ।",
+                "en": "Two rak'ahs in congregation are sunnah, recited aloud, with a khutbah and du'a; Shafi'is and Hanbalis add the Eid takbirs."
+              },
+              "evidence": {
+                "bn": "আবদুল্লাহ ইবনে যায়েদ (রা.)-এর বর্ণনা (সহিহ বুখারি ১০১২)।",
+                "en": "The report of 'Abdullah ibn Zayd (Sahih al-Bukhari 1012)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "আদব ও প্রস্তুতি",
+            "en": "Etiquette and preparation"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "আগে থেকে তওবা, জুলুম ও হারাম উপার্জন ছেড়ে দেওয়া, অন্যের হক ফিরিয়ে দেওয়া",
+              "en": "Repent beforehand, stop injustice and unlawful earnings, return others' rights"
+            },
+            {
+              "bn": "সদকা করা এবং সম্ভব হলে রোজা রাখা",
+              "en": "Give charity and fast if possible"
+            },
+            {
+              "bn": "সাধারণ পোশাকে বিনয়ের সাথে মাঠে যাওয়া; বয়স্ক, শিশু ও দুর্বলদের সাথে নেওয়া",
+              "en": "Go out humbly in plain clothes; bring elders, children and the weak"
+            },
+            {
+              "bn": "দোয়ার সময় হাত ভালোভাবে ওপরে তোলা",
+              "en": "Raise the hands well in du'a"
+            },
+            {
+              "bn": "খুতবা বা দোয়ার শেষে ইমামের চাদর উল্টে নেওয়া (অবস্থা পরিবর্তনের আশার প্রতীক) (সহিহ বুখারি ১০১২)",
+              "en": "The imam turns his cloak at the end (symbolising hope for change) (Sahih al-Bukhari 1012)"
+            }
+          ]
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "বৃষ্টির দোয়া",
+            "en": "Du'a for rain"
+          },
+          "ar": "اللّٰهُمَّ اسْقِنَا غَيْثًا مُغِيثًا، مَرِيئًا مَرِيعًا، نَافِعًا غَيْرَ ضَارٍّ، عَاجِلًا غَيْرَ آجِلٍ",
+          "pron": {
+            "bn": "আল্লাহুম্মাসকিনা গাইসান মুগীসান, মারীআন মারীআন, নাফিআন গাইরা দাররিন, আজিলান গাইরা আজিল।",
+            "en": "Allahummasqina ghaythan mughithan, mari'an mari'an, nafi'an ghayra darr, 'ajilan ghayra ajil."
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ, আমাদের এমন বৃষ্টি দাও, যা সাহায্যকারী, সুপেয় ও ফসল উৎপাদনকারী, উপকারী, ক্ষতিকর নয়, দ্রুত আসে, দেরিতে নয়।",
+            "en": "O Allah, give us rain that relieves, wholesome and fertile, beneficial not harmful, soon and not delayed."
+          },
+          "ref": {
+            "bn": "সুনান আবু দাউদ ১১৬৯ (জাবির রা.)",
+            "en": "Sunan Abi Dawud 1169 (Jabir)"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "সংক্ষিপ্ত দোয়া",
+            "en": "Short du'a"
+          },
+          "ar": "اللّٰهُمَّ أَغِثْنَا، اللّٰهُمَّ أَغِثْنَا، اللّٰهُمَّ أَغِثْنَا",
+          "pron": {
+            "bn": "আল্লাহুম্মা আগিসনা, আল্লাহুম্মা আগিসনা, আল্লাহুম্মা আগিসনা।",
+            "en": "Allahumma aghithna, Allahumma aghithna, Allahumma aghithna."
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ, আমাদের বৃষ্টি দিয়ে সাহায্য করো (তিনবার)।",
+            "en": "O Allah, relieve us with rain (three times)."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি ১০১৪",
+            "en": "Sahih al-Bukhari 1014"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tahiyyatul-masjid-wudu",
+      "title": {
+        "bn": "তাহিয়্যাতুল মসজিদ ও তাহিয়্যাতুল ওযু",
+        "en": "Tahiyyat al-Masjid and Tahiyyat al-Wudu"
+      },
+      "summary": {
+        "bn": "মসজিদে ঢুকে বসার আগে দুই রাকাত, আর ওযুর পর দুই রাকাত নফল: ফজিলত ও নিয়ম।",
+        "en": "Two rak'ahs on entering the mosque before sitting, and two after wudu: their virtue and rules."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "তাহিয়্যাতুল মসজিদ",
+            "en": "Tahiyyat al-masjid (greeting the mosque)"
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "إِذَا دَخَلَ أَحَدُكُمُ الْمَسْجِدَ فَلْيَرْكَعْ رَكْعَتَيْنِ قَبْلَ أَنْ يَجْلِسَ",
+          "pron": {
+            "bn": "ইযা দাখালা আহাদুকুমুল মাসজিদা ফালইয়ারকা' রাকআতাইনি কাবলা আই ইয়াজলিস।",
+            "en": "Idha dakhala ahadukumul-masjida falyarka' rak'atayni qabla ay yajlis."
+          },
+          "meaning": {
+            "bn": "তোমাদের কেউ মসজিদে প্রবেশ করলে বসার আগে যেন দুই রাকাত নামাজ পড়ে নেয়।",
+            "en": "When one of you enters the mosque, let him pray two rak'ahs before sitting."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি ৪৪৪",
+            "en": "Sahih al-Bukhari 444"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "হুকুম: অধিকাংশ আলেমের মতে সুন্নত (মুস্তাহাব)।",
+              "en": "Ruling: sunnah (recommended) according to most scholars."
+            },
+            {
+              "bn": "মসজিদে ঢুকে বসার আগে পড়বেন। ঢুকেই কোনো ফরজ বা সুন্নত নামাজ পড়লে তাতেই তাহিয়্যাতুল মসজিদ আদায় হয়ে যায়; আলাদা পড়তে হয় না।",
+              "en": "Pray before sitting. If you start a fard or sunnah prayer on entering, it counts; no separate prayer is needed."
+            },
+            {
+              "bn": "হানাফি মতে মাকরুহ সময়ে (সূর্যোদয়, ঠিক দুপুর, সূর্যাস্ত, এবং ফজর ও আসরের পর) পড়বেন না; তখন জিকির করুন। শাফেয়ি মতে এটি কারণযুক্ত নামাজ বলে সেই সময়েও পড়া যায়।",
+              "en": "Hanafis do not pray it in the disliked times (sunrise, noon, sunset, after Fajr and 'Asr) but make dhikr instead; Shafi'is allow it then since it has a cause."
+            },
+            {
+              "bn": "জুমার খুতবা চলাকালে ঢুকলে কী করবেন, তা নিয়ে মতভেদ আছে; ‘জুমার নামাজ’ অধ্যায় দেখুন।",
+              "en": "On entering during the Friday khutbah, scholars differ; see the Jumu'ah guide."
+            },
+            {
+              "bn": "ইকামত হয়ে গেলে তাহিয়্যাতুল মসজিদ না পড়ে জামাতে শরিক হবেন।",
+              "en": "If the iqamah has been called, join the congregation instead."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "তাহিয়্যাতুল ওযু",
+            "en": "Tahiyyat al-wudu (prayer after wudu)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "ওযু করার পর দুই রাকাত নফল পড়া সুন্নত। নবীজি (সা.) বলেছেন, যে মুসলিম সুন্দরভাবে ওযু করে, তারপর মন ও মুখ পুরোপুরি নামাজে নিবদ্ধ রেখে দুই রাকাত পড়ে, তার জন্য জান্নাত অবধারিত হয়ে যায় (সহিহ মুসলিম ২৩৪)।",
+            "en": "Praying two rak'ahs after wudu is sunnah. The Prophet said: any Muslim who performs wudu well, then prays two rak'ahs with heart and face devoted to them, Paradise becomes due for him (Sahih Muslim 234)."
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নবীজি (সা.) বিলাল (রা.)-কে জিজ্ঞেস করলেন, ইসলামে তাঁর সবচেয়ে আশাব্যঞ্জক আমল কী, কারণ জান্নাতে তিনি বিলালের জুতার আওয়াজ শুনেছেন। বিলাল (রা.) বললেন, দিনে বা রাতে যখনই ওযু করেছি, সেই ওযু দিয়ে যতটুকু তাওফিক হয়েছে নামাজ পড়েছি (সহিহ বুখারি ১১৪৯)।",
+            "en": "The Prophet asked Bilal about his most hopeful deed, as he had heard his footsteps in Paradise. Bilal said: whenever I made wudu, day or night, I prayed with it as much as was written for me (Sahih al-Bukhari 1149)."
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "ওযুর অঙ্গ শুকানোর আগেই পড়া উত্তম বলে আলেমরা উল্লেখ করেছেন।",
+              "en": "Scholars mention it is best to pray before the limbs dry."
+            },
+            {
+              "bn": "হানাফি মতে মাকরুহ সময়ে পড়বেন না।",
+              "en": "Hanafis do not pray it in the disliked times."
+            },
+            {
+              "bn": "ওযুর পর কোনো ফরজ বা সুন্নত পড়লেও এর সওয়াব পাওয়ার আশা করা যায়।",
+              "en": "One may hope for its reward even when praying a fard or sunnah right after wudu."
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নিয়ত মনে মনে করাই যথেষ্ট। উদাহরণ (প্রচলিত বাংলা): ‘আমি আল্লাহর জন্য দুই রাকাত তাহিয়্যাতুল মসজিদ (বা তাহিয়্যাতুল ওযু) নামাজ পড়ছি।’",
+            "en": "The intention in the heart is enough. Example (common Bangla phrasing): 'I am praying two rak'ahs of tahiyyat al-masjid (or al-wudu) for Allah.'"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sajdah-tilawah",
+      "title": {
+        "bn": "সিজদায়ে তিলাওয়াত",
+        "en": "Sajdah al-Tilawah (Prostration of Recitation)"
+      },
+      "summary": {
+        "bn": "কুরআনের নির্দিষ্ট আয়াত পড়লে বা শুনলে যে সিজদা দিতে হয়: হুকুম, পদ্ধতি, দোয়া এবং সিজদার ১৫টি আয়াতের তালিকা।",
+        "en": "The prostration made on reciting or hearing certain verses: ruling, method, du'a, and the list of the 15 places."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "কুরআনের কিছু আয়াত পড়লে বা শুনলে একটি সিজদা দিতে হয়; একে সিজদায়ে তিলাওয়াত বলে। মুসহাফে এসব আয়াতের পাশে সাধারণত ‘۩’ চিহ্ন বা ‘সিজদা’ লেখা থাকে। নবীজি (সা.) বলেছেন, আদম সন্তান সিজদার আয়াত পড়ে সিজদা করলে শয়তান কাঁদতে কাঁদতে সরে যায় (সহিহ মুসলিম ৮১)।",
+            "en": "Certain verses call for a prostration when recited or heard; this is sajdah al-tilawah. In the Mushaf they are usually marked with '۩' or the word 'sajdah'. The Prophet said that when the son of Adam recites a verse of prostration and prostrates, Shaytan withdraws weeping (Sahih Muslim 81)."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "হুকুম",
+            "en": "Ruling"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "যে পড়ে এবং যে শোনে, উভয়ের ওপর ওয়াজিব।",
+                "en": "Wajib on both the reciter and the listener."
+              },
+              "evidence": {
+                "bn": "কয়েকটি সিজদার আয়াতে সরাসরি সিজদার নির্দেশ আছে, যেমন ‘ফাসজুদূ লিল্লাহি ওয়া'বুদূ’ (সূরা নাজম ৫৩:৬২), ‘ওয়াসজুদ ওয়াকতারিব’ (সূরা আলাক ৯৬:১৯); সহিহ মুসলিম ৮১।",
+                "en": "Some of these verses command prostration, e.g. An-Najm 53:62 and Al-'Alaq 96:19; Sahih Muslim 81."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি ও হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "সুন্নতে মুয়াক্কাদা, ওয়াজিব নয়।",
+                "en": "A confirmed sunnah, not obligatory."
+              },
+              "evidence": {
+                "bn": "উমর (রা.) জুমার খুতবায় সিজদার আয়াত পড়ে একবার সিজদা করেন, আরেক জুমায় করেননি এবং বলেন, আল্লাহ এটি ফরজ করেননি, তবে আমরা চাইলে করি (সহিহ বুখারি ১০৭৭); যায়েদ ইবনে সাবিত (রা.) নবীজি (সা.)-এর সামনে সূরা নাজম পড়লেন, তিনি সিজদা করেননি (সহিহ বুখারি ১০৭২)।",
+                "en": "'Umar prostrated on the minbar one Friday and not the next, saying Allah had not made it obligatory (Sahih al-Bukhari 1077); Zayd ibn Thabit recited An-Najm before the Prophet and he did not prostrate (Sahih al-Bukhari 1072)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "পদ্ধতি (হানাফি)",
+            "en": "Method (Hanafi)"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "পবিত্রতা ও কিবলা",
+            "en": "Purity and qiblah"
+          },
+          "text": {
+            "bn": "নামাজের মতোই ওযু, পবিত্র কাপড় ও জায়গা, সতর ঢাকা ও কিবলামুখী হওয়া শর্ত (অধিকাংশ আলেমের মত)।",
+            "en": "As for prayer: wudu, clean clothes and place, covered awrah, facing the qiblah (view of most scholars)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "নিয়ত",
+            "en": "Intention"
+          },
+          "text": {
+            "bn": "মনে মনে সিজদায়ে তিলাওয়াতের নিয়ত করুন। দাঁড়িয়ে থেকে সিজদায় যাওয়া মুস্তাহাব, বসে থেকেও যাওয়া যায়।",
+            "en": "Intend the prostration of recitation in your heart. Going down from standing is preferred; from sitting is also fine."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তাকবির বলে সিজদা",
+            "en": "Takbir and prostrate"
+          },
+          "text": {
+            "bn": "হাত না তুলে ‘আল্লাহু আকবার’ বলে একটি সিজদা করুন; সিজদায় অন্তত তিনবার ‘সুবহানা রাব্বিয়াল আ'লা’ পড়ুন বা নিচের দোয়াটি পড়ুন।",
+            "en": "Without raising your hands, say 'Allahu Akbar' and make one sajdah; say 'Subhana Rabbiyal-A'la' at least three times or the du'a below."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তাকবির বলে উঠা",
+            "en": "Rise with takbir"
+          },
+          "text": {
+            "bn": "‘আল্লাহু আকবার’ বলে উঠে যান। হানাফি মতে নামাজের বাইরে এই সিজদায় তাশাহহুদ বা সালাম নেই।",
+            "en": "Rise saying 'Allahu Akbar'. In the Hanafi school there is no tashahhud or salam for it outside prayer."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "সিজদায়ে তিলাওয়াতের দোয়া",
+            "en": "Du'a in the prostration of recitation"
+          },
+          "ar": "سَجَدَ وَجْهِيَ لِلَّذِي خَلَقَهُ، وَشَقَّ سَمْعَهُ وَبَصَرَهُ بِحَوْلِهِ وَقُوَّتِهِ",
+          "pron": {
+            "bn": "সাজাদা ওয়াজহিয়া লিল্লাযী খালাকাহূ, ওয়া শাক্কা সাম'আহূ ওয়া বাসারাহূ বিহাওলিহী ওয়া কুওয়াতিহ।",
+            "en": "Sajada wajhiya lilladhi khalaqahu, wa shaqqa sam'ahu wa basarahu bihawlihi wa quwwatih."
+          },
+          "meaning": {
+            "bn": "আমার মুখমণ্ডল সিজদা করল সেই সত্তার জন্য, যিনি একে সৃষ্টি করেছেন এবং নিজ শক্তি ও সামর্থ্যে এর কান ও চোখ খুলে দিয়েছেন।",
+            "en": "My face prostrates to the One who created it and brought forth its hearing and sight by His might and power."
+          },
+          "ref": {
+            "bn": "জামে তিরমিজি ৫৮০; সুনান আবু দাউদ ১৪১৪",
+            "en": "Jami' al-Tirmidhi 580; Sunan Abi Dawud 1414"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "এই দোয়ার হাদিসকে শাইখ আলবানিসহ অনেকে সহিহ বলেছেন, তবে আবু দাউদের সনদে একজন অজ্ঞাত বর্ণনাকারী থাকায় কেউ কেউ দুর্বল বলেছেন। ‘সুবহানা রাব্বিয়াল আ'লা’ পড়াই যথেষ্ট।",
+            "en": "Many, including al-Albani, graded this du'a's hadith sahih, though some called it weak because Abu Dawud's chain has an unnamed narrator. Saying 'Subhana Rabbiyal-A'la' is enough."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কিছু মাসআলা",
+            "en": "Some rulings"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "নামাজের মধ্যে সিজদার আয়াত পড়লে সাথে সাথে (তিন আয়াত পরিমাণ দেরির আগে) সিজদা করে দাঁড়িয়ে বাকি কিরাত পড়বেন। ইমাম পড়লে মুক্তাদিরাও ইমামের সাথে সিজদা করবেন।",
+              "en": "If recited in prayer, prostrate promptly (before about three verses' delay), then stand and continue. Followers prostrate with the imam."
+            },
+            {
+              "bn": "নামাজের বাইরে পড়লে সাথে সাথে করা উত্তম; পরে করলেও আদায় হয়ে যায় (হানাফি)।",
+              "en": "Outside prayer, it is best done at once, but may be done later (Hanafi)."
+            },
+            {
+              "bn": "একই বৈঠকে একই আয়াত বারবার পড়লে বা শুনলে একটি সিজদাই যথেষ্ট (হানাফি)।",
+              "en": "Repeating the same verse in one sitting needs only one prostration (Hanafi)."
+            },
+            {
+              "bn": "সিজদার আয়াতের শুধু অনুবাদ পড়লে বা রেকর্ড করা তিলাওয়াত শুনলে সিজদা ওয়াজিব হয় কি না, তা নিয়ে আলেমদের মতভেদ আছে; অনেকের মতে রেকর্ডিং শুনলে ওয়াজিব হয় না।",
+              "en": "Scholars differ on whether reading only a translation or hearing a recording requires it; many say a recording does not."
+            },
+            {
+              "bn": "ঋতুস্রাব বা নিফাস অবস্থায় শুনলে নারীর ওপর সিজদা ওয়াজিব হয় না (হানাফি)।",
+              "en": "A woman in menstruation or post-natal bleeding who hears it owes no prostration (Hanafi)."
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কুরআনে সিজদার আয়াতসমূহ",
+            "en": "The verses of prostration"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "ক্রম",
+              "en": "No."
+            },
+            {
+              "bn": "সূরা",
+              "en": "Surah"
+            },
+            {
+              "bn": "আয়াত",
+              "en": "Ayah"
+            },
+            {
+              "bn": "পারা",
+              "en": "Juz'"
+            },
+            {
+              "bn": "মন্তব্য",
+              "en": "Note"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "১",
+                "en": "1"
+              },
+              {
+                "bn": "আ'রাফ (৭)",
+                "en": "Al-A'raf (7)"
+              },
+              {
+                "bn": "২০৬",
+                "en": "206"
+              },
+              {
+                "bn": "৯",
+                "en": "9"
+              },
+              {
+                "bn": "সর্বসম্মত",
+                "en": "Agreed"
+              }
+            ],
+            [
+              {
+                "bn": "২",
+                "en": "2"
+              },
+              {
+                "bn": "রা'দ (১৩)",
+                "en": "Ar-Ra'd (13)"
+              },
+              {
+                "bn": "১৫",
+                "en": "15"
+              },
+              {
+                "bn": "১৩",
+                "en": "13"
+              },
+              {
+                "bn": "সর্বসম্মত",
+                "en": "Agreed"
+              }
+            ],
+            [
+              {
+                "bn": "৩",
+                "en": "3"
+              },
+              {
+                "bn": "নাহল (১৬)",
+                "en": "An-Nahl (16)"
+              },
+              {
+                "bn": "৫০",
+                "en": "50"
+              },
+              {
+                "bn": "১৪",
+                "en": "14"
+              },
+              {
+                "bn": "সর্বসম্মত",
+                "en": "Agreed"
+              }
+            ],
+            [
+              {
+                "bn": "৪",
+                "en": "4"
+              },
+              {
+                "bn": "বনি ইসরাঈল / ইসরা (১৭)",
+                "en": "Al-Isra (17)"
+              },
+              {
+                "bn": "১০৯",
+                "en": "109"
+              },
+              {
+                "bn": "১৫",
+                "en": "15"
+              },
+              {
+                "bn": "সর্বসম্মত",
+                "en": "Agreed"
+              }
+            ],
+            [
+              {
+                "bn": "৫",
+                "en": "5"
+              },
+              {
+                "bn": "মারইয়াম (১৯)",
+                "en": "Maryam (19)"
+              },
+              {
+                "bn": "৫৮",
+                "en": "58"
+              },
+              {
+                "bn": "১৬",
+                "en": "16"
+              },
+              {
+                "bn": "সর্বসম্মত",
+                "en": "Agreed"
+              }
+            ],
+            [
+              {
+                "bn": "৬",
+                "en": "6"
+              },
+              {
+                "bn": "হজ (২২)",
+                "en": "Al-Hajj (22)"
+              },
+              {
+                "bn": "১৮",
+                "en": "18"
+              },
+              {
+                "bn": "১৭",
+                "en": "17"
+              },
+              {
+                "bn": "সর্বসম্মত",
+                "en": "Agreed"
+              }
+            ],
+            [
+              {
+                "bn": "৭",
+                "en": "7"
+              },
+              {
+                "bn": "হজ (২২)",
+                "en": "Al-Hajj (22)"
+              },
+              {
+                "bn": "৭৭",
+                "en": "77"
+              },
+              {
+                "bn": "১৭",
+                "en": "17"
+              },
+              {
+                "bn": "শাফেয়ি ও হাম্বলি মতে সিজদা; হানাফি ও মালেকি মতে এটি নামাজের সিজদার নির্দেশ, তিলাওয়াতের সিজদা নয়",
+                "en": "A prostration for Shafi'is and Hanbalis; Hanafis and Malikis see it as about the prayer's sajdah, not a sajdah of recitation"
+              }
+            ],
+            [
+              {
+                "bn": "৮",
+                "en": "8"
+              },
+              {
+                "bn": "ফুরকান (২৫)",
+                "en": "Al-Furqan (25)"
+              },
+              {
+                "bn": "৬০",
+                "en": "60"
+              },
+              {
+                "bn": "১৯",
+                "en": "19"
+              },
+              {
+                "bn": "সর্বসম্মত",
+                "en": "Agreed"
+              }
+            ],
+            [
+              {
+                "bn": "৯",
+                "en": "9"
+              },
+              {
+                "bn": "নামল (২৭)",
+                "en": "An-Naml (27)"
+              },
+              {
+                "bn": "২৬",
+                "en": "26"
+              },
+              {
+                "bn": "১৯",
+                "en": "19"
+              },
+              {
+                "bn": "সর্বসম্মত",
+                "en": "Agreed"
+              }
+            ],
+            [
+              {
+                "bn": "১০",
+                "en": "10"
+              },
+              {
+                "bn": "সাজদা (৩২)",
+                "en": "As-Sajdah (32)"
+              },
+              {
+                "bn": "১৫",
+                "en": "15"
+              },
+              {
+                "bn": "২১",
+                "en": "21"
+              },
+              {
+                "bn": "সর্বসম্মত",
+                "en": "Agreed"
+              }
+            ],
+            [
+              {
+                "bn": "১১",
+                "en": "11"
+              },
+              {
+                "bn": "সোয়াদ (৩৮)",
+                "en": "Sad (38)"
+              },
+              {
+                "bn": "২৪",
+                "en": "24"
+              },
+              {
+                "bn": "২৩",
+                "en": "23"
+              },
+              {
+                "bn": "হানাফি ও মালেকি মতে তিলাওয়াতের সিজদা; শাফেয়ি ও হাম্বলি মতে শুকরের সিজদা (নামাজের ভেতরে নয়)",
+                "en": "A sajdah of recitation for Hanafis and Malikis; for Shafi'is and Hanbalis a prostration of thanks (not inside prayer)"
+              }
+            ],
+            [
+              {
+                "bn": "১২",
+                "en": "12"
+              },
+              {
+                "bn": "হা-মিম সাজদা / ফুসসিলাত (৪১)",
+                "en": "Fussilat (41)"
+              },
+              {
+                "bn": "৩৮",
+                "en": "38"
+              },
+              {
+                "bn": "২৪",
+                "en": "24"
+              },
+              {
+                "bn": "সর্বসম্মত (মালেকি মতে আয়াত ৩৭-এ)",
+                "en": "Agreed (Maliki: at ayah 37)"
+              }
+            ],
+            [
+              {
+                "bn": "১৩",
+                "en": "13"
+              },
+              {
+                "bn": "নাজম (৫৩)",
+                "en": "An-Najm (53)"
+              },
+              {
+                "bn": "৬২",
+                "en": "62"
+              },
+              {
+                "bn": "২৭",
+                "en": "27"
+              },
+              {
+                "bn": "মালেকি প্রসিদ্ধ মতে নয়, অন্যদের মতে সিজদা",
+                "en": "Not in the well-known Maliki view; a sajdah for the others"
+              }
+            ],
+            [
+              {
+                "bn": "১৪",
+                "en": "14"
+              },
+              {
+                "bn": "ইনশিকাক (৮৪)",
+                "en": "Al-Inshiqaq (84)"
+              },
+              {
+                "bn": "২১",
+                "en": "21"
+              },
+              {
+                "bn": "৩০",
+                "en": "30"
+              },
+              {
+                "bn": "মালেকি প্রসিদ্ধ মতে নয়, অন্যদের মতে সিজদা",
+                "en": "Not in the well-known Maliki view; a sajdah for the others"
+              }
+            ],
+            [
+              {
+                "bn": "১৫",
+                "en": "15"
+              },
+              {
+                "bn": "আলাক (৯৬)",
+                "en": "Al-'Alaq (96)"
+              },
+              {
+                "bn": "১৯",
+                "en": "19"
+              },
+              {
+                "bn": "৩০",
+                "en": "30"
+              },
+              {
+                "bn": "মালেকি প্রসিদ্ধ মতে নয়, অন্যদের মতে সিজদা",
+                "en": "Not in the well-known Maliki view; a sajdah for the others"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "হানাফি মতে সিজদার আয়াত মোট ১৪টি (তালিকার ৭ নম্বর বাদে)। শাফেয়ি ও হাম্বলি মতেও ১৪টি (১১ নম্বর বাদে)। আয়াত নম্বর প্রচলিত মুসহাফ (হাফস) অনুযায়ী।",
+            "en": "Hanafis count 14 (all except no. 7). Shafi'is and Hanbalis also count 14 (all except no. 11). Ayah numbers follow the common (Hafs) Mushaf."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "সূরা নাজমের সিজদা নবীজি (সা.) মক্কায় করেছেন এবং সাথের সবাই সিজদা করেছিল (সহিহ বুখারি ১০৬৭)।",
+            "en": "The Prophet prostrated at An-Najm in Makkah and those with him did too (Sahih al-Bukhari 1067)."
+          }
+        }
+      ]
+    }
+  ]
+}

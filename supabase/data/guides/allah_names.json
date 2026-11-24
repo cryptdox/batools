@@ -1,0 +1,1958 @@
+[
+ {
+  "n": 1,
+  "ar": "الرَّحْمٰنُ",
+  "pron": {
+   "bn": "আর-রহমান",
+   "en": "Ar-Rahman"
+  },
+  "meaning": {
+   "bn": "পরম দয়াময়",
+   "en": "The Most Gracious"
+  },
+  "note": {
+   "bn": "যাঁর দয়া দুনিয়াতে সব সৃষ্টির জন্য বিস্তৃত। তাওবা ছাড়া কুরআনের প্রতিটি সূরার শুরুতে বিসমিল্লাহর মধ্যে এই নাম আছে।",
+   "en": "The One whose mercy reaches all creation in this world. It is in the Basmalah that opens every surah except At-Tawbah."
+  },
+  "ref": {
+   "bn": "সূরা ফাতিহা ১:৩",
+   "en": "Al-Fatihah 1:3"
+  }
+ },
+ {
+  "n": 2,
+  "ar": "الرَّحِيمُ",
+  "pron": {
+   "bn": "আর-রহিম",
+   "en": "Ar-Rahim"
+  },
+  "meaning": {
+   "bn": "অতিশয় দয়ালু",
+   "en": "The Most Merciful"
+  },
+  "note": {
+   "bn": "যিনি বিশেষভাবে মুমিনদের প্রতি দয়া করেন। কুরআনে আছে: “আর তিনি মুমিনদের প্রতি পরম দয়ালু।”",
+   "en": "The One who is especially merciful to the believers: “And He is ever Merciful to the believers.”"
+  },
+  "ref": {
+   "bn": "সূরা আহযাব ৩৩:৪৩",
+   "en": "Al-Ahzab 33:43"
+  }
+ },
+ {
+  "n": 3,
+  "ar": "الْمَلِكُ",
+  "pron": {
+   "bn": "আল-মালিক",
+   "en": "Al-Malik"
+  },
+  "meaning": {
+   "bn": "মহাবাদশাহ, প্রকৃত অধিপতি",
+   "en": "The King, the Sovereign"
+  },
+  "note": {
+   "bn": "সব রাজত্ব ও ক্ষমতার প্রকৃত মালিক তিনিই; দুনিয়ার সব রাজত্ব সাময়িক। “মহিমান্বিত আল্লাহ, যিনি প্রকৃত বাদশাহ।”",
+   "en": "All true kingship belongs to Him; every worldly kingdom is temporary. “Exalted is Allah, the True King.”"
+  },
+  "ref": {
+   "bn": "সূরা ত্বা-হা ২০:১১৪",
+   "en": "Ta-Ha 20:114"
+  }
+ },
+ {
+  "n": 4,
+  "ar": "الْقُدُّوسُ",
+  "pron": {
+   "bn": "আল-কুদ্দুস",
+   "en": "Al-Quddus"
+  },
+  "meaning": {
+   "bn": "পরম পবিত্র",
+   "en": "The Most Holy"
+  },
+  "note": {
+   "bn": "সব দোষ-ত্রুটি ও অপূর্ণতা থেকে তিনি সম্পূর্ণ পবিত্র।",
+   "en": "He is completely pure, free of every flaw and imperfection."
+  },
+  "ref": {
+   "bn": "সূরা জুমুআ ৬২:১",
+   "en": "Al-Jumu'ah 62:1"
+  }
+ },
+ {
+  "n": 5,
+  "ar": "السَّلَامُ",
+  "pron": {
+   "bn": "আস-সালাম",
+   "en": "As-Salam"
+  },
+  "meaning": {
+   "bn": "শান্তিদাতা, সব ত্রুটিমুক্ত",
+   "en": "The Source of Peace"
+  },
+  "note": {
+   "bn": "তিনি সব দোষ থেকে মুক্ত এবং বান্দাদের শান্তি ও নিরাপত্তা দেন। ফরজ নামাজের পর পড়া হয়: “আল্লাহুম্মা আনতাস সালাম, ওয়া মিনকাস সালাম” (সহিহ মুসলিম ৫৯১)।",
+   "en": "He is free of all defects and grants peace and safety. After the obligatory prayer we say “Allahumma antas-salam wa minkas-salam” (Sahih Muslim 591)."
+  },
+  "ref": {
+   "bn": "সূরা হাশর ৫৯:২৩",
+   "en": "Al-Hashr 59:23"
+  }
+ },
+ {
+  "n": 6,
+  "ar": "الْمُؤْمِنُ",
+  "pron": {
+   "bn": "আল-মু'মিন",
+   "en": "Al-Mu'min"
+  },
+  "meaning": {
+   "bn": "নিরাপত্তাদাতা, বিশ্বস্ত",
+   "en": "The Giver of Security, the Faithful"
+  },
+  "note": {
+   "bn": "যিনি বান্দাদের ভয় থেকে নিরাপত্তা দেন এবং নিজের ওয়াদা ও রাসুলদের সত্যতা প্রমাণ করেন।",
+   "en": "He gives His servants safety from fear and confirms the truth of His promise and His messengers."
+  },
+  "ref": {
+   "bn": "সূরা হাশর ৫৯:২৩",
+   "en": "Al-Hashr 59:23"
+  }
+ },
+ {
+  "n": 7,
+  "ar": "الْمُهَيْمِنُ",
+  "pron": {
+   "bn": "আল-মুহাইমিন",
+   "en": "Al-Muhaymin"
+  },
+  "meaning": {
+   "bn": "রক্ষাকর্তা, সর্বতত্ত্বাবধায়ক",
+   "en": "The Guardian, the Overseer"
+  },
+  "note": {
+   "bn": "যিনি সবকিছুর ওপর নজর রাখেন ও রক্ষা করেন; সবকিছু তাঁর নিয়ন্ত্রণে।",
+   "en": "He watches over and protects everything; all things are under His control."
+  },
+  "ref": {
+   "bn": "সূরা হাশর ৫৯:২৩",
+   "en": "Al-Hashr 59:23"
+  }
+ },
+ {
+  "n": 8,
+  "ar": "الْعَزِيزُ",
+  "pron": {
+   "bn": "আল-আযীয",
+   "en": "Al-'Aziz"
+  },
+  "meaning": {
+   "bn": "মহাপরাক্রমশালী",
+   "en": "The Almighty"
+  },
+  "note": {
+   "bn": "তিনি এমন শক্তিমান যাঁকে কেউ পরাজিত করতে পারে না। কুরআনে প্রায়ই “আল-আযীযুল হাকীম” একসঙ্গে এসেছে।",
+   "en": "He is mighty and can never be overcome. The Quran often pairs it with Al-Hakim: “the Almighty, the All-Wise.”"
+  },
+  "ref": {
+   "bn": "সূরা আলে ইমরান ৩:৬",
+   "en": "Al 'Imran 3:6"
+  }
+ },
+ {
+  "n": 9,
+  "ar": "الْجَبَّارُ",
+  "pron": {
+   "bn": "আল-জাব্বার",
+   "en": "Al-Jabbar"
+  },
+  "meaning": {
+   "bn": "মহাপ্রতাপশালী, ক্ষতিপূরণকারী",
+   "en": "The Compeller, the Restorer"
+  },
+  "note": {
+   "bn": "তাঁর ইচ্ছা সবার ওপর কার্যকর; আবার তিনিই ভাঙা হৃদয় জোড়া লাগান ও দুর্বলের অভাব পূরণ করেন।",
+   "en": "His will prevails over all; and He mends broken hearts and makes up what the weak lack."
+  },
+  "ref": {
+   "bn": "সূরা হাশর ৫৯:২৩",
+   "en": "Al-Hashr 59:23"
+  }
+ },
+ {
+  "n": 10,
+  "ar": "الْمُتَكَبِّرُ",
+  "pron": {
+   "bn": "আল-মুতাকাব্বির",
+   "en": "Al-Mutakabbir"
+  },
+  "meaning": {
+   "bn": "সর্বশ্রেষ্ঠত্বের অধিকারী",
+   "en": "The Supreme in Greatness"
+  },
+  "note": {
+   "bn": "সব বড়ত্ব ও শ্রেষ্ঠত্ব কেবল তাঁরই প্রাপ্য; বান্দার জন্য অহংকার নিন্দনীয়।",
+   "en": "All greatness belongs to Him alone; for a servant, arrogance is blameworthy."
+  },
+  "ref": {
+   "bn": "সূরা হাশর ৫৯:২৩",
+   "en": "Al-Hashr 59:23"
+  }
+ },
+ {
+  "n": 11,
+  "ar": "الْخَالِقُ",
+  "pron": {
+   "bn": "আল-খালিক",
+   "en": "Al-Khaliq"
+  },
+  "meaning": {
+   "bn": "সৃষ্টিকর্তা",
+   "en": "The Creator"
+  },
+  "note": {
+   "bn": "যিনি সবকিছু নির্ধারিত পরিমাপে অস্তিত্বে এনেছেন।",
+   "en": "He brought everything into being in a measured, decreed way."
+  },
+  "ref": {
+   "bn": "সূরা হাশর ৫৯:২৪",
+   "en": "Al-Hashr 59:24"
+  }
+ },
+ {
+  "n": 12,
+  "ar": "الْبَارِئُ",
+  "pron": {
+   "bn": "আল-বারি",
+   "en": "Al-Bari'"
+  },
+  "meaning": {
+   "bn": "উদ্ভাবনকারী",
+   "en": "The Originator, the Maker"
+  },
+  "note": {
+   "bn": "যিনি সৃষ্টিকে কোনো পূর্ব নমুনা ছাড়া, ত্রুটিমুক্তভাবে অস্তিত্ব দেন।",
+   "en": "He brings creation into existence without any prior model and free of flaws."
+  },
+  "ref": {
+   "bn": "সূরা হাশর ৫৯:২৪",
+   "en": "Al-Hashr 59:24"
+  }
+ },
+ {
+  "n": 13,
+  "ar": "الْمُصَوِّرُ",
+  "pron": {
+   "bn": "আল-মুসাওয়ির",
+   "en": "Al-Musawwir"
+  },
+  "meaning": {
+   "bn": "আকৃতিদাতা",
+   "en": "The Fashioner of Forms"
+  },
+  "note": {
+   "bn": "যিনি প্রতিটি সৃষ্টিকে আলাদা রূপ দেন; মাতৃগর্ভে যেমন ইচ্ছা তেমন আকৃতি দেন (সূরা আলে ইমরান ৩:৬)।",
+   "en": "He gives every creature its own form; He shapes us in the womb as He wills (Al 'Imran 3:6)."
+  },
+  "ref": {
+   "bn": "সূরা হাশর ৫৯:২৪",
+   "en": "Al-Hashr 59:24"
+  }
+ },
+ {
+  "n": 14,
+  "ar": "الْغَفَّارُ",
+  "pron": {
+   "bn": "আল-গাফ্ফার",
+   "en": "Al-Ghaffar"
+  },
+  "meaning": {
+   "bn": "মহাক্ষমাশীল",
+   "en": "The Ever-Forgiving"
+  },
+  "note": {
+   "bn": "যিনি বারবার ক্ষমা করেন। নূহ (আ.) বলেছিলেন: “তোমাদের রবের কাছে ক্ষমা চাও, নিশ্চয়ই তিনি মহাক্ষমাশীল।”",
+   "en": "He forgives again and again. Nuh (AS) said: “Ask forgiveness of your Lord; indeed He is ever Forgiving.”"
+  },
+  "ref": {
+   "bn": "সূরা নূহ ৭১:১০",
+   "en": "Nuh 71:10"
+  }
+ },
+ {
+  "n": 15,
+  "ar": "الْقَهَّارُ",
+  "pron": {
+   "bn": "আল-কাহ্হার",
+   "en": "Al-Qahhar"
+  },
+  "meaning": {
+   "bn": "মহাপরাক্রান্ত, সবার ওপর বিজয়ী",
+   "en": "The Subduer"
+  },
+  "note": {
+   "bn": "সব সৃষ্টি তাঁর ক্ষমতার অধীন। কিয়ামতের দিন ঘোষণা হবে: “আজ রাজত্ব কার? এক, মহাপরাক্রান্ত আল্লাহর।”",
+   "en": "All creation is subject to His power. On the Last Day: “To whom belongs the kingdom today? To Allah, the One, the Prevailing.”"
+  },
+  "ref": {
+   "bn": "সূরা গাফির ৪০:১৬",
+   "en": "Ghafir 40:16"
+  }
+ },
+ {
+  "n": 16,
+  "ar": "الْوَهَّابُ",
+  "pron": {
+   "bn": "আল-ওয়াহ্হাব",
+   "en": "Al-Wahhab"
+  },
+  "meaning": {
+   "bn": "মহাদাতা",
+   "en": "The Bestower"
+  },
+  "note": {
+   "bn": "যিনি বিনিময় ছাড়াই অফুরন্ত দান করেন। মুমিনদের দোয়া: “নিশ্চয়ই আপনি মহাদাতা।”",
+   "en": "He gives endlessly without asking anything in return. The believers pray: “Indeed, You are the Bestower.”"
+  },
+  "ref": {
+   "bn": "সূরা আলে ইমরান ৩:৮",
+   "en": "Al 'Imran 3:8"
+  }
+ },
+ {
+  "n": 17,
+  "ar": "الرَّزَّاقُ",
+  "pron": {
+   "bn": "আর-রায্যাক",
+   "en": "Ar-Razzaq"
+  },
+  "meaning": {
+   "bn": "রিজিকদাতা",
+   "en": "The Provider"
+  },
+  "note": {
+   "bn": "সব সৃষ্টির রিজিক তাঁর হাতে; “নিশ্চয়ই আল্লাহই রিজিকদাতা, প্রবল শক্তিধর।”",
+   "en": "The provision of all creation is in His hand: “Indeed, Allah is the Provider, the Firm Possessor of strength.”"
+  },
+  "ref": {
+   "bn": "সূরা যারিয়াত ৫১:৫৮",
+   "en": "Adh-Dhariyat 51:58"
+  }
+ },
+ {
+  "n": 18,
+  "ar": "الْفَتَّاحُ",
+  "pron": {
+   "bn": "আল-ফাত্তাহ",
+   "en": "Al-Fattah"
+  },
+  "meaning": {
+   "bn": "উন্মোচনকারী, মীমাংসাকারী",
+   "en": "The Opener, the Judge"
+  },
+  "note": {
+   "bn": "যিনি রহমত ও রিজিকের দরজা খুলে দেন এবং বান্দাদের মাঝে ন্যায্য ফয়সালা করেন।",
+   "en": "He opens the doors of mercy and provision and judges between His servants with truth."
+  },
+  "ref": {
+   "bn": "সূরা সাবা ৩৪:২৬",
+   "en": "Saba 34:26"
+  }
+ },
+ {
+  "n": 19,
+  "ar": "الْعَلِيمُ",
+  "pron": {
+   "bn": "আল-আলীম",
+   "en": "Al-'Alim"
+  },
+  "meaning": {
+   "bn": "সর্বজ্ঞ",
+   "en": "The All-Knowing"
+  },
+  "note": {
+   "bn": "প্রকাশ্য-গোপন, অতীত-ভবিষ্যৎ সবকিছু তিনি জানেন। ফেরেশতারা বলেছিলেন: “নিশ্চয়ই আপনি সর্বজ্ঞ, প্রজ্ঞাময়।”",
+   "en": "He knows the seen and unseen, past and future. The angels said: “Indeed, You are the All-Knowing, the All-Wise.”"
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:৩২",
+   "en": "Al-Baqarah 2:32"
+  }
+ },
+ {
+  "n": 20,
+  "ar": "الْقَابِضُ",
+  "pron": {
+   "bn": "আল-কাবিদ",
+   "en": "Al-Qabid"
+  },
+  "meaning": {
+   "bn": "সংকোচনকারী",
+   "en": "The Withholder"
+  },
+  "note": {
+   "bn": "যিনি নিজ প্রজ্ঞায় রিজিক ইত্যাদি সংকুচিত করেন। “আল্লাহই সংকুচিত করেন ও প্রশস্ত করেন”; তাই এই নাম আল-বাসিতের সঙ্গে মিলিয়ে বলা উত্তম।",
+   "en": "He constricts provision by His wisdom. “Allah withholds and grants abundance,” so this name is best mentioned together with Al-Basit."
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:২৪৫",
+   "en": "Al-Baqarah 2:245"
+  }
+ },
+ {
+  "n": 21,
+  "ar": "الْبَاسِطُ",
+  "pron": {
+   "bn": "আল-বাসিত",
+   "en": "Al-Basit"
+  },
+  "meaning": {
+   "bn": "প্রসারকারী",
+   "en": "The Expander"
+  },
+  "note": {
+   "bn": "যিনি যাকে ইচ্ছা রিজিক ও অনুগ্রহ প্রশস্ত করে দেন।",
+   "en": "He expands provision and favour for whom He wills."
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:২৪৫",
+   "en": "Al-Baqarah 2:245"
+  }
+ },
+ {
+  "n": 22,
+  "ar": "الْخَافِضُ",
+  "pron": {
+   "bn": "আল-খাফিদ",
+   "en": "Al-Khafid"
+  },
+  "meaning": {
+   "bn": "অবনতকারী",
+   "en": "The Abaser"
+  },
+  "note": {
+   "bn": "যিনি অহংকারী ও জালিমদের নিচু করেন। নামটি কুরআনে নাম হিসেবে আসেনি; সহিহ হাদিসে আছে, আল্লাহ দাঁড়িপাল্লা নিচু করেন ও উঁচু করেন (সহিহ মুসলিম ১৭৯)।",
+   "en": "He lowers the arrogant and the oppressors. It does not occur in the Quran as a name; a sahih hadith says Allah lowers the scale and raises it (Sahih Muslim 179)."
+  }
+ },
+ {
+  "n": 23,
+  "ar": "الرَّافِعُ",
+  "pron": {
+   "bn": "আর-রাফি",
+   "en": "Ar-Rafi'"
+  },
+  "meaning": {
+   "bn": "উন্নীতকারী",
+   "en": "The Exalter"
+  },
+  "note": {
+   "bn": "যিনি মর্যাদা উঁচু করেন; “তোমাদের মধ্যে যারা ঈমান এনেছে এবং যাদের জ্ঞান দেওয়া হয়েছে, আল্লাহ তাদের মর্যাদা উঁচু করবেন।”",
+   "en": "He raises people in rank: “Allah will raise those who have believed among you and those given knowledge, by degrees.”"
+  },
+  "ref": {
+   "bn": "সূরা মুজাদালা ৫৮:১১",
+   "en": "Al-Mujadilah 58:11"
+  }
+ },
+ {
+  "n": 24,
+  "ar": "الْمُعِزُّ",
+  "pron": {
+   "bn": "আল-মুইয্য",
+   "en": "Al-Mu'izz"
+  },
+  "meaning": {
+   "bn": "সম্মানদাতা",
+   "en": "The Giver of Honour"
+  },
+  "note": {
+   "bn": "সম্মান কেবল তাঁর হাতে; “আপনি যাকে ইচ্ছা সম্মান দেন।”",
+   "en": "Honour is in His hand alone: “You honour whom You will.”"
+  },
+  "ref": {
+   "bn": "সূরা আলে ইমরান ৩:২৬",
+   "en": "Al 'Imran 3:26"
+  }
+ },
+ {
+  "n": 25,
+  "ar": "الْمُذِلُّ",
+  "pron": {
+   "bn": "আল-মুযিল্ল",
+   "en": "Al-Mudhill"
+  },
+  "meaning": {
+   "bn": "অপমানকারী",
+   "en": "The Giver of Disgrace"
+  },
+  "note": {
+   "bn": "তিনি যাকে ইচ্ছা ন্যায়সঙ্গতভাবে লাঞ্ছিত করেন; “আর যাকে ইচ্ছা অপমানিত করেন।” আল-মুইয্যের সঙ্গে মিলিয়ে বলা উত্তম।",
+   "en": "He humbles whom He wills, justly: “and You humble whom You will.” Best mentioned together with Al-Mu'izz."
+  },
+  "ref": {
+   "bn": "সূরা আলে ইমরান ৩:২৬",
+   "en": "Al 'Imran 3:26"
+  }
+ },
+ {
+  "n": 26,
+  "ar": "السَّمِيعُ",
+  "pron": {
+   "bn": "আস-সামী",
+   "en": "As-Sami'"
+  },
+  "meaning": {
+   "bn": "সর্বশ্রোতা",
+   "en": "The All-Hearing"
+  },
+  "note": {
+   "bn": "সব আওয়াজ, এমনকি মনের নীরব দোয়াও তিনি শোনেন।",
+   "en": "He hears every sound, even the silent prayer of the heart."
+  },
+  "ref": {
+   "bn": "সূরা শূরা ৪২:১১",
+   "en": "Ash-Shura 42:11"
+  }
+ },
+ {
+  "n": 27,
+  "ar": "الْبَصِيرُ",
+  "pron": {
+   "bn": "আল-বাসীর",
+   "en": "Al-Basir"
+  },
+  "meaning": {
+   "bn": "সর্বদ্রষ্টা",
+   "en": "The All-Seeing"
+  },
+  "note": {
+   "bn": "কোনো কিছুই তাঁর দৃষ্টির আড়ালে নয়; “তাঁর মতো কিছুই নেই, তিনি সর্বশ্রোতা, সর্বদ্রষ্টা।”",
+   "en": "Nothing is hidden from His sight: “There is nothing like Him, and He is the All-Hearing, the All-Seeing.”"
+  },
+  "ref": {
+   "bn": "সূরা শূরা ৪২:১১",
+   "en": "Ash-Shura 42:11"
+  }
+ },
+ {
+  "n": 28,
+  "ar": "الْحَكَمُ",
+  "pron": {
+   "bn": "আল-হাকাম",
+   "en": "Al-Hakam"
+  },
+  "meaning": {
+   "bn": "মহাবিচারক",
+   "en": "The Judge"
+  },
+  "note": {
+   "bn": "চূড়ান্ত ফয়সালা ও বিধান দেওয়ার অধিকার তাঁরই; “আমি কি আল্লাহ ছাড়া অন্য কাউকে বিচারক মানব?”",
+   "en": "The final judgement and law belong to Him: “Shall I seek a judge other than Allah?”"
+  },
+  "ref": {
+   "bn": "সূরা আনআম ৬:১১৪",
+   "en": "Al-An'am 6:114"
+  }
+ },
+ {
+  "n": 29,
+  "ar": "الْعَدْلُ",
+  "pron": {
+   "bn": "আল-আদল",
+   "en": "Al-'Adl"
+  },
+  "meaning": {
+   "bn": "ন্যায়পরায়ণ",
+   "en": "The Just"
+  },
+  "note": {
+   "bn": "তিনি কারও প্রতি বিন্দুমাত্র জুলুম করেন না। শব্দটি কুরআনে নাম হিসেবে নয়, গুণ হিসেবে এসেছে: “তোমার রবের বাণী সত্য ও ন্যায়ে পরিপূর্ণ।”",
+   "en": "He never wrongs anyone in the least. The word occurs in the Quran as a quality, not a name: “The word of your Lord is complete in truth and justice.”"
+  },
+  "ref": {
+   "bn": "সূরা আনআম ৬:১১৫",
+   "en": "Al-An'am 6:115"
+  }
+ },
+ {
+  "n": 30,
+  "ar": "اللَّطِيفُ",
+  "pron": {
+   "bn": "আল-লাতীফ",
+   "en": "Al-Latif"
+  },
+  "meaning": {
+   "bn": "সূক্ষ্মদর্শী, কোমল দয়ালু",
+   "en": "The Subtle, the Gentle"
+  },
+  "note": {
+   "bn": "যিনি অতি সূক্ষ্ম বিষয়ও জানেন এবং বান্দার প্রতি অদৃশ্যভাবে অনুগ্রহ করেন।",
+   "en": "He knows the finest details and is kind to His servants in ways they do not see."
+  },
+  "ref": {
+   "bn": "সূরা মুলক ৬৭:১৪",
+   "en": "Al-Mulk 67:14"
+  }
+ },
+ {
+  "n": 31,
+  "ar": "الْخَبِيرُ",
+  "pron": {
+   "bn": "আল-খাবীর",
+   "en": "Al-Khabir"
+  },
+  "meaning": {
+   "bn": "সর্ববিষয়ে অবগত",
+   "en": "The All-Aware"
+  },
+  "note": {
+   "bn": "সবকিছুর ভেতরের খবরও তিনি জানেন; “যিনি সৃষ্টি করেছেন তিনি কি জানবেন না? তিনি সূক্ষ্মদর্শী, সব বিষয়ে অবগত।”",
+   "en": "He knows the inner reality of all things: “Does He not know, He who created, while He is the Subtle, the All-Aware?”"
+  },
+  "ref": {
+   "bn": "সূরা মুলক ৬৭:১৪",
+   "en": "Al-Mulk 67:14"
+  }
+ },
+ {
+  "n": 32,
+  "ar": "الْحَلِيمُ",
+  "pron": {
+   "bn": "আল-হালীম",
+   "en": "Al-Halim"
+  },
+  "meaning": {
+   "bn": "সহনশীল",
+   "en": "The Forbearing"
+  },
+  "note": {
+   "bn": "বান্দা অপরাধ করলেও তিনি সঙ্গে সঙ্গে শাস্তি দেন না, তওবার সুযোগ দেন।",
+   "en": "Even when servants sin, He does not punish at once but gives time to repent."
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:২৬৩",
+   "en": "Al-Baqarah 2:263"
+  }
+ },
+ {
+  "n": 33,
+  "ar": "الْعَظِيمُ",
+  "pron": {
+   "bn": "আল-আযীম",
+   "en": "Al-'Azim"
+  },
+  "meaning": {
+   "bn": "মহান",
+   "en": "The Magnificent"
+  },
+  "note": {
+   "bn": "সত্তা ও গুণে তিনি সর্বোচ্চ মহান; আয়াতুল কুরসি শেষ হয় “ওয়া হুওয়াল আলিয়্যুল আযীম” দিয়ে।",
+   "en": "He is supremely great in Essence and attributes; Ayat al-Kursi ends with “and He is the Most High, the Magnificent.”"
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:২৫৫",
+   "en": "Al-Baqarah 2:255"
+  }
+ },
+ {
+  "n": 34,
+  "ar": "الْغَفُورُ",
+  "pron": {
+   "bn": "আল-গাফুর",
+   "en": "Al-Ghafur"
+  },
+  "meaning": {
+   "bn": "অতি ক্ষমাশীল",
+   "en": "The All-Forgiving"
+  },
+  "note": {
+   "bn": "যিনি বড় বড় গুনাহও ক্ষমা করেন; “আমার বান্দাদের জানিয়ে দাও, আমি অতি ক্ষমাশীল, পরম দয়ালু।”",
+   "en": "He forgives even great sins: “Inform My servants that I am the Forgiving, the Merciful.”"
+  },
+  "ref": {
+   "bn": "সূরা হিজর ১৫:৪৯",
+   "en": "Al-Hijr 15:49"
+  }
+ },
+ {
+  "n": 35,
+  "ar": "الشَّكُورُ",
+  "pron": {
+   "bn": "আশ-শাকুর",
+   "en": "Ash-Shakur"
+  },
+  "meaning": {
+   "bn": "গুণগ্রাহী",
+   "en": "The Appreciative"
+  },
+  "note": {
+   "bn": "বান্দার অল্প আমলকেও তিনি মূল্য দেন এবং বহুগুণ প্রতিদান দেন।",
+   "en": "He values even a small deed of His servant and rewards it many times over."
+  },
+  "ref": {
+   "bn": "সূরা তাগাবুন ৬৪:১৭",
+   "en": "At-Taghabun 64:17"
+  }
+ },
+ {
+  "n": 36,
+  "ar": "الْعَلِيُّ",
+  "pron": {
+   "bn": "আল-আলিয়্য",
+   "en": "Al-'Aliyy"
+  },
+  "meaning": {
+   "bn": "সমুচ্চ",
+   "en": "The Most High"
+  },
+  "note": {
+   "bn": "সত্তা, মর্যাদা ও ক্ষমতায় তিনি সবার ঊর্ধ্বে।",
+   "en": "He is above all in Essence, rank and power."
+  },
+  "ref": {
+   "bn": "সূরা হজ ২২:৬২",
+   "en": "Al-Hajj 22:62"
+  }
+ },
+ {
+  "n": 37,
+  "ar": "الْكَبِيرُ",
+  "pron": {
+   "bn": "আল-কাবীর",
+   "en": "Al-Kabir"
+  },
+  "meaning": {
+   "bn": "মহীয়ান, সর্বশ্রেষ্ঠ",
+   "en": "The Most Great"
+  },
+  "note": {
+   "bn": "তাঁর চেয়ে বড় কিছু নেই; তাই আমরা “আল্লাহু আকবার” বলি।",
+   "en": "Nothing is greater than Him; that is why we say “Allahu Akbar.”"
+  },
+  "ref": {
+   "bn": "সূরা হজ ২২:৬২",
+   "en": "Al-Hajj 22:62"
+  }
+ },
+ {
+  "n": 38,
+  "ar": "الْحَفِيظُ",
+  "pron": {
+   "bn": "আল-হাফীয",
+   "en": "Al-Hafiz"
+  },
+  "meaning": {
+   "bn": "সংরক্ষণকারী",
+   "en": "The Preserver"
+  },
+  "note": {
+   "bn": "যিনি সবকিছু রক্ষা করেন এবং বান্দার আমল সংরক্ষণ করেন; “নিশ্চয়ই আমার রব সবকিছুর রক্ষক।”",
+   "en": "He guards all things and keeps record of deeds: “Indeed, my Lord is Guardian over all things.”"
+  },
+  "ref": {
+   "bn": "সূরা হুদ ১১:৫৭",
+   "en": "Hud 11:57"
+  }
+ },
+ {
+  "n": 39,
+  "ar": "الْمُقِيتُ",
+  "pron": {
+   "bn": "আল-মুকীত",
+   "en": "Al-Muqit"
+  },
+  "meaning": {
+   "bn": "আহার ও শক্তিদাতা",
+   "en": "The Nourisher"
+  },
+  "note": {
+   "bn": "যিনি প্রতিটি প্রাণীর খাদ্য ও শক্তি জোগান এবং সবকিছুর ওপর ক্ষমতাবান।",
+   "en": "He supplies every creature with food and strength and has power over all things."
+  },
+  "ref": {
+   "bn": "সূরা নিসা ৪:৮৫",
+   "en": "An-Nisa 4:85"
+  }
+ },
+ {
+  "n": 40,
+  "ar": "الْحَسِيبُ",
+  "pron": {
+   "bn": "আল-হাসীব",
+   "en": "Al-Hasib"
+  },
+  "meaning": {
+   "bn": "হিসাব গ্রহণকারী, যথেষ্ট",
+   "en": "The Reckoner, the Sufficient"
+  },
+  "note": {
+   "bn": "যিনি বান্দার সব আমলের হিসাব নেবেন, আর যে তাঁর ওপর ভরসা করে তার জন্য তিনিই যথেষ্ট।",
+   "en": "He will take account of every deed, and He is enough for whoever relies on Him."
+  },
+  "ref": {
+   "bn": "সূরা নিসা ৪:৮৬",
+   "en": "An-Nisa 4:86"
+  }
+ },
+ {
+  "n": 41,
+  "ar": "الْجَلِيلُ",
+  "pron": {
+   "bn": "আল-জালীল",
+   "en": "Al-Jalil"
+  },
+  "meaning": {
+   "bn": "মহিমান্বিত",
+   "en": "The Majestic"
+  },
+  "note": {
+   "bn": "মহত্ত্ব ও মর্যাদার পূর্ণতা তাঁরই। নামটি এই রূপে কুরআনে নেই; তবে “যুল-জালাল” (মহিমার অধিকারী) রূপে এসেছে।",
+   "en": "Perfect majesty is His. The name is not in the Quran in this form, but occurs as “Dhul-Jalal” (Owner of Majesty)."
+  },
+  "ref": {
+   "bn": "সূরা আর-রহমান ৫৫:৭৮",
+   "en": "Ar-Rahman 55:78"
+  }
+ },
+ {
+  "n": 42,
+  "ar": "الْكَرِيمُ",
+  "pron": {
+   "bn": "আল-কারীম",
+   "en": "Al-Karim"
+  },
+  "meaning": {
+   "bn": "পরম দানশীল, মহাসম্মানিত",
+   "en": "The Most Generous"
+  },
+  "note": {
+   "bn": "যিনি না চাইতেই দেন এবং অপরাধীকেও দয়া করেন; “হে মানুষ, কিসে তোমাকে তোমার মহান রব সম্পর্কে ধোঁকায় ফেলল?”",
+   "en": "He gives without being asked and is kind even to wrongdoers: “O mankind, what has deceived you about your Lord, the Generous?”"
+  },
+  "ref": {
+   "bn": "সূরা ইনফিতার ৮২:৬",
+   "en": "Al-Infitar 82:6"
+  }
+ },
+ {
+  "n": 43,
+  "ar": "الرَّقِيبُ",
+  "pron": {
+   "bn": "আর-রাকীব",
+   "en": "Ar-Raqib"
+  },
+  "meaning": {
+   "bn": "পর্যবেক্ষক",
+   "en": "The Watchful"
+  },
+  "note": {
+   "bn": "তিনি সবসময় বান্দার প্রতিটি কাজ ও চিন্তা দেখছেন; “নিশ্চয়ই আল্লাহ তোমাদের ওপর সজাগ দৃষ্টি রাখেন।”",
+   "en": "He constantly watches every deed and thought: “Indeed, Allah is ever, over you, an Observer.”"
+  },
+  "ref": {
+   "bn": "সূরা নিসা ৪:১",
+   "en": "An-Nisa 4:1"
+  }
+ },
+ {
+  "n": 44,
+  "ar": "الْمُجِيبُ",
+  "pron": {
+   "bn": "আল-মুজীব",
+   "en": "Al-Mujib"
+  },
+  "meaning": {
+   "bn": "দোয়া কবুলকারী",
+   "en": "The Responsive"
+  },
+  "note": {
+   "bn": "যিনি বান্দার ডাকে সাড়া দেন; সালেহ (আ.) বলেছিলেন: “নিশ্চয়ই আমার রব নিকটে, ডাকে সাড়া দেন।”",
+   "en": "He answers those who call on Him. Salih (AS) said: “Indeed, my Lord is near and responsive.”"
+  },
+  "ref": {
+   "bn": "সূরা হুদ ১১:৬১",
+   "en": "Hud 11:61"
+  }
+ },
+ {
+  "n": 45,
+  "ar": "الْوَاسِعُ",
+  "pron": {
+   "bn": "আল-ওয়াসি",
+   "en": "Al-Wasi'"
+  },
+  "meaning": {
+   "bn": "সর্বব্যাপী, প্রাচুর্যময়",
+   "en": "The All-Encompassing"
+  },
+  "note": {
+   "bn": "তাঁর জ্ঞান, রহমত ও দান সবকিছুকে পরিব্যাপ্ত করে আছে।",
+   "en": "His knowledge, mercy and giving encompass everything."
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:১১৫",
+   "en": "Al-Baqarah 2:115"
+  }
+ },
+ {
+  "n": 46,
+  "ar": "الْحَكِيمُ",
+  "pron": {
+   "bn": "আল-হাকীম",
+   "en": "Al-Hakim"
+  },
+  "meaning": {
+   "bn": "প্রজ্ঞাময়",
+   "en": "The All-Wise"
+  },
+  "note": {
+   "bn": "তাঁর প্রতিটি আদেশ ও সিদ্ধান্তে গভীর প্রজ্ঞা আছে, যদিও আমরা সব সময় তা বুঝি না।",
+   "en": "There is deep wisdom in each of His commands and decrees, even when we do not see it."
+  },
+  "ref": {
+   "bn": "সূরা আনআম ৬:১৮",
+   "en": "Al-An'am 6:18"
+  }
+ },
+ {
+  "n": 47,
+  "ar": "الْوَدُودُ",
+  "pron": {
+   "bn": "আল-ওয়াদুদ",
+   "en": "Al-Wadud"
+  },
+  "meaning": {
+   "bn": "প্রেমময়",
+   "en": "The Most Loving"
+  },
+  "note": {
+   "bn": "যিনি মুমিনদের ভালোবাসেন এবং মুমিনরাও যাঁকে ভালোবাসে; “তিনি ক্ষমাশীল, প্রেমময়।”",
+   "en": "He loves the believers and is loved by them: “And He is the Forgiving, the Loving.”"
+  },
+  "ref": {
+   "bn": "সূরা বুরুজ ৮৫:১৪",
+   "en": "Al-Buruj 85:14"
+  }
+ },
+ {
+  "n": 48,
+  "ar": "الْمَجِيدُ",
+  "pron": {
+   "bn": "আল-মাজীদ",
+   "en": "Al-Majid"
+  },
+  "meaning": {
+   "bn": "মহাগৌরবময়",
+   "en": "The Most Glorious"
+  },
+  "note": {
+   "bn": "মর্যাদা ও দানে তিনি অতি গৌরবময়; দরুদে ইবরাহিমি শেষ হয় “ইন্নাকা হামীদুম মাজীদ” দিয়ে।",
+   "en": "He is most glorious in honour and generosity; the Ibrahimi durood ends with “innaka Hamidun Majid.”"
+  },
+  "ref": {
+   "bn": "সূরা হুদ ১১:৭৩",
+   "en": "Hud 11:73"
+  }
+ },
+ {
+  "n": 49,
+  "ar": "الْبَاعِثُ",
+  "pron": {
+   "bn": "আল-বা'ইস",
+   "en": "Al-Ba'ith"
+  },
+  "meaning": {
+   "bn": "পুনরুত্থানকারী",
+   "en": "The Resurrector"
+  },
+  "note": {
+   "bn": "যিনি রাসুল পাঠিয়েছেন এবং মৃতদের কবর থেকে আবার জীবিত করে উঠাবেন; “আল্লাহ কবরবাসীদের পুনরুত্থিত করবেন।”",
+   "en": "He sent the messengers and will raise the dead from their graves: “Allah will resurrect those in the graves.”"
+  },
+  "ref": {
+   "bn": "সূরা হজ ২২:৭",
+   "en": "Al-Hajj 22:7"
+  }
+ },
+ {
+  "n": 50,
+  "ar": "الشَّهِيدُ",
+  "pron": {
+   "bn": "আশ-শাহীদ",
+   "en": "Ash-Shahid"
+  },
+  "meaning": {
+   "bn": "সাক্ষী, সর্বপ্রত্যক্ষকারী",
+   "en": "The Witness"
+  },
+  "note": {
+   "bn": "সবকিছু তাঁর সামনে উপস্থিত; “নিশ্চয়ই আল্লাহ সবকিছুর সাক্ষী।”",
+   "en": "Everything is present before Him: “Indeed, Allah is Witness over all things.”"
+  },
+  "ref": {
+   "bn": "সূরা হজ ২২:১৭",
+   "en": "Al-Hajj 22:17"
+  }
+ },
+ {
+  "n": 51,
+  "ar": "الْحَقُّ",
+  "pron": {
+   "bn": "আল-হাক্ক",
+   "en": "Al-Haqq"
+  },
+  "meaning": {
+   "bn": "চিরসত্য",
+   "en": "The Truth"
+  },
+  "note": {
+   "bn": "তাঁর অস্তিত্ব, কথা ও ওয়াদা সবই সত্য; “তারা জানবে যে আল্লাহই সুস্পষ্ট সত্য।”",
+   "en": "His existence, word and promise are all true: “They will know that Allah is the manifest Truth.”"
+  },
+  "ref": {
+   "bn": "সূরা নূর ২৪:২৫",
+   "en": "An-Nur 24:25"
+  }
+ },
+ {
+  "n": 52,
+  "ar": "الْوَكِيلُ",
+  "pron": {
+   "bn": "আল-ওয়াকীল",
+   "en": "Al-Wakil"
+  },
+  "meaning": {
+   "bn": "কর্মবিধায়ক, ভরসাস্থল",
+   "en": "The Trustee"
+  },
+  "note": {
+   "bn": "যাঁর ওপর ভরসা করলে তিনিই যথেষ্ট; বিপদে মুমিনরা বলেছিলেন: “হাসবুনাল্লাহু ওয়া নি'মাল ওয়াকীল।”",
+   "en": "He is enough for whoever trusts Him; in danger the believers said: “Allah is sufficient for us, and He is the best Trustee.”"
+  },
+  "ref": {
+   "bn": "সূরা আলে ইমরান ৩:১৭৩",
+   "en": "Al 'Imran 3:173"
+  }
+ },
+ {
+  "n": 53,
+  "ar": "الْقَوِيُّ",
+  "pron": {
+   "bn": "আল-কাবিয়্য",
+   "en": "Al-Qawiyy"
+  },
+  "meaning": {
+   "bn": "মহাশক্তিমান",
+   "en": "The All-Strong"
+  },
+  "note": {
+   "bn": "তাঁর শক্তির কোনো সীমা নেই, তিনি কখনো দুর্বল হন না।",
+   "en": "His strength has no limit; He never weakens."
+  },
+  "ref": {
+   "bn": "সূরা শূরা ৪২:১৯",
+   "en": "Ash-Shura 42:19"
+  }
+ },
+ {
+  "n": 54,
+  "ar": "الْمَتِينُ",
+  "pron": {
+   "bn": "আল-মাতীন",
+   "en": "Al-Matin"
+  },
+  "meaning": {
+   "bn": "সুদৃঢ়",
+   "en": "The Firm"
+  },
+  "note": {
+   "bn": "যাঁর শক্তি অটল ও সুদৃঢ়; কোনো কাজে তিনি ক্লান্ত হন না।",
+   "en": "His strength is firm and unshakable; no task tires Him."
+  },
+  "ref": {
+   "bn": "সূরা যারিয়াত ৫১:৫৮",
+   "en": "Adh-Dhariyat 51:58"
+  }
+ },
+ {
+  "n": 55,
+  "ar": "الْوَلِيُّ",
+  "pron": {
+   "bn": "আল-ওয়ালিয়্য",
+   "en": "Al-Waliyy"
+  },
+  "meaning": {
+   "bn": "অভিভাবক, বন্ধু",
+   "en": "The Protecting Friend"
+  },
+  "note": {
+   "bn": "তিনি মুমিনদের অভিভাবক; “আল্লাহ মুমিনদের অভিভাবক, তিনি তাদের অন্ধকার থেকে আলোর দিকে বের করে আনেন।”",
+   "en": "He is the ally of the believers: “Allah is the ally of those who believe; He brings them out of darkness into light.”"
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:২৫৭",
+   "en": "Al-Baqarah 2:257"
+  }
+ },
+ {
+  "n": 56,
+  "ar": "الْحَمِيدُ",
+  "pron": {
+   "bn": "আল-হামীদ",
+   "en": "Al-Hamid"
+  },
+  "meaning": {
+   "bn": "প্রশংসিত",
+   "en": "The Praiseworthy"
+  },
+  "note": {
+   "bn": "সব অবস্থায় সব প্রশংসা তাঁরই প্রাপ্য; “আল্লাহই অভাবমুক্ত, প্রশংসিত।”",
+   "en": "All praise in every state is His due: “Allah is the Free of need, the Praiseworthy.”"
+  },
+  "ref": {
+   "bn": "সূরা ফাতির ৩৫:১৫",
+   "en": "Fatir 35:15"
+  }
+ },
+ {
+  "n": 57,
+  "ar": "الْمُحْصِي",
+  "pron": {
+   "bn": "আল-মুহসী",
+   "en": "Al-Muhsi"
+  },
+  "meaning": {
+   "bn": "সবকিছু গণনাকারী",
+   "en": "The Accounter"
+  },
+  "note": {
+   "bn": "যিনি সবকিছু গুনে রেখেছেন; “তিনি তাদের পরিবেষ্টন করে রেখেছেন এবং গুনে গুনে হিসাব রেখেছেন।”",
+   "en": "He has counted everything: “He has enumerated them and counted them a full counting.”"
+  },
+  "ref": {
+   "bn": "সূরা মারইয়াম ১৯:৯৪",
+   "en": "Maryam 19:94"
+  }
+ },
+ {
+  "n": 58,
+  "ar": "الْمُبْدِئُ",
+  "pron": {
+   "bn": "আল-মুবদি",
+   "en": "Al-Mubdi'"
+  },
+  "meaning": {
+   "bn": "প্রথমবার সৃষ্টিকারী",
+   "en": "The Originator"
+  },
+  "note": {
+   "bn": "যিনি সৃষ্টিকে প্রথমবার অস্তিত্বে এনেছেন; “তিনিই প্রথমবার সৃষ্টি করেন এবং পুনরায় করবেন।”",
+   "en": "He brought creation into being the first time: “It is He who originates and repeats.”"
+  },
+  "ref": {
+   "bn": "সূরা বুরুজ ৮৫:১৩",
+   "en": "Al-Buruj 85:13"
+  }
+ },
+ {
+  "n": 59,
+  "ar": "الْمُعِيدُ",
+  "pron": {
+   "bn": "আল-মুঈদ",
+   "en": "Al-Mu'id"
+  },
+  "meaning": {
+   "bn": "পুনরায় সৃষ্টিকারী",
+   "en": "The Restorer"
+  },
+  "note": {
+   "bn": "যিনি মৃত্যুর পর সৃষ্টিকে আবার জীবিত করবেন।",
+   "en": "He will bring creation back to life after death."
+  },
+  "ref": {
+   "bn": "সূরা বুরুজ ৮৫:১৩",
+   "en": "Al-Buruj 85:13"
+  }
+ },
+ {
+  "n": 60,
+  "ar": "الْمُحْيِي",
+  "pron": {
+   "bn": "আল-মুহয়ী",
+   "en": "Al-Muhyi"
+  },
+  "meaning": {
+   "bn": "জীবনদাতা",
+   "en": "The Giver of Life"
+  },
+  "note": {
+   "bn": "যিনি মৃত মাটিকে জীবিত করেন; “নিশ্চয়ই তিনিই মৃতদের জীবনদাতা।”",
+   "en": "He revives dead land: “Indeed, that same One will give life to the dead.”"
+  },
+  "ref": {
+   "bn": "সূরা রুম ৩০:৫০",
+   "en": "Ar-Rum 30:50"
+  }
+ },
+ {
+  "n": 61,
+  "ar": "الْمُمِيتُ",
+  "pron": {
+   "bn": "আল-মুমীত",
+   "en": "Al-Mumit"
+  },
+  "meaning": {
+   "bn": "মৃত্যুদাতা",
+   "en": "The Bringer of Death"
+  },
+  "note": {
+   "bn": "প্রতিটি প্রাণের মৃত্যু তাঁর নির্ধারিত সময়েই আসে; “তিনিই জীবন দেন ও মৃত্যু দেন।”",
+   "en": "Every soul dies at the time He has set: “He gives life and causes death.”"
+  },
+  "ref": {
+   "bn": "সূরা হাদিদ ৫৭:২",
+   "en": "Al-Hadid 57:2"
+  }
+ },
+ {
+  "n": 62,
+  "ar": "الْحَيُّ",
+  "pron": {
+   "bn": "আল-হাইয়্য",
+   "en": "Al-Hayy"
+  },
+  "meaning": {
+   "bn": "চিরঞ্জীব",
+   "en": "The Ever-Living"
+  },
+  "note": {
+   "bn": "যাঁর জীবনের শুরু ও শেষ নেই; “ভরসা করো সেই চিরঞ্জীবের ওপর, যিনি কখনো মরবেন না।”",
+   "en": "His life has no beginning or end: “Rely upon the Ever-Living who does not die.”"
+  },
+  "ref": {
+   "bn": "সূরা ফুরকান ২৫:৫৮",
+   "en": "Al-Furqan 25:58"
+  }
+ },
+ {
+  "n": 63,
+  "ar": "الْقَيُّومُ",
+  "pron": {
+   "bn": "আল-কাইয়ুম",
+   "en": "Al-Qayyum"
+  },
+  "meaning": {
+   "bn": "চিরস্থায়ী, সবকিছুর ধারক",
+   "en": "The Self-Sustaining"
+  },
+  "note": {
+   "bn": "তিনি কারও মুখাপেক্ষী নন, আর সবকিছু তাঁরই ওপর নির্ভর করে টিকে আছে; আয়াতুল কুরসিতে নামটি আছে।",
+   "en": "He depends on none, while all things depend on Him for their existence; it occurs in Ayat al-Kursi."
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:২৫৫",
+   "en": "Al-Baqarah 2:255"
+  }
+ },
+ {
+  "n": 64,
+  "ar": "الْوَاجِدُ",
+  "pron": {
+   "bn": "আল-ওয়াজিদ",
+   "en": "Al-Wajid"
+  },
+  "meaning": {
+   "bn": "অভাবমুক্ত, যিনি যা চান পান",
+   "en": "The Finder, the Self-Sufficient"
+  },
+  "note": {
+   "bn": "তাঁর কোনো কিছুর অভাব নেই; যা ইচ্ছা করেন তা-ই পান। এই নামটি কুরআনে আসেনি, তিরমিজির তালিকায় আছে।",
+   "en": "He lacks nothing and finds whatever He wills. This name does not occur in the Quran; it is in Tirmidhi's list."
+  }
+ },
+ {
+  "n": 65,
+  "ar": "الْمَاجِدُ",
+  "pron": {
+   "bn": "আল-মাজিদ",
+   "en": "Al-Maajid"
+  },
+  "meaning": {
+   "bn": "মহিমান্বিত, মর্যাদাবান",
+   "en": "The Noble, the Illustrious"
+  },
+  "note": {
+   "bn": "মর্যাদা ও দানশীলতায় পরিপূর্ণ; অর্থে আল-মাজীদের কাছাকাছি। এই রূপটি কুরআনে আসেনি।",
+   "en": "Full of honour and generosity; close in meaning to Al-Majid. This form does not occur in the Quran."
+  }
+ },
+ {
+  "n": 66,
+  "ar": "الْوَاحِدُ",
+  "pron": {
+   "bn": "আল-ওয়াহিদ",
+   "en": "Al-Wahid"
+  },
+  "meaning": {
+   "bn": "এক, একক",
+   "en": "The One"
+  },
+  "note": {
+   "bn": "সত্তা ও গুণে তিনি এক, তাঁর কোনো শরিক নেই; “তিনি এক, মহাপরাক্রান্ত।”",
+   "en": "He is One in Essence and attributes, without partner: “He is the One, the Prevailing.”"
+  },
+  "ref": {
+   "bn": "সূরা রা'দ ১৩:১৬",
+   "en": "Ar-Ra'd 13:16"
+  }
+ },
+ {
+  "n": 67,
+  "ar": "الْأَحَدُ",
+  "pron": {
+   "bn": "আল-আহাদ",
+   "en": "Al-Ahad"
+  },
+  "meaning": {
+   "bn": "অদ্বিতীয়",
+   "en": "The Unique, the Only One"
+  },
+  "note": {
+   "bn": "যাঁর মতো আর কেউ নেই; সূরা ইখলাস শুরু হয় “কুল হুওয়াল্লাহু আহাদ” দিয়ে। তিরমিজির কিছু সংস্করণে এই নামটি নেই।",
+   "en": "There is none like Him; Surah Al-Ikhlas begins “Say: He is Allah, the One.” Some editions of Tirmidhi's list do not include it."
+  },
+  "ref": {
+   "bn": "সূরা ইখলাস ১১২:১",
+   "en": "Al-Ikhlas 112:1"
+  }
+ },
+ {
+  "n": 68,
+  "ar": "الصَّمَدُ",
+  "pron": {
+   "bn": "আস-সামাদ",
+   "en": "As-Samad"
+  },
+  "meaning": {
+   "bn": "অমুখাপেক্ষী, সবার আশ্রয়স্থল",
+   "en": "The Eternal Refuge"
+  },
+  "note": {
+   "bn": "সবাই তাঁর মুখাপেক্ষী, কিন্তু তিনি কারও মুখাপেক্ষী নন।",
+   "en": "All depend on Him, while He depends on none."
+  },
+  "ref": {
+   "bn": "সূরা ইখলাস ১১২:২",
+   "en": "Al-Ikhlas 112:2"
+  }
+ },
+ {
+  "n": 69,
+  "ar": "الْقَادِرُ",
+  "pron": {
+   "bn": "আল-কাদির",
+   "en": "Al-Qadir"
+  },
+  "meaning": {
+   "bn": "সর্বশক্তিমান",
+   "en": "The All-Capable"
+  },
+  "note": {
+   "bn": "যা ইচ্ছা তা করতে তিনি সক্ষম; “বলো, তিনি তোমাদের ওপর শাস্তি পাঠাতে সক্ষম।”",
+   "en": "He is able to do whatever He wills: “Say: He is able to send upon you punishment.”"
+  },
+  "ref": {
+   "bn": "সূরা আনআম ৬:৬৫",
+   "en": "Al-An'am 6:65"
+  }
+ },
+ {
+  "n": 70,
+  "ar": "الْمُقْتَدِرُ",
+  "pron": {
+   "bn": "আল-মুকতাদির",
+   "en": "Al-Muqtadir"
+  },
+  "meaning": {
+   "bn": "পূর্ণ ক্ষমতাবান",
+   "en": "The All-Powerful"
+  },
+  "note": {
+   "bn": "যাঁর ক্ষমতা পরিপূর্ণ; মুত্তাকিরা থাকবে “সর্বশক্তিমান অধিপতির সান্নিধ্যে।”",
+   "en": "His power is complete; the righteous will be “in the presence of a Sovereign, Perfect in Ability.”"
+  },
+  "ref": {
+   "bn": "সূরা কামার ৫৪:৫৫",
+   "en": "Al-Qamar 54:55"
+  }
+ },
+ {
+  "n": 71,
+  "ar": "الْمُقَدِّمُ",
+  "pron": {
+   "bn": "আল-মুকাদ্দিম",
+   "en": "Al-Muqaddim"
+  },
+  "meaning": {
+   "bn": "অগ্রসরকারী",
+   "en": "The Expediter"
+  },
+  "note": {
+   "bn": "যিনি যাকে ইচ্ছা ও যা ইচ্ছা আগে নিয়ে আসেন। রাসুল ﷺ রাতের নামাজের দোয়ায় বলতেন: “আনতাল মুকাদ্দিমু ওয়া আনতাল মুআখখির” (সহিহ বুখারি ও মুসলিম)।",
+   "en": "He brings forward whom and what He wills. The Prophet ﷺ said in his night-prayer dua: “You are the One who brings forward and the One who delays” (Bukhari and Muslim)."
+  },
+  "ref": {
+   "bn": "সূরা কাফ ৫০:২৮",
+   "en": "Qaf 50:28"
+  }
+ },
+ {
+  "n": 72,
+  "ar": "الْمُؤَخِّرُ",
+  "pron": {
+   "bn": "আল-মুআখখির",
+   "en": "Al-Mu'akhkhir"
+  },
+  "meaning": {
+   "bn": "বিলম্বকারী",
+   "en": "The Delayer"
+  },
+  "note": {
+   "bn": "যিনি নিজ প্রজ্ঞায় যা ইচ্ছা পিছিয়ে দেন; তিনি মানুষকে নির্দিষ্ট সময় পর্যন্ত অবকাশ দেন।",
+   "en": "He delays what He wills by His wisdom; He gives people respite until an appointed time."
+  },
+  "ref": {
+   "bn": "সূরা নাহল ১৬:৬১",
+   "en": "An-Nahl 16:61"
+  }
+ },
+ {
+  "n": 73,
+  "ar": "الْأَوَّلُ",
+  "pron": {
+   "bn": "আল-আওয়াল",
+   "en": "Al-Awwal"
+  },
+  "meaning": {
+   "bn": "আদি, সর্বপ্রথম",
+   "en": "The First"
+  },
+  "note": {
+   "bn": "যাঁর আগে কিছুই ছিল না; রাসুল ﷺ এভাবেই নামটি ব্যাখ্যা করেছেন (সহিহ মুসলিম ২৭১৩)।",
+   "en": "There was nothing before Him; this is how the Prophet ﷺ explained it (Sahih Muslim 2713)."
+  },
+  "ref": {
+   "bn": "সূরা হাদিদ ৫৭:৩",
+   "en": "Al-Hadid 57:3"
+  }
+ },
+ {
+  "n": 74,
+  "ar": "الْآخِرُ",
+  "pron": {
+   "bn": "আল-আখির",
+   "en": "Al-Akhir"
+  },
+  "meaning": {
+   "bn": "অন্ত, সর্বশেষ",
+   "en": "The Last"
+  },
+  "note": {
+   "bn": "যাঁর পরে কিছু নেই; সবকিছু শেষ হয়ে যাবে, তিনি থাকবেন।",
+   "en": "There is nothing after Him; all will end and He will remain."
+  },
+  "ref": {
+   "bn": "সূরা হাদিদ ৫৭:৩",
+   "en": "Al-Hadid 57:3"
+  }
+ },
+ {
+  "n": 75,
+  "ar": "الظَّاهِرُ",
+  "pron": {
+   "bn": "আয-যাহির",
+   "en": "Az-Zahir"
+  },
+  "meaning": {
+   "bn": "প্রকাশ্য, সবার ঊর্ধ্বে",
+   "en": "The Manifest"
+  },
+  "note": {
+   "bn": "যাঁর ঊর্ধ্বে কিছু নেই; তাঁর নিদর্শন সবখানে স্পষ্ট।",
+   "en": "There is nothing above Him; His signs are clear everywhere."
+  },
+  "ref": {
+   "bn": "সূরা হাদিদ ৫৭:৩",
+   "en": "Al-Hadid 57:3"
+  }
+ },
+ {
+  "n": 76,
+  "ar": "الْبَاطِنُ",
+  "pron": {
+   "bn": "আল-বাতিন",
+   "en": "Al-Batin"
+  },
+  "meaning": {
+   "bn": "গোপন, অন্তর্নিহিত",
+   "en": "The Hidden"
+  },
+  "note": {
+   "bn": "যাঁর চেয়ে নিকটে কিছু নেই, অথচ চোখ তাঁকে দেখতে পায় না।",
+   "en": "Nothing is nearer than Him, yet eyes cannot perceive Him."
+  },
+  "ref": {
+   "bn": "সূরা হাদিদ ৫৭:৩",
+   "en": "Al-Hadid 57:3"
+  }
+ },
+ {
+  "n": 77,
+  "ar": "الْوَالِي",
+  "pron": {
+   "bn": "আল-ওয়ালী",
+   "en": "Al-Wali"
+  },
+  "meaning": {
+   "bn": "সবকিছুর পরিচালক",
+   "en": "The Governor"
+  },
+  "note": {
+   "bn": "যিনি সবকিছুর কাজ পরিচালনা করেন; “তিনি ছাড়া তাদের আর কোনো অভিভাবক নেই।”",
+   "en": "He manages the affairs of all things: “There is not for them besides Him any patron.”"
+  },
+  "ref": {
+   "bn": "সূরা রা'দ ১৩:১১",
+   "en": "Ar-Ra'd 13:11"
+  }
+ },
+ {
+  "n": 78,
+  "ar": "الْمُتَعَالِي",
+  "pron": {
+   "bn": "আল-মুতাআলী",
+   "en": "Al-Muta'ali"
+  },
+  "meaning": {
+   "bn": "সর্বোচ্চ মহিমান্বিত",
+   "en": "The Most Exalted"
+  },
+  "note": {
+   "bn": "সব সৃষ্টির ঊর্ধ্বে এবং সব অপূর্ণতা থেকে বহু ঊর্ধ্বে; “তিনি মহান, সর্বোচ্চ।”",
+   "en": "Above all creation and far above every imperfection: “the Grand, the Exalted.”"
+  },
+  "ref": {
+   "bn": "সূরা রা'দ ১৩:৯",
+   "en": "Ar-Ra'd 13:9"
+  }
+ },
+ {
+  "n": 79,
+  "ar": "الْبَرُّ",
+  "pron": {
+   "bn": "আল-বার্র",
+   "en": "Al-Barr"
+  },
+  "meaning": {
+   "bn": "পরম কল্যাণকারী",
+   "en": "The Source of Goodness"
+  },
+  "note": {
+   "bn": "যিনি বান্দাদের প্রতি অশেষ সদয়; “নিশ্চয়ই তিনি কল্যাণময়, পরম দয়ালু।”",
+   "en": "He is endlessly good to His servants: “Indeed, it is He who is the Beneficent, the Merciful.”"
+  },
+  "ref": {
+   "bn": "সূরা তূর ৫২:২৮",
+   "en": "At-Tur 52:28"
+  }
+ },
+ {
+  "n": 80,
+  "ar": "التَّوَّابُ",
+  "pron": {
+   "bn": "আত-তাওয়াব",
+   "en": "At-Tawwab"
+  },
+  "meaning": {
+   "bn": "তওবা কবুলকারী",
+   "en": "The Accepter of Repentance"
+  },
+  "note": {
+   "bn": "যিনি বারবার তওবা কবুল করেন; আদম (আ.)-এর তওবাও তিনি কবুল করেছিলেন।",
+   "en": "He accepts repentance again and again; He accepted the repentance of Adam (AS)."
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:৩৭",
+   "en": "Al-Baqarah 2:37"
+  }
+ },
+ {
+  "n": 81,
+  "ar": "الْمُنْتَقِمُ",
+  "pron": {
+   "bn": "আল-মুনতাকিম",
+   "en": "Al-Muntaqim"
+  },
+  "meaning": {
+   "bn": "প্রতিশোধ গ্রহণকারী",
+   "en": "The Avenger"
+  },
+  "note": {
+   "bn": "যিনি অবাধ্য অপরাধীদের ন্যায্য শাস্তি দেন; কুরআনে আছে: “আমি অপরাধীদের থেকে প্রতিশোধ নেব।”",
+   "en": "He justly punishes persistent criminals: “Indeed, We will take retribution from the criminals.”"
+  },
+  "ref": {
+   "bn": "সূরা সাজদা ৩২:২২",
+   "en": "As-Sajdah 32:22"
+  }
+ },
+ {
+  "n": 82,
+  "ar": "الْعَفُوُّ",
+  "pron": {
+   "bn": "আল-আফুউ",
+   "en": "Al-'Afuww"
+  },
+  "meaning": {
+   "bn": "মার্জনাকারী",
+   "en": "The Pardoner"
+  },
+  "note": {
+   "bn": "যিনি গুনাহ এমনভাবে মুছে দেন যেন চিহ্নও না থাকে; লাইলাতুল কদরের দোয়ায় এই নাম আছে (সুনান তিরমিজি ৩৫১৩)।",
+   "en": "He erases sins as if they never were; this name is in the dua for Laylat al-Qadr (Jami' at-Tirmidhi 3513)."
+  },
+  "ref": {
+   "bn": "সূরা নিসা ৪:৪৩",
+   "en": "An-Nisa 4:43"
+  }
+ },
+ {
+  "n": 83,
+  "ar": "الرَّءُوفُ",
+  "pron": {
+   "bn": "আর-রাউফ",
+   "en": "Ar-Ra'uf"
+  },
+  "meaning": {
+   "bn": "অতি স্নেহশীল",
+   "en": "The Most Kind"
+  },
+  "note": {
+   "bn": "যাঁর দয়া অত্যন্ত কোমল ও গভীর; “নিশ্চয়ই আল্লাহ মানুষের প্রতি অতি স্নেহশীল, পরম দয়ালু।”",
+   "en": "His mercy is most tender: “Indeed, Allah is, to the people, Kind and Merciful.”"
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:১৪৩",
+   "en": "Al-Baqarah 2:143"
+  }
+ },
+ {
+  "n": 84,
+  "ar": "مَالِكُ الْمُلْكِ",
+  "pron": {
+   "bn": "মালিকুল মুলক",
+   "en": "Malik al-Mulk"
+  },
+  "meaning": {
+   "bn": "সার্বভৌম ক্ষমতার মালিক",
+   "en": "Owner of All Sovereignty"
+  },
+  "note": {
+   "bn": "তিনি যাকে ইচ্ছা রাজত্ব দেন, যার থেকে ইচ্ছা কেড়ে নেন; “বলো, হে আল্লাহ, রাজত্বের মালিক।”",
+   "en": "He gives kingship to whom He wills and takes it from whom He wills: “Say: O Allah, Owner of Sovereignty.”"
+  },
+  "ref": {
+   "bn": "সূরা আলে ইমরান ৩:২৬",
+   "en": "Al 'Imran 3:26"
+  }
+ },
+ {
+  "n": 85,
+  "ar": "ذُو الْجَلَالِ وَالْإِكْرَامِ",
+  "pron": {
+   "bn": "যুল-জালালি ওয়াল-ইকরাম",
+   "en": "Dhul-Jalali wal-Ikram"
+  },
+  "meaning": {
+   "bn": "মহিমা ও সম্মানের অধিকারী",
+   "en": "Lord of Majesty and Honour"
+  },
+  "note": {
+   "bn": "সব সৃষ্টি ধ্বংস হবে, কেবল মহিমা ও সম্মানের অধিকারী রবের চেহারা বাকি থাকবে।",
+   "en": "All creation will perish, and only the Face of your Lord, Owner of Majesty and Honour, will remain."
+  },
+  "ref": {
+   "bn": "সূরা আর-রহমান ৫৫:২৭",
+   "en": "Ar-Rahman 55:27"
+  }
+ },
+ {
+  "n": 86,
+  "ar": "الْمُقْسِطُ",
+  "pron": {
+   "bn": "আল-মুকসিত",
+   "en": "Al-Muqsit"
+  },
+  "meaning": {
+   "bn": "ন্যায়বিচারক",
+   "en": "The Equitable"
+  },
+  "note": {
+   "bn": "যিনি পূর্ণ ন্যায়ের সঙ্গে বিচার করেন; আল্লাহ নিজেই সাক্ষ্য দিয়েছেন যে তিনি ন্যায়ের সঙ্গে প্রতিষ্ঠিত।",
+   "en": "He judges with perfect fairness; Allah Himself bears witness that He maintains justice."
+  },
+  "ref": {
+   "bn": "সূরা আলে ইমরান ৩:১৮",
+   "en": "Al 'Imran 3:18"
+  }
+ },
+ {
+  "n": 87,
+  "ar": "الْجَامِعُ",
+  "pron": {
+   "bn": "আল-জামি",
+   "en": "Al-Jami'"
+  },
+  "meaning": {
+   "bn": "একত্রকারী",
+   "en": "The Gatherer"
+  },
+  "note": {
+   "bn": "যিনি কিয়ামতের দিন সব মানুষকে একত্র করবেন; “হে আমাদের রব, আপনি মানুষকে এমন দিনে একত্র করবেন যাতে কোনো সন্দেহ নেই।”",
+   "en": "He will gather all people on the Last Day: “Our Lord, You will gather the people for a Day about which there is no doubt.”"
+  },
+  "ref": {
+   "bn": "সূরা আলে ইমরান ৩:৯",
+   "en": "Al 'Imran 3:9"
+  }
+ },
+ {
+  "n": 88,
+  "ar": "الْغَنِيُّ",
+  "pron": {
+   "bn": "আল-গানিয়্য",
+   "en": "Al-Ghaniyy"
+  },
+  "meaning": {
+   "bn": "অভাবমুক্ত",
+   "en": "The Self-Sufficient"
+  },
+  "note": {
+   "bn": "তিনি কারও মুখাপেক্ষী নন, আর সবাই তাঁর মুখাপেক্ষী; “আল্লাহ অভাবমুক্ত, আর তোমরা অভাবী।”",
+   "en": "He needs no one, while all need Him: “Allah is the Free of need, and you are the needy.”"
+  },
+  "ref": {
+   "bn": "সূরা মুহাম্মাদ ৪৭:৩৮",
+   "en": "Muhammad 47:38"
+  }
+ },
+ {
+  "n": 89,
+  "ar": "الْمُغْنِي",
+  "pron": {
+   "bn": "আল-মুগনী",
+   "en": "Al-Mughni"
+  },
+  "meaning": {
+   "bn": "অভাব মোচনকারী",
+   "en": "The Enricher"
+  },
+  "note": {
+   "bn": "যিনি বান্দাকে অভাবমুক্ত ও সচ্ছল করেন; “তিনিই ধনী করেন ও সম্পদ দান করেন।”",
+   "en": "He frees His servants from need: “It is He who enriches and suffices.”"
+  },
+  "ref": {
+   "bn": "সূরা নাজম ৫৩:৪৮",
+   "en": "An-Najm 53:48"
+  }
+ },
+ {
+  "n": 90,
+  "ar": "الْمَانِعُ",
+  "pron": {
+   "bn": "আল-মানি",
+   "en": "Al-Mani'"
+  },
+  "meaning": {
+   "bn": "প্রতিরোধকারী",
+   "en": "The Preventer"
+  },
+  "note": {
+   "bn": "তিনি যা আটকে রাখেন কেউ তা দিতে পারে না; নামাজের পর দোয়ায় আছে: “আপনি যা আটকান তা দেওয়ার কেউ নেই” (সহিহ বুখারি ৮৪৪)। এই নামটি কুরআনে আসেনি।",
+   "en": "None can give what He withholds; after prayer we say “none can give what You withhold” (Sahih al-Bukhari 844). This name does not occur in the Quran."
+  }
+ },
+ {
+  "n": 91,
+  "ar": "الضَّارُّ",
+  "pron": {
+   "bn": "আদ-দার্র",
+   "en": "Ad-Darr"
+  },
+  "meaning": {
+   "bn": "ক্ষতির মালিক",
+   "en": "The Distresser"
+  },
+  "note": {
+   "bn": "ক্ষতি ও কষ্টও তাঁর অনুমতি ছাড়া আসে না, তাই তা দূর করতে কেবল তাঁর কাছেই চাইতে হয়; আন-নাফির সঙ্গে মিলিয়ে বলা উত্তম।",
+   "en": "No harm comes except by His permission, so only He can remove it; best mentioned together with An-Nafi'."
+  },
+  "ref": {
+   "bn": "সূরা ইউনুস ১০:১০৭",
+   "en": "Yunus 10:107"
+  }
+ },
+ {
+  "n": 92,
+  "ar": "النَّافِعُ",
+  "pron": {
+   "bn": "আন-নাফি",
+   "en": "An-Nafi'"
+  },
+  "meaning": {
+   "bn": "কল্যাণদাতা",
+   "en": "The Benefactor"
+  },
+  "note": {
+   "bn": "সব উপকার ও কল্যাণ তাঁর পক্ষ থেকেই আসে; তিনি উপকার করতে চাইলে কেউ বাধা দিতে পারে না।",
+   "en": "All benefit comes from Him; if He intends benefit, none can prevent it."
+  },
+  "ref": {
+   "bn": "সূরা ফাতহ ৪৮:১১",
+   "en": "Al-Fath 48:11"
+  }
+ },
+ {
+  "n": 93,
+  "ar": "النُّورُ",
+  "pron": {
+   "bn": "আন-নূর",
+   "en": "An-Nur"
+  },
+  "meaning": {
+   "bn": "জ্যোতি",
+   "en": "The Light"
+  },
+  "note": {
+   "bn": "“আল্লাহ আসমান ও জমিনের নূর”; তিনিই হেদায়াতের আলো দান করেন।",
+   "en": "“Allah is the Light of the heavens and the earth”; He grants the light of guidance."
+  },
+  "ref": {
+   "bn": "সূরা নূর ২৪:৩৫",
+   "en": "An-Nur 24:35"
+  }
+ },
+ {
+  "n": 94,
+  "ar": "الْهَادِي",
+  "pron": {
+   "bn": "আল-হাদী",
+   "en": "Al-Hadi"
+  },
+  "meaning": {
+   "bn": "পথপ্রদর্শক",
+   "en": "The Guide"
+  },
+  "note": {
+   "bn": "যিনি সঠিক পথ দেখান; “পথপ্রদর্শক ও সাহায্যকারী হিসেবে তোমার রবই যথেষ্ট।”",
+   "en": "He guides to the right path: “Sufficient is your Lord as a Guide and a Helper.”"
+  },
+  "ref": {
+   "bn": "সূরা ফুরকান ২৫:৩১",
+   "en": "Al-Furqan 25:31"
+  }
+ },
+ {
+  "n": 95,
+  "ar": "الْبَدِيعُ",
+  "pron": {
+   "bn": "আল-বাদী",
+   "en": "Al-Badi'"
+  },
+  "meaning": {
+   "bn": "অভিনব স্রষ্টা",
+   "en": "The Incomparable Originator"
+  },
+  "note": {
+   "bn": "যিনি কোনো পূর্ব নমুনা ছাড়াই আসমান-জমিন সৃষ্টি করেছেন।",
+   "en": "He created the heavens and the earth with no prior model."
+  },
+  "ref": {
+   "bn": "সূরা বাকারা ২:১১৭",
+   "en": "Al-Baqarah 2:117"
+  }
+ },
+ {
+  "n": 96,
+  "ar": "الْبَاقِي",
+  "pron": {
+   "bn": "আল-বাকী",
+   "en": "Al-Baqi"
+  },
+  "meaning": {
+   "bn": "চিরস্থায়ী",
+   "en": "The Everlasting"
+  },
+  "note": {
+   "bn": "সবকিছু ধ্বংস হবে, কেবল তিনিই বাকি থাকবেন; “আর বাকি থাকবে তোমার রবের চেহারা।”",
+   "en": "Everything will perish and He alone will remain: “And there will remain the Face of your Lord.”"
+  },
+  "ref": {
+   "bn": "সূরা আর-রহমান ৫৫:২৭",
+   "en": "Ar-Rahman 55:27"
+  }
+ },
+ {
+  "n": 97,
+  "ar": "الْوَارِثُ",
+  "pron": {
+   "bn": "আল-ওয়ারিস",
+   "en": "Al-Warith"
+  },
+  "meaning": {
+   "bn": "উত্তরাধিকারী",
+   "en": "The Inheritor"
+  },
+  "note": {
+   "bn": "সবকিছু শেষ হলে সবকিছুর মালিকানা তাঁরই থাকবে; “আর আমিই চূড়ান্ত উত্তরাধিকারী।”",
+   "en": "When all passes away, everything remains His: “And We are the Inheritor.”"
+  },
+  "ref": {
+   "bn": "সূরা হিজর ১৫:২৩",
+   "en": "Al-Hijr 15:23"
+  }
+ },
+ {
+  "n": 98,
+  "ar": "الرَّشِيدُ",
+  "pron": {
+   "bn": "আর-রাশীদ",
+   "en": "Ar-Rashid"
+  },
+  "meaning": {
+   "bn": "সঠিক পথে পরিচালনাকারী",
+   "en": "The Guide to the Right Path"
+  },
+  "note": {
+   "bn": "যাঁর সব কাজ সঠিক ও কল্যাণকর এবং যিনি বান্দাকে সঠিক পথে চালান। এই নামটি এই রূপে কুরআনে আসেনি।",
+   "en": "All His actions are right and good, and He directs His servants aright. This name does not occur in the Quran in this form."
+  }
+ },
+ {
+  "n": 99,
+  "ar": "الصَّبُورُ",
+  "pron": {
+   "bn": "আস-সাবুর",
+   "en": "As-Sabur"
+  },
+  "meaning": {
+   "bn": "পরম ধৈর্যশীল",
+   "en": "The Most Patient"
+  },
+  "note": {
+   "bn": "বান্দাদের অবাধ্যতা দেখেও তিনি তাড়াহুড়া করে শাস্তি দেন না। সহিহ হাদিসে আছে, কষ্টদায়ক কথা শুনে আল্লাহর চেয়ে বেশি ধৈর্যশীল কেউ নেই (সহিহ বুখারি)।",
+   "en": "He does not hasten to punish despite His servants' disobedience. A sahih hadith says no one is more patient with hurtful words than Allah (Sahih al-Bukhari)."
+  }
+ }
+]

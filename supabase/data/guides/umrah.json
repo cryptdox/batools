@@ -1,0 +1,960 @@
+{
+  "topic": "umrah",
+  "guides": [
+    {
+      "slug": "umrah-basics",
+      "title": {
+        "bn": "উমরাহ: হুকুম, ফজিলত ও এক নজরে",
+        "en": "Umrah: ruling, virtues and overview"
+      },
+      "summary": {
+        "bn": "উমরাহ কী, এর হুকুম ও ফজিলত, আর পুরো উমরাহ এক নজরে।",
+        "en": "What umrah is, its ruling and virtues, and the whole umrah at a glance."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "উমরাহ মানে নির্দিষ্ট নিয়মে বায়তুল্লাহর জিয়ারত: ইহরাম, তাওয়াফ, সাফা-মারওয়ার সাঈ এবং মাথা মুণ্ডন বা চুল ছোট করা। হজের মতো নির্দিষ্ট দিন নেই; বছরের যেকোনো সময় করা যায় (হানাফি মতে ৯ থেকে ১৩ জিলহজ উমরাহ করা মাকরুহ)।",
+            "en": "Umrah is visiting the House of Allah in a set way: ihram, tawaf, sa'i between Safa and Marwah, and shaving or shortening the hair. Unlike hajj it has no fixed days and may be done any time of the year (Hanafis dislike umrah on 9–13 Dhul Hijjah)."
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "وَأَتِمُّوا الْحَجَّ وَالْعُمْرَةَ لِلَّهِ",
+          "pron": {
+            "bn": "ওয়া আতিম্মুল হাজ্জা ওয়াল উমরাতা লিল্লাহ",
+            "en": "Wa atimmul-hajja wal-'umrata lillah"
+          },
+          "meaning": {
+            "bn": "আর আল্লাহর জন্য হজ ও উমরাহ পূর্ণ করো।",
+            "en": "And complete the hajj and umrah for Allah."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৯৬",
+            "en": "Al-Baqarah 2:196"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "উমরাহর হুকুম",
+            "en": "Ruling on umrah"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি ও মালেকি",
+                "en": "Hanafi and Maliki"
+              },
+              "text": {
+                "bn": "জীবনে একবার উমরাহ করা সুন্নতে মুয়াক্কাদা (জোরালো সুন্নত), ফরজ নয়।",
+                "en": "Performing umrah once in a lifetime is an emphasised sunnah, not obligatory."
+              },
+              "evidence": {
+                "bn": "জাবির (রা.)-এর হাদিস: উমরাহ ওয়াজিব কি না জিজ্ঞেস করা হলে নবী (সা.) বললেন, না, তবে উমরাহ করা উত্তম (তিরমিজি)। আয়াতে 'পূর্ণ করো' বলা হয়েছে শুরু করার পর, শুরু করা আবশ্যক এমন নয়।",
+                "en": "Hadith of Jabir: asked whether umrah is obligatory, the Prophet said no, but doing it is better (Tirmidhi). The verse says 'complete' once begun, not that beginning is required."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও হাম্বলি",
+                "en": "Shafi'i and Hanbali"
+              },
+              "text": {
+                "bn": "সামর্থ্যবানের ওপর জীবনে একবার উমরাহ করা ওয়াজিব (ফরজের মতো আবশ্যক)।",
+                "en": "Umrah is obligatory once in a lifetime for those able."
+              },
+              "evidence": {
+                "bn": "আয়াতে হজের সাথে উমরাহকেও একই নির্দেশে রাখা হয়েছে; আয়েশা (রা.)-এর হাদিস: নারীদের জিহাদ হলো হজ ও উমরাহ (ইবনে মাজাহ)।",
+                "en": "The verse joins umrah with hajj in one command; Aishah's hadith: the jihad of women is hajj and umrah (Ibn Majah)."
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ফজিলত",
+            "en": "Virtues"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "এক উমরাহ থেকে আরেক উমরাহ, এর মাঝের গুনাহের কাফফারা।",
+              "en": "One umrah to the next is an expiation for what is between them."
+            },
+            {
+              "bn": "রমজানে উমরাহ একটি হজের সমান সওয়াব (তবে এটি ফরজ হজের বদলে যথেষ্ট নয়)।",
+              "en": "An umrah in Ramadan equals a hajj in reward (though it does not replace the obligatory hajj)."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৭৭৩; সহিহ বুখারি ১৭৮২; সহিহ মুসলিম ১২৫৬",
+            "en": "Sahih al-Bukhari 1773; Sahih al-Bukhari 1782; Sahih Muslim 1256"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "উমরাহ এক নজরে",
+            "en": "Umrah at a glance"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "ধাপ",
+              "en": "Step"
+            },
+            {
+              "bn": "কাজ",
+              "en": "What to do"
+            },
+            {
+              "bn": "হানাফি মতে হুকুম",
+              "en": "Hanafi ruling"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "১",
+                "en": "1"
+              },
+              {
+                "bn": "মিকাতে বা আগে ইহরাম: নিয়ত ও তালবিয়া",
+                "en": "Ihram at or before the miqat: intention and talbiyah"
+              },
+              {
+                "bn": "শর্ত (ফরজ)",
+                "en": "Condition (farz)"
+              }
+            ],
+            [
+              {
+                "bn": "২",
+                "en": "2"
+              },
+              {
+                "bn": "মসজিদুল হারামে প্রবেশ ও কাবার তাওয়াফ, সাত চক্কর",
+                "en": "Enter Al-Masjid al-Haram and circle the Ka'bah seven times"
+              },
+              {
+                "bn": "রুকন (ফরজ)",
+                "en": "Pillar (farz)"
+              }
+            ],
+            [
+              {
+                "bn": "৩",
+                "en": "3"
+              },
+              {
+                "bn": "মাকামে ইবরাহিমের পেছনে দুই রাকাত নামাজ",
+                "en": "Two rakats behind Maqam Ibrahim"
+              },
+              {
+                "bn": "ওয়াজিব",
+                "en": "Wajib"
+              }
+            ],
+            [
+              {
+                "bn": "৪",
+                "en": "4"
+              },
+              {
+                "bn": "জমজমের পানি পান",
+                "en": "Drink Zamzam"
+              },
+              {
+                "bn": "সুন্নত/মুস্তাহাব",
+                "en": "Sunnah"
+              }
+            ],
+            [
+              {
+                "bn": "৫",
+                "en": "5"
+              },
+              {
+                "bn": "সাফা থেকে মারওয়া, সাত চক্কর সাঈ",
+                "en": "Sa'i: seven laps from Safa to Marwah"
+              },
+              {
+                "bn": "ওয়াজিব (অন্য তিন মাজহাবে রুকন)",
+                "en": "Wajib (a pillar in the other three schools)"
+              }
+            ],
+            [
+              {
+                "bn": "৬",
+                "en": "6"
+              },
+              {
+                "bn": "মাথা মুণ্ডন বা চুল ছোট করা",
+                "en": "Shave or shorten the hair"
+              },
+              {
+                "bn": "ওয়াজিব",
+                "en": "Wajib"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "ইহরাম, নিষিদ্ধ কাজ ও মিকাতের বিস্তারিত হজ বিভাগের 'ইহরাম' ও 'মিকাত' গাইডে আছে; উমরাহতেও একই বিধান।",
+            "en": "Details of ihram, its prohibitions and the miqat are in the hajj section's ihram and miqat guides; the same rules apply to umrah."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "umrah-ihram-to-masjid",
+      "title": {
+        "bn": "উমরাহ: ইহরাম থেকে মসজিদুল হারাম",
+        "en": "Umrah: from ihram to Al-Masjid al-Haram"
+      },
+      "summary": {
+        "bn": "ইহরামের প্রস্তুতি, নিয়ত, তালবিয়া, মক্কায় প্রবেশ এবং মসজিদুল হারামে প্রবেশের আদব।",
+        "en": "Preparing ihram, the intention, the talbiyah, entering Makkah and entering Al-Masjid al-Haram."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "step",
+          "title": {
+            "bn": "প্রস্তুতি",
+            "en": "Preparation"
+          },
+          "text": {
+            "bn": "নখ কাটা, অবাঞ্ছিত লোম পরিষ্কার, গোসল (না পারলে ওজু)। পুরুষ শরীরে সুগন্ধি লাগাতে পারেন, ইহরামের কাপড়ে নয়।",
+            "en": "Trim nails, remove unwanted hair, take a ghusl (or wudu). Men may perfume the body, not the ihram sheets."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "পোশাক",
+            "en": "Clothing"
+          },
+          "text": {
+            "bn": "পুরুষ: সেলাইবিহীন দুটি সাদা চাদর ও খোলা স্যান্ডেল, মাথা খোলা। নারী: সাধারণ শালীন পোশাক, নিকাব ও হাতমোজা ছাড়া।",
+            "en": "Men: two unstitched white sheets and open sandals, head uncovered. Women: ordinary modest clothes, without niqab or gloves."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দুই রাকাত (সুন্নত)",
+            "en": "Two rakats (sunnah)"
+          },
+          "text": {
+            "bn": "মাকরুহ সময় না হলে ইহরামের আগে দুই রাকাত নামাজ পড়ুন (হানাফি মত); অন্যদের মতে কোনো ফরজ নামাজের পরে ইহরাম বাঁধা উত্তম।",
+            "en": "If not a disliked time, pray two rakats before ihram (Hanafi view); others prefer entering ihram after an obligatory prayer."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "নিয়ত",
+            "en": "Intention"
+          },
+          "text": {
+            "bn": "মিকাতে পৌঁছানোর আগে মনে মনে উমরাহর নিয়ত করুন। এটি মনের ইচ্ছা; মুখে বলা জরুরি নয়।",
+            "en": "Before reaching the miqat, intend umrah in your heart. It is an intention of the heart; saying it is not required."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "মুখে বলার একটি উদাহরণ (জরুরি নয়)",
+            "en": "An example to say aloud (not required)"
+          },
+          "ar": "لَبَّيْكَ عُمْرَةً",
+          "pron": {
+            "bn": "লাব্বাইকা উমরাতান",
+            "en": "Labbayka 'umratan"
+          },
+          "meaning": {
+            "bn": "আমি উমরাহর জন্য হাজির।",
+            "en": "Here I am for umrah."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "আরেকটি প্রচলিত উদাহরণ: 'হে আল্লাহ! আমি উমরাহর নিয়ত করছি, তুমি তা আমার জন্য সহজ করো এবং কবুল করো।' এটি কোনো হাদিসের নির্দিষ্ট বাক্য নয়; নিজের ভাষায় মনে মনে নিয়তই যথেষ্ট।",
+            "en": "Another common example: 'O Allah, I intend umrah; make it easy for me and accept it from me.' This is not fixed wording from a hadith; the intention in your heart, in any language, is enough."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তালবিয়া",
+            "en": "Talbiyah"
+          },
+          "text": {
+            "bn": "নিয়তের পর তালবিয়া পড়লেই ইহরাম শুরু। এরপর ইহরামের সব নিষেধ মেনে চলবেন এবং তাওয়াফ শুরু পর্যন্ত বেশি বেশি তালবিয়া পড়বেন (পুরুষ উচ্চস্বরে, নারী নিচু স্বরে)।",
+            "en": "With the talbiyah after the intention, ihram begins. From then on observe all ihram prohibitions and repeat the talbiyah often until starting tawaf (men aloud, women quietly)."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "তালবিয়া",
+            "en": "Talbiyah"
+          },
+          "ar": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ",
+          "pron": {
+            "bn": "লাব্বাইকা আল্লাহুম্মা লাব্বাইক, লাব্বাইকা লা শারীকা লাকা লাব্বাইক, ইন্নাল হামদা ওয়ান নি'মাতা লাকা ওয়াল মুলক, লা শারীকা লাক",
+            "en": "Labbayka Allahumma labbayk, labbayka la sharika laka labbayk, innal-hamda wan-ni'mata laka wal-mulk, la sharika lak"
+          },
+          "meaning": {
+            "bn": "আমি হাজির, হে আল্লাহ! আমি হাজির। আমি হাজির, তোমার কোনো শরিক নেই, আমি হাজির। নিশ্চয়ই সব প্রশংসা, সব নিয়ামত তোমারই, আর রাজত্বও তোমার; তোমার কোনো শরিক নেই।",
+            "en": "Here I am, O Allah, here I am. Here I am, You have no partner, here I am. Surely all praise and blessings are Yours, and the dominion; You have no partner."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি ১৫৪৯; সহিহ মুসলিম ১১৮৪",
+            "en": "Sahih al-Bukhari 1549; Sahih Muslim 1184"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মক্কায় প্রবেশ",
+            "en": "Entering Makkah"
+          },
+          "text": {
+            "bn": "সম্ভব হলে মক্কায় প্রবেশের আগে গোসল করা সুন্নত। হোটেলে মালপত্র রেখে, বিশ্রাম নিয়ে, ওজু করে মসজিদুল হারামে যান।",
+            "en": "If possible, take a ghusl before entering Makkah (sunnah). Leave your bags at the hotel, rest, make wudu and go to Al-Masjid al-Haram."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মসজিদে প্রবেশ",
+            "en": "Entering the masjid"
+          },
+          "text": {
+            "bn": "ডান পা দিয়ে প্রবেশ করে মসজিদে প্রবেশের দোয়া পড়ুন।",
+            "en": "Enter with the right foot and say the dua for entering the masjid."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "মসজিদে প্রবেশের দোয়া",
+            "en": "Dua on entering the masjid"
+          },
+          "ar": "بِسْمِ اللَّهِ، وَالصَّلَاةُ وَالسَّلَامُ عَلَىٰ رَسُولِ اللَّهِ، اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+          "pron": {
+            "bn": "বিসমিল্লাহি, ওয়াস সালাতু ওয়াস সালামু আলা রাসূলিল্লাহ, আল্লাহুম্মাফতাহ লী আবওয়াবা রাহমাতিক",
+            "en": "Bismillahi, was-salatu was-salamu 'ala rasulillah, Allahummaftah li abwaba rahmatik"
+          },
+          "meaning": {
+            "bn": "আল্লাহর নামে; আল্লাহর রাসুলের ওপর দরুদ ও সালাম। হে আল্লাহ! আমার জন্য তোমার রহমতের দরজাগুলো খুলে দাও।",
+            "en": "In the name of Allah, and blessings and peace on the Messenger of Allah. O Allah, open for me the doors of Your mercy."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ৭১৩",
+            "en": "Sahih Muslim 713"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "সহিহ মুসলিমে মূল অংশ 'আল্লাহুম্মাফতাহ লী আবওয়াবা রাহমাতিক'; শুরুতে বিসমিল্লাহ ও দরুদ অন্য হাদিসগ্রন্থের বর্ণনায় এসেছে।",
+            "en": "Sahih Muslim has the core 'Allahummaftah li abwaba rahmatik'; the Bismillah and salawat at the start come in other hadith collections."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "কাবা প্রথম দেখার সময় নির্দিষ্ট কোনো সহিহ দোয়া প্রমাণিত নেই; এ সম্পর্কে প্রচলিত বর্ণনাগুলো দুর্বল। মন থেকে যেকোনো দোয়া করুন।",
+            "en": "No specific authentic dua is established for first seeing the Ka'bah; the popular reports are weak. Make any dua from the heart."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "umrah-tawaf",
+      "title": {
+        "bn": "উমরাহ: তাওয়াফ, দুই রাকাত ও জমজম",
+        "en": "Umrah: tawaf, two rakats and Zamzam"
+      },
+      "summary": {
+        "bn": "হাজরে আসওয়াদ থেকে সাত চক্কর তাওয়াফ, রুকনে ইয়ামানি ও হাজরে আসওয়াদের মাঝের দোয়া, মাকামে ইবরাহিমে নামাজ ও জমজম।",
+        "en": "Seven rounds of tawaf from the Black Stone, the dua between the Yemeni corner and the Black Stone, prayer at Maqam Ibrahim and Zamzam."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "step",
+          "title": {
+            "bn": "ওজু ও প্রস্তুতি",
+            "en": "Wudu and preparation"
+          },
+          "text": {
+            "bn": "ওজু অবস্থায় তাওয়াফ করবেন। পুরুষরা চাদরের মাঝখান ডান বগলের নিচ দিয়ে এনে বাম কাঁধে রাখবেন, ডান কাঁধ খোলা থাকবে (ইজতিবা) — শুধু এই তাওয়াফের সময়।",
+            "en": "Perform tawaf in wudu. Men pass the middle of the upper sheet under the right arm and over the left shoulder, leaving the right shoulder bare (idtiba') — only during this tawaf."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "তাওয়াফে ওজুর হুকুম",
+            "en": "Wudu for tawaf"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "ওজু ওয়াজিব; ওজু ছাড়া তাওয়াফ করলে তাওয়াফ হয়ে যায়, তবে দম বা সদকা দিতে হয় (অথবা ওজু করে আবার তাওয়াফ করলে মাফ)।",
+                "en": "Wudu is wajib; a tawaf without wudu counts, but a dam or charity is due (or it is waived by repeating the tawaf with wudu)."
+              },
+              "evidence": {
+                "bn": "কুরআনে শুধু তাওয়াফের নির্দেশ এসেছে; পবিত্রতা হাদিস থেকে প্রমাণিত, তাই ওয়াজিব স্তরে।",
+                "en": "The Quran commands tawaf alone; purity is established by hadith, hence wajib."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "ওজু তাওয়াফের শর্ত; ওজু ছাড়া তাওয়াফ সহিহ হবে না।",
+                "en": "Wudu is a condition; tawaf without it is not valid."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'বায়তুল্লাহর তাওয়াফ নামাজের মতো, তবে এতে কথা বলা বৈধ' (তিরমিজি); নবী (সা.) তাওয়াফের আগে ওজু করেছেন।",
+                "en": "Hadith: 'Tawaf around the House is like prayer, except that speaking is allowed' (Tirmidhi); the Prophet made wudu before tawaf."
+              }
+            }
+          ]
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "হাজরে আসওয়াদ থেকে শুরু",
+            "en": "Start at the Black Stone"
+          },
+          "text": {
+            "bn": "হাজরে আসওয়াদ বরাবর (সবুজ বাতির দাগ) দাঁড়িয়ে কাবার দিকে মুখ করুন। সম্ভব হলে পাথরটি চুম্বন করুন, না হলে হাত দিয়ে স্পর্শ করে হাতে চুমু দিন, তাও না পারলে দূর থেকে ডান হাত তুলে ইশারা করুন (ইশারা করা হাতে চুমু খাবেন না) এবং বলুন:",
+            "en": "Stand in line with the Black Stone (marked by a green light) facing the Ka'bah. Kiss the stone if possible; if not, touch it with your hand and kiss the hand; if not, raise your right hand towards it from a distance (do not kiss the hand after pointing) and say:"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "হাজরে আসওয়াদের সামনে",
+            "en": "At the Black Stone"
+          },
+          "ar": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ",
+          "pron": {
+            "bn": "বিসমিল্লাহি ওয়াল্লাহু আকবার",
+            "en": "Bismillahi wallahu akbar"
+          },
+          "meaning": {
+            "bn": "আল্লাহর নামে, আল্লাহ সবচেয়ে মহান।",
+            "en": "In the name of Allah, and Allah is the Greatest."
+          },
+          "ref": {
+            "bn": "সহিহ বুখারি (তাকবির); বিসমিল্লাহ অংশ ইবনে উমর রা.-এর আমল",
+            "en": "Sahih al-Bukhari (the takbir); the Bismillah is from Ibn Umar's practice"
+          },
+          "check": true
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "সাত চক্কর",
+            "en": "Seven rounds"
+          },
+          "text": {
+            "bn": "কাবাকে বাম দিকে রেখে ঘুরতে থাকুন। হাতিমের (অর্ধবৃত্তাকার দেয়াল) বাইরে দিয়ে ঘুরবেন, কারণ এটি কাবার অংশ। প্রতিবার হাজরে আসওয়াদ বরাবর এলে এক চক্কর পূর্ণ হয়; প্রতিবার ইশারা করে 'আল্লাহু আকবার' বলুন।",
+            "en": "Walk with the Ka'bah on your left, outside the Hatim (the semicircular wall), since it is part of the Ka'bah. Each time you reach the Black Stone line one round is complete; point to it and say 'Allahu akbar' each time."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "রমল (পুরুষ)",
+            "en": "Ramal (men)"
+          },
+          "text": {
+            "bn": "প্রথম তিন চক্করে পুরুষরা কাঁধ দুলিয়ে ছোট ছোট কদমে একটু দ্রুত হাঁটবেন; বাকি চার চক্কর স্বাভাবিকভাবে। ভিড়ে সম্ভব না হলে ছেড়ে দিন।",
+            "en": "In the first three rounds men walk briskly with short steps, moving the shoulders; the remaining four at a normal pace. Skip it if the crowd makes it impossible."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "রুকনে ইয়ামানি",
+            "en": "The Yemeni corner"
+          },
+          "text": {
+            "bn": "হাজরে আসওয়াদের আগের কোণ রুকনে ইয়ামানি। সহজে সম্ভব হলে ডান হাতে স্পর্শ করুন, চুম্বন করবেন না; ভিড়ে স্পর্শ করা না গেলে ইশারাও করতে হবে না।",
+            "en": "The corner before the Black Stone is the Yemeni corner. Touch it with your right hand if easy, without kissing; if the crowd prevents it, no gesture is needed."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "রুকনে ইয়ামানি ও হাজরে আসওয়াদের মাঝে",
+            "en": "Between the Yemeni corner and the Black Stone"
+          },
+          "ar": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+          "pron": {
+            "bn": "রাব্বানা আতিনা ফিদ দুনইয়া হাসানাতাও ওয়া ফিল আখিরাতি হাসানাতাও ওয়া কিনা আযাবান নার",
+            "en": "Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar"
+          },
+          "meaning": {
+            "bn": "হে আমাদের রব! আমাদের দুনিয়াতে কল্যাণ দাও, আখিরাতেও কল্যাণ দাও এবং আমাদের জাহান্নামের আজাব থেকে রক্ষা করো।",
+            "en": "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire."
+          },
+          "ref": {
+            "bn": "সুনান আবু দাউদ ১৮৯২; সূরা বাকারা ২:২০১",
+            "en": "Sunan Abi Dawud 1892; Al-Baqarah 2:201"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "এই অংশ ছাড়া তাওয়াফের জন্য নির্দিষ্ট কোনো দোয়া নেই। বইয়ে 'প্রথম চক্করের দোয়া, দ্বিতীয় চক্করের দোয়া' যা দেখা যায়, তা হাদিসে নেই। নিজের ভাষায় দোয়া, জিকির, ইস্তিগফার বা কুরআন তিলাওয়াত করুন।",
+            "en": "Apart from this part, tawaf has no set duas. The 'dua of the first round, second round' found in booklets is not from the hadith. Make dua in your own language, do dhikr, seek forgiveness or recite Quran."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তাওয়াফ শেষ",
+            "en": "Finishing tawaf"
+          },
+          "text": {
+            "bn": "সপ্তম চক্কর শেষে হাজরে আসওয়াদ বরাবর এসে তাওয়াফ শেষ। এবার ডান কাঁধ ঢেকে নিন।",
+            "en": "Tawaf ends on reaching the Black Stone line after the seventh round. Now cover the right shoulder."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মাকামে ইবরাহিমে দুই রাকাত",
+            "en": "Two rakats at Maqam Ibrahim"
+          },
+          "text": {
+            "bn": "সম্ভব হলে মাকামে ইবরাহিমকে নিজের ও কাবার মাঝে রেখে দুই রাকাত নামাজ পড়ুন; ভিড় থাকলে মসজিদের যেকোনো স্থানে। প্রথম রাকাতে সূরা কাফিরুন, দ্বিতীয় রাকাতে সূরা ইখলাস পড়া সুন্নত। মাকরুহ সময় হলে পরে পড়বেন।",
+            "en": "If possible pray two rakats with Maqam Ibrahim between you and the Ka'bah; in crowds, anywhere in the masjid. Reciting Al-Kafirun in the first and Al-Ikhlas in the second is sunnah. If it is a disliked time, pray later."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "মাকামে ইবরাহিমের দিকে যাওয়ার সময়",
+            "en": "When going to Maqam Ibrahim"
+          },
+          "ar": "وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى",
+          "pron": {
+            "bn": "ওয়াত্তাখিযূ মিম মাকামি ইবরাহীমা মুসাল্লা",
+            "en": "Wattakhidhu mim maqami ibrahima musalla"
+          },
+          "meaning": {
+            "bn": "আর তোমরা মাকামে ইবরাহিমকে নামাজের স্থান বানাও।",
+            "en": "And take the station of Ibrahim as a place of prayer."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১২৫",
+            "en": "Al-Baqarah 2:125"
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১২১৮",
+            "en": "Sahih Muslim 1218"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "জমজম",
+            "en": "Zamzam"
+          },
+          "text": {
+            "bn": "এরপর জমজমের পানি তৃপ্তি সহকারে পান করুন এবং যা চান তার জন্য দোয়া করুন। নবী (সা.) জমজম দাঁড়িয়ে পান করেছেন; বসে পান করাও জায়েজ।",
+            "en": "Then drink Zamzam to your fill and make dua for whatever you wish. The Prophet drank Zamzam standing; sitting is also fine."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান ইবনে মাজাহ ('জমজমের পানি যে উদ্দেশ্যে পান করা হয়, তার জন্যই')",
+            "en": "Sunan Ibn Majah ('The water of Zamzam is for whatever it is drunk for')"
+          },
+          "check": true
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "আবার হাজরে আসওয়াদ (সুন্নত)",
+            "en": "Back to the Black Stone (sunnah)"
+          },
+          "text": {
+            "bn": "সম্ভব হলে সাঈতে যাওয়ার আগে আবার হাজরে আসওয়াদ স্পর্শ বা ইশারা করুন; ভিড়ে এটি ছেড়ে দেওয়া যায়।",
+            "en": "If possible, touch or point to the Black Stone again before going to sa'i; it may be left in crowds."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "umrah-sai-halq",
+      "title": {
+        "bn": "উমরাহ: সাঈ ও মাথা মুণ্ডন",
+        "en": "Umrah: sa'i and shaving the head"
+      },
+      "summary": {
+        "bn": "সাফা থেকে মারওয়া সাত চক্কর সাঈ, সাফার দোয়া, তারপর মাথা মুণ্ডন বা চুল ছোট করে উমরাহ শেষ।",
+        "en": "Seven laps of sa'i from Safa to Marwah, the dua at Safa, then shaving or shortening to complete umrah."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "step",
+          "title": {
+            "bn": "সাফায় যাওয়া",
+            "en": "Go to Safa"
+          },
+          "text": {
+            "bn": "সাফা পাহাড়ের কাছে এসে (শুধু প্রথমবার) নিচের আয়াতাংশ পড়ুন, তারপর বলুন 'আবদাউ বিমা বাদাআল্লাহু বিহি' — আল্লাহ যা দিয়ে শুরু করেছেন, আমিও তা দিয়ে শুরু করছি।",
+            "en": "Approaching Safa (the first time only), recite the verse below, then say 'Abda'u bima bada'allahu bih' — I begin with what Allah began with."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "সাফার কাছে (প্রথমবার)",
+            "en": "Near Safa (first time)"
+          },
+          "ar": "إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ ۖ أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ",
+          "pron": {
+            "bn": "ইন্নাস সাফা ওয়াল মারওয়াতা মিন শাআইরিল্লাহ। আবদাউ বিমা বাদাআল্লাহু বিহি",
+            "en": "Innas-safa wal-marwata min sha'a'irillah. Abda'u bima bada'allahu bih"
+          },
+          "meaning": {
+            "bn": "নিশ্চয়ই সাফা ও মারওয়া আল্লাহর নিদর্শনগুলোর অন্তর্ভুক্ত। আল্লাহ যা দিয়ে শুরু করেছেন, আমিও তা দিয়ে শুরু করছি।",
+            "en": "Indeed Safa and Marwah are among the symbols of Allah. I begin with what Allah began with."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৫৮; সহিহ মুসলিম ১২১৮",
+            "en": "Al-Baqarah 2:158; Sahih Muslim 1218"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "সাফায় দোয়া",
+            "en": "Dua at Safa"
+          },
+          "text": {
+            "bn": "সাফায় উঠে কাবার দিকে মুখ করুন, দুই হাত দোয়ার মতো তুলুন (নামাজের তাকবিরের মতো কান পর্যন্ত নয়), তিনবার 'আল্লাহু আকবার' বলে নিচের জিকির পড়ুন, তারপর নিজের ভাষায় দোয়া করুন। এভাবে তিনবার জিকির ও দোয়া করা সুন্নত।",
+            "en": "Climb Safa, face the Ka'bah, raise your hands as in dua (not to the ears as in prayer), say 'Allahu akbar' three times and the dhikr below, then make your own dua. Doing the dhikr and dua three times is sunnah."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "সাফা ও মারওয়ার জিকির",
+            "en": "Dhikr at Safa and Marwah"
+          },
+          "ar": "اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ. لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ",
+          "pron": {
+            "bn": "আল্লাহু আকবার, আল্লাহু আকবার, আল্লাহু আকবার। লা ইলাহা ইল্লাল্লাহু ওয়াহদাহু লা শারীকা লাহু, লাহুল মুলকু ওয়া লাহুল হামদু, ওয়া হুয়া আলা কুল্লি শাইয়িন কাদীর। লা ইলাহা ইল্লাল্লাহু ওয়াহদাহু, আনজাযা ওয়া'দাহু, ওয়া নাসারা আবদাহু, ওয়া হাযামাল আহযাবা ওয়াহদাহু",
+            "en": "Allahu akbar, Allahu akbar, Allahu akbar. La ilaha illallahu wahdahu la sharika lah, lahul-mulku wa lahul-hamd, wa huwa 'ala kulli shay'in qadir. La ilaha illallahu wahdah, anjaza wa'dah, wa nasara 'abdah, wa hazamal-ahzaba wahdah"
+          },
+          "meaning": {
+            "bn": "আল্লাহ সবচেয়ে মহান (তিনবার)। আল্লাহ ছাড়া কোনো ইলাহ নেই, তিনি এক, তাঁর কোনো শরিক নেই; রাজত্ব ও প্রশংসা তাঁরই, তিনি সবকিছুর ওপর ক্ষমতাবান। আল্লাহ ছাড়া কোনো ইলাহ নেই, তিনি এক; তিনি তাঁর ওয়াদা পূর্ণ করেছেন, তাঁর বান্দাকে সাহায্য করেছেন এবং একাই শত্রুদলগুলোকে পরাজিত করেছেন।",
+            "en": "Allah is the Greatest (three times). There is no god but Allah alone, without partner; His is the dominion and the praise, and He has power over all things. There is no god but Allah alone; He fulfilled His promise, helped His servant and alone defeated the confederates."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ১২১৮",
+            "en": "Sahih Muslim 1218"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মারওয়ার দিকে",
+            "en": "Towards Marwah"
+          },
+          "text": {
+            "bn": "সাফা থেকে নেমে মারওয়ার দিকে হাঁটুন। দুই সবুজ বাতির মাঝখানে পুরুষরা মাঝারি গতিতে দৌড়াবেন; নারীরা স্বাভাবিকভাবে হাঁটবেন। পথে যেকোনো দোয়া-জিকির করুন।",
+            "en": "Come down from Safa and walk towards Marwah. Between the two green lights men jog at a moderate pace; women walk normally. Make any dua and dhikr on the way."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "সাঈর পথে (সাহাবিদের থেকে বর্ণিত)",
+            "en": "During sa'i (reported from Companions)"
+          },
+          "ar": "رَبِّ اغْفِرْ وَارْحَمْ، إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ",
+          "pron": {
+            "bn": "রাব্বিগফির ওয়ারহাম, ইন্নাকা আনতাল আআযযুল আকরাম",
+            "en": "Rabbighfir warham, innaka antal-a'azzul-akram"
+          },
+          "meaning": {
+            "bn": "হে আমার রব! ক্ষমা করো ও দয়া করো; নিশ্চয়ই তুমি সর্বাধিক পরাক্রমশালী, সর্বাধিক সম্মানিত।",
+            "en": "My Lord, forgive and have mercy; You are the Most Mighty, the Most Generous."
+          },
+          "ref": {
+            "bn": "ইবনে মাসউদ ও ইবনে উমর রা. থেকে মাওকুফ বর্ণনা (মুসান্নাফ ইবনে আবি শাইবা)",
+            "en": "Mawquf report from Ibn Mas'ud and Ibn Umar (Musannaf Ibn Abi Shaybah)"
+          },
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "এটি নবী (সা.)-এর হাদিস নয়, সাহাবিদের আমল হিসেবে বর্ণিত; পড়া যায়, তবে জরুরি নয়।",
+            "en": "This is reported as the practice of Companions, not a hadith of the Prophet; it may be said but is not required."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মারওয়ায়",
+            "en": "At Marwah"
+          },
+          "text": {
+            "bn": "মারওয়ায় উঠে কাবার দিকে মুখ করে সাফার মতোই জিকির ও দোয়া করুন। সাফা থেকে মারওয়া এক চক্কর, মারওয়া থেকে সাফা আরেক চক্কর।",
+            "en": "At Marwah face the Ka'bah and do the same dhikr and dua as at Safa. Safa to Marwah is one lap, Marwah to Safa another."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "সাত চক্কর",
+            "en": "Seven laps"
+          },
+          "text": {
+            "bn": "এভাবে সাত চক্কর পূর্ণ করুন; সপ্তম চক্কর মারওয়ায় শেষ হবে। ক্লান্ত হলে বিশ্রাম নেওয়া যায়; প্রয়োজনে হুইলচেয়ার ব্যবহার করা যায়।",
+            "en": "Complete seven laps this way; the seventh ends at Marwah. You may rest if tired, and use a wheelchair if needed."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "সাঈর জন্য ওজু শর্ত নয়, তবে ওজু থাকা উত্তম। তাওয়াফের পর হায়েজ শুরু হলে নারী সাঈ করতে পারবেন, কারণ সাঈর স্থান মসজিদের মূল অংশের বাইরে বলে গণ্য।",
+            "en": "Wudu is not a condition for sa'i, though better. If a woman's period starts after tawaf she may still do sa'i, as the sa'i area is counted outside the masjid proper."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মাথা মুণ্ডন বা চুল ছোট করা",
+            "en": "Shave or shorten the hair"
+          },
+          "text": {
+            "bn": "সাঈ শেষে পুরুষরা পুরো মাথা মুণ্ডন করবেন (উত্তম) বা পুরো মাথার চুল ছোট করবেন। নারীরা চুলের আগা থেকে আঙুলের এক কর পরিমাণ কাটবেন। হজের নিকটবর্তী সময়ে তামাত্তুর উমরাহ হলে পুরুষের জন্য চুল ছোট করে হজের মুণ্ডনের জন্য চুল রেখে দেওয়া ভালো।",
+            "en": "After sa'i men shave the whole head (better) or shorten hair from the whole head. Women cut a fingertip's length from the ends. For a tamattu' umrah close to hajj, men may prefer to shorten, keeping hair to shave at hajj."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৭২৭; সহিহ মুসলিম ১৩০১",
+            "en": "Sahih al-Bukhari 1727; Sahih Muslim 1301"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "নবী (সা.) মাথা মুণ্ডনকারীদের জন্য তিনবার এবং চুল ছোট করা ব্যক্তিদের জন্য একবার রহমতের দোয়া করেছেন। মুণ্ডন বা চুল ছোট করার মাধ্যমে উমরাহ পূর্ণ হয় এবং ইহরামের সব নিষেধ উঠে যায়।",
+            "en": "The Prophet prayed for mercy for those who shave three times and for those who shorten once. With shaving or shortening the umrah is complete and all ihram restrictions end."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "মসজিদ থেকে বের হওয়ার দোয়া (বাম পা দিয়ে)",
+            "en": "Dua on leaving the masjid (left foot first)"
+          },
+          "ar": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+          "pron": {
+            "bn": "আল্লাহুম্মা ইন্নী আসআলুকা মিন ফাদলিক",
+            "en": "Allahumma inni as'aluka min fadlik"
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ! আমি তোমার অনুগ্রহ প্রার্থনা করি।",
+            "en": "O Allah, I ask You of Your bounty."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ৭১৩",
+            "en": "Sahih Muslim 713"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "umrah-checklist",
+      "title": {
+        "bn": "উমরাহর চেকলিস্ট",
+        "en": "Umrah checklist"
+      },
+      "summary": {
+        "bn": "যাত্রার আগে কী নেবেন, কী শিখবেন, আর উমরাহর ধাপগুলো মিলিয়ে নেওয়ার তালিকা।",
+        "en": "What to pack and learn before travelling, and a list to tick off the steps of umrah."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যাত্রার আগে",
+            "en": "Before travelling"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "পাসপোর্ট, ভিসা, টিকিট, হোটেল ও এজেন্সির কাগজ, টিকার সনদ (প্রযোজ্য হলে); সবকিছুর কপি ও ফোনে ছবি",
+              "en": "Passport, visa, tickets, hotel and agency papers, vaccination certificate (if required); copies and photos on your phone"
+            },
+            {
+              "bn": "নিয়ত খাঁটি করা, তওবা, ঋণ ও মানুষের হক মিটিয়ে নেওয়া, পরিবারের কাছ থেকে বিদায় ও ক্ষমা চাওয়া",
+              "en": "Purify the intention, repent, settle debts and others' rights, say farewell and seek forgiveness from family"
+            },
+            {
+              "bn": "উমরাহর নিয়ম, তালবিয়া ও প্রয়োজনীয় দোয়াগুলো আগে থেকে শিখে নেওয়া",
+              "en": "Learn the rites, the talbiyah and key duas beforehand"
+            },
+            {
+              "bn": "হালাল অর্থে খরচের ব্যবস্থা",
+              "en": "Make sure the money is lawful"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "সঙ্গে নেবেন",
+            "en": "What to pack"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "পুরুষ: দুই সেট ইহরামের চাদর, ইহরামের বেল্ট/টাকার থলে, পায়ের পাতার মাঝখান খোলা স্যান্ডেল",
+              "en": "Men: two sets of ihram sheets, an ihram belt/money pouch, sandals that leave the middle of the foot exposed"
+            },
+            {
+              "bn": "নারী: ঢিলেঢালা শালীন পোশাক, হিজাব, আরামদায়ক জুতা ও মোজা",
+              "en": "Women: loose modest clothes, hijab, comfortable shoes and socks"
+            },
+            {
+              "bn": "সুগন্ধিহীন সাবান, শ্যাম্পু, টুথপেস্ট ও লোশন",
+              "en": "Unscented soap, shampoo, toothpaste and lotion"
+            },
+            {
+              "bn": "নিয়মিত ওষুধ ও প্রেসক্রিপশন, ব্যথানাশক, ফোস্কার প্লাস্টার",
+              "en": "Regular medicines and prescriptions, painkillers, blister plasters"
+            },
+            {
+              "bn": "জুতা রাখার ছোট ব্যাগ, পানির বোতল, ছাতা, পাওয়ার ব্যাংক",
+              "en": "Small shoe bag, water bottle, umbrella, power bank"
+            },
+            {
+              "bn": "ছোট দোয়ার বই বা এই অ্যাপ (অফলাইনে চলে এমনভাবে)",
+              "en": "A small dua book or this app (available offline)"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "উমরাহর ধাপ মিলিয়ে নিন",
+            "en": "Tick off the steps"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "গোসল/ওজু, ইহরামের পোশাক, (সম্ভব হলে) দুই রাকাত",
+              "en": "Ghusl/wudu, ihram clothing, (if possible) two rakats"
+            },
+            {
+              "bn": "মিকাতের আগে নিয়ত ও তালবিয়া",
+              "en": "Intention and talbiyah before the miqat"
+            },
+            {
+              "bn": "ইহরামের নিষেধগুলো মেনে চলা",
+              "en": "Observe the prohibitions of ihram"
+            },
+            {
+              "bn": "ডান পা দিয়ে মসজিদুল হারামে প্রবেশ ও দোয়া",
+              "en": "Enter Al-Masjid al-Haram with the right foot and the dua"
+            },
+            {
+              "bn": "ওজুসহ সাত চক্কর তাওয়াফ, হাজরে আসওয়াদ থেকে শুরু ও শেষ (পুরুষ: ইজতিবা ও প্রথম তিন চক্করে রমল)",
+              "en": "Seven rounds of tawaf in wudu, starting and ending at the Black Stone (men: idtiba' and ramal in the first three)"
+            },
+            {
+              "bn": "রুকনে ইয়ামানি ও হাজরে আসওয়াদের মাঝে 'রাব্বানা আতিনা'",
+              "en": "'Rabbana atina' between the Yemeni corner and the Black Stone"
+            },
+            {
+              "bn": "কাঁধ ঢেকে মাকামে ইবরাহিমের পেছনে বা মসজিদের যেকোনো স্থানে দুই রাকাত",
+              "en": "Cover the shoulder and pray two rakats behind Maqam Ibrahim or anywhere in the masjid"
+            },
+            {
+              "bn": "জমজম পান ও দোয়া",
+              "en": "Drink Zamzam and make dua"
+            },
+            {
+              "bn": "সাফা থেকে শুরু করে মারওয়ায় শেষ, সাত চক্কর সাঈ",
+              "en": "Seven laps of sa'i, starting at Safa and ending at Marwah"
+            },
+            {
+              "bn": "মাথা মুণ্ডন বা চুল ছোট করা — উমরাহ সম্পন্ন",
+              "en": "Shave or shorten the hair — umrah complete"
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "উমরাহর পরে মক্কায় যত দিন থাকবেন, মসজিদুল হারামে জামাতে নামাজ ও নফল তাওয়াফে সময় দিন। মক্কা ছাড়ার আগে বিদায়ী তাওয়াফ শুধু উমরাহকারীর জন্য হানাফিসহ অনেক আলেমের মতে ওয়াজিব নয় (শাফেয়ি মতে মক্কা ত্যাগকারী সবার জন্য ওয়াজিব); তবে করে নেওয়াই উত্তম।",
+            "en": "While you remain in Makkah after umrah, spend time in congregational prayer and voluntary tawaf at Al-Masjid al-Haram. For someone who came only for umrah, a farewell tawaf is not obligatory for Hanafis and many others (Shafi'is make it obligatory for anyone leaving Makkah); doing it is best."
+          }
+        }
+      ]
+    }
+  ]
+}

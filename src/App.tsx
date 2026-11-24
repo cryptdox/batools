@@ -73,6 +73,7 @@ import { IsQuiz } from './pages/IslamicStudio/IsQuiz';
 import { IsAcademy } from './pages/IslamicStudio/IsAcademy';
 import { IsMedia } from './pages/IslamicStudio/IsMedia';
 import { IsBooks } from './pages/IslamicStudio/IsBooks';
+import { IsGuides } from './pages/IslamicStudio/IsGuides';
 import { IsBlog } from './pages/IslamicStudio/IsBlog';
 import { IsTracker, IsZakat } from './pages/IslamicStudio/IsZakatTracker';
 import { IsScores } from './pages/IslamicStudio/IsScores';
@@ -263,6 +264,7 @@ function AuthGate() {
         <Route path="/is/academy" element={<IsAcademy />} />
         <Route path="/is/media" element={<IsMedia />} />
         <Route path="/is/books" element={<IsBooks />} />
+        <Route path="/is/guides" element={<IsGuides />} />
         <Route path="/is/blog" element={<IsBlog />} />
         <Route path="/is/zakat" element={<IsZakat />} />
         <Route path="/is/tracker" element={<IsTracker />} />

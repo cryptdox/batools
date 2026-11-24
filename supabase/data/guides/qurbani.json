@@ -1,0 +1,1402 @@
+{
+  "topic": "qurbani",
+  "guides": [
+    {
+      "slug": "qurbani-ruling",
+      "title": {
+        "bn": "কুরবানি: হুকুম ও কার ওপর",
+        "en": "Qurbani: ruling and who must offer it"
+      },
+      "summary": {
+        "bn": "কুরবানির গুরুত্ব, এটি ওয়াজিব না সুন্নত — মাজহাবগুলোর মত, এবং কার ওপর আবশ্যক।",
+        "en": "The importance of qurbani, whether it is wajib or sunnah in the different schools, and on whom it is due."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "فَصَلِّ لِرَبِّكَ وَانْحَرْ",
+          "pron": {
+            "bn": "ফাসাল্লি লিরাব্বিকা ওয়ানহার",
+            "en": "Fasalli lirabbika wanhar"
+          },
+          "meaning": {
+            "bn": "অতএব তোমার রবের উদ্দেশে নামাজ পড়ো এবং কুরবানি করো।",
+            "en": "So pray to your Lord and sacrifice."
+          },
+          "ref": {
+            "bn": "সূরা কাওসার ১০৮:২",
+            "en": "Al-Kawthar 108:2"
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "لَنْ يَنَالَ اللَّهَ لُحُومُهَا وَلَا دِمَاؤُهَا وَلَٰكِنْ يَنَالُهُ التَّقْوَىٰ مِنْكُمْ",
+          "pron": {
+            "bn": "লাই ইয়ানালাল্লাহা লুহূমুহা ওয়ালা দিমাউহা ওয়ালাকিই ইয়ানালুহুত তাকওয়া মিনকুম",
+            "en": "Lay yanalallaha luhumuha wa la dima'uha wa lakiy yanaluhut-taqwa minkum"
+          },
+          "meaning": {
+            "bn": "আল্লাহর কাছে এগুলোর গোশত বা রক্ত পৌঁছায় না, বরং তাঁর কাছে পৌঁছায় তোমাদের তাকওয়া।",
+            "en": "Neither their meat nor their blood reaches Allah; what reaches Him is your piety."
+          },
+          "ref": {
+            "bn": "সূরা হজ ২২:৩৭",
+            "en": "Al-Hajj 22:37"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "কুরবানি হলো ঈদুল আজহার দিনগুলোতে আল্লাহর সন্তুষ্টির জন্য নির্দিষ্ট পশু জবাই করা। এটি ইবরাহিম (আ.)-এর সুন্নত এবং নবী (সা.) মদিনায় প্রতি বছর কুরবানি করেছেন। উদ্দেশ্য গোশত খাওয়া নয়, বরং আল্লাহর জন্য ত্যাগ ও তাকওয়া।",
+            "en": "Qurbani is slaughtering specified animals on the days of Eid al-Adha for the pleasure of Allah. It is the sunnah of Ibrahim, and the Prophet offered it every year in Madinah. Its purpose is not the meat but sacrifice and piety for Allah."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "কুরবানি ওয়াজিব না সুন্নত",
+            "en": "Is qurbani wajib or sunnah"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "কুরবানির দিনগুলোতে নিসাব পরিমাণ সম্পদের মালিক প্রত্যেক প্রাপ্তবয়স্ক, সুস্থ মস্তিষ্কের, মুকিম (মুসাফির নয়) মুসলিমের ওপর কুরবানি ওয়াজিব।",
+                "en": "Qurbani is wajib on every adult, sane, resident (not travelling) Muslim who owns the nisab during the days of sacrifice."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'যার সামর্থ্য আছে অথচ কুরবানি করে না, সে যেন আমাদের ঈদগাহের কাছে না আসে' (ইবনে মাজাহ); এবং 'ফাসাল্লি লিরাব্বিকা ওয়ানহার' আয়াতের নির্দেশ।",
+                "en": "Hadith: 'Whoever can afford it and does not sacrifice, let him not come near our place of prayer' (Ibn Majah); and the command in the verse 'so pray to your Lord and sacrifice'."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "সামর্থ্যবানের জন্য সুন্নতে মুয়াক্কাদা (জোরালো সুন্নত); সামর্থ্য থাকা সত্ত্বেও ছেড়ে দেওয়া মাকরুহ।",
+                "en": "An emphasised sunnah for those able; leaving it while able is disliked."
+              },
+              "evidence": {
+                "bn": "উম্মে সালামা (রা.)-এর হাদিস: 'তোমাদের কেউ কুরবানি করতে চাইলে...' — 'চাইলে' শব্দ ইচ্ছাধীনতার ইঙ্গিত দেয় (মুসলিম); আবু বকর (রা.) ও উমর (রা.) কখনো কখনো কুরবানি করতেন না, যাতে মানুষ একে ওয়াজিব না ভাবে।",
+                "en": "Umm Salamah's hadith: 'If one of you wants to sacrifice...' — 'wants' implies choice (Muslim); Abu Bakr and Umar sometimes did not sacrifice so people would not think it obligatory."
+              }
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান ইবনে মাজাহ ৩১২৩; সহিহ মুসলিম ১৯৭৭",
+            "en": "Sunan Ibn Majah 3123; Sahih Muslim 1977"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "হানাফি মতে কার ওপর ওয়াজিব",
+            "en": "On whom it is wajib (Hanafi)"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "মুসলিম, প্রাপ্তবয়স্ক ও সুস্থ মস্তিষ্কের",
+              "en": "Muslim, adult and sane"
+            },
+            {
+              "bn": "মুকিম; শরিয়তসম্মত মুসাফিরের ওপর ওয়াজিব নয়",
+              "en": "Resident; not obligatory on a Shariah traveller"
+            },
+            {
+              "bn": "১০ জিলহজ সুবহে সাদিক থেকে ১২ জিলহজ সূর্যাস্তের মধ্যে যেকোনো সময় মৌলিক প্রয়োজন ও ঋণের অতিরিক্ত নিসাব পরিমাণ সম্পদের মালিক (সদকাতুল ফিতরের নিসাবের মতো; বছর পূর্ণ হওয়া শর্ত নয়)",
+              "en": "Owning, at any time between dawn on 10 and sunset on 12 Dhul Hijjah, the nisab beyond basic needs and debts (as for sadaqatul fitr; a full year is not required)"
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "নিসাবের হিসাবে যাকাতের মতো শুধু নগদ-সোনা-রূপা নয়, মৌলিক প্রয়োজনের অতিরিক্ত যেকোনো সম্পদ (অব্যবহৃত জমি, অতিরিক্ত বাড়ি, অপ্রয়োজনীয় জিনিস) হানাফি মতে যোগ হয়।",
+            "en": "For this nisab, Hanafis count not only cash, gold and silver but any wealth beyond basic needs (unused land, an extra house, surplus goods)."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "পরিবারের প্রত্যেক সদস্য, যিনি নিজে নিসাবের মালিক (যেমন গয়নার মালিক স্ত্রী বা উপার্জনক্ষম সন্তান), হানাফি মতে তার ওপর আলাদা কুরবানি ওয়াজিব। মৃত ব্যক্তির পক্ষ থেকে নফল কুরবানি করা যায়।",
+            "en": "In the Hanafi view every family member who personally owns the nisab (e.g. a wife who owns jewellery, or an earning child) has a separate qurbani due. A voluntary qurbani may be offered on behalf of the deceased."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "qurbani-animals",
+      "title": {
+        "bn": "কুরবানির পশু: বয়স, ভাগ ও দোষত্রুটি",
+        "en": "Qurbani animals: age, shares and defects"
+      },
+      "summary": {
+        "bn": "কোন পশু, কত বয়সে, কয়জন শরিক হতে পারে, আর কোন দোষ থাকলে কুরবানি হবে না।",
+        "en": "Which animals, at what age, how many may share, and which defects disqualify an animal."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "কুরবানির পশু হতে হবে গৃহপালিত চতুষ্পদ পশুর (আনআম) মধ্য থেকে: উট, গরু, মহিষ, ছাগল, ভেড়া ও দুম্বা। নর-মাদি দুটোই চলবে। হরিণ, মুরগি বা অন্য প্রাণী দিয়ে কুরবানি হয় না।",
+            "en": "The animal must be from the livestock (an'am): camels, cattle, buffalo, goats, sheep and rams. Male or female are both fine. Deer, chickens or other animals do not count."
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "পশু",
+              "en": "Animal"
+            },
+            {
+              "bn": "ন্যূনতম বয়স (হানাফি)",
+              "en": "Minimum age (Hanafi)"
+            },
+            {
+              "bn": "কতজন শরিক",
+              "en": "Shares"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "ছাগল",
+                "en": "Goat"
+              },
+              {
+                "bn": "পূর্ণ ১ বছর",
+                "en": "Full 1 year"
+              },
+              {
+                "bn": "১ জন",
+                "en": "1 person"
+              }
+            ],
+            [
+              {
+                "bn": "ভেড়া, দুম্বা",
+                "en": "Sheep, ram"
+              },
+              {
+                "bn": "পূর্ণ ১ বছর; তবে ৬ মাস পার হয়ে এত হৃষ্টপুষ্ট যে এক বছরের মতো দেখায়, তাহলেও চলবে",
+                "en": "Full 1 year; or over 6 months if so well-grown it looks a year old"
+              },
+              {
+                "bn": "১ জন",
+                "en": "1 person"
+              }
+            ],
+            [
+              {
+                "bn": "গরু, মহিষ",
+                "en": "Cow, buffalo"
+              },
+              {
+                "bn": "পূর্ণ ২ বছর",
+                "en": "Full 2 years"
+              },
+              {
+                "bn": "সর্বোচ্চ ৭ জন",
+                "en": "Up to 7 people"
+              }
+            ],
+            [
+              {
+                "bn": "উট",
+                "en": "Camel"
+              },
+              {
+                "bn": "পূর্ণ ৫ বছর",
+                "en": "Full 5 years"
+              },
+              {
+                "bn": "সর্বোচ্চ ৭ জন",
+                "en": "Up to 7 people"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১৯৬৩; সহিহ মুসলিম ১৩১৮",
+            "en": "Sahih Muslim 1963; Sahih Muslim 1318"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "অন্য মাজহাবে বয়সে সামান্য পার্থক্য আছে (যেমন শাফেয়ি মতে ছাগলের বয়স পূর্ণ ২ বছর)। বয়স নিশ্চিত হতে দাঁত দেখা বা বিক্রেতার নির্ভরযোগ্য তথ্য নিন; বয়স কম হলে কুরবানি হবে না।",
+            "en": "Other schools differ slightly on ages (e.g. Shafi'is require a goat of a full 2 years). Check the teeth or rely on trustworthy information from the seller; an underage animal does not count."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "গরু-উটে ভাগে কুরবানি",
+            "en": "Sharing a cow or camel"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "গরু, মহিষ বা উটে সর্বোচ্চ সাতজন শরিক হতে পারেন; সাতের কম (২, ৩, ৫ জন) হলেও চলবে।",
+              "en": "Up to seven may share a cow, buffalo or camel; fewer (2, 3, 5) is also fine."
+            },
+            {
+              "bn": "কারও ভাগ সাত ভাগের এক ভাগের কম হতে পারবে না।",
+              "en": "No one's share may be less than one seventh."
+            },
+            {
+              "bn": "প্রত্যেক শরিকের নিয়ত আল্লাহর সন্তুষ্টি (কুরবানি বা আকিকা) হতে হবে। হানাফি মতে কোনো একজন শুধু গোশত খাওয়ার নিয়তে শরিক হলে কারও কুরবানি সহিহ হবে না।",
+              "en": "Every partner's intention must be for Allah (qurbani or aqiqah). In the Hanafi view, if even one joins only for meat, no one's qurbani is valid."
+            },
+            {
+              "bn": "সব শরিকের টাকা হালাল হওয়া জরুরি; গোশত ওজন করে সমান ভাগ করবেন, অনুমানে নয়।",
+              "en": "All partners' money must be lawful; divide the meat equally by weight, not by guess."
+            }
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "একটি ছাগল কি পুরো পরিবারের পক্ষ থেকে যথেষ্ট",
+            "en": "Does one goat suffice for a whole household"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "একটি ছাগল বা ভেড়া কেবল একজনের ওয়াজিব কুরবানি আদায় করে। পরিবারের যার যার ওপর কুরবানি ওয়াজিব, প্রত্যেককে আলাদা কুরবানি দিতে হবে; তবে সওয়াবে অন্যদের শরিক করা যায়।",
+                "en": "One goat or sheep discharges the wajib qurbani of one person only. Each family member on whom it is wajib must offer separately, though others may be included in the reward."
+              },
+              "evidence": {
+                "bn": "কুরবানি প্রত্যেক সামর্থ্যবানের ব্যক্তিগত দায়িত্ব; নবী (সা.) কর্তৃক পরিবারের পক্ষ থেকে কুরবানি সওয়াবে শরিক করার অর্থে।",
+                "en": "Qurbani is a personal duty of each person able; the Prophet's sacrifice for his family is understood as sharing the reward."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "একজন ব্যক্তি নিজের ও পুরো পরিবারের পক্ষ থেকে একটি ছাগল কুরবানি করলে সবার পক্ষ থেকে সুন্নত আদায় হয়ে যায়।",
+                "en": "A man sacrificing one goat for himself and his household fulfils the sunnah for all of them."
+              },
+              "evidence": {
+                "bn": "আবু আইয়ুব (রা.): নবী (সা.)-এর যুগে একজন নিজের ও পরিবারের পক্ষ থেকে একটি ছাগল কুরবানি করত (তিরমিজি); নবী (সা.) কুরবানির সময় বলেছেন, 'মুহাম্মদ ও মুহাম্মদের পরিবারের পক্ষ থেকে' (মুসলিম)।",
+                "en": "Abu Ayyub: in the Prophet's time a man would sacrifice one sheep for himself and his household (Tirmidhi); the Prophet said at his sacrifice, 'from Muhammad and the family of Muhammad' (Muslim)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "জামে তিরমিজি ১৫০৫; সহিহ মুসলিম ১৯৬৭",
+            "en": "Jami' at-Tirmidhi 1505; Sahih Muslim 1967"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যেসব দোষ থাকলে কুরবানি হবে না",
+            "en": "Defects that disqualify"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নবী (সা.) চার ধরনের পশু কুরবানি করতে নিষেধ করেছেন: স্পষ্ট কানা, স্পষ্ট অসুস্থ, স্পষ্ট খোঁড়া এবং এত শুকনো যে হাড়ে মজ্জা নেই।",
+            "en": "The Prophet forbade four kinds of animals: one clearly blind in one eye, one clearly sick, one clearly lame, and one so emaciated it has no marrow."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ ২৮০২; জামে তিরমিজি ১৪৯৭",
+            "en": "Sunan Abi Dawud 2802; Jami' at-Tirmidhi 1497"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "এক বা দুই চোখ অন্ধ, বা এক চোখের বেশির ভাগ দৃষ্টি নেই",
+              "en": "Blind in one or both eyes, or most of one eye's sight gone"
+            },
+            {
+              "bn": "এমন খোঁড়া যে জবাইয়ের স্থান পর্যন্ত নিজে হেঁটে যেতে পারে না",
+              "en": "So lame it cannot walk to the place of slaughter"
+            },
+            {
+              "bn": "এমন রোগা বা অসুস্থ যে চলাফেরা ও খাওয়া স্বাভাবিক নয়",
+              "en": "So thin or sick that it cannot move or eat normally"
+            },
+            {
+              "bn": "হানাফি মতে: কান বা লেজের এক-তৃতীয়াংশের বেশি কাটা; শিং গোড়া থেকে ভেঙে মগজ পর্যন্ত ক্ষত; দাঁত না থাকায় ঘাস খেতে পারে না; জন্মগতভাবে কান নেই; ছাগলের একটি বা গরুর দুটি স্তনের বোঁটা কাটা বা শুকনো",
+              "en": "Hanafi: more than a third of the ear or tail cut off; a horn broken at the root with injury reaching inside; toothless so it cannot graze; born without ears; one teat of a goat or two of a cow cut off or dry"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যেসব কারণে সমস্যা নেই",
+            "en": "What does not disqualify"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "খাসি (বীজ কাটা) পশু; এটি বরং ভালো",
+              "en": "A castrated animal; this is even preferred"
+            },
+            {
+              "bn": "জন্মগতভাবে শিং নেই, বা শিং সামান্য ভাঙা",
+              "en": "Born without horns, or a slightly broken horn"
+            },
+            {
+              "bn": "কানে ছোট ছিদ্র বা সামান্য কাটা, এক-তৃতীয়াংশের কম",
+              "en": "A small hole or cut in the ear, less than a third"
+            },
+            {
+              "bn": "জবাইয়ের জন্য শোয়ানোর সময় হঠাৎ আঘাত লেগে খুঁত হওয়া (হানাফি মত)",
+              "en": "A defect that occurs suddenly while laying the animal down for slaughter (Hanafi view)"
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "সবচেয়ে ভালো, হৃষ্টপুষ্ট ও সুন্দর পশু বাছাই করা উত্তম। নবী (সা.) দুটি সাদা-কালো রঙের শিংওয়ালা দুম্বা কুরবানি করেছেন।",
+            "en": "Choosing the best, healthiest and finest animal is better. The Prophet sacrificed two horned rams, white with black markings."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "qurbani-time-slaughter",
+      "title": {
+        "bn": "কুরবানির সময়, জবাইয়ের নিয়ম ও দোয়া",
+        "en": "Time, method of slaughter and dua"
+      },
+      "summary": {
+        "bn": "কখন থেকে কখন পর্যন্ত কুরবানি করা যায়, সুন্নত পদ্ধতিতে জবাই এবং জবাইয়ের দোয়া।",
+        "en": "When qurbani may be offered, the sunnah method of slaughter and the dua."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কুরবানির সময়",
+            "en": "The time of qurbani"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "ঈদুল আজহার নামাজের পর থেকে কুরবানির সময় শুরু। যেখানে ঈদের নামাজ হয়, সেখানে নামাজের আগে জবাই করলে তা কুরবানি হয় না, সাধারণ গোশত হয়; আবার কুরবানি দিতে হবে। (হানাফি মতে যে গ্রামে ঈদের নামাজ হয় না, সেখানে ১০ তারিখ সুবহে সাদিকের পরই জবাই করা যায়।) প্রথম দিন, অর্থাৎ ১০ জিলহজ কুরবানি করা উত্তম।",
+            "en": "The time begins after the Eid al-Adha prayer. Where the Eid prayer is held, an animal slaughtered before it is ordinary meat, not qurbani, and must be replaced. (For Hanafis, in a village with no Eid prayer, slaughter is valid after dawn on the 10th.) The first day, the 10th, is best."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি; সহিহ মুসলিম (বারা ইবনে আযিব রা.: নামাজের আগে জবাই করা পশু সাধারণ গোশত)",
+            "en": "Sahih al-Bukhari; Sahih Muslim (al-Bara' ibn 'Azib: an animal slaughtered before the prayer is just meat)"
+          },
+          "check": true
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "কুরবানির শেষ সময়",
+            "en": "The last time for qurbani"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি, মালেকি, হাম্বলি",
+                "en": "Hanafi, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "১২ জিলহজ সূর্যাস্ত পর্যন্ত, অর্থাৎ ঈদের দিনসহ মোট তিন দিন।",
+                "en": "Until sunset on 12 Dhul Hijjah: three days including Eid day."
+              },
+              "evidence": {
+                "bn": "উমর (রা.), আলী (রা.), ইবনে আব্বাস (রা.)সহ কয়েকজন সাহাবি থেকে বর্ণিত: কুরবানির দিন তিনটি।",
+                "en": "Reported from Companions such as Umar, Ali and Ibn Abbas: the days of sacrifice are three."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি",
+                "en": "Shafi'i"
+              },
+              "text": {
+                "bn": "১৩ জিলহজ সূর্যাস্ত পর্যন্ত, অর্থাৎ আইয়ামে তাশরিকের শেষ দিন পর্যন্ত মোট চার দিন।",
+                "en": "Until sunset on 13 Dhul Hijjah, the last day of Tashriq: four days."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'আইয়ামে তাশরিকের সব দিনই জবাইয়ের দিন' (মুসনাদে আহমাদ)।",
+                "en": "Hadith: 'All the days of Tashriq are days of slaughter' (Musnad Ahmad)."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "রাতে জবাই করা জায়েজ, তবে অন্ধকারে ভুল হওয়ার আশঙ্কায় হানাফি মতে মাকরুহ; দিনে করা উত্তম।",
+            "en": "Slaughtering at night is permitted, but Hanafis dislike it for fear of mistakes in the dark; daytime is better."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "জবাইয়ের নিয়ম",
+            "en": "The method of slaughter"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "নিজে বা উপস্থিত থেকে",
+            "en": "Yourself or present"
+          },
+          "text": {
+            "bn": "সম্ভব হলে নিজের কুরবানি নিজে জবাই করা উত্তম; না পারলে অন্যকে দিয়ে করানো এবং নিজে উপস্থিত থাকা ভালো। নারীরাও জবাই করতে পারেন।",
+            "en": "It is best to slaughter your own animal if you can; otherwise have someone do it and be present. Women may also slaughter."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "পশুর প্রতি দয়া",
+            "en": "Kindness to the animal"
+          },
+          "text": {
+            "bn": "ছুরি খুব ধারালো করবেন, পশুর সামনে ধার দেবেন না, এক পশুর সামনে আরেকটি জবাই করবেন না, পানি খাওয়াবেন এবং টেনে-হিঁচড়ে কষ্ট দেবেন না।",
+            "en": "Sharpen the knife well, not in front of the animal; do not slaughter one in sight of another; give it water and do not drag or hurt it."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১৯৫৫",
+            "en": "Sahih Muslim 1955"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "শোয়ানো",
+            "en": "Laying it down"
+          },
+          "text": {
+            "bn": "পশুকে বাম কাতে কিবলামুখী করে শোয়ান; বড় পশুর জন্য কয়েকজন সাহায্যকারী রাখুন।",
+            "en": "Lay the animal on its left side facing the qiblah; have helpers for large animals."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "বিসমিল্লাহ বলে জবাই",
+            "en": "Slaughter with Bismillah"
+          },
+          "text": {
+            "bn": "জবাইয়ের সময় 'বিসমিল্লাহি আল্লাহু আকবার' বলে দ্রুত গলার সামনের দিকে ছুরি চালান। যিনি ছুরি চালাবেন এবং যিনি ছুরিতে হাত দিয়ে সাহায্য করবেন, দুজনকেই বিসমিল্লাহ বলতে হবে।",
+            "en": "Say 'Bismillahi Allahu akbar' and cut swiftly across the front of the throat. Whoever moves the knife, and anyone holding the knife with him, must both say Bismillah."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "কী কাটতে হবে",
+            "en": "What must be cut"
+          },
+          "text": {
+            "bn": "শ্বাসনালি, খাদ্যনালি এবং দুই পাশের দুটি বড় রক্তনালি (মোট চারটি)। হানাফি মতে এর যেকোনো তিনটি কাটা গেলে জবাই সহিহ। মাথা আলাদা করে ফেলা বা ঘাড়ের হাড় ভাঙা মাকরুহ।",
+            "en": "The windpipe, the gullet and the two large blood vessels at the sides (four in all). For Hanafis cutting any three of these makes it valid. Cutting the head off or breaking the neck is disliked."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "পুরো নিস্তেজ হওয়া পর্যন্ত অপেক্ষা",
+            "en": "Wait until it is still"
+          },
+          "text": {
+            "bn": "পশু পুরোপুরি নিস্তেজ ও ঠান্ডা না হওয়া পর্যন্ত চামড়া ছাড়ানো বা কাটা শুরু করবেন না।",
+            "en": "Do not begin skinning or cutting until the animal is completely still."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "ইচ্ছা করে বিসমিল্লাহ ছেড়ে দিলে হানাফি ও অধিকাংশ আলেমের মতে সেই পশু খাওয়া হালাল নয় (সূরা আনআম ৬:১২১); ভুলে গেলে হালাল। শাফেয়ি মতে বিসমিল্লাহ সুন্নত।",
+            "en": "If Bismillah is deliberately omitted, the meat is not lawful according to the Hanafis and most scholars (Al-An'am 6:121); if forgotten, it is lawful. For Shafi'is Bismillah is sunnah."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "জবাইয়ের দোয়া",
+            "en": "Duas at slaughter"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "জবাইয়ের সময় (জরুরি অংশ: বিসমিল্লাহ)",
+            "en": "At the moment of slaughter (the essential part: Bismillah)"
+          },
+          "ar": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ",
+          "pron": {
+            "bn": "বিসমিল্লাহি ওয়াল্লাহু আকবার",
+            "en": "Bismillahi wallahu akbar"
+          },
+          "meaning": {
+            "bn": "আল্লাহর নামে, আর আল্লাহ সবচেয়ে মহান।",
+            "en": "In the name of Allah, and Allah is the Greatest."
+          },
+          "ref": {
+            "bn": "সহিহ মুসলিম ১৯৬৬",
+            "en": "Sahih Muslim 1966"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "জবাইয়ের আগে পড়ার দোয়া (ঐচ্ছিক)",
+            "en": "Dua before slaughter (optional)"
+          },
+          "ar": "إِنِّي وَجَّهْتُ وَجْهِيَ لِلَّذِي فَطَرَ السَّمَاوَاتِ وَالْأَرْضَ عَلَىٰ مِلَّةِ إِبْرَاهِيمَ حَنِيفًا وَمَا أَنَا مِنَ الْمُشْرِكِينَ، إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ، لَا شَرِيكَ لَهُ وَبِذَٰلِكَ أُمِرْتُ وَأَنَا مِنَ الْمُسْلِمِينَ، اللَّهُمَّ مِنْكَ وَلَكَ",
+          "pron": {
+            "bn": "ইন্নী ওয়াজ্জাহতু ওয়াজহিয়া লিল্লাযী ফাতারাস সামাওয়াতি ওয়াল আরদা আলা মিল্লাতি ইবরাহীমা হানীফাও ওয়ামা আনা মিনাল মুশরিকীন, ইন্না সালাতী ওয়া নুসুকী ওয়া মাহইয়ায়া ওয়া মামাতী লিল্লাহি রাব্বিল আলামীন, লা শারীকা লাহু ওয়া বিযালিকা উমিরতু ওয়া আনা মিনাল মুসলিমীন, আল্লাহুম্মা মিনকা ওয়া লাকা",
+            "en": "Inni wajjahtu wajhiya lilladhi fataras-samawati wal-arda 'ala millati ibrahima hanifan wa ma ana minal-mushrikin, inna salati wa nusuki wa mahyaya wa mamati lillahi rabbil-'alamin, la sharika lahu wa bidhalika umirtu wa ana minal-muslimin, Allahumma minka wa lak"
+          },
+          "meaning": {
+            "bn": "আমি একনিষ্ঠভাবে ইবরাহিমের দ্বীনের ওপর থেকে সেই সত্তার দিকে মুখ ফেরালাম, যিনি আসমান ও জমিন সৃষ্টি করেছেন; আমি মুশরিকদের অন্তর্ভুক্ত নই। নিশ্চয়ই আমার নামাজ, আমার কুরবানি, আমার জীবন ও মরণ জগৎসমূহের রব আল্লাহর জন্য; তাঁর কোনো শরিক নেই। আমাকে এরই নির্দেশ দেওয়া হয়েছে, আর আমি মুসলিমদের একজন। হে আল্লাহ! এটি তোমারই দান এবং তোমারই জন্য।",
+            "en": "I turn my face to the One who created the heavens and the earth, upon the way of Ibrahim, inclining to truth, and I am not of the polytheists. My prayer, my sacrifice, my living and my dying are for Allah, Lord of the worlds; He has no partner. This I am commanded, and I am of the Muslims. O Allah, it is from You and for You."
+          },
+          "ref": {
+            "bn": "সুনান আবু দাউদ ২৭৯৫",
+            "en": "Sunan Abi Dawud 2795"
+          },
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "এই দোয়াটি জাবির (রা.)-এর বর্ণনায় এসেছে; সনদ নিয়ে হাদিসবিশারদদের আলোচনা আছে। দোয়ার পরে 'বিসমিল্লাহি ওয়াল্লাহু আকবার' বলে জবাই করবেন। মুখে নিয়ত বা অংশীদারদের নাম বলা জরুরি নয়; মনে নিয়ত থাকাই যথেষ্ট। চাইলে বলতে পারেন 'আল্লাহুম্মা তাকাব্বাল মিন্নী' (হে আল্লাহ, আমার পক্ষ থেকে কবুল করো) — নবী (সা.) বলেছিলেন 'আল্লাহুম্মা তাকাব্বাল মিন মুহাম্মাদিন ওয়া আলি মুহাম্মাদ...'।",
+            "en": "This dua comes in Jabir's narration; hadith scholars discuss its chain. After it, slaughter saying 'Bismillahi wallahu akbar'. Saying the intention or the partners' names aloud is not required; the intention in the heart is enough. You may say 'Allahumma taqabbal minni' (O Allah, accept from me) — the Prophet said 'Allahumma taqabbal min Muhammadin wa ali Muhammad...'."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১৯৬৭",
+            "en": "Sahih Muslim 1967"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "qurbani-meat-skin",
+      "title": {
+        "bn": "কুরবানির গোশত ও চামড়া",
+        "en": "Qurbani meat and skin"
+      },
+      "summary": {
+        "bn": "গোশত কীভাবে ভাগ করবেন, চামড়া ও কসাইয়ের মজুরির বিধান।",
+        "en": "How to divide the meat, and the rulings on the skin and the butcher's wage."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "فَكُلُوا مِنْهَا وَأَطْعِمُوا الْقَانِعَ وَالْمُعْتَرَّ",
+          "pron": {
+            "bn": "ফাকুলূ মিনহা ওয়া আতইমুল কানিআ ওয়াল মু'তার",
+            "en": "Fakulu minha wa at'imul-qani'a wal-mu'tarr"
+          },
+          "meaning": {
+            "bn": "তোমরা তা থেকে খাও এবং যে চায় না ও যে চায় — উভয় অভাবীকে খাওয়াও।",
+            "en": "Eat from them and feed both the one who does not ask and the one who asks."
+          },
+          "ref": {
+            "bn": "সূরা হজ ২২:৩৬",
+            "en": "Al-Hajj 22:36"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "গোশত বণ্টন",
+            "en": "Dividing the meat"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "ভাগ",
+              "en": "Share"
+            },
+            {
+              "bn": "কাদের জন্য",
+              "en": "For whom"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "এক-তৃতীয়াংশ",
+                "en": "One third"
+              },
+              {
+                "bn": "নিজের ও পরিবারের জন্য",
+                "en": "Yourself and your family"
+              }
+            ],
+            [
+              {
+                "bn": "এক-তৃতীয়াংশ",
+                "en": "One third"
+              },
+              {
+                "bn": "আত্মীয়স্বজন, প্রতিবেশী ও বন্ধুদের জন্য (ধনী হলেও দেওয়া যায়)",
+                "en": "Relatives, neighbours and friends (even if well-off)"
+              }
+            ],
+            [
+              {
+                "bn": "এক-তৃতীয়াংশ",
+                "en": "One third"
+              },
+              {
+                "bn": "গরিব-মিসকিনদের জন্য",
+                "en": "The poor and needy"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "তিন ভাগ করা মুস্তাহাব (উত্তম), বাধ্যতামূলক নয়। পরিবার বড় হলে বেশি রাখা যায়, আবার পুরোটা দান করাও যায়। গোশত সংরক্ষণ করে পরে খাওয়াও জায়েজ।",
+            "en": "Dividing into thirds is recommended, not compulsory. A large family may keep more, and one may also give it all away. Storing the meat to eat later is allowed."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সূরা হজ ২২:২৮",
+            "en": "Al-Hajj 22:28"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "কুরবানির গোশত, চর্বি, হাড় বা কোনো অংশ বিক্রি করা জায়েজ নয়।",
+              "en": "Selling any part of the qurbani animal — meat, fat or bones — is not allowed."
+            },
+            {
+              "bn": "কসাইয়ের মজুরি কুরবানির গোশত বা চামড়া দিয়ে দেওয়া যাবে না; আলাদা টাকা দিতে হবে। মজুরি দেওয়ার পর উপহার হিসেবে গোশত দেওয়া যায়।",
+              "en": "The butcher's wage must not be paid with meat or skin; pay separately. Meat may be given to him as a gift beyond the wage."
+            },
+            {
+              "bn": "মানতের কুরবানি হলে পুরো গোশত গরিবদের দিতে হবে; মানতকারী ও তার পরিবার খেতে পারবে না।",
+              "en": "If the qurbani was vowed (nazr), all the meat goes to the poor; the person and his family may not eat it."
+            },
+            {
+              "bn": "হানাফি মতে অমুসলিম প্রতিবেশীকেও উপহার হিসেবে কুরবানির গোশত দেওয়া যায়।",
+              "en": "Hanafis allow giving qurbani meat as a gift to non-Muslim neighbours too."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১৩১৭",
+            "en": "Sahih Muslim 1317"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "চামড়া",
+            "en": "The skin"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "চামড়া নিজে ব্যবহার করা (যেমন জায়নামাজ বা মশক বানানো) বা কাউকে দান করা যায়। চামড়া বিক্রি করলে সেই টাকা নিজে ব্যবহার করা যাবে না; পুরো টাকা যাকাতের হকদার গরিবদের সদকা করে দিতে হবে। মাদরাসার লিল্লাহ বোর্ডিং বা গরিব ছাত্রদের দেওয়া প্রচলিত ও উত্তম খাত।",
+            "en": "The skin may be used personally (e.g. as a prayer mat or water skin) or donated. If it is sold, the money may not be used by the owner; all of it must be given as charity to those eligible for zakat. Orphanage and poor-student funds of madrasahs are a common good choice."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "চামড়ার টাকা দিয়ে মসজিদ নির্মাণ, ইমামের বেতন বা কর্মচারীর পারিশ্রমিক দেওয়া হানাফি মতে ঠিক নয়; এটি গরিবের হক।",
+            "en": "Using the skin money for building a masjid, the imam's salary or workers' wages is not correct in the Hanafi view; it is the right of the poor."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "qurbani-dhul-hijjah-takbir",
+      "title": {
+        "bn": "জিলহজের দশ দিন ও তাকবিরে তাশরিক",
+        "en": "The ten days of Dhul Hijjah and takbir at-tashriq"
+      },
+      "summary": {
+        "bn": "জিলহজের প্রথম দশ দিনের ফজিলত, নখ-চুল না কাটার সুন্নত, আরাফার রোজা এবং তাকবিরে তাশরিক।",
+        "en": "The virtue of the first ten days of Dhul Hijjah, the sunnah of not cutting nails and hair, the Arafah fast and takbir at-tashriq."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "وَالْفَجْرِ ۝ وَلَيَالٍ عَشْرٍ",
+          "pron": {
+            "bn": "ওয়াল ফাজর, ওয়া লায়ালিন আশর",
+            "en": "Wal-fajr, wa layalin 'ashr"
+          },
+          "meaning": {
+            "bn": "শপথ ভোরের, শপথ দশ রাতের।",
+            "en": "By the dawn, and by the ten nights."
+          },
+          "ref": {
+            "bn": "সূরা ফজর ৮৯:১–২",
+            "en": "Al-Fajr 89:1–2"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "অধিকাংশ মুফাসসিরের মতে এই দশ রাত জিলহজের প্রথম দশ রাত। নবী (সা.) বলেছেন, এমন কোনো দিন নেই যেদিনের নেক আমল আল্লাহর কাছে এই দশ দিনের আমলের চেয়ে বেশি প্রিয়।",
+            "en": "Most commentators say these ten nights are the first ten of Dhul Hijjah. The Prophet said there are no days in which good deeds are more beloved to Allah than these ten days."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ৯৬৯",
+            "en": "Sahih al-Bukhari 969"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "বেশি বেশি তাকবির (আল্লাহু আকবার), তাহলিল (লা ইলাহা ইল্লাল্লাহ) ও তাহমিদ (আলহামদুলিল্লাহ) পড়া",
+              "en": "Say takbir, tahlil and tahmid abundantly"
+            },
+            {
+              "bn": "নফল রোজা, বিশেষ করে ৯ জিলহজ আরাফার রোজা (হাজি ছাড়া অন্যদের জন্য); এটি আগের ও পরের এক বছরের গুনাহের কাফফারা হওয়ার আশা করা যায়",
+              "en": "Voluntary fasting, especially the Arafah fast on the 9th (for non-pilgrims); it is hoped to expiate the year before and after"
+            },
+            {
+              "bn": "দান-সদকা, কুরআন তিলাওয়াত, তওবা ও সব ধরনের নেক কাজ",
+              "en": "Charity, Quran, repentance and all good deeds"
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১১৬২",
+            "en": "Sahih Muslim 1162"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "নখ ও চুল না কাটা",
+            "en": "Not cutting nails and hair"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "উম্মে সালামা (রা.) বর্ণনা করেন, নবী (সা.) বলেছেন: জিলহজের দশক শুরু হলে তোমাদের যে কুরবানি করতে চায়, সে যেন তার চুল ও নখ থেকে কিছু না কাটে (কুরবানি করা পর্যন্ত)।",
+            "en": "Umm Salamah reported that the Prophet said: when the ten days of Dhul Hijjah begin, whoever of you intends to sacrifice should not cut anything of his hair or nails (until he has sacrificed)."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১৯৭৭",
+            "en": "Sahih Muslim 1977"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "এই নিষেধের হুকুম",
+            "en": "Ruling of this prohibition"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হাম্বলি",
+                "en": "Hanbali"
+              },
+              "text": {
+                "bn": "কুরবানিদাতার জন্য চুল-নখ কাটা হারাম; কেটে ফেললে তওবা করবে, তবে কোনো কাফফারা নেই।",
+                "en": "Cutting hair or nails is forbidden for the one sacrificing; if done, he repents, with no expiation."
+              },
+              "evidence": {
+                "bn": "হাদিসে সরাসরি নিষেধাজ্ঞা এসেছে, আর নিষেধের মূল অর্থ হারাম।",
+                "en": "The hadith gives a direct prohibition, whose basic meaning is forbiddance."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও মালেকি",
+                "en": "Shafi'i and Maliki"
+              },
+              "text": {
+                "bn": "মাকরুহ তানযিহি (না কাটা সুন্নত, কাটলে গুনাহ নেই)।",
+                "en": "Mildly disliked (not cutting is sunnah; cutting is not a sin)."
+              },
+              "evidence": {
+                "bn": "আয়েশা (রা.)-এর হাদিস: নবী (সা.) মদিনা থেকে কুরবানির পশু পাঠাতেন, কিন্তু ইহরামকারীর জন্য নিষিদ্ধ কোনো কিছু নিজের ওপর হারাম করতেন না।",
+                "en": "Aishah's hadith: the Prophet sent sacrificial animals from Madinah, yet did not make anything forbidden for himself that is forbidden to a pilgrim in ihram."
+              }
+            },
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "মুস্তাহাব; না কাটা উত্তম, কাটলে গুনাহ নেই। অনেক আলেম কুরবানি না দেওয়া ব্যক্তির জন্যও এতে শামিল হওয়া ভালো বলেছেন।",
+                "en": "Recommended; not cutting is better and cutting is no sin. Many scholars say it is good for those not sacrificing to join in too."
+              },
+              "evidence": {
+                "bn": "দুটি হাদিসের সমন্বয়: নিষেধকে উত্তমতার অর্থে নেওয়া।",
+                "en": "Reconciling the two hadiths by taking the prohibition as a recommendation."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "নিষেধটি কুরবানিদাতার নিজের জন্য, তার পরিবারের সবার জন্য নয়। ইহরামের মতো সুগন্ধি বা অন্য কিছু নিষেধ নয়।",
+            "en": "The prohibition is for the person sacrificing, not his whole family. Nothing else, like perfume as in ihram, is forbidden."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "তাকবিরে তাশরিক",
+            "en": "Takbir at-tashriq"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "তাকবিরে তাশরিক",
+            "en": "Takbir at-tashriq"
+          },
+          "ar": "اللَّهُ أَكْبَرُ اللَّهُ أَكْبَرُ، لَا إِلَٰهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ اللَّهُ أَكْبَرُ، وَلِلَّهِ الْحَمْدُ",
+          "pron": {
+            "bn": "আল্লাহু আকবার আল্লাহু আকবার, লা ইলাহা ইল্লাল্লাহু, ওয়াল্লাহু আকবার আল্লাহু আকবার, ওয়া লিল্লাহিল হামদ",
+            "en": "Allahu akbar Allahu akbar, la ilaha illallah, wallahu akbar Allahu akbar, wa lillahil-hamd"
+          },
+          "meaning": {
+            "bn": "আল্লাহ সবচেয়ে মহান, আল্লাহ সবচেয়ে মহান; আল্লাহ ছাড়া কোনো ইলাহ নেই; আল্লাহ সবচেয়ে মহান, আল্লাহ সবচেয়ে মহান, আর সব প্রশংসা আল্লাহর।",
+            "en": "Allah is the Greatest, Allah is the Greatest; there is no god but Allah; Allah is the Greatest, Allah is the Greatest, and to Allah belongs all praise."
+          },
+          "ref": {
+            "bn": "ইবনে মাসউদ রা. থেকে বর্ণিত (মুসান্নাফ ইবনে আবি শাইবা)",
+            "en": "Reported from Ibn Mas'ud (Musannaf Ibn Abi Shaybah)"
+          },
+          "check": true
+        },
+        {
+          "type": "arabic",
+          "ar": "وَاذْكُرُوا اللَّهَ فِي أَيَّامٍ مَعْدُودَاتٍ",
+          "pron": {
+            "bn": "ওয়াযকুরুল্লাহা ফী আইয়ামিম মা'দূদাত",
+            "en": "Wadhkurullaha fi ayyamim ma'dudat"
+          },
+          "meaning": {
+            "bn": "আর নির্দিষ্ট দিনগুলোতে আল্লাহকে স্মরণ করো।",
+            "en": "And remember Allah during the appointed days."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:২০৩",
+            "en": "Al-Baqarah 2:203"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "তাকবিরে তাশরিকের হুকুম ও দিন",
+            "en": "Ruling and days of takbir at-tashriq"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি (ফতোয়া: ইমাম আবু ইউসুফ ও মুহাম্মদের মত)",
+                "en": "Hanafi (fatwa: the view of Abu Yusuf and Muhammad)"
+              },
+              "text": {
+                "bn": "৯ জিলহজ ফজর থেকে ১৩ জিলহজ আসর পর্যন্ত মোট ২৩ ওয়াক্ত ফরজ নামাজের পর একবার করে পড়া ওয়াজিব; পুরুষ উচ্চস্বরে, নারী নিচু স্বরে। একা বা জামাতে, মুকিম বা মুসাফির সবার জন্য। শুরুতে দুবার 'আল্লাহু আকবার'।",
+                "en": "Wajib once after each of the 23 obligatory prayers from Fajr on the 9th to Asr on the 13th; men aloud, women quietly; alone or in congregation, resident or traveller. Two takbirs at the start."
+              },
+              "evidence": {
+                "bn": "আলী (রা.) আরাফার দিন ফজর থেকে আইয়ামে তাশরিকের শেষ দিনের আসর পর্যন্ত তাকবির বলতেন; শব্দ ইবনে মাসউদ (রা.) থেকে। (ইমাম আবু হানিফার মূল মত ছিল ইবনে মাসউদ রা.-এর অনুসরণে ১০ তারিখের আসর পর্যন্ত।)",
+                "en": "Ali said the takbir from Fajr on the day of Arafah to Asr on the last day of Tashriq; the wording is from Ibn Mas'ud. (Abu Hanifa's own view, following Ibn Mas'ud, was until Asr on the 10th.)"
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও হাম্বলি",
+                "en": "Shafi'i and Hanbali"
+              },
+              "text": {
+                "bn": "সুন্নত। হাজি নন এমন ব্যক্তির জন্য ৯ জিলহজ ফজর থেকে ১৩ জিলহজ আসর পর্যন্ত ফরজ নামাজের পর (মুকাইয়াদ); এ ছাড়া জিলহজের প্রথম থেকে সব সময় যেকোনো স্থানে তাকবির বলা (মুতলাক)। শাফেয়ি মতে শুরুতে তিনবার 'আল্লাহু আকবার'।",
+                "en": "Sunnah. For non-pilgrims, after obligatory prayers from Fajr on the 9th to Asr on the 13th (restricted takbir), plus takbir at any time and place from the start of Dhul Hijjah (unrestricted). Shafi'is begin with three takbirs."
+              },
+              "evidence": {
+                "bn": "আলী (রা.) ও অন্যান্য সাহাবির আমল; ইবনে উমর (রা.) ও আবু হুরাইরা (রা.) এই দশ দিনে বাজারে তাকবির বলতেন (সহিহ বুখারিতে তালিক হিসেবে)।",
+                "en": "Practice of Ali and other Companions; Ibn Umar and Abu Hurayrah said the takbir in the markets in these ten days (reported without chain in Sahih al-Bukhari)."
+              }
+            },
+            {
+              "label": {
+                "bn": "মালেকি",
+                "en": "Maliki"
+              },
+              "text": {
+                "bn": "সুন্নত; ১০ জিলহজ জোহর থেকে ১৩ জিলহজ ফজর পর্যন্ত ১৫ ওয়াক্ত ফরজ নামাজের পর।",
+                "en": "Sunnah; after 15 obligatory prayers from Zuhr on the 10th to Fajr on the 13th."
+              },
+              "evidence": {
+                "bn": "হাজিদের তালবিয়া শেষ হয়ে তাকবির শুরু হয় ১০ তারিখে; অন্যরা তাদের অনুসরণ করবে।",
+                "en": "The pilgrims' talbiyah ends and their takbir begins on the 10th; others follow them."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "ঈদুল আজহার নামাজে যাওয়ার পথে উচ্চস্বরে তাকবির বলা সুন্নত।",
+            "en": "Saying the takbir aloud on the way to the Eid al-Adha prayer is sunnah."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "qurbani-aqiqah",
+      "title": {
+        "bn": "আকিকা: নিয়ম, পশু, নাম রাখা ও মাথা মুণ্ডন",
+        "en": "Aqiqah: method, animals, naming and shaving the head"
+      },
+      "summary": {
+        "bn": "সন্তান জন্মের পর আকিকা কখন ও কীভাবে করবেন, ছেলে ও মেয়ের জন্য কয়টি পশু, নাম রাখা, মাথা মুণ্ডন ও অন্যান্য সুন্নত।",
+        "en": "When and how to do aqiqah after a birth, how many animals for a boy and a girl, naming, shaving the head and related sunnahs."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "আকিকা মানে সন্তান জন্মের শুকরিয়া হিসেবে আল্লাহর জন্য পশু জবাই করা। নবী (সা.) বলেছেন: প্রত্যেক শিশু তার আকিকার সঙ্গে বন্ধক থাকে; সপ্তম দিনে তার পক্ষ থেকে পশু জবাই করা হবে, তার মাথা মুণ্ডন করা হবে এবং নাম রাখা হবে।",
+            "en": "Aqiqah is slaughtering an animal for Allah in gratitude for a child's birth. The Prophet said: every child is held in pledge by his aqiqah; an animal is slaughtered for him on the seventh day, his head is shaved and he is named."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ ২৮৩৮; জামে তিরমিজি ১৫২২",
+            "en": "Sunan Abi Dawud 2838; Jami' at-Tirmidhi 1522"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "আকিকার হুকুম",
+            "en": "Ruling on aqiqah"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "সুন্নতে মুয়াক্কাদা; সাধারণত বাবা বা যার ওপর সন্তানের ভরণপোষণের দায়িত্ব, তিনি করবেন।",
+                "en": "An emphasised sunnah, usually done by the father or whoever supports the child."
+              },
+              "evidence": {
+                "bn": "ওপরের হাদিস এবং নবী (সা.) কর্তৃক হাসান ও হুসাইন (রা.)-এর আকিকা।",
+                "en": "The hadith above and the Prophet's aqiqah for Al-Hasan and Al-Husayn."
+              }
+            },
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "মুস্তাহাব (শুকরিয়া হিসেবে উত্তম আমল); না করলে গুনাহ নেই।",
+                "en": "Recommended (a good act of gratitude); no sin if not done."
+              },
+              "evidence": {
+                "bn": "কিছু বর্ণনায় নবী (সা.) বলেছেন, 'যে সন্তানের পক্ষ থেকে কুরবানি (আকিকা) করতে চায়, সে করুক' — এতে ইচ্ছাধীনতা বোঝায় (আবু দাউদ, নাসায়ি)।",
+                "en": "In some reports the Prophet said, 'Whoever wishes to sacrifice for his child, let him do so' — indicating choice (Abu Dawud, an-Nasa'i)."
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কখন",
+            "en": "When"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "জন্মের সপ্তম দিনে আকিকা করা সুন্নত (জন্মের দিনসহ গণনা; যেমন শুক্রবার জন্ম হলে পরের বৃহস্পতিবার)।",
+              "en": "The sunnah is the seventh day (counting the day of birth; e.g. born on Friday, aqiqah on the next Thursday)."
+            },
+            {
+              "bn": "সপ্তম দিনে না পারলে কিছু আলেম ১৪ বা ২১ তম দিনের কথা বলেন (এ সম্পর্কিত বর্ণনা দুর্বল); না পারলে পরে যেকোনো সময় করা যায়।",
+              "en": "If not possible on the seventh day, some scholars suggest the 14th or 21st (the report on this is weak); otherwise any time later."
+            },
+            {
+              "bn": "সন্তান সপ্তম দিনের আগে মারা গেলেও অনেক আলেমের মতে আকিকা করা যায়।",
+              "en": "Many scholars allow aqiqah even if the child died before the seventh day."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কয়টি পশু",
+            "en": "How many animals"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "সন্তান",
+              "en": "Child"
+            },
+            {
+              "bn": "সুন্নত পরিমাণ",
+              "en": "Sunnah amount"
+            },
+            {
+              "bn": "ন্যূনতম",
+              "en": "Minimum"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "ছেলে",
+                "en": "Boy"
+              },
+              {
+                "bn": "সমান মানের দুটি ছাগল/ভেড়া",
+                "en": "Two comparable goats/sheep"
+              },
+              {
+                "bn": "একটি ছাগল/ভেড়াও যথেষ্ট",
+                "en": "One goat/sheep also suffices"
+              }
+            ],
+            [
+              {
+                "bn": "মেয়ে",
+                "en": "Girl"
+              },
+              {
+                "bn": "একটি ছাগল/ভেড়া",
+                "en": "One goat/sheep"
+              },
+              {
+                "bn": "একটি",
+                "en": "One"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "জামে তিরমিজি ১৫১৩",
+            "en": "Jami' at-Tirmidhi 1513"
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ (হাসান ও হুসাইন রা.-এর পক্ষ থেকে একটি করে দুম্বা)",
+            "en": "Sunan Abi Dawud (one ram each for Al-Hasan and Al-Husayn)"
+          },
+          "check": true
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "গরু বা উটের ভাগে আকিকা",
+            "en": "Aqiqah as a share of a cow or camel"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি ও শাফেয়ি",
+                "en": "Hanafi and Shafi'i"
+              },
+              "text": {
+                "bn": "গরু বা উটের সাত ভাগের এক ভাগ দিয়ে আকিকা করা যায় (ছেলের জন্য দুই ভাগ); কুরবানির পশুতে আকিকার ভাগ রাখাও জায়েজ।",
+                "en": "Aqiqah may be done with one seventh of a cow or camel (two sevenths for a boy); an aqiqah share in a qurbani animal is also allowed."
+              },
+              "evidence": {
+                "bn": "কুরবানির ওপর কিয়াস, যেখানে গরু-উট সাতজনের পক্ষ থেকে যথেষ্ট।",
+                "en": "Analogy with qurbani, where a cow or camel suffices for seven."
+              }
+            },
+            {
+              "label": {
+                "bn": "মালেকি ও হাম্বলি",
+                "en": "Maliki and Hanbali"
+              },
+              "text": {
+                "bn": "ভাগে আকিকা হয় না; পুরো একটি পশু লাগবে (গরু বা উট পুরোটা দিলে চলবে)।",
+                "en": "Shares do not count for aqiqah; a whole animal is needed (a whole cow or camel is fine)."
+              },
+              "evidence": {
+                "bn": "আকিকা একটি জীবনের বিনিময়ে একটি পূর্ণ প্রাণ উৎসর্গ; হাদিসে ছাগল/ভেড়ার কথা এসেছে।",
+                "en": "Aqiqah offers one whole life for a life; the hadith speaks of sheep and goats."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "আকিকার পশুর বয়স ও দোষত্রুটির শর্ত কুরবানির পশুর মতোই। জবাইয়ের নিয়মও একই।",
+            "en": "The age and defect conditions for the aqiqah animal are the same as for qurbani, and so is the method of slaughter."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "আকিকার জবাইয়ের সময় (ঐচ্ছিক)",
+            "en": "At the aqiqah slaughter (optional)"
+          },
+          "ar": "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ، اللَّهُمَّ لَكَ وَإِلَيْكَ، هَٰذِهِ عَقِيقَةُ فُلَانٍ",
+          "pron": {
+            "bn": "বিসমিল্লাহি ওয়াল্লাহু আকবার, আল্লাহুম্মা লাকা ওয়া ইলাইকা, হাযিহি আকীকাতু (সন্তানের নাম)",
+            "en": "Bismillahi wallahu akbar, Allahumma laka wa ilayk, hadhihi 'aqiqatu (child's name)"
+          },
+          "meaning": {
+            "bn": "আল্লাহর নামে, আল্লাহ সবচেয়ে মহান। হে আল্লাহ! তোমারই জন্য এবং তোমারই কাছে। এটি অমুকের আকিকা।",
+            "en": "In the name of Allah, Allah is the Greatest. O Allah, for You and to You. This is the aqiqah of (name)."
+          },
+          "ref": {
+            "bn": "আয়েশা রা. থেকে বর্ণিত (সুনানুল কুবরা, বায়হাকি)",
+            "en": "Reported from Aishah (as-Sunan al-Kubra, al-Bayhaqi)"
+          },
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "জরুরি শুধু 'বিসমিল্লাহ' বলা; বাকিটা ঐচ্ছিক। সন্তানের নাম মুখে বলা শর্ত নয়, মনে নিয়ত থাকাই যথেষ্ট।",
+            "en": "Only 'Bismillah' is essential; the rest is optional. Saying the child's name aloud is not a condition; the intention in the heart is enough."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "গোশত",
+            "en": "The meat"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "আকিকার গোশত কুরবানির মতো তিন ভাগ করা যায়, রান্না করে আত্মীয়-প্রতিবেশী ও গরিবদের খাওয়ানো যায়, কাঁচাও বিতরণ করা যায়। মা-বাবা ও পরিবারের সবাই খেতে পারেন। চামড়ার বিধান কুরবানির মতো।",
+            "en": "The aqiqah meat may be divided in thirds like qurbani, cooked to feed relatives, neighbours and the poor, or given raw. Parents and the whole family may eat from it. The skin follows the qurbani ruling."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "নাম রাখা",
+            "en": "Naming"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "জন্মের দিন বা সপ্তম দিনে নাম রাখা যায়; দুটোই হাদিসে এসেছে।",
+              "en": "The child may be named on the day of birth or the seventh day; both are in the hadith."
+            },
+            {
+              "bn": "আল্লাহর কাছে সবচেয়ে প্রিয় নাম আবদুল্লাহ ও আবদুর রহমান। নবী-রাসুল ও সাহাবিদের নাম এবং সুন্দর অর্থের নাম রাখুন।",
+              "en": "The names most beloved to Allah are Abdullah and Abdur-Rahman. Choose names of prophets and Companions and names with good meanings."
+            },
+            {
+              "bn": "আল্লাহ ছাড়া অন্য কারও দাসত্ব বোঝায় এমন নাম (যেমন আবদুন নবী, গোলাম রসুল) বা খারাপ অর্থের নাম রাখা যাবে না; নবী (সা.) খারাপ অর্থের নাম বদলে দিতেন।",
+              "en": "Do not use names implying servitude to other than Allah (e.g. Abdun-Nabi, Ghulam Rasul) or with bad meanings; the Prophet used to change such names."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ২১৩২",
+            "en": "Sahih Muslim 2132"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "এই অ্যাপের 'ইসলামিক নাম' অংশ থেকে অর্থসহ নাম বাছাই করতে পারেন।",
+            "en": "You can choose names with their meanings from this app's Islamic Names section."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "মাথা মুণ্ডন ও অন্যান্য সুন্নত",
+            "en": "Shaving the head and other sunnahs"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "মাথা মুণ্ডন",
+            "en": "Shave the head"
+          },
+          "text": {
+            "bn": "সপ্তম দিনে শিশুর (ছেলে-মেয়ে উভয়ের) মাথার চুল মুণ্ডন করা সুন্নত।",
+            "en": "On the seventh day shaving the baby's head (boy or girl) is sunnah."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "চুলের ওজনে রূপা সদকা",
+            "en": "Silver equal to the hair's weight"
+          },
+          "text": {
+            "bn": "মুণ্ডিত চুলের ওজনের সমপরিমাণ রূপা (বা তার মূল্য) সদকা করা মুস্তাহাব; নবী (সা.) হাসান (রা.)-এর ক্ষেত্রে ফাতিমা (রা.)-কে এমন করতে বলেছিলেন।",
+            "en": "Giving in charity silver equal to the weight of the shaved hair (or its value) is recommended; the Prophet told Fatimah to do this for Al-Hasan."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "জামে তিরমিজি (আলী রা.-এর বর্ণনা: হাসান রা.-এর চুলের ওজনে রূপা সদকা)",
+            "en": "Jami' at-Tirmidhi (Ali: silver equal to the weight of Al-Hasan's hair)"
+          },
+          "check": true
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "তাহনিক",
+            "en": "Tahnik"
+          },
+          "text": {
+            "bn": "কোনো নেককার ব্যক্তি খেজুর চিবিয়ে নরম করে শিশুর তালুতে সামান্য লাগিয়ে দেওয়া এবং বরকতের দোয়া করা সুন্নত; নবী (সা.) নবজাতকদের তাহনিক করতেন।",
+            "en": "It is sunnah for a righteous person to chew a date until soft, rub a little on the baby's palate and pray for blessing; the Prophet did tahnik for newborns."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি; সহিহ মুসলিম (আবু মুসা রা.-এর পুত্র ইবরাহিমের তাহনিক)",
+            "en": "Sahih al-Bukhari; Sahih Muslim (tahnik of Abu Musa's son Ibrahim)"
+          },
+          "check": true
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "কানে আজান",
+            "en": "Adhan in the ear"
+          },
+          "text": {
+            "bn": "জন্মের পর শিশুর ডান কানে আজান দেওয়ার প্রচলন আছে। আবু রাফে (রা.) বর্ণনা করেন যে নবী (সা.) হাসান (রা.)-এর কানে আজান দিয়েছেন; তিরমিজি একে সহিহ বলেছেন, তবে অনেক হাদিসবিশারদ সনদকে দুর্বল বলেছেন। বাম কানে ইকামতের বর্ণনা আরও দুর্বল।",
+            "en": "Giving the adhan in the newborn's right ear is common practice. Abu Rafi' reported that the Prophet gave the adhan in Al-Hasan's ear; at-Tirmidhi graded it sound, but many hadith scholars consider the chain weak. The report of iqamah in the left ear is weaker still."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ; জামে তিরমিজি (আবু রাফে রা.-এর বর্ণনা)",
+            "en": "Sunan Abi Dawud; Jami' at-Tirmidhi (narration of Abu Rafi')"
+          },
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "শিশুর জন্মে কুসংস্কারমূলক রীতি (যেমন নির্দিষ্ট দিনে ঘর থেকে বের না হওয়া, তাবিজ ঝোলানো) থেকে বিরত থাকুন। মেয়ে সন্তানের জন্মে আনন্দ ও কৃতজ্ঞতা ছেলের মতোই।",
+            "en": "Avoid superstitious customs around birth (such as not leaving the house on certain days, or hanging amulets). The birth of a daughter calls for the same joy and gratitude as a son."
+          }
+        }
+      ]
+    }
+  ]
+}

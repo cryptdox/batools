@@ -1,0 +1,1346 @@
+{
+  "topic": "zakat",
+  "guides": [
+    {
+      "slug": "zakat-basics",
+      "title": {
+        "bn": "যাকাত: কার ওপর ফরজ",
+        "en": "Zakat: who must pay"
+      },
+      "summary": {
+        "bn": "যাকাত ইসলামের তৃতীয় স্তম্ভ। কোন শর্তে যাকাত ফরজ হয় এবং কেন এটি সম্পদকে পবিত্র করে।",
+        "en": "Zakat is the third pillar of Islam. The conditions that make it due and how it purifies wealth."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ",
+          "pron": {
+            "bn": "ওয়া আকীমুস সালাতা ওয়া আতুয যাকাহ",
+            "en": "Wa aqimus-salata wa atuz-zakah"
+          },
+          "meaning": {
+            "bn": "আর নামাজ কায়েম করো এবং যাকাত দাও।",
+            "en": "And establish the prayer and give the zakat."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:৪৩",
+            "en": "Al-Baqarah 2:43"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "যাকাত মানে পবিত্রতা ও বৃদ্ধি। নির্দিষ্ট পরিমাণ সম্পদ এক বছর মালিকানায় থাকলে তার একটি নির্ধারিত অংশ (সাধারণত ২.৫%) কুরআনে বর্ণিত হকদারদের দিয়ে দেওয়াই যাকাত। নবী (সা.) বলেছেন, ইসলাম পাঁচটি স্তম্ভের ওপর প্রতিষ্ঠিত, তার একটি যাকাত দেওয়া।",
+            "en": "Zakat means purification and growth. When a set amount of wealth has been owned for a year, a fixed share of it (usually 2.5%) is given to the recipients named in the Quran. The Prophet said Islam is built on five pillars, one of which is giving zakat."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ৮; সহিহ মুসলিম ১৬",
+            "en": "Sahih al-Bukhari 8; Sahih Muslim 16"
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِمْ بِهَا",
+          "pron": {
+            "bn": "খুয মিন আমওয়ালিহিম সাদাকাতান তুতাহহিরুহুম ওয়া তুযাক্কীহিম বিহা",
+            "en": "Khudh min amwalihim sadaqatan tutahhiruhum wa tuzakkihim biha"
+          },
+          "meaning": {
+            "bn": "তাদের সম্পদ থেকে সদকা গ্রহণ করো, যা দিয়ে তুমি তাদের পবিত্র ও পরিশুদ্ধ করবে।",
+            "en": "Take from their wealth a charity by which you purify them and cause them to grow."
+          },
+          "ref": {
+            "bn": "সূরা তাওবা ৯:১০৩",
+            "en": "At-Tawbah 9:103"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যাকাত ফরজ হওয়ার শর্ত",
+            "en": "Conditions for zakat to be due"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "মুসলিম হওয়া",
+              "en": "Being Muslim"
+            },
+            {
+              "bn": "নিসাব পরিমাণ যাকাতযোগ্য সম্পদের মালিক হওয়া (নিসাবের বিস্তারিত পরের গাইডে)",
+              "en": "Owning zakatable wealth of at least the nisab (details in the next guide)"
+            },
+            {
+              "bn": "সম্পদের পূর্ণ মালিকানা থাকা",
+              "en": "Full ownership of the wealth"
+            },
+            {
+              "bn": "সম্পদ মৌলিক প্রয়োজন (থাকার ঘর, পরিধেয় কাপড়, ব্যবহারের আসবাব, যানবাহন ইত্যাদি) ও আদায়যোগ্য ঋণের অতিরিক্ত হওয়া",
+              "en": "The wealth being beyond basic needs (home, clothes, household items, personal vehicle) and debts due"
+            },
+            {
+              "bn": "নিসাব পরিমাণ সম্পদের ওপর চান্দ্রবছর (হাওল) পূর্ণ হওয়া",
+              "en": "A full lunar year (hawl) passing on the nisab amount"
+            },
+            {
+              "bn": "প্রাপ্তবয়স্ক ও সুস্থ মস্তিষ্কের হওয়া (হানাফি মতে)",
+              "en": "Being adult and sane (Hanafi view)"
+            }
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "শিশু ও মানসিক প্রতিবন্ধীর সম্পদে যাকাত",
+            "en": "Zakat on the wealth of children and the insane"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "নাবালেগ ও পাগলের সম্পদে যাকাত ফরজ নয় (তবে তাদের জমির ফসলে উশর আছে)।",
+                "en": "No zakat is due on the wealth of a minor or an insane person (though ushr is due on their crops)."
+              },
+              "evidence": {
+                "bn": "যাকাত একটি ইবাদত, আর তারা ইবাদতের জন্য দায়িত্বপ্রাপ্ত নয়।",
+                "en": "Zakat is an act of worship and they are not legally responsible for worship."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "তাদের সম্পদেও যাকাত ফরজ; অভিভাবক আদায় করবেন।",
+                "en": "Zakat is due on their wealth too; the guardian pays it."
+              },
+              "evidence": {
+                "bn": "যাকাত সম্পদের হক; উমর (রা.) ও আয়েশা (রা.) ইয়াতিমের সম্পদ থেকে যাকাত দিতেন বলে বর্ণিত।",
+                "en": "Zakat is a right on the wealth; Umar and Aishah are reported to have paid zakat from orphans' wealth."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "যাকাত না দেওয়ার পরিণতি ভয়াবহ। যারা সোনা-রূপা জমিয়ে রাখে আর আল্লাহর পথে খরচ করে না, কুরআনে তাদের যন্ত্রণাদায়ক শাস্তির কথা বলা হয়েছে।",
+            "en": "The consequence of withholding zakat is severe. The Quran warns those who hoard gold and silver and do not spend it in the way of Allah of a painful punishment."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সূরা তাওবা ৯:৩৪; সূরা তাওবা ৯:৩৫",
+            "en": "At-Tawbah 9:34; At-Tawbah 9:35"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "এই অ্যাপে একটি যাকাত ক্যালকুলেটর আছে। নিচের গাইডগুলো পড়ে নিয়ম বুঝে নিন, তারপর ক্যালকুলেটরে নিজের সম্পদের হিসাব বসান।",
+            "en": "This app has a zakat calculator. Read these guides to understand the rules, then enter your own figures in the calculator."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "zakat-nisab-hawl",
+      "title": {
+        "bn": "নিসাব ও এক বছর (হাওল)",
+        "en": "Nisab and the zakat year (hawl)"
+      },
+      "summary": {
+        "bn": "কতটুকু সম্পদ থাকলে যাকাত ফরজ হয়, সোনা না রূপার নিসাব ধরবেন, আর বছর কীভাবে গণনা করবেন।",
+        "en": "How much wealth makes zakat due, whether to use the gold or silver nisab, and how the year is counted."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "নিসাব কী",
+            "en": "What is nisab"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নিসাব হলো সম্পদের সেই ন্যূনতম পরিমাণ, যার মালিক হলে যাকাত ফরজ হয়। হাদিসে সোনার নিসাব ২০ দিনার (মিসকাল) এবং রূপার নিসাব ২০০ দিরহাম (৫ উকিয়া) নির্ধারিত হয়েছে।",
+            "en": "Nisab is the minimum amount of wealth that makes zakat due. The hadith sets the nisab of gold at 20 dinars (mithqal) and of silver at 200 dirhams (5 awqiyah)."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ৯৭৯",
+            "en": "Sahih Muslim 979"
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ (আলী রা.-এর বর্ণনা: ২০ দিনার ও এক বছর)",
+            "en": "Sunan Abi Dawud (narration of Ali: 20 dinars and one year)"
+          },
+          "check": true
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "সম্পদ",
+              "en": "Asset"
+            },
+            {
+              "bn": "নিসাব (গ্রাম)",
+              "en": "Nisab (grams)"
+            },
+            {
+              "bn": "ভরি/তোলা হিসাবে",
+              "en": "In bhori/tola"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "সোনা",
+                "en": "Gold"
+              },
+              {
+                "bn": "প্রায় ৮৫ গ্রাম",
+                "en": "About 85 g"
+              },
+              {
+                "bn": "সাড়ে ৭ ভরি (প্রায় ৮৭.৪৮ গ্রাম)",
+                "en": "7.5 bhori (about 87.48 g)"
+              }
+            ],
+            [
+              {
+                "bn": "রূপা",
+                "en": "Silver"
+              },
+              {
+                "bn": "প্রায় ৫৯৫ গ্রাম",
+                "en": "About 595 g"
+              },
+              {
+                "bn": "সাড়ে ৫২ ভরি (প্রায় ৬১২.৩৬ গ্রাম)",
+                "en": "52.5 bhori (about 612.36 g)"
+              }
+            ],
+            [
+              {
+                "bn": "নগদ টাকা, ব্যবসায়িক পণ্য ও মিশ্র সম্পদ",
+                "en": "Cash, trade goods and mixed assets"
+              },
+              {
+                "bn": "সোনা বা রূপার নিসাবের সমমূল্য (নিচের মতভেদ দেখুন)",
+                "en": "The value of the gold or silver nisab (see the difference below)"
+              },
+              {
+                "bn": "—",
+                "en": "—"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "গ্রামের হিসাবে সামান্য পার্থক্য আছে: আন্তর্জাতিকভাবে সাধারণত ৮৫ গ্রাম ও ৫৯৫ গ্রাম ধরা হয়, আর বাংলাদেশ-ভারতে প্রচলিত হিসাব সাড়ে ৭ ভরি ও সাড়ে ৫২ ভরি। যাকাতের তারিখে স্থানীয় বাজারদর দেখে টাকায় নিসাব নির্ণয় করুন।",
+            "en": "The gram figures differ slightly: internationally 85 g and 595 g are common, while the usual reckoning in Bangladesh and India is 7.5 and 52.5 bhori. Work out the nisab in taka from the local market price on your zakat date."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "নগদ ও মিশ্র সম্পদে কোন নিসাব ধরবেন",
+            "en": "Which nisab to use for cash and mixed wealth"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "রূপার নিসাব",
+                "en": "Silver nisab"
+              },
+              "text": {
+                "bn": "টাকা, ব্যবসার পণ্য বা কয়েক ধরনের সম্পদ মিলে রূপার নিসাবের মূল্যে পৌঁছালেই যাকাত ফরজ। হানাফি মাজহাব ও বাংলাদেশের অধিকাংশ মুফতি এ মত দেন। এতে গরিবদের উপকার বেশি এবং সতর্কতাও বেশি।",
+                "en": "Zakat is due once cash, trade goods or a mix of assets reach the value of the silver nisab. This is the Hanafi view and that of most muftis in Bangladesh; it benefits the poor more and is more cautious."
+              },
+              "evidence": {
+                "bn": "দুটি নিসাবের মধ্যে যেটি গরিবের জন্য বেশি উপকারী সেটিই ধরা উচিত; হানাফি মতে বিভিন্ন সম্পদ মূল্যের ভিত্তিতে একসাথে যোগ হয়।",
+                "en": "Of the two nisabs, the one more beneficial to the poor should be used; Hanafis combine different assets by value."
+              }
+            },
+            {
+              "label": {
+                "bn": "সোনার নিসাব",
+                "en": "Gold nisab"
+              },
+              "text": {
+                "bn": "বর্তমানে রূপার দাম অনেক কমে যাওয়ায় সমকালীন অনেক আলেম (যেমন ইউসুফ আল-কারযাভি) বলেন, টাকার নিসাব সোনার মূল্যে ধরা উচিত, যাতে সত্যিকারের সচ্ছল ব্যক্তির ওপরই যাকাত আসে।",
+                "en": "Because silver has lost much of its value, many contemporary scholars (e.g. Yusuf al-Qaradawi) say the cash nisab should be set by gold, so that zakat falls on the genuinely well-off."
+              },
+              "evidence": {
+                "bn": "নবী (সা.)-এর যুগে ২০ দিনার ও ২০০ দিরহামের মূল্য প্রায় সমান ছিল; এখন সোনা সম্পদের স্থিতিশীল মাপকাঠি।",
+                "en": "In the Prophet's time 20 dinars and 200 dirhams were roughly equal in value; today gold is the more stable measure of wealth."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "শুধু সোনা থাকলে (অন্য কোনো যাকাতযোগ্য সম্পদ, এমনকি সামান্য নগদও নেই) তাহলে সোনার নিসাবই প্রযোজ্য। কিন্তু সোনার সাথে কিছু নগদ টাকা বা রূপা থাকলেই হানাফি মতে সব মিলিয়ে রূপার নিসাবে হিসাব হবে।",
+            "en": "If you own only gold (no other zakatable asset, not even a little cash), the gold nisab applies. But in the Hanafi view, once there is some cash or silver with the gold, everything is combined and measured against the silver nisab."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "এক বছর (হাওল)",
+            "en": "The year (hawl)"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "যেদিন প্রথম নিসাব পরিমাণ সম্পদের মালিক হয়েছেন, চান্দ্রমাসের সেই তারিখই আপনার যাকাতের তারিখ। পরের বছর ওই তারিখে হিসাব করবেন।",
+              "en": "The lunar date on which you first owned the nisab is your zakat date; calculate on that date each following year."
+            },
+            {
+              "bn": "যাকাতের বছর চান্দ্রবছর (হিজরি)। ইংরেজি বছর ধরে হিসাব করলে অনেক আলেম ২.৫%-এর বদলে প্রায় ২.৫৭৭% দিতে বলেন।",
+              "en": "The zakat year is lunar (Hijri). If you calculate on the solar year, many scholars advise about 2.577% instead of 2.5%."
+            },
+            {
+              "bn": "ফসল, ফল ও খনিজে বছর লাগে না; তোলার সময়ই দিতে হয়।",
+              "en": "Crops, fruit and minerals need no year; their due is paid at harvest."
+            }
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "বছরের মাঝে সম্পদ কমে গেলে বা নতুন আয় হলে",
+            "en": "When wealth drops or new income arrives during the year"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "বছরের শুরু ও শেষে নিসাব পূর্ণ থাকলেই যথেষ্ট; মাঝে কমে গেলেও (একেবারে শূন্য না হলে) ক্ষতি নেই। বছরের মাঝে যে নতুন টাকা আসে (বেতন, লাভ, উপহার), তার জন্য আলাদা বছর লাগে না; যাকাতের তারিখে যা আছে, সবকিছুর যাকাত দেবেন।",
+                "en": "It is enough that the nisab is complete at the start and end of the year; dropping below it in between does not matter (unless it falls to nothing). New money during the year (salary, profit, gifts) needs no separate year; pay on everything you hold on the zakat date."
+              },
+              "evidence": {
+                "bn": "প্রতিটি আয়ের আলাদা বছর হিসাব করা মানুষের জন্য কঠিন; একই জাতের সম্পদ মূল সম্পদের সঙ্গে যুক্ত হয়।",
+                "en": "Tracking a separate year for every receipt would be a hardship; wealth of the same kind joins the original holding."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও হাম্বলি",
+                "en": "Shafi'i and Hanbali"
+              },
+              "text": {
+                "bn": "পুরো বছর জুড়ে নিসাব থাকতে হবে; মাঝে নিসাবের নিচে নামলে নতুন করে বছর শুরু। নতুন আয়ের প্রতিটির জন্য আলাদা বছর গণনা হবে (ব্যবসার লাভ ছাড়া), তবে সহজতার জন্য আগেভাগে সবটার যাকাত দিয়ে দেওয়া যায়।",
+                "en": "The nisab must be held throughout the year; if it falls below, the year restarts. Each new receipt has its own year (except trading profit), though one may pay on everything early for simplicity."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'বছর পূর্ণ না হওয়া পর্যন্ত কোনো সম্পদে যাকাত নেই।'",
+                "en": "Hadith: 'No zakat is due on wealth until a year has passed over it.'"
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "বছর পূর্ণ হওয়ার আগে অগ্রিম যাকাত দেওয়া হানাফি, শাফেয়ি ও হাম্বলি মতে জায়েজ; নবী (সা.) আব্বাস (রা.)-এর কাছ থেকে অগ্রিম যাকাত নিয়েছিলেন বলে বর্ণিত।",
+            "en": "Paying zakat in advance before the year ends is allowed by the Hanafi, Shafi'i and Hanbali schools; the Prophet is reported to have accepted Abbas's zakat in advance."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সুনান আবু দাউদ; জামে তিরমিজি (আব্বাস রা.-এর অগ্রিম যাকাত)",
+            "en": "Sunan Abi Dawud; Jami' at-Tirmidhi (Abbas paying zakat in advance)"
+          },
+          "check": true
+        }
+      ]
+    },
+    {
+      "slug": "zakat-assets",
+      "title": {
+        "bn": "কোন কোন সম্পদে যাকাত",
+        "en": "Which assets are zakatable"
+      },
+      "summary": {
+        "bn": "নগদ টাকা, সোনা-রূপা, ব্যবসার পণ্য, শেয়ার, পাওনা টাকা, ফসলের উশর ও গবাদিপশু; আর কোন সম্পদে যাকাত নেই।",
+        "en": "Cash, gold and silver, trade goods, shares, money owed to you, ushr on crops and livestock; and what is not zakatable."
+      },
+      "level": "detail",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "নগদ টাকা ও সঞ্চয়",
+            "en": "Cash and savings"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "হাতের নগদ, ব্যাংক হিসাব, মোবাইল ব্যাংকিং, এফডিআর, সঞ্চয়পত্র, বিদেশি মুদ্রা, ডিপিএস-এ জমা টাকা — সবই যাকাতের হিসাবে আসবে। সুদ বা অবৈধ আয়ের টাকা যাকাতের অংশ নয়; সেটি সওয়াবের নিয়ত ছাড়া পুরোটাই গরিবকে দিয়ে দিতে হবে।",
+            "en": "Cash in hand, bank accounts, mobile wallets, fixed deposits, savings certificates, foreign currency and deposit schemes all count. Interest or unlawful income is not part of zakat; all of it must be given away to the poor without expecting reward."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "সোনা ও রূপা",
+            "en": "Gold and silver"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "সোনা-রূপার গয়না, বার বা কয়েনের যাকাত দিতে হবে যাকাতের তারিখের বাজারদর (বিক্রয়মূল্য) অনুযায়ী। পাথর বা অন্য ধাতু বাদ দিয়ে শুধু সোনা-রূপার ওজন ধরবেন। হীরা, মুক্তা বা প্ল্যাটিনামের গয়না ব্যক্তিগত ব্যবহারের হলে যাকাত নেই; ব্যবসার জন্য হলে আছে।",
+            "en": "Gold and silver jewellery, bars and coins are zakatable at the market (sale) value on the zakat date. Count only the gold or silver weight, excluding stones and other metals. Diamond, pearl or platinum jewellery for personal use is not zakatable; if held for trade, it is."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "ব্যবহারের গয়নায় যাকাত",
+            "en": "Zakat on jewellery that is worn"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "নারীর ব্যবহারের সোনা-রূপার গয়নাতেও যাকাত ফরজ।",
+                "en": "Zakat is due even on gold and silver jewellery a woman wears."
+              },
+              "evidence": {
+                "bn": "এক নারীর মেয়ের হাতে সোনার মোটা কাঁকন দেখে নবী (সা.) জিজ্ঞেস করেন তার যাকাত দেওয়া হয় কি না (আবু দাউদ); এবং সোনা-রূপা জমানোর আয়াতের ব্যাপকতা।",
+                "en": "The Prophet, seeing thick gold bangles on a woman's daughter, asked whether their zakat was paid (Abu Dawud); and the general verse on hoarding gold and silver."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "স্বাভাবিক পরিমাণে ব্যবহারের জন্য রাখা জায়েজ গয়নায় যাকাত নেই; সঞ্চয় বা বিনিয়োগের জন্য রাখা গয়নায় আছে।",
+                "en": "No zakat on lawful jewellery kept in normal amounts for wearing; jewellery kept as savings or investment is zakatable."
+              },
+              "evidence": {
+                "bn": "আয়েশা (রা.), জাবির (রা.), ইবনে উমর (রা.)সহ কয়েকজন সাহাবির আমল: তারা পরিবারের ব্যবহারের গয়নার যাকাত দিতেন না।",
+                "en": "The practice of Companions such as Aishah, Jabir and Ibn Umar, who did not pay zakat on the jewellery their families wore."
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ব্যবসার পণ্য",
+            "en": "Trade goods"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "বিক্রির উদ্দেশ্যে রাখা সব পণ্য (দোকানের মাল, গুদামের স্টক, বিক্রির জন্য কেনা জমি বা ফ্ল্যাট) যাকাতের তারিখের বাজারদরে হিসাব করে যাকাত দেবেন। দোকানঘর, আসবাব, মেশিন ও গাড়ির মতো স্থায়ী সম্পদে যাকাত নেই, তবে সেগুলো থেকে আসা আয় জমা থাকলে তাতে আছে।",
+            "en": "All goods held for sale (shop stock, warehouse inventory, land or flats bought to resell) are valued at the market price on the zakat date. Fixed assets such as the shop premises, furniture, machines and vehicles are not zakatable, though the income from them is once saved."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "শেয়ার ও বিনিয়োগ",
+            "en": "Shares and investments"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "শেয়ারের যাকাত",
+            "en": "Zakat on shares"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "কেনাবেচার জন্য রাখা শেয়ার",
+                "en": "Shares held for trading"
+              },
+              "text": {
+                "bn": "দাম বাড়লে বিক্রির উদ্দেশ্যে কেনা শেয়ার ব্যবসার পণ্যের মতো; যাকাতের তারিখে পুরো বাজারমূল্যের ২.৫% দিতে হবে। এ বিষয়ে সমকালীন আলেমরা প্রায় একমত।",
+                "en": "Shares bought to sell at a profit are like trade goods: 2.5% of the full market value on the zakat date. Contemporary scholars broadly agree on this."
+              },
+              "evidence": {
+                "bn": "ব্যবসার পণ্যে যাকাতের সাধারণ বিধান।",
+                "en": "The general ruling on trade goods."
+              }
+            },
+            {
+              "label": {
+                "bn": "দীর্ঘমেয়াদি বিনিয়োগ (লভ্যাংশের জন্য)",
+                "en": "Long-term investment (for dividends)"
+              },
+              "text": {
+                "bn": "এক মত: কোম্পানির নগদ, পাওনা ও পণ্যের মতো যাকাতযোগ্য সম্পদে আপনার অংশ হিসাব করে তার যাকাত দেবেন (জানা না গেলে বাজারমূল্যের ওপর দেওয়াই সতর্কতা)। আরেক মত: পুরো বাজারমূল্যের ওপরই যাকাত। লভ্যাংশ হাতে এলে তা নগদের সঙ্গে যোগ হবে।",
+                "en": "One view: pay on your share of the company's zakatable assets (cash, receivables, inventory); if that is unknown, paying on market value is the safe course. Another view: pay on the full market value. Dividends received join your cash."
+              },
+              "evidence": {
+                "bn": "শেয়ার কোম্পানির সম্পদের মালিকানার অংশ; স্থায়ী সম্পদে যাকাত নেই — ইসলামিক ফিকহ একাডেমির মতো সংস্থার আলোচনা।",
+                "en": "A share is part-ownership of the company's assets, and fixed assets are not zakatable — as discussed by bodies such as the Islamic Fiqh Academy."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "পাওনা টাকা ও ঋণ",
+            "en": "Money owed to you and your debts"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "যে পাওনা ফেরত পাওয়ার আশা আছে, তার যাকাতও দিতে হবে; প্রতি বছর দিয়ে দেওয়া সহজ। হানাফি মতে চাইলে টাকা হাতে পাওয়ার পর বিগত বছরগুলোর যাকাত একসাথে দেওয়া যায়।",
+              "en": "Money owed to you that you expect to recover is zakatable; paying each year is simplest. Hanafis allow paying for the past years together once it is received."
+            },
+            {
+              "bn": "যে পাওনা ফেরত পাওয়ার আশা নেই, তাতে যাকাত নেই; পরে পেলে হানাফি মতে পাওয়ার পর থেকে হিসাব।",
+              "en": "Money you do not expect to recover is not zakatable; if later recovered, Hanafis count from receipt."
+            },
+            {
+              "bn": "আপনার নিজের যে ঋণ এখন পরিশোধ করতে হবে (বা এ বছরের কিস্তি), হানাফি ও হাম্বলি মতে তা বাদ দিয়ে হিসাব করবেন; দীর্ঘমেয়াদি ঋণের পুরোটা একবারে বাদ দেওয়া যায় না। শাফেয়ি মতে ঋণ বাদ যায় না।",
+              "en": "Debts you must pay now (or this year's instalments) are deducted in the Hanafi and Hanbali view; the whole of a long-term loan is not deducted at once. Shafi'is do not deduct debts."
+            },
+            {
+              "bn": "প্রভিডেন্ট ফান্ড: যে অংশ এখনও তোলার অধিকার নেই, অনেক আলেমের মতে তা হাতে পাওয়ার পর থেকে হিসাব হবে; স্বেচ্ছায় জমা অংশ ও তোলার অধিকার আছে এমন অংশে যাকাত দেওয়াই সতর্কতা।",
+              "en": "Provident fund: many scholars say the part you cannot yet withdraw is counted from when you receive it; voluntary contributions and withdrawable balances should be included to be safe."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যেসব সম্পদে যাকাত নেই",
+            "en": "What is not zakatable"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "বসবাসের বাড়ি, ব্যবহারের গাড়ি, আসবাব, পোশাক ও গৃহস্থালি জিনিস",
+              "en": "The home you live in, personal car, furniture, clothes and household goods"
+            },
+            {
+              "bn": "ভাড়া দেওয়া বাড়ি-দোকান (তবে ভাড়ার জমানো টাকায় যাকাত আছে)",
+              "en": "Property rented out (but saved rental income is zakatable)"
+            },
+            {
+              "bn": "নিজে বাড়ি করার জন্য কেনা জমি (বিক্রির নিয়তে কিনলে যাকাত আছে)",
+              "en": "Land bought to build your own home (land bought to resell is zakatable)"
+            },
+            {
+              "bn": "পেশার যন্ত্রপাতি ও কাজের বই",
+              "en": "Tools of one's trade and working books"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ফসলের যাকাত (উশর)",
+            "en": "Zakat on crops (ushr)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "বৃষ্টি বা প্রাকৃতিক পানিতে উৎপন্ন ফসলে উৎপাদনের ১০% (উশর), আর সেচ দিয়ে উৎপন্ন ফসলে ৫% (নিসফে উশর) দিতে হয়। এতে বছর পূর্ণ হওয়া লাগে না; ফসল তোলার সময়ই দেবেন।",
+            "en": "Crops watered by rain or natural sources owe 10% of the harvest (ushr); crops watered by irrigation owe 5%. No year is needed; it is paid at harvest."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৪৮৩",
+            "en": "Sahih al-Bukhari 1483"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "উশরের নিসাব",
+            "en": "Nisab for ushr"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "ইমাম আবু হানিফা",
+                "en": "Imam Abu Hanifa"
+              },
+              "text": {
+                "bn": "কম-বেশি যে পরিমাণ ফসলই হোক, উশর দিতে হবে; কোনো নিসাব নেই।",
+                "en": "Ushr is due on any amount of produce, however small; there is no nisab."
+              },
+              "evidence": {
+                "bn": "'যা বৃষ্টিতে সিক্ত হয় তাতে উশর' হাদিসটি ব্যাপক, পরিমাণের শর্ত নেই।",
+                "en": "The hadith 'what is watered by rain owes a tenth' is general, with no minimum."
+              }
+            },
+            {
+              "label": {
+                "bn": "অধিকাংশ আলেম (আবু ইউসুফ, মুহাম্মদসহ)",
+                "en": "Majority (incl. Abu Yusuf and Muhammad)"
+              },
+              "text": {
+                "bn": "পাঁচ ওয়াসাক (প্রায় ৬৫০ কেজি) বা তার বেশি সংরক্ষণযোগ্য শস্য হলেই উশর।",
+                "en": "Ushr is due only once storable grain reaches five awsuq (about 650 kg)."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'পাঁচ ওয়াসাকের কম শস্যে সদকা নেই।'",
+                "en": "Hadith: 'There is no charity on less than five awsuq.'"
+              }
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ৯৭৯",
+            "en": "Sahih Muslim 979"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "গবাদিপশু (সংক্ষেপে)",
+            "en": "Livestock (briefly)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "যে গরু, মহিষ, উট, ছাগল ও ভেড়া বছরের বেশির ভাগ সময় মুক্ত চারণভূমিতে চরে খায় (সায়িমা), তাতে যাকাত আছে। যেমন: ৪০–১২০টি ছাগল/ভেড়ায় ১টি; ৩০টি গরু/মহিষে এক বছর বয়সী ১টি বাছুর, ৪০টিতে দুই বছর বয়সী ১টি; ৫টি উটে ১টি ছাগল। খামারে কিনে খাওয়ানো পশু ব্যবসার জন্য হলে ব্যবসার পণ্য হিসেবে মূল্যের ২.৫% দিতে হবে।",
+            "en": "Cattle, buffalo, camels, goats and sheep that graze freely for most of the year (sa'imah) owe zakat. For example: 1 for 40–120 goats/sheep; a one-year calf for 30 cattle and a two-year one for 40; a goat for 5 camels. Farm animals fed on bought fodder and raised for sale are trade goods at 2.5% of value."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি (আবু বকর রা.-এর যাকাত-পত্র); সুনান আবু দাউদ (মুয়াজ রা.-এর বর্ণনা)",
+            "en": "Sahih al-Bukhari (Abu Bakr's letter on zakat); Sunan Abi Dawud (narration of Mu'adh)"
+          },
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "পশুর যাকাতের পূর্ণ তালিকা দীর্ঘ; এমন খামার থাকলে নির্ভরযোগ্য আলেমের কাছ থেকে বিস্তারিত জেনে নিন।",
+            "en": "The full livestock tables are long; if you own such herds, get the details from a reliable scholar."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "zakat-calculation",
+      "title": {
+        "bn": "যাকাত হিসাব করার নিয়ম",
+        "en": "How to calculate zakat"
+      },
+      "summary": {
+        "bn": "ধাপে ধাপে যাকাতের হিসাব এবং টাকায় একটি উদাহরণ।",
+        "en": "Step-by-step zakat calculation with a worked example in taka."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "step",
+          "title": {
+            "bn": "যাকাতের তারিখ ঠিক করুন",
+            "en": "Fix your zakat date"
+          },
+          "text": {
+            "bn": "যে হিজরি তারিখে প্রথম নিসাবের মালিক হয়েছিলেন, সেটিই আপনার যাকাতের তারিখ। মনে না থাকলে আনুমানিক একটি তারিখ (যেমন রমজানের কোনো দিন) ঠিক করে প্রতি বছর সেদিন হিসাব করুন।",
+            "en": "Your zakat date is the Hijri date you first owned the nisab. If you do not remember, fix a reasonable date (e.g. a day in Ramadan) and calculate on it every year."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "যাকাতযোগ্য সম্পদ যোগ করুন",
+            "en": "Add up zakatable assets"
+          },
+          "text": {
+            "bn": "ওই দিনের হিসাবে নগদ, ব্যাংক, সঞ্চয়, সোনা-রূপার বাজারমূল্য, ব্যবসার পণ্যের মূল্য, শেয়ার ও ফেরতযোগ্য পাওনা যোগ করুন।",
+            "en": "On that date add cash, bank balances, savings, the market value of gold and silver, the value of trade stock, shares and recoverable money owed to you."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "আদায়যোগ্য ঋণ বাদ দিন",
+            "en": "Deduct debts now due"
+          },
+          "text": {
+            "bn": "এখন পরিশোধ করতে হবে এমন ঋণ, বকেয়া বিল ও এ বছরের কিস্তি বাদ দিন (হানাফি মত)।",
+            "en": "Deduct debts you must pay now, unpaid bills and this year's instalments (Hanafi view)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "নিসাবের সাথে মিলান",
+            "en": "Compare with the nisab"
+          },
+          "text": {
+            "bn": "বাকি অঙ্ক যদি নিসাবের মূল্যের (আজকের দামে) সমান বা বেশি হয়, তাহলে যাকাত ফরজ।",
+            "en": "If what remains is equal to or above the nisab value (at today's price), zakat is due."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "২.৫% বের করুন",
+            "en": "Take 2.5%"
+          },
+          "text": {
+            "bn": "নিট সম্পদকে ৪০ দিয়ে ভাগ করুন, অথবা ২.৫% হিসাব করুন। যাকাত নিসাবের ওপরের অংশে নয়, পুরো নিট সম্পদের ওপর।",
+            "en": "Divide net wealth by 40, i.e. take 2.5%. Zakat is on the whole net amount, not only the part above the nisab."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "নিয়ত করে আদায় করুন",
+            "en": "Pay with intention"
+          },
+          "text": {
+            "bn": "যাকাতের নিয়তে (মনে মনে) হকদারকে দিন। প্রাপককে 'যাকাত' বলে জানানো জরুরি নয়। হিসাব লিখে রাখুন।",
+            "en": "Give it to eligible recipients with the intention of zakat in your heart. You need not tell the recipient it is zakat. Keep a record."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "উদাহরণ",
+            "en": "Worked example"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "রহিম সাহেবের যাকাতের তারিখে সম্পদ নিচের মতো। (দামগুলো শুধু উদাহরণের জন্য; আসল হিসাবে সেদিনের বাজারদর বসাবেন।)",
+            "en": "Mr Rahim's assets on his zakat date are below. (Values are only for illustration; use the actual market prices on your date.)"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "খাত",
+              "en": "Item"
+            },
+            {
+              "bn": "টাকা",
+              "en": "Taka"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "হাতে ও ব্যাংকে নগদ",
+                "en": "Cash in hand and bank"
+              },
+              {
+                "bn": "১,৫০,০০০",
+                "en": "150,000"
+              }
+            ],
+            [
+              {
+                "bn": "সঞ্চয়পত্র ও এফডিআর",
+                "en": "Savings certificates and FDR"
+              },
+              {
+                "bn": "২,০০,০০০",
+                "en": "200,000"
+              }
+            ],
+            [
+              {
+                "bn": "স্ত্রীর গয়নার সোনা, সেদিনের বিক্রয়মূল্যে (ধরা যাক; মালিক স্ত্রী হলে হিসাব তার নামে হবে)",
+                "en": "Gold jewellery at sale value that day (assumed; if it belongs to his wife, it is counted in her name)"
+              },
+              {
+                "bn": "৪,০০,০০০",
+                "en": "400,000"
+              }
+            ],
+            [
+              {
+                "bn": "দোকানের বিক্রয়যোগ্য মাল",
+                "en": "Shop stock for sale"
+              },
+              {
+                "bn": "৩,০০,০০০",
+                "en": "300,000"
+              }
+            ],
+            [
+              {
+                "bn": "ফেরত পাওয়ার আশা আছে এমন পাওনা",
+                "en": "Money owed to him, expected back"
+              },
+              {
+                "bn": "৫০,০০০",
+                "en": "50,000"
+              }
+            ],
+            [
+              {
+                "bn": "মোট যাকাতযোগ্য সম্পদ",
+                "en": "Total zakatable assets"
+              },
+              {
+                "bn": "১১,০০,০০০",
+                "en": "1,100,000"
+              }
+            ],
+            [
+              {
+                "bn": "বাদ: এখন পরিশোধযোগ্য ঋণ ও এ বছরের কিস্তি",
+                "en": "Less: debts and instalments due now"
+              },
+              {
+                "bn": "− ১,০০,০০০",
+                "en": "− 100,000"
+              }
+            ],
+            [
+              {
+                "bn": "বাদ: বকেয়া বিল",
+                "en": "Less: unpaid bills"
+              },
+              {
+                "bn": "− ২০,০০০",
+                "en": "− 20,000"
+              }
+            ],
+            [
+              {
+                "bn": "নিট যাকাতযোগ্য সম্পদ",
+                "en": "Net zakatable wealth"
+              },
+              {
+                "bn": "৯,৮০,০০০",
+                "en": "980,000"
+              }
+            ],
+            [
+              {
+                "bn": "যাকাত (৯,৮০,০০০ × ২.৫%)",
+                "en": "Zakat (980,000 × 2.5%)"
+              },
+              {
+                "bn": "২৪,৫০০",
+                "en": "24,500"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নিট সম্পদ ৯,৮০,০০০ টাকা যদি সেদিনের নিসাবের মূল্যের চেয়ে বেশি হয় (রূপার নিসাবে সাধারণত হবে), তাহলে রহিম সাহেবের যাকাত ২৪,৫০০ টাকা।",
+            "en": "If the net 980,000 taka is above that day's nisab value (with the silver nisab it usually will be), Mr Rahim's zakat is 24,500 taka."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "গয়না যার মালিকানায়, যাকাত তারই। স্ত্রীর গয়না স্ত্রীর সম্পদ; স্বামী চাইলে তার পক্ষ থেকে (তার অনুমতিতে) দিয়ে দিতে পারেন।",
+            "en": "Zakat is on whoever owns the jewellery. A wife's jewellery is her wealth; the husband may pay it for her with her permission."
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "এই অ্যাপের যাকাত ক্যালকুলেটরে খাতগুলো আলাদা করে বসালে হিসাব সহজ হবে। ক্যালকুলেটরের ফল একটি সহায়ক হিসাব; জটিল ব্যবসা বা সম্পদের ক্ষেত্রে আলেমের পরামর্শ নিন।",
+            "en": "Entering each item separately in this app's zakat calculator makes it easy. The calculator gives a helpful estimate; for complex businesses or holdings, consult a scholar."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "zakat-recipients",
+      "title": {
+        "bn": "যাকাত কাকে দেবেন, কাকে দেবেন না",
+        "en": "Who receives zakat and who cannot"
+      },
+      "summary": {
+        "bn": "কুরআনে বর্ণিত যাকাতের আট খাত এবং যাদের যাকাত দেওয়া যায় না।",
+        "en": "The eight categories of zakat recipients in the Quran, and those who may not receive it."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "যাকাতের আট খাত",
+            "en": "The eight categories"
+          },
+          "ar": "إِنَّمَا الصَّدَقَاتُ لِلْفُقَرَاءِ وَالْمَسَاكِينِ وَالْعَامِلِينَ عَلَيْهَا وَالْمُؤَلَّفَةِ قُلُوبُهُمْ وَفِي الرِّقَابِ وَالْغَارِمِينَ وَفِي سَبِيلِ اللَّهِ وَابْنِ السَّبِيلِ ۖ فَرِيضَةً مِنَ اللَّهِ ۗ وَاللَّهُ عَلِيمٌ حَكِيمٌ",
+          "pron": {
+            "bn": "ইন্নামাস সাদাকাতু লিল ফুকারাই ওয়াল মাসাকীনি ওয়াল আমিলীনা আলাইহা ওয়াল মুআল্লাফাতি কুলূবুহুম ওয়া ফির রিকাবি ওয়াল গারিমীনা ওয়া ফী সাবীলিল্লাহি ওয়াবনিস সাবীল, ফারীদাতাম মিনাল্লাহ, ওয়াল্লাহু আলীমুন হাকীম",
+            "en": "Innamas-sadaqatu lil-fuqara'i wal-masakini wal-'amilina 'alayha wal-mu'allafati qulubuhum wa fir-riqabi wal-gharimina wa fi sabilillahi wabnis-sabil, faridatam minallah, wallahu 'alimun hakim"
+          },
+          "meaning": {
+            "bn": "সদকা (যাকাত) কেবল ফকির, মিসকিন, যাকাত আদায়ের কাজে নিযুক্ত কর্মী, যাদের মন জয় করা উদ্দেশ্য, দাসমুক্তি, ঋণগ্রস্ত, আল্লাহর পথে এবং মুসাফিরের জন্য। এটা আল্লাহর নির্ধারিত বিধান; আল্লাহ সর্বজ্ঞ, প্রজ্ঞাময়।",
+            "en": "Zakat is only for the poor, the needy, those employed to administer it, those whose hearts are to be reconciled, freeing captives, those in debt, in the cause of Allah, and the stranded traveller: an obligation from Allah. Allah is All-Knowing, All-Wise."
+          },
+          "ref": {
+            "bn": "সূরা তাওবা ৯:৬০",
+            "en": "At-Tawbah 9:60"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "খাত",
+              "en": "Category"
+            },
+            {
+              "bn": "কারা",
+              "en": "Who they are"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "ফকির",
+                "en": "Al-fuqara' (the poor)"
+              },
+              {
+                "bn": "যার নিসাব পরিমাণ সম্পদ নেই; প্রয়োজনের চেয়ে অনেক কম আছে",
+                "en": "Those without nisab-level wealth, having far less than their needs"
+              }
+            ],
+            [
+              {
+                "bn": "মিসকিন",
+                "en": "Al-masakin (the needy)"
+              },
+              {
+                "bn": "যার কিছুই নেই বা যা আছে তাতে চলে না (দুটির পার্থক্য নিয়ে মতভেদ আছে, তবে দুজনই হকদার)",
+                "en": "Those with nothing or not enough to live on (the exact difference is debated; both are eligible)"
+              }
+            ],
+            [
+              {
+                "bn": "আমিলিন",
+                "en": "Al-'amilin (zakat workers)"
+              },
+              {
+                "bn": "সরকার বা প্রতিষ্ঠানের পক্ষ থেকে যাকাত সংগ্রহ ও বণ্টনের দায়িত্বপ্রাপ্ত কর্মী, ধনী হলেও পারিশ্রমিক হিসেবে",
+                "en": "Those appointed by the state or an institution to collect and distribute zakat, paid even if wealthy"
+              }
+            ],
+            [
+              {
+                "bn": "মুআল্লাফাতুল কুলূব",
+                "en": "Mu'allafat al-qulub"
+              },
+              {
+                "bn": "ইসলামের প্রতি মন আকৃষ্ট করা বা নওমুসলিমকে দৃঢ় করা যাদের উদ্দেশ্য (হানাফি মতে এ খাতটি এখন প্রযোজ্য নয়; অন্যরা প্রয়োজনে প্রযোজ্য বলেন)",
+                "en": "Those whose hearts are to be won or new Muslims to be strengthened (Hanafis hold this no longer applies; others say it applies when needed)"
+              }
+            ],
+            [
+              {
+                "bn": "রিকাব",
+                "en": "Ar-riqab (captives)"
+              },
+              {
+                "bn": "দাস বা বন্দিকে মুক্ত করা",
+                "en": "Freeing slaves or captives"
+              }
+            ],
+            [
+              {
+                "bn": "গারিমিন",
+                "en": "Al-gharimin (debtors)"
+              },
+              {
+                "bn": "বৈধ প্রয়োজনে ঋণগ্রস্ত, যে ঋণ শোধ করতে অক্ষম",
+                "en": "Those in debt for a lawful need who cannot repay"
+              }
+            ],
+            [
+              {
+                "bn": "ফী সাবীলিল্লাহ",
+                "en": "Fi sabilillah"
+              },
+              {
+                "bn": "আল্লাহর পথে: হানাফি মতে আল্লাহর পথে নিয়োজিত অভাবী ব্যক্তি (যেমন অভাবী দ্বীনি ছাত্র); এর পরিধি নিয়ে আলেমদের মতভেদ আছে",
+                "en": "In Allah's cause: for Hanafis, needy people engaged in it (e.g. poor students of religious knowledge); its scope is debated"
+              }
+            ],
+            [
+              {
+                "bn": "ইবনুস সাবীল",
+                "en": "Ibn as-sabil"
+              },
+              {
+                "bn": "সফরে গিয়ে অর্থসংকটে পড়া মুসাফির, বাড়িতে ধনী হলেও",
+                "en": "A traveller stranded without funds, even if wealthy at home"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নিকটাত্মীয়দের মধ্যে যারা হকদার (ভাই-বোন, চাচা-মামা, খালা-ফুফু ইত্যাদি), তাদের দেওয়া উত্তম; এতে যাকাত ও আত্মীয়তার হক দুটোই আদায় হয়।",
+            "en": "It is best to give to eligible relatives (siblings, uncles, aunts, etc.); it fulfils both zakat and the rights of kinship."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যাদের যাকাত দেওয়া যায় না",
+            "en": "Those who cannot receive zakat"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "নিজের মা-বাবা, দাদা-দাদি, নানা-নানি (ঊর্ধ্বতন)",
+              "en": "One's own parents and grandparents (ascendants)"
+            },
+            {
+              "bn": "নিজের সন্তান, নাতি-নাতনি (অধস্তন)",
+              "en": "One's own children and grandchildren (descendants)"
+            },
+            {
+              "bn": "নিজের স্ত্রী (স্বামী স্ত্রীকে যাকাত দিতে পারেন না)",
+              "en": "One's own wife (a husband cannot give zakat to his wife)"
+            },
+            {
+              "bn": "নিসাব পরিমাণ সম্পদের মালিক ধনী ব্যক্তি",
+              "en": "A wealthy person who owns nisab"
+            },
+            {
+              "bn": "নবী (সা.)-এর বংশধর বনু হাশিম",
+              "en": "The Prophet's family, Banu Hashim"
+            },
+            {
+              "bn": "অমুসলিমকে ফরজ যাকাত দেওয়া যায় না (নফল সদকা দেওয়া যায়)",
+              "en": "Non-Muslims cannot receive obligatory zakat (they may receive voluntary charity)"
+            },
+            {
+              "bn": "হানাফি মতে যাকাতে কোনো ব্যক্তিকে মালিক বানিয়ে দিতে হয়; তাই সরাসরি মসজিদ নির্মাণ, রাস্তা তৈরি বা মৃতের কাফনে যাকাতের টাকা খরচ করা যায় না",
+              "en": "Hanafis require zakat to be handed into a person's ownership, so it cannot be spent directly on building masjids, roads or shrouding the dead"
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১০৭২",
+            "en": "Sahih Muslim 1072"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "স্ত্রী কি স্বামীকে যাকাত দিতে পারবেন",
+            "en": "Can a wife give zakat to her husband"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "ইমাম আবু হানিফা",
+                "en": "Imam Abu Hanifa"
+              },
+              "text": {
+                "bn": "না; স্বামী-স্ত্রীর সম্পদ ও উপকার পরস্পর জড়িত, তাই যাকাত নিজের কাছেই ফিরে আসে।",
+                "en": "No; spouses share benefit from each other's wealth, so the zakat effectively returns to the giver."
+              },
+              "evidence": {
+                "bn": "মা-বাবা ও সন্তানের ক্ষেত্রে নিষেধের ওপর কিয়াস।",
+                "en": "Analogy with the prohibition for parents and children."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, হাম্বলি (এক বর্ণনা), আবু ইউসুফ ও মুহাম্মদ",
+                "en": "Shafi'i, Hanbali (one report), Abu Yusuf and Muhammad"
+              },
+              "text": {
+                "bn": "হ্যাঁ, স্বামী হকদার হলে স্ত্রী তাকে যাকাত দিতে পারেন।",
+                "en": "Yes, a wife may give her zakat to her husband if he is eligible."
+              },
+              "evidence": {
+                "bn": "ইবনে মাসউদ (রা.)-এর স্ত্রী জয়নব (রা.) স্বামী ও ইয়াতিমদের দান করা সম্পর্কে জিজ্ঞেস করলে নবী (সা.) বলেন, তার জন্য দুটি সওয়াব: আত্মীয়তার ও সদকার (সহিহ বুখারি)।",
+                "en": "When Zaynab, wife of Ibn Mas'ud, asked about giving to her husband and orphans, the Prophet said she would have two rewards, for kinship and for charity (Sahih al-Bukhari)."
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "ভালোভাবে খোঁজ নিয়ে যাকে হকদার মনে করে দিয়েছেন, পরে সে ধনী প্রমাণিত হলেও হানাফি মতে যাকাত আদায় হয়ে যাবে।",
+            "en": "If you gave to someone after reasonable checking and they later turn out to be wealthy, in the Hanafi view the zakat is still valid."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "zakat-sadaqah",
+      "title": {
+        "bn": "সদকা ও তার ফজিলত",
+        "en": "Sadaqah and its virtues"
+      },
+      "summary": {
+        "bn": "ফরজ যাকাতের বাইরে নফল দান, সদকায়ে জারিয়া এবং দানের আদব।",
+        "en": "Voluntary charity beyond zakat, ongoing charity, and the manners of giving."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "مَثَلُ الَّذِينَ يُنْفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنْبَتَتْ سَبْعَ سَنَابِلَ فِي كُلِّ سُنْبُلَةٍ مِائَةُ حَبَّةٍ",
+          "pron": {
+            "bn": "মাসালুল্লাযীনা ইউনফিকূনা আমওয়ালাহুম ফী সাবীলিল্লাহি কামাসালি হাব্বাতিন আমবাতাত সাবআ সানাবিলা ফী কুল্লি সুমবুলাতিম মিআতু হাব্বাহ",
+            "en": "Mathalul-ladhina yunfiquna amwalahum fi sabilillahi kamathali habbatin ambatat sab'a sanabila fi kulli sumbulatim mi'atu habbah"
+          },
+          "meaning": {
+            "bn": "যারা আল্লাহর পথে সম্পদ ব্যয় করে, তাদের উপমা একটি শস্যদানার মতো, যা থেকে সাতটি শীষ জন্মায়, প্রতিটি শীষে একশ দানা।",
+            "en": "The example of those who spend their wealth in the way of Allah is that of a grain that grows seven ears, in each ear a hundred grains."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:২৬১",
+            "en": "Al-Baqarah 2:261"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "সদকার কিছু ফজিলত",
+            "en": "Some virtues of charity"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "সদকা সম্পদ কমায় না।",
+              "en": "Charity does not decrease wealth."
+            },
+            {
+              "bn": "অর্ধেক খেজুর দিয়ে হলেও জাহান্নাম থেকে বাঁচো।",
+              "en": "Protect yourself from the Fire, even with half a date."
+            },
+            {
+              "bn": "আল্লাহ হালাল উপার্জনের দান গ্রহণ করেন এবং তা বাড়িয়ে পাহাড়সম করে দেন।",
+              "en": "Allah accepts charity from lawful earnings and grows it until it becomes like a mountain."
+            },
+            {
+              "bn": "যে এত গোপনে দান করে যে ডান হাত কী দিল বাম হাত জানে না, সে কিয়ামতের দিন আল্লাহর আরশের ছায়া পাবে।",
+              "en": "One who gives so secretly that his left hand does not know what his right hand gave will be shaded by Allah on the Day of Judgement."
+            },
+            {
+              "bn": "প্রত্যেক ভালো কাজই সদকা; ভাইয়ের সাথে হাসিমুখে দেখা করাও সদকা।",
+              "en": "Every good deed is charity; meeting your brother with a smile is charity."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ২৫৮৮; সহিহ বুখারি ১৪১৭; সহিহ বুখারি ১৪১০; সহিহ বুখারি ১৪২৩; সহিহ বুখারি ৬০২১; জামে তিরমিজি ১৯৫৬",
+            "en": "Sahih Muslim 2588; Sahih al-Bukhari 1417; Sahih al-Bukhari 1410; Sahih al-Bukhari 1423; Sahih al-Bukhari 6021; Jami' at-Tirmidhi 1956"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "সদকায়ে জারিয়া",
+            "en": "Ongoing charity (sadaqah jariyah)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "মানুষ মারা গেলে তার আমল বন্ধ হয়ে যায়, তিনটি ছাড়া: সদকায়ে জারিয়া, উপকারী জ্ঞান এবং নেক সন্তান যে তার জন্য দোয়া করে। মসজিদ, মাদরাসা, নলকূপ, হাসপাতাল, গাছ লাগানো, কুরআন বিতরণ — এগুলো চলমান সদকার উদাহরণ (এসব খাতে নফল সদকা দেবেন; হানাফি মতে ফরজ যাকাত নয়)।",
+            "en": "When a person dies his deeds end except three: ongoing charity, beneficial knowledge, and a righteous child who prays for him. Masjids, schools, wells, hospitals, planting trees and distributing Qurans are examples (give voluntary charity for these; in the Hanafi view not obligatory zakat)."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১৬৩১",
+            "en": "Sahih Muslim 1631"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "দানের আদব",
+            "en": "Manners of giving"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "হালাল ও ভালো জিনিস দান করুন; নিজে যা নিতে চান না তা দেবেন না।",
+              "en": "Give from lawful and good things; do not give what you yourself would not accept."
+            },
+            {
+              "bn": "খোঁটা দিয়ে বা কষ্ট দিয়ে দান নষ্ট করবেন না।",
+              "en": "Do not ruin charity with reminders of your favour or with hurt."
+            },
+            {
+              "bn": "লোক দেখানোর জন্য নয়, আল্লাহর সন্তুষ্টির জন্য দিন; গোপনে দেওয়া উত্তম, তবে অন্যকে উৎসাহিত করতে প্রকাশ্যে দেওয়াও জায়েজ।",
+              "en": "Give for Allah, not for show; secret giving is better, though open giving to encourage others is allowed."
+            },
+            {
+              "bn": "প্রাপকের সম্মান রক্ষা করুন; ছবি তুলে প্রচার করা থেকে বিরত থাকুন।",
+              "en": "Preserve the recipient's dignity; avoid photographing and publicising them."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সূরা বাকারা ২:২৬৪; সূরা বাকারা ২:২৬৭; সূরা বাকারা ২:২৭১",
+            "en": "Al-Baqarah 2:264; Al-Baqarah 2:267; Al-Baqarah 2:271"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "zakat-common-mistakes",
+      "title": {
+        "bn": "যাকাতে প্রচলিত ভুল",
+        "en": "Common mistakes in zakat"
+      },
+      "summary": {
+        "bn": "যাকাত দিতে গিয়ে মানুষ সাধারণত যে ভুলগুলো করে।",
+        "en": "Mistakes people commonly make when paying zakat."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "হিসাব না করে আন্দাজে একটা অঙ্ক দিয়ে দেওয়া। প্রতি বছর লিখে হিসাব করুন।",
+              "en": "Giving a rough amount without calculating. Calculate and write it down every year."
+            },
+            {
+              "bn": "শুধু রমজানে যাকাত দিতে হবে ভাবা। যাকাতের তারিখ আপনার নিসাবের বছর অনুযায়ী; চাইলে রমজানকে তারিখ বানাতে পারেন, কিন্তু পরে দেরি করা ঠিক নয়।",
+              "en": "Thinking zakat must be paid in Ramadan. The date follows your nisab year; you may choose a Ramadan date, but do not delay beyond it."
+            },
+            {
+              "bn": "স্ত্রীর গয়না, ব্যবসার মাল বা পাওনা টাকা হিসাব থেকে বাদ দেওয়া।",
+              "en": "Leaving out the wife's jewellery, business stock or money owed."
+            },
+            {
+              "bn": "ইংরেজি বছর ধরে ২.৫% দেওয়া; সৌরবছরে হিসাব করলে প্রায় ২.৫৭৭% দিন।",
+              "en": "Paying 2.5% on a solar year; on a solar year pay about 2.577%."
+            },
+            {
+              "bn": "মা-বাবা, সন্তান বা স্ত্রীকে যাকাত দেওয়া।",
+              "en": "Giving zakat to parents, children or one's wife."
+            },
+            {
+              "bn": "যাচাই না করে পেশাদার ভিক্ষুক বা ধনী ব্যক্তিকে দেওয়া।",
+              "en": "Giving without checking to professional beggars or the well-off."
+            },
+            {
+              "bn": "নিম্নমানের শাড়ি-লুঙ্গির দাম বাজারমূল্যের চেয়ে বেশি ধরে যাকাত হিসাবে দেওয়া; জিনিস দিলে তার প্রকৃত মূল্যই ধরবেন।",
+              "en": "Giving cheap clothes valued above their real price; when giving goods, count only their true value."
+            },
+            {
+              "bn": "যাকাতের টাকায় সরাসরি মসজিদ বানানো বা ওয়াজ মাহফিলের খরচ চালানো (হানাফি মতে আদায় হয় না)।",
+              "en": "Using zakat directly to build masjids or fund events (not valid in the Hanafi view)."
+            },
+            {
+              "bn": "কর্মচারীর বেতন বা উপহার যাকাতের নামে দেওয়া; প্রাপ্য পারিশ্রমিক যাকাত নয়।",
+              "en": "Paying an employee's salary or a gift as zakat; wages owed are not zakat."
+            },
+            {
+              "bn": "যাকাতের নিয়ত ছাড়া দান করে পরে তাকে যাকাত ধরা; দেওয়ার সময় বা আলাদা করে রাখার সময় নিয়ত থাকতে হবে।",
+              "en": "Giving without the intention of zakat and counting it later; the intention must be there when giving or when setting it aside."
+            },
+            {
+              "bn": "সুদের টাকা দিয়ে যাকাত দেওয়া। সুদের টাকা সওয়াবের নিয়ত ছাড়া গরিবকে দিয়ে দিতে হবে; যাকাত হালাল সম্পদ থেকে দিতে হবে।",
+              "en": "Paying zakat from interest money. Interest must be given away without seeking reward; zakat is paid from lawful wealth."
+            },
+            {
+              "bn": "মাসিক বেতনের প্রতিটির জন্য আলাদা বছর গুনতে গিয়ে হিসাব জটিল করে ফেলা; হানাফি মতে যাকাতের তারিখে যা আছে, সবকিছুর যাকাত একসাথে দিলেই হয়।",
+              "en": "Over-complicating by counting a separate year for every salary; for Hanafis, pay on everything you hold on the zakat date."
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "অ্যাপের যাকাত ক্যালকুলেটর ব্যবহার করে প্রতি বছরের হিসাব সংরক্ষণ করুন, যাতে পরের বছর তুলনা করা সহজ হয়।",
+            "en": "Use the app's zakat calculator and keep each year's calculation so next year's comparison is easy."
+          }
+        }
+      ]
+    }
+  ]
+}

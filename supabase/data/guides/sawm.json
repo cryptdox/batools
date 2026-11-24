@@ -1,0 +1,2059 @@
+{
+  "topic": "sawm",
+  "guides": [
+    {
+      "slug": "sawm-basics",
+      "title": {
+        "bn": "রোজা: কার ওপর ফরজ ও কেন",
+        "en": "Fasting: who must fast and why"
+      },
+      "summary": {
+        "bn": "রমজানের রোজা ইসলামের পাঁচ স্তম্ভের একটি। কার ওপর রোজা ফরজ, রোজার ফজিলত ও আদব এখানে সংক্ষেপে।",
+        "en": "Fasting Ramadan is one of the five pillars of Islam. Who must fast, its virtues and its manners in brief."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "রোজা ফরজ হওয়ার আয়াত",
+            "en": "The verse of fasting"
+          },
+          "ar": "يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِنْ قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ",
+          "pron": {
+            "bn": "ইয়া আইয়ুহাল্লাযীনা আমানূ কুতিবা আলাইকুমুস সিয়ামু কামা কুতিবা আলাল্লাযীনা মিন কাবলিকুম লাআল্লাকুম তাত্তাকূন",
+            "en": "Ya ayyuhal-ladhina amanu kutiba 'alaykumus-siyamu kama kutiba 'alal-ladhina min qablikum la'allakum tattaqun"
+          },
+          "meaning": {
+            "bn": "হে ঈমানদারগণ! তোমাদের ওপর রোজা ফরজ করা হয়েছে, যেমন ফরজ করা হয়েছিল তোমাদের পূর্ববর্তীদের ওপর, যাতে তোমরা তাকওয়া অর্জন করতে পারো।",
+            "en": "O you who believe, fasting is prescribed for you as it was prescribed for those before you, so that you may become mindful of Allah."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৮৩",
+            "en": "Al-Baqarah 2:183"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "রোজা মানে সুবহে সাদিক (ফজরের সময় শুরু) থেকে সূর্যাস্ত পর্যন্ত আল্লাহর সন্তুষ্টির নিয়তে খাওয়া, পান করা ও স্ত্রী-সহবাস থেকে বিরত থাকা। রমজান মাসের রোজা প্রত্যেক প্রাপ্তবয়স্ক মুসলিমের ওপর ফরজ।",
+            "en": "Fasting (sawm) means refraining from food, drink and marital relations from true dawn (start of Fajr) until sunset, with the intention of pleasing Allah. Fasting the month of Ramadan is obligatory on every adult Muslim."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কার ওপর রোজা ফরজ",
+            "en": "Who must fast"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "মুসলিম",
+              "en": "A Muslim"
+            },
+            {
+              "bn": "বালেগ বা প্রাপ্তবয়স্ক (ছেলে-মেয়ের বয়ঃসন্ধির লক্ষণ দেখা দিলে, নয়তো চাঁদের হিসাবে ১৫ বছর হলে)",
+              "en": "Adult (has reached puberty, or otherwise 15 lunar years of age)"
+            },
+            {
+              "bn": "সুস্থ মস্তিষ্কের অধিকারী",
+              "en": "Of sound mind"
+            },
+            {
+              "bn": "রোজা রাখতে সক্ষম; গুরুতর অসুস্থ নয়",
+              "en": "Able to fast, not seriously ill"
+            },
+            {
+              "bn": "মুকিম, অর্থাৎ শরিয়তসম্মত সফরে নেই",
+              "en": "Resident, i.e. not on a journey by the Shariah definition"
+            },
+            {
+              "bn": "নারীর ক্ষেত্রে: হায়েজ (মাসিক) ও নিফাস (প্রসব-পরবর্তী রক্তস্রাব) থেকে পবিত্র",
+              "en": "For women: free of menstruation (hayd) and post-natal bleeding (nifas)"
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "অসুস্থ, মুসাফির, গর্ভবতী-দুগ্ধদানকারী মা ও বৃদ্ধদের বিধান আলাদা গাইডে দেওয়া আছে। তাদের অনেকের জন্য পরে কাজা বা ফিদইয়া আছে, রোজা পুরোপুরি মাফ নয়।",
+            "en": "The rulings for the sick, travellers, pregnant and nursing mothers and the elderly are in a separate guide. For most of them the fast is made up later or compensated with fidya; it is not simply cancelled."
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "ছোট শিশুদের ওপর রোজা ফরজ নয়, তবে সাহাবিরা অভ্যাস করানোর জন্য শিশুদের রোজা রাখাতেন এবং ক্ষুধায় কাঁদলে খেলনা দিয়ে ভুলিয়ে রাখতেন।",
+            "en": "Fasting is not obligatory on young children, but the Companions trained their children to fast and gave them toys to distract them when they cried from hunger."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৯৬০",
+            "en": "Sahih al-Bukhari 1960"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "রোজার কিছু ফজিলত",
+            "en": "Some virtues of fasting"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "যে ব্যক্তি ঈমানের সাথে ও সওয়াবের আশায় রমজানের রোজা রাখে, তার আগের গুনাহ ক্ষমা করা হয়।",
+              "en": "Whoever fasts Ramadan with faith and hoping for reward, his past sins are forgiven."
+            },
+            {
+              "bn": "রোজা ঢালস্বরূপ, গুনাহ ও জাহান্নাম থেকে রক্ষা করে।",
+              "en": "Fasting is a shield, protecting from sin and the Fire."
+            },
+            {
+              "bn": "জান্নাতে 'রাইয়ান' নামে একটি দরজা আছে, শুধু রোজাদাররা সেখান দিয়ে প্রবেশ করবে।",
+              "en": "Paradise has a gate called Ar-Rayyan through which only those who fast will enter."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ৩৮; সহিহ বুখারি ১৮৯৪; সহিহ বুখারি ১৮৯৬",
+            "en": "Sahih al-Bukhari 38; Sahih al-Bukhari 1894; Sahih al-Bukhari 1896"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "রোজার আদব",
+            "en": "Manners of the fast"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "রোজা শুধু না খেয়ে থাকা নয়। মিথ্যা কথা, গালিগালাজ, গিবত ও ঝগড়া থেকেও বাঁচতে হবে। নবী (সা.) বলেছেন, যে মিথ্যা কথা ও মিথ্যা অনুযায়ী কাজ ছাড়ে না, তার খাবার-পানীয় ত্যাগ করায় আল্লাহর কোনো প্রয়োজন নেই। কেউ ঝগড়া করতে এলে বলবে: 'আমি রোজাদার।'",
+            "en": "Fasting is not only going without food. One must also avoid lies, abuse, backbiting and quarrels. The Prophet (peace be upon him) said that whoever does not give up false speech and acting on it, Allah has no need of his leaving food and drink. If someone picks a fight, say: 'I am fasting.'"
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৯০৩; সহিহ বুখারি ১৯০৪",
+            "en": "Sahih al-Bukhari 1903; Sahih al-Bukhari 1904"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sawm-niyyah-sehri-iftar",
+      "title": {
+        "bn": "নিয়ত, সেহরি ও ইফতার",
+        "en": "Niyyah, sehri and iftar"
+      },
+      "summary": {
+        "bn": "রোজার নিয়ত কীভাবে করবেন, সেহরি ও ইফতারের সুন্নত এবং ইফতারের সহিহ দোয়া।",
+        "en": "How to make the intention, the sunnahs of sehri and iftar, and the authentic iftar dua."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "নিয়ত",
+            "en": "Niyyah (intention)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নিয়ত মানে মনের ইচ্ছা। আপনি যে আগামীকাল রোজা রাখবেন বলে মনে মনে ঠিক করেছেন, সেটাই নিয়ত। সেহরি খেতে ওঠাও নিয়তের প্রমাণ। মুখে উচ্চারণ করা জরুরি নয়, আর নির্দিষ্ট কোনো আরবি বাক্য বলাও শর্ত নয়।",
+            "en": "Niyyah is the intention in the heart. Having decided in your heart that you will fast tomorrow is the intention; getting up for sehri itself shows it. Saying it aloud is not required, and no particular Arabic wording is a condition."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১; সহিহ মুসলিম ১৯০৭",
+            "en": "Sahih al-Bukhari 1; Sahih Muslim 1907"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "উদাহরণ (মুখে বলা জরুরি নয়): 'আমি আগামীকাল আল্লাহর সন্তুষ্টির জন্য রমজানের ফরজ রোজা রাখার নিয়ত করছি।' এটি শুধু একটি প্রচলিত বাংলা উদাহরণ; মনে এই ইচ্ছা থাকলেই যথেষ্ট।",
+            "en": "Example (saying it is not required): 'I intend to keep tomorrow's obligatory Ramadan fast for the sake of Allah.' This is only a common example phrasing; having this intention in the heart is enough."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "নিয়ত কখন করতে হবে",
+            "en": "When must the intention be made"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "রমজানের রোজা, নির্দিষ্ট দিনের মানতের রোজা ও নফল রোজার নিয়ত রাত থেকে শুরু করে পরদিন দুপুরের আগে (শরয়ি অর্ধদিবসের আগে) পর্যন্ত করা যায়, যদি এর মধ্যে কিছু খাওয়া না হয়। তবে রাতেই নিয়ত করা উত্তম। কাজা, কাফফারা ও অনির্দিষ্ট মানতের রোজার নিয়ত রাতেই করতে হয়।",
+                "en": "For Ramadan, a vow for a fixed day and voluntary fasts, the intention may be made from the night until before midday (the Shariah half-day) if nothing has been eaten; making it at night is better. Make-up, kaffarah and unfixed vow fasts need the intention at night."
+              },
+              "evidence": {
+                "bn": "নবী (সা.) দিনের বেলায় ঘরে খাবার না পেয়ে বলেছেন, 'তাহলে আমি রোজা রাখলাম' (নফল); আশুরার দিনে দিনের বেলায় রোজা রাখার ঘোষণা দেওয়া হয়েছিল।",
+                "en": "The Prophet, finding no food at home during the day, said 'Then I am fasting' (voluntary); and on Ashura it was announced during the day that people should fast."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "ফরজ রোজার (রমজান, কাজা, মানত) নিয়ত ফজরের আগে রাতেই করতে হবে। নফল রোজার নিয়ত দিনের বেলায়ও করা যায় (মালেকিদের মতে নফলেও রাতে)।",
+                "en": "For obligatory fasts (Ramadan, make-up, vows) the intention must be made at night before Fajr. For voluntary fasts it may be made during the day (Malikis require night for these too)."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'যে ফজরের আগে রোজার নিয়ত করে না, তার রোজা হয় না।' (হাফসা রা. থেকে বর্ণিত)",
+                "en": "Hadith: 'Whoever does not resolve to fast before Fajr has no fast.' (narrated from Hafsah)"
+              }
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ১১৫৪; সুনান আবু দাউদ ২৪৫৪",
+            "en": "Sahih Muslim 1154; Sunan Abi Dawud 2454"
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি (আশুরার দিনে দিনের বেলায় রোজার ঘোষণা)",
+            "en": "Sahih al-Bukhari (the daytime announcement to fast on Ashura)"
+          },
+          "check": true
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "সেহরি",
+            "en": "Sehri (pre-dawn meal)"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "সেহরি খাওয়া সুন্নত; এতে বরকত আছে। অল্প কিছু, এমনকি এক ঢোক পানি হলেও খাবেন।",
+              "en": "Eating sehri is sunnah and has blessing; eat something, even a sip of water."
+            },
+            {
+              "bn": "সেহরি দেরিতে, অর্থাৎ ফজরের সময় শুরু হওয়ার কিছু আগে খাওয়া সুন্নত। নবী (সা.)-এর সেহরি ও ফজরের নামাজের মাঝে প্রায় পঞ্চাশ আয়াত পড়ার সময় থাকত।",
+              "en": "Delaying sehri to shortly before Fajr is sunnah; between the Prophet's sehri and the Fajr prayer was about the time of reciting fifty verses."
+            },
+            {
+              "bn": "ফজরের সময় শুরু হয়ে গেলে খাওয়া বন্ধ করতে হবে। আজান শুনে খাওয়া চালিয়ে না গিয়ে স্থানীয় নির্ভরযোগ্য সময়সূচি দেখে কয়েক মিনিট আগেই থামা নিরাপদ।",
+              "en": "Stop eating once Fajr time begins. Rather than eating on through the adhan, it is safer to stop a few minutes early by a reliable local timetable."
+            },
+            {
+              "bn": "সেহরিই আমাদের রোজা ও আহলে কিতাবের রোজার পার্থক্য।",
+              "en": "Sehri is the difference between our fasting and that of the People of the Book."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৯২৩; সহিহ বুখারি ১৯২১; সহিহ মুসলিম ১০৯৬",
+            "en": "Sahih al-Bukhari 1923; Sahih al-Bukhari 1921; Sahih Muslim 1096"
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "وَكُلُوا وَاشْرَبُوا حَتَّى يَتَبَيَّنَ لَكُمُ الْخَيْطُ الْأَبْيَضُ مِنَ الْخَيْطِ الْأَسْوَدِ مِنَ الْفَجْرِ",
+          "pron": {
+            "bn": "ওয়া কুলূ ওয়াশরাবূ হাত্তা ইয়াতাবাইয়ানা লাকুমুল খাইতুল আবইয়াদু মিনাল খাইতিল আসওয়াদি মিনাল ফাজর",
+            "en": "Wa kulu washrabu hatta yatabayyana lakumul-khaytul-abyadu minal-khaytil-aswadi minal-fajr"
+          },
+          "meaning": {
+            "bn": "আর খাও ও পান করো, যতক্ষণ না রাতের কালো রেখা থেকে ভোরের সাদা রেখা স্পষ্ট হয়।",
+            "en": "And eat and drink until the white thread of dawn becomes distinct to you from the black thread."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৮৭",
+            "en": "Al-Baqarah 2:187"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ইফতার",
+            "en": "Iftar (breaking the fast)"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "সূর্য ডোবার সঙ্গে সঙ্গে দেরি না করে ইফতার করা সুন্নত। মানুষ যতদিন তাড়াতাড়ি ইফতার করবে, ততদিন কল্যাণে থাকবে।",
+              "en": "Breaking the fast promptly at sunset is sunnah; people will remain in good as long as they hasten the iftar."
+            },
+            {
+              "bn": "তাজা খেজুর দিয়ে ইফতার করা সুন্নত; না পেলে শুকনো খেজুর, তাও না পেলে কয়েক ঢোক পানি।",
+              "en": "Break the fast with fresh dates, if not then dried dates, and if not then a few sips of water."
+            },
+            {
+              "bn": "ইফতারের সময় দোয়া করুন; রোজাদারকে ইফতার করানোরও বড় সওয়াব আছে।",
+              "en": "Make dua at iftar; feeding a fasting person also carries great reward."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৯৫৭; সহিহ মুসলিম ১০৯৮; সুনান আবু দাউদ ২৩৫৬",
+            "en": "Sahih al-Bukhari 1957; Sahih Muslim 1098; Sunan Abi Dawud 2356"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "ইফতারের দোয়া (সহিহ সনদে বর্ণিত)",
+            "en": "Iftar dua (authentic)"
+          },
+          "ar": "ذَهَبَ الظَّمَأُ، وَابْتَلَّتِ الْعُرُوقُ، وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ",
+          "pron": {
+            "bn": "যাহাবায যামাউ, ওয়াবতাল্লাতিল উরূকু, ওয়া সাবাতাল আজরু ইনশাআল্লাহ",
+            "en": "Dhahabaz-zama'u, wabtallatil-'uruqu, wa thabatal-ajru in sha Allah"
+          },
+          "meaning": {
+            "bn": "পিপাসা দূর হয়েছে, শিরাগুলো সিক্ত হয়েছে, আর আল্লাহ চাইলে প্রতিদান নিশ্চিত হয়েছে।",
+            "en": "The thirst is gone, the veins are moistened, and the reward is certain, if Allah wills."
+          },
+          "ref": {
+            "bn": "সুনান আবু দাউদ ২৩৫৭",
+            "en": "Sunan Abi Dawud 2357"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "এই দোয়াটি নবী (সা.) ইফতার করার পরে পড়তেন, তাই প্রথমে 'বিসমিল্লাহ' বলে ইফতার শুরু করুন, তারপর এটি পড়ুন। হাদিসবিশারদদের অনেকে এর সনদকে হাসান (গ্রহণযোগ্য) বলেছেন।",
+            "en": "The Prophet said this after breaking the fast, so start eating with 'Bismillah' and then say it. Many hadith scholars graded its chain hasan (acceptable)."
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "প্রচলিত দোয়া (সনদ দুর্বল)",
+            "en": "Common dua (weak chain)"
+          },
+          "ar": "اللَّهُمَّ لَكَ صُمْتُ، وَعَلَى رِزْقِكَ أَفْطَرْتُ",
+          "pron": {
+            "bn": "আল্লাহুম্মা লাকা সুমতু, ওয়া আলা রিযক্বিকা আফতারতু",
+            "en": "Allahumma laka sumtu, wa 'ala rizqika aftartu"
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ! তোমার জন্যই রোজা রেখেছি এবং তোমার দেওয়া রিজিক দিয়েই ইফতার করছি।",
+            "en": "O Allah, for You I fasted and with Your provision I break my fast."
+          },
+          "ref": {
+            "bn": "সুনান আবু দাউদ ২৩৫৮",
+            "en": "Sunan Abi Dawud 2358"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "এই দোয়াটি মুরসাল সূত্রে বর্ণিত, তাই সনদ দুর্বল; অর্থ সুন্দর বলে পড়া যায়, তবে সহিহ দোয়া হিসেবে প্রথমটিই অগ্রাধিকার পাবে। বাংলাদেশে প্রচলিত 'ওয়া বিকা আমানতু ওয়া আলাইকা তাওয়াক্কালতু' অংশটুকু কোনো হাদিসে পাওয়া যায় না।",
+            "en": "This dua comes through a mursal chain and is weak; its meaning is fine, but the first dua is the authentic one to prefer. The addition 'wa bika amantu wa 'alayka tawakkaltu' common in Bangladesh is not found in any hadith."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sawm-what-breaks",
+      "title": {
+        "bn": "যেসব কারণে রোজা ভাঙে, যেসবে ভাঙে না",
+        "en": "What breaks the fast and what does not"
+      },
+      "summary": {
+        "bn": "কোন কাজে রোজা ভেঙে যায় আর কোনটায় ভাঙে না, একনজরে টেবিলে। যেসব বিষয়ে আলেমদের মতভেদ আছে, তা আলাদা দেখানো হয়েছে।",
+        "en": "At a glance: what breaks the fast and what does not, with the points scholars differ on shown separately."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "মূলনীতি: ইচ্ছাকৃতভাবে খাওয়া, পান করা, স্ত্রী-সহবাস, আর এ জাতীয় কিছু দিয়ে রোজা ভাঙে। ভুলে গিয়ে খেলে বা অনিচ্ছায় কিছু হলে রোজা ভাঙে না।",
+            "en": "The principle: the fast is broken by deliberate eating, drinking, marital relations and things of that kind. Eating by mistake or anything that happens unintentionally does not break it."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যেসব কারণে রোজা ভেঙে যায়",
+            "en": "What breaks the fast"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "কাজ",
+              "en": "Act"
+            },
+            {
+              "bn": "করণীয়",
+              "en": "What is due"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "ইচ্ছাকৃতভাবে খাওয়া বা পান করা",
+                "en": "Deliberately eating or drinking"
+              },
+              {
+                "bn": "কাজা; হানাফি ও মালেকি মতে কাফফারাও",
+                "en": "Make-up; also kaffarah in the Hanafi and Maliki view"
+              }
+            ],
+            [
+              {
+                "bn": "রোজা অবস্থায় ইচ্ছাকৃত স্ত্রী-সহবাস",
+                "en": "Deliberate intercourse while fasting"
+              },
+              {
+                "bn": "কাজা ও কাফফারা (সব মাজহাবে একমত)",
+                "en": "Make-up and kaffarah (agreed)"
+              }
+            ],
+            [
+              {
+                "bn": "ইচ্ছা করে বমি করা (হানাফি মতে মুখভর্তি হলে)",
+                "en": "Deliberately making oneself vomit (Hanafi: a mouthful)"
+              },
+              {
+                "bn": "কাজা",
+                "en": "Make-up"
+              }
+            ],
+            [
+              {
+                "bn": "হায়েজ বা নিফাস শুরু হওয়া, দিনের যেকোনো সময়ে",
+                "en": "Menstruation or post-natal bleeding starting, at any time of the day"
+              },
+              {
+                "bn": "কাজা",
+                "en": "Make-up"
+              }
+            ],
+            [
+              {
+                "bn": "ধূমপান বা ইচ্ছা করে ধোঁয়া টেনে নেওয়া",
+                "en": "Smoking or deliberately inhaling smoke"
+              },
+              {
+                "bn": "কাজা",
+                "en": "Make-up"
+              }
+            ],
+            [
+              {
+                "bn": "পুষ্টিকর ইনজেকশন বা স্যালাইন (খাবারের বিকল্প)",
+                "en": "Nutritive injection or IV drip (a substitute for food)"
+              },
+              {
+                "bn": "কাজা (সমকালীন আলেমদের অধিকাংশের মত)",
+                "en": "Make-up (view of most contemporary scholars)"
+              }
+            ],
+            [
+              {
+                "bn": "ইচ্ছাকৃত হস্তমৈথুন বা স্পর্শে বীর্যপাত",
+                "en": "Deliberate ejaculation by masturbation or touching"
+              },
+              {
+                "bn": "কাজা",
+                "en": "Make-up"
+              }
+            ],
+            [
+              {
+                "bn": "নাক বা কানে ওষুধ দিয়ে তা গলা পর্যন্ত পৌঁছানো",
+                "en": "Nose or ear drops that reach the throat"
+              },
+              {
+                "bn": "কাজা",
+                "en": "Make-up"
+              }
+            ],
+            [
+              {
+                "bn": "ফজর শুরু হয়ে গেছে বা সূর্য ডুবেছে ভেবে ভুল সময়ে খাওয়া",
+                "en": "Eating at the wrong time thinking Fajr had not begun or the sun had set"
+              },
+              {
+                "bn": "কাজা (অধিকাংশ আলেমের মত)",
+                "en": "Make-up (majority view)"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "জামে তিরমিজি ৭২০; সুনান আবু দাউদ ২৩৮০; সহিহ মুসলিম ৩৩৫",
+            "en": "Jami' at-Tirmidhi 720; Sunan Abi Dawud 2380; Sahih Muslim 335"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যেসব কারণে রোজা ভাঙে না",
+            "en": "What does not break the fast"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "কাজ",
+              "en": "Act"
+            },
+            {
+              "bn": "হুকুম",
+              "en": "Ruling"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "ভুলে গিয়ে খাওয়া বা পান করা",
+                "en": "Eating or drinking forgetfully"
+              },
+              {
+                "bn": "ভাঙে না; মনে পড়লেই থামবেন",
+                "en": "Does not break; stop as soon as you remember"
+              }
+            ],
+            [
+              {
+                "bn": "অনিচ্ছায় বমি হওয়া",
+                "en": "Vomiting unintentionally"
+              },
+              {
+                "bn": "ভাঙে না",
+                "en": "Does not break"
+              }
+            ],
+            [
+              {
+                "bn": "স্বপ্নদোষ, বা গোসল ফরজ অবস্থায় ফজর হয়ে যাওয়া",
+                "en": "A wet dream, or being in a state of janabah at Fajr"
+              },
+              {
+                "bn": "ভাঙে না; গোসল করে নেবেন",
+                "en": "Does not break; take the ghusl"
+              }
+            ],
+            [
+              {
+                "bn": "মিসওয়াক বা পেস্ট ছাড়া ব্রাশ করা",
+                "en": "Miswak, or brushing without toothpaste"
+              },
+              {
+                "bn": "ভাঙে না; পেস্ট ব্যবহার মাকরুহ, গিলে ফেললে ভেঙে যাবে",
+                "en": "Does not break; toothpaste is disliked and breaks the fast if swallowed"
+              }
+            ],
+            [
+              {
+                "bn": "গোসল করা, গায়ে পানি ঢালা",
+                "en": "Bathing, pouring water over oneself"
+              },
+              {
+                "bn": "ভাঙে না, যদি পানি গলায় না যায়",
+                "en": "Does not break if water does not go down the throat"
+              }
+            ],
+            [
+              {
+                "bn": "রক্ত পরীক্ষার জন্য রক্ত দেওয়া",
+                "en": "Giving blood for a test"
+              },
+              {
+                "bn": "ভাঙে না",
+                "en": "Does not break"
+              }
+            ],
+            [
+              {
+                "bn": "পুষ্টিহীন ইনজেকশন (যেমন ইনসুলিন, টিকা) মাংসে বা চামড়ায়",
+                "en": "Non-nutritive injections (e.g. insulin, vaccines) into muscle or skin"
+              },
+              {
+                "bn": "ভাঙে না (অধিকাংশ সমকালীন আলেম)",
+                "en": "Does not break (most contemporary scholars)"
+              }
+            ],
+            [
+              {
+                "bn": "নিজের থুথু গিলে ফেলা",
+                "en": "Swallowing one's own saliva"
+              },
+              {
+                "bn": "ভাঙে না",
+                "en": "Does not break"
+              }
+            ],
+            [
+              {
+                "bn": "অনিচ্ছায় ধুলা, ধোঁয়া বা মাছি গলায় ঢুকে যাওয়া",
+                "en": "Dust, smoke or a fly entering the throat unintentionally"
+              },
+              {
+                "bn": "ভাঙে না",
+                "en": "Does not break"
+              }
+            ],
+            [
+              {
+                "bn": "সুগন্ধি লাগানো, তেল বা মলম মাখা",
+                "en": "Applying perfume, oil or ointment"
+              },
+              {
+                "bn": "ভাঙে না",
+                "en": "Does not break"
+              }
+            ],
+            [
+              {
+                "bn": "প্রয়োজনে রান্নার স্বাদ জিভে দেখে ফেলে দেওয়া",
+                "en": "Tasting food on the tongue when needed and spitting it out"
+              },
+              {
+                "bn": "ভাঙে না; বিনা প্রয়োজনে মাকরুহ",
+                "en": "Does not break; disliked without need"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৯৩৩; সহিহ মুসলিম ১১৫৫",
+            "en": "Sahih al-Bukhari 1933; Sahih Muslim 1155"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "ভুলে খেয়ে ফেললে নবী (সা.) বলেছেন: সে যেন রোজা পূর্ণ করে, কেননা আল্লাহই তাকে খাইয়েছেন ও পান করিয়েছেন।",
+            "en": "If you eat by mistake, the Prophet said: let him complete his fast, for it is Allah who fed him and gave him drink."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যেসব বিষয়ে মতভেদ আছে",
+            "en": "Points of difference"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "চোখে ড্রপ ও সুরমা",
+            "en": "Eye drops and kohl"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি ও শাফেয়ি",
+                "en": "Hanafi and Shafi'i"
+              },
+              "text": {
+                "bn": "চোখে ড্রপ বা সুরমা দিলে রোজা ভাঙে না, গলায় স্বাদ পেলেও।",
+                "en": "Eye drops or kohl do not break the fast, even if a taste is felt in the throat."
+              },
+              "evidence": {
+                "bn": "চোখ খাদ্য প্রবেশের স্বাভাবিক পথ নয়।",
+                "en": "The eye is not a normal passage for food to enter."
+              }
+            },
+            {
+              "label": {
+                "bn": "মালেকি ও হাম্বলি",
+                "en": "Maliki and Hanbali"
+              },
+              "text": {
+                "bn": "গলায় স্বাদ পৌঁছালে রোজা ভেঙে যায়; সতর্কতার জন্য দিনের বেলা না দিয়ে রাতে দেওয়া ভালো।",
+                "en": "If the taste reaches the throat the fast is broken; to be careful, use them at night rather than in the day."
+              },
+              "evidence": {
+                "bn": "যা গলা পর্যন্ত পৌঁছায় তা ভেতরে প্রবেশ করেছে বলে গণ্য।",
+                "en": "What reaches the throat is counted as having entered the body."
+              }
+            }
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "হাঁপানির ইনহেলার",
+            "en": "Asthma inhaler"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "রোজা ভাঙে (দেশের হানাফি ফতোয়া বোর্ডসহ অনেকের মত)",
+                "en": "Breaks the fast (many, incl. Hanafi fatwa bodies in the subcontinent)"
+              },
+              "text": {
+                "bn": "ইনহেলারের ওষুধের কণা গলা হয়ে ভেতরে যায়, তাই রোজা ভেঙে যায়; প্রয়োজন হলে ব্যবহার করবেন এবং পরে কাজা করবেন।",
+                "en": "The medicine particles of an inhaler pass down the throat, so the fast is broken; use it if needed and make the day up later."
+              },
+              "evidence": {
+                "bn": "ইচ্ছাকৃতভাবে কোনো বস্তু মুখ দিয়ে ভেতরে নেওয়ার বিধানের ওপর কিয়াস।",
+                "en": "Analogy with deliberately taking any substance in through the mouth."
+              }
+            },
+            {
+              "label": {
+                "bn": "রোজা ভাঙে না (সৌদি স্থায়ী ফতোয়া কমিটিসহ অনেকের মত)",
+                "en": "Does not break (many, incl. the Saudi Permanent Committee)"
+              },
+              "text": {
+                "bn": "ইনহেলারের ওষুধ খুব সামান্য ও মূলত ফুসফুসে যায়; এটি খাবার বা পানীয় নয়।",
+                "en": "The amount is tiny and goes mainly to the lungs; it is neither food nor drink."
+              },
+              "evidence": {
+                "bn": "কুলি করার পর মুখে যে সামান্য আর্দ্রতা থাকে তার সঙ্গে তুলনা।",
+                "en": "Compared to the slight moisture left in the mouth after rinsing it."
+              }
+            }
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "শিঙ্গা লাগানো বা রক্তদান",
+            "en": "Cupping or donating blood"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি, মালেকি, শাফেয়ি",
+                "en": "Hanafi, Maliki, Shafi'i"
+              },
+              "text": {
+                "bn": "রোজা ভাঙে না, তবে দুর্বল হয়ে পড়ার আশঙ্কা থাকলে মাকরুহ।",
+                "en": "Does not break the fast, but is disliked if it may weaken the person."
+              },
+              "evidence": {
+                "bn": "নবী (সা.) রোজা অবস্থায় শিঙ্গা লাগিয়েছেন বলে সহিহ বুখারিতে বর্ণিত।",
+                "en": "Sahih al-Bukhari reports that the Prophet was cupped while fasting."
+              }
+            },
+            {
+              "label": {
+                "bn": "হাম্বলি",
+                "en": "Hanbali"
+              },
+              "text": {
+                "bn": "শিঙ্গা লাগালে বা লাগিয়ে দিলে রোজা ভেঙে যায়।",
+                "en": "Cupping breaks the fast of both the one cupped and the one cupping."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'শিঙ্গা লাগানো ও যাকে লাগানো হলো, দুজনেরই রোজা ভেঙে গেল।' (আবু দাউদ ও অন্যান্য)",
+                "en": "Hadith: 'The one who cups and the one cupped have broken their fast.' (Abu Dawud and others)"
+              }
+            }
+          ],
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "চিকিৎসা-সংক্রান্ত নতুন প্রশ্নে (এন্ডোস্কপি, ডায়ালাইসিস ইত্যাদি) নির্ভরযোগ্য মুফতির কাছ থেকে জেনে নিন।",
+            "en": "For new medical questions (endoscopy, dialysis and so on), ask a reliable mufti."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sawm-qaza-kaffarah-fidya",
+      "title": {
+        "bn": "কাজা, কাফফারা ও ফিদইয়া",
+        "en": "Qaza, kaffarah and fidya"
+      },
+      "summary": {
+        "bn": "ভাঙা বা ছুটে যাওয়া রোজার কাজা, কাফফারা কখন লাগে, আর ফিদইয়া কার জন্য।",
+        "en": "Making up missed fasts, when kaffarah is due, and who pays fidya."
+      },
+      "level": "detail",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কাজা",
+            "en": "Qaza (make-up)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "কাজা মানে ছুটে যাওয়া বা ভেঙে যাওয়া প্রতিটি রোজার বদলে পরে একটি করে রোজা রাখা। অসুস্থতা, সফর, হায়েজ-নিফাস বা অন্য কোনো কারণে রোজা ছুটে গেলে কাজা করতে হয়।",
+            "en": "Qaza means keeping one fast later for each fast missed or broken. Fasts missed through illness, travel, menstruation, post-natal bleeding or other reasons must be made up."
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "فَمَنْ كَانَ مِنْكُمْ مَرِيضًا أَوْ عَلَىٰ سَفَرٍ فَعِدَّةٌ مِنْ أَيَّامٍ أُخَرَ",
+          "pron": {
+            "bn": "ফামান কানা মিনকুম মারীদান আও আলা সাফারিন ফাইদ্দাতুম মিন আইয়ামিন উখার",
+            "en": "Faman kana minkum maridan aw 'ala safarin fa'iddatum min ayyamin ukhar"
+          },
+          "meaning": {
+            "bn": "তোমাদের মধ্যে কেউ অসুস্থ হলে বা সফরে থাকলে অন্য দিনগুলোতে সেই সংখ্যা পূরণ করবে।",
+            "en": "Whoever of you is ill or on a journey, then an equal number of other days."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৮৪",
+            "en": "Al-Baqarah 2:184"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "পরবর্তী রমজানের আগেই কাজা করে নেওয়া উত্তম; একটানা রাখা জরুরি নয়।",
+              "en": "It is best to make up before the next Ramadan; the days need not be consecutive."
+            },
+            {
+              "bn": "কোনো ওজর ছাড়া দেরি করা ঠিক নয়। শাফেয়ি ও হাম্বলি মতে বিনা ওজরে পরের রমজান পার হয়ে গেলে কাজার সাথে প্রতিদিনের জন্য ফিদইয়াও দিতে হয়; হানাফি মতে শুধু কাজা।",
+              "en": "Do not delay without excuse. In the Shafi'i and Hanbali view, if the next Ramadan passes without excuse, a fidya per day is due with the make-up; in the Hanafi view only the make-up."
+            },
+            {
+              "bn": "নিয়ত রাতেই করবেন: 'আমি রমজানের একটি কাজা রোজা রাখছি' এমন ইচ্ছা মনে রাখাই যথেষ্ট।",
+              "en": "Make the intention at night; the intention in the heart that 'I am keeping a missed Ramadan fast' is enough."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কাফফারা",
+            "en": "Kaffarah (expiation)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "রমজানের রোজা অবস্থায় ইচ্ছাকৃতভাবে স্ত্রী-সহবাস করলে কাজার সাথে কাফফারাও দিতে হয়। এক ব্যক্তি এমন করে নবী (সা.)-এর কাছে এলে তিনি তাকে ক্রমানুসারে এই তিনটির কথা বলেন:",
+            "en": "Deliberate intercourse while fasting in Ramadan requires kaffarah in addition to the make-up. When a man who had done this came to the Prophet, he told him these three, in order:"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "দাস মুক্ত করা",
+            "en": "Free a slave"
+          },
+          "text": {
+            "bn": "বর্তমানে এর সুযোগ নেই, তাই পরের ধাপ প্রযোজ্য।",
+            "en": "This is not possible today, so the next option applies."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "একটানা ৬০ দিন রোজা",
+            "en": "Fast 60 consecutive days"
+          },
+          "text": {
+            "bn": "মাঝে এক দিনও বাদ পড়লে (নারীর হায়েজ ছাড়া) নতুন করে শুরু করতে হবে।",
+            "en": "If even one day is missed (except a woman's menstruation), it must be started again."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "৬০ জন মিসকিনকে খাওয়ানো",
+            "en": "Feed 60 poor people"
+          },
+          "text": {
+            "bn": "অসুস্থতা বা বার্ধক্যের কারণে ৬০ রোজা রাখতে অক্ষম হলে ৬০ জন মিসকিনকে দুই বেলা পেট ভরে খাওয়াবেন, অথবা (হানাফি মতে) প্রত্যেককে একটি ফিতরা পরিমাণ দেবেন।",
+            "en": "If unable to fast 60 days due to illness or old age, feed 60 poor people two full meals each, or (Hanafi view) give each the amount of one sadaqatul fitr."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৯৩৬; সহিহ মুসলিম ১১১১",
+            "en": "Sahih al-Bukhari 1936; Sahih Muslim 1111"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "ইচ্ছাকৃত খাওয়া-দাওয়ায় কাফফারা আছে কি না",
+            "en": "Is kaffarah due for deliberate eating and drinking"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি ও মালেকি",
+                "en": "Hanafi and Maliki"
+              },
+              "text": {
+                "bn": "বিনা ওজরে রমজানের রোজা ইচ্ছাকৃতভাবে খেয়ে বা পান করে ভাঙলেও কাজা ও কাফফারা দুটোই লাগবে।",
+                "en": "Deliberately breaking a Ramadan fast by eating or drinking without excuse also requires both make-up and kaffarah."
+              },
+              "evidence": {
+                "bn": "কাফফারার কারণ রমজানের পবিত্রতা ইচ্ছাকৃতভাবে নষ্ট করা, যা খাওয়া-দাওয়াতেও পাওয়া যায়।",
+                "en": "The cause of kaffarah is deliberately violating the sanctity of Ramadan, which also happens by eating."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও হাম্বলি",
+                "en": "Shafi'i and Hanbali"
+              },
+              "text": {
+                "bn": "কাফফারা শুধু সহবাসের ক্ষেত্রে; খাওয়া-দাওয়ায় শুধু কাজা এবং তওবা।",
+                "en": "Kaffarah is only for intercourse; for eating and drinking only make-up and repentance."
+              },
+              "evidence": {
+                "bn": "হাদিসে কাফফারা শুধু সহবাসের ঘটনায় এসেছে; অন্য কিছুকে এর সাথে মেলানো যায় না।",
+                "en": "The hadith mentions kaffarah only for intercourse; other cases are not joined to it."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ফিদইয়া",
+            "en": "Fidya (compensation)"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "যে ব্যক্তি বার্ধক্য বা আরোগ্যের আশা নেই এমন রোগের কারণে রোজা রাখতে পারেন না এবং পরে কাজা করারও সম্ভাবনা নেই, তিনি প্রতিটি রোজার বদলে একজন মিসকিনকে খাবার দেবেন। একে ফিদইয়া বলে।",
+            "en": "A person who cannot fast because of old age or an illness with no hope of recovery, and who has no prospect of making it up later, feeds one poor person for each day missed. This is called fidya."
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "وَعَلَى الَّذِينَ يُطِيقُونَهُ فِدْيَةٌ طَعَامُ مِسْكِينٍ",
+          "pron": {
+            "bn": "ওয়া আলাল্লাযীনা ইউতীকূনাহূ ফিদইয়াতুন তাআমু মিসকীন",
+            "en": "Wa 'alal-ladhina yutiqunahu fidyatun ta'amu miskin"
+          },
+          "meaning": {
+            "bn": "আর যাদের জন্য এটা অত্যন্ত কষ্টকর, তাদের ওপর ফিদইয়া: একজন মিসকিনকে খাওয়ানো।",
+            "en": "And upon those who can only do it with great hardship, a compensation: feeding a poor person."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৮৪",
+            "en": "Al-Baqarah 2:184"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "ফিদইয়ার পরিমাণ",
+            "en": "Amount of fidya"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "প্রতি রোজার জন্য একটি সদকাতুল ফিতরের সমান (অর্ধ সা' গম বা এক সা' খেজুর/যব), অথবা তার বাজারমূল্য; কিংবা একজন মিসকিনকে দুই বেলা পেট ভরে খাওয়ানো।",
+                "en": "For each fast, the amount of one sadaqatul fitr (half a sa' of wheat or a sa' of dates/barley) or its market value; or two full meals for one poor person."
+              },
+              "evidence": {
+                "bn": "সদকাতুল ফিতরের পরিমাণের ওপর কিয়াস; হানাফি মতে মূল্য দেওয়াও জায়েজ।",
+                "en": "Analogy with sadaqatul fitr; Hanafis allow giving the value."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "প্রতি রোজার জন্য এক মুদ (প্রায় ৫০০–৬০০ গ্রাম) খাদ্যশস্য; হাম্বলি মতে গম হলে এক মুদ, অন্য শস্য হলে অর্ধ সা'। টাকা দিলে আদায় হবে না।",
+                "en": "One mudd (about 500–600 g) of staple food per fast; Hanbalis: a mudd of wheat or half a sa' of other grain. Money does not count."
+              },
+              "evidence": {
+                "bn": "সাহাবিদের আমল, যেমন ইবনে আব্বাস (রা.) ও আনাস (রা.)-এর ফতোয়া।",
+                "en": "Practice of the Companions, e.g. the fatwas of Ibn Abbas and Anas."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "সুস্থ মানুষ, যিনি পরে কাজা করতে পারবেন, তার জন্য ফিদইয়া দিয়ে রোজা ছেড়ে দেওয়া জায়েজ নয়। ফিদইয়া দেওয়ার পর আল্লাহর রহমতে সুস্থ হয়ে গেলে হানাফি মতে কাজা করতে হবে।",
+            "en": "A healthy person who can make up later may not skip fasts by paying fidya. If someone pays fidya and later recovers, in the Hanafi view he must make up the fasts."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sawm-excused",
+      "title": {
+        "bn": "যাদের জন্য রোজা না রাখার অনুমতি আছে",
+        "en": "Who is excused from fasting"
+      },
+      "summary": {
+        "bn": "অসুস্থ, মুসাফির, গর্ভবতী ও দুগ্ধদানকারী মা, বৃদ্ধ, আর হায়েজ-নিফাস অবস্থায় নারীর বিধান।",
+        "en": "Rulings for the sick, travellers, pregnant and nursing mothers, the elderly, and women in menstruation or post-natal bleeding."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "arabic",
+          "ar": "يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ",
+          "pron": {
+            "bn": "ইউরীদুল্লাহু বিকুমুল ইউসরা ওয়ালা ইউরীদু বিকুমুল উসর",
+            "en": "Yuridullahu bikumul-yusra wa la yuridu bikumul-'usr"
+          },
+          "meaning": {
+            "bn": "আল্লাহ তোমাদের জন্য সহজ চান, কঠিন চান না।",
+            "en": "Allah intends ease for you and does not intend hardship."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৮৫",
+            "en": "Al-Baqarah 2:185"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "কে",
+              "en": "Who"
+            },
+            {
+              "bn": "রোজা",
+              "en": "Fasting"
+            },
+            {
+              "bn": "পরে করণীয়",
+              "en": "Afterwards"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "অসুস্থ (রোজায় রোগ বাড়ার বা দেরিতে সারার আশঙ্কা)",
+                "en": "Sick (fasting may worsen or prolong the illness)"
+              },
+              {
+                "bn": "না রাখার অনুমতি",
+                "en": "May leave it"
+              },
+              {
+                "bn": "সুস্থ হলে কাজা",
+                "en": "Make up when well"
+              }
+            ],
+            [
+              {
+                "bn": "মুসাফির (শরিয়তসম্মত সফর)",
+                "en": "Traveller (Shariah-defined journey)"
+              },
+              {
+                "bn": "রাখা বা না রাখা দুটোই জায়েজ",
+                "en": "May fast or not"
+              },
+              {
+                "bn": "না রাখলে কাজা",
+                "en": "Make up if not fasted"
+              }
+            ],
+            [
+              {
+                "bn": "গর্ভবতী বা দুগ্ধদানকারী মা (নিজের বা সন্তানের ক্ষতির আশঙ্কা)",
+                "en": "Pregnant or nursing mother (fears harm to herself or the child)"
+              },
+              {
+                "bn": "না রাখার অনুমতি",
+                "en": "May leave it"
+              },
+              {
+                "bn": "কাজা; ফিদইয়া নিয়ে মতভেদ নিচে",
+                "en": "Make up; fidya is differed on, see below"
+              }
+            ],
+            [
+              {
+                "bn": "অতি বৃদ্ধ বা চিরস্থায়ী রোগী",
+                "en": "Very elderly or chronically ill"
+              },
+              {
+                "bn": "না রাখার অনুমতি",
+                "en": "May leave it"
+              },
+              {
+                "bn": "প্রতিদিনের জন্য ফিদইয়া",
+                "en": "Fidya for each day"
+              }
+            ],
+            [
+              {
+                "bn": "হায়েজ বা নিফাস অবস্থায় নারী",
+                "en": "Woman in menstruation or post-natal bleeding"
+              },
+              {
+                "bn": "রাখা নিষেধ",
+                "en": "Must not fast"
+              },
+              {
+                "bn": "পরে কাজা",
+                "en": "Make up later"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "অসুস্থ ব্যক্তি",
+            "en": "The sick"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "শুধু সামান্য অসুবিধা নয়, বরং অভিজ্ঞ চিকিৎসকের মতামত বা নিজের অভিজ্ঞতা থেকে যদি প্রবল ধারণা হয় যে রোজা রাখলে রোগ বাড়বে, দেরিতে সারবে বা মারাত্মক ক্ষতি হবে, তাহলে রোজা না রেখে পরে কাজা করবেন। প্রাণের আশঙ্কা থাকলে রোজা ভেঙে ফেলাই আবশ্যক।",
+            "en": "Not a minor discomfort, but when an experienced doctor's opinion or one's own experience strongly suggests that fasting will worsen the illness, delay recovery or cause serious harm, one does not fast and makes it up later. If life is at risk, breaking the fast is required."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "মুসাফির",
+            "en": "The traveller"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "শরিয়তসম্মত সফরে (হানাফি মতে প্রায় ৪৮ মাইল বা ৭৭–৭৮ কিলোমিটার বা তার বেশি দূরত্বের সফর) রোজা না রাখার অনুমতি আছে। কষ্ট না হলে রাখাই উত্তম, কষ্ট হলে না রাখা উত্তম। সফর শুরুর দিন সকালে বাড়িতে রোজা শুরু করলে হানাফি মতে সেদিনের রোজা পূর্ণ করাই উচিত।",
+            "en": "On a Shariah journey (Hanafi: about 48 miles / 77–78 km or more) one may leave the fast. If it is not hard, fasting is better; if it is hard, not fasting is better. If you began the fast at home on the morning you set out, Hanafis say you should complete that day."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৯৪৩; সহিহ মুসলিম ১১২১",
+            "en": "Sahih al-Bukhari 1943; Sahih Muslim 1121"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "গর্ভবতী ও দুগ্ধদানকারী মা",
+            "en": "Pregnant and nursing mothers"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "নিজের বা সন্তানের স্বাস্থ্যের ক্ষতির আশঙ্কা থাকলে তারা রোজা না রেখে পরে রাখতে পারেন। নবী (সা.) বলেছেন, আল্লাহ মুসাফির, গর্ভবতী ও দুগ্ধদানকারী মায়ের জন্য রোজায় ছাড় দিয়েছেন।",
+            "en": "If they fear harm to their own health or the child's, they may leave the fast and keep it later. The Prophet said that Allah has relieved the traveller, the pregnant and the nursing woman of fasting."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "জামে তিরমিজি; সুনান আবু দাউদ (আনাস ইবনে মালিক আল-কা'বি রা.-এর বর্ণনা)",
+            "en": "Jami' at-Tirmidhi; Sunan Abi Dawud (narration of Anas ibn Malik al-Ka'bi)"
+          },
+          "check": true
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "কাজার সঙ্গে ফিদইয়াও লাগবে কি না",
+            "en": "Is fidya due along with the make-up"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "শুধু কাজা; ফিদইয়া লাগবে না, ক্ষতির আশঙ্কা নিজের জন্য হোক বা সন্তানের জন্য।",
+                "en": "Only make-up, no fidya, whether the fear was for herself or the child."
+              },
+              "evidence": {
+                "bn": "তারা অসুস্থ ব্যক্তির মতো, যার জন্য কুরআনে শুধু কাজার কথা বলা হয়েছে।",
+                "en": "They are like the sick person, for whom the Quran mentions only make-up."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি ও হাম্বলি",
+                "en": "Shafi'i and Hanbali"
+              },
+              "text": {
+                "bn": "শুধু নিজের জন্য ভয় হলে কাজা; সন্তানের জন্য ভয়ে রোজা না রাখলে কাজার সাথে প্রতিদিন এক মুদ ফিদইয়াও।",
+                "en": "If she feared only for herself, make-up; if she left it fearing for the child, make-up plus one mudd of fidya per day."
+              },
+              "evidence": {
+                "bn": "ইবনে আব্বাস (রা.) ও ইবনে উমর (রা.)-এর ফতোয়া।",
+                "en": "Fatwas of Ibn Abbas and Ibn Umar."
+              }
+            },
+            {
+              "label": {
+                "bn": "মালেকি",
+                "en": "Maliki"
+              },
+              "text": {
+                "bn": "গর্ভবতী শুধু কাজা করবেন; দুগ্ধদানকারী মা কাজা ও ফিদইয়া দুটোই।",
+                "en": "The pregnant woman only makes up; the nursing mother makes up and pays fidya."
+              },
+              "evidence": {
+                "bn": "গর্ভাবস্থাকে অসুস্থতার মতো ধরা হয়, দুধ খাওয়ানোকে নয়।",
+                "en": "Pregnancy is treated like illness, nursing is not."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "বৃদ্ধ ও স্থায়ী রোগী",
+            "en": "The elderly and chronically ill"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "যে বৃদ্ধ রোজা রাখার শক্তি রাখেন না, বা যার রোগ সারার আশা নেই, তিনি প্রতিটি রোজার বদলে ফিদইয়া দেবেন। বিস্তারিত 'কাজা, কাফফারা ও ফিদইয়া' গাইডে।",
+            "en": "An elderly person without the strength to fast, or someone with no hope of recovery, gives fidya for each day. Details are in the 'Qaza, kaffarah and fidya' guide."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "হায়েজ ও নিফাস",
+            "en": "Menstruation and post-natal bleeding"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "হায়েজ বা নিফাস অবস্থায় রোজা রাখা জায়েজ নয়; পরে কাজা করতে হবে। নামাজের কাজা নেই, রোজার কাজা আছে।",
+              "en": "Fasting is not allowed during menstruation or post-natal bleeding; the fasts are made up later. Prayers are not made up, fasts are."
+            },
+            {
+              "bn": "দিনের বেলায় রক্ত শুরু হলে সেদিনের রোজা ভেঙে যায়, ইফতারের এক মিনিট আগে হলেও।",
+              "en": "If bleeding starts during the day, that day's fast is broken, even a minute before sunset."
+            },
+            {
+              "bn": "ফজরের আগে পবিত্র হয়ে গেলে রোজা রাখবেন, গোসল ফজরের পরে করলেও সমস্যা নেই।",
+              "en": "If she becomes pure before Fajr she fasts, even if she takes the ghusl after Fajr."
+            },
+            {
+              "bn": "দিনের বেলায় পবিত্র হলে হানাফি মতে সন্ধ্যা পর্যন্ত খাওয়া-দাওয়া থেকে বিরত থাকা উচিত, তবে সেদিনের কাজা করতে হবে।",
+              "en": "If she becomes pure during the day, Hanafis say she should refrain from eating until sunset, but still make up that day."
+            },
+            {
+              "bn": "ওষুধ খেয়ে মাসিক পিছিয়ে দেওয়া স্বাস্থ্যের ক্ষতি না হলে অনেক আলেমের মতে জায়েজ, তবে স্বাভাবিক নিয়মে চলাই উত্তম।",
+              "en": "Delaying the period with pills is allowed by many scholars if it causes no harm, though following the natural course is better."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ মুসলিম ৩৩৫",
+            "en": "Sahih Muslim 335"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sawm-laylatul-qadr-itikaf",
+      "title": {
+        "bn": "লাইলাতুল কদর ও ইতিকাফ",
+        "en": "Laylatul Qadr and i'tikaf"
+      },
+      "summary": {
+        "bn": "হাজার মাসের চেয়ে উত্তম রাত খোঁজা, এ রাতের দোয়া এবং শেষ দশকের ইতিকাফের নিয়ম।",
+        "en": "Seeking the night better than a thousand months, its dua, and i'tikaf in the last ten nights."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "লাইলাতুল কদর (শবে কদর)",
+            "en": "Laylatul Qadr"
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "لَيْلَةُ الْقَدْرِ خَيْرٌ مِنْ أَلْفِ شَهْرٍ",
+          "pron": {
+            "bn": "লাইলাতুল কাদরি খাইরুম মিন আলফি শাহর",
+            "en": "Laylatul-qadri khayrum min alfi shahr"
+          },
+          "meaning": {
+            "bn": "কদরের রাত হাজার মাসের চেয়েও উত্তম।",
+            "en": "The Night of Decree is better than a thousand months."
+          },
+          "ref": {
+            "bn": "সূরা কদর ৯৭:৩",
+            "en": "Al-Qadr 97:3"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "এই রাতে কুরআন নাজিল হয়েছে। যে ব্যক্তি ঈমানের সাথে ও সওয়াবের আশায় এ রাতে ইবাদত করে, তার আগের গুনাহ ক্ষমা করা হয়। নির্দিষ্ট তারিখ জানানো হয়নি; রমজানের শেষ দশকের বেজোড় রাতগুলোতে খুঁজতে বলা হয়েছে (২১, ২৩, ২৫, ২৭, ২৯-এর রাত)। ২৭-এর রাতের কথা অনেক সাহাবি বলেছেন, তবে শুধু এক রাতে সীমাবদ্ধ না থেকে পুরো শেষ দশকে চেষ্টা করুন।",
+            "en": "The Quran was revealed on this night. Whoever stands in worship on it with faith and hoping for reward has his past sins forgiven. Its date was not fixed; we are told to seek it in the odd nights of the last ten of Ramadan (the nights before the 21st, 23rd, 25th, 27th, 29th). Many Companions held it to be the 27th, but strive through all of the last ten rather than one night."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৯০১; সহিহ বুখারি ২০১৭; সহিহ মুসলিম ৭৬২",
+            "en": "Sahih al-Bukhari 1901; Sahih al-Bukhari 2017; Sahih Muslim 762"
+          }
+        },
+        {
+          "type": "arabic",
+          "label": {
+            "bn": "লাইলাতুল কদরের দোয়া",
+            "en": "Dua for Laylatul Qadr"
+          },
+          "ar": "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+          "pron": {
+            "bn": "আল্লাহুম্মা ইন্নাকা আফুওউন তুহিব্বুল আফওয়া ফা'ফু আন্নি",
+            "en": "Allahumma innaka 'afuwwun tuhibbul-'afwa fa'fu 'anni"
+          },
+          "meaning": {
+            "bn": "হে আল্লাহ! তুমি ক্ষমাশীল, ক্ষমা করতে ভালোবাসো, অতএব আমাকে ক্ষমা করো।",
+            "en": "O Allah, You are Pardoning and love to pardon, so pardon me."
+          },
+          "ref": {
+            "bn": "জামে তিরমিজি ৩৫১৩; সুনান ইবনে মাজাহ ৩৮৫০",
+            "en": "Jami' at-Tirmidhi 3513; Sunan Ibn Majah 3850"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "আয়েশা (রা.) জিজ্ঞেস করেছিলেন, কদরের রাত পেলে কী বলবেন; নবী (সা.) এই দোয়াটি শিখিয়ে দেন। কিছু ছাপা বইয়ে 'আফুওউন'-এর পরে 'কারীম' শব্দটি আছে, তবে নির্ভরযোগ্য বর্ণনায় এটি নেই।",
+            "en": "Aishah asked what she should say if she found the Night of Decree, and the Prophet taught her this dua. Some printed editions add 'karim' after ''afuwwun', but the reliable narrations do not have it."
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "নফল নামাজ, কুরআন তিলাওয়াত, জিকির, দোয়া ও ইস্তিগফার করুন।",
+              "en": "Pray voluntary prayers, recite the Quran, do dhikr, make dua and seek forgiveness."
+            },
+            {
+              "bn": "এ রাতের জন্য নির্দিষ্ট রাকাত সংখ্যা বা বিশেষ সূরা দিয়ে নির্দিষ্ট পদ্ধতির নামাজ হাদিসে নেই; প্রচলিত এমন পদ্ধতিগুলো ভিত্তিহীন।",
+              "en": "No hadith sets a particular number of rakats or special surahs for a 'Qadr prayer'; such popular methods have no basis."
+            },
+            {
+              "bn": "ভোরে সূর্য আলোকরশ্মি ছাড়া স্নিগ্ধভাবে ওঠা এ রাতের একটি আলামত হিসেবে বর্ণিত।",
+              "en": "One reported sign is that the sun rises the next morning soft, without strong rays."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "ইতিকাফ",
+            "en": "I'tikaf"
+          }
+        },
+        {
+          "type": "text",
+          "text": {
+            "bn": "ইতিকাফ মানে ইবাদতের নিয়তে মসজিদে অবস্থান করা। নবী (সা.) ইন্তেকাল পর্যন্ত প্রতি রমজানের শেষ দশ দিন ইতিকাফ করেছেন। হানাফি মতে রমজানের শেষ দশকের ইতিকাফ সুন্নতে মুয়াক্কাদা আলাল কিফায়া: মহল্লার কেউ একজন করলে সবার পক্ষ থেকে আদায় হয়।",
+            "en": "I'tikaf means staying in the masjid with the intention of worship. The Prophet did i'tikaf in the last ten days of every Ramadan until he passed away. For Hanafis the i'tikaf of the last ten of Ramadan is a communal emphasised sunnah: if one person of the locality does it, the duty is fulfilled for all."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ২০২৬; সহিহ মুসলিম ১১৭২",
+            "en": "Sahih al-Bukhari 2026; Sahih Muslim 1172"
+          }
+        },
+        {
+          "type": "arabic",
+          "ar": "وَلَا تُبَاشِرُوهُنَّ وَأَنْتُمْ عَاكِفُونَ فِي الْمَسَاجِدِ",
+          "pron": {
+            "bn": "ওয়ালা তুবাশিরূহুন্না ওয়া আনতুম আকিফূনা ফিল মাসাজিদ",
+            "en": "Wa la tubashiruhunna wa antum 'akifuna fil-masajid"
+          },
+          "meaning": {
+            "bn": "আর মসজিদে ইতিকাফ অবস্থায় তোমরা স্ত্রীদের সঙ্গে মেলামেশা করো না।",
+            "en": "And do not have relations with them while you are in i'tikaf in the masjids."
+          },
+          "ref": {
+            "bn": "সূরা বাকারা ২:১৮৭",
+            "en": "Al-Baqarah 2:187"
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "শুরু",
+            "en": "Start"
+          },
+          "text": {
+            "bn": "২০ রমজান সূর্যাস্তের আগে ইতিকাফের নিয়তে মসজিদে প্রবেশ করুন (মনে মনে নিয়তই যথেষ্ট)।",
+            "en": "Enter the masjid before sunset on the 20th of Ramadan with the intention of i'tikaf (an intention in the heart is enough)."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "অবস্থান",
+            "en": "Stay"
+          },
+          "text": {
+            "bn": "শেষ দশ দিন মসজিদেই থাকবেন; ঘুম, খাওয়া সব মসজিদে। সময় কাটান নামাজ, তিলাওয়াত, জিকির, দোয়া ও দ্বীনি পড়াশোনায়।",
+            "en": "Stay in the masjid for the last ten days, sleeping and eating there. Spend the time in prayer, recitation, dhikr, dua and religious study."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "বের হওয়া",
+            "en": "Going out"
+          },
+          "text": {
+            "bn": "শুধু প্রয়োজনে বের হওয়া যায়: প্রস্রাব-পায়খানা, ফরজ গোসল, খাবার এনে দেওয়ার কেউ না থাকলে খাবার আনা, আর মসজিদে জুমা না হলে জুমার জন্য। প্রয়োজন শেষ হলেই ফিরে আসবেন।",
+            "en": "Leave only for needs: the toilet, an obligatory ghusl, fetching food if no one can bring it, and Jumu'ah if it is not held in that masjid. Return as soon as the need is done."
+          }
+        },
+        {
+          "type": "step",
+          "title": {
+            "bn": "শেষ",
+            "en": "End"
+          },
+          "text": {
+            "bn": "শাওয়ালের চাঁদ দেখা গেলে (ঈদের আগের সন্ধ্যায়) ইতিকাফ শেষ।",
+            "en": "I'tikaf ends when the Shawwal moon is sighted (the evening before Eid)."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ২০২৯",
+            "en": "Sahih al-Bukhari 2029"
+          }
+        },
+        {
+          "type": "note",
+          "tone": "warn",
+          "text": {
+            "bn": "বিনা প্রয়োজনে মসজিদ থেকে বের হলে বা স্ত্রী-সহবাস করলে ইতিকাফ ভেঙে যায়। অপ্রয়োজনীয় গল্প, মোবাইল ঘাঁটা ও অনর্থক কাজ থেকে দূরে থাকুন।",
+            "en": "Leaving the masjid without need or marital relations break the i'tikaf. Avoid idle chatter, endless phone scrolling and pointless activity."
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "নারীদের ইতিকাফ কোথায়",
+            "en": "Where women do i'tikaf"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "নারীরা ঘরের নামাজের জন্য নির্দিষ্ট স্থানে (মসজিদে বাইত) ইতিকাফ করবেন; এটাই তাদের জন্য উত্তম।",
+                "en": "Women do i'tikaf in the place set aside for prayer in the home (masjid al-bayt); this is better for them."
+              },
+              "evidence": {
+                "bn": "নারীদের নামাজ ঘরে উত্তম হওয়ার হাদিসগুলোর ওপর কিয়াস।",
+                "en": "Analogy with the hadiths that a woman's prayer at home is better."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "নারী-পুরুষ সবার ইতিকাফ মসজিদেই হতে হবে, যদি নিরাপদ ব্যবস্থা থাকে।",
+                "en": "I'tikaf for men and women alike must be in a masjid, where it is safe and suitable."
+              },
+              "evidence": {
+                "bn": "আয়াতে 'মসজিদে' বলা হয়েছে, আর নবীপত্নীগণ মসজিদে ইতিকাফ করেছেন।",
+                "en": "The verse says 'in the masjids', and the Prophet's wives did i'tikaf in the masjid."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "sawm-sadaqatul-fitr",
+      "title": {
+        "bn": "সদকাতুল ফিতর (ফিতরা)",
+        "en": "Sadaqatul fitr (fitrah)"
+      },
+      "summary": {
+        "bn": "ঈদুল ফিতরের আগে আদায় করা ওয়াজিব দান: কার ওপর, কত, কখন এবং কাকে দেবেন।",
+        "en": "The charity due before Eid al-Fitr: who pays, how much, when and to whom."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "text",
+          "text": {
+            "bn": "সদকাতুল ফিতর রোজার ভুলত্রুটি থেকে রোজাদারকে পবিত্র করে এবং গরিবদের ঈদের দিনের খাবারের ব্যবস্থা করে। নবী (সা.) প্রত্যেক মুসলিম নারী-পুরুষ, ছোট-বড়, স্বাধীন-দাস সবার পক্ষ থেকে ঈদের নামাজে যাওয়ার আগে এক সা' খেজুর বা এক সা' যব দেওয়ার নির্দেশ দিয়েছেন।",
+            "en": "Sadaqatul fitr purifies the fasting person from idle and indecent talk and provides food for the poor on Eid. The Prophet ordered one sa' of dates or one sa' of barley on behalf of every Muslim, male and female, young and old, free and slave, to be given before people go out to the Eid prayer."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৫০৩; সুনান আবু দাউদ ১৬০৯",
+            "en": "Sahih al-Bukhari 1503; Sunan Abi Dawud 1609"
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কার ওপর ওয়াজিব",
+            "en": "Who must pay"
+          }
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "ফিতরা কার ওপর ওয়াজিব",
+            "en": "On whom fitrah is due"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "ঈদের দিন সুবহে সাদিকের সময় যে মুসলিম মৌলিক প্রয়োজনের অতিরিক্ত নিসাব পরিমাণ সম্পদের মালিক, তার ওপর ওয়াজিব (এক বছর পূর্ণ হওয়া শর্ত নয়)। নিজের ও নাবালেগ সন্তানের পক্ষ থেকে দেবেন।",
+                "en": "Due on a Muslim who, at dawn on Eid day, owns wealth of nisab value beyond basic needs (a full year is not required). He pays for himself and his minor children."
+              },
+              "evidence": {
+                "bn": "হাদিস: 'সদকা কেবল সচ্ছলতা থেকেই।'",
+                "en": "Hadith: 'Charity is only from surplus wealth.'"
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "ঈদের দিন ও রাতের খাবারের অতিরিক্ত এক সা' খাদ্য যার কাছে আছে, তার ওপরই ওয়াজিব; নিসাব শর্ত নয়। পরিবারের যাদের ভরণপোষণ তার দায়িত্বে, তাদের পক্ষ থেকেও দেবেন।",
+                "en": "Due on anyone who has one sa' of food beyond what he needs for Eid day and night; nisab is not required. He also pays for those he must support."
+              },
+              "evidence": {
+                "bn": "হাদিসে 'প্রত্যেক মুসলিমের ওপর' বলা হয়েছে, ধনী হওয়ার শর্ত নেই।",
+                "en": "The hadith says 'on every Muslim' without a condition of wealth."
+              }
+            }
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "রোজা রাখতে না পারলেও ফিতরা দিতে হবে। ঈদের দিন ফজরের আগে জন্ম নেওয়া শিশুর পক্ষ থেকেও দিতে হয়।",
+            "en": "Fitrah is due even from someone who could not fast, and also for a child born before Fajr on Eid day."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "পরিমাণ",
+            "en": "Amount"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "খাদ্য",
+              "en": "Food"
+            },
+            {
+              "bn": "হানাফি মতে পরিমাণ",
+              "en": "Hanafi amount"
+            },
+            {
+              "bn": "অন্য তিন মাজহাব",
+              "en": "Other three madhhabs"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "গম বা আটা",
+                "en": "Wheat or flour"
+              },
+              {
+                "bn": "অর্ধ সা' (প্রায় ১ কেজি ৬৫০ গ্রাম)",
+                "en": "Half a sa' (about 1.65 kg)"
+              },
+              {
+                "bn": "এক সা'",
+                "en": "One sa'"
+              }
+            ],
+            [
+              {
+                "bn": "খেজুর",
+                "en": "Dates"
+              },
+              {
+                "bn": "এক সা' (প্রায় ৩ কেজি ৩০০ গ্রাম)",
+                "en": "One sa' (about 3.3 kg)"
+              },
+              {
+                "bn": "এক সা'",
+                "en": "One sa'"
+              }
+            ],
+            [
+              {
+                "bn": "যব",
+                "en": "Barley"
+              },
+              {
+                "bn": "এক সা'",
+                "en": "One sa'"
+              },
+              {
+                "bn": "এক সা'",
+                "en": "One sa'"
+              }
+            ],
+            [
+              {
+                "bn": "কিশমিশ",
+                "en": "Raisins"
+              },
+              {
+                "bn": "এক সা' (এক বর্ণনায় অর্ধ সা')",
+                "en": "One sa' (half in one report)"
+              },
+              {
+                "bn": "এক সা'",
+                "en": "One sa'"
+              }
+            ],
+            [
+              {
+                "bn": "পনির",
+                "en": "Dried cheese (aqit)"
+              },
+              {
+                "bn": "এক সা'",
+                "en": "One sa'"
+              },
+              {
+                "bn": "এক সা'",
+                "en": "One sa'"
+              }
+            ],
+            [
+              {
+                "bn": "চাল বা অন্য প্রধান খাদ্য",
+                "en": "Rice or other staple"
+              },
+              {
+                "bn": "মূল্য হিসেবে ওপরের কোনোটির সমান",
+                "en": "Equal in value to one of the above"
+              },
+              {
+                "bn": "এক সা' (প্রায় ২.৫–৩ কেজি; সা'-এর ওজন নিয়ে মতভেদ আছে)",
+                "en": "One sa' (about 2.5–3 kg; the weight of a sa' is differed on)"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "differ",
+          "title": {
+            "bn": "টাকা দিয়ে ফিতরা দেওয়া যাবে কি না",
+            "en": "Can fitrah be paid in money"
+          },
+          "views": [
+            {
+              "label": {
+                "bn": "হানাফি",
+                "en": "Hanafi"
+              },
+              "text": {
+                "bn": "খাদ্য বা তার বাজারমূল্য দুটোই দেওয়া যায়; গরিবের প্রয়োজন বিবেচনায় টাকা দেওয়া অনেক সময় উত্তম। বাংলাদেশে প্রতি বছর ইসলামিক ফাউন্ডেশন গম, যব, খেজুর, কিশমিশ ও পনিরের দাম ধরে সর্বনিম্ন ও সর্বোচ্চ পরিমাণ ঘোষণা করে; সামর্থ্য অনুযায়ী উচ্চতর খাদ্যের মূল্যে দেওয়া উত্তম।",
+                "en": "Food or its market value may be given; money is often better given the needs of the poor. In Bangladesh the Islamic Foundation announces each year the amounts based on wheat, barley, dates, raisins and cheese; giving at the rate of a higher food is better for those who can."
+              },
+              "evidence": {
+                "bn": "উদ্দেশ্য গরিবের প্রয়োজন পূরণ; উমর ইবনে আবদুল আজিজসহ কিছু তাবেয়ির আমল এবং মুয়াজ (রা.) থেকে যাকাতে পণ্যের বদলে মূল্য গ্রহণের বর্ণনা।",
+                "en": "The aim is to meet the needs of the poor; the practice of some Successors such as Umar ibn Abd al-Aziz, and reports from Mu'adh of taking value in zakat."
+              }
+            },
+            {
+              "label": {
+                "bn": "শাফেয়ি, মালেকি, হাম্বলি",
+                "en": "Shafi'i, Maliki, Hanbali"
+              },
+              "text": {
+                "bn": "নির্ধারিত খাদ্যই দিতে হবে (দেশের প্রধান খাদ্য, যেমন চাল); টাকা দিলে আদায় হবে না।",
+                "en": "It must be given as food (the local staple, such as rice); money does not discharge it."
+              },
+              "evidence": {
+                "bn": "নবী (সা.) ও সাহাবিরা দিনার-দিরহাম থাকা সত্ত্বেও খাদ্য দিয়েছেন, এবং হাদিসে খাদ্যের নাম উল্লেখ করা হয়েছে।",
+                "en": "The Prophet and Companions gave food although coins existed, and the hadith names foods."
+              }
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "কখন ও কাকে",
+            "en": "When and to whom"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "bn": "ঈদের নামাজে যাওয়ার আগে দেওয়া উত্তম। সাহাবিরা ঈদের এক-দুই দিন আগেও দিতেন। গরিবরা যাতে ঈদের প্রস্তুতি নিতে পারে, তাই কয়েক দিন আগে দেওয়াও ভালো (হানাফি মতে রমজানের যেকোনো সময় দেওয়া যায়)।",
+              "en": "Best before the Eid prayer. The Companions gave it a day or two before Eid. Giving a few days early helps the poor prepare (Hanafis allow any time in Ramadan)."
+            },
+            {
+              "bn": "ঈদের নামাজের পর পর্যন্ত দেরি করা ঠিক নয়; দেরি হলেও দায়িত্ব শেষ হয় না, আদায় করতেই হবে।",
+              "en": "Do not delay it past the Eid prayer; if delayed, it is still owed and must be paid."
+            },
+            {
+              "bn": "যাকাতের যারা হকদার, ফিতরাও তাদেরই দেবেন, বিশেষ করে গরিব-মিসকিন। নিজের মা-বাবা, সন্তান ও স্ত্রীকে দেওয়া যায় না।",
+              "en": "Give it to those eligible for zakat, especially the poor and needy; not to one's own parents, children or spouse."
+            }
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি (ইবনে উমর রা. ঈদের এক-দুই দিন আগে ফিতরা দিতেন)",
+            "en": "Sahih al-Bukhari (Ibn Umar gave it a day or two before Eid)"
+          },
+          "check": true
+        }
+      ]
+    },
+    {
+      "slug": "sawm-nafl-and-forbidden",
+      "title": {
+        "bn": "নফল রোজা ও যেসব দিনে রোজা নিষেধ",
+        "en": "Voluntary fasts and forbidden fasting days"
+      },
+      "summary": {
+        "bn": "শাওয়ালের ছয় রোজা, আরাফা, আশুরা, সোম-বৃহস্পতিবার, আইয়ামে বিজ এবং যেদিন রোজা রাখা নিষেধ।",
+        "en": "Six of Shawwal, Arafah, Ashura, Mondays and Thursdays, the White Days, and the days fasting is forbidden."
+      },
+      "level": "basic",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": {
+            "bn": "সুন্নত ও নফল রোজা",
+            "en": "Sunnah and voluntary fasts"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "রোজা",
+              "en": "Fast"
+            },
+            {
+              "bn": "ফজিলত",
+              "en": "Virtue"
+            },
+            {
+              "bn": "সূত্র",
+              "en": "Source"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "শাওয়ালের ছয় রোজা",
+                "en": "Six days of Shawwal"
+              },
+              {
+                "bn": "রমজানের পর ছয়টি রাখলে সারা বছর রোজার সমান; একটানা বা আলাদা দুইভাবেই রাখা যায়",
+                "en": "With Ramadan, like fasting the whole year; may be kept consecutively or spread out"
+              },
+              {
+                "bn": "সহিহ মুসলিম ১১৬৪",
+                "en": "Sahih Muslim 1164"
+              }
+            ],
+            [
+              {
+                "bn": "আরাফার দিন (৯ জিলহজ)",
+                "en": "Day of Arafah (9 Dhul Hijjah)"
+              },
+              {
+                "bn": "আগের ও পরের এক বছরের গুনাহের কাফফারা হওয়ার আশা",
+                "en": "Hoped to expiate the sins of the year before and the year after"
+              },
+              {
+                "bn": "সহিহ মুসলিম ১১৬২",
+                "en": "Sahih Muslim 1162"
+              }
+            ],
+            [
+              {
+                "bn": "আশুরা (১০ মুহাররম)",
+                "en": "Ashura (10 Muharram)"
+              },
+              {
+                "bn": "আগের এক বছরের গুনাহের কাফফারা হওয়ার আশা; সঙ্গে ৯ তারিখও রাখা সুন্নত",
+                "en": "Hoped to expiate the previous year; fasting the 9th with it is sunnah"
+              },
+              {
+                "bn": "সহিহ মুসলিম ১১৬২, ১১৩৪",
+                "en": "Sahih Muslim 1162, 1134"
+              }
+            ],
+            [
+              {
+                "bn": "সোমবার ও বৃহস্পতিবার",
+                "en": "Mondays and Thursdays"
+              },
+              {
+                "bn": "এ দুই দিনে আমল আল্লাহর কাছে পেশ করা হয়; সোমবার নবী (সা.)-এর জন্মদিন",
+                "en": "Deeds are presented to Allah on these days; Monday is the day the Prophet was born"
+              },
+              {
+                "bn": "সহিহ মুসলিম ১১৬২; জামে তিরমিজি ৭৪৭",
+                "en": "Sahih Muslim 1162; Jami' at-Tirmidhi 747"
+              }
+            ],
+            [
+              {
+                "bn": "আইয়ামে বিজ (চান্দ্রমাসের ১৩, ১৪, ১৫)",
+                "en": "White Days (13th, 14th, 15th of each lunar month)"
+              },
+              {
+                "bn": "প্রতি মাসে তিন রোজা সারা বছর রোজার মতো",
+                "en": "Three days each month are like fasting all year"
+              },
+              {
+                "bn": "সহিহ বুখারি ১৯৮১; জামে তিরমিজি ৭৬১",
+                "en": "Sahih al-Bukhari 1981; Jami' at-Tirmidhi 761"
+              }
+            ],
+            [
+              {
+                "bn": "মুহাররম মাস",
+                "en": "The month of Muharram"
+              },
+              {
+                "bn": "রমজানের পর সর্বোত্তম রোজা আল্লাহর মাস মুহাররমের রোজা",
+                "en": "The best fasting after Ramadan is in Allah's month, Muharram"
+              },
+              {
+                "bn": "সহিহ মুসলিম ১১৬৩",
+                "en": "Sahih Muslim 1163"
+              }
+            ],
+            [
+              {
+                "bn": "শাবান মাস",
+                "en": "The month of Sha'ban"
+              },
+              {
+                "bn": "নবী (সা.) রমজানের পর শাবানেই সবচেয়ে বেশি রোজা রাখতেন",
+                "en": "After Ramadan the Prophet fasted most in Sha'ban"
+              },
+              {
+                "bn": "সহিহ বুখারি ১৯৬৯",
+                "en": "Sahih al-Bukhari 1969"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "tone": "info",
+          "text": {
+            "bn": "হজে থাকা ব্যক্তির জন্য আরাফার দিনে রোজা না রাখাই সুন্নত; নবী (সা.) আরাফায় রোজা রাখেননি, যাতে দোয়া ও ইবাদতে শক্তি থাকে।",
+            "en": "For someone performing hajj, not fasting on the day of Arafah is the sunnah; the Prophet did not fast at Arafah, keeping his strength for dua and worship."
+          }
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি (উম্মুল ফজল রা.-এর বর্ণনা: আরাফায় নবী সা.-কে দুধ পাঠানো)",
+            "en": "Sahih al-Bukhari (Umm al-Fadl's report of sending milk to the Prophet at Arafah)"
+          },
+          "check": true
+        },
+        {
+          "type": "note",
+          "tone": "tip",
+          "text": {
+            "bn": "নফল রোজা রেখে কোনো কারণে ভেঙে ফেললে হানাফি মতে পরে একটি কাজা করতে হয়; শাফেয়ি ও হাম্বলি মতে কাজা জরুরি নয়, তবে উত্তম।",
+            "en": "If a voluntary fast is broken for some reason, Hanafis require one make-up day; Shafi'is and Hanbalis say it is not required but recommended."
+          }
+        },
+        {
+          "type": "heading",
+          "text": {
+            "bn": "যেসব দিনে রোজা রাখা নিষেধ",
+            "en": "Days on which fasting is forbidden"
+          }
+        },
+        {
+          "type": "table",
+          "head": [
+            {
+              "bn": "দিন",
+              "en": "Day"
+            },
+            {
+              "bn": "হুকুম",
+              "en": "Ruling"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "bn": "ঈদুল ফিতরের দিন (১ শাওয়াল)",
+                "en": "Eid al-Fitr (1 Shawwal)"
+              },
+              {
+                "bn": "হারাম",
+                "en": "Forbidden (haram)"
+              }
+            ],
+            [
+              {
+                "bn": "ঈদুল আজহার দিন (১০ জিলহজ)",
+                "en": "Eid al-Adha (10 Dhul Hijjah)"
+              },
+              {
+                "bn": "হারাম",
+                "en": "Forbidden (haram)"
+              }
+            ],
+            [
+              {
+                "bn": "আইয়ামে তাশরিক (১১, ১২, ১৩ জিলহজ)",
+                "en": "Days of Tashriq (11, 12, 13 Dhul Hijjah)"
+              },
+              {
+                "bn": "নিষেধ; এগুলো খাওয়া-দাওয়া ও আল্লাহর জিকিরের দিন (হাদি জোগাড় করতে না পারা তামাত্তু হাজির জন্য কিছু মাজহাবে ছাড় আছে)",
+                "en": "Forbidden; these are days of eating, drinking and remembering Allah (some madhhabs make an exception for a tamattu' pilgrim who finds no sacrificial animal)"
+              }
+            ],
+            [
+              {
+                "bn": "শুধু জুমার দিনকে আলাদা করে রোজা",
+                "en": "Singling out Friday alone for fasting"
+              },
+              {
+                "bn": "মাকরুহ; আগের বা পরের দিনসহ রাখলে সমস্যা নেই",
+                "en": "Disliked; fine if joined with the day before or after"
+              }
+            ],
+            [
+              {
+                "bn": "সন্দেহের দিন (শাবানের ৩০ তারিখ, চাঁদ নিয়ে সন্দেহ হলে) রমজানের সতর্কতায়",
+                "en": "The day of doubt (30 Sha'ban when the moon is unclear) as a precaution for Ramadan"
+              },
+              {
+                "bn": "মাকরুহ / নিষেধ; রমজানের এক-দুই দিন আগে থেকে রোজা শুরু করবেন না, তবে নিয়মিত অভ্যাসের রোজা হলে ভিন্ন কথা",
+                "en": "Disliked / forbidden; do not start fasting a day or two before Ramadan, unless it is a regular habitual fast"
+              }
+            ],
+            [
+              {
+                "bn": "সারা বছর বিরতিহীন রোজা",
+                "en": "Fasting every day of the year without break"
+              },
+              {
+                "bn": "নিষেধ",
+                "en": "Forbidden"
+              }
+            ],
+            [
+              {
+                "bn": "স্বামী উপস্থিত থাকলে তার অনুমতি ছাড়া স্ত্রীর নফল রোজা",
+                "en": "A wife's voluntary fast without her husband's permission when he is present"
+              },
+              {
+                "bn": "নিষেধ",
+                "en": "Forbidden"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "ref",
+          "text": {
+            "bn": "সহিহ বুখারি ১৯৯০; সহিহ মুসলিম ১১৩৭; সহিহ মুসলিম ১১৪১; সহিহ বুখারি ১৯৮৫; সহিহ মুসলিম ১১৪৪; সহিহ বুখারি ১৯১৪; সহিহ বুখারি ১৯৭৭; সহিহ বুখারি ৫১৯৫",
+            "en": "Sahih al-Bukhari 1990; Sahih Muslim 1137; Sahih Muslim 1141; Sahih al-Bukhari 1985; Sahih Muslim 1144; Sahih al-Bukhari 1914; Sahih al-Bukhari 1977; Sahih al-Bukhari 5195"
+          }
+        }
+      ]
+    }
+  ]
+}
